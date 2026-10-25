@@ -1,0 +1,303 @@
+import React, { useState, useEffect } from 'react';
+import { CASE_STUDIES, CaseStudy } from '../data/portfolioData';
+import { ArrowUpRight, X, Check, Building2, Calendar, User, Wrench, ShieldAlert, Lightbulb } from 'lucide-react';
+
+export const ProjectsSection: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [activeModalCase, setActiveModalCase] = useState<CaseStudy | null>(null);
+
+  const categories = [
+    'All',
+    'Application Support',
+    'Retail Operations',
+    'SaaS Migration',
+    'Development & Data',
+    'Infrastructure'
+  ];
+
+  const filteredCases = CASE_STUDIES.filter((c) => {
+    if (selectedCategory === 'All') return true;
+    return c.category === selectedCategory;
+  });
+
+  // Handle ESC key for modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setActiveModalCase(null);
+      }
+    };
+    if (activeModalCase) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [activeModalCase]);
+
+  return (
+    <section id="projects" className="py-20 lg:py-28 bg-[#070A11]/60 relative border-t border-slate-800/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-sky-400 uppercase mb-3">
+              <span>Technical Deep Dives</span>
+              <span aria-hidden="true" className="text-slate-600">·</span>
+              <span>Real Case Studies</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-3">
+              Engineering & Operational Case Studies
+            </h2>
+            <p className="text-base text-slate-300 leading-relaxed">
+              Detailed technical narratives highlighting actual operational incidents, commissioning workflows, enterprise SaaS migrations, and development projects.
+            </p>
+          </div>
+
+          {/* Interactive Category Filter */}
+          <div className="flex items-center gap-1.5 p-1 bg-slate-900 border border-slate-800 rounded-lg self-start md:self-auto overflow-x-auto max-w-full">
+            {categories.map((cat) => {
+              const active = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-sky-400 ${
+                    active
+                      ? 'bg-sky-500/15 text-sky-300 border border-sky-500/30'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Case Studies Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredCases.map((caseStudy) => (
+            <article
+              key={caseStudy.id}
+              className="rounded-xl bg-slate-900/60 border border-slate-800/80 p-5 sm:p-6 flex flex-col justify-between hover:border-slate-700/80 transition-all hover:shadow-xl hover:shadow-black/30 group"
+            >
+              <div>
+                {/* Unboxed Metadata (Zero-pill discipline) */}
+                <div className="flex items-center gap-2 text-xs font-mono text-sky-400 mb-3">
+                  <span>{caseStudy.category}</span>
+                  <span aria-hidden="true" className="text-slate-700">·</span>
+                  <span className="text-slate-400">{caseStudy.organization}</span>
+                </div>
+
+                <h3 className="text-lg font-bold text-white group-hover:text-sky-300 transition-colors mb-2.5 leading-snug">
+                  {caseStudy.title}
+                </h3>
+
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4 line-clamp-3">
+                  {caseStudy.overview}
+                </p>
+
+                {/* Challenge Snapshot */}
+                <div className="p-3 rounded-lg bg-slate-950/60 border border-slate-800/60 mb-5">
+                  <div className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-400 mb-1">
+                    <ShieldAlert className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>The Operational Challenge</span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">
+                    {caseStudy.challenge}
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                {/* Tech Badges */}
+                <div className="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-slate-800/60">
+                  {caseStudy.technologies.slice(0, 3).map((t) => (
+                    <span
+                      key={t}
+                      className="text-[11px] font-mono text-slate-400 bg-slate-800/60 px-2 py-0.5 rounded border border-slate-700/60"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                  {caseStudy.technologies.length > 3 && (
+                    <span className="text-[11px] font-mono text-slate-400 px-1 py-0.5">
+                      +{caseStudy.technologies.length - 3} more
+                    </span>
+                  )}
+                </div>
+
+                {/* Open Modal CTA */}
+                <button
+                  type="button"
+                  onClick={() => setActiveModalCase(caseStudy)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2 text-xs font-semibold text-slate-200 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700/70 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                >
+                  <span>Read Full Case Study</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-sky-400" />
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+
+      </div>
+
+      {/* Case Study Detail Modal */}
+      {activeModalCase && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="case-modal-title"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto"
+          onClick={() => setActiveModalCase(null)}
+        >
+          <div
+            className="bg-[#0B1120] border border-slate-700/80 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative my-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              type="button"
+              onClick={() => setActiveModalCase(null)}
+              aria-label="Close modal"
+              className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Modal Header */}
+            <div className="pr-10 mb-6 border-b border-slate-800 pb-5">
+              <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-wider mb-2">
+                <span>{activeModalCase.category}</span>
+                <span aria-hidden="true" className="text-slate-600">·</span>
+                <span>Case Study</span>
+              </div>
+              <h2 id="case-modal-title" className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-3">
+                {activeModalCase.title}
+              </h2>
+
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-slate-400">
+                <div className="flex items-center gap-1.5">
+                  <User className="w-3.5 h-3.5 text-slate-400" />
+                  <span className="text-slate-200 font-medium">{activeModalCase.role}</span>
+                </div>
+                <span aria-hidden="true" className="text-slate-700">·</span>
+                <div className="flex items-center gap-1.5">
+                  <Building2 className="w-3.5 h-3.5 text-slate-400" />
+                  <span>{activeModalCase.organization}</span>
+                </div>
+                <span aria-hidden="true" className="text-slate-700">·</span>
+                <div className="flex items-center gap-1.5 font-mono">
+                  <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                  <span>{activeModalCase.period}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Body: Structured Technical Narrative */}
+            <div className="space-y-6 text-sm text-slate-300">
+              {/* Context */}
+              <div>
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+                  1. Operational Context
+                </h3>
+                <p className="leading-relaxed text-slate-300 bg-slate-900/50 p-4 rounded-lg border border-slate-800">
+                  {activeModalCase.context}
+                </p>
+              </div>
+
+              {/* Challenge */}
+              <div>
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+                  2. The Core Problem & Technical Challenge
+                </h3>
+                <p className="leading-relaxed text-slate-300 bg-amber-950/20 p-4 rounded-lg border border-amber-900/40 text-amber-200/90">
+                  {activeModalCase.challenge}
+                </p>
+              </div>
+
+              {/* Approach */}
+              <div>
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+                  3. Systematic Approach & Hands-on Implementation
+                </h3>
+                <ul className="space-y-2.5">
+                  {activeModalCase.approach.map((step, idx) => (
+                    <li key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-slate-900/50 border border-slate-800/80">
+                      <span className="font-mono text-xs text-sky-400 font-semibold mt-0.5 shrink-0">
+                        0{idx + 1}.
+                      </span>
+                      <span className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                        {step}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Outcomes */}
+              <div>
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+                  4. Outcomes & Verified Results
+                </h3>
+                <div className="space-y-2">
+                  {activeModalCase.outcomes.map((out, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
+                      <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <span className="leading-relaxed">{out}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Takeaway */}
+              <div className="p-4 rounded-lg bg-sky-950/30 border border-sky-800/40 flex items-start gap-3">
+                <Lightbulb className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="text-xs font-bold text-sky-300 uppercase tracking-wider mb-1">
+                    Operational Takeaway
+                  </h4>
+                  <p className="text-xs text-slate-200 italic leading-relaxed">
+                    "{activeModalCase.operationalTakeaway}"
+                  </p>
+                </div>
+              </div>
+
+              {/* Technologies */}
+              <div className="pt-4 border-t border-slate-800 flex flex-wrap items-center gap-2">
+                <span className="text-xs font-mono text-slate-400 mr-2">Technologies Used:</span>
+                {activeModalCase.technologies.map((t) => (
+                  <span
+                    key={t}
+                    className="text-xs font-mono text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/70"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="mt-8 pt-4 border-t border-slate-800 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setActiveModalCase(null)}
+                className="px-5 py-2 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-md transition-colors"
+              >
+                Close Case Study
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};

@@ -1,0 +1,661 @@
+ARIES IRHAN — PROFESSIONAL PORTFOLIO KNOWLEDGE FILE
+Last updated: 25 October 2026
+Purpose: Source material for building a personal portfolio website, resume-linked profile, project showcase, and professional biography.
+
+IMPORTANT NOTES FOR THE WEBSITE BUILDER
+- Treat this file as source material, not as permission to invent facts.
+- Do not publish private contact details unless the owner intentionally includes them.
+- Do not invent metrics, technical depth, certifications, projects, or outcomes.
+- Where something is described as a foundation, basic exposure, or transferable experience, preserve that level of certainty.
+- Dates and role details below are based on information shared by Aries. Confirm exact dates and employer legal names before public launch if needed.
+- Keep the portfolio professional, modern, responsive, accessible, and ATS/recruiter friendly.
+- A good positioning statement is: IT Support + Application Support + IT Operations, with multi-site retail systems, POS, networking, SaaS administration, vendor coordination, and a software-development foundation.
+- Do not present Aries as an L3 engineer, senior cloud engineer, advanced database developer, or specialist in tools he has not confirmed using hands-on.
+
+============================================================
+1. PROFESSIONAL IDENTITY
+============================================================
+
+Full name:
+Muhammad Aries Irhan bin Abd Razak
+
+Preferred display name:
+Aries Irhan
+
+Professional positioning:
+IT Support | Application Support | IT Operations
+
+Current role:
+System Application Specialist at emart24 Malaysia
+
+Current location on resume:
+Negeri Sembilan, Malaysia
+
+Professional profile:
+IT support and application support professional with nearly three years of relevant experience across retail systems, multi-site support, end-user troubleshooting, IT operations, networking, SaaS administration, vendor coordination, system testing, and technical documentation. Combines hands-on support experience with a foundation in web application development and SQL/MySQL from an IT internship.
+
+Suggested short introduction:
+“I’m an IT support and application support professional focused on keeping business systems reliable and users productive. My experience spans retail POS and payment systems, multi-site IT operations, network troubleshooting, SaaS administration, vendor coordination, system testing, and data validation. I also have a software-development foundation in Laravel and MySQL, which helps me approach application issues analytically.”
+
+Suggested longer introduction:
+“I work at the intersection of IT support, business applications, and day-to-day operations. In my current role at emart24 Malaysia, I support Xilnex POS and related systems across HQ and retail outlets, troubleshoot application, device, payment, and connectivity issues, coordinate with vendors, assist with new-site IT commissioning, and conduct UAT/system validation. Previously, I supported users and distributed sites through Lark Helpdesk, administered Lark, assisted with a Google Workspace-to-Lark migration, and worked with IT equipment and business data. Earlier, I gained onsite and remote technical support experience in managed print services and a software-development foundation using Laravel and MySQL.”
+
+Career themes:
+- IT support and service desk operations
+- Business application and POS support
+- Multi-site retail IT operations
+- Network and endpoint troubleshooting
+- SaaS administration and migration
+- Vendor and service-provider coordination
+- UAT, validation, and deployment readiness
+- Data accuracy and operational support
+- Documentation and workflow improvement
+- Foundational web development and SQL/MySQL
+
+============================================================
+2. CAREER TIMELINE
+============================================================
+
+A. System Application Specialist
+Employer: emart24 Malaysia
+Location: Subang Jaya, Selangor, Malaysia
+Dates: September 2025 – Present
+
+B. IT Executive
+Employer: Palaterium Sdn Bhd
+Location: Kuala Lumpur, Malaysia
+Dates: April 2024 – August 2025
+
+C. IT Technician
+Employer: Managed Print Services company
+Location: Kajang, Selangor, Malaysia
+Dates: October 2023 – March 2024
+Note: The exact legal employer name has not been provided in the resume material. Use “Managed Print Services” unless Aries confirms the company name.
+
+D. IT Intern – Full-Stack Developer
+Employer: Attorney General’s Chambers of Malaysia
+Location: Putrajaya, Malaysia
+Dates: September 2021 – February 2022
+
+Education:
+Diploma in Computer Science and Mathematics
+Universiti Teknologi MARA (UiTM), Melaka Jasin
+2019 – 2022
+
+Certification:
+AWS Certified Cloud Practitioner
+
+Other training/certification listed on the resume:
+- Generative AI Copilot Digital Upskilling Program – AI Teach Malaysia
+- ITIL Foundation – In progress (only show as “in progress” while that remains accurate; do not describe it as completed)
+
+============================================================
+3. CURRENT ROLE: EMART24 MALAYSIA
+============================================================
+
+Title:
+System Application Specialist
+
+Dates:
+September 2025 – Present
+
+Work context:
+Supports HQ and multiple emart24 retail outlets. Work spans POS/application support, payment devices, network connectivity, new-store commissioning, data and promotion processes, system testing, and vendor coordination. Resume material refers to 9+ operational sites/new-site deployments; confirm the precise meaning and current count before publishing as a public achievement.
+
+Key systems and areas:
+- Xilnex POS
+- POS and payment terminals/devices
+- Retail business applications
+- Third-party delivery/service integrations
+- Product, promotion, CRM, and food data processes
+- Microsoft 365 account provisioning/email setup/onboarding (as stated in current resume)
+- Network and connectivity support
+- New-store IT commissioning and operational readiness
+- UAT and system validation
+- Vendor and cross-functional coordination
+
+Responsibilities and experience:
+- Acts as a primary point of contact for technical incidents affecting HQ and retail outlets.
+- Receives, triages, prioritises, investigates, and follows up on issues based on urgency and operational impact.
+- Troubleshoots POS, application, hardware, software, payment-device, network, and connectivity problems.
+- Supports Xilnex POS and related business applications, including system configuration and operational issues.
+- Coordinates with vendors and technical teams on unresolved incidents, provides technical context, follows up, and validates fixes.
+- Supports integrations between internal platforms and third-party delivery services; identifies and escalates recurring system/API synchronisation issues.
+- Supports operational data processes involving product, promotion, CRM, and food data; validates information and coordinates corrections with relevant teams.
+- Supports promotion setup and system testing, coordinating with Marketing, CRM, MD, Food, and technical stakeholders as needed.
+- Performs UAT/system validation before deployments, system changes, promotions, integrations, or application updates.
+- Supports new-store IT setup and commissioning, including hardware provisioning, network connectivity, device configuration, POS/payment setup, testing, and readiness checks.
+- Troubleshoots LAN, Wi-Fi, and related connectivity problems at outlets.
+- Coordinates with third-party vendors and payment partners to investigate issues.
+- Documents recurring issues and improves troubleshooting/support workflows.
+- Has supported Microsoft 365 user account provisioning, email setup, and onboarding, according to the resume information.
+
+Examples of real work shared:
+- Xilnex POS support and troubleshooting across HQ and outlets.
+- New-store opening support, vendor equipment checks, POS/payment setup, and readiness validation.
+- Payment-related investigation, including distinguishing physical-card declines such as “Do Not Honour” from phone-wallet payment behaviour and coordinating with the relevant payment provider/technical teams.
+- POS sync and update/restart coordination with outlet teams.
+- Promotion not detected or not applied troubleshooting.
+- Reviewing reversed/failed payment status and escalating for follow-up.
+- Investigating NVR-to-switch/CCTV connectivity and outlet Wi-Fi visibility during store setup.
+- LAN cable work: cable management, RJ45 crimping/replacement, and cable testing; a specific incident involved a cable tester’s sequence not blinking as expected and fitting a new RJ45 head.
+- Supporting multiple store openings/standby deployments. Previous information referenced 6 store openings supported and 2 further Kedah stores planned at that time. This may be outdated, so do not publish the numbers without reconfirmation.
+
+Potential portfolio case studies:
+1. Multi-site POS and application support
+   - Problem category: retail systems and operational incidents.
+   - Role: triage, troubleshoot, coordinate with vendor/technical teams, communicate status, validate resolution.
+   - Skills: application support, incident management, customer communication, vendor coordination.
+   - Do not disclose confidential store/customer/payment information.
+
+2. New-store IT commissioning
+   - Scope: hardware checks, network connectivity, POS/payment devices, system configuration, testing, operational readiness.
+   - Skills: deployment coordination, troubleshooting, network basics, UAT, vendor management.
+   - Avoid publishing internal network layouts, IP addresses, credentials, security details, or vendor-sensitive information.
+
+3. Promotion/system validation
+   - Scope: promotion setup, system testing, product/promotion data checks, coordination with Marketing/CRM/MD/Food teams.
+   - Skills: data validation, UAT, cross-functional communication, application support.
+   - Avoid publishing campaign-sensitive information or internal data.
+
+4. Payment issue investigation
+   - Scope: help distinguish issue types, collect relevant evidence, coordinate with payment partner/vendor, track resolution.
+   - Skills: incident triage, payment/POS support, technical communication.
+   - Do not publish transaction IDs, cardholder data, screenshots, or other payment details.
+
+Suggested resume-ready bullets:
+- Provide day-to-day IT and application support for Xilnex POS and related retail systems across HQ and multiple outlets, troubleshooting application, hardware, payment-device, and connectivity issues.
+- Coordinate with vendors and technical teams to investigate incidents, escalate unresolved issues, validate fixes, and keep outlet users informed.
+- Support new-store IT commissioning, including hardware provisioning, network connectivity, POS/payment setup, system testing, and operational readiness.
+- Conduct UAT and data validation for system changes, promotions, integrations, and retail operational processes.
+- Support operational data workflows involving product, promotion, CRM, and food data, coordinating corrections with relevant teams.
+- Troubleshoot LAN/Wi-Fi connectivity and support basic network and device setup across retail sites.
+- Support Microsoft 365 user provisioning, email setup, and onboarding activities.
+
+============================================================
+4. PREVIOUS ROLE: PALATERIUM SDN BHD
+============================================================
+
+Title:
+IT Executive
+
+Dates:
+April 2024 – August 2025
+
+Environment:
+IT support for HQ/distributed sites, user and SaaS administration, helpdesk operations, equipment lifecycle, vendor coordination, business data, and workflow improvements.
+
+Key systems/tools:
+- Lark Helpdesk
+- Lark Super Admin / Lark platform
+- Google Workspace (before migration)
+- Microsoft 365 (as stated in resume/current profile)
+- TeamViewer and other remote support tools
+- NetSuite
+- Microsoft Excel
+- LAN, Wi-Fi, TCP/IP
+
+Responsibilities:
+- Delivered first- and second-line IT support through Lark Helpdesk for HQ and distributed sites.
+- Managed incidents and service requests involving hardware, software, applications, user accounts, access, and networking.
+- Triaged requests, collected technical information, performed structured troubleshooting, followed up with users, and tracked cases through resolution/SLA targets.
+- Provided remote diagnostics using TeamViewer and other remote-access tools.
+- Escalated complex issues to vendors/service providers, supplied relevant technical details, tracked progress, and verified fixes.
+- Troubleshot LAN, Wi-Fi, and TCP/IP connectivity issues.
+- Administered Lark as Super Admin, including user accounts, permissions, access settings, onboarding, and offboarding.
+- Led/supported migration from Google Workspace to Lark.
+- Supported email/data migration, account provisioning, access configuration, validation, and post-migration troubleshooting to the extent applicable to actual duties. Confirm exact migration scope before presenting each subtask as personally performed.
+- Designed and deployed digital workflow automation to reduce repetitive tasks and streamline departmental operations.
+- Supported NetSuite data imports and used Excel to clean/validate data and identify inconsistencies.
+- Supported IT procurement, inventory, equipment deployment, replacements, maintenance, and vendor coordination.
+- Supported onboarding/offboarding and user access workflows.
+
+Google Workspace → Lark migration:
+This is a notable professional achievement suitable for LinkedIn and portfolio. Safe wording:
+“Managed the Google Workspace-to-Lark migration, supporting user transition, account/access configuration, data and email migration activities, validation, and post-migration support.”
+Use “led” only if Aries had ownership/lead responsibility. Use “managed” or “supported” if work was shared.
+Only list mail migration, Drive/data migration, training, approval workflows, Lark Base, and automation if Aries confirms the precise tasks he handled. Prior information mentions Google Takeout/mail migration, Lark Base/approval/automation, and HQ training, but confirm which tasks were personally owned before publishing as a detailed project.
+
+Potential portfolio case study: Google Workspace to Lark migration
+- Objective: move business users/workflows from Google Workspace to Lark.
+- Work areas that may be included if confirmed: user/account preparation, email/data migration, access setup, validation, troubleshooting, user communication/training, Lark workflow setup.
+- Skills: SaaS administration, migration planning, user support, access management, validation, change coordination.
+- Outcomes: describe qualitative outcomes such as transition support and continuity only if accurate. Do not invent user counts, migration volume, time saved, or downtime reduction.
+- Do not publish internal user data, mail contents, credentials, tenant identifiers, or confidential business information.
+
+Suggested LinkedIn/resume bullet:
+“Managed the Google Workspace-to-Lark migration, covering user transition, account/access configuration, data and email migration activities, validation, and post-migration support.”
+
+============================================================
+5. PREVIOUS ROLE: MANAGED PRINT SERVICES
+============================================================
+
+Title:
+IT Technician
+
+Dates:
+October 2023 – March 2024
+
+Environment:
+Onsite and remote support for customer IT equipment and managed print environments.
+
+Responsibilities:
+- Delivered onsite and remote technical support for corporate customers.
+- Troubleshot laptops, printers, copiers, servers, network peripherals, and other ICT equipment.
+- Diagnosed hardware, software, driver, firmware, operating system, and network issues.
+- Logged and managed service incidents through Freshdesk.
+- Recorded issue details, troubleshooting steps, progress, and resolution status.
+- Worked within service targets and escalated cases when required.
+- Communicated findings and progress to customers/end users.
+- Installed, configured, and maintained equipment and related software.
+- Supported TCP/IP and device connectivity troubleshooting.
+
+Suggested resume bullets:
+- Delivered onsite and remote technical support for laptops, printers, servers, network peripherals, and other ICT equipment.
+- Managed service incidents through Freshdesk, documenting troubleshooting steps and tracking cases against service targets.
+- Diagnosed hardware, software, driver, firmware, operating-system, and network-connectivity issues, coordinating with customers and internal teams through resolution.
+
+============================================================
+6. INTERNSHIP: ATTORNEY GENERAL’S CHAMBERS OF MALAYSIA
+============================================================
+
+Title:
+IT Intern – Full-Stack Developer
+
+Location:
+Putrajaya, Malaysia
+
+Dates:
+September 2021 – February 2022
+
+Project:
+DKICT Declaration System
+
+Technology:
+- Laravel
+- MySQL
+- Web application development
+- SQL/database queries
+- Requirements gathering
+- System Requirements Specification (SRS)
+- Entity Relationship Diagrams (ERDs)
+- User testing/feedback and application troubleshooting
+
+Responsibilities and experience:
+- Contributed to development of the DKICT Declaration System using Laravel and MySQL.
+- Participated in the development lifecycle from requirements gathering through development/testing and deployment-related work.
+- Worked with a relational database using MySQL.
+- Investigated application issues during development and user testing.
+- Liaised with non-technical stakeholders to understand feedback and translate it into functional fixes.
+- Produced SRS documentation and ERDs.
+
+Important SQL positioning:
+The internship gives Aries a legitimate foundation in SQL/MySQL and relational databases. It does not automatically establish current advanced SQL proficiency. Do not claim advanced query optimisation, stored procedures, complex reporting pipelines, production DBA duties, or extensive data engineering unless confirmed.
+
+Potential portfolio case study:
+DKICT Declaration System (internship project)
+- Role: IT Intern / Full-Stack Developer.
+- Stack: Laravel, MySQL.
+- Work: application development, database-backed functionality, requirements/documentation, testing, stakeholder feedback.
+- Include only code/screenshots that Aries has permission to share. Do not expose government internal systems, sensitive workflows, real personal data, or non-public source code.
+- If public display is not authorised, use a text-only project summary without confidential screenshots or source code.
+
+Suggested resume bullets:
+- Contributed to the DKICT Declaration System using Laravel and MySQL, participating in requirements gathering, application development, testing, and deployment-related activities.
+- Investigated application issues during user testing and worked with stakeholders to translate feedback into functional improvements.
+- Prepared System Requirements Specification (SRS) documentation and Entity Relationship Diagrams (ERDs).
+
+============================================================
+7. EDUCATION AND CERTIFICATIONS
+============================================================
+
+Education:
+Diploma in Computer Science and Mathematics
+Universiti Teknologi MARA (UiTM), Melaka Jasin
+2019 – 2022
+
+Certification:
+AWS Certified Cloud Practitioner
+
+Additional training listed:
+Generative AI Copilot Digital Upskilling Program – AI Teach Malaysia
+
+ITIL:
+ITIL Foundation was listed as “In progress” in resume material. Update or remove this status if it is no longer accurate. Do not list as completed unless passed.
+
+AWS positioning:
+AWS Certified Cloud Practitioner indicates foundational understanding of AWS/cloud concepts. Do not describe Aries as an AWS cloud engineer or claim hands-on production cloud operations solely on the basis of this certification.
+
+============================================================
+8. TECHNICAL SKILLS INVENTORY
+============================================================
+
+IT Support / Service Desk:
+- L1/L2 technical support
+- Incident triage and prioritisation
+- Helpdesk and ticket management
+- SLA tracking/follow-up
+- Incident escalation
+- End-user communication
+- Remote and onsite troubleshooting
+- Knowledge/documentation practices
+- Freshdesk
+- Lark Helpdesk
+
+Business Application Support:
+- Xilnex POS
+- Retail POS and payment-device support
+- Business application troubleshooting
+- System configuration/support
+- UAT and system validation
+- Promotion/system testing
+- Operational data validation
+- Third-party integration issue coordination
+- NetSuite data import/validation support
+
+SaaS / User Administration:
+- Lark Super Admin
+- User provisioning and access permissions
+- Onboarding/offboarding
+- Google Workspace-to-Lark migration experience
+- Microsoft 365 user provisioning/email setup/onboarding, as described in resume material
+- TeamViewer
+- AnyDesk
+
+Networking:
+- TCP/IP
+- LAN and Wi-Fi troubleshooting
+- IP configuration
+- DNS and DHCP fundamentals
+- Basic routing and switching
+- Network peripherals
+- RJ45 crimping and cable testing
+- Outlet network connectivity troubleshooting
+
+Database / Development:
+- SQL/MySQL foundations
+- Database queries and data validation
+- Laravel
+- HTML/CSS
+- JavaScript (foundational learning/exposure; clarify current proficiency)
+- Git basics
+- JSON fundamentals
+- Entity Relationship Diagrams (ERDs)
+- System Requirements Specification (SRS)
+- Excel, including data cleanup/validation and advanced functions as listed in resume
+
+Hardware / IT Operations:
+- Laptops and desktops
+- Printers/copiers
+- POS terminals
+- Payment devices
+- Network equipment
+- Equipment provisioning/deployment
+- Asset inventory/procurement support
+- Vendor coordination
+- System testing
+- New-site commissioning
+- Technical documentation
+
+Cloud:
+- AWS Cloud Practitioner-level knowledge
+- AWS Certified Cloud Practitioner
+
+Linux:
+- Aries has used/installed Kubuntu and has some Linux exposure. Only list “Kubuntu/Linux basic exposure” if useful and if he is comfortable discussing it. Do not claim advanced Linux administration.
+
+Skills not confirmed as hands-on and that must NOT be invented:
+- Microsoft Intune administration
+- Advanced Azure AD / Entra ID administration
+- Exchange Online administration at advanced level
+- Windows Server administration
+- Advanced SQL/reporting optimisation
+- GPU/CUDA infrastructure
+- Kubernetes or production container orchestration
+- Production cloud operations/NOC experience
+- Exigo platform
+- L3 support ownership
+- Financial-sector/BNM IT operations
+- Enterprise security incident response
+- Large-scale enterprise network engineering
+
+============================================================
+9. ACHIEVEMENTS AND EVIDENCE
+============================================================
+
+Confirmed/reported achievements and work highlights:
+- Supported multiple emart24 retail sites in a live operational environment.
+- Supported new-store IT setup/commissioning and operational readiness.
+- Supported Xilnex POS and payment-device troubleshooting.
+- Coordinated incident resolution with external vendors and technical teams.
+- Conducted UAT and system validation before changes/deployments.
+- Supported retail data and promotion-related operational processes.
+- Supported Google Workspace-to-Lark migration at Palaterium.
+- Administered Lark accounts, permissions, onboarding/offboarding.
+- Created/deployed digital workflow automation at Palaterium.
+- Supported NetSuite data import and Excel-based data validation.
+- Used Freshdesk and Lark Helpdesk for ticketed support.
+- Worked with Laravel/MySQL on a government internship project.
+- Performed physical network cabling work including RJ45 replacement/crimping and cable testing.
+- Holds AWS Certified Cloud Practitioner.
+
+Potential quantified detail:
+- Resume material states support across HQ and “9+ operational sites” and “9+ new site deployments.” Confirm whether this means sites currently supported, total deployments, or another count before publishing. Do not conflate them.
+- Earlier discussion mentioned 6 store openings supported and 2 additional Kedah stores planned at that time. These numbers may be outdated; reconfirm.
+- Do not invent ticket volume, SLA percentage, user count, migration size, downtime avoided, money saved, or percentage improvements.
+
+How to present achievements on the website:
+Use an “Impact” section with truthful qualitative outcomes:
+- Improved continuity of retail operations through incident troubleshooting and vendor follow-up.
+- Supported smoother new-site launches through IT setup, testing, and readiness coordination.
+- Helped users transition to Lark during a SaaS migration.
+- Improved operational workflows through digital automation and structured support processes.
+Only claim measurable outcomes if Aries can provide evidence.
+
+============================================================
+10. PORTFOLIO PROJECT IDEAS
+============================================================
+
+Project 1 — Retail POS & Application Support
+Role: System Application Specialist
+Technologies/areas: Xilnex POS, payment devices, networking, vendor coordination, UAT, retail operations.
+Show:
+- A high-level overview of the support process.
+- An anonymised issue-resolution example.
+- A high-level diagram of how support, outlet users, and vendors coordinate.
+- No internal system diagrams, private network details, payment data, store-sensitive information, or screenshots without permission.
+
+Project 2 — New Store IT Commissioning
+Role: IT/application support
+Areas: device provisioning, network connectivity, POS/payment setup, configuration, testing, vendor coordination.
+Show:
+- A generic launch checklist.
+- The categories of equipment/systems validated.
+- The testing and handover process.
+- No passwords, IP addresses, serial numbers, CCTV configuration, or confidential store layouts.
+
+Project 3 — Google Workspace to Lark Migration
+Role: IT Executive at Palaterium
+Areas: SaaS migration, user transition, accounts/access, email/data migration, validation, support.
+Show:
+- High-level migration phases: preparation, migration, validation, user support, post-migration stabilisation.
+- Only claim phases/tasks personally handled.
+- Do not disclose company data or account information.
+
+Project 4 — DKICT Declaration System
+Role: IT Intern / Full-Stack Developer
+Stack: Laravel, MySQL
+Areas: application development, requirements gathering, database design, testing, SRS/ERD.
+Show:
+- An approved project summary.
+- Generic/redacted diagrams or personal recreations if original assets are confidential.
+- No government confidential data, private source code, or real personal records without permission.
+
+Project 5 — Workflow Automation
+Role: IT Executive at Palaterium
+Areas: Lark workflow automation and operational process streamlining.
+Show:
+- A generic explanation of a workflow.
+- Before/after process narrative only if accurate.
+- Do not claim time savings or automation volume without evidence.
+
+Project 6 — IT Support Knowledge Base / Troubleshooting Playbook
+This could be a personal portfolio project, not a past employer deliverable:
+- Create a sample troubleshooting playbook for generic POS/network issues.
+- Label it clearly as a personal demonstration project.
+- Use synthetic examples only.
+- Do not imply it is an official emart24 or employer document.
+
+============================================================
+11. CAREER DIRECTION AND TARGET ROLES
+============================================================
+
+Roles that align with existing experience:
+- IT Support Engineer / IT Support Executive
+- Application Support Analyst / Engineer
+- IT Operations Executive / Analyst
+- Regional IT Support
+- POS / Retail Systems Support
+- Service Desk Analyst (L1/L2)
+- Junior Systems Analyst
+- Junior Technical Support Engineer
+- IT Operations / Systems Support
+
+Potential growth areas:
+- Stronger SQL scripting/reporting
+- Deeper application integrations and API troubleshooting
+- ITIL/service management practices
+- Microsoft 365 administration
+- Networking fundamentals and structured troubleshooting
+- Linux fundamentals
+- Cloud operations fundamentals
+- Monitoring, scheduled jobs, incident metrics, and operational runbooks
+
+Career positioning:
+Aries can position himself as an application-minded IT support professional who understands the operational impact of technical issues, can communicate with non-technical users and vendors, and has both practical support experience and a development/database foundation.
+
+============================================================
+12. LINKEDIN AND RESUME CONTENT
+============================================================
+
+Suggested headline:
+IT Support & Application Support | POS & Retail Systems | IT Operations | Networking | SQL/MySQL | AWS Certified Cloud Practitioner
+
+Alternative headline:
+System Application Specialist | L1/L2 IT Support | Xilnex POS | Multi-Site IT Operations | SaaS Administration
+
+Suggested “About” section:
+“I’m an IT support and application support professional with experience across multi-site retail operations, business applications, user support, networking, SaaS administration, and IT operations.
+
+In my current role at emart24 Malaysia, I support Xilnex POS and related retail systems, troubleshoot application, payment-device, hardware, and connectivity issues, coordinate with vendors, assist with new-store IT commissioning, and perform UAT and operational data validation.
+
+Previously, at Palaterium, I provided L1/L2 support through Lark Helpdesk, administered the Lark platform, supported the migration from Google Workspace to Lark, worked with NetSuite/Excel data validation, and helped improve workflows through digital automation. My earlier IT Technician role strengthened my onsite and remote troubleshooting skills, while my internship at the Attorney General’s Chambers of Malaysia gave me a software-development foundation using Laravel and MySQL.
+
+I hold a Diploma in Computer Science and Mathematics and am an AWS Certified Cloud Practitioner. I’m interested in opportunities across application support, IT operations, systems support, and regional IT support where I can contribute to reliable services while continuing to deepen my technical skills.”
+
+Suggested Google Workspace-to-Lark LinkedIn bullet:
+“Managed the Google Workspace-to-Lark migration, supporting user transition, account/access configuration, data and email migration activities, validation, and post-migration support.”
+Adjust “managed” to “supported” if it better reflects shared ownership.
+
+============================================================
+13. WEBSITE CONTENT AND DESIGN GUIDANCE
+============================================================
+
+Suggested website purpose:
+A professional personal portfolio that complements Aries’s resume and lets recruiters understand his work, strengths, technical skills, and selected case studies quickly.
+
+Recommended pages/sections:
+1. Hero:
+   - Name: Muhammad Aries Irhan bin Abd Razak
+   - Title: IT Support | Application Support | IT Operations
+   - Short intro
+   - Buttons: Download Resume, View Projects, Contact
+2. About:
+   - Career overview
+   - Practical support + application troubleshooting + development foundation
+3. Experience:
+   - emart24 Malaysia
+   - Palaterium Sdn Bhd
+   - Managed Print Services
+   - Attorney General’s Chambers of Malaysia
+4. Skills:
+   - IT Support & Operations
+   - POS & Application Support
+   - Networking
+   - SaaS Administration
+   - SQL/MySQL & Development
+   - Cloud Fundamentals
+5. Featured Projects / Case Studies:
+   - Retail POS/application support (anonymised)
+   - New-store IT commissioning
+   - Google Workspace-to-Lark migration
+   - DKICT Declaration System (only if public sharing is allowed)
+   - Workflow automation (only if details can be shared)
+6. Certifications:
+   - AWS Certified Cloud Practitioner
+   - Generative AI Copilot Digital Upskilling Program
+   - ITIL Foundation only if still in progress
+7. Contact:
+   - LinkedIn
+   - Email
+   - Optional phone number only if Aries wants it public
+   - Resume download
+
+Visual style:
+- Professional, modern, understated technology aesthetic.
+- Strong typography, generous spacing, clean section hierarchy.
+- Mobile-first responsive layout.
+- Accessible colour contrast and keyboard navigation.
+- Subtle animations only; respect reduced-motion preferences.
+- Avoid generic “hacker” visuals, fake dashboards, fabricated analytics, or meaningless skill percentage bars.
+- Use real evidence and concise case studies instead of exaggerated claims.
+- Make it easy to scan within 30–60 seconds.
+- Add SEO title/description, favicon, Open Graph metadata, and a custom domain if available.
+- Include downloadable PDF resume only after ensuring it is current.
+- Use a contact form only if a safe backend/service is configured; otherwise use email/LinkedIn links.
+- Do not put credentials, API keys, internal screenshots, private company data, or production access information in the website/repository.
+
+============================================================
+14. PERSONAL DATA AND PRIVACY
+============================================================
+
+Contact details shared in the resume:
+- Email: ariesirhan25@gmail.com
+- Phone: +60 11-5582 2313
+- LinkedIn: https://www.linkedin.com/in/aries-razak-a36045256
+- Resume location: Negeri Sembilan, Malaysia
+
+Privacy recommendations:
+- Consider publishing only email and LinkedIn, rather than phone number and detailed location.
+- Do not include home address, identity card number, personal financial details, passwords, or private information.
+- Use a professional email contact link and spam-conscious contact method.
+- Do not expose employer internal documents, production screenshots, user information, payment data, credentials, IP addresses, or network diagrams.
+- Ask permission before using employer logos, confidential screenshots, code, or internal project assets.
+
+============================================================
+15. IMPORTANT ACCURACY CHECKLIST BEFORE PUBLISHING
+============================================================
+
+Please verify these details before the website goes live:
+1. Whether “9+ operational sites” and “9+ new site deployments” are both accurate and mean different things.
+2. The exact employer/legal name for the Managed Print Services role.
+3. Which parts of the Google Workspace-to-Lark migration Aries personally handled: user accounts, mail migration, data/Drive migration, Google Takeout, training, Lark Base, approval flows, automation, validation, post-migration support.
+4. Current SQL/MySQL ability and which query types Aries can comfortably demonstrate.
+5. Current JavaScript proficiency.
+6. Whether Microsoft 365 administration was limited to provisioning/email/onboarding or included more administration.
+7. Whether ITIL Foundation is still in progress.
+8. Whether the DKICT Declaration System can be publicly described or shown.
+9. Which certifications should be linked to verifiable credential pages.
+10. Whether phone number should be public on the portfolio.
+
+Never invent:
+- Job titles or dates.
+- Quantified achievements.
+- Advanced technical skills.
+- Certifications not earned.
+- Project outcomes not measured.
+- Exigo experience.
+- L3 support experience.
+- Intune or advanced cloud/network/security experience.
+
+END OF FILE

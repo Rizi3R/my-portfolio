@@ -1,0 +1,986 @@
+# PROJECT: BUILD A PREMIUM PERSONAL IT PORTFOLIO WEBSITE FOR ARIES IRHAN
+
+You are an expert senior full-stack developer, UI/UX designer, creative director, technical SEO specialist, and personal branding strategist.
+
+Your task is to design and build a complete, polished, production-quality personal portfolio website for me using the information in the knowledge-base file I have uploaded.
+
+Do not merely explain how to build it. Actually build the working website and implement the features described below.
+
+Treat this as a real professional portfolio that I can deploy publicly and use when applying for IT Support, Application Support, IT Operations, System Support, IT Application Specialist, and Cloud Operations roles.
+
+The final result should look like a premium portfolio designed by an experienced developer, not a generic AI-generated portfolio template.
+
+==================================================
+1. UNDERSTAND MY PROFESSIONAL IDENTITY
+==================================================
+
+My name is Muhammad Aries Irhan bin Abd Razak. I professionally go by Aries Irhan.
+
+I am an IT professional based in Malaysia with experience in IT support, application support, retail technology, POS systems, IT operations, technical troubleshooting, vendor coordination, and system implementation.
+
+My current role is System Application Specialist at emart24 Malaysia.
+
+My previous experience includes:
+- IT Executive at Palaterium Sdn Bhd.
+- IT Technician in a managed print services environment.
+- IT Intern and Full-Stack Developer at the Attorney General's Chambers of Malaysia.
+
+I hold a Diploma in Computer Science and Mathematics from UiTM Melaka Jasin and have earned the AWS Certified Cloud Practitioner certification.
+
+My experience includes working with Xilnex POS, Lark, Microsoft 365, Freshdesk, TeamViewer, NetSuite, networking fundamentals, system troubleshooting, IT infrastructure setup, application support, data validation, and business system operations.
+
+My professional direction is to continue growing beyond conventional helpdesk support into application support, system administration, IT operations, integrations, automation, and cloud-related technologies.
+
+Use the uploaded knowledge-base file as the primary source of truth for my career information.
+
+IMPORTANT:
+- Do not invent employment history, certifications, qualifications, technical skills, projects, metrics, or achievements.
+- Do not claim that I am a senior engineer, cloud architect, cybersecurity specialist, or experienced full-stack engineer.
+- Do not exaggerate my level of expertise.
+- Distinguish between professional experience, foundational knowledge, personal learning, and future learning goals.
+- If a specific detail is missing, omit it rather than fabricate it.
+- Never expose private information that is unnecessary for a public portfolio.
+- Use my professional name, Aries Irhan, prominently instead of displaying my entire legal name throughout the website.
+
+The website should communicate three things:
+
+1. I understand how IT systems support real business operations.
+2. I can troubleshoot technical problems, coordinate with stakeholders, and support applications across multiple sites.
+3. I am continuously developing my technical skills and preparing for the next stage of my IT career.
+
+==================================================
+2. DESIGN DIRECTION
+==================================================
+
+Create a visually impressive, premium, dark-themed technology portfolio.
+
+Design inspiration:
+- Modern developer portfolios.
+- Premium SaaS product websites.
+- Minimalist technology landing pages.
+- Modern engineering dashboards.
+- Editorial typography with carefully controlled visual hierarchy.
+- Subtle futuristic elements without excessive cyberpunk styling.
+
+Visual identity:
+- Primary background: deep charcoal or near-black.
+- Secondary backgrounds: slightly lighter charcoal panels.
+- Accent colour: electric blue or a tasteful blue-to-violet gradient.
+- Text: white for headings and soft grey for secondary text.
+- Borders: subtle, low-contrast outlines.
+- Cards: clean, understated, with restrained glass-like effects where appropriate.
+- Typography: use a modern sans-serif font such as Inter, Geist, or a similar available alternative.
+
+The design must feel professional enough for a recruiter or IT hiring manager while still demonstrating creativity and technical ability.
+
+Avoid:
+- Generic template layouts.
+- Excessive gradients.
+- Excessive glassmorphism.
+- Bright neon colours everywhere.
+- Too many rounded cards.
+- Huge empty spaces without purpose.
+- Constant animations.
+- Excessive glowing effects.
+- Stock photographs of people in suits.
+- Fake testimonials.
+- Fake client logos.
+- Fake company partnerships.
+- Fake GitHub contribution graphs.
+- Fake project metrics.
+- Fake live system monitoring.
+- Fake uptime statistics.
+- Fake visitor counts.
+
+Use whitespace intentionally.
+
+The finished design should feel like a personal engineering brand rather than a company marketing page.
+
+==================================================
+3. TECHNICAL IMPLEMENTATION
+==================================================
+
+First, inspect the available development environment and determine the best implementation compatible with Google AI Studio's current coding environment.
+
+Preferred stack:
+- React.
+- TypeScript.
+- Vite, if supported by the environment.
+- Tailwind CSS, if available and properly configured.
+- Lucide icons or another suitable lightweight icon library.
+- Framer Motion or a compatible animation library only if it can be installed and used correctly.
+
+Use reusable components and a clear project structure.
+
+Potential structure:
+
+src/
+  components/
+    Navbar.tsx
+    Hero.tsx
+    About.tsx
+    Experience.tsx
+    Skills.tsx
+    Projects.tsx
+    Certifications.tsx
+    LearningJourney.tsx
+    Contact.tsx
+    Footer.tsx
+    SectionHeading.tsx
+    ProjectCard.tsx
+    ExperienceCard.tsx
+  data/
+    portfolio.ts
+  App.tsx
+  main.tsx
+  index.css
+
+Adapt this structure to the environment as necessary.
+
+Implementation requirements:
+- Produce working code, not pseudocode.
+- Ensure all imports resolve.
+- Ensure all components are implemented.
+- Avoid unnecessary dependencies.
+- Do not leave unfinished TODO comments for essential functionality.
+- Do not use nonfunctional buttons.
+- Do not create navigation links that lead nowhere.
+- Do not make external API calls that are unnecessary for a static portfolio.
+- Do not require a backend unless there is a compelling reason.
+- Store repeated portfolio content in structured data objects where practical.
+- Keep content and presentation separate.
+- Ensure the website can be built and deployed using the documented commands for the selected environment.
+
+If you can run the project, run it and fix compilation errors, runtime errors, and layout problems before considering the work complete.
+
+If you cannot execute the project, carefully review the code for consistency and explain the appropriate run commands.
+
+==================================================
+4. WEBSITE STRUCTURE
+==================================================
+
+Build a complete single-page portfolio with the following sections.
+
+A. NAVIGATION BAR
+
+Create a sleek navigation bar with:
+- Aries Irhan wordmark.
+- About.
+- Experience.
+- Skills.
+- Projects.
+- Contact.
+- A prominent "Let's Connect" button.
+
+Requirements:
+- Sticky navigation.
+- Smooth scrolling.
+- Clear active or hover states.
+- Responsive mobile navigation.
+- Keyboard accessibility.
+- Navigation must not cover section headings when scrolling.
+- On mobile, the menu must open and close correctly.
+
+The navbar should be minimal and professional.
+
+B. HERO SECTION
+
+This is the most important section.
+
+Make the first screen memorable.
+
+Suggested content:
+
+Eyebrow:
+IT SUPPORT · APPLICATION SYSTEMS · IT OPERATIONS
+
+Main heading:
+"I keep business-critical systems running."
+
+Supporting heading or description:
+"I'm Aries Irhan, an IT professional focused on application support, retail technology, system troubleshooting, and reliable IT operations."
+
+Additional supporting copy:
+"From supporting POS systems across retail outlets to coordinating technical implementations and improving internal workflows, I enjoy solving practical problems where technology meets business operations."
+
+Primary CTA:
+"Explore My Work"
+
+Secondary CTA:
+"Get In Touch"
+
+Optional third CTA:
+"View Resume"
+
+The resume button must only work if a real resume file has been supplied and made available to the website. If no resume file exists, do not create a broken download button.
+
+On the right side of the hero section, create an attractive abstract technical visual.
+
+Possible visual direction:
+- A stylised network of connected nodes.
+- A clean system architecture-inspired illustration.
+- Floating technical interface elements.
+- Subtle geometric shapes.
+- A custom CSS-based terminal or system-status panel.
+
+The illustration must be original and should not pretend to represent an actual production system.
+
+If using a terminal visual, label it clearly as a portfolio illustration or interactive demo.
+
+Do not create a fake real-time dashboard that claims to monitor my actual workplace systems.
+
+The hero must look excellent at 1440px desktop width and remain compelling on mobile.
+
+C. PROFESSIONAL OVERVIEW
+
+Create an About section that explains my professional journey.
+
+Focus on:
+- My background in Computer Science and Mathematics.
+- My progression from IT Technician to IT Executive and System Application Specialist.
+- My exposure to application support and business-critical retail systems.
+- My experience supporting users, investigating incidents, coordinating with vendors, and setting up technology for business operations.
+- My interest in continuing to develop application, infrastructure, and cloud-related skills.
+
+Present the information in a confident, grounded, human way.
+
+Avoid generic phrases such as:
+"I am a passionate technology enthusiast seeking to leverage synergies."
+
+Use clear, natural English.
+
+Possible section heading:
+"Technology is only useful when it works for people."
+
+Use a visual timeline or concise professional narrative to demonstrate career progression.
+
+Do not invent personal motivations or experiences that are not supported by the knowledge base.
+
+D. EXPERIENCE TIMELINE
+
+Create a polished professional experience section.
+
+Include these positions using the dates and details in the knowledge-base file:
+
+1. System Application Specialist
+   emart24 Malaysia
+   September 2025 – Present
+
+2. IT Executive
+   Palaterium Sdn Bhd
+   Use the verified dates from the knowledge base.
+
+3. IT Technician
+   Managed Print Services company
+   Use the verified dates from the knowledge base.
+   If the legal company name is not available, do not invent one.
+
+4. IT Intern – Full-Stack Developer
+   Attorney General's Chambers of Malaysia
+   Use the verified dates from the knowledge base.
+
+For each role, include:
+- Job title.
+- Employer.
+- Employment dates.
+- Short role overview.
+- Key responsibilities.
+- Relevant technologies.
+- Meaningful technical or operational contributions supported by the source information.
+
+Use expandable cards, a vertical timeline, or another polished layout.
+
+Keep the descriptions concise enough to scan quickly, but provide enough detail to demonstrate real experience.
+
+For my current emart24 role, prioritise:
+- Xilnex POS application support.
+- Troubleshooting incidents affecting retail operations.
+- Coordinating with stores, internal teams, and vendors.
+- Supporting new store technology setup.
+- Payment-related issue investigation and escalation.
+- Promotion and product-data validation.
+- System testing and operational readiness.
+- Basic networking and connectivity troubleshooting.
+
+For my Palaterium role, prioritise:
+- Lark Helpdesk and administration.
+- User provisioning and access management.
+- Remote IT support.
+- Google Workspace-to-Lark migration, described only to the extent supported by my actual responsibilities.
+- Vendor coordination.
+- IT procurement and inventory.
+- NetSuite and Excel data preparation or validation.
+- Workflow improvements and automation where supported by the knowledge base.
+
+For my IT Technician role, prioritise:
+- Hardware and software troubleshooting.
+- Printer and peripheral support.
+- Networking and connectivity.
+- Driver, firmware, and operating system issues.
+- Ticket documentation and service targets.
+
+For my internship, prioritise:
+- Laravel and MySQL.
+- The DKICT Declaration System.
+- Requirements gathering.
+- Development and testing.
+- System documentation.
+- Software development fundamentals.
+
+Do not turn every responsibility into a separate oversized card.
+
+E. TECHNICAL SKILLS
+
+Build an attractive technical skills section with logical categories.
+
+Suggested categories:
+
+1. Application & POS Support
+   - Xilnex POS.
+   - Application troubleshooting.
+   - Incident investigation.
+   - System testing and UAT.
+   - Product and promotion data validation.
+   - Vendor escalation.
+   - Retail application operations.
+
+2. IT Operations & End-User Support
+   - Lark Helpdesk.
+   - Microsoft 365 fundamentals and user administration where supported.
+   - Freshdesk.
+   - TeamViewer.
+   - Remote troubleshooting.
+   - User onboarding and offboarding.
+   - IT inventory and procurement.
+   - Technical documentation.
+
+3. Networking & Infrastructure
+   - TCP/IP fundamentals.
+   - LAN and Wi-Fi troubleshooting.
+   - Basic DNS and DHCP knowledge.
+   - Connectivity troubleshooting.
+   - Basic router, switch, and access-point concepts.
+   - RJ45 crimping and cable testing.
+   - Basic IT equipment deployment.
+
+4. Business Applications & Data
+   - NetSuite exposure.
+   - Microsoft Excel.
+   - Data cleaning and validation.
+   - SQL/MySQL foundations.
+   - Reporting and data-import fundamentals where supported.
+
+5. Development & Cloud Foundations
+   - AWS fundamentals.
+   - AWS Certified Cloud Practitioner.
+   - Laravel.
+   - MySQL.
+   - HTML and CSS.
+   - JavaScript fundamentals.
+   - Git fundamentals.
+   - JSON fundamentals.
+
+Only display skills supported by the knowledge base.
+
+Skill visualisation:
+- Use grouped tags, compact cards, or clean lists.
+- Avoid giant progress bars with arbitrary percentages.
+- Do not claim "95% expertise" or similar unsupported numbers.
+- Clearly distinguish between professional experience and foundational knowledge.
+- Consider badges such as "Professional Experience", "Working Knowledge", and "Foundational Knowledge" when accurate.
+
+The section should be visually rich without looking like a collection of random technology logos.
+
+F. PROJECTS AND CASE STUDIES
+
+This section is essential.
+
+Transform my real professional experience into credible, technical case studies.
+
+Use only projects and activities supported by the knowledge-base file.
+
+Potential case studies include:
+
+PROJECT 1: RETAIL POS APPLICATION SUPPORT
+
+Context:
+Retail stores depend on reliable point-of-sale systems to complete transactions and support daily operations.
+
+My contribution:
+Describe my actual work supporting Xilnex POS, investigating reported issues, coordinating with outlets and vendors, validating system behaviour, and escalating issues where necessary.
+
+Technical areas:
+- Application troubleshooting.
+- Incident triage.
+- POS operations.
+- Vendor coordination.
+- System testing.
+- Operational communication.
+
+PROJECT 2: NEW RETAIL STORE IT READINESS
+
+Context:
+A new retail outlet requires multiple IT components to be ready before operations begin.
+
+My contribution:
+Describe my actual involvement in equipment checks, POS and payment setup, connectivity checks, CCTV/NVR networking coordination, Wi-Fi troubleshooting, and operational readiness.
+
+Technical areas:
+- IT equipment deployment.
+- Basic networking.
+- POS setup.
+- Connectivity validation.
+- Cross-team coordination.
+- Testing and troubleshooting.
+
+PROJECT 3: GOOGLE WORKSPACE-TO-LARK MIGRATION
+
+Context:
+An organisation transitions from Google Workspace to Lark to support its collaboration and operational workflows.
+
+My contribution:
+Use the knowledge base to describe the exact work I personally performed.
+
+Potential areas, only if verified:
+- User provisioning.
+- Email and data migration.
+- Access configuration.
+- Validation.
+- Post-migration support.
+- Lark administration.
+- Workflow configuration.
+
+Do not claim that I led the entire migration if my involvement was shared or limited to particular tasks.
+
+PROJECT 4: DKICT DECLARATION SYSTEM
+
+Context:
+A software development internship involving a declaration system.
+
+My contribution:
+Describe my actual work on the DKICT Declaration System using Laravel and MySQL.
+
+Potential areas:
+- Requirements gathering.
+- Application development.
+- Database fundamentals.
+- User testing.
+- Software requirements documentation.
+- Entity relationship diagrams.
+
+PROJECT 5: IT INFRASTRUCTURE TROUBLESHOOTING
+
+Context:
+Real-world IT support includes resolving physical connectivity and hardware-related issues.
+
+My contribution:
+Include relevant examples from my work history, such as LAN cable troubleshooting, RJ45 termination, cable testing, printer support, and network connectivity investigations.
+
+Only include examples that are genuinely supported by the knowledge base.
+
+CASE STUDY DESIGN:
+
+Every project card should include:
+- Project title.
+- Category.
+- Short overview.
+- Problem or operational context.
+- My role.
+- Approach.
+- Technologies involved.
+- Outcome or lesson learned.
+
+Use these headings where appropriate:
+"Context"
+"Challenge"
+"Approach"
+"Outcome"
+"Technologies"
+
+Do not invent numerical improvements, cost savings, percentage reductions, or business outcomes.
+
+When an exact measurable outcome is unavailable, describe the operational purpose, work completed, or lesson learned instead.
+
+Use project tags and subtle interactive details.
+
+Each project card may open into a modal or expandable case-study view.
+
+All modals must support:
+- Close button.
+- Escape key.
+- Click-outside-to-close where appropriate.
+- Accessible focus behaviour.
+- Mobile-friendly scrolling.
+
+Do not display employer-confidential information, private customer information, internal IP addresses, credentials, proprietary screenshots, or sensitive operational details.
+
+For projects involving my current or former employers, use generic diagrams or original illustrations rather than real internal screenshots.
+
+If you create illustrative diagrams, clearly present them as conceptual illustrations, not actual internal architecture.
+
+G. CERTIFICATIONS AND EDUCATION
+
+Create a clean section displaying:
+
+Education:
+Diploma in Computer Science and Mathematics
+UiTM Melaka Jasin
+2019–2022
+
+Certification:
+AWS Certified Cloud Practitioner
+
+Additional training:
+Generative AI Copilot Digital Upskilling Program – AI Teach Malaysia
+
+Only include additional certifications or training that are confirmed in the knowledge base.
+
+If ITIL Foundation is listed as in progress, label it accurately as "In Progress" only if that status is still correct. Otherwise, omit it.
+
+Do not display fake certification badges or claim credentials I have not earned.
+
+H. LEARNING JOURNEY
+
+I want my portfolio to demonstrate professional growth, not just past employment.
+
+Create a section titled:
+"Always building beyond the ticket."
+
+Explain that I am expanding my technical foundation beyond day-to-day support.
+
+Possible areas:
+- Application troubleshooting and integrations.
+- SQL and data handling.
+- Web development fundamentals.
+- Cloud fundamentals.
+- Automation and workflow improvements.
+- Networking and infrastructure knowledge.
+
+Only present these as active learning areas if the knowledge base supports them.
+
+Clearly separate:
+- Skills I have used professionally.
+- Skills I have studied.
+- Skills I plan to develop.
+
+Do not present planned learning as professional experience.
+
+A simple, elegant learning roadmap is preferred over fake achievement percentages or fabricated course-completion statistics.
+
+I. CONTACT SECTION
+
+Create a strong closing section.
+
+Suggested heading:
+"Have a system to improve or a problem to solve?"
+
+Suggested copy:
+"I'm open to connecting with IT teams and organisations working on application support, IT operations, retail technology, and system reliability."
+
+Include:
+- Email: ariesirhan25@gmail.com
+- LinkedIn: https://www.linkedin.com/in/aries-razak-a36045256
+
+Use the contact information exactly as supplied.
+
+Add:
+- A clickable email link using mailto.
+- A LinkedIn button opening my profile in a new tab.
+- Appropriate security attributes for external links.
+
+Do not invent a phone number or add personal information beyond what is needed.
+
+Do not implement a fake contact form that appears to send messages but does nothing.
+
+If implementing a contact form requires a backend or third-party service, either:
+1. Use a properly configured service with explicit setup instructions, or
+2. Provide a simple email-based contact option instead.
+
+The default should be a reliable, functional contact section without requiring a backend.
+
+J. FOOTER
+
+Include:
+- Aries Irhan.
+- A short professional tagline.
+- Navigation links.
+- LinkedIn.
+- Email.
+- Automatically calculated current year.
+
+Use a subtle closing design.
+
+==================================================
+5. OPTIONAL PREMIUM INTERACTIVE FEATURES
+==================================================
+
+Implement the following features where they improve the experience.
+
+A. CUSTOM CURSOR EFFECTS
+
+Optional desktop-only cursor details.
+
+Keep them subtle and disable them on touch devices.
+
+Do not interfere with normal pointer behaviour or accessibility.
+
+B. SCROLL ANIMATIONS
+
+Use subtle entrance animations for section headings, project cards, and experience entries.
+
+Requirements:
+- Respect the user's reduced-motion preferences.
+- Avoid excessive movement.
+- Avoid delaying content visibility.
+- Do not make the website feel slow.
+
+C. PROJECT FILTERS
+
+Allow visitors to filter projects by category, such as:
+- Application Support.
+- IT Operations.
+- Infrastructure.
+- Development.
+- Data & Systems.
+
+Ensure filtering actually works.
+
+D. INTERACTIVE TECHNICAL ILLUSTRATION
+
+Create a lightweight, original technical illustration in the hero section.
+
+It could represent a simplified flow:
+
+User Report
+    ↓
+Incident Triage
+    ↓
+Application / Network Investigation
+    ↓
+Resolution or Vendor Escalation
+    ↓
+Validation and Documentation
+
+This represents my general support workflow, not a specific confidential process at my employer.
+
+Use SVG, CSS, or React components rather than large external assets.
+
+E. COPY EMAIL BUTTON
+
+Add a button that copies my email address to the clipboard.
+
+Provide a visible success message and handle clipboard errors gracefully.
+
+F. BACK-TO-TOP BUTTON
+
+Display a small back-to-top control after the user scrolls down.
+
+Ensure it works with keyboard and touch input.
+
+Do not implement features merely to increase complexity. Prioritise quality and reliability.
+
+==================================================
+6. RESPONSIVE DESIGN
+==================================================
+
+The website must be fully responsive.
+
+Test and optimise these approximate viewport widths:
+- 360px mobile.
+- 390px mobile.
+- 768px tablet.
+- 1024px laptop.
+- 1440px desktop.
+- 1920px large desktop.
+
+Requirements:
+- No horizontal overflow.
+- No overlapping navigation.
+- No clipped headings.
+- No broken grids.
+- No inaccessible buttons.
+- No text that is too small to read.
+- No excessive whitespace on mobile.
+- No giant project cards that require unnecessary scrolling.
+- All modals must fit mobile screens.
+- Buttons must be large enough for touch input.
+
+On mobile, prioritise readability, fast loading, and easy navigation.
+
+==================================================
+7. ACCESSIBILITY
+==================================================
+
+Implement sensible accessibility practices.
+
+Include:
+- Semantic HTML.
+- Correct heading hierarchy.
+- Accessible navigation labels.
+- Keyboard-operable interactive elements.
+- Visible focus indicators.
+- Sufficient colour contrast.
+- Meaningful alt text for informative images.
+- Empty alt text for decorative images where appropriate.
+- Reduced-motion support.
+- Appropriate ARIA attributes when needed.
+- Form labels if any form is implemented.
+
+Do not rely on colour alone to communicate important information.
+
+==================================================
+8. PERFORMANCE AND CODE QUALITY
+==================================================
+
+The website should be lightweight and fast.
+
+Requirements:
+- Optimise assets.
+- Avoid large unnecessary libraries.
+- Avoid excessive animation.
+- Avoid unnecessary network requests.
+- Use CSS and SVG for lightweight visuals where possible.
+- Use lazy loading for appropriate below-the-fold images.
+- Prevent layout shifts.
+- Avoid console errors.
+- Avoid broken external links.
+- Avoid placeholder images.
+- Avoid unused dependencies.
+- Ensure clean, maintainable React and TypeScript code.
+
+Do not use copyrighted portfolio templates or copy another developer's complete design.
+
+The final website should have its own visual identity.
+
+==================================================
+9. SEO AND SOCIAL SHARING
+==================================================
+
+Configure the website with appropriate metadata.
+
+Suggested page title:
+"Aries Irhan | IT Support & Application Systems"
+
+Suggested meta description:
+"Explore Aries Irhan's professional portfolio in IT support, application support, retail technology, POS systems, and IT operations."
+
+Include:
+- Appropriate page title.
+- Meta description.
+- Viewport metadata.
+- Theme colour.
+- Open Graph title and description.
+- Open Graph image configuration if a suitable image is created or supplied.
+- Favicon using a simple Aries Irhan monogram.
+- Semantic content structure.
+- Descriptive section IDs.
+- A canonical URL only if a real production URL is provided.
+
+Do not invent a domain name or claim the website has been indexed by search engines.
+
+Avoid keyword stuffing.
+
+==================================================
+10. CONTENT STYLE
+==================================================
+
+The website copy must sound natural, professional, technically credible, and human.
+
+Writing style:
+- Clear English.
+- Confident but not arrogant.
+- Concise but meaningful.
+- Focused on real responsibilities and practical problem-solving.
+- Appropriate for recruiters, IT managers, and technical hiring managers.
+
+Avoid generic AI-generated language such as:
+- "Passionate tech enthusiast."
+- "Results-driven professional leveraging cutting-edge solutions."
+- "Revolutionising the digital landscape."
+- "Driving synergies through innovative technology."
+- "I am a ninja of all trades."
+
+Prefer practical statements that communicate what I actually do.
+
+The portfolio should help a hiring manager understand:
+1. What I have worked on.
+2. What technical problems I can help investigate.
+3. Which systems and tools I have experience with.
+4. How I collaborate with users, teams, and vendors.
+5. How I am growing professionally.
+
+Do not overstate my current level of technical expertise.
+
+==================================================
+11. DESIGN DETAILS THAT MAKE IT FEEL PREMIUM
+==================================================
+
+Pay attention to the small details that separate an excellent portfolio from a generic website.
+
+Include:
+- Carefully balanced typography.
+- Strong spacing and alignment.
+- Consistent border radii.
+- Subtle card hover states.
+- Smooth but restrained transitions.
+- Clear visual hierarchy.
+- A consistent icon style.
+- Distinct section layouts.
+- Elegant dividers.
+- Thoughtful mobile spacing.
+- A polished footer.
+- A cohesive colour palette.
+- Consistent button styling.
+- A restrained visual motif inspired by system architecture or interconnected services.
+
+Consider adding a small availability or professional-focus label, but do not claim I am actively available for employment unless that information is confirmed.
+
+You may use small visual labels such as:
+"APPLICATION SUPPORT"
+"RETAIL TECHNOLOGY"
+"IT OPERATIONS"
+
+Avoid turning the site into a fake command-line terminal or hacker-themed dashboard.
+
+I want the design to look like a credible IT professional's personal website.
+
+==================================================
+12. DATA ACCURACY AND PRIVACY
+==================================================
+
+Use the uploaded knowledge-base file as the primary source of truth.
+
+Before implementing content:
+- Review the entire knowledge base.
+- Identify confirmed career dates.
+- Identify confirmed certifications.
+- Identify confirmed technologies.
+- Identify genuine projects.
+- Distinguish confirmed achievements from suggested wording.
+- Omit any uncertain claims.
+
+Do not display:
+- Passwords.
+- Access tokens.
+- API keys.
+- Internal credentials.
+- Internal IP addresses.
+- Confidential employer information.
+- Private customer details.
+- Internal screenshots containing sensitive data.
+- Unapproved proprietary diagrams.
+- Personal financial information.
+- Private relationship or family information.
+- Any irrelevant sensitive personal information.
+
+Do not expose hidden implementation details or secrets in frontend code.
+
+All information displayed on the public website should be appropriate for a professional portfolio.
+
+==================================================
+13. DEPLOYMENT READINESS
+==================================================
+
+Prepare the project for deployment.
+
+Prefer a solution that can be deployed to Vercel or another suitable static hosting platform.
+
+Provide:
+- A working development setup.
+- Correct package configuration.
+- A production build script.
+- Clear setup instructions.
+- Clear build instructions.
+- Deployment instructions.
+- Any necessary configuration files.
+- A list of environment variables only if actually required.
+
+If Vercel is selected, make sure the project structure and build settings are compatible.
+
+For a single-page application, configure routing appropriately if client-side routing is used.
+
+The website should not require a paid service to function unless explicitly stated.
+
+Do not expose API keys or secrets in frontend code.
+
+==================================================
+14. FINAL QUALITY ASSURANCE
+==================================================
+
+Before finishing, review the complete implementation.
+
+Check:
+
+[ ] The website renders correctly.
+[ ] All React components are implemented.
+[ ] The navigation works.
+[ ] All navigation links lead to valid sections.
+[ ] The mobile menu works.
+[ ] The project filters work.
+[ ] Project details open and close correctly.
+[ ] The Escape key closes modals.
+[ ] The email button works.
+[ ] The LinkedIn link works.
+[ ] There are no fake or broken resume download buttons.
+[ ] There are no fake contact form submissions.
+[ ] The site works on mobile and desktop.
+[ ] There is no horizontal overflow.
+[ ] Animations respect reduced-motion preferences.
+[ ] The browser console has no avoidable errors.
+[ ] No professional facts have been invented.
+[ ] No unearned certifications are displayed.
+[ ] The content is readable and recruiter-friendly.
+[ ] The production build succeeds, if the environment supports running it.
+[ ] Deployment instructions match the actual project.
+
+==================================================
+15. HOW I WANT YOU TO WORK
+==================================================
+
+Work like an experienced developer building a real product.
+
+Step 1:
+Inspect the uploaded knowledge-base file and extract the accurate portfolio content.
+
+Step 2:
+Plan the page structure, design system, component architecture, and responsive layout.
+
+Step 3:
+Implement the complete website.
+
+Step 4:
+Inspect the result and improve the design until it feels polished, distinctive, and professional.
+
+Step 5:
+Run available build or validation tools and fix errors.
+
+Step 6:
+Provide clear instructions for running and deploying the website.
+
+Do not stop after producing a wireframe.
+
+Do not stop after implementing only the hero section.
+
+Do not provide only an explanation or tutorial.
+
+Do not leave essential sections incomplete.
+
+Do not ask me to manually create components that you can implement yourself.
+
+If a feature is not supported by the environment, implement a simpler working alternative.
+
+If a particular fact is uncertain, omit it instead of inventing it.
+
+If there is a conflict between visual complexity and reliability, prioritise reliability while maintaining excellent design.
+
+The finished website must be a complete, responsive, functional portfolio with real content derived from my knowledge base.
+
+FINAL CREATIVE DIRECTION:
+
+Build a website that makes an IT hiring manager think:
+
+"This person understands real IT operations, has practical application support experience, can communicate technical issues clearly, and is actively building the skills to take on greater responsibility."
+
+The result should be memorable without being flashy, technically credible without pretending I know everything, and visually polished without sacrificing usability.
+
+Now inspect the uploaded knowledge base and start building the website.
