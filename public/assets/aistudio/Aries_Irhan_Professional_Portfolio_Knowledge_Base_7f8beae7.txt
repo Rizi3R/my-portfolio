@@ -1,4 +1,4 @@
-ARIES IRHAN — PROFESSIONAL PORTFOLIO KNOWLEDGE FILE
+ARIES RAZAK — PROFESSIONAL PORTFOLIO KNOWLEDGE FILE
 Last updated: 25 October 2026
 Purpose: Source material for building a personal portfolio website, resume-linked profile, project showcase, and professional biography.
 
@@ -20,7 +20,7 @@ Full name:
 Muhammad Aries Irhan bin Abd Razak
 
 Preferred display name:
-Aries Irhan
+Aries Razak
 
 Professional positioning:
 IT Support | Application Support | IT Operations
