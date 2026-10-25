@@ -93,6 +93,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 <span>{PERSONAL_INFO.location}</span>
               </span>
               <span>·</span>
+              <span className="text-slate-600 font-medium">
+                Phone: {PERSONAL_INFO.phone}
+              </span>
+              <span>·</span>
               <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-1 text-sky-700 hover:underline">
                 <Mail className="w-3.5 h-3.5" />
                 <span>{PERSONAL_INFO.email}</span>

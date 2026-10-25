@@ -119,6 +119,7 @@ export const ContactSection: React.FC = () => {
 
             <div className="pt-2 text-xs text-slate-400 space-y-1">
               <p>📍 Location: {PERSONAL_INFO.location}</p>
+              <p>📞 Phone: {PERSONAL_INFO.phone}</p>
               <p>🕒 Response time: Typically within 24 hours</p>
               <p>📄 Full contact details & references available upon interview request</p>
             </div>

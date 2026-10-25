@@ -115,7 +115,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
           </div>
 
           <div className="flex items-center gap-4 text-[11px] font-mono">
-            <span>Subang Jaya / Negeri Sembilan, MY</span>
+            <span>{PERSONAL_INFO.location}</span>
             <span aria-hidden="true">·</span>
             <span>AWS Cloud Practitioner</span>
           </div>
