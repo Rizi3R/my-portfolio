@@ -1,0 +1,716 @@
+# TASK: UPGRADE MY EXISTING PERSONAL PORTFOLIO INTO A BROADER IT PROFESSIONAL PORTFOLIO
+
+Act as a senior full-stack developer, UI/UX designer, technical recruiter, personal branding strategist, and software quality engineer.
+
+I already have a working personal portfolio website.
+
+Live website:
+https://aries-razak.vercel.app/
+
+The website was generated using Google AI Studio, pushed to GitHub, and deployed to Vercel.
+
+I want you to IMPROVE THE EXISTING CODEBASE, not generate an unrelated replacement project.
+
+My main objective is to position myself for a wider range of IT opportunities instead of being perceived primarily as a retail IT or POS specialist.
+
+I want the website to support my applications for roles in:
+
+1. IT Support and Technical Support
+2. Application Support and Systems Support
+3. IT Operations
+4. Business Systems and SaaS Administration
+5. IT Infrastructure and Network Support
+6. Junior Cloud Support and Cloud Operations
+7. Technical Implementation and Integration Support
+8. Junior Technical Analyst and Software Support roles
+
+The website must remain honest about my experience and technical capabilities.
+
+The final product should be visually polished, technically credible, responsive, accessible, fast, and suitable for professional recruitment.
+
+==================================================
+PHASE 1: AUDIT THE EXISTING CODEBASE
+==================================================
+
+Before making any changes, inspect the entire existing project.
+
+Identify:
+- The frontend framework and version.
+- The build system.
+- The current component structure.
+- The styling approach.
+- Existing page sections.
+- Current typography and colour palette.
+- Existing animations and interactive features.
+- Responsive design implementation.
+- Navigation behaviour.
+- Project card implementation.
+- Contact functionality.
+- SEO metadata.
+- Asset usage.
+- Existing package dependencies.
+- Build and deployment configuration.
+- Potential accessibility issues.
+- Potential performance issues.
+- Any broken or placeholder functionality.
+
+Inspect the actual source code instead of assuming how the website was implemented.
+
+Create a concise internal assessment of what should be retained, improved, simplified, or removed.
+
+IMPORTANT:
+- Preserve the existing framework unless there is a compelling technical reason to change it.
+- Preserve working features.
+- Preserve the current deployment compatibility.
+- Do not unnecessarily replace the package manager or dependency versions.
+- Do not delete configuration files without understanding their purpose.
+- Do not break the existing Vercel deployment.
+- Do not replace the entire application simply because you prefer a different architecture.
+
+After reviewing the existing project, proceed directly to implementing the improvements.
+
+Do not stop after providing recommendations.
+
+==================================================
+PHASE 2: REVIEW MY PROFESSIONAL IDENTITY
+==================================================
+
+My professional name is Aries Irhan.
+
+I am an IT professional based in Malaysia.
+
+My current role is System Application Specialist at emart24 Malaysia.
+
+My previous experience includes:
+- IT Executive at Palaterium Sdn Bhd.
+- IT Technician in a managed print services environment.
+- IT Intern and Full-Stack Developer at the Attorney General's Chambers of Malaysia.
+
+I hold a Diploma in Computer Science and Mathematics from UiTM Melaka Jasin.
+
+I have earned the AWS Certified Cloud Practitioner certification.
+
+I have experience across areas including:
+- IT support.
+- Application troubleshooting.
+- Business application support.
+- POS systems.
+- User support and administration.
+- IT operations.
+- Basic networking.
+- Hardware and software troubleshooting.
+- Vendor coordination.
+- IT equipment deployment.
+- SaaS administration.
+- Data validation.
+- Software development fundamentals.
+- Cloud fundamentals.
+
+My technical exposure includes tools and technologies such as Xilnex POS, Lark, Microsoft 365, Freshdesk, TeamViewer, NetSuite, Excel, Laravel, MySQL, and AWS fundamentals.
+
+Use the supplied portfolio knowledge-base file if it is available in the current project.
+
+If the file is not available, use only verified information present in the existing website or source material.
+
+Do not invent dates, certifications, employment history, achievements, project results, technical skills, or responsibilities.
+
+Do not describe me as:
+- A senior engineer.
+- An experienced cloud engineer.
+- An expert full-stack developer.
+- An advanced database engineer.
+- An experienced cybersecurity professional.
+- An L3 support specialist.
+
+Do not exaggerate my responsibilities in any position.
+
+The goal is to communicate transferable professional experience, not to pretend that I have already mastered every field I want to explore.
+
+==================================================
+PHASE 3: CHANGE THE WEBSITE'S POSITIONING
+==================================================
+
+The existing website must no longer feel narrowly focused on retail technology.
+
+Retail IT is part of my experience, but it is not my entire professional identity.
+
+My new positioning should communicate:
+
+"I support, troubleshoot, and improve the technology that helps businesses operate."
+
+My central professional themes are:
+
+1. APPLICATIONS
+Supporting business applications, investigating incidents, testing system behaviour, and coordinating issue resolution.
+
+2. OPERATIONS
+Supporting users, resolving technical issues, coordinating vendors, documenting incidents, and maintaining operational continuity.
+
+3. SYSTEMS
+Working with business applications, user administration, data validation, infrastructure fundamentals, and technology implementations.
+
+4. CONTINUOUS DEVELOPMENT
+Building on my existing IT experience through cloud fundamentals, programming, data handling, and automation.
+
+These four themes should guide the website's messaging, visual structure, experience section, and project presentation.
+
+Retail experience should remain visible and credible, but it should not dominate every heading or every section.
+
+Do not remove Xilnex, emart24, or my retail experience.
+
+Instead, describe the technical and operational skills demonstrated by that experience.
+
+==================================================
+PHASE 4: IMPROVE THE HERO SECTION
+==================================================
+
+Redesign or refine the existing hero section to communicate my broader professional identity immediately.
+
+Suggested eyebrow text:
+
+IT SUPPORT · APPLICATION SYSTEMS · IT OPERATIONS
+
+Suggested headline:
+
+"I keep business-critical technology running."
+
+Suggested supporting copy:
+
+"I'm Aries Irhan, an IT professional experienced in application support, technical troubleshooting, IT operations, and business system implementation. I work across users, applications, and infrastructure to investigate issues and help technology operate reliably."
+
+Use this wording as a starting point and refine it if necessary.
+
+Keep the final introduction concise, natural, and recruiter-friendly.
+
+Primary CTA:
+"Explore My Experience"
+
+Secondary CTA:
+"View My Projects"
+
+Contact CTA:
+"Let's Connect"
+
+Only include a resume download button if a real, current resume file exists in the project and the download works.
+
+Do not invent a resume file or create a nonfunctional button.
+
+The hero visual should represent interconnected business technology rather than retail alone.
+
+Consider a clean, abstract illustration showing:
+
+Users → Applications → Infrastructure → Business Operations
+
+Alternatively, create a lightweight technical illustration showing an incident moving through investigation, resolution, and validation.
+
+The illustration must be clearly conceptual and must not pretend to be a live view of my employer's systems.
+
+Retain the existing visual identity if it is already strong.
+
+Improve it rather than changing everything unnecessarily.
+
+==================================================
+PHASE 5: IMPROVE THE ABOUT SECTION
+==================================================
+
+The About section should tell a coherent professional story.
+
+Explain that my experience has developed across multiple areas of IT:
+
+- Hardware and software troubleshooting.
+- End-user support.
+- Business application support.
+- SaaS and user administration.
+- Retail application operations.
+- IT infrastructure setup.
+- System implementation.
+- Software development fundamentals.
+
+Emphasise that supporting business systems requires more than fixing technical errors. It also involves understanding user requirements, investigating issues systematically, communicating clearly, coordinating with relevant teams, and validating results.
+
+Show my career progression from IT Technician to IT Executive to System Application Specialist.
+
+Explain my interest in broadening my experience into application support, IT operations, systems administration, and cloud-related technologies.
+
+Do not invent a personal story or claim that I have worked in industries where I have no confirmed experience.
+
+The tone should be professional, direct, and human.
+
+Avoid generic phrases such as:
+- "Passionate technology enthusiast."
+- "Leveraging synergies."
+- "Revolutionising digital transformation."
+- "Innovative thought leader."
+
+Use specific, credible statements.
+
+==================================================
+PHASE 6: CREATE A TRANSFERABLE SKILLS SECTION
+==================================================
+
+Reorganise my skills so they are easy to understand across different job categories.
+
+Use the following groups.
+
+GROUP 1: APPLICATION & SYSTEMS SUPPORT
+
+Relevant skills:
+- Application troubleshooting.
+- Business application support.
+- Incident investigation.
+- User-reported issue analysis.
+- System testing and validation.
+- Vendor coordination.
+- Application administration where supported by experience.
+- POS application support.
+- Operational documentation.
+
+GROUP 2: IT OPERATIONS & END-USER SUPPORT
+
+Relevant skills:
+- Technical support.
+- Hardware and software troubleshooting.
+- Remote support.
+- Helpdesk and ticketing workflows.
+- User onboarding and offboarding.
+- Account provisioning.
+- IT equipment deployment.
+- IT inventory and procurement.
+- Incident documentation.
+- Microsoft 365 fundamentals where supported.
+
+GROUP 3: NETWORKING & INFRASTRUCTURE
+
+Relevant skills:
+- TCP/IP fundamentals.
+- LAN and Wi-Fi troubleshooting.
+- DNS and DHCP fundamentals.
+- Connectivity troubleshooting.
+- Basic network equipment concepts.
+- RJ45 crimping and cable testing.
+- Basic infrastructure deployment.
+
+GROUP 4: BUSINESS SYSTEMS & DATA
+
+Relevant skills:
+- Lark administration and workflows.
+- NetSuite exposure.
+- Microsoft Excel.
+- Data cleaning and validation.
+- SQL and MySQL foundations.
+- Data-import fundamentals where supported.
+- Business application administration.
+
+GROUP 5: DEVELOPMENT & CLOUD FOUNDATIONS
+
+Relevant skills:
+- AWS cloud fundamentals.
+- AWS Certified Cloud Practitioner.
+- Laravel.
+- MySQL.
+- HTML.
+- CSS.
+- JavaScript fundamentals.
+- Git fundamentals.
+- JSON fundamentals.
+
+Use the knowledge base to determine which skills belong in each category.
+
+Do not display skills that I have not used, studied, or otherwise genuinely encountered.
+
+Do not add technologies merely because they appear in job descriptions I am interested in.
+
+Do not add unsupported claims about advanced Azure administration, Microsoft Intune, Kubernetes, advanced SQL, production cloud operations, or enterprise security.
+
+Do not use arbitrary skill percentages such as "95% proficiency".
+
+Where useful, distinguish:
+- Professional Experience.
+- Working Knowledge.
+- Foundational Knowledge.
+
+Only use these labels when accurate.
+
+The section should help recruiters identify transferable skills without creating the impression that I am an expert in every listed technology.
+
+==================================================
+PHASE 7: IMPROVE THE EXPERIENCE SECTION
+==================================================
+
+Retain all genuine work experience and employment dates from the existing project or verified knowledge base.
+
+Do not remove earlier positions simply because they are less relevant to a particular job family.
+
+For each position, present:
+- Job title.
+- Employer.
+- Employment period.
+- Short overview.
+- Key responsibilities.
+- Relevant systems and technologies.
+- Practical contributions.
+
+CURRENT ROLE: SYSTEM APPLICATION SPECIALIST
+
+Present this role as evidence of application support, technical troubleshooting, system operations, vendor coordination, and implementation experience.
+
+Highlight:
+- Xilnex POS application support.
+- Incident investigation.
+- Coordination with users, internal teams, and vendors.
+- Payment issue investigation and escalation.
+- System testing.
+- Product and promotion data validation.
+- IT setup for new outlets.
+- Connectivity troubleshooting.
+- Operational readiness.
+
+Do not make the entire description about retail.
+
+Instead, explain the underlying technical capabilities that are transferable to other environments.
+
+PREVIOUS ROLE: IT EXECUTIVE
+
+Highlight:
+- Lark Helpdesk and administration.
+- User provisioning and access management.
+- Remote technical support.
+- Google Workspace-to-Lark migration, within the scope of my actual responsibilities.
+- Vendor coordination.
+- IT procurement and inventory.
+- NetSuite and Excel data handling.
+- Workflow improvements where supported.
+
+PREVIOUS ROLE: IT TECHNICIAN
+
+Highlight:
+- Hardware and software troubleshooting.
+- Printer and peripheral support.
+- Network connectivity.
+- Driver, firmware, and operating system issues.
+- Ticket documentation.
+- Service targets.
+
+INTERNSHIP: IT INTERN – FULL-STACK DEVELOPER
+
+Highlight:
+- Laravel.
+- MySQL.
+- The DKICT Declaration System.
+- Requirements gathering.
+- Application development.
+- User testing.
+- Software documentation.
+- Database fundamentals.
+
+Use an elegant timeline, expandable experience cards, or another clear layout.
+
+Ensure the experience section remains readable on mobile.
+
+==================================================
+PHASE 8: IMPROVE THE PROJECTS SECTION
+==================================================
+
+Projects must demonstrate transferable technical ability rather than focusing exclusively on retail.
+
+Use genuine employment experience and internship work to create professional case studies.
+
+Potential case studies:
+
+PROJECT A: BUSINESS APPLICATION TROUBLESHOOTING
+
+Describe how I investigate reported issues, gather relevant information, test potential causes, coordinate with users or vendors, and validate system behaviour.
+
+Use only actions supported by my actual experience.
+
+PROJECT B: IT INFRASTRUCTURE & DEPLOYMENT
+
+Describe my experience with equipment checks, connectivity troubleshooting, basic network setup, POS/payment setup where relevant, and technical readiness checks.
+
+Present the underlying infrastructure skills in a way that is relevant across industries.
+
+PROJECT C: SAAS MIGRATION & USER ADMINISTRATION
+
+Describe my Google Workspace-to-Lark migration experience, Lark administration, account provisioning, access management, and validation only to the extent supported by my actual work.
+
+PROJECT D: SOFTWARE DEVELOPMENT INTERNSHIP
+
+Describe my work on the DKICT Declaration System using Laravel and MySQL.
+
+Explain the relevant development and testing experience without claiming extensive professional software engineering experience.
+
+PROJECT E: CLOUD FUNDAMENTALS PROJECT
+
+If I have already completed a real cloud project and the details are available, present it accurately.
+
+If I have not completed a suitable project, do not invent one.
+
+Instead, add an optional "Learning Projects" category that can remain hidden until I have a completed project to display.
+
+Each case study should communicate:
+- Context.
+- Problem or requirement.
+- My actual contribution.
+- Approach.
+- Technologies.
+- Outcome or lessons learned.
+
+Do not invent percentages, financial savings, resolution-time improvements, user counts, uptime figures, or other numerical results.
+
+Do not expose confidential employer information, customer data, internal IP addresses, credentials, or proprietary screenshots.
+
+Use original conceptual diagrams where visual explanations would help.
+
+Distinguish actual employment work from personal learning projects.
+
+If a project description contains an unverified outcome, omit it.
+
+==================================================
+PHASE 9: ADD A CAREER INTERESTS SECTION
+==================================================
+
+Add a small section or visual element that communicates the technical directions I am interested in exploring.
+
+Suggested heading:
+
+"Building toward what's next."
+
+Include these areas:
+
+- Application Support & Systems.
+- IT Operations & Infrastructure.
+- Business Systems & Integrations.
+- Cloud Support & Operations.
+- Technical Troubleshooting & Automation.
+
+Explain that these interests build on my existing experience and represent areas in which I want to continue growing.
+
+Do not present them as additional professional roles I have already performed.
+
+Do not make the website look like I am randomly applying for every job in technology.
+
+The common theme should remain reliable systems, practical troubleshooting, and continuous technical development.
+
+Keep this section compact and visually appealing.
+
+==================================================
+PHASE 10: CERTIFICATIONS & EDUCATION
+==================================================
+
+Retain my verified education and certifications.
+
+Education:
+Diploma in Computer Science and Mathematics
+UiTM Melaka Jasin
+2019–2022
+
+Certification:
+AWS Certified Cloud Practitioner
+
+Additional training:
+Generative AI Copilot Digital Upskilling Program – AI Teach Malaysia
+
+Use accurate issue dates and expiry information only if verified.
+
+Do not claim additional certifications.
+
+If ITIL Foundation is listed as in progress, verify that the status is still accurate before displaying it.
+
+If the status cannot be verified, omit the in-progress claim.
+
+Use genuine badge images only if they are available and permitted.
+
+Otherwise, use simple text-based certification cards.
+
+==================================================
+PHASE 11: IMPROVE THE CONTACT SECTION
+==================================================
+
+Keep the contact section professional and straightforward.
+
+Email:
+ariesirhan25@gmail.com
+
+LinkedIn:
+https://www.linkedin.com/in/aries-razak-a36045256
+
+Include:
+- A working mailto link.
+- A LinkedIn link opening in a new tab.
+- Clear navigation.
+- A concise professional invitation to connect.
+
+Do not invent a phone number.
+
+Do not add a fake contact form that appears to submit messages but does nothing.
+
+If a contact form already exists, test its functionality. If it requires an unconfigured backend, replace it with a reliable email contact option or clearly document what configuration is needed.
+
+Do not expose API keys or secrets in frontend code.
+
+==================================================
+PHASE 12: VISUAL DESIGN
+==================================================
+
+Keep the existing design elements that are already good.
+
+Improve the website to feel like a premium, modern IT professional portfolio.
+
+Preferred visual direction:
+- Dark charcoal or near-black background if consistent with the existing theme.
+- Carefully selected blue accent colours.
+- Clean typography.
+- Clear spacing.
+- Professional section hierarchy.
+- Subtle borders.
+- Elegant cards.
+- Restrained animations.
+- Technical diagrams.
+- Strong responsive layout.
+
+The website should feel credible to both technical and non-technical recruiters.
+
+Avoid:
+- Excessive neon colours.
+- Fake command-line interfaces.
+- Fake monitoring dashboards.
+- Fake production system metrics.
+- Fake testimonials.
+- Fake customer logos.
+- Fake GitHub activity.
+- Generic AI-generated business imagery.
+- Excessive animations.
+- Unnecessary visual effects.
+- Large blocks of generic text.
+- Too many repetitive cards.
+
+Use visual storytelling to make the portfolio interesting without compromising professionalism.
+
+==================================================
+PHASE 13: ACCESSIBILITY, SEO & PERFORMANCE
+==================================================
+
+Review and improve:
+- Semantic HTML.
+- Heading hierarchy.
+- Keyboard navigation.
+- Visible focus states.
+- Colour contrast.
+- Accessible mobile navigation.
+- Reduced-motion support.
+- Image loading.
+- Layout stability.
+- Responsive design.
+- Page title and metadata.
+- Open Graph metadata.
+- Favicon.
+- Link behaviour.
+- Browser console errors.
+- Unnecessary dependencies.
+
+Use the existing framework and architecture.
+
+Do not introduce a backend or paid service unless absolutely necessary.
+
+Do not invent a custom domain.
+
+Keep the existing Vercel URL unless I later provide a different domain.
+
+Ensure the website remains suitable for static deployment if that is how the existing project is configured.
+
+==================================================
+PHASE 14: GITHUB AND VERCEL COMPATIBILITY
+==================================================
+
+The website is already deployed through GitHub and Vercel.
+
+I intend to review your code changes, push them to my existing GitHub repository, and redeploy through my existing workflow.
+
+Therefore:
+- Preserve the existing project structure where practical.
+- Preserve the existing package scripts.
+- Preserve required configuration files.
+- Avoid unnecessary framework migrations.
+- Do not add secrets to source code.
+- Do not require environment variables unless they are genuinely necessary.
+- Ensure all imports and assets resolve correctly.
+- Ensure the build command matches the project's actual framework.
+- Do not change the deployment configuration unnecessarily.
+
+If you have the ability to run the application, run it and fix any build errors.
+
+If you cannot run it, inspect the code carefully and provide the exact commands I should use to validate it before pushing.
+
+==================================================
+PHASE 15: FINAL QUALITY CHECK
+==================================================
+
+Before completing the task, confirm that:
+
+[ ] The website presents me as a broad IT professional, not only a retail IT specialist.
+
+[ ] My retail experience remains visible but does not dominate the entire website.
+
+[ ] My experience translates clearly into application support, IT operations, systems support, and infrastructure-related capabilities.
+
+[ ] My career progression is clear.
+
+[ ] My technical skills are categorised logically.
+
+[ ] My projects describe genuine work.
+
+[ ] My internship is represented accurately.
+
+[ ] My AWS certification is displayed accurately.
+
+[ ] No qualifications or experience have been invented.
+
+[ ] No unsupported technical expertise has been added.
+
+[ ] No fake project outcomes or statistics have been added.
+
+[ ] The contact links work.
+
+[ ] All navigation links work.
+
+[ ] The site is responsive.
+
+[ ] The site has no avoidable horizontal overflow.
+
+[ ] The website remains compatible with the existing deployment workflow.
+
+[ ] The code is maintainable.
+
+[ ] The production build succeeds, if build tools are available.
+
+==================================================
+FINAL INSTRUCTIONS
+==================================================
+
+Work directly on the existing project.
+
+Do not create an unrelated new application.
+
+Do not stop after producing a design proposal.
+
+Do not merely provide suggestions.
+
+Implement the changes, preserve the working features, and improve the existing website.
+
+If you identify a strong section or feature that should remain unchanged, keep it.
+
+If a feature is unnecessary, simplify it rather than adding complexity.
+
+If information is uncertain, omit it rather than inventing it.
+
+The final result should help me apply confidently across several related IT career paths while accurately representing my current experience and professional potential.
+
+When finished, provide a concise summary of:
+1. What you changed.
+2. Which files you modified.
+3. Which features you improved.
+4. Any factual details I should verify.
+5. How to run and build the project.
+6. Any remaining issues I should fix before pushing to GitHub and redeploying to Vercel.
+
+Now inspect the existing codebase and implement the improvements.

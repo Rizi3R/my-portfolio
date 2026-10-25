@@ -28,7 +28,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
     { label: 'Skills', href: '#skills' },
     { label: 'Case Studies', href: '#projects' },
     { label: 'Certifications', href: '#certifications' },
-    { label: 'Roadmap', href: '#roadmap' },
+    { label: 'Target Roles', href: '#roadmap' },
     { label: 'Contact', href: '#contact' }
   ];
 

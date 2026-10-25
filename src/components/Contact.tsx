@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
-import { Mail, Linkedin, Copy, Check, ArrowUpRight, Send, MessageSquare } from 'lucide-react';
+import { Mail, Linkedin, Copy, Check, ArrowUpRight, Send, MessageSquare, Terminal } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState<string>('Application Support Opportunity');
+  const [selectedSubject, setSelectedSubject] = useState<string>('Application Support Role');
 
   const topics = [
-    { id: 'app-support', label: 'Application Support Opportunity', subject: 'Opportunity: Application Support Engineer / Specialist' },
-    { id: 'it-ops', label: 'IT Operations & Retail Systems', subject: 'Inquiry: Retail IT Operations & System Support' },
+    { id: 'app-support', label: 'Application Support Role', subject: 'Opportunity: Application Support Specialist / Systems Analyst' },
+    { id: 'it-ops', label: 'IT Operations & Service Desk', subject: 'Inquiry: IT Operations & Systems Support Role' },
+    { id: 'business-systems', label: 'Business Systems / SaaS', subject: 'Opportunity: Business Systems & SaaS Administrator' },
+    { id: 'infrastructure', label: 'IT Infrastructure & Network', subject: 'Inquiry: IT Infrastructure & Network Support' },
     { id: 'general', label: 'Professional Networking', subject: 'Connecting: Professional IT Networking' },
   ];
 
@@ -18,7 +20,6 @@ export const ContactSection: React.FC = () => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2400);
     } catch {
-      // Fallback
       setCopied(true);
       setTimeout(() => setCopied(false), 2400);
     }
@@ -28,21 +29,21 @@ export const ContactSection: React.FC = () => {
   const mailtoLink = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(currentTopic.subject)}`;
 
   return (
-    <section id="contact" className="py-20 lg:py-28 relative">
+    <section id="contact" className="py-20 lg:py-28 relative border-t border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
+        {/* Section Header with Chapter Label */}
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-sky-400 uppercase mb-3">
-            <span>Direct Channels</span>
+            <span>Chapter 06</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
-            <span>Let's Connect</span>
+            <span>The Next Mission</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-            Have a system to improve or a problem to solve?
+            Have a technical challenge worth solving?
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
-            I'm open to connecting with IT hiring managers, engineering leaders, and organizations working on application support, retail technology, systems reliability, and IT operations.
+            I'm interested in opportunities where I can support business-critical systems, solve practical technical problems, and continue growing across IT operations and application systems.
           </p>
         </div>
 
@@ -53,10 +54,10 @@ export const ContactSection: React.FC = () => {
           <div className="lg:col-span-6 bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 sm:p-8 space-y-6">
             <div>
               <h3 className="text-base font-bold text-white mb-2">
-                Get in Touch Directly
+                Connect Directly
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Whether you have an open position or want to discuss retail technology troubleshooting, feel free to reach out directly via email or LinkedIn.
+                Whether you have an open position in application support, systems operations, or IT infrastructure, feel free to reach out directly via email or LinkedIn.
               </p>
             </div>
 
@@ -135,7 +136,7 @@ export const ContactSection: React.FC = () => {
                 </h3>
               </div>
               <p className="text-xs text-slate-300 mb-5 leading-relaxed">
-                Select your inquiry topic below to instantly open your email client with an organized subject line:
+                Select your inquiry role below to instantly open your email client with an organized subject line:
               </p>
 
               {/* Topic Selector */}

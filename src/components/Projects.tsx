@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { CASE_STUDIES, CaseStudy } from '../data/portfolioData';
-import { ArrowUpRight, X, Check, Building2, Calendar, User, Wrench, ShieldAlert, Lightbulb } from 'lucide-react';
+import { CASE_STUDIES, CaseStudy, ExplorationRoute } from '../data/portfolioData';
+import { 
+  ArrowUpRight, 
+  X, 
+  Check, 
+  Building2, 
+  Calendar, 
+  User, 
+  ShieldAlert, 
+  Lightbulb, 
+  Search, 
+  CheckCircle2, 
+  Sparkles,
+  ArrowRight
+} from 'lucide-react';
 
-export const ProjectsSection: React.FC = () => {
+interface ProjectsProps {
+  activeRoute: ExplorationRoute;
+}
+
+export const ProjectsSection: React.FC<ProjectsProps> = ({ activeRoute }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeModalCase, setActiveModalCase] = useState<CaseStudy | null>(null);
 
   const categories = [
     'All',
     'Application Support',
-    'Retail Operations',
-    'SaaS Migration',
-    'Development & Data',
-    'Infrastructure'
+    'IT Operations',
+    'SaaS & Systems',
+    'Infrastructure',
+    'Development & Data'
   ];
 
   const filteredCases = CASE_STUDIES.filter((c) => {
@@ -40,22 +57,22 @@ export const ProjectsSection: React.FC = () => {
   }, [activeModalCase]);
 
   return (
-    <section id="projects" className="py-20 lg:py-28 bg-[#070A11]/60 relative border-t border-slate-800/80">
+    <section id="projects" className="py-20 lg:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
+        {/* Section Header with Chapter Label */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-sky-400 uppercase mb-3">
-              <span>Technical Deep Dives</span>
+              <span>Chapter 03</span>
               <span aria-hidden="true" className="text-slate-600">·</span>
-              <span>Real Case Studies</span>
+              <span>The Problem Solver</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-3">
-              Engineering & Operational Case Studies
+              Technical Case Studies
             </h2>
             <p className="text-base text-slate-300 leading-relaxed">
-              Detailed technical narratives highlighting actual operational incidents, commissioning workflows, enterprise SaaS migrations, and development projects.
+              Real operational investigations, site commissioning workflows, SaaS migrations, and development projects—documented with structured methodology, verifiable facts, and transferable lessons.
             </p>
           </div>
 
@@ -83,69 +100,95 @@ export const ProjectsSection: React.FC = () => {
 
         {/* Case Studies Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCases.map((caseStudy) => (
-            <article
-              key={caseStudy.id}
-              className="rounded-xl bg-slate-900/60 border border-slate-800/80 p-5 sm:p-6 flex flex-col justify-between hover:border-slate-700/80 transition-all hover:shadow-xl hover:shadow-black/30 group"
-            >
-              <div>
-                {/* Unboxed Metadata (Zero-pill discipline) */}
-                <div className="flex items-center gap-2 text-xs font-mono text-sky-400 mb-3">
-                  <span>{caseStudy.category}</span>
-                  <span aria-hidden="true" className="text-slate-700">·</span>
-                  <span className="text-slate-400">{caseStudy.organization}</span>
-                </div>
+          {filteredCases.map((caseStudy) => {
+            const isRouteMatched = activeRoute !== 'all' && caseStudy.relevantRoutes.includes(activeRoute);
 
-                <h3 className="text-lg font-bold text-white group-hover:text-sky-300 transition-colors mb-2.5 leading-snug">
-                  {caseStudy.title}
-                </h3>
-
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4 line-clamp-3">
-                  {caseStudy.overview}
-                </p>
-
-                {/* Challenge Snapshot */}
-                <div className="p-3 rounded-lg bg-slate-950/60 border border-slate-800/60 mb-5">
-                  <div className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-400 mb-1">
-                    <ShieldAlert className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                    <span>The Operational Challenge</span>
+            return (
+              <article
+                key={caseStudy.id}
+                className={`rounded-xl border p-5 sm:p-6 flex flex-col justify-between transition-all duration-200 hover:shadow-2xl hover:shadow-black/40 group relative ${
+                  isRouteMatched
+                    ? 'bg-slate-900/90 border-sky-400/80 shadow-md shadow-sky-950/30 ring-1 ring-sky-400/40'
+                    : 'bg-slate-900/60 border-slate-800/80 hover:border-slate-700'
+                }`}
+              >
+                {/* Route highlight badge */}
+                {isRouteMatched && (
+                  <div className="absolute -top-2.5 right-4 text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-sky-400 text-slate-950 flex items-center gap-1 shadow-sm">
+                    <Sparkles className="w-2.5 h-2.5" />
+                    <span>Relevant to Selected Route</span>
                   </div>
-                  <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">
-                    {caseStudy.challenge}
+                )}
+
+                <div>
+                  {/* Mission Number & Category */}
+                  <div className="flex items-center justify-between text-xs font-mono text-sky-400 mb-2.5">
+                    <span className="font-bold tracking-wider">{caseStudy.missionNumber}</span>
+                    <span className="text-slate-400 font-sans">{caseStudy.category}</span>
+                  </div>
+
+                  <h3 className="text-lg font-bold text-white group-hover:text-sky-300 transition-colors mb-2 leading-snug">
+                    {caseStudy.title}
+                  </h3>
+
+                  <p className="text-xs text-sky-300/90 italic mb-4 leading-relaxed">
+                    "{caseStudy.hook}"
                   </p>
-                </div>
-              </div>
 
-              <div>
-                {/* Tech Badges */}
-                <div className="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-slate-800/60">
-                  {caseStudy.technologies.slice(0, 3).map((t) => (
-                    <span
-                      key={t}
-                      className="text-[11px] font-mono text-slate-400 bg-slate-800/60 px-2 py-0.5 rounded border border-slate-700/60"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                  {caseStudy.technologies.length > 3 && (
-                    <span className="text-[11px] font-mono text-slate-400 px-1 py-0.5">
-                      +{caseStudy.technologies.length - 3} more
-                    </span>
-                  )}
+                  {/* Challenge Snapshot */}
+                  <div className="p-3 rounded-lg bg-slate-950/70 border border-slate-800/70 mb-4">
+                    <div className="flex items-center gap-1.5 text-[11px] font-semibold text-amber-400 mb-1">
+                      <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
+                      <span>The Challenge</span>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">
+                      {caseStudy.challenge}
+                    </p>
+                  </div>
+
+                  {/* Investigation Snapshot */}
+                  <div className="p-3 rounded-lg bg-slate-950/40 border border-slate-800/50 mb-5">
+                    <div className="flex items-center gap-1.5 text-[11px] font-semibold text-sky-400 mb-1">
+                      <Search className="w-3.5 h-3.5 shrink-0" />
+                      <span>Investigation Flow</span>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">
+                      {caseStudy.investigation}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Open Modal CTA */}
-                <button
-                  type="button"
-                  onClick={() => setActiveModalCase(caseStudy)}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2 text-xs font-semibold text-slate-200 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700/70 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-                >
-                  <span>Read Full Case Study</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-sky-400" />
-                </button>
-              </div>
-            </article>
-          ))}
+                <div>
+                  {/* Tech Badges */}
+                  <div className="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-slate-800/60">
+                    {caseStudy.technologies.slice(0, 3).map((t) => (
+                      <span
+                        key={t}
+                        className="text-[11px] font-mono text-slate-400 bg-slate-800/60 px-2 py-0.5 rounded border border-slate-700/60"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                    {caseStudy.technologies.length > 3 && (
+                      <span className="text-[11px] font-mono text-slate-400 px-1 py-0.5">
+                        +{caseStudy.technologies.length - 3} more
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Open Modal CTA */}
+                  <button
+                    type="button"
+                    onClick={() => setActiveModalCase(caseStudy)}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold text-slate-200 hover:text-white bg-slate-800/70 hover:bg-slate-800 border border-slate-700/80 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                  >
+                    <span>Inspect Full Case Study</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-sky-400" />
+                  </button>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
       </div>
@@ -156,11 +199,11 @@ export const ProjectsSection: React.FC = () => {
           role="dialog"
           aria-modal="true"
           aria-labelledby="case-modal-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto"
           onClick={() => setActiveModalCase(null)}
         >
           <div
-            className="bg-[#0B1120] border border-slate-700/80 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative my-8"
+            className="bg-[#0B1120] border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative my-8"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}
@@ -176,13 +219,16 @@ export const ProjectsSection: React.FC = () => {
             {/* Modal Header */}
             <div className="pr-10 mb-6 border-b border-slate-800 pb-5">
               <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-wider mb-2">
-                <span>{activeModalCase.category}</span>
+                <span>{activeModalCase.missionNumber}</span>
                 <span aria-hidden="true" className="text-slate-600">·</span>
-                <span>Case Study</span>
+                <span>{activeModalCase.category}</span>
               </div>
-              <h2 id="case-modal-title" className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-3">
+              <h2 id="case-modal-title" className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
                 {activeModalCase.title}
               </h2>
+              <p className="text-xs sm:text-sm text-sky-300 italic mb-4">
+                "{activeModalCase.hook}"
+              </p>
 
               <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-slate-400">
                 <div className="flex items-center gap-1.5">
@@ -202,36 +248,39 @@ export const ProjectsSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Modal Body: Structured Technical Narrative */}
+            {/* Modal Body: Structured Technical Sections */}
             <div className="space-y-6 text-sm text-slate-300">
-              {/* Context */}
+              
+              {/* 1. THE CHALLENGE */}
               <div>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                  1. Operational Context
+                <h3 className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2 mb-2">
+                  <ShieldAlert className="w-4 h-4" />
+                  <span>The Challenge</span>
                 </h3>
-                <p className="leading-relaxed text-slate-300 bg-slate-900/50 p-4 rounded-lg border border-slate-800">
-                  {activeModalCase.context}
-                </p>
-              </div>
-
-              {/* Challenge */}
-              <div>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                  2. The Core Problem & Technical Challenge
-                </h3>
-                <p className="leading-relaxed text-slate-300 bg-amber-950/20 p-4 rounded-lg border border-amber-900/40 text-amber-200/90">
+                <p className="leading-relaxed text-slate-200 bg-amber-950/20 p-4 rounded-lg border border-amber-900/40">
                   {activeModalCase.challenge}
                 </p>
               </div>
 
-              {/* Approach */}
+              {/* 2. THE INVESTIGATION */}
               <div>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                  3. Systematic Approach & Hands-on Implementation
+                <h3 className="text-xs font-bold uppercase tracking-wider text-sky-400 flex items-center gap-2 mb-2">
+                  <Search className="w-4 h-4" />
+                  <span>The Investigation</span>
+                </h3>
+                <p className="leading-relaxed text-slate-200 bg-sky-950/20 p-4 rounded-lg border border-sky-900/40">
+                  {activeModalCase.investigation}
+                </p>
+              </div>
+
+              {/* 3. THE APPROACH */}
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                  The Technical Actions & Approach
                 </h3>
                 <ul className="space-y-2.5">
                   {activeModalCase.approach.map((step, idx) => (
-                    <li key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-slate-900/50 border border-slate-800/80">
+                    <li key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 border border-slate-800">
                       <span className="font-mono text-xs text-sky-400 font-semibold mt-0.5 shrink-0">
                         0{idx + 1}.
                       </span>
@@ -243,14 +292,15 @@ export const ProjectsSection: React.FC = () => {
                 </ul>
               </div>
 
-              {/* Outcomes */}
+              {/* 4. THE OUTCOME */}
               <div>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                  4. Outcomes & Verified Results
+                <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-2 mb-2">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>The Verified Outcome</span>
                 </h3>
                 <div className="space-y-2">
-                  {activeModalCase.outcomes.map((out, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
+                  {activeModalCase.outcome.map((out, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-200">
                       <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                       <span className="leading-relaxed">{out}</span>
                     </div>
@@ -258,22 +308,22 @@ export const ProjectsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Takeaway */}
-              <div className="p-4 rounded-lg bg-sky-950/30 border border-sky-800/40 flex items-start gap-3">
+              {/* 5. WHAT I LEARNED */}
+              <div className="p-4 rounded-lg bg-gradient-to-r from-slate-900 to-sky-950/40 border border-sky-800/40 flex items-start gap-3">
                 <Lightbulb className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-xs font-bold text-sky-300 uppercase tracking-wider mb-1">
-                    Operational Takeaway
+                    What I Learned (Transferable Lesson)
                   </h4>
                   <p className="text-xs text-slate-200 italic leading-relaxed">
-                    "{activeModalCase.operationalTakeaway}"
+                    "{activeModalCase.whatILearned}"
                   </p>
                 </div>
               </div>
 
               {/* Technologies */}
               <div className="pt-4 border-t border-slate-800 flex flex-wrap items-center gap-2">
-                <span className="text-xs font-mono text-slate-400 mr-2">Technologies Used:</span>
+                <span className="text-xs font-mono text-slate-400 mr-2">Technologies Involved:</span>
                 {activeModalCase.technologies.map((t) => (
                   <span
                     key={t}

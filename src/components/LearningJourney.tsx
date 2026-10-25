@@ -1,8 +1,29 @@
 import React from 'react';
-import { LEARNING_JOURNEY } from '../data/portfolioData';
-import { Compass, ArrowRight, BookOpen, CheckCircle } from 'lucide-react';
+import { CAREER_INTERESTS, PERSONAL_INFO } from '../data/portfolioData';
+import { Compass, ArrowRight, ShieldCheck, Server, Cloud, Network, Workflow, CheckCircle2 } from 'lucide-react';
 
 export const LearningJourneySection: React.FC = () => {
+  const interestIcons: Record<string, React.ReactNode> = {
+    'Application Support & Systems': <Server className="w-5 h-5 text-sky-400" />,
+    'IT Operations & Service Desk': <ShieldCheck className="w-5 h-5 text-indigo-400" />,
+    'Business Systems & Integrations': <Workflow className="w-5 h-5 text-amber-400" />,
+    'Cloud Support & Operations': <Cloud className="w-5 h-5 text-cyan-400" />,
+    'Infrastructure & Network Support': <Network className="w-5 h-5 text-teal-400" />
+  };
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      const navHeight = 72;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - navHeight,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <section id="roadmap" className="py-20 lg:py-28 bg-[#070A11]/60 relative border-t border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,64 +31,95 @@ export const LearningJourneySection: React.FC = () => {
         {/* Section Header */}
         <div className="max-w-3xl mb-14">
           <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-sky-400 uppercase mb-3">
-            <span>Continuous Improvement</span>
+            <span>Career Direction & Growth</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
-            <span>Professional Growth</span>
+            <span>Target Roles</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-            Always building beyond the ticket.
+            Building toward what's next.
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
-            I don't treat IT support as a closed box. I'm actively expanding my technical foundation to transition from operational support into deeper application architecture, system reliability, and cloud operations.
+            I am actively expanding my technical foundation to take on greater responsibility across application systems, IT operations, SaaS administration, and cloud environments. These targeted directions build directly on my hands-on support experience and computer science background.
           </p>
         </div>
 
-        {/* Learning Roadmap Cards */}
+        {/* 5 Career Interest Pathways */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {LEARNING_JOURNEY.map((item, index) => (
+          {CAREER_INTERESTS.map((item, index) => (
             <div
-              key={item.area}
-              className="p-5 sm:p-6 rounded-xl bg-slate-900/60 border border-slate-800/80 flex flex-col justify-between hover:border-slate-700 transition-colors"
+              key={item.category}
+              className="p-5 sm:p-6 rounded-xl bg-slate-900/60 border border-slate-800/80 flex flex-col justify-between hover:border-slate-700 transition-all hover:shadow-lg group"
             >
               <div>
-                <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                  <span>Track 0{index + 1}</span>
-                  <span className="text-sky-400 font-medium">{item.status}</span>
+                <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
+                  <span className="text-sky-400 font-semibold">Direction 0{index + 1}</span>
+                  <div className="w-8 h-8 rounded-lg bg-slate-800/80 border border-slate-700/60 flex items-center justify-center">
+                    {interestIcons[item.category] || <Compass className="w-4 h-4 text-sky-400" />}
+                  </div>
                 </div>
 
-                <h3 className="text-base font-bold text-white mb-3 leading-snug">
-                  {item.area}
+                <h3 className="text-base font-bold text-white group-hover:text-sky-300 transition-colors mb-2 leading-snug">
+                  {item.category}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  {item.focus}
+                <span className="text-xs font-semibold text-slate-300 block mb-2">
+                  Target: {item.title}
+                </span>
+
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                  {item.description}
                 </p>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-slate-800/60 flex items-center gap-2 text-[11px] text-slate-400">
-                <CheckCircle className="w-3.5 h-3.5 text-sky-400" />
-                <span>Targeted Technical Advancement</span>
+              <div className="pt-3 border-t border-slate-800/60">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block mb-1">
+                  Existing Foundation:
+                </span>
+                <p className="text-xs text-slate-300 italic leading-relaxed">
+                  {item.transferableFoundation}
+                </p>
               </div>
             </div>
           ))}
+
+          {/* Core Philosophy Card as 6th Tile */}
+          <div className="p-5 sm:p-6 rounded-xl bg-gradient-to-br from-slate-900/90 to-sky-950/40 border border-sky-500/30 flex flex-col justify-between">
+            <div>
+              <div className="text-xs font-mono text-sky-400 mb-2 font-semibold">
+                Unified Thread
+              </div>
+              <h3 className="text-base font-bold text-white mb-2">
+                Operational Reliability First
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Whether diagnosing a desktop network issue, validating database records in MySQL, or provisioning cloud IAM policies, the objective remains constant: helping businesses operate without technical interruptions.
+              </p>
+            </div>
+
+            <div className="pt-4 border-t border-slate-800/80 mt-4 flex items-center gap-2 text-xs font-mono text-sky-300">
+              <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0" />
+              <span>Available for Technical Roles in Malaysia</span>
+            </div>
+          </div>
         </div>
 
         {/* Alignment Callout */}
         <div className="rounded-xl bg-gradient-to-r from-slate-900 via-slate-900/80 to-slate-900 border border-slate-800 p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="max-w-2xl">
             <h4 className="text-base sm:text-lg font-bold text-white mb-1.5">
-              Targeted Career Trajectory
+              Ready to Contribute to Your Technical Team
             </h4>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Seeking opportunities across <strong className="text-white">Application Support Engineering</strong>, <strong className="text-white">IT Operations Analysis</strong>, <strong className="text-white">Systems Support</strong>, and <strong className="text-white">Regional Retail IT</strong> where I can contribute to reliable services while continuing to deepen infrastructure automation and cloud competencies.
+              Open to conversations for roles in <strong className="text-white">Application Support</strong>, <strong className="text-white">IT Operations</strong>, <strong className="text-white">Systems Support</strong>, <strong className="text-white">SaaS Administration</strong>, and <strong className="text-white">Junior Cloud Support</strong>.
             </p>
           </div>
 
           <a
             href="#contact"
+            onClick={(e) => handleLinkClick(e, '#contact')}
             className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-slate-950 bg-sky-400 hover:bg-sky-300 rounded-md transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
           >
-            <span>Discuss Opportunities</span>
+            <span>Let's Discuss Opportunities</span>
             <ArrowRight className="w-4 h-4" />
           </a>
         </div>

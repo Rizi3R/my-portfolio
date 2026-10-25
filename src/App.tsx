@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { ExplorationRoute } from './data/portfolioData';
 import { Navbar } from './components/Navbar';
+import { RouteSelector } from './components/RouteSelector';
 import { Hero } from './components/Hero';
 import { OperationalStrip } from './components/OperationalStrip';
 import { About } from './components/About';
 import { ExperienceSection } from './components/Experience';
 import { SkillsSection } from './components/Skills';
 import { ProjectsSection } from './components/Projects';
+import { ProjectShowcase } from './components/ProjectShowcase';
 import { CertificationsSection } from './components/Certifications';
 import { LearningJourneySection } from './components/LearningJourney';
 import { ContactSection } from './components/Contact';
@@ -13,47 +16,58 @@ import { Footer } from './components/Footer';
 import { ResumeModal } from './components/ResumeModal';
 
 export default function App() {
+  const [activeRoute, setActiveRoute] = useState<ExplorationRoute>('all');
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#070A11] text-slate-100 flex flex-col font-sans selection:bg-sky-500/25 selection:text-sky-200">
-      {/* Top Navigation */}
+      
+      {/* Top Navigation with Scroll Progress Indicator */}
       <Navbar onOpenResume={() => setResumeModalOpen(true)} />
 
-      {/* Main Content Sections */}
+      {/* Sticky 'Choose Your Route' Recruiter Perspective Selector */}
+      <RouteSelector
+        activeRoute={activeRoute}
+        onRouteChange={setActiveRoute}
+      />
+
+      {/* Main Content Sections (Story-Driven Chapters) */}
       <main className="flex-1">
-        {/* 1. Hero Section */}
+        {/* Opening: Hero with Interactive Terminal Status Panel */}
         <Hero onOpenResume={() => setResumeModalOpen(true)} />
 
-        {/* 2. Operational Presence Strip */}
+        {/* 4 Professional Themes Bar */}
         <OperationalStrip />
 
-        {/* 3. About / Professional Philosophy */}
+        {/* Chapter 01: The Operator */}
         <About />
 
-        {/* 4. Professional Experience Timeline */}
-        <ExperienceSection />
+        {/* Chapter 02: The Journey (Interactive Career Timeline) */}
+        <ExperienceSection activeRoute={activeRoute} />
 
-        {/* 5. Technical Skills Inventory */}
-        <SkillsSection />
+        {/* Chapter 03: The Problem Solver (Missions & Case Studies) */}
+        <ProjectsSection activeRoute={activeRoute} />
 
-        {/* 6. Technical Case Studies */}
-        <ProjectsSection />
+        {/* Chapter 04: The Toolkit (Interactive Skills Explorer) */}
+        <SkillsSection activeRoute={activeRoute} />
 
-        {/* 7. Education & Certifications */}
+        {/* Chapter 05: The Builder (Projects & Technical Implementations) */}
+        <ProjectShowcase activeRoute={activeRoute} />
+
+        {/* Accreditations: Certifications & Education */}
         <CertificationsSection />
 
-        {/* 8. Learning Journey: Building Beyond the Ticket */}
+        {/* Target Roles: Building Toward What's Next */}
         <LearningJourneySection />
 
-        {/* 9. Contact & Direct Connection */}
+        {/* Chapter 06: The Next Mission (Contact & Outreach) */}
         <ContactSection />
       </main>
 
-      {/* Footer */}
+      {/* Footer with Chapter Summary & Back-to-Top */}
       <Footer onOpenResume={() => setResumeModalOpen(true)} />
 
-      {/* Verified Technical Resume Modal (Print & ATS-Optimized) */}
+      {/* Verified Technical Resume Modal (ATS-Optimized & Print-Ready) */}
       <ResumeModal
         isOpen={resumeModalOpen}
         onClose={() => setResumeModalOpen(false)}

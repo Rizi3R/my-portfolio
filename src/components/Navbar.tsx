@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Compass } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface NavbarProps {
@@ -9,10 +9,15 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 24);
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        setScrollProgress((window.scrollY / totalScroll) * 100);
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -20,11 +25,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
 
   const navLinks = [
     { label: 'About', href: '#about' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Skills', href: '#skills' },
+    { label: 'Journey', href: '#experience' },
     { label: 'Case Studies', href: '#projects' },
-    { label: 'Certifications', href: '#certifications' },
-    { label: 'Roadmap', href: '#roadmap' },
+    { label: 'Toolkit', href: '#skills' },
+    { label: 'Projects', href: '#showcase' },
+    { label: 'Contact', href: '#contact' },
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -32,7 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
     setMobileMenuOpen(false);
     const element = document.querySelector(href);
     if (element) {
-      const navHeight = 72;
+      const navHeight = 76;
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
         top: elementPosition - navHeight,
@@ -45,12 +50,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 no-print ${
         isScrolled
-          ? 'bg-[#070A11]/90 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/20'
+          ? 'bg-[#070A11]/95 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/20'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
+      {/* Scroll Progress Bar at very top */}
+      <div 
+        className="h-[2px] bg-sky-400 transition-all duration-75 origin-left"
+        style={{ width: `${scrollProgress}%` }}
+        role="progressbar"
+        aria-valuenow={Math.round(scrollProgress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-8">
-        {/* Zone 1: Brand Wordmark (Strict single text element, no attached pills) */}
+        
+        {/* Zone 1: Brand Wordmark */}
         <a
           href="#top"
           onClick={(e) => handleLinkClick(e, '#top')}
@@ -65,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
         {/* Zone 2: Clean single-line text navigation links */}
         <nav
           aria-label="Main Navigation"
-          className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300"
+          className="hidden md:flex items-center gap-6 lg:gap-7 text-sm font-medium text-slate-300"
         >
           {navLinks.map((link) => (
             <a
@@ -134,7 +150,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
                 }}
                 className="flex items-center justify-between w-full text-left text-sm font-medium text-slate-200 bg-slate-800/80 px-3 py-2.5 rounded-md"
               >
-                <span>View Clean Technical Resume</span>
+                <span>View Technical Resume</span>
                 <ArrowUpRight className="w-4 h-4 text-slate-400" />
               </button>
               <a

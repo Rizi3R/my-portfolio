@@ -206,16 +206,16 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-xs text-slate-700">
               <div>
-                <strong className="text-slate-900">Retail & Applications:</strong> Xilnex POS, Payment Gateways, UAT Testing, Promotion Setup.
+                <strong className="text-slate-900">Application & Systems:</strong> Incident Investigation, UAT Testing, Xilnex POS, Payment Gateways, Vendor Coordination.
               </div>
               <div>
-                <strong className="text-slate-900">SaaS & Administration:</strong> Lark Super Admin, Microsoft 365, Google Workspace, TeamViewer.
+                <strong className="text-slate-900">IT Operations & SaaS:</strong> Lark Super Admin, Microsoft 365, Google Workspace Migration, TeamViewer, Helpdesk SLAs.
               </div>
               <div>
-                <strong className="text-slate-900">Networking & Physical:</strong> TCP/IP, LAN/Wi-Fi, RJ45 Termination, Cable Testing, Switch Ports.
+                <strong className="text-slate-900">Networking & Infrastructure:</strong> TCP/IP, LAN/Wi-Fi, RJ45 Termination & Cable Testing, Switch Ports, Site Commissioning.
               </div>
               <div>
-                <strong className="text-slate-900">Data & Development:</strong> MySQL, SQL Queries, Laravel, Microsoft Excel Validation, Git Basics.
+                <strong className="text-slate-900">Cloud & Development:</strong> AWS Certified Cloud Practitioner, MySQL & Relational Queries, Laravel MVC, Excel Audit.
               </div>
             </div>
           </div>
