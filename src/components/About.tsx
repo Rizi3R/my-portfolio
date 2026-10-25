@@ -116,7 +116,7 @@ export const About: React.FC = () => {
             "A support professional with a software foundation doesn't just reboot servers. They trace execution logs, isolate reproducible edge cases, and deliver structured technical clarity to vendors and development teams."
           </p>
           <span className="text-xs font-mono text-sky-400 font-medium">
-            — Aries Irhan · System Application Specialist
+            — {PERSONAL_INFO.displayName} · System Application Specialist
           </span>
         </div>
 

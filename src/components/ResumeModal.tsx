@@ -81,8 +81,11 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
           {/* Header */}
           <div className="border-b border-slate-200 pb-6">
             <h1 id="resume-modal-title" className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-1">
-              {PERSONAL_INFO.fullName}
+              {PERSONAL_INFO.displayName}
             </h1>
+            <p className="text-xs text-slate-500 mb-2 font-mono">
+              Legal Name: {PERSONAL_INFO.fullName}
+            </p>
             <p className="text-sm font-semibold text-sky-700 tracking-wide uppercase mb-3">
               {PERSONAL_INFO.headline}
             </p>

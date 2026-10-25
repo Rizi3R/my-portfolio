@@ -106,7 +106,7 @@ export interface Education {
 
 export const PERSONAL_INFO = {
   fullName: "Muhammad Aries Irhan bin Abd Razak",
-  displayName: "Aries Irhan",
+  displayName: "Aries Razak",
   headline: "IT Support · Application Systems · IT Operations",
   tagline: "I keep business-critical technology running.",
   positioningStatement: "I support, troubleshoot, and improve the technology that helps businesses operate.",
