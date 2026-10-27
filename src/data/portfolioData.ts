@@ -107,11 +107,11 @@ export interface Education {
 export const PERSONAL_INFO = {
   fullName: "Muhammad Aries Irhan bin Abd Razak",
   displayName: "Aries Razak",
-  headline: "IT Support · Application Systems · IT Operations",
-  tagline: "I keep business-critical technology running.",
-  positioningStatement: "I support, troubleshoot, and improve the technology that helps businesses operate.",
-  shortBio: "From application support and business systems to IT operations and technical troubleshooting, I help keep technology working for the people who depend on it.",
-  extendedBio: "I work across users, business applications, and infrastructure to investigate issues and help technology operate reliably. In my current role at emart24 Malaysia, I support enterprise retail applications and Xilnex POS across HQ and multi-site outlets, troubleshoot device, payment, and connectivity incidents, coordinate technical fixes with third-party vendors, assist with new-site IT commissioning, and conduct UAT/system validation. Previously, at Palaterium, I supported distributed users through Lark Helpdesk, administered Lark as Super Admin, assisted with a company-wide Google Workspace-to-Lark migration, and validated business data in NetSuite and Excel. Earlier, I built practical troubleshooting grit in managed print services and developed a foundational software engineering mindset using Laravel and MySQL during an internship at the Attorney General's Chambers of Malaysia.",
+  headline: "Systems Support · IT Operations · Computing Explorer",
+  tagline: "I keep business systems running. And I explore what happens beneath the interface.",
+  positioningStatement: "Hands-on application specialist and systems operator with a deep curiosity for computing, networking, and software engineering.",
+  shortBio: "I work across applications, business systems, and infrastructure to keep technology working for the people who depend on it. Beyond day-to-day operations, I explore how software, networks, operating systems, and cloud primitives work under the hood.",
+  extendedBio: "I sit at the intersection between frontline users, business applications, and infrastructure. In my day-to-day role at emart24 Malaysia, I support enterprise retail applications and Xilnex POS across HQ and nationwide outlets, troubleshoot payment and connectivity bottlenecks, and coordinate vendor fixes. At the same time, my diploma in Computer Science & Mathematics and AWS Cloud Practitioner certification fuel an ongoing drive to understand computing from the ground up: writing code, dissecting network packet hops, experimenting with system algorithms, and building interactive tools to see how digital systems tick.",
   location: "Selangor / Kuala Lumpur, Malaysia",
   phone: "Available upon request",
   email: "ariesirhan25@gmail.com",
@@ -124,87 +124,88 @@ export const PERSONAL_INFO = {
 export const EXPLORATION_ROUTES: RouteDefinition[] = [
   {
     id: 'all',
-    label: 'View Everything',
-    shortLabel: 'All Overview',
-    description: 'Explore the complete timeline, all 5 case studies, and comprehensive technical toolkit.',
-    targetRole: 'General IT Review',
-    badge: 'Comprehensive'
+    label: 'All Horizons',
+    shortLabel: 'Complete Space',
+    description: 'Explore verified career history, the interactive technology lab, system architectures, and learning frontiers.',
+    targetRole: 'Holistic Exploration',
+    badge: 'Everything'
   },
   {
     id: 'app-support',
-    label: 'Application Support',
-    shortLabel: 'App Support',
-    description: 'Focus on application triage, incident root cause analysis, vendor escalation, and UAT validation.',
+    label: 'Application & Systems',
+    shortLabel: 'App Systems',
+    description: 'Explore application triage, POS transaction flows, payment gateway responses, and UAT validation.',
     targetRole: 'Application Support Specialist / Systems Analyst',
-    badge: 'Primary Strength'
+    badge: 'Core Experience'
   },
   {
     id: 'it-ops',
-    label: 'IT Operations',
-    shortLabel: 'IT Ops',
-    description: 'Focus on multi-site service delivery, ticketing workflows, SLA management, and site deployments.',
-    targetRole: 'IT Operations Executive / Service Desk Analyst',
-    badge: 'Operational Grit'
+    label: 'IT Operations & Service',
+    shortLabel: 'Operations',
+    description: 'Explore multi-site support delivery, SLA management, vendor coordination, and store IT commissioning.',
+    targetRole: 'IT Operations Executive / Service Desk Lead',
+    badge: 'Operational Track'
   },
   {
     id: 'business-systems',
-    label: 'Business Systems & SaaS',
-    shortLabel: 'Business SaaS',
-    description: 'Focus on Lark Super Admin, Google Workspace migration, NetSuite data auditing, and approval workflows.',
+    label: 'SaaS & Enterprise Systems',
+    shortLabel: 'SaaS Governance',
+    description: 'Explore Lark Super Admin, Google Workspace migration, approval automation, and NetSuite data auditing.',
     targetRole: 'Business Systems / SaaS Administrator',
-    badge: 'Enterprise SaaS'
+    badge: 'Enterprise Platform'
   },
   {
     id: 'infrastructure',
-    label: 'Infrastructure & Network',
-    shortLabel: 'Infra & Network',
-    description: 'Focus on Layer 1-4 diagnostics, TCP/IP, RJ45 termination, Wi-Fi, and endpoint hardware provisioning.',
-    targetRole: 'IT Infrastructure / Technical Support Specialist',
+    label: 'Networking & Physical Layers',
+    shortLabel: 'Network & Hardware',
+    description: 'Explore Layer 1-4 diagnostics, TCP/IP routing, RJ45 termination, VLANs, and endpoint hardware triage.',
+    targetRole: 'IT Infrastructure / Network Support Specialist',
     badge: 'Hands-on Technical'
   },
   {
     id: 'cloud',
-    label: 'Cloud & Technical Growth',
-    shortLabel: 'Cloud Foundations',
-    description: 'Focus on AWS Certified Cloud Practitioner principles, Linux basics, and software development foundations.',
-    targetRole: 'Junior Cloud Operations / Cloud Support Associate',
-    badge: 'Certified Foundation'
+    label: 'Software, Cloud & Algorithms',
+    shortLabel: 'Software & Cloud',
+    description: 'Explore AWS Cloud Practitioner concepts, full-stack Laravel/MySQL development, and algorithm experiments.',
+    targetRole: 'Junior Cloud Operations / Technical Associate',
+    badge: 'Engineering Core'
   }
 ];
 
 export const CHAPTERS = [
-  { id: 'chapter-01', number: 'CHAPTER 01', title: 'THE OPERATOR', subtitle: 'Philosophy & Operational Grounding', href: '#about' },
-  { id: 'chapter-02', number: 'CHAPTER 02', title: 'THE JOURNEY', subtitle: 'Career Progression & Timeline', href: '#experience' },
-  { id: 'chapter-03', number: 'CHAPTER 03', title: 'THE PROBLEM SOLVER', subtitle: 'Technical Case Studies', href: '#projects' },
-  { id: 'chapter-04', number: 'CHAPTER 04', title: 'THE TOOLKIT', subtitle: 'Interactive Skills Explorer', href: '#skills' },
-  { id: 'chapter-05', number: 'CHAPTER 05', title: 'THE BUILDER', subtitle: 'Projects & Implementations', href: '#showcase' },
-  { id: 'chapter-06', number: 'CHAPTER 06', title: 'THE NEXT MISSION', subtitle: 'Target Roles & Contact', href: '#contact' },
+  { id: 'chapter-lab', number: 'SPACE 01', title: 'THE LAB', subtitle: 'Interactive Computing Experiments', href: '#lab' },
+  { id: 'chapter-systems', number: 'SPACE 02', title: 'SYSTEMS', subtitle: 'How Technology Connects', href: '#systems' },
+  { id: 'chapter-journey', number: 'SPACE 03', title: 'FIELD NOTES', subtitle: 'Career Timeline & Experience', href: '#experience' },
+  { id: 'chapter-cases', number: 'SPACE 04', title: 'CASE STUDIES', subtitle: 'Technical Investigations', href: '#projects' },
+  { id: 'chapter-toolkit', number: 'SPACE 05', title: 'THE TOOLKIT', subtitle: 'Capabilities & Daily Drivers', href: '#skills' },
+  { id: 'chapter-frontier', number: 'SPACE 06', title: 'THE FRONTIER', subtitle: 'Active Learning & Horizons', href: '#frontier' },
+  { id: 'chapter-contact', number: 'SPACE 07', title: 'DISPATCH', subtitle: 'Connect & Inquire', href: '#contact' },
 ];
 
 export const CORE_PILLARS = [
   {
-    theme: "01 · Applications",
-    title: "Application & Systems Support",
-    description: "Troubleshooting business applications, investigating incident root causes, testing system behaviour, and coordinating technical fixes with vendors.",
-    relevantRoutes: ['app-support', 'business-systems'] as ExplorationRoute[]
+    theme: "01 · Systems Grounding",
+    title: "Application & Operational Support",
+    description: "Hands-on troubleshooting of multi-site business applications, retail POS, payment gateways, and vendor escalation.",
+    relevantRoutes: ['app-support', 'it-ops'] as ExplorationRoute[]
   },
   {
-    theme: "02 · Operations",
-    title: "IT Operations & Service Desk",
-    description: "Supporting end users, managing ticket triage, coordinating multi-party vendors, maintaining SOP documentation, and ensuring operational continuity.",
-    relevantRoutes: ['it-ops', 'infrastructure'] as ExplorationRoute[]
-  },
-  {
-    theme: "03 · Systems",
-    title: "SaaS & Infrastructure",
-    description: "User lifecycle administration, Google Workspace and Lark platform management, data validation, and network/equipment implementations.",
+    theme: "02 · Architecture & SaaS",
+    title: "Enterprise Systems & Governance",
+    description: "Super Admin administration of Lark and Google Workspace, automated approval bots, and ERP data auditing.",
     relevantRoutes: ['business-systems', 'infrastructure'] as ExplorationRoute[]
   },
   {
-    theme: "04 · Continuous Growth",
-    title: "Cloud & Development Core",
-    description: "AWS Certified Cloud Practitioner foundation combined with practical MVC web development, relational SQL querying, and workflow automation.",
-    relevantRoutes: ['cloud', 'app-support'] as ExplorationRoute[]
+    theme: "03 · Physical & Network",
+    title: "Layer 1–4 Network & Hardware",
+    description: "Hands-on RJ45 T-568B cabling, managed switch VLANs, Wi-Fi AP commissioning, and hardware diagnostics.",
+    relevantRoutes: ['infrastructure', 'app-support'] as ExplorationRoute[]
+  },
+  {
+    theme: "04 · Engineering & Curiosity",
+    title: "Software, Cloud & Exploration",
+    description: "Diploma in CS & Mathematics, AWS Cloud Practitioner certification, MVC web development, and digital experiments.",
+    relevantRoutes: ['cloud', 'all'] as ExplorationRoute[]
   },
 ];
 
@@ -764,3 +765,84 @@ export const CERTIFICATIONS: Certification[] = [
     relevantRoutes: ['it-ops', 'app-support']
   }
 ];
+
+export interface FrontierTopic {
+  id: string;
+  domain: string;
+  title: string;
+  tagline: string;
+  status: 'Active Investigation' | 'Hands-on Experiments' | 'Conceptual Study';
+  whyItMatters: string;
+  questionsInvestigated: string[];
+  keyConcepts: string[];
+  sampleCommandOrCode?: string;
+  practicalConnection: string;
+}
+
+export const FRONTIER_TOPICS: FrontierTopic[] = [
+  {
+    id: 'linux-internals',
+    domain: 'Operating Systems',
+    title: 'Linux Kernel & System Internals',
+    tagline: 'Moving beyond surface commands to understand processes, memory, and syscalls.',
+    status: 'Active Investigation',
+    whyItMatters: 'Every web server, POS backend daemon, and cloud container runs on an OS kernel. Understanding file descriptors, signals, and virtual memory demystifies cryptic crash dumps and zombie processes.',
+    questionsInvestigated: [
+      'How does the virtual filesystem (VFS) map device nodes like /dev/tty to physical serial ports and pinpads?',
+      'What happens during fork() and execve() when a daemon spawns a worker process?',
+      'How do kernel cgroups and namespaces enforce process isolation for containers?'
+    ],
+    keyConcepts: ['File Descriptors', 'Process Scheduling', 'Virtual Memory', 'strace & lsof', 'Systemd Units'],
+    sampleCommandOrCode: 'strace -e trace=network,openat,read,write -p $PID',
+    practicalConnection: 'Directly helps troubleshoot POS backend service hangs, socket leaks, and permission bitmasks in production.'
+  },
+  {
+    id: 'networking-deep-dive',
+    domain: 'Computer Networks',
+    title: 'Packet Routing & Transport Architecture',
+    tagline: 'Dissecting TCP handshakes, congestion windows, and packet encapsulation.',
+    status: 'Hands-on Experiments',
+    whyItMatters: 'Understanding OSI Layer 1 through 7 transforms network troubleshooting from "the internet is down" into precise root cause isolation.',
+    questionsInvestigated: [
+      'Why do payment EDC pinpads fail with 504 Host Timeout when upstream MTU fragmentation occurs?',
+      'How does BGP and Anycast DNS route packets across global CDNs?',
+      'What causes TCP SYN retransmissions during branch dual-WAN failover?'
+    ],
+    keyConcepts: ['TCP 3-Way Handshake', 'MTU / MSS Sizing', 'VLAN 802.1Q Tagging', 'NAT Overload (PAT)', 'TLS 1.3 Key Exchange'],
+    sampleCommandOrCode: 'tcpdump -i eth0 -nn -vvv "tcp[tcpflags] & (tcp-syn) != 0"',
+    practicalConnection: 'Builds upon my hands-on experience terminating T-568B cabling and configuring store gateway WAN routing.'
+  },
+  {
+    id: 'defensive-security',
+    domain: 'Cybersecurity Concepts',
+    title: 'Defensive Security & Identity Governance',
+    tagline: 'Protecting systems from the inside out: zero trust, principle of least privilege, and audit telemetry.',
+    status: 'Conceptual Study',
+    whyItMatters: 'Real security is not hacking screens—it is disciplined access control, identity lifecycle governance, and audit visibility.',
+    questionsInvestigated: [
+      'How do SAML 2.0 and OIDC identity assertions prevent token replay attacks in enterprise SaaS?',
+      'Why are default permissions (e.g. 777) a severe attack vector in Linux multi-user environments?',
+      'How can automated approval workflows prevent unauthorized ERP data mutation?'
+    ],
+    keyConcepts: ['SAML / SSO Handshakes', 'Least Privilege (PoLP)', 'Unix Permission Bitmasks', 'Audit Logging & SIEM', 'Endpoint Isolation'],
+    sampleCommandOrCode: 'find / -perm -4000 -type f 2>/dev/null # Audit SUID binaries',
+    practicalConnection: 'Directly informed by administering Lark as Super Admin and enforcing strict data auditing on NetSuite imports.'
+  },
+  {
+    id: 'cloud-architecture',
+    domain: 'Cloud & Infrastructure',
+    title: 'Cloud Systems & Infrastructure as Code',
+    tagline: 'Designing resilient, decoupled architectures across AWS primitives.',
+    status: 'Active Investigation',
+    whyItMatters: 'Building beyond single on-premise servers into fault-tolerant, auto-scaling distributed services.',
+    questionsInvestigated: [
+      'How does an Application Load Balancer distribute traffic across multi-AZ private subnets?',
+      'What are the latency and cost trade-offs between S3 Standard, Glacier, and EBS block storage?',
+      'How do VPC Security Groups (stateful) differ from Network ACLs (stateless)?'
+    ],
+    keyConcepts: ['AWS VPC Subnetting', 'IAM Role Delegation', 'Stateless vs Stateful Gateways', 'Infrastructure as Code', 'Automated Health Checks'],
+    sampleCommandOrCode: 'aws ec2 describe-instances --filters "Name=instance-state-name,Values=running"',
+    practicalConnection: 'Reinforces my AWS Certified Cloud Practitioner credential toward hands-on cloud operations.'
+  }
+];
+

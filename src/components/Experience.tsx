@@ -33,16 +33,16 @@ export const ExperienceSection: React.FC<ExperienceProps> = ({ activeRoute }) =>
         
         {/* Section Header with Chapter Label */}
         <div className="max-w-3xl mb-12">
-          <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-sky-400 uppercase mb-3">
-            <span>Chapter 02</span>
-            <span>·</span>
-            <span>The Journey</span>
+          <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-sky-400 uppercase mb-3">
+            <span>SPACE 03</span>
+            <span aria-hidden="true" className="text-slate-600">·</span>
+            <span>FIELD NOTES & CAREER TIMELINE</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-            Interactive Career Progression
+            Verified Professional Experience
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
-            A continuous progression from hands-on hardware and network troubleshooting to enterprise SaaS administration, software development, and multi-site application operations.
+            A continuous progression from hands-on hardware diagnostics and Layer-1 network cabling to enterprise SaaS administration, full-stack software development, and nationwide retail application operations.
           </p>
         </div>
 

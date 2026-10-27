@@ -39,16 +39,16 @@ export const SkillsSection: React.FC<SkillsProps> = ({ activeRoute }) => {
         
         {/* Section Header with Chapter Label */}
         <div className="max-w-3xl mb-12">
-          <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-sky-400 uppercase mb-3">
-            <span>Chapter 04</span>
+          <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-sky-400 uppercase mb-3">
+            <span>SPACE 05</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
-            <span>The Toolkit</span>
+            <span>THE TOOLKIT & DAILY DRIVERS</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-3">
-            Interactive Technical Matrix
+            Technical Capabilities & Tools
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
-            Select an operational domain below to inspect practical production examples, verified toolings, and honest proficiency levels.
+            Select an operational domain below to inspect practical production examples, verified toolings, and honest proficiency levels—clearly distinguishing daily production drivers from active foundational studies.
           </p>
         </div>
 

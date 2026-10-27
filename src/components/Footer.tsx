@@ -23,12 +23,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
   };
 
   const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Skills', href: '#skills' },
+    { label: 'The Lab', href: '#lab' },
+    { label: 'Systems', href: '#systems' },
+    { label: 'The Origin', href: '#about' },
+    { label: 'Field Notes', href: '#experience' },
     { label: 'Case Studies', href: '#projects' },
-    { label: 'Certifications', href: '#certifications' },
-    { label: 'Target Roles', href: '#roadmap' },
+    { label: 'Toolkit', href: '#skills' },
+    { label: 'The Frontier', href: '#frontier' },
     { label: 'Contact', href: '#contact' }
   ];
 

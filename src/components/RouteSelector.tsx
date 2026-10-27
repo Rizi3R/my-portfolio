@@ -26,7 +26,7 @@ export const RouteSelector: React.FC<RouteSelectorProps> = ({ activeRoute, onRou
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                TACTICAL ROUTE HUD:
+                PERSPECTIVE LENS:
               </span>
               <span className="text-xs font-semibold text-white truncate">
                 {currentRouteDef.targetRole}

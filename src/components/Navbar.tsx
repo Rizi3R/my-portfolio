@@ -33,11 +33,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks = [
-    { label: 'Systems Nexus', href: '#nexus' },
-    { label: 'Investigations', href: '#investigations' },
-    { label: 'Diagnostic Bay', href: '#simulator' },
-    { label: 'Journey', href: '#experience' },
+    { label: 'The Lab', href: '#lab' },
+    { label: 'Systems', href: '#systems' },
+    { label: 'Field Notes', href: '#experience' },
+    { label: 'Case Studies', href: '#projects' },
     { label: 'Toolkit', href: '#skills' },
+    { label: 'The Frontier', href: '#frontier' },
     { label: 'Contact', href: '#contact' },
   ];
 

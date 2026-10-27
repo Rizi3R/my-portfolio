@@ -37,16 +37,16 @@ export const ContactSection: React.FC = () => {
         
         {/* Section Header with Chapter Label */}
         <div className="max-w-3xl mb-12">
-          <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-sky-400 uppercase mb-3">
-            <span>Chapter 06</span>
+          <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-sky-400 uppercase mb-3">
+            <span>SPACE 07</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
-            <span>The Next Mission</span>
+            <span>DISPATCH & INQUIRY</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-            Have a technical challenge worth solving?
+            Have a technical challenge worth solving or want to talk technology?
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
-            I'm interested in opportunities where I can support business-critical systems, solve practical technical problems, and continue growing across IT operations and application systems.
+            I'm interested in opportunities where I can support business-critical systems, solve real operational problems, and continue exploring across IT operations, networks, and software engineering.
           </p>
         </div>
 

@@ -10,16 +10,16 @@ export const About: React.FC = () => {
         
         {/* Section Header */}
         <div className="max-w-3xl mb-14">
-          <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-sky-400 uppercase mb-3">
-            <span>Chapter 01</span>
+          <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-sky-400 uppercase mb-3">
+            <span>THE ORIGIN</span>
             <span aria-hidden="true" className="text-slate-600">·</span>
-            <span>The Operator</span>
+            <span>GROUNDING & CURIOSITY</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug mb-5">
-            I support, troubleshoot, and improve the technology that keeps businesses running.
+            I support the systems that run businesses today, and investigate how computers work from the ground up.
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
-            Supporting business systems requires more than closing tickets. It demands understanding real user workflows, investigating issues systematically, communicating clearly with non-technical stakeholders and technical vendors, and rigorously validating every fix.
+            Supporting technology requires more than closing tickets. It demands understanding real user workflows, investigating issues systematically, communicating clearly across stakeholders and vendors, and having the technical curiosity to dissect problems down to their root causes.
           </p>
         </div>
 

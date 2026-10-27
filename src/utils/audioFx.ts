@@ -212,6 +212,31 @@ class FuturisticAudioEngine {
       osc.stop(now + 0.05);
     } catch {}
   }
+
+  // Network packet hop blip
+  public playPacketHop() {
+    if (this.isMuted) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(1100, now);
+      osc.frequency.exponentialRampToValueAtTime(1600, now + 0.03);
+
+      gain.gain.setValueAtTime(0.025, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.035);
+    } catch {}
+  }
 }
 
 export const audioFx = new FuturisticAudioEngine();

@@ -93,74 +93,74 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       perform: () => scrollTo('#top')
     },
     {
-      id: 'nav-nexus',
+      id: 'nav-lab',
       category: 'Navigation',
-      label: 'The Systems Nexus (Living Knowledge & Architecture Graph)',
-      shortcut: 'N',
-      icon: <Layers className="w-4 h-4 text-sky-400" />,
-      perform: () => scrollTo('#nexus')
+      label: 'Space 01 · The Lab (Interactive Computing Experiments)',
+      shortcut: 'L',
+      icon: <Cpu className="w-4 h-4 text-sky-400" />,
+      perform: () => scrollTo('#lab')
     },
     {
-      id: 'nav-investigations',
+      id: 'nav-systems',
       category: 'Navigation',
-      label: 'The Investigation Bay (5-Phase Case Study Forensics)',
-      shortcut: 'I',
-      icon: <Terminal className="w-4 h-4 text-amber-400" />,
-      perform: () => scrollTo('#investigations')
+      label: 'Space 02 · Systems Architecture (Retail POS & SaaS Pipelines)',
+      shortcut: 'S',
+      icon: <Layers className="w-4 h-4 text-sky-400" />,
+      perform: () => scrollTo('#systems')
     },
     {
-      id: 'nav-about',
+      id: 'nav-origin',
       category: 'Navigation',
-      label: 'Chapter 01 · The Operator (Philosophy & Mindset)',
-      shortcut: '1',
-      icon: <Layers className="w-4 h-4 text-sky-400" />,
+      label: 'The Origin · Grounding & Curiosity (Mindset)',
+      shortcut: 'O',
+      icon: <Layers className="w-4 h-4 text-slate-400" />,
       perform: () => scrollTo('#about')
     },
     {
       id: 'nav-exp',
       category: 'Navigation',
-      label: 'Chapter 02 · The Journey (Career Timeline)',
-      shortcut: '2',
+      label: 'Space 03 · Field Notes (Career Progression & Timeline)',
+      shortcut: 'E',
       icon: <Briefcase className="w-4 h-4 text-sky-400" />,
       perform: () => scrollTo('#experience')
     },
     {
-      id: 'nav-sim',
-      category: 'Tools',
-      label: 'Launch Interactive Incident Simulator',
-      shortcut: 'S',
-      icon: <Cpu className="w-4 h-4 text-emerald-400" />,
-      perform: () => scrollTo('#simulator')
+      id: 'nav-investigations',
+      category: 'Navigation',
+      label: 'Forensic Investigation Bay & Diagnostic Triage',
+      shortcut: 'I',
+      icon: <Terminal className="w-4 h-4 text-amber-400" />,
+      perform: () => scrollTo('#investigations')
     },
     {
       id: 'nav-projects',
       category: 'Navigation',
-      label: 'Chapter 03 · The Problem Solver (5 Mission Case Studies)',
-      shortcut: '3',
+      label: 'Space 04 · Technical Case Studies & Debriefs',
+      shortcut: 'C',
       icon: <Terminal className="w-4 h-4 text-sky-400" />,
       perform: () => scrollTo('#projects')
     },
     {
       id: 'nav-skills',
       category: 'Navigation',
-      label: 'Chapter 04 · The Toolkit (Skills Matrix & Production Examples)',
-      shortcut: '4',
-      icon: <Cpu className="w-4 h-4 text-sky-400" />,
+      label: 'Space 05 · The Toolkit (Daily Drivers & Capabilities)',
+      shortcut: 'T',
+      icon: <Cpu className="w-4 h-4 text-emerald-400" />,
       perform: () => scrollTo('#skills')
     },
     {
-      id: 'nav-builder',
+      id: 'nav-frontier',
       category: 'Navigation',
-      label: 'Chapter 05 · The Builder (Real Deliverables & Runbooks)',
-      shortcut: '5',
-      icon: <Layers className="w-4 h-4 text-sky-400" />,
-      perform: () => scrollTo('#deliverables')
+      label: 'Space 06 · The Frontier (Active Learning Horizons)',
+      shortcut: 'F',
+      icon: <Terminal className="w-4 h-4 text-indigo-400" />,
+      perform: () => scrollTo('#frontier')
     },
     {
       id: 'nav-contact',
       category: 'Navigation',
-      label: 'Chapter 06 · The Next Mission (Contact & Mail Composer)',
-      shortcut: '6',
+      label: 'Space 07 · Dispatch & Professional Inquiry',
+      shortcut: 'D',
       icon: <Mail className="w-4 h-4 text-sky-400" />,
       perform: () => scrollTo('#contact')
     },

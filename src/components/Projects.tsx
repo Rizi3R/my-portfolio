@@ -65,10 +65,10 @@ export const ProjectsSection: React.FC<ProjectsProps> = ({ activeRoute }) => {
         {/* Section Header with Chapter Label */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-sky-400 uppercase mb-3">
-              <span>Chapter 03</span>
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-sky-400 uppercase mb-3">
+              <span>SPACE 04</span>
               <span aria-hidden="true" className="text-slate-600">·</span>
-              <span>The Problem Solver</span>
+              <span>INVESTIGATIVE CASE STUDIES</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-3">
               Technical Case Studies & Debriefs

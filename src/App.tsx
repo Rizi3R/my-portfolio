@@ -4,16 +4,16 @@ import { Navbar } from './components/Navbar';
 import { RouteSelector } from './components/RouteSelector';
 import { Hero } from './components/Hero';
 import { OperationalStrip } from './components/OperationalStrip';
-import { SystemsNexus } from './components/SystemsNexus';
+import { TheLab } from './components/TheLab';
+import { SystemsExplorer } from './components/SystemsExplorer';
+import { TheFrontier } from './components/TheFrontier';
 import { InvestigationBay } from './components/InvestigationBay';
 import { IncidentSimulator } from './components/IncidentSimulator';
 import { About } from './components/About';
 import { ExperienceSection } from './components/Experience';
 import { SkillsSection } from './components/Skills';
 import { ProjectsSection } from './components/Projects';
-import { ProjectShowcase } from './components/ProjectShowcase';
 import { CertificationsSection } from './components/Certifications';
-import { LearningJourneySection } from './components/LearningJourney';
 import { ContactSection } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ResumeModal } from './components/ResumeModal';
@@ -79,39 +79,37 @@ export default function App() {
         {/* 4 Professional Themes Bar */}
         <OperationalStrip />
 
-        {/* The Systems Nexus: Interactive Living Knowledge & Topology Graph */}
-        <SystemsNexus />
+        {/* Space 01: The Personal Technology Lab (Interactive Packet Tracer, Cache Simulator, UNIX Bitmask) */}
+        <TheLab />
 
-        {/* The Investigation Bay: 5-Phase Interactive Case Investigations */}
+        {/* Space 02: Systems Architecture (How Business Technology Actually Connects) */}
+        <SystemsExplorer />
+
+        {/* The Origin: Philosophy & Operational Grounding */}
+        <About />
+
+        {/* Space 03: Field Notes (Verified Professional Career Progression) */}
+        <ExperienceSection activeRoute={activeRoute} />
+
+        {/* Interactive Forensic Investigations & Incident Simulator */}
         <InvestigationBay />
-
-        {/* Interactive Feature: The Diagnostic Sandbox (Incident Simulator) */}
         <div id="simulator">
           <IncidentSimulator />
         </div>
 
-        {/* Chapter 01: The Operator (Mindset & Progression) */}
-        <About />
-
-        {/* Chapter 02: The Journey (Interactive Career Timeline) */}
-        <ExperienceSection activeRoute={activeRoute} />
-
-        {/* Chapter 03: The Problem Solver (Missions & Case Studies) */}
+        {/* Space 04: Technical Case Studies & Operational Debriefs */}
         <ProjectsSection activeRoute={activeRoute} />
 
-        {/* Chapter 04: The Toolkit (Interactive Skills Explorer) */}
+        {/* Space 05: The Toolkit (Daily Drivers & Capabilities) */}
         <SkillsSection activeRoute={activeRoute} />
 
-        {/* Chapter 05: The Builder (Projects & Technical Implementations) */}
-        <ProjectShowcase activeRoute={activeRoute} />
+        {/* Space 06: The Frontier (Active Learning & Horizons) */}
+        <TheFrontier />
 
-        {/* Accreditations: Certifications & Education */}
+        {/* Accreditations: Certifications & Formal Education */}
         <CertificationsSection />
 
-        {/* Target Roles: Building Toward What's Next */}
-        <LearningJourneySection />
-
-        {/* Chapter 06: The Next Mission (Contact & Outreach) */}
+        {/* Space 07: Dispatch & Professional Inquiry */}
         <ContactSection />
       </main>
 
