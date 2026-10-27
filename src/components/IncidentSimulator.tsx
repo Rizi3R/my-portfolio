@@ -15,7 +15,6 @@ import {
   Cpu
 } from 'lucide-react';
 import { TiltCard } from './TiltCard';
-import { ScrambleText } from './ScrambleText';
 
 interface DiagnosticTool {
   id: string;
@@ -266,7 +265,7 @@ export const IncidentSimulator: React.FC = () => {
             <span>Real-World Incident Resolution</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug mb-3">
-            <ScrambleText text="Step into the diagnostic bay." />
+            Step into the diagnostic bay.
           </h2>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
             Test how real incidents are triaged in production. Select an actual ticket from my career, execute Layer 1–4 diagnostics, and deploy the verified technical fix.

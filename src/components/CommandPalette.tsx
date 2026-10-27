@@ -93,6 +93,22 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       perform: () => scrollTo('#top')
     },
     {
+      id: 'nav-nexus',
+      category: 'Navigation',
+      label: 'The Systems Nexus (Living Knowledge & Architecture Graph)',
+      shortcut: 'N',
+      icon: <Layers className="w-4 h-4 text-sky-400" />,
+      perform: () => scrollTo('#nexus')
+    },
+    {
+      id: 'nav-investigations',
+      category: 'Navigation',
+      label: 'The Investigation Bay (5-Phase Case Study Forensics)',
+      shortcut: 'I',
+      icon: <Terminal className="w-4 h-4 text-amber-400" />,
+      perform: () => scrollTo('#investigations')
+    },
+    {
       id: 'nav-about',
       category: 'Navigation',
       label: 'Chapter 01 · The Operator (Philosophy & Mindset)',

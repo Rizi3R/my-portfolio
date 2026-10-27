@@ -3,7 +3,6 @@ import { SKILL_CATEGORIES, SkillCategory, ExplorationRoute } from '../data/portf
 import { Server, Shield, Network, Database, Cloud, Search, Check, Sparkles } from 'lucide-react';
 import { audioFx } from '../utils/audioFx';
 import { TiltCard } from './TiltCard';
-import { ScrambleText } from './ScrambleText';
 
 interface SkillsProps {
   activeRoute: ExplorationRoute;
@@ -46,7 +45,7 @@ export const SkillsSection: React.FC<SkillsProps> = ({ activeRoute }) => {
             <span>The Toolkit</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-3">
-            <ScrambleText text="Interactive Technical Matrix" />
+            Interactive Technical Matrix
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
             Select an operational domain below to inspect practical production examples, verified toolings, and honest proficiency levels.
@@ -110,7 +109,7 @@ export const SkillsSection: React.FC<SkillsProps> = ({ activeRoute }) => {
                   {categoryIcons[selectedCategory.id]}
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-white">
-                  <ScrambleText text={selectedCategory.title} />
+                  {selectedCategory.title}
                 </h3>
               </div>
               <p className="text-xs sm:text-sm text-slate-300 mt-1 leading-relaxed">

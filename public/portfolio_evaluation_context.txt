@@ -76,12 +76,25 @@ The portfolio implements a custom, high-tech engineering aesthetic ("sci-fi comm
      - `--contact`: Displays public contact details.
      - `--help`: Explains navigation tips.
 
-4. 4-PILLAR OPERATIONAL STRIP (src/components/OperationalStrip.tsx)
-   - Highlights 4 core technical pillars:
-     1) Business Applications (Enterprise POS, payment gateways, data validation, UAT)
-     2) IT Operations & Support (Multi-site operations, helpdesk SLAs, root cause analysis)
-     3) Systems & Infrastructure (SaaS Super Admin, LAN/Wi-Fi diagnostics, hardware commissioning)
-     4) Continuous Growth (AWS Certified, ITIL v4 in-progress, ongoing cloud learning)
+4. THE SYSTEMS NEXUS — LIVING KNOWLEDGE GRAPH (src/components/SystemsNexus.tsx)
+   - An interactive visual node graph mapping the real interconnected systems of Aries Razak:
+     * Nodes: Xilnex POS, Payment Gateways & EDC Pinpads, Layer 1-4 Cabling, Endpoint Diagnostics, Incident Triage, Lark Super Admin, NetSuite Data Audit, Laravel/MySQL, AWS Cloud.
+     * Dynamic vector connection lines that illuminate active data pipelines.
+     * Deep Evidence Dossier inspector detailing verified on-the-ground reality, roles, and linked case studies.
+     * Includes dual viewport: Interactive Physics Canvas + Expandable Hierarchy Tree for mobile accessibility.
+
+5. THE INVESTIGATION BAY — 5-PHASE FORENSIC LAB (src/components/InvestigationBay.tsx)
+   - Reimagines conventional case study cards into progressive technical investigations:
+     * Phase 1: THE SIGNAL (Reported operational distress, user symptom, revenue risk)
+     * Phase 2: THE INVESTIGATION (Diagnostic telemetry checked, cables probed, false leads eliminated)
+     * Phase 3: THE REASONING (Fault isolation: local switch vs bank acquirer vs register queue)
+     * Phase 4: THE ACTION (Concrete engineering fix deployed by Aries)
+     * Phase 5: THE RESULT & LESSON (Measured recovery, zero launch downtime, transferable SOP)
+   - Interactive Diagnostic Telemetry Log dump displaying real CLI command lines and network diagnostics.
+   - Standard Operating Procedure (SOP) quick reference panel.
+
+6. 4-PILLAR OPERATIONAL STRIP (src/components/OperationalStrip.tsx)
+   - Highlights 4 core technical pillars with 3D TiltCards.
 
 5. CHAPTER 01 · THE OPERATOR (src/components/About.tsx)
    - 2-Column narrative detailing the mindset of a systems troubleshooter.

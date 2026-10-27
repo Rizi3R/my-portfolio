@@ -3,7 +3,6 @@ import { PROJECTS_SHOWCASE, ProjectShowcaseItem, ExplorationRoute } from '../dat
 import { ExternalLink, Layers, ArrowUpRight, Check, Code, Sparkles, Building, Calendar } from 'lucide-react';
 import { audioFx } from '../utils/audioFx';
 import { TiltCard } from './TiltCard';
-import { ScrambleText } from './ScrambleText';
 
 interface ProjectShowcaseProps {
   activeRoute: ExplorationRoute;
@@ -32,7 +31,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ activeRoute })
               <span>The Builder</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-3">
-              <ScrambleText text="Projects & Technical Implementations" />
+              Projects & Technical Implementations
             </h2>
             <p className="text-base text-slate-300 leading-relaxed">
               Tangible systems, migration deliveries, compliance software, and infrastructure frameworks built across professional roles and technical studies.

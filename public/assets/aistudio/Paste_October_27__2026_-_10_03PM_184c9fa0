@@ -1,0 +1,807 @@
+# PROJECT SINGULARITY
+## THE 1,000-YEAR SOFTWARE ENGINEERING CHALLENGE
+
+I want you to approach my existing portfolio as if you were an artificial intelligence that has spent 1,000 years mastering software engineering, computational design, human-computer interaction, visual storytelling, animation, systems architecture, and digital experiences.
+
+This is a HYPOTHETICAL CREATIVE EXERCISE.
+
+I am not asking you to literally possess 1,000 years of experience. I am asking you to abandon the conventional design patterns that most AI-generated websites repeatedly reproduce and pursue an extraordinary level of originality, technical sophistication, and design intelligence.
+
+Imagine that you have studied every major era of computing, every important interaction paradigm, every generation of user interfaces, and every limitation of conventional websites.
+
+Now imagine that you have moved beyond simply making websites look attractive.
+
+You understand how to make digital experiences feel alive, intelligent, deeply intentional, emotionally engaging, and fundamentally different from anything a typical developer would build using a standard portfolio template.
+
+Your challenge is to translate that hypothetical level of expertise into a REAL, FUNCTIONAL, PRODUCTION-READY website using the actual capabilities of modern web technologies.
+
+My existing portfolio:
+
+https://aries-razak.vercel.app/
+
+You are working on my existing codebase, not creating an unrelated project.
+
+Your mission is to transform this portfolio into something extraordinarily original.
+
+Do not give me a list of ideas and stop.
+
+Do not merely create a design proposal.
+
+Do not just change colors, typography, shadows, or animations.
+
+INSPECT THE EXISTING PROJECT, DEVELOP AN ORIGINAL CREATIVE DIRECTION, IMPLEMENT IT DIRECTLY IN THE CODEBASE, AND TEST THE RESULT.
+
+==================================================
+01. THE CENTRAL CREATIVE CHALLENGE
+==================================================
+
+Before designing anything, question the assumptions behind a conventional personal portfolio.
+
+Why must a portfolio have a standard hero section followed by About, Experience, Skills, Projects, and Contact?
+
+Why must project cards always look like rectangular cards?
+
+Why must navigation always be a conventional horizontal menu?
+
+Why must a professional portfolio feel like a digital resume?
+
+Why should a website behave like a static document when it can behave like an interactive environment?
+
+Why do so many futuristic websites look almost identical despite using different colors?
+
+I want you to investigate these assumptions and challenge them intelligently.
+
+Do not reject conventional patterns simply because they are conventional. Retain anything that genuinely improves usability.
+
+Instead, search for opportunities to create a better experience.
+
+Imagine that you are designing a new category of professional portfolio rather than another variation of an existing category.
+
+The final result should feel like a combination of:
+
+- An experimental human-computer interface.
+- A beautifully engineered interactive environment.
+- A living map of a technical professional's capabilities.
+- A narrative experience that reveals information through exploration.
+- A premium digital product designed by a team of exceptional engineers and designers.
+- A technically ambitious but highly usable professional portfolio.
+
+These are creative references, not a rigid visual template.
+
+Find an original visual language that unifies the entire experience.
+
+Do not simply combine random futuristic effects.
+
+Every unusual design decision must have a reason to exist.
+
+==================================================
+02. THE ORIGINALITY RULE
+==================================================
+
+I DO NOT WANT ANOTHER GENERIC AI PORTFOLIO.
+
+Avoid automatically defaulting to:
+
+- A black background with purple gradients.
+- Neon blue text.
+- A glowing sphere in the hero section.
+- Floating glassmorphism cards.
+- Random particle backgrounds.
+- A standard typing animation.
+- A generic three-column project grid.
+- A conventional developer dashboard.
+- A fake command-line interface used only for decoration.
+- A collection of animated statistics.
+- A generic 3D object that has nothing to do with my work.
+- Excessive scroll animations.
+- An interface that looks impressive in a screenshot but feels ordinary when used.
+
+These patterns are not forbidden if you discover a genuinely exceptional implementation, but they must never be your automatic solution.
+
+Develop a distinctive visual identity based on the relationship between technology, systems, investigation, complexity, and human problem-solving.
+
+Consider unconventional ways of representing information.
+
+For example, could professional experience be represented as an interconnected system?
+
+Could skills become navigable regions in a visual environment?
+
+Could technical case studies behave like investigations that unfold as the visitor explores them?
+
+Could the visitor discover relationships between technologies, responsibilities, and projects?
+
+Could the entire website share a visual metaphor that becomes more meaningful as the visitor learns about me?
+
+Could a visitor explore my capabilities in a way that would be impossible to communicate through a conventional resume?
+
+These are examples of the type of thinking I want. They are not instructions to implement all these features.
+
+Find the strongest idea and execute it exceptionally well.
+
+I prefer ONE cohesive, extraordinary experience over twenty disconnected visual tricks.
+
+==================================================
+03. THINK LIKE AN UNCONVENTIONAL CREATIVE ENGINEER
+==================================================
+
+Before implementation, internally explore several radically different creative directions.
+
+Consider at least five concepts that differ fundamentally in their interaction model, information architecture, and visual language.
+
+For example, one concept might treat the website as an explorable technical universe.
+
+Another might treat it as an interactive investigation into how technology works.
+
+Another might turn professional experience into a living network of interconnected systems.
+
+Another might use spatial navigation and visual storytelling.
+
+Another might build a highly responsive interface that transforms according to what the visitor wants to understand.
+
+Do not merely generate five different color palettes.
+
+The concepts must represent genuinely different ideas.
+
+Evaluate them against these criteria:
+
+1. Originality.
+2. Technical feasibility.
+3. Professional credibility.
+4. Ease of understanding.
+5. Quality of interaction.
+6. Mobile usability.
+7. Performance.
+8. Accessibility.
+9. Maintainability.
+10. Ability to communicate my real capabilities.
+
+Choose the strongest concept and implement it.
+
+Do not spend the entire response describing the concepts. The goal is to build the winning concept.
+
+If the development environment supports planning, use it to establish a coherent implementation strategy before modifying the code.
+
+==================================================
+04. CREATE AN EXPERIENCE THAT REVEALS ITSELF
+==================================================
+
+I want the website to reward curiosity.
+
+The visitor should encounter details that encourage exploration without feeling lost.
+
+Think about progressive revelation.
+
+At first, the visitor sees a clear introduction.
+
+As the visitor explores, they discover deeper information about my technical experience.
+
+When they investigate a particular skill, they discover related work.
+
+When they explore a project, they discover the problem, the reasoning, the technical decisions, and the outcome.
+
+When they explore my professional journey, they understand how different experiences connect.
+
+The website should communicate multiple levels of information:
+
+LEVEL 1: Immediate understanding.
+
+Who am I? What do I do? What can I contribute?
+
+LEVEL 2: Professional evidence.
+
+What have I actually worked on? What systems have I supported? What can I demonstrate?
+
+LEVEL 3: Technical depth.
+
+How do I investigate problems? How do I approach systems? What technical decisions have I made?
+
+LEVEL 4: Professional potential.
+
+How am I developing? What am I learning? What kinds of technical challenges interest me?
+
+Visitors should be able to move between these levels naturally.
+
+Do not make essential information difficult to access merely to create mystery.
+
+A recruiter should never need to solve a puzzle to find my experience or contact information.
+
+The experience must be discoverable, not confusing.
+
+==================================================
+05. EXPLORE INTERACTION PARADIGMS BEYOND ORDINARY WEBSITES
+==================================================
+
+Explore interaction patterns that go beyond standard buttons, cards, and scrolling.
+
+Consider whether the portfolio could benefit from:
+
+A. CONTEXTUAL INTERFACES
+
+The interface responds meaningfully to what the visitor is exploring.
+
+For example, exploring application support could highlight relevant case studies and skills without taking the visitor to a completely separate website.
+
+B. CONNECTED INFORMATION
+
+Related skills, projects, and experiences become visually connected.
+
+The visitor can understand how individual competencies contribute to larger technical responsibilities.
+
+C. INTERACTIVE TECHNICAL INVESTIGATIONS
+
+Real case studies unfold as the visitor examines a problem, the investigation, the solution, and the lessons learned.
+
+D. MULTIPLE EXPLORATION PATHS
+
+A recruiter, technical manager, and developer might approach my experience from different perspectives.
+
+Allow visitors to discover the most relevant information through different routes while preserving one unified portfolio.
+
+E. SPATIAL OR DEPTH-BASED PRESENTATION
+
+Explore depth, layering, dimensional transitions, or spatial layouts if they genuinely improve understanding.
+
+Use CSS transforms, SVG, Canvas, WebGL, or an existing suitable library only when justified.
+
+Do not introduce heavyweight 3D technology merely because it looks futuristic.
+
+F. DYNAMIC INFORMATION VISUALIZATION
+
+Consider visual representations of relationships between skills, projects, technologies, and career experiences.
+
+These relationships must be based on real information rather than invented data.
+
+G. MICRO-INTERACTIONS WITH PURPOSE
+
+Every interaction should provide useful feedback or improve the visitor's understanding.
+
+A click, transition, expansion, or selection should feel deliberate and polished.
+
+You are not required to implement all seven approaches.
+
+Select the approaches that contribute most to the chosen concept.
+
+==================================================
+06. MAKE THE WEBSITE FEEL IMPOSSIBLE, BUT KEEP IT REAL
+==================================================
+
+The website should create the impression of extraordinary engineering through a combination of:
+
+- Exceptional interaction design.
+- Precise animation timing.
+- Original information visualization.
+- Unexpected but understandable transitions.
+- A consistent visual language.
+- Carefully managed visual complexity.
+- Intelligent content organization.
+- High-quality typography.
+- Responsive layout transformations.
+- Fast, predictable interactions.
+- Excellent technical execution.
+
+Do not confuse visual complexity with technical sophistication.
+
+A simple interaction executed with extraordinary precision can be more impressive than a complicated 3D scene.
+
+Prioritize the quality of the entire experience over isolated effects.
+
+If you introduce a sophisticated interaction, make sure it works properly.
+
+For example, an interactive network should have meaningful relationships, clear labels, usable controls, and a useful fallback.
+
+A spatial interface should not make text unreadable.
+
+An animation should not prevent a user from clicking a button.
+
+A visual effect should not destroy mobile performance.
+
+A dynamic interface should not hide important information from search engines or assistive technology.
+
+If a concept is technically ambitious, decompose it into achievable components and implement them carefully.
+
+Use real web technologies and real logic.
+
+Do not simulate functionality that does not exist.
+
+==================================================
+07. BUILD A DISTINCTIVE OPENING EXPERIENCE
+==================================================
+
+The first screen should be immediately memorable.
+
+My professional identity must remain clear.
+
+Name:
+
+Aries Irhan
+
+Professional positioning:
+
+IT Support | Application Systems | IT Operations
+
+Core message:
+
+"I keep business-critical technology running."
+
+Supporting message:
+
+"I work across application support, business systems, technical troubleshooting, and IT operations, turning technical problems into practical solutions."
+
+Explore an opening experience that goes beyond a static headline.
+
+Possible approaches include:
+
+- An interactive representation of interconnected technical systems.
+- A visual environment that gradually reveals my professional identity.
+- An abstract system that becomes more organized as the visitor explores.
+- A responsive visual composition that connects technical concepts to my actual experience.
+- An original interface that allows visitors to explore my professional focus immediately.
+
+Choose something distinctive.
+
+Do not automatically implement a typing animation or a glowing sphere.
+
+The first screen must work without waiting for an animation.
+
+My name, professional focus, and primary navigation must remain immediately accessible.
+
+Include clear actions for exploring my work and contacting me.
+
+==================================================
+08. REPRESENT MY PROFESSIONAL EXPERIENCE AS EVIDENCE
+==================================================
+
+My portfolio must remain a truthful representation of my real background.
+
+My experience includes:
+
+- System Application Specialist at emart24 Malaysia.
+- IT Executive at Palaterium Sdn Bhd.
+- IT Technician at a managed print services company.
+- IT Intern in a full-stack development role at the Attorney General's Chambers of Malaysia.
+
+Verify exact dates and descriptions against the existing project content and confirmed information.
+
+My genuine experience includes areas such as:
+
+- Xilnex POS application support.
+- Application troubleshooting.
+- Vendor coordination.
+- New store technology setup.
+- Business system administration.
+- SaaS platform migration and administration.
+- Lark platform experience.
+- User and operational support.
+- LAN and Wi-Fi troubleshooting.
+- Hardware setup.
+- Data management.
+- Web development exposure.
+
+Use the verified information available in the existing codebase.
+
+Do not invent responsibilities, projects, outcomes, metrics, or technologies.
+
+Present my experience in an unconventional but understandable way.
+
+The visitor should be able to explore a professional responsibility and understand:
+
+1. What the operational need was.
+2. What I personally did.
+3. Which technical skills were involved.
+4. How I approached the problem.
+5. What the verified outcome was.
+6. What I learned.
+
+If details are missing, do not fabricate them.
+
+Create a clearly identified placeholder in the development version or leave out unsupported claims.
+
+==================================================
+09. CREATE A TECHNICAL KNOWLEDGE MAP
+==================================================
+
+Explore the idea of representing my capabilities as a connected technical knowledge map.
+
+Potential domains:
+
+APPLICATION SUPPORT
+
+IT OPERATIONS
+
+BUSINESS SYSTEMS
+
+INFRASTRUCTURE AND NETWORKING
+
+WEB DEVELOPMENT
+
+CLOUD FOUNDATIONS
+
+The map should reveal meaningful relationships.
+
+For example, an application troubleshooting case study might connect to application support, vendor coordination, and operational continuity.
+
+An infrastructure troubleshooting example might connect to networking fundamentals, hardware, and technical investigation.
+
+These relationships must reflect actual experience.
+
+Visitors should be able to select a domain and discover related information.
+
+Make the map intuitive and responsive.
+
+If the screen is too small for a large visual map, automatically switch to a more suitable mobile representation such as a compact graph, categorized list, or expandable hierarchy.
+
+Do not force a desktop-style visualization onto a phone.
+
+Do not use fake proficiency percentages.
+
+Distinguish between professional experience, working knowledge, foundational knowledge, and ongoing learning.
+
+==================================================
+10. DESIGN CASE STUDIES THAT FEEL LIKE INVESTIGATIONS
+==================================================
+
+Turn genuine professional experiences into interactive technical investigations.
+
+A case study could reveal its content progressively:
+
+THE SIGNAL
+What problem or requirement was reported?
+
+THE INVESTIGATION
+What information needed to be checked?
+
+THE REASONING
+How were possible causes considered?
+
+THE ACTION
+What did I actually do?
+
+THE RESULT
+What happened, based on verified information?
+
+THE LESSON
+What did the experience teach me?
+
+Use interactive timelines, decision flows, diagrams, layered explanations, or other suitable techniques.
+
+Do not pretend that a real incident had a particular sequence if the facts do not support it.
+
+For conceptual demonstrations, explicitly identify the content as illustrative.
+
+The visitor should gain a better understanding of my technical thinking, not simply watch an animation.
+
+==================================================
+11. MAKE THE WEBSITE FEEL ALIVE WITHOUT MAKING IT SLOW
+==================================================
+
+Develop a deliberate motion system.
+
+Consider:
+
+- Context-sensitive transitions.
+- Carefully timed reveals.
+- Responsive hover and focus states.
+- Meaningful visual feedback.
+- Animated relationships between related content.
+- Subtle depth changes.
+- Smooth but predictable section transitions.
+- Small transformations when the visitor changes the selected context.
+
+Motion must reinforce meaning.
+
+Avoid excessive movement, random animations, flashing elements, and constant background activity.
+
+The interface should remain comfortable to read for extended periods.
+
+Respect prefers-reduced-motion.
+
+Do not use scroll hijacking.
+
+Do not lock the visitor into a scripted sequence.
+
+Do not require the visitor to watch an animation before accessing information.
+
+Animations must never be essential to understanding the content.
+
+==================================================
+12. MAKE RESPONSIVENESS PART OF THE CREATIVE DESIGN
+==================================================
+
+Responsiveness is not a final CSS adjustment.
+
+Design the experience to adapt intelligently to different devices.
+
+Support at least these viewport widths:
+
+360px
+390px
+430px
+768px
+1024px
+1440px
+1920px
+
+At each size, reconsider the interaction model where necessary.
+
+For example:
+
+- A desktop knowledge map might become a navigable hierarchy on mobile.
+- A complex timeline might become a compact vertical journey.
+- A spatial navigation interface might become a straightforward list.
+- Hover interactions must have suitable touch alternatives.
+- Dense technical visualizations must have readable mobile alternatives.
+
+Do not merely shrink desktop content.
+
+Ensure all features remain usable with touch, keyboard, and mouse.
+
+Avoid horizontal overflow, clipped text, tiny controls, and content that disappears at certain breakpoints.
+
+==================================================
+13. TECHNICAL IMPLEMENTATION STANDARDS
+==================================================
+
+Act like a principal engineer responsible for maintaining this codebase.
+
+Before making changes:
+
+1. Inspect the project structure.
+2. Identify the framework and styling system.
+3. Review installed dependencies.
+4. Understand existing routes and components.
+5. Inspect the deployment configuration.
+6. Identify existing functionality worth preserving.
+
+Use the existing technology stack unless there is a compelling reason to change it.
+
+Do not rebuild the entire application unnecessarily.
+
+Prefer reusable, modular components.
+
+Use semantic HTML and accessible interaction patterns.
+
+Use CSS, SVG, Canvas, or existing libraries appropriately.
+
+Only add dependencies when their benefits justify their cost.
+
+Avoid unnecessary WebGL frameworks, massive animation libraries, or complex rendering systems.
+
+If you introduce Canvas or WebGL, provide suitable fallbacks and ensure that essential content remains accessible.
+
+Do not introduce backend infrastructure, authentication, databases, or external APIs unless the feature genuinely requires them.
+
+Do not expose API keys, credentials, or private environment variables.
+
+Preserve Vercel compatibility.
+
+==================================================
+14. PERFORMANCE IS PART OF THE ART
+==================================================
+
+An extraordinary website that runs badly is not extraordinary engineering.
+
+Optimize for:
+
+- Fast initial rendering.
+- Minimal layout shifts.
+- Efficient event handling.
+- Small and purposeful dependencies.
+- Lazy loading where appropriate.
+- Efficient animation.
+- Sensible image optimization.
+- Responsive rendering.
+- Stable interaction.
+- Good accessibility.
+- Search engine discoverability.
+
+Prefer transform and opacity animations where appropriate.
+
+Avoid expensive continuous calculations.
+
+Use requestAnimationFrame when justified for animation work.
+
+Clean up event listeners, observers, and animation loops.
+
+Do not run unnecessary computations on every scroll event.
+
+Do not make the experience depend on a powerful graphics card.
+
+Provide a graceful fallback for lower-powered devices.
+
+Ensure the website remains functional when advanced visual effects are unavailable.
+
+==================================================
+15. MAKE IT IMPRESSIVE TO TECHNICAL PEOPLE
+==================================================
+
+A technically sophisticated visitor should be able to appreciate the engineering behind the experience.
+
+Use meaningful component architecture.
+
+Keep application state predictable.
+
+Separate content data from presentation where appropriate.
+
+Use clear naming and maintainable code.
+
+Avoid massive components containing the entire application.
+
+Avoid unnecessary abstraction.
+
+Do not sacrifice maintainability to make the implementation appear complicated.
+
+Do not introduce design patterns that add complexity without delivering value.
+
+Where appropriate, include genuine technical details in my case studies that demonstrate my reasoning.
+
+The engineering quality must support the visual ambition.
+
+==================================================
+16. PROTECT THE HUMAN EXPERIENCE
+==================================================
+
+The website must remain understandable to someone who is not a developer.
+
+Use clear labels.
+
+Provide visible navigation.
+
+Explain unusual interactions when necessary.
+
+Keep essential information accessible through conventional controls.
+
+Provide a straightforward way to return to the main view.
+
+Make interactive elements keyboard accessible.
+
+Maintain appropriate contrast.
+
+Use readable typography.
+
+Avoid flashing or disorienting effects.
+
+Do not create an interface that requires visitors to understand technical jargon before they can use it.
+
+The website should feel extraordinary because it is well designed, not because it is difficult to understand.
+
+==================================================
+17. TEST THE ACTUAL IMPLEMENTATION
+==================================================
+
+Do not claim that a feature works merely because you generated its code.
+
+After implementation:
+
+- Run the available build.
+- Check for compilation errors.
+- Check the browser console if browser testing is available.
+- Verify that navigation works.
+- Test all interactive controls.
+- Test keyboard access.
+- Test touch interactions.
+- Test reduced-motion behavior.
+- Inspect the required viewport sizes.
+- Check for horizontal overflow.
+- Verify all external links.
+- Verify email links.
+- Confirm that essential content remains accessible.
+- Review the implementation for unsupported claims.
+- Check compatibility with the existing Vercel deployment.
+
+If browser automation or live visual inspection is unavailable, state that limitation honestly.
+
+Do not claim to have tested a device or browser that you did not actually test.
+
+Fix issues found during testing.
+
+==================================================
+18. YOUR IMPLEMENTATION PROCESS
+==================================================
+
+Work in these stages:
+
+STAGE A: INVESTIGATE
+
+Inspect the existing codebase and understand what already exists.
+
+STAGE B: INVENT
+
+Explore fundamentally different design concepts and select the strongest one.
+
+STAGE C: ARCHITECT
+
+Determine the information structure, interaction model, component architecture, and technical approach.
+
+STAGE D: BUILD
+
+Implement the actual experience in the existing project.
+
+STAGE E: REFINE
+
+Improve visual consistency, interaction quality, responsive behavior, and accessibility.
+
+STAGE F: VERIFY
+
+Run available checks, fix errors, and verify the actual implementation.
+
+STAGE G: REPORT
+
+Summarize the concept, the most significant changes, the technologies used, the tests performed, and any remaining limitations.
+
+Do not stop after STAGE A, B, or C.
+
+The goal is the working implementation.
+
+If the complete transformation is too large for one pass, prioritize a complete, cohesive core experience before adding secondary effects.
+
+Do not leave the website half-finished.
+
+==================================================
+19. THE FINAL ACCEPTANCE TEST
+==================================================
+
+Before considering the project complete, ask yourself:
+
+ORIGINALITY
+Does the result have a distinctive concept, or does it still resemble a typical AI-generated portfolio?
+
+COHESION
+Does the entire website feel like one carefully designed experience?
+
+INTERACTION
+Do the interactions reveal useful information or improve understanding?
+
+TECHNICAL QUALITY
+Does the implementation use sound engineering practices?
+
+PROFESSIONAL VALUE
+Can recruiters quickly understand my experience and capabilities?
+
+RESPONSIVENESS
+Does the experience adapt intelligently to phones, tablets, and desktops?
+
+ACCESSIBILITY
+Can people navigate and understand the website without relying on animation, color, or a mouse?
+
+PERFORMANCE
+Does the website remain responsive without unnecessary technical overhead?
+
+TRUTHFULNESS
+Does every professional claim reflect my actual background?
+
+MAINTAINABILITY
+Can the project continue to be developed without becoming unnecessarily fragile?
+
+If the result is merely a standard portfolio with more animations, the challenge has not been met.
+
+If it is visually unusual but difficult to navigate, the challenge has not been met.
+
+If it looks impressive but contains broken interactions, the challenge has not been met.
+
+If it is technically elaborate but provides no additional value to visitors, the challenge has not been met.
+
+The goal is a genuinely original, technically excellent, interactive professional experience.
+
+==================================================
+20. FINAL DIRECTIVE
+==================================================
+
+Think beyond the design patterns you would normally generate.
+
+Challenge your first ideas.
+
+Look for the concept that is both surprising and useful.
+
+Do not imitate a popular developer portfolio.
+
+Do not mistake visual noise for sophistication.
+
+Do not make complexity the objective.
+
+Make the quality of the thinking visible through the quality of the finished experience.
+
+Treat this project as an opportunity to demonstrate what an AI-assisted developer can accomplish when creativity, engineering discipline, and human-centered design are pushed unusually far.
+
+Now inspect my existing codebase, choose your strongest concept, and begin implementing it.
+
+I want to see the real result, not merely hear about what you could create.

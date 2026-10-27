@@ -3,7 +3,6 @@ import { EXPERIENCES, Experience, ExplorationRoute } from '../data/portfolioData
 import { MapPin, Calendar, Check, ArrowUpRight, Sparkles, Terminal, Activity } from 'lucide-react';
 import { audioFx } from '../utils/audioFx';
 import { TiltCard } from './TiltCard';
-import { ScrambleText } from './ScrambleText';
 
 interface ExperienceProps {
   activeRoute: ExplorationRoute;
@@ -36,11 +35,11 @@ export const ExperienceSection: React.FC<ExperienceProps> = ({ activeRoute }) =>
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-sky-400 uppercase mb-3">
             <span>Chapter 02</span>
-            <span aria-hidden="true" className="text-slate-600">·</span>
+            <span>·</span>
             <span>The Journey</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-            <ScrambleText text="Interactive Career Progression" />
+            Interactive Career Progression
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
             A continuous progression from hands-on hardware and network troubleshooting to enterprise SaaS administration, software development, and multi-site application operations.
@@ -108,7 +107,7 @@ export const ExperienceSection: React.FC<ExperienceProps> = ({ activeRoute }) =>
             <div>
               <div className="flex flex-wrap items-center gap-2.5 mb-1.5">
                 <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  <ScrambleText text={selectedExp.role} />
+                  {selectedExp.role}
                 </h3>
                 {selectedExp.isCurrent && (
                   <span className="text-[11px] font-mono font-semibold text-emerald-300 bg-emerald-950/70 px-2.5 py-0.5 rounded border border-emerald-800/60 flex items-center gap-1">

@@ -2,7 +2,6 @@ import React from 'react';
 import { CERTIFICATIONS, EDUCATION_DATA } from '../data/portfolioData';
 import { Award, GraduationCap, CheckCircle2, Clock, Sparkles } from 'lucide-react';
 import { TiltCard } from './TiltCard';
-import { ScrambleText } from './ScrambleText';
 
 export const CertificationsSection: React.FC = () => {
   return (
@@ -17,7 +16,7 @@ export const CertificationsSection: React.FC = () => {
             <span>Verified Credentials</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-            <ScrambleText text="Education & Certifications" />
+            Education & Certifications
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
             Formally earned credentials and ongoing professional development in cloud infrastructure, service management, and computer science.

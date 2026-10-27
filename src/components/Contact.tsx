@@ -3,7 +3,6 @@ import { PERSONAL_INFO } from '../data/portfolioData';
 import { Mail, Linkedin, Copy, Check, ArrowUpRight, Send, MessageSquare, Terminal, ShieldCheck } from 'lucide-react';
 import { audioFx } from '../utils/audioFx';
 import { TiltCard } from './TiltCard';
-import { ScrambleText } from './ScrambleText';
 
 export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -44,7 +43,7 @@ export const ContactSection: React.FC = () => {
             <span>The Next Mission</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-            <ScrambleText text="Have a technical challenge worth solving?" />
+            Have a technical challenge worth solving?
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
             I'm interested in opportunities where I can support business-critical systems, solve practical technical problems, and continue growing across IT operations and application systems.

@@ -15,7 +15,6 @@ import {
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { NetworkTopologyCanvas } from './NetworkTopologyCanvas';
 import { ArchitectureMatrix } from './ArchitectureMatrix';
-import { ScrambleText } from './ScrambleText';
 import { audioFx } from '../utils/audioFx';
 
 interface HeroProps {
@@ -139,17 +138,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume, onOpenCommandPalette }
               </span>
             </div>
 
-            {/* Main Headline with Cypher Scramble on Hover */}
+            {/* Main Headline */}
             <h1 
               style={{ textWrap: 'balance' } as React.CSSProperties}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-white tracking-tight leading-[1.12] mb-6"
             >
-              <ScrambleText text={PERSONAL_INFO.tagline} />
+              {PERSONAL_INFO.tagline}
             </h1>
 
             {/* Prominent Name & Supporting Copy */}
             <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed mb-4 max-w-xl">
-              I'm <strong className="font-bold text-white tracking-wide"><ScrambleText text={PERSONAL_INFO.displayName} /></strong>. {PERSONAL_INFO.shortBio}
+              I'm <strong className="font-bold text-white tracking-wide">{PERSONAL_INFO.displayName}</strong>. {PERSONAL_INFO.shortBio}
             </p>
 
             <p className="text-sm sm:text-base text-slate-400 leading-relaxed mb-8 max-w-xl">

@@ -54,7 +54,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">
               <span className="w-6 h-6 rounded bg-sky-500/10 border border-sky-500/30 text-sky-400 flex items-center justify-center font-mono text-xs font-semibold">
-                AI
+                AR
               </span>
               <span className="text-base font-bold text-white tracking-tight">
                 {PERSONAL_INFO.displayName}

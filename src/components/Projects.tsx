@@ -16,7 +16,6 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { TiltCard } from './TiltCard';
-import { ScrambleText } from './ScrambleText';
 
 interface ProjectsProps {
   activeRoute: ExplorationRoute;
@@ -72,7 +71,7 @@ export const ProjectsSection: React.FC<ProjectsProps> = ({ activeRoute }) => {
               <span>The Problem Solver</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-3">
-              <ScrambleText text="Technical Case Studies & Debriefs" />
+              Technical Case Studies & Debriefs
             </h2>
             <p className="text-base text-slate-300 leading-relaxed">
               Real operational investigations, site commissioning workflows, SaaS migrations, and development projects—documented with structured methodology, verifiable facts, and transferable lessons.

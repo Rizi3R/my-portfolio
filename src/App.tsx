@@ -4,9 +4,11 @@ import { Navbar } from './components/Navbar';
 import { RouteSelector } from './components/RouteSelector';
 import { Hero } from './components/Hero';
 import { OperationalStrip } from './components/OperationalStrip';
+import { SystemsNexus } from './components/SystemsNexus';
+import { InvestigationBay } from './components/InvestigationBay';
+import { IncidentSimulator } from './components/IncidentSimulator';
 import { About } from './components/About';
 import { ExperienceSection } from './components/Experience';
-import { IncidentSimulator } from './components/IncidentSimulator';
 import { SkillsSection } from './components/Skills';
 import { ProjectsSection } from './components/Projects';
 import { ProjectShowcase } from './components/ProjectShowcase';
@@ -77,16 +79,22 @@ export default function App() {
         {/* 4 Professional Themes Bar */}
         <OperationalStrip />
 
-        {/* Chapter 01: The Operator (Mindset & Progression) */}
-        <About />
+        {/* The Systems Nexus: Interactive Living Knowledge & Topology Graph */}
+        <SystemsNexus />
 
-        {/* Chapter 02: The Journey (Interactive Career Timeline) */}
-        <ExperienceSection activeRoute={activeRoute} />
+        {/* The Investigation Bay: 5-Phase Interactive Case Investigations */}
+        <InvestigationBay />
 
         {/* Interactive Feature: The Diagnostic Sandbox (Incident Simulator) */}
         <div id="simulator">
           <IncidentSimulator />
         </div>
+
+        {/* Chapter 01: The Operator (Mindset & Progression) */}
+        <About />
+
+        {/* Chapter 02: The Journey (Interactive Career Timeline) */}
+        <ExperienceSection activeRoute={activeRoute} />
 
         {/* Chapter 03: The Problem Solver (Missions & Case Studies) */}
         <ProjectsSection activeRoute={activeRoute} />

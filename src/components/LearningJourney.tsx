@@ -3,7 +3,6 @@ import { CAREER_INTERESTS, PERSONAL_INFO } from '../data/portfolioData';
 import { Compass, ArrowRight, ShieldCheck, Server, Cloud, Network, Workflow, CheckCircle2 } from 'lucide-react';
 import { audioFx } from '../utils/audioFx';
 import { TiltCard } from './TiltCard';
-import { ScrambleText } from './ScrambleText';
 
 export const LearningJourneySection: React.FC = () => {
   const interestIcons: Record<string, React.ReactNode> = {
@@ -40,7 +39,7 @@ export const LearningJourneySection: React.FC = () => {
             <span>Target Roles</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-            <ScrambleText text="Building toward what's next." />
+            Building toward what's next.
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
             I am actively expanding my technical foundation to take on greater responsibility across application systems, IT operations, SaaS administration, and cloud environments. These targeted directions build directly on my hands-on support experience and computer science background.

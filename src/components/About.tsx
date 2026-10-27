@@ -2,7 +2,6 @@ import React from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { Layers, Network, Server, Database, Code, CheckCircle2, ShieldCheck, Cpu, Terminal } from 'lucide-react';
 import { TiltCard } from './TiltCard';
-import { ScrambleText } from './ScrambleText';
 
 export const About: React.FC = () => {
   return (
@@ -17,7 +16,7 @@ export const About: React.FC = () => {
             <span>The Operator</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug mb-5">
-            <ScrambleText text="I support, troubleshoot, and improve the technology that keeps businesses running." />
+            I support, troubleshoot, and improve the technology that keeps businesses running.
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
             Supporting business systems requires more than closing tickets. It demands understanding real user workflows, investigating issues systematically, communicating clearly with non-technical stakeholders and technical vendors, and rigorously validating every fix.
