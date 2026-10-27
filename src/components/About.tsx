@@ -1,6 +1,8 @@
 import React from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
-import { Layers, Network, Server, Database, Code, CheckCircle2, ShieldCheck, Cpu } from 'lucide-react';
+import { Layers, Network, Server, Database, Code, CheckCircle2, ShieldCheck, Cpu, Terminal } from 'lucide-react';
+import { TiltCard } from './TiltCard';
+import { ScrambleText } from './ScrambleText';
 
 export const About: React.FC = () => {
   return (
@@ -15,7 +17,7 @@ export const About: React.FC = () => {
             <span>The Operator</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug mb-5">
-            I support, troubleshoot, and improve the technology that helps businesses operate.
+            <ScrambleText text="I support, troubleshoot, and improve the technology that keeps businesses running." />
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
             Supporting business systems requires more than closing tickets. It demands understanding real user workflows, investigating issues systematically, communicating clearly with non-technical stakeholders and technical vendors, and rigorously validating every fix.
@@ -44,10 +46,10 @@ export const About: React.FC = () => {
             </p>
           </div>
 
-          {/* Right Column: 4 Progression Stages */}
+          {/* Right Column: 4 Progression Stages in 3D TiltCards */}
           <div className="lg:col-span-5 space-y-3.5">
             
-            <div className="p-4.5 rounded-lg bg-slate-900/60 border border-slate-800/80 transition-all hover:border-slate-700">
+            <TiltCard className="p-4.5 bg-slate-900/60 border border-slate-800/80">
               <div className="flex items-center gap-3 mb-1.5">
                 <div className="w-8 h-8 rounded bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
                   <Server className="w-4 h-4" />
@@ -60,9 +62,9 @@ export const About: React.FC = () => {
               <p className="text-xs text-slate-300 leading-relaxed pl-11">
                 Multi-site business application & POS support, incident investigation, payment API decline triage, UAT testing, new site IT commissioning, and vendor coordination.
               </p>
-            </div>
+            </TiltCard>
 
-            <div className="p-4.5 rounded-lg bg-slate-900/60 border border-slate-800/80 transition-all hover:border-slate-700">
+            <TiltCard className="p-4.5 bg-slate-900/60 border border-slate-800/80">
               <div className="flex items-center gap-3 mb-1.5">
                 <div className="w-8 h-8 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0">
                   <Layers className="w-4 h-4" />
@@ -75,9 +77,9 @@ export const About: React.FC = () => {
               <p className="text-xs text-slate-300 leading-relaxed pl-11">
                 L1/L2 Lark Helpdesk support, Lark Super Admin governance, Google Workspace migration assistance, workflow automation, NetSuite data auditing, and remote desktop support.
               </p>
-            </div>
+            </TiltCard>
 
-            <div className="p-4.5 rounded-lg bg-slate-900/60 border border-slate-800/80 transition-all hover:border-slate-700">
+            <TiltCard className="p-4.5 bg-slate-900/60 border border-slate-800/80">
               <div className="flex items-center gap-3 mb-1.5">
                 <div className="w-8 h-8 rounded bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center shrink-0">
                   <Cpu className="w-4 h-4" />
@@ -90,9 +92,9 @@ export const About: React.FC = () => {
               <p className="text-xs text-slate-300 leading-relaxed pl-11">
                 Hardware diagnostics, firmware updates, network printer integration, TCP/IP configurations, Freshdesk SLA management, and client-facing technical support.
               </p>
-            </div>
+            </TiltCard>
 
-            <div className="p-4.5 rounded-lg bg-slate-900/60 border border-slate-800/80 transition-all hover:border-slate-700">
+            <TiltCard className="p-4.5 bg-slate-900/60 border border-slate-800/80">
               <div className="flex items-center gap-3 mb-1.5">
                 <div className="w-8 h-8 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
                   <Code className="w-4 h-4" />
@@ -105,20 +107,20 @@ export const About: React.FC = () => {
               <p className="text-xs text-slate-300 leading-relaxed pl-11">
                 Web application development in PHP Laravel and MySQL, System Requirements Specification (SRS), ERD modeling, and stakeholder user testing.
               </p>
-            </div>
+            </TiltCard>
 
           </div>
         </div>
 
         {/* Operating Philosophy Quote Box */}
-        <div className="p-6 sm:p-8 rounded-xl bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-slate-900/90 border border-slate-800 text-center max-w-4xl mx-auto">
+        <TiltCard className="p-6 sm:p-8 border border-slate-800 text-center max-w-4xl mx-auto bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-slate-900/90">
           <p className="text-sm sm:text-base italic text-slate-300 mb-3">
             "A support professional with a software foundation doesn't just reboot servers. They trace execution logs, isolate reproducible edge cases, and deliver structured technical clarity to vendors and development teams."
           </p>
           <span className="text-xs font-mono text-sky-400 font-medium">
             — {PERSONAL_INFO.displayName} · System Application Specialist
           </span>
-        </div>
+        </TiltCard>
 
       </div>
     </section>

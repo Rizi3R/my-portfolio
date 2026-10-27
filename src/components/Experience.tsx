@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { EXPERIENCES, Experience, ExplorationRoute } from '../data/portfolioData';
-import { MapPin, Calendar, ChevronDown, ChevronUp, Check, Briefcase, ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
+import { MapPin, Calendar, Check, ArrowUpRight, Sparkles, Terminal, Activity } from 'lucide-react';
+import { audioFx } from '../utils/audioFx';
+import { TiltCard } from './TiltCard';
+import { ScrambleText } from './ScrambleText';
 
 interface ExperienceProps {
   activeRoute: ExplorationRoute;
@@ -13,6 +16,7 @@ export const ExperienceSection: React.FC<ExperienceProps> = ({ activeRoute }) =>
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    audioFx.playClick(500);
     const element = document.querySelector(href);
     if (element) {
       const navHeight = 76;
@@ -36,7 +40,7 @@ export const ExperienceSection: React.FC<ExperienceProps> = ({ activeRoute }) =>
             <span>The Journey</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-            Interactive Career Progression
+            <ScrambleText text="Interactive Career Progression" />
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
             A continuous progression from hands-on hardware and network troubleshooting to enterprise SaaS administration, software development, and multi-site application operations.
@@ -53,7 +57,10 @@ export const ExperienceSection: React.FC<ExperienceProps> = ({ activeRoute }) =>
               <button
                 key={exp.id}
                 type="button"
-                onClick={() => setSelectedRoleId(exp.id)}
+                onClick={() => {
+                  audioFx.playClick(600);
+                  setSelectedRoleId(exp.id);
+                }}
                 className={`p-3.5 sm:p-4 rounded-xl border text-left transition-all relative flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
                   isSelected
                     ? 'bg-slate-900 border-sky-400 shadow-lg shadow-sky-950/40 ring-1 ring-sky-400/50'
@@ -71,7 +78,7 @@ export const ExperienceSection: React.FC<ExperienceProps> = ({ activeRoute }) =>
 
                 <div>
                   <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-1">
-                    <span>Stage 0{index + 1}</span>
+                    <span>STAGE 0{index + 1}</span>
                     <span className="text-slate-500">{exp.period.split('–')[0].trim()}</span>
                   </div>
                   <h3 className="text-xs sm:text-sm font-bold text-white leading-snug line-clamp-1">
@@ -94,18 +101,19 @@ export const ExperienceSection: React.FC<ExperienceProps> = ({ activeRoute }) =>
         </div>
 
         {/* Selected Role Interactive Detailed Dossier */}
-        <div className="rounded-2xl bg-slate-900/80 border border-slate-800 p-6 sm:p-8 shadow-2xl relative transition-all">
+        <TiltCard interactive={false} className="p-6 sm:p-8 bg-slate-900/90 border-slate-800 shadow-2xl">
           
           {/* Header Row */}
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 pb-6 border-b border-slate-800">
             <div>
               <div className="flex flex-wrap items-center gap-2.5 mb-1.5">
                 <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  {selectedExp.role}
+                  <ScrambleText text={selectedExp.role} />
                 </h3>
                 {selectedExp.isCurrent && (
-                  <span className="text-[11px] font-mono font-semibold text-emerald-300 bg-emerald-950/70 px-2.5 py-0.5 rounded border border-emerald-800/60">
-                    Current Position
+                  <span className="text-[11px] font-mono font-semibold text-emerald-300 bg-emerald-950/70 px-2.5 py-0.5 rounded border border-emerald-800/60 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Current Position</span>
                   </span>
                 )}
               </div>
@@ -152,7 +160,7 @@ export const ExperienceSection: React.FC<ExperienceProps> = ({ activeRoute }) =>
               <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300">
                 {selectedExp.responsibilities.map((resp, i) => (
                   <li key={i} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 mt-2 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 mt-2 shrink-0 shadow-xs shadow-sky-400/50" />
                     <span className="leading-relaxed">{resp}</span>
                   </li>
                 ))}
@@ -169,7 +177,7 @@ export const ExperienceSection: React.FC<ExperienceProps> = ({ activeRoute }) =>
                   {selectedExp.keyContributions.map((contrib, i) => (
                     <div 
                       key={i}
-                      className="p-3 bg-slate-950/60 rounded-lg border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2.5"
+                      className="p-3 bg-slate-950/70 rounded-lg border border-slate-800 text-xs text-slate-300 leading-relaxed flex items-start gap-2.5"
                     >
                       <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                       <span>{contrib}</span>
@@ -198,7 +206,7 @@ export const ExperienceSection: React.FC<ExperienceProps> = ({ activeRoute }) =>
 
           </div>
 
-        </div>
+        </TiltCard>
 
       </div>
     </section>

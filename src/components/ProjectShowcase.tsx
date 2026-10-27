@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { PROJECTS_SHOWCASE, ProjectShowcaseItem, ExplorationRoute } from '../data/portfolioData';
 import { ExternalLink, Layers, ArrowUpRight, Check, Code, Sparkles, Building, Calendar } from 'lucide-react';
+import { audioFx } from '../utils/audioFx';
+import { TiltCard } from './TiltCard';
+import { ScrambleText } from './ScrambleText';
 
 interface ProjectShowcaseProps {
   activeRoute: ExplorationRoute;
@@ -29,7 +32,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ activeRoute })
               <span>The Builder</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-3">
-              Projects & Technical Implementations
+              <ScrambleText text="Projects & Technical Implementations" />
             </h2>
             <p className="text-base text-slate-300 leading-relaxed">
               Tangible systems, migration deliveries, compliance software, and infrastructure frameworks built across professional roles and technical studies.
@@ -44,7 +47,10 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ activeRoute })
                 <button
                   key={opt}
                   type="button"
-                  onClick={() => setSelectedFilter(opt)}
+                  onClick={() => {
+                    audioFx.playClick(500);
+                    setSelectedFilter(opt);
+                  }}
                   className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-sky-400 ${
                     active
                       ? 'bg-sky-500/15 text-sky-300 border border-sky-500/30'
@@ -64,12 +70,12 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ activeRoute })
             const isRouteMatched = activeRoute !== 'all' && project.relevantRoutes.includes(activeRoute);
 
             return (
-              <div
+              <TiltCard
                 key={project.id}
-                className={`p-6 rounded-2xl border transition-all duration-200 flex flex-col justify-between hover:shadow-xl hover:shadow-black/30 group relative ${
+                className={`p-6 flex flex-col justify-between group ${
                   isRouteMatched
-                    ? 'bg-slate-900/90 border-sky-400/80 shadow-md shadow-sky-950/30 ring-1 ring-sky-400/40'
-                    : 'bg-slate-900/50 border-slate-800 hover:border-slate-700'
+                    ? 'border-sky-400/80 shadow-md shadow-sky-950/30 ring-1 ring-sky-400/40'
+                    : 'border-slate-800 hover:border-slate-700'
                 }`}
               >
                 {/* Route badge */}
@@ -135,6 +141,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ activeRoute })
                       href={project.link.url}
                       target={project.link.isExternal ? '_blank' : '_self'}
                       rel={project.link.isExternal ? 'noopener noreferrer' : ''}
+                      onClick={() => audioFx.playClick(600)}
                       className="inline-flex items-center justify-center gap-1.5 w-full px-4 py-2 text-xs font-semibold text-slate-950 bg-sky-400 hover:bg-sky-300 rounded-md transition-colors shadow-sm"
                     >
                       <span>{project.link.label}</span>
@@ -146,7 +153,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ activeRoute })
                     </div>
                   )}
                 </div>
-              </div>
+              </TiltCard>
             );
           })}
         </div>

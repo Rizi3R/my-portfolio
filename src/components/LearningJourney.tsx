@@ -1,6 +1,9 @@
 import React from 'react';
 import { CAREER_INTERESTS, PERSONAL_INFO } from '../data/portfolioData';
 import { Compass, ArrowRight, ShieldCheck, Server, Cloud, Network, Workflow, CheckCircle2 } from 'lucide-react';
+import { audioFx } from '../utils/audioFx';
+import { TiltCard } from './TiltCard';
+import { ScrambleText } from './ScrambleText';
 
 export const LearningJourneySection: React.FC = () => {
   const interestIcons: Record<string, React.ReactNode> = {
@@ -13,6 +16,7 @@ export const LearningJourneySection: React.FC = () => {
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    audioFx.playClick(500);
     const element = document.querySelector(href);
     if (element) {
       const navHeight = 72;
@@ -36,7 +40,7 @@ export const LearningJourneySection: React.FC = () => {
             <span>Target Roles</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-            Building toward what's next.
+            <ScrambleText text="Building toward what's next." />
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
             I am actively expanding my technical foundation to take on greater responsibility across application systems, IT operations, SaaS administration, and cloud environments. These targeted directions build directly on my hands-on support experience and computer science background.
@@ -46,13 +50,13 @@ export const LearningJourneySection: React.FC = () => {
         {/* 5 Career Interest Pathways */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {CAREER_INTERESTS.map((item, index) => (
-            <div
+            <TiltCard
               key={item.category}
-              className="p-5 sm:p-6 rounded-xl bg-slate-900/60 border border-slate-800/80 flex flex-col justify-between hover:border-slate-700 transition-all hover:shadow-lg group"
+              className="p-5 sm:p-6 flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
-                  <span className="text-sky-400 font-semibold">Direction 0{index + 1}</span>
+                  <span className="text-sky-400 font-semibold">DIRECTION 0{index + 1}</span>
                   <div className="w-8 h-8 rounded-lg bg-slate-800/80 border border-slate-700/60 flex items-center justify-center">
                     {interestIcons[item.category] || <Compass className="w-4 h-4 text-sky-400" />}
                   </div>
@@ -79,11 +83,11 @@ export const LearningJourneySection: React.FC = () => {
                   {item.transferableFoundation}
                 </p>
               </div>
-            </div>
+            </TiltCard>
           ))}
 
           {/* Core Philosophy Card as 6th Tile */}
-          <div className="p-5 sm:p-6 rounded-xl bg-gradient-to-br from-slate-900/90 to-sky-950/40 border border-sky-500/30 flex flex-col justify-between">
+          <TiltCard className="p-5 sm:p-6 bg-gradient-to-br from-slate-900/90 to-sky-950/40 border-sky-500/30 flex flex-col justify-between">
             <div>
               <div className="text-xs font-mono text-sky-400 mb-2 font-semibold">
                 Unified Thread
@@ -100,11 +104,11 @@ export const LearningJourneySection: React.FC = () => {
               <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0" />
               <span>Available for Technical Roles in Malaysia</span>
             </div>
-          </div>
+          </TiltCard>
         </div>
 
         {/* Alignment Callout */}
-        <div className="rounded-xl bg-gradient-to-r from-slate-900 via-slate-900/80 to-slate-900 border border-slate-800 p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <TiltCard interactive={false} className="p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-gradient-to-r from-slate-900 via-slate-900/80 to-slate-900 border-slate-800">
           <div className="max-w-2xl">
             <h4 className="text-base sm:text-lg font-bold text-white mb-1.5">
               Ready to Contribute to Your Technical Team
@@ -122,7 +126,7 @@ export const LearningJourneySection: React.FC = () => {
             <span>Let's Discuss Opportunities</span>
             <ArrowRight className="w-4 h-4" />
           </a>
-        </div>
+        </TiltCard>
 
       </div>
     </section>

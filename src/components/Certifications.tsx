@@ -1,6 +1,8 @@
 import React from 'react';
 import { CERTIFICATIONS, EDUCATION_DATA } from '../data/portfolioData';
 import { Award, GraduationCap, CheckCircle2, Clock, Sparkles } from 'lucide-react';
+import { TiltCard } from './TiltCard';
+import { ScrambleText } from './ScrambleText';
 
 export const CertificationsSection: React.FC = () => {
   return (
@@ -15,7 +17,7 @@ export const CertificationsSection: React.FC = () => {
             <span>Verified Credentials</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
-            Education & Certifications
+            <ScrambleText text="Education & Certifications" />
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
             Formally earned credentials and ongoing professional development in cloud infrastructure, service management, and computer science.
@@ -25,13 +27,13 @@ export const CertificationsSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Formal Education */}
-          <div className="lg:col-span-5 bg-slate-900/60 border border-slate-800/80 rounded-xl p-6 sm:p-7">
+          <TiltCard interactive={false} className="lg:col-span-5 bg-slate-900/60 border-slate-800/80 p-6 sm:p-7">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center">
                 <GraduationCap className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-xs font-mono text-sky-400 block">Formal Education</span>
+                <span className="text-xs font-mono text-sky-400 block">Formal Academic Degree</span>
                 <span className="text-xs text-slate-400 font-mono">{EDUCATION_DATA.period}</span>
               </div>
             </div>
@@ -58,7 +60,7 @@ export const CertificationsSection: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </TiltCard>
 
           {/* Right Column: Professional Certifications & In-Progress Study */}
           <div className="lg:col-span-7 space-y-4">
@@ -67,14 +69,14 @@ export const CertificationsSection: React.FC = () => {
               const isInProgress = cert.status === 'In Progress';
 
               return (
-                <div
+                <TiltCard
                   key={cert.name}
-                  className={`p-5 sm:p-6 rounded-xl border transition-all ${
+                  className={`p-5 sm:p-6 ${
                     isCertified
-                      ? 'bg-slate-900/80 border-sky-500/30'
+                      ? 'border-sky-500/30'
                       : isInProgress
-                      ? 'bg-slate-900/50 border-amber-500/30'
-                      : 'bg-slate-900/50 border-slate-800/80'
+                      ? 'border-amber-500/30'
+                      : 'border-slate-800/80'
                   }`}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-2">
@@ -120,7 +122,7 @@ export const CertificationsSection: React.FC = () => {
                       "{cert.credentialNote}"
                     </div>
                   )}
-                </div>
+                </TiltCard>
               );
             })}
           </div>

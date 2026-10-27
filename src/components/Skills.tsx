@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { SKILL_CATEGORIES, SkillCategory, ExplorationRoute } from '../data/portfolioData';
-import { Server, Shield, Network, Database, Cloud, CheckCircle2, Sparkles, BookOpen, Layers } from 'lucide-react';
+import { Server, Shield, Network, Database, Cloud, Search, Check, Sparkles } from 'lucide-react';
+import { audioFx } from '../utils/audioFx';
+import { TiltCard } from './TiltCard';
+import { ScrambleText } from './ScrambleText';
 
 interface SkillsProps {
   activeRoute: ExplorationRoute;
@@ -8,6 +11,7 @@ interface SkillsProps {
 
 export const SkillsSection: React.FC<SkillsProps> = ({ activeRoute }) => {
   const [selectedCatId, setSelectedCatId] = useState<string>('skills-app-support');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const categoryIcons: Record<string, React.ReactNode> = {
     'skills-app-support': <Server className="w-5 h-5 text-sky-400" />,
@@ -18,6 +22,17 @@ export const SkillsSection: React.FC<SkillsProps> = ({ activeRoute }) => {
   };
 
   const selectedCategory = SKILL_CATEGORIES.find((c) => c.id === selectedCatId) || SKILL_CATEGORIES[0];
+
+  // Filter skills by search query if entered
+  const displayedSkills = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return selectedCategory.skills;
+    }
+    const q = searchQuery.toLowerCase();
+    return selectedCategory.skills.filter(
+      (s) => s.name.toLowerCase().includes(q) || (s.practicalExample && s.practicalExample.toLowerCase().includes(q))
+    );
+  }, [selectedCategory, searchQuery]);
 
   return (
     <section id="skills" className="py-20 lg:py-28 bg-[#070A11]/60 relative border-t border-slate-800/80">
@@ -31,10 +46,10 @@ export const SkillsSection: React.FC<SkillsProps> = ({ activeRoute }) => {
             <span>The Toolkit</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-3">
-            Interactive Skills Explorer
+            <ScrambleText text="Interactive Technical Matrix" />
           </h2>
           <p className="text-base text-slate-300 leading-relaxed">
-            Select a domain below to inspect practical operational examples, applied systems, and honest experience levels. No arbitrary percentages or ungrounded claims.
+            Select an operational domain below to inspect practical production examples, verified toolings, and honest proficiency levels.
           </p>
         </div>
 
@@ -48,7 +63,11 @@ export const SkillsSection: React.FC<SkillsProps> = ({ activeRoute }) => {
               <button
                 key={cat.id}
                 type="button"
-                onClick={() => setSelectedCatId(cat.id)}
+                onClick={() => {
+                  audioFx.playClick(600);
+                  setSelectedCatId(cat.id);
+                  setSearchQuery('');
+                }}
                 className={`p-3.5 rounded-xl border text-left transition-all relative flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
                   isSelected
                     ? 'bg-slate-900 border-sky-400 shadow-lg shadow-sky-950/40 ring-1 ring-sky-400/50'
@@ -91,7 +110,7 @@ export const SkillsSection: React.FC<SkillsProps> = ({ activeRoute }) => {
                   {categoryIcons[selectedCategory.id]}
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-white">
-                  {selectedCategory.title}
+                  <ScrambleText text={selectedCategory.title} />
                 </h3>
               </div>
               <p className="text-xs sm:text-sm text-slate-300 mt-1 leading-relaxed">
@@ -99,18 +118,36 @@ export const SkillsSection: React.FC<SkillsProps> = ({ activeRoute }) => {
               </p>
             </div>
 
-            <div className="p-3 rounded-lg bg-slate-950/70 border border-slate-800 text-xs text-slate-400 font-mono self-start md:self-auto shrink-0 max-w-sm">
-              <span className="text-sky-400 block font-semibold mb-0.5">Practical Context:</span>
-              <span className="text-slate-300 font-sans">{selectedCategory.practicalContext}</span>
+            {/* Quick Live Search Filter Input */}
+            <div className="relative min-w-[220px]">
+              <Search className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Filter tools / examples..."
+                className="w-full pl-8 pr-3 py-1.5 text-xs bg-slate-950/80 border border-slate-800 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-400 font-mono"
+              />
             </div>
           </div>
 
+          {/* Practical Context Banner */}
+          <div className="my-4 p-3 rounded-lg bg-slate-950/70 border border-slate-800/80 text-xs text-slate-400 font-mono flex items-center justify-between">
+            <div>
+              <span className="text-sky-400 font-semibold mr-2">PRACTICAL CONTEXT:</span>
+              <span className="text-slate-300 font-sans">{selectedCategory.practicalContext}</span>
+            </div>
+            <span className="text-slate-500 text-[11px] hidden sm:inline">
+              Showing {displayedSkills.length} of {selectedCategory.skills.length}
+            </span>
+          </div>
+
           {/* Interactive Skills Grid with Practical Examples */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6">
-            {selectedCategory.skills.map((skill) => (
-              <div
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+            {displayedSkills.map((skill) => (
+              <TiltCard
                 key={skill.name}
-                className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80 hover:border-slate-700/80 transition-all flex flex-col justify-between"
+                className="p-4 bg-slate-950/60 border-slate-800/80 hover:border-slate-700/80 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3 mb-2">
@@ -140,7 +177,7 @@ export const SkillsSection: React.FC<SkillsProps> = ({ activeRoute }) => {
                     </p>
                   )}
                 </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
 

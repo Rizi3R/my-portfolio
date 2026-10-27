@@ -1,0 +1,183 @@
+================================================================================
+ARIES RAZAK — COMPLETE PORTFOLIO ARCHITECTURE, DATA & EVALUATION CONTEXT FILE
+================================================================================
+Generated: October 2026
+Purpose: Comprehensive technical and strategic brief for AI systems (ChatGPT, Claude, Gemini, etc.) 
+or human reviewers to evaluate, critique, and audit the personal portfolio website of Aries Razak.
+Live URL: https://aries-razak.vercel.app/
+Repository Framework: React 19 + TypeScript 5 + Vite 8 + Tailwind CSS 4
+
+================================================================================
+1. CANDIDATE IDENTITY & CORE POSITIONING
+================================================================================
+• Full Legal Name: Muhammad Aries Irhan bin Abd Razak
+• Preferred Display Name: Aries Razak
+• Current Role: System Application Specialist / IT Support at emart24 Malaysia (Sep 2025 – Present)
+• Location: Selangor / Kuala Lumpur, Malaysia (Sanitized for public repository safety)
+• Contact Email: ariesirhan25@gmail.com
+• Phone: Available upon request (Sanitized to prevent public web-scraping spam)
+• LinkedIn: https://www.linkedin.com/in/aries-razak-a36045256
+• Portfolio URL: https://aries-razak.vercel.app/
+
+CORE POSITIONING STATEMENT:
+"I keep business-critical technology running."
+
+PRIMARY VALUE PROPOSITION:
+Aries is a systems and application support specialist operating across users, retail applications, and IT infrastructure. He investigates root causes, translates complex user bugs into actionable technical tickets for engineering teams, coordinates with software vendors, commissions multi-site IT infrastructure, and conducts UAT testing. His technical foundation includes a Diploma in Computer Science & Mathematics (UiTM), hands-on Layer 1–4 networking, enterprise SaaS administration (Lark Super Admin), and an AWS Certified Cloud Practitioner accreditation.
+
+TARGET ROLES SOUGHT:
+1. Application Support Specialist / Systems Analyst
+2. IT Operations Executive / Service Desk Lead
+3. Business Systems / SaaS Administrator (Lark, Google Workspace, NetSuite)
+4. Junior Cloud Operations / Cloud Support Associate
+5. IT Infrastructure Support / Network Specialist
+
+================================================================================
+2. FUTURISTIC DESIGN SYSTEM & INTERACTIVE JS/CSS ARCHITECTURE
+================================================================================
+The portfolio implements a custom, high-tech engineering aesthetic ("sci-fi command bridge") with advanced CSS & JS techniques that avoid template slop:
+• CyberBackground Canvas: Interactive 60fps HTML5 canvas rendering an ambient constellation mesh that gravitationally deflects and connects to mouse coordinates with glowing cyan vectors.
+• ScrambleText Engine: Custom text cypher scrambler that rapidly shuffles through hexadecimal/katakana glyphs (`0x8F`, `01`, `#!%`) before decrypting into title prose on mount and hover.
+• TiltCard 3D Perspective: Hardware-accelerated CSS 3D transforms (`perspective(1000px)`, `rotateX`, `rotateY`) with dynamic specular spotlight sheen that follows the user's cursor.
+• Web Audio API Synthesizer (audioFx.ts): 100% client-side synthesizers generating crisp mechanical clicks, command frequencies, and verification chords (respectfully muted by default).
+• Tri-Mode Interactive Hero HUD:
+   1. Live Multi-Site Network Topology Canvas (interactive packet flow & store node clicks)
+   2. ARIES-OS Interactive Bash Terminal (accepts `profile`, `stack`, `ping`, `architecture`, `help`, etc.)
+   3. Enterprise Architecture Pipeline Matrix (interactive retail store -> switch -> VPN -> POS -> Bank acquirer flow)
+• Synchronized Military Clock: Live UTC & Malaysia Time (MYT UTC+8) synchronized in real-time.
+• Interactive Diagnostic Sandbox (Incident Simulator): 3 production tickets with live Layer 1-4 diagnostic probes and verification checks.
+• Holographic Skill Matrix with real-time text query filtering.
+
+================================================================================
+3. COMPONENT-BY-COMPONENT ARCHITECTURE
+================================================================================
+
+1. TOP NAVIGATION & PROGRESS BAR (src/components/Navbar.tsx)
+   - Fixed header with backdrop blur and dynamic scroll progress bar.
+   - Brand mark: "AR · Aries Razak".
+   - Controls: Cmd+K shortcut trigger, cybernetic audio FX toggle, and verified ATS Resume viewer.
+
+2. TACTICAL RECRUITER HUD (src/components/RouteSelector.tsx)
+   - Sticky discovery filter with 6 selectable lenses:
+     a) 'all' — View Everything (comprehensive timeline & all missions)
+     b) 'app-support' — Application Support (Xilnex POS, payment gateway, vendor triage, UAT)
+     c) 'it-ops' — IT Operations (SLA response, multi-site store support, endpoint lifecycles)
+     d) 'business-systems' — Business Systems & SaaS (Lark Super Admin, migration, NetSuite audit)
+     e) 'infrastructure' — Infrastructure & Networks (RJ45 termination, cabling, DHCP/AP, site commissioning)
+     f) 'cloud' — Cloud Foundations (AWS Cloud Practitioner, Linux, IAM, basic architecture)
+   - Selecting a route triggers a reactive visual highlight (subtle sky border glow and "Relevant to Route" badge) on relevant experience cards, case studies, and skills without hiding other content.
+
+3. HERO SECTION & INTERACTIVE TERMINAL CONSOLE (src/components/Hero.tsx)
+   - Left Column: Bold headline "I keep business-critical technology running", concise introduction, verified credentials bar (AWS Certified Cloud Practitioner, UiTM Diploma, Location), and direct CTAs.
+   - Right Column: Interactive CLI Terminal (`ARIES.EXE / PROFESSIONAL PROFILE v2.6-PROD`).
+   - Features one-click non-blocking commands:
+     - `--profile`: Displays core operational positioning statement.
+     - `--stack`: Highlights primary toolset (Xilnex POS, Lark Admin, M365, TCP/IP, Laravel, AWS).
+     - `--contact`: Displays public contact details.
+     - `--help`: Explains navigation tips.
+
+4. 4-PILLAR OPERATIONAL STRIP (src/components/OperationalStrip.tsx)
+   - Highlights 4 core technical pillars:
+     1) Business Applications (Enterprise POS, payment gateways, data validation, UAT)
+     2) IT Operations & Support (Multi-site operations, helpdesk SLAs, root cause analysis)
+     3) Systems & Infrastructure (SaaS Super Admin, LAN/Wi-Fi diagnostics, hardware commissioning)
+     4) Continuous Growth (AWS Certified, ITIL v4 in-progress, ongoing cloud learning)
+
+5. CHAPTER 01 · THE OPERATOR (src/components/About.tsx)
+   - 2-Column narrative detailing the mindset of a systems troubleshooter.
+   - 4 Progression Cards:
+     - Root-Cause Diagnostic Mindset (tracing execution logs and isolating edge cases)
+     - Multi-Site Operational Resilience (commissioning physical store infrastructure)
+     - Systems & SaaS Governance (user directory management and automated approval workflows)
+     - Software Engineering Foundation (Laravel & MySQL background gives diagnostic advantage)
+   - Operating philosophy quote signed by Aries Razak.
+
+6. CHAPTER 02 · THE JOURNEY — CAREER TIMELINE (src/components/Experience.tsx)
+   - Interactive role selector tabs allowing quick jumping between positions:
+     1) System Application Specialist / IT Support — emart24 Malaysia (Sep 2025 – Present)
+        • Retail application support, Xilnex POS triage, payment terminal connectivity, vendor escalation, new outlet IT commissioning, and UAT validation.
+     2) IT Executive — Palaterium Sdn Bhd (Apr 2024 – Aug 2025)
+        • Lark Super Admin, Google Workspace-to-Lark company-wide migration, employee onboarding/offboarding access policies, NetSuite data validation via Excel, and remote user support.
+     3) IT Technician — Managed Print Services (Oct 2023 – Mar 2024)
+        • Commercial printer/scanner hardware repair, print-server configuration, static IP & DHCP troubleshooting, Windows driver resolution, and Freshdesk SLA ticketing.
+     4) IT Intern (Full-Stack Developer) — Attorney General’s Chambers of Malaysia (Sep 2021 – Feb 2022)
+        • Requirements gathering (SRS), Entity Relationship Diagrams (ERD), relational database schema in MySQL, and MVC application development in PHP Laravel for the DKICT declaration system.
+
+INTERACTIVE FEATURE: THE DIAGNOSTIC SANDBOX / INCIDENT SIMULATOR (src/components/IncidentSimulator.tsx)
+   - Gamified production incident triage simulator allowing hiring managers to solve 3 real historical tickets:
+     1) INC-2041: POS Payment Gateway Host Timeout during Peak Hours (emart24)
+     2) INC-1182: Multi-Site Store Launch — Switch Port Inactive & CCTV Link Fault (emart24)
+     3) INC-0947: SaaS Migration — Departmental Approval Workflow Desync (Palaterium)
+   - Diagnostic probes include: Ping & Traceroute, 8-Wire RJ45 Pin Continuity Tester, Lark Super Admin Directory Audit.
+   - Real-time diagnostic telemetry console with interactive resolution action selection and verified operational takeaways.
+
+7. CHAPTER 03 · THE PROBLEM SOLVER — TECHNICAL MISSIONS (src/components/Projects.tsx)
+   - 5 in-depth case studies formatted like engineering incident debriefs:
+     • MISSION 01: Multi-Site Retail POS Application Triage & Incident Resolution
+     • MISSION 02: IT Infrastructure Setup & Multi-Site Deployment Readiness
+     • MISSION 03: SaaS Platform Migration, Administration & Workflow Automation
+     • MISSION 04: Web Application Development & Database Design (DKICT Declaration System)
+     • MISSION 05: Layer 1–4 Network & Endpoint Hardware Diagnostics
+   - Each mission breaks down into:
+     - Executive Hook & Context
+     - The Challenge (Operational obstacle)
+     - The Investigation (Diagnostic methodology: cable testers, ping, Wi-Fi checks, error logs)
+     - The Approach (Systematic steps executed)
+     - The Outcome (Concrete operational business impact)
+     - What I Learned (Transferable engineering insight)
+   - Interactive "Inspect Full Mission Debrief" modal for deep reading.
+
+8. CHAPTER 04 · THE TOOLKIT — SKILLS EXPLORER (src/components/Skills.tsx)
+   - Domain-organized technical inventory across 5 categories:
+     1) Application & Systems Support (Xilnex POS, Payment Gateways, UAT, Vendor Triage)
+     2) IT Operations & Service Management (Incident Resolution, Asset Lifecycle, Freshdesk, SOPs)
+     3) SaaS Administration & Productivity (Lark Super Admin, Google Workspace, M365, Automation)
+     4) Infrastructure & Networking (TCP/IP, RJ45 Termination, DHCP/DNS, Hardware Commissioning)
+     5) Development & Cloud Foundations (AWS Cloud Practitioner, MySQL/SQL, Laravel/PHP, Git)
+   - Every skill features an honest experience badge ("Professional Experience", "Working Knowledge", etc.) and a concrete practical production example.
+
+9. CHAPTER 05 · THE BUILDER — DELIVERABLES SHOWCASE (src/components/ProjectShowcase.tsx)
+   - Showcases 6 tangible technical artifacts:
+     1) DKICT Security Declaration Portal (Laravel + MySQL)
+     2) Enterprise Lark Super Admin Migration & Automation (SaaS Governance)
+     3) Retail POS Incident Triage & Vendor Escalation Playbook (Operational Runbook)
+     4) Multi-Site IT Commissioning & Physical Infrastructure Runbook (Checklists & Testing)
+     5) AWS Cloud Foundations & Architectural Studies (AWS Certified)
+     6) Interactive Portfolio & Developer Console (React 19, TypeScript, Tailwind)
+
+10. ACCREDITATIONS & EDUCATION (src/components/Certifications.tsx & LearningJourney.tsx)
+    - AWS Certified Cloud Practitioner (Certified, Validation: CLF-C02)
+    - Diploma in Computer Science and Mathematics — Universiti Teknologi MARA (UiTM)
+    - ITIL v4 Foundation (In Progress — Service Value System, Incident & Problem Management)
+    - Forward-looking learning roadmap: CompTIA Security+, Linux Administration, and Cloud Support.
+
+11. CHAPTER 06 · THE NEXT MISSION — CONTACT (src/components/Contact.tsx)
+    - Headline: "Have a technical challenge worth solving?"
+    - Direct email copy button with instant toast notification.
+    - Role-based quick mail composer buttons (pre-fills subject lines for Application Support, IT Operations, or Systems Admin inquiries).
+    - Verified LinkedIn profile link.
+
+12. VERIFIED ATS-OPTIMIZED TECHNICAL RESUME MODAL (src/components/ResumeModal.tsx)
+    - Modal dialog displaying complete resume formatted for readability and ATS parsers.
+    - Displays "Aries Razak" prominently with formal legal name clearly noted for background checks.
+    - Native browser print styling (`@media print`) enables instant 1–2 page PDF generation via "Print / Save PDF" button.
+
+================================================================================
+4. VERIFIED FACTUAL CONSTRAINTS (DO NOT INVENT)
+================================================================================
+When analyzing or generating suggestions for Aries Razak's profile, adhere to these verified facts:
+• DO NOT claim Aries is a Senior Cloud Architect, DevOps Lead, or Software Engineer.
+• DO NOT invent certifications that he does not hold (he holds AWS Certified Cloud Practitioner; ITIL v4 is currently in progress).
+• DO NOT fabricate fictional company metrics (e.g., "saved $2M" or "managed 500 servers").
+• DO accurately reflect his real strengths: systematic root-cause troubleshooting, bridging software developers with operational users, multi-site retail POS deployment, physical cabling & networking grit, SaaS administration, and disciplined documentation.
+
+================================================================================
+5. PROMPTS TO ASK AN EVALUATING AI
+================================================================================
+You can feed this file into another AI along with questions such as:
+1. "Evaluate how effectively this portfolio positions Aries Razak for mid-level Application Support and IT Operations roles. Where are the strongest selling points, and what gaps should he address in interviews?"
+2. "Analyze the 5 case study missions. How credible and compelling are the diagnostic methodologies described from a technical hiring manager's perspective?"
+3. "Review the visual hierarchy, route selector, and storytelling structure of this portfolio. How does it compare to typical developer or IT support portfolios?"
+4. "Provide 10 technical interview questions a hiring manager would likely ask Aries based on the technologies and experiences listed in this document, along with recommended answers."
+5. "Draft an ATS-optimized LinkedIn summary and elevator pitch that aligns with this portfolio's positioning."
+================================================================================
