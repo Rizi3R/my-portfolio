@@ -1,27 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { 
   Search, 
   Command, 
   X, 
   ArrowRight, 
   FileText, 
-  Layers, 
-  Briefcase, 
-  Cpu, 
-  Terminal, 
+  Compass,
+  Network,
+  Receipt,
   Mail, 
   Volume2, 
   VolumeX, 
   Check, 
   ExternalLink 
 } from 'lucide-react';
-import { ExplorationRoute, PERSONAL_INFO } from '../data/portfolioData';
+import { PROFILE, STRATA, NODES } from '../data/universeContent';
 import { audioFx } from '../utils/audioFx';
 
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectRoute: (route: ExplorationRoute) => void;
+  onSelectView: (view: 'trace' | 'atlas' | 'plain') => void;
+  onSelectNode: (nodeId: string) => void;
+  onJumpToStratum: (stratumId: any) => void;
   onOpenResume: () => void;
   isAudioMuted: boolean;
   onToggleAudio: () => void;
@@ -29,8 +30,9 @@ interface CommandPaletteProps {
 
 interface PaletteAction {
   id: string;
-  category: 'Navigation' | 'Recruiter Routes' | 'Actions' | 'Tools';
+  category: 'Perspectives' | 'Strata Navigation' | 'Topology Nodes' | 'Actions';
   label: string;
+  sublabel?: string;
   shortcut?: string;
   icon: React.ReactNode;
   perform: () => void;
@@ -39,7 +41,9 @@ interface PaletteAction {
 export const CommandPalette: React.FC<CommandPaletteProps> = ({
   isOpen,
   onClose,
-  onSelectRoute,
+  onSelectView,
+  onSelectNode,
+  onJumpToStratum,
   onOpenResume,
   isAudioMuted,
   onToggleAudio
@@ -60,313 +64,264 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     }
   }, [isOpen]);
 
-  const scrollTo = (id: string) => {
-    onClose();
-    const el = document.querySelector(id);
-    if (el) {
-      const navHeight = 76;
-      const elPosition = el.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({
-        top: elPosition - navHeight,
-        behavior: 'smooth'
-      });
+  const copyEmail = async () => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(PROFILE.email);
+      } else {
+        const textArea = document.createElement('textarea');
+        textArea.value = PROFILE.email;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-9999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+      setCopiedEmail(true);
+      audioFx.playSuccess();
+      setTimeout(() => {
+        setCopiedEmail(false);
+        onClose();
+      }, 1500);
+    } catch {
+      onClose();
     }
   };
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(PERSONAL_INFO.email);
-    setCopiedEmail(true);
-    audioFx.playSuccess();
-    setTimeout(() => {
-      setCopiedEmail(false);
-      onClose();
-    }, 1000);
-  };
-
-  const actions: PaletteAction[] = [
+  // Base navigation actions
+  const baseActions: PaletteAction[] = [
     {
-      id: 'nav-hero',
-      category: 'Navigation',
-      label: 'Home & Systems Topology HUD',
-      shortcut: 'H',
-      icon: <Terminal className="w-4 h-4 text-sky-400" />,
-      perform: () => scrollTo('#top')
-    },
-    {
-      id: 'nav-lab',
-      category: 'Navigation',
-      label: 'Space 01 · The Lab (Interactive Computing Experiments)',
-      shortcut: 'L',
-      icon: <Cpu className="w-4 h-4 text-sky-400" />,
-      perform: () => scrollTo('#lab')
-    },
-    {
-      id: 'nav-systems',
-      category: 'Navigation',
-      label: 'Space 02 · Systems Architecture (Retail POS & SaaS Pipelines)',
-      shortcut: 'S',
-      icon: <Layers className="w-4 h-4 text-sky-400" />,
-      perform: () => scrollTo('#systems')
-    },
-    {
-      id: 'nav-origin',
-      category: 'Navigation',
-      label: 'The Origin · Grounding & Curiosity (Mindset)',
-      shortcut: 'O',
-      icon: <Layers className="w-4 h-4 text-slate-400" />,
-      perform: () => scrollTo('#about')
-    },
-    {
-      id: 'nav-exp',
-      category: 'Navigation',
-      label: 'Space 03 · Field Notes (Career Progression & Timeline)',
-      shortcut: 'E',
-      icon: <Briefcase className="w-4 h-4 text-sky-400" />,
-      perform: () => scrollTo('#experience')
-    },
-    {
-      id: 'nav-investigations',
-      category: 'Navigation',
-      label: 'Forensic Investigation Bay & Diagnostic Triage',
-      shortcut: 'I',
-      icon: <Terminal className="w-4 h-4 text-amber-400" />,
-      perform: () => scrollTo('#investigations')
-    },
-    {
-      id: 'nav-projects',
-      category: 'Navigation',
-      label: 'Space 04 · Technical Case Studies & Debriefs',
-      shortcut: 'C',
-      icon: <Terminal className="w-4 h-4 text-sky-400" />,
-      perform: () => scrollTo('#projects')
-    },
-    {
-      id: 'nav-skills',
-      category: 'Navigation',
-      label: 'Space 05 · The Toolkit (Daily Drivers & Capabilities)',
-      shortcut: 'T',
-      icon: <Cpu className="w-4 h-4 text-emerald-400" />,
-      perform: () => scrollTo('#skills')
-    },
-    {
-      id: 'nav-frontier',
-      category: 'Navigation',
-      label: 'Space 06 · The Frontier (Active Learning Horizons)',
-      shortcut: 'F',
-      icon: <Terminal className="w-4 h-4 text-indigo-400" />,
-      perform: () => scrollTo('#frontier')
-    },
-    {
-      id: 'nav-contact',
-      category: 'Navigation',
-      label: 'Space 07 · Dispatch & Professional Inquiry',
-      shortcut: 'D',
-      icon: <Mail className="w-4 h-4 text-sky-400" />,
-      perform: () => scrollTo('#contact')
-    },
-    // Routes
-    {
-      id: 'route-app-support',
-      category: 'Recruiter Routes',
-      label: 'Filter Route: Application Support (POS, Triage, UAT)',
-      icon: <ArrowRight className="w-4 h-4 text-sky-400" />,
+      id: 'view-trace',
+      category: 'Perspectives',
+      label: 'Switch to Trace Journey (Beep to Receipt)',
+      sublabel: 'Continuous 6-strata vertical progression',
+      shortcut: '1',
+      icon: <Compass className="w-4 h-4 text-cyan-400" />,
       perform: () => {
-        onSelectRoute('app-support');
+        onSelectView('trace');
         onClose();
-        scrollTo('#experience');
       }
     },
     {
-      id: 'route-it-ops',
-      category: 'Recruiter Routes',
-      label: 'Filter Route: IT Operations & Multi-Site Support',
-      icon: <ArrowRight className="w-4 h-4 text-sky-400" />,
+      id: 'view-atlas',
+      category: 'Perspectives',
+      label: 'Switch to Atlas Knowledge Graph',
+      sublabel: 'Deterministic 30-node topology with filters',
+      shortcut: '2',
+      icon: <Network className="w-4 h-4 text-sky-400" />,
       perform: () => {
-        onSelectRoute('it-ops');
+        onSelectView('atlas');
         onClose();
-        scrollTo('#experience');
       }
     },
     {
-      id: 'route-biz',
-      category: 'Recruiter Routes',
-      label: 'Filter Route: Business Systems & SaaS Administration',
-      icon: <ArrowRight className="w-4 h-4 text-sky-400" />,
+      id: 'view-plain',
+      category: 'Perspectives',
+      label: 'Switch to Plain Semantic Reader Specification',
+      sublabel: 'Light paper document for crawlers and print',
+      shortcut: '3',
+      icon: <FileText className="w-4 h-4 text-amber-400" />,
       perform: () => {
-        onSelectRoute('business-systems');
+        onSelectView('plain');
         onClose();
-        scrollTo('#experience');
       }
     },
     {
-      id: 'route-infra',
-      category: 'Recruiter Routes',
-      label: 'Filter Route: Infrastructure & Layer 1–4 Networking',
-      icon: <ArrowRight className="w-4 h-4 text-sky-400" />,
-      perform: () => {
-        onSelectRoute('infrastructure');
-        onClose();
-        scrollTo('#experience');
-      }
-    },
-    {
-      id: 'route-cloud',
-      category: 'Recruiter Routes',
-      label: 'Filter Route: Cloud Foundations (AWS Certified)',
-      icon: <ArrowRight className="w-4 h-4 text-sky-400" />,
-      perform: () => {
-        onSelectRoute('cloud');
-        onClose();
-        scrollTo('#experience');
-      }
-    },
-    // Actions
-    {
-      id: 'action-resume',
-      category: 'Actions',
-      label: 'Open Verified ATS Resume (Printable / PDF)',
+      id: 'jump-receipt',
+      category: 'Perspectives',
+      label: 'The Thermal Receipt (Dossier & Print Resume)',
+      sublabel: 'Verified work chronology, credentials, contact',
       shortcut: 'R',
-      icon: <FileText className="w-4 h-4 text-sky-400" />,
+      icon: <Receipt className="w-4 h-4 text-emerald-400" />,
       perform: () => {
         onClose();
-        onOpenResume();
+        setTimeout(() => {
+          const el = document.getElementById('receipt');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
       }
     },
+    // Strata Navigation
+    ...STRATA.map((st, i) => ({
+      id: `stratum-${st.id}`,
+      category: 'Strata Navigation' as const,
+      label: `Stratum 0${i + 1}: ${st.title}`,
+      sublabel: st.tagline,
+      icon: <span className="text-xs font-mono font-bold text-cyan-400">0{i + 1}</span>,
+      perform: () => {
+        onJumpToStratum(st.id);
+        onClose();
+      }
+    })),
+    // Actions & Tools
     {
-      id: 'action-email',
+      id: 'act-copy-email',
       category: 'Actions',
-      label: copiedEmail ? 'Copied to Clipboard!' : `Copy Email (${PERSONAL_INFO.email})`,
+      label: copiedEmail ? 'Email Copied!' : `Copy Email (${PROFILE.email})`,
+      sublabel: 'Clipboard action with iframe fallback',
       shortcut: 'C',
-      icon: copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Mail className="w-4 h-4 text-slate-300" />,
+      icon: copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Mail className="w-4 h-4 text-cyan-400" />,
       perform: copyEmail
     },
     {
-      id: 'action-audio',
+      id: 'act-toggle-audio',
       category: 'Actions',
-      label: isAudioMuted ? 'Enable Cybernetic Audio FX' : 'Mute Cybernetic Audio FX',
+      label: isAudioMuted ? 'Enable Audio Synthesizer Cues' : 'Mute Audio Cues',
+      sublabel: 'Interactive click and navigation tones',
       shortcut: 'M',
-      icon: isAudioMuted ? <VolumeX className="w-4 h-4 text-slate-400" /> : <Volume2 className="w-4 h-4 text-sky-400" />,
+      icon: isAudioMuted ? <VolumeX className="w-4 h-4 text-stone-500" /> : <Volume2 className="w-4 h-4 text-cyan-400" />,
       perform: () => {
         onToggleAudio();
+      }
+    },
+    {
+      id: 'act-linkedin',
+      category: 'Actions',
+      label: 'Open LinkedIn Profile',
+      sublabel: 'Verified external profile',
+      icon: <ExternalLink className="w-4 h-4 text-stone-400" />,
+      perform: () => {
+        window.open(PROFILE.linkedIn, '_blank', 'noopener,noreferrer');
         onClose();
       }
     }
   ];
 
-  const filtered = actions.filter((act) =>
-    act.label.toLowerCase().includes(query.toLowerCase()) ||
-    act.category.toLowerCase().includes(query.toLowerCase())
-  );
+  // Dynamic search across all 30 topology nodes
+  const nodeActions: PaletteAction[] = NODES.map(node => ({
+    id: `node-${node.id}`,
+    category: 'Topology Nodes',
+    label: `${node.label} [${node.status.toUpperCase()}]`,
+    sublabel: `${node.stratum.toUpperCase()} · ${node.summary}`,
+    icon: <span className="text-xs font-mono text-cyan-400">◆</span>,
+    perform: () => {
+      onSelectNode(node.id);
+      onClose();
+    }
+  }));
+
+  const allActions = useMemo(() => [...baseActions, ...nodeActions], [copiedEmail, isAudioMuted]);
+
+  const filteredActions = useMemo(() => {
+    if (!query.trim()) return baseActions;
+    const q = query.toLowerCase();
+    return allActions.filter(act => 
+      act.label.toLowerCase().includes(q) || 
+      (act.sublabel && act.sublabel.toLowerCase().includes(q))
+    );
+  }, [query, allActions, baseActions]);
+
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, [filteredActions]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      onClose();
-    } else if (e.key === 'ArrowDown') {
+    if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedIndex((prev) => (prev + 1) % (filtered.length || 1));
-      audioFx.playClick(600);
+      setSelectedIndex(prev => (prev + 1) % Math.max(1, filteredActions.length));
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setSelectedIndex((prev) => (prev - 1 + filtered.length) % (filtered.length || 1));
-      audioFx.playClick(600);
-    } else if (e.key === 'Enter' && filtered[selectedIndex]) {
+      setSelectedIndex(prev => (prev - 1 + filteredActions.length) % Math.max(1, filteredActions.length));
+    } else if (e.key === 'Enter') {
       e.preventDefault();
-      filtered[selectedIndex].perform();
-      audioFx.playCommand();
+      if (filteredActions[selectedIndex]) {
+        filteredActions[selectedIndex].perform();
+      }
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      onClose();
     }
   };
 
   if (!isOpen) return null;
 
   return (
-    <div
+    <div 
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-sm"
+      onClick={onClose}
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-150"
-      onClick={onClose}
+      aria-label="Command search palette"
     >
-      <div
-        className="bg-[#090E1D] border border-slate-700/80 rounded-xl max-w-2xl w-full shadow-2xl overflow-hidden font-sans"
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={handleKeyDown}
+      <div 
+        className="w-full max-w-xl bg-stone-950 border border-stone-800 shadow-2xl overflow-hidden font-mono text-xs"
+        onClick={e => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="relative border-b border-slate-800 p-4 flex items-center gap-3 bg-slate-900/90">
-          <Search className="w-5 h-5 text-sky-400 shrink-0" />
+        <div className="flex items-center px-4 border-b border-stone-800 bg-stone-900/50">
+          <Search className="w-4 h-4 text-stone-500 mr-3 shrink-0" />
           <input
             ref={inputRef}
             type="text"
             value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setSelectedIndex(0);
-            }}
-            placeholder="Type a command, chapter, or route (e.g. 'simulator', 'POS', 'resume')..."
-            className="w-full bg-transparent text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none"
+            onChange={e => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Type a command, stratum, or node name..."
+            className="w-full py-3.5 bg-transparent text-stone-100 placeholder-stone-500 focus:outline-none"
+            aria-label="Search commands or nodes"
           />
-          <button
-            type="button"
-            onClick={onClose}
-            className="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800"
-          >
-            <X className="w-4 h-4" />
-          </button>
+          {query && (
+            <button 
+              onClick={() => setQuery('')}
+              className="text-stone-500 hover:text-stone-300 p-1"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
 
         {/* Results List */}
-        <div className="max-h-[380px] overflow-y-auto p-2 divide-y divide-slate-800/40">
-          {filtered.length === 0 ? (
-            <div className="p-8 text-center text-sm text-slate-500 font-mono">
-              No matching commands or routes found for "{query}".
+        <div className="max-h-80 overflow-y-auto divide-y divide-stone-900">
+          {filteredActions.length === 0 ? (
+            <div className="p-8 text-center text-stone-500">
+              No matching commands or nodes found for "{query}".
             </div>
           ) : (
-            filtered.map((action, idx) => {
-              const isSelected = selectedIndex === idx;
+            filteredActions.map((action, idx) => {
+              const isSelected = idx === selectedIndex;
               return (
                 <div
                   key={action.id}
-                  onClick={() => {
-                    action.perform();
-                    audioFx.playCommand();
-                  }}
+                  onClick={() => action.perform()}
                   onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-lg cursor-pointer transition-colors ${
-                    isSelected
-                      ? 'bg-sky-500/20 text-white border border-sky-500/40'
-                      : 'text-slate-300 hover:bg-slate-800/60 border border-transparent'
+                  className={`p-3 flex items-center justify-between cursor-pointer transition-colors ${
+                    isSelected 
+                      ? 'bg-stone-900 text-stone-100 border-l-2 border-cyan-400' 
+                      : 'text-stone-400 hover:text-stone-200'
                   }`}
+                  role="option"
+                  aria-selected={isSelected}
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="p-1 rounded bg-slate-800/80 shrink-0">
-                      {action.icon}
-                    </span>
-                    <span className="text-xs sm:text-sm font-medium">{action.label}</span>
+                  <div className="flex items-center gap-3 overflow-hidden">
+                    <span className="shrink-0">{action.icon}</span>
+                    <div className="truncate">
+                      <div className="font-bold text-stone-200 truncate">{action.label}</div>
+                      {action.sublabel && (
+                        <div className="text-[10px] text-stone-500 truncate">{action.sublabel}</div>
+                      )}
+                    </div>
                   </div>
-
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 hidden sm:inline">
-                      {action.category}
+                  {action.shortcut && (
+                    <span className="shrink-0 ml-2 px-1.5 py-0.5 bg-stone-900 border border-stone-800 text-[10px] text-stone-400">
+                      {action.shortcut}
                     </span>
-                    {action.shortcut && (
-                      <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-slate-800 text-slate-400 rounded border border-slate-700">
-                        {action.shortcut}
-                      </kbd>
-                    )}
-                  </div>
+                  )}
                 </div>
               );
             })
           )}
         </div>
 
-        {/* Command Palette Footer */}
-        <div className="bg-slate-950 px-4 py-2.5 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-500">
+        {/* Footer Hint Bar */}
+        <div className="px-4 py-2 border-t border-stone-800 bg-stone-900/30 flex items-center justify-between text-[10px] text-stone-500">
           <div className="flex items-center gap-3">
-            <span>Use <kbd className="px-1 py-0.5 bg-slate-900 border border-slate-800 rounded text-slate-400">↑</kbd> <kbd className="px-1 py-0.5 bg-slate-900 border border-slate-800 rounded text-slate-400">↓</kbd> to navigate</span>
-            <span>·</span>
-            <span><kbd className="px-1 py-0.5 bg-slate-900 border border-slate-800 rounded text-slate-400">Enter</kbd> to select</span>
+            <span>↑↓ Navigate</span>
+            <span>↵ Select</span>
+            <span>Esc Close</span>
           </div>
-          <span className="text-sky-400 font-semibold">ARIES.EXE HUD</span>
+          <span className="text-cyan-400/80">30 Nodes · 6 Strata</span>
         </div>
       </div>
     </div>

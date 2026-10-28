@@ -1,0 +1,245 @@
+# MISSION
+
+You are a coordinated senior team (creative director, creative technologist, frontend architect, interaction designer, accessibility engineer, performance engineer, security reviewer, technical-content editor) working directly inside my existing project. Upgrade my personal portfolio, live at https://aries-razak.vercel.app/, into a distinctive, fully functional, accessible, fast "personal technology universe" by modifying the actual project files.
+
+Improve the existing project; do not rebuild from scratch. If the audit proves a rewrite of some part is necessary, justify it in writing before doing it.
+
+Do not stop at planning, mockups or recommendations. Notes are intermediate artifacts; the deliverable is a working modified codebase plus an honest report. This single prompt covers the whole job: audit, concept, implementation, testing, a critical self-review with fixes, a copy-truth audit and a final report. Complete it in order.
+
+Conflict-resolution priority: (1) correctness and truthful representation, (2) user experience and accessibility, (3) originality, (4) technical reliability, (5) performance and security, (6) maintainability, (7) visual polish. Independently of that order, never expose secrets and never publish confidential employer information (section 11).
+
+# 1. NON-NEGOTIABLE RULES
+
+1. Truth. Never invent employment details, dates, achievements, metrics, certifications, projects, skills or expertise. The existing site content and files in the repo are the source of truth. If something is missing, leave it out and list it under "Owner questions" in the final report. Do not guess and do not ask me mid-task unless you are completely blocked; collect questions for the end.
+2. No fake functionality. No buttons that do nothing. No interfaces implying a live connection that does not exist. Never claim the site monitors devices, scans networks, performs security analysis or runs AI models unless that is genuinely implemented. Every simulation carries a persistent "SIMULATION" label and a short "Models / Does not model" note. Illustrative data is labeled "Illustrative".
+3. Honest verification. Do not say a test, build, audit or check passed unless you actually ran it. If you cannot run something in your environment, write "Not run" with the reason and give me the exact command to run locally.
+4. No hidden scope. Do not add a backend, database, auth, analytics, third-party trackers, paid services or API keys. If the project template wires a Gemini or other API key, do not expose it, extend it or add new key usage.
+5. No overclaiming identity. Do not describe me as a security specialist, cloud engineer, AI engineer or senior software engineer. Use the titles already on the site. My exploration of those areas is shown through evidence statuses (section 5), not through titles.
+6. Preserve what works. Keep working features, routes, URLs, content and deployment configuration unless you document why a change is needed.
+7. Do not respond to any weakness by simply adding more animation or visual effects. Every addition must earn its place; prefer clearer hierarchy, better interaction design, better copy and cleaner engineering.
+
+# 2. CONTEXT
+
+Owner: Aries Razak (confirm the display name from the existing site).
+Stack and workflow: Google AI Studio, GitHub, Vercel. The actual framework, dependencies, routing, styling and build setup are UNKNOWN to this prompt. Inspect the repo and report; do not assume. If git is available, work on a new branch (for example portfolio-upgrade), not main, and commit after each stage.
+
+What was observed from the live page's HTML head only (not from source):
+- title: "Aries Razak | Systems Support & Technology Explorer"
+- description: personal technology universe; Systems Support Specialist and computing explorer; hands-on retail POS, SaaS administration, Layer 1-4 networking, interactive computing lab, active learning frontiers
+- OG description mentions interactive packet routing simulations, a cache eviction workbench and learning frontiers
+- theme-color #090D16; viewport and canonical set; referrer policy strict-origin-when-cross-origin
+- The initial HTML contained no body content, suggesting client-side rendering. Verify, and if true, address crawler/no-JS content (section 6.6).
+I describe the existing design as dark, futuristic, chapter-based, with interactive elements and a strong professional-experience emphasis. Verify against the source.
+
+Professional background (an outline only; the site's existing content is the source of truth for exact titles, dates and responsibilities; if the two conflict, keep the site's content and flag the discrepancy):
+- System Application Specialist, emart24 Malaysia (current)
+- IT Executive, Palaterium Sdn Bhd
+- IT Technician, managed print services company
+- IT Intern (full-stack development), Attorney General's Chambers of Malaysia
+- AWS Certified Cloud Practitioner
+Experience areas: application support, POS systems, troubleshooting, vendor coordination, store technology setups, business systems, SaaS administration, data management, networking fundamentals, hardware troubleshooting, web development exposure.
+
+Audience: recruiters and hiring managers (need experience and contact quickly) and technically curious people (need something worth exploring).
+
+# 3. PROCESS (follow in order; do not skip stages)
+
+Keep docs/PROGRESS.md updated after every stage: what is done, what is in progress, what remains, and decisions made. If you are running out of room or time, stop at a clean point, make sure the code builds, update docs/PROGRESS.md, and tell me exactly what to paste to continue. Prefer a complete, polished core over many unfinished features.
+
+Stage 1 - Inspect the repository. List framework, build tool, language, styling approach, routing, state management, animation libraries, dependencies with versions, content/data files, existing components, vercel.json or Vercel settings, scripts, tests, lint config. Write findings to docs/AUDIT.md. Flag anything you could not determine.
+
+Stage 2 - Audit the current site (source plus rendered behavior if you can run it). Identify strongest and weakest elements; which interactions are genuinely useful vs decoration; which are generic; mobile and accessibility defects; bundle size and Core Web Vitals baseline if measurable (record numbers, or "not measurable"). Add to docs/AUDIT.md.
+
+Stage 3 - Explore directions. Write three fundamentally different concepts in about 100 words each. One must be the "Beep to Receipt" concept in section 4. The other two must be your own and must not rely on neon, 3D or particles as their identity.
+
+Stage 4 - Select and justify. Adopt "Beep to Receipt" unless you can justify in 150 words or fewer a stronger concept that satisfies every rule in section 1. Record the decision in docs/DESIGN_DECISIONS.md.
+
+Stage 5 - Define the design system and information architecture (sections 5 and 7). Implement tokens before components.
+
+Stage 6 - Define the technical architecture: component tree, data flow, content model, folder structure, lazy-loading boundaries, fallback strategy. Reuse existing structure where it is sound. Document in docs/ARCHITECTURE.md.
+
+Stage 7 - Implement the core: content model migration, layout shell, Plain view, Trace skeleton with all six strata and static fallbacks, Receipt, navigation, view switching, SEO fundamentals. This stage must be independently shippable.
+
+Stage 8 - Implement the signature features: animated Trace line, stratum visuals, Atlas, Lab integration (section 6).
+
+Stage 9 - Adapt across devices (section 8). Do not just shrink desktop layouts.
+
+Stage 10 - Test functionality, accessibility, security and performance (section 13). Record results in docs/TEST_REPORT.md.
+
+Stage 11 - Critical self-review. Act as a skeptical external reviewer who did not build this. For each category, list specific findings with file paths, component names or viewport widths (no vague statements), in docs/REVIEW.md:
+- Generic patterns: remove my name and logo; could this be confused with another portfolio? What is distinctive and what is not?
+- Unnecessary complexity: components, dependencies, effects or abstractions that do not earn their cost.
+- Low-value interactions: anything a visitor would not miss if deleted.
+- Performance bottlenecks: numbers or "Not measured".
+- Mobile problems at 360, 390, 430 and 768px.
+- Accessibility weaknesses: keyboard traps, missing names, contrast, motion, canvas content unavailable to assistive technology.
+- Unsupported claims and simulation honesty: anything not traceable to a source; anything implying live data, real scanning or real AI.
+- Broken or incomplete functionality: dead controls, unhandled errors, unreachable states.
+- Design-system inconsistencies: bypassed tokens, one-off colors or spacings, inconsistent states.
+- Confidentiality: anything that could reveal internal employer details.
+Rank findings by impact (truthfulness, usability and accessibility, distinctiveness, performance) divided by effort. List the top ten.
+
+Stage 12 - Fix. Implement the top review fixes plus every failure from Stage 10, highest impact first. Rules: you must remove or simplify at least one feature, effect or dependency that fails the value test and explain what you cut; any new visual element must replace something, not add to it. Re-run every available check afterwards and update docs/TEST_REPORT.md.
+
+Stage 13 - Copy-truth audit and final report. Create docs/COPY_AUDIT.md: a table of every sentence of visitor-facing copy (text, where it appears, source: existing site content / my brief / written by you, evidence status). Flag every sentence you wrote yourself so I can approve or delete it. Then produce the final report (section 15).
+
+# 4. CREATIVE CONCEPT: "BEEP TO RECEIPT"
+
+One barcode scan at a till touches hardware, operating system, network, application, cloud/automation and people/process. The site follows that single transaction down through those layers. The journey ends at a printed receipt, which is my experience and contact section.
+
+Entry: a short premise line, for example "One scan. Six layers. Here is what happens between the beep and the receipt." No loading screen and no intro that delays content.
+
+Six strata, each with: a title, a one-line description of what happens to the scan at this layer, a distinct visualization, 2-4 annotations linking to Atlas nodes, and evidence badges.
+1. Hardware and peripherals - scanner, terminal, receipt printer, cabling. Visual: SVG schematic line drawing.
+2. Operating system and device - drivers, processes, filesystem. Visual: process tree or file tree.
+3. Network - LAN, router, WAN, Layers 1-4. Visual: node graph hosting the packet routing simulation.
+4. Application - POS software, SaaS administration, data. Visual: structured record and log view.
+5. Cloud and automation - SaaS, cloud foundations, scripting, RPA, integrations. Visual: flow diagram. Show only what the content supports, with honest statuses.
+6. People and process - vendor coordination, support, deployments, handoffs. Visual: handoff or ticket-lifecycle diagram.
+Security, AI-assisted development and similar topics are cross-cutting themes shown as nodes (and later as highlight lenses), not as strata.
+
+Signature element: one continuous SVG trace line running through the strata and changing representation at each one. Its position encodes scroll progress. Under reduced motion or without scroll-driven support it is fully drawn and static.
+
+Views: Trace (default), Atlas, Plain. A compact persistent header shows the name, the view switch, and "Experience" and "Contact" links that jump to the Receipt. A recruiter must reach experience and contact within one interaction, without needing any animation to complete.
+
+# 5. CONTENT MODEL AND PROVENANCE
+
+Create one typed content source (adapt to the existing structure) from which Trace annotations, Atlas, Plain view, Receipt and structured data are all generated. No content is duplicated across views.
+
+Node: id, label, stratum (hardware | os | network | application | cloud-automation | people-process), kind (technology | concept | project | role | certification), status (professional | project | experiment | foundation | learning | exploring), summary (max 200 characters, factual, first person), evidenceRef (REQUIRED when status is professional or project: id of an experience entry, a project entry or a URL), links (optional).
+Edge: from, to, reason (REQUIRED, max 120 characters, states the real relationship).
+Experience entry: id, title, organization, start, end, bullets. Migrate verbatim from the existing site. Do not embellish.
+
+Evidence statuses (always shown with text plus a shape or fill pattern, never color alone):
+- professional: used in paid work I can substantiate
+- project: completed personal project
+- experiment: working demonstration or simulation I built
+- foundation: studied or certified, not yet applied professionally
+- learning: currently studying
+- exploring: on my list
+
+Derive nodes only from existing site content and the background above. If a topic (for example Linux, DNS, RPA/UiPath, defensive security) has no support in existing content, do not assign it a status; list it under "Owner questions". Do not add nodes to reach a number; 30-60 is a ceiling, not a target.
+
+Add scripts/validate-content.mjs, runnable as `npm run validate:content`, that fails on: missing status, professional or project node without evidenceRef, edge without reason, duplicate ids, dangling edges, over-length text. Wire it into the build only if that cannot break the Vercel deployment; otherwise document it.
+
+# 6. FEATURES, BEHAVIOR AND ACCEPTANCE CRITERIA
+
+6.1 Trace
+- Native scrolling only. No scroll-jacking, no scroll snapping that traps users.
+- A rail (desktop) or top progress bar with the current stratum label (mobile) shows depth; items are links that jump to strata.
+- Each stratum has a shareable URL (route or hash) and Back works correctly.
+- Scroll-linked line drawing uses CSS scroll-driven animations when `CSS.supports('animation-timeline: scroll()')`; otherwise IntersectionObserver.
+- Every stratum visualization has a static, fully rendered fallback state.
+- Acceptance: all six strata readable with animation disabled; no layout shift when the trace line draws; keyboard users reach every annotation.
+
+6.2 Atlas
+- Renders every node and edge from the content model. Layout is deterministic (precomputed or seeded) and stable between loads.
+- Encoding: stratum by position or region and color; evidence status by shape or fill pattern plus text label.
+- Selecting a node opens a panel: label, status, summary, evidence link, related nodes each with their edge reason.
+- Filters: evidence status and stratum; simple text search.
+- Keyboard: Tab enters the graph, arrow keys move between related nodes, Enter selects, Escape clears. An equivalent accessible list or tree is the primary screen-reader representation; the canvas or SVG is decorative to assistive technology.
+- Any dragging has a single-pointer non-drag alternative.
+- Mobile (below 768px): no full-graph view. Show filter chips, a list, and a focused view of the selected node with at most 8 neighbors.
+- Acceptance: contrast at least 3:1 for graphics and 4.5:1 for text; touch targets at least 44px on touch devices (never below 24px); no hover-only information; at 360px nothing overlaps or requires horizontal scroll.
+
+6.3 Lab
+- Verify that the packet routing simulation and the cache eviction workbench exist in the source; improve them, do not replace them. If either does not exist, report it and do not fabricate.
+- Shared simulation chrome: "SIMULATION" label, Models / Does not model note, play/pause/step/reset, speed control, seed or scenario selector, readable state log (also exposed through a throttled aria-live region).
+- Separate pure logic from rendering. Review the algorithms for correctness (for example eviction order for each policy offered; hop counts and path selection for routing). Add unit tests for the pure logic if a test runner exists or a minimal one (such as Vitest) is justified.
+- Pause animation when offscreen or the tab is hidden. Cap canvas DPR at 2. Under reduced motion: no autoplay, step-driven.
+- Acceptance: deterministic for a given seed; fully operable by keyboard; usable at 360px with controls below the canvas.
+
+6.4 Receipt
+- Generated from the experience data. Columns: role, organization, period. Include certification and contact.
+- Contact uses only mechanisms that already exist (mailto, LinkedIn, GitHub, existing form). Add a copy-email button with a clipboard fallback. Do not add a backend.
+- Link to a résumé file only if one already exists in the repo or public folder. Do not generate or invent one.
+- A print stylesheet produces a clean one-to-two page résumé from this section.
+- Entry animation (lines printing sequentially) is under 1.5 seconds total, skippable, and disabled under reduced motion. No gimmick totals or joke lines that misrepresent anything.
+
+6.5 Plain view
+- Text-first, light "paper" theme, linear document of all content from the same data. Fully functional with minimal JavaScript. Also the print source.
+
+6.6 Crawlability and sharing
+- Ensure meaningful content exists without running JavaScript: at minimum a static fallback in the HTML, plus JSON-LD Person data using only verified fields and existing links, canonical, correct title and meta, and verified OG/Twitter tags (check that the OG image exists and renders). Consider build-time prerendering only if the audit shows it is low risk. Do not migrate frameworks.
+
+6.7 Case file (conditional)
+- Build the component only if real case-study content already exists on the site or in the repo (structure: problem, investigation, decisions, actions, outcome). Do not invent a case. If no content exists, list it under "Owner questions" and skip.
+
+# 7. DESIGN SYSTEM
+
+Define everything as tokens (CSS variables or the existing styling system) and document in docs/DESIGN_SYSTEM.md.
+- Color: base ink starting at #090D16 with 3-4 lifted surface steps; one warm thermal accent for trace and active states; muted blue-gray for structure; paper off-white for receipt and Plain surfaces. Status encoding is never color-only. Verify contrast for every text/background pair. Avoid purple or cyan gradients, neon glow, glassmorphism, floating particles and generic dashboard cards unless you can justify them for this concept.
+- Type: at most two families (a variable grotesque and a mono with tabular numerals), self-hosted or from the existing font setup, font-display: swap, metric-matched fallbacks, roughly 100 KB total at most. Fluid scale with clamp(); body line length 60-75ch.
+- Spacing and grid: 8px base unit; 12-column desktop, 8-column tablet, 4-column mobile; content max width about 1280px, with wider canvases permitted.
+- Surfaces and depth: hairline 1px rules, tick marks and dimension-style labels; depth through overlap only; a restrained shadow only on receipt surfaces.
+- Motion: tokens for duration (120/200/320ms) and easing. Principle: things trace, print and settle. No parallax. Every animation has a purpose, a reduced-motion variant and an off-screen pause.
+- Icons: a small custom inline SVG set with 1.5px stroke; no icon library sprawl.
+- States: default, hover (pointer only), focus-visible (at least 2px ring with offset), active, disabled, loading (skeleton or static placeholder that prevents layout shift), error (plain-language message with a recovery action), empty.
+- Each content type has its own representation: graph for relationships, receipt for records, schematic for hardware, log view for application behavior. They must still feel like one system.
+
+# 8. RESPONSIVE REQUIREMENTS
+
+Verify at 360, 390, 430, 768, 1024, 1440 and 1920px widths.
+- 360-430: single column; top progress bar with stratum label; simplified or static stratum visuals; Atlas as filter chips plus list plus focused neighbor view; Lab controls beneath the canvas; no hover dependence; respect safe-area insets; use svh/dvh instead of 100vh.
+- 768: two-column where it helps; Atlas as list plus canvas split.
+- 1024+: side rail; full Atlas canvas with detail panel.
+- 1440 and 1920: constrained text measure, composed (not stretched) layouts; no empty-looking voids.
+- Reduce effects on low-power devices: if more than 30 consecutive frames exceed 24ms, automatically drop to a simplified visual mode.
+- No horizontal page scroll at any width; wide tables and diagrams scroll inside their own container.
+
+# 9. ACCESSIBILITY (WCAG 2.2 AA target)
+
+Semantic landmarks, a skip link, one h1, logical heading order; keyboard access to every function with visible focus; prefers-reduced-motion honored everywhere; prefers-contrast and forced-colors do not break the layout; any motion longer than 5 seconds has a pause control; no flashing; text alternatives for every informational graphic (the accessible list or description conveys what the visual conveys); aria-live used sparingly and throttled; do not rely on color, hover or drag alone; touch targets as in 6.2; alt text meaningful, not filler.
+
+# 10. PERFORMANCE
+
+Measure a baseline first. Targets (mobile, throttled): LCP at most 2.5s, INP at most 200ms, CLS at most 0.1. Initial-route JavaScript must not grow by more than about 60 KB gzipped over baseline; lazy-load Atlas and Lab. Compress and size images; use modern formats; no unoptimized hero media. Preload only the critical font; no layout shift from fonts. Animations use transform and opacity; pause offscreen; clean up listeners and rAF loops on unmount. If Lighthouse is runnable, target mobile Performance 90+, Accessibility 95+, Best Practices 95+, SEO 90+ as a minimum, not as proof of quality.
+
+# 11. SECURITY AND PRIVACY
+
+- No secrets, API keys, tokens or private URLs in the repo or bundle. Do not add .env files containing real values.
+- External links use rel="noopener noreferrer". No dangerouslySetInnerHTML or equivalent with unsanitized content. No eval. No new third-party scripts.
+- Add or tighten security headers in vercel.json only if you test that nothing breaks (for example a conservative Content-Security-Policy, X-Content-Type-Options, Referrer-Policy, Permissions-Policy). Report exactly what changed.
+- Confidentiality: describe employer systems at a general level only. No internal hostnames, IP addresses, vendor pricing, store addresses, credentials, screenshots of internal systems or configuration details. If existing content already contains any of these, flag it in the report.
+- Security demonstrations are educational and defensive only. No scanning, probing or attack tooling.
+- Do not publish personal data beyond what already appears on the site (no home address, ID numbers or private phone numbers).
+
+# 12. ENGINEERING RULES
+
+- Keep the current framework, language and styling approach unless justified. TypeScript strict-friendly if the project uses TypeScript.
+- Add a dependency only if clearly justified, small, maintained and necessary; list every addition with size and reason. Prefer native APIs.
+- Reusable, small components; no component over about 250 lines without reason; data separated from presentation; pure logic separated from rendering.
+- Lazy-load heavy views. Handle unsupported capabilities with feature detection and tested fallbacks.
+- Remove dead code and unused dependencies you introduce or confirm are unused.
+- Keep Vercel configuration, build command, output directory and environment settings unchanged unless required, and report any change.
+- Do not use WebGL, WebGPU, Three.js, Web Workers or audio unless the audit produces a specific, documented need that nothing simpler can meet.
+
+# 13. VERIFICATION
+
+Run what your environment allows: install, lint, type-check, unit tests, validate:content, production build. Then check, and record in docs/TEST_REPORT.md as Pass / Fail / Not run (with reason):
+- all views at the seven widths; keyboard-only pass of every feature; reduced-motion emulation; no-JS or low-JS view of Plain; print preview of the Receipt; 4x CPU throttling and slow 4G; automated accessibility scan (axe or equivalent); bundle size versus baseline; Lighthouse if available.
+For anything you cannot run, give me the exact command or manual steps. Screen-reader testing (VoiceOver, NVDA) is a manual step for me; include a checklist for it.
+
+# 14. DEFINITION OF DONE
+
+- Every claim on the site traces to existing content or a documented source; no unsupported expertise.
+- No dead buttons; every simulation is labeled and functional; any mock data is labeled.
+- Experience and contact reachable in one interaction from the first screen.
+- Trace, Atlas, Lab, Receipt and Plain view work at all seven widths, by keyboard, and with reduced motion.
+- Content validator passes (or "Not run" is reported); production build succeeds (or "Not run" is reported).
+- No new secrets or unexpected network calls.
+- At least one feature, effect or dependency was removed or simplified during the critical review.
+- docs/ files exist and match the code.
+
+# 15. FINAL REPORT (plain, specific, no marketing language)
+
+1. Files created, modified, deleted (grouped).
+2. Architecture summary and why.
+3. Dependencies added or removed, with sizes and reasons.
+4. What was implemented vs. skipped, and why.
+5. Test and verification results: Pass / Fail / Not run, with reasons and commands.
+6. Baseline vs. final performance numbers, if measured.
+7. Critical review: top findings, what was fixed, what was cut, remaining weaknesses stated plainly.
+8. Known limitations, browser-support caveats and fallbacks.
+9. Vercel/deployment considerations and any configuration changes.
+10. Owner questions: content, statuses or evidence you could not determine; plus the list of copy you wrote that I must approve (from docs/COPY_AUDIT.md).
+11. Suggested next steps, ranked by impact.

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight, Command, Volume2, VolumeX } from 'lucide-react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { Menu, X, ArrowUpRight, Command, Volume2, VolumeX, FileText, Network, Compass, Receipt } from 'lucide-react';
+import { PROFILE } from '../data/universeContent';
 import { audioFx } from '../utils/audioFx';
 
+export type ActiveView = 'trace' | 'atlas' | 'plain';
+
 interface NavbarProps {
+  activeView: ActiveView;
+  onChangeView: (view: ActiveView) => void;
   onOpenResume: () => void;
   onOpenCommandPalette: () => void;
   isAudioMuted: boolean;
@@ -11,6 +15,8 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ 
+  activeView,
+  onChangeView,
   onOpenResume, 
   onOpenCommandPalette,
   isAudioMuted,
@@ -32,42 +38,24 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'The Lab', href: '#lab' },
-    { label: 'Systems', href: '#systems' },
-    { label: 'Field Notes', href: '#experience' },
-    { label: 'Case Studies', href: '#projects' },
-    { label: 'Toolkit', href: '#skills' },
-    { label: 'The Frontier', href: '#frontier' },
-    { label: 'Contact', href: '#contact' },
-  ];
-
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
+  const handleSelectView = (view: ActiveView) => {
     audioFx.playClick(500);
+    onChangeView(view);
     setMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      const navHeight = 76;
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({
-        top: elementPosition - navHeight,
-        behavior: 'smooth'
-      });
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 no-print ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 print:hidden ${
         isScrolled
-          ? 'bg-[#070A11]/95 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/20'
-          : 'bg-transparent border-b border-transparent'
+          ? 'bg-[#050811]/95 backdrop-blur-md border-b border-stone-800/90 shadow-xl shadow-black/40'
+          : 'bg-[#050811]/80 backdrop-blur-sm border-b border-stone-800/50'
       }`}
     >
       {/* Scroll Progress Bar at very top */}
       <div 
-        className="h-[2px] bg-sky-400 transition-all duration-75 origin-left"
+        className="h-[2px] bg-cyan-400 transition-all duration-75 origin-left"
         style={{ width: `${scrollProgress}%` }}
         role="progressbar"
         aria-valuenow={Math.round(scrollProgress)}
@@ -75,107 +63,116 @@ export const Navbar: React.FC<NavbarProps> = ({
         aria-valuemax={100}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         
-        {/* Zone 1: Brand Wordmark */}
-        <a
-          href="#top"
-          onClick={(e) => handleLinkClick(e, '#top')}
-          className="text-base sm:text-lg font-bold tracking-tight text-white hover:text-sky-400 transition-colors whitespace-nowrap shrink-0 flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-sm"
-        >
-          <span className="w-7 h-7 rounded bg-sky-500/10 border border-sky-500/30 text-sky-400 flex items-center justify-center font-mono text-xs font-semibold">
-            AR
-          </span>
-          <span>{PERSONAL_INFO.displayName}</span>
-        </a>
+        {/* Brand Wordmark */}
+        <div className="flex items-center gap-3 shrink-0">
+          <button
+            onClick={() => handleSelectView('trace')}
+            className="flex items-center gap-2.5 text-stone-100 hover:text-cyan-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 font-mono text-sm sm:text-base font-bold cursor-pointer"
+            aria-label="Aries Razak - Return to Top Trace View"
+          >
+            <span className="w-7 h-7 bg-stone-900 border border-stone-700 text-cyan-400 flex items-center justify-center text-xs font-bold">
+              AR
+            </span>
+            <span className="hidden sm:inline">{PROFILE.displayName}</span>
+          </button>
+          <span className="hidden md:inline text-stone-600 font-mono text-xs">/</span>
+          <span className="hidden md:inline text-stone-400 font-mono text-xs">Technology Universe</span>
+        </div>
 
-        {/* Zone 2: Clean single-line text navigation links */}
+        {/* 3 Primary View Switchers (Trace · Atlas · Plain) */}
         <nav
-          aria-label="Main Navigation"
-          className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300"
+          aria-label="Universe Perspectives"
+          className="hidden md:flex items-center bg-stone-950 p-1 border border-stone-800 font-mono text-xs"
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
-              className="hover:text-white transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-sky-400 hover:after:w-full after:transition-all after:duration-200 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-sky-400 rounded-xs"
-            >
-              {link.label}
-            </a>
-          ))}
+          <button
+            onClick={() => handleSelectView('trace')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 transition-all cursor-pointer ${
+              activeView === 'trace'
+                ? 'bg-stone-800 text-cyan-300 border border-stone-700 font-bold'
+                : 'text-stone-400 hover:text-stone-200'
+            }`}
+            aria-pressed={activeView === 'trace'}
+          >
+            <Compass className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Trace (Journey)</span>
+          </button>
+
+          <button
+            onClick={() => handleSelectView('atlas')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 transition-all cursor-pointer ${
+              activeView === 'atlas'
+                ? 'bg-stone-800 text-cyan-300 border border-stone-700 font-bold'
+                : 'text-stone-400 hover:text-stone-200'
+            }`}
+            aria-pressed={activeView === 'atlas'}
+          >
+            <Network className="w-3.5 h-3.5 text-sky-400" />
+            <span>Atlas (Graph)</span>
+          </button>
+
+          <button
+            onClick={() => handleSelectView('plain')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 transition-all cursor-pointer ${
+              activeView === 'plain'
+                ? 'bg-stone-800 text-cyan-300 border border-stone-700 font-bold'
+                : 'text-stone-400 hover:text-stone-200'
+            }`}
+            aria-pressed={activeView === 'plain'}
+          >
+            <FileText className="w-3.5 h-3.5 text-amber-400" />
+            <span>Plain (Spec)</span>
+          </button>
         </nav>
 
-        {/* Zone 3: Interactive Controls (Cmd+K, Audio Toggle, Resume, Mobile Menu) */}
-        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
-          
-          {/* Quick HUD Search trigger */}
-          <button
-            type="button"
-            onClick={() => {
-              audioFx.playClick(600);
-              onOpenCommandPalette();
-            }}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-mono text-slate-400 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-slate-800 rounded-md transition-colors"
-            title="Search Commands & Routes (Cmd+K)"
-          >
-            <Command className="w-3.5 h-3.5 text-sky-400" />
-            <span className="hidden sm:inline">Cmd+K</span>
-          </button>
-
-          {/* Audio FX Toggle */}
-          <button
-            type="button"
-            onClick={() => {
-              onToggleAudio();
-            }}
-            className={`p-1.5 rounded-md border text-xs transition-colors ${
-              !isAudioMuted
-                ? 'bg-sky-500/20 border-sky-500/50 text-sky-300'
-                : 'bg-slate-900/80 border-slate-800 text-slate-500 hover:text-slate-300'
-            }`}
-            title={!isAudioMuted ? 'Mute Cybernetic Audio FX' : 'Enable Cybernetic Audio FX'}
-            aria-label={!isAudioMuted ? 'Mute Cybernetic Audio FX' : 'Enable Cybernetic Audio FX'}
-          >
-            {!isAudioMuted ? (
-              <Volume2 className="w-4 h-4" />
-            ) : (
-              <VolumeX className="w-4 h-4" />
-            )}
-          </button>
-
-          {/* Resume Viewer Button */}
-          <button
-            type="button"
-            onClick={() => {
-              audioFx.playClick(600);
-              onOpenResume();
-            }}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700/70 rounded-md transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-          >
-            <span>Resume</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-slate-400" />
-          </button>
-
-          {/* Contact CTA */}
+        {/* Action Controls & Utilities */}
+        <div className="flex items-center gap-2 font-mono text-xs">
+          {/* Quick Jump to Receipt */}
           <a
-            href="#contact"
-            onClick={(e) => handleLinkClick(e, '#contact')}
-            className="hidden sm:inline-flex px-3.5 py-1.5 text-xs font-semibold text-slate-950 bg-sky-400 hover:bg-sky-300 rounded-md transition-colors whitespace-nowrap shrink-0 shadow-sm shadow-sky-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+            href="#receipt"
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 transition-colors"
           >
-            Connect
+            <Receipt className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Receipt</span>
           </a>
 
-          {/* Mobile hamburger */}
+          {/* Audio Synthesizer Mute Toggle */}
           <button
-            type="button"
-            onClick={() => {
-              audioFx.playClick(400);
-              setMobileMenuOpen(!mobileMenuOpen);
-            }}
-            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            onClick={onToggleAudio}
+            className="p-1.5 text-stone-400 hover:text-stone-200 border border-stone-800 hover:border-stone-700 transition-colors cursor-pointer"
+            aria-label={isAudioMuted ? 'Unmute Audio Cues' : 'Mute Audio Cues'}
+            title={isAudioMuted ? 'Unmute Sound FX' : 'Mute Sound FX'}
+          >
+            {isAudioMuted ? <VolumeX className="w-4 h-4 text-stone-500" /> : <Volume2 className="w-4 h-4 text-cyan-400" />}
+          </button>
+
+          {/* Command Palette Trigger */}
+          <button
+            onClick={onOpenCommandPalette}
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-stone-900 border border-stone-800 hover:border-stone-700 text-stone-400 hover:text-stone-200 transition-colors cursor-pointer"
+            aria-label="Open Command Search Palette (Cmd+K)"
+          >
+            <Command className="w-3.5 h-3.5" />
+            <span className="text-[10px] text-stone-500">⌘K</span>
+          </button>
+
+          {/* Verified Dossier Button */}
+          <button
+            onClick={onOpenResume}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-cyan-950/80 hover:bg-cyan-900/80 text-cyan-300 border border-cyan-700/60 transition-colors cursor-pointer font-bold"
+            aria-label="Open Verified ATS Resume Modal"
+          >
+            <span>Dossier</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </button>
+
+          {/* Mobile Menu Trigger */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-stone-400 hover:text-stone-100 border border-stone-800 cursor-pointer"
+            aria-label="Toggle Navigation Menu"
             aria-expanded={mobileMenuOpen}
-            className="lg:hidden p-2 text-slate-400 hover:text-white rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -184,38 +181,52 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#0A0F1D] border-b border-slate-800 px-5 pt-3 pb-6 shadow-2xl transition-all">
-          <div className="flex flex-col gap-2.5">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className="text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 px-3 py-2.5 rounded-md transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-            <div className="pt-2 border-t border-slate-800 flex flex-col gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenResume();
-                }}
-                className="flex items-center justify-between w-full text-left text-sm font-medium text-slate-200 bg-slate-800/80 px-3 py-2.5 rounded-md"
-              >
-                <span>View Technical Resume</span>
-                <ArrowUpRight className="w-4 h-4 text-slate-400" />
-              </button>
-              <a
-                href="#contact"
-                onClick={(e) => handleLinkClick(e, '#contact')}
-                className="text-center text-sm font-semibold text-slate-950 bg-sky-400 hover:bg-sky-300 py-2.5 rounded-md transition-colors"
-              >
-                Let's Connect
-              </a>
-            </div>
+        <div className="md:hidden bg-[#050811] border-b border-stone-800 px-4 py-4 space-y-3 font-mono text-xs">
+          <div className="text-[10px] uppercase text-stone-500 tracking-wider">
+            Switch Perspective
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            <button
+              onClick={() => handleSelectView('trace')}
+              className={`p-2.5 text-center border ${
+                activeView === 'trace' ? 'bg-stone-800 text-cyan-300 border-cyan-500' : 'bg-stone-950 text-stone-400 border-stone-800'
+              }`}
+            >
+              Trace (Journey)
+            </button>
+            <button
+              onClick={() => handleSelectView('atlas')}
+              className={`p-2.5 text-center border ${
+                activeView === 'atlas' ? 'bg-stone-800 text-cyan-300 border-cyan-500' : 'bg-stone-950 text-stone-400 border-stone-800'
+              }`}
+            >
+              Atlas (Graph)
+            </button>
+            <button
+              onClick={() => handleSelectView('plain')}
+              className={`p-2.5 text-center border ${
+                activeView === 'plain' ? 'bg-stone-800 text-cyan-300 border-cyan-500' : 'bg-stone-950 text-stone-400 border-stone-800'
+              }`}
+            >
+              Plain (Spec)
+            </button>
+          </div>
+
+          <div className="pt-2 border-t border-stone-800 flex items-center justify-between">
+            <a
+              href="#receipt"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-stone-300 hover:text-cyan-300 flex items-center gap-1.5 py-1"
+            >
+              <Receipt className="w-4 h-4 text-cyan-400" />
+              <span>Thermal Receipt Output</span>
+            </a>
+            <button
+              onClick={onOpenResume}
+              className="text-cyan-400 font-bold"
+            >
+              Full Dossier →
+            </button>
           </div>
         </div>
       )}

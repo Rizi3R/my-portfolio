@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { PERSONAL_INFO } from '../data/portfolioData';
-import { ArrowUp, Mail, Linkedin, FileText } from 'lucide-react';
+import { PROFILE, STRATA } from '../data/universeContent';
+import { ArrowUp, Mail, Linkedin, Receipt, Compass, Network, FileText } from 'lucide-react';
 
 interface FooterProps {
   onOpenResume: () => void;
@@ -22,119 +22,97 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const navLinks = [
-    { label: 'The Lab', href: '#lab' },
-    { label: 'Systems', href: '#systems' },
-    { label: 'The Origin', href: '#about' },
-    { label: 'Field Notes', href: '#experience' },
-    { label: 'Case Studies', href: '#projects' },
-    { label: 'Toolkit', href: '#skills' },
-    { label: 'The Frontier', href: '#frontier' },
-    { label: 'Contact', href: '#contact' }
-  ];
-
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      const navHeight = 72;
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({
-        top: elementPosition - navHeight,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
-    <footer className="bg-[#05080E] border-t border-slate-800/80 py-12 relative no-print">
+    <footer className="bg-stone-950 border-t border-stone-800 py-12 relative no-print font-mono text-xs text-stone-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Row */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-slate-800/80">
-          <div className="space-y-1.5">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-stone-800">
+          <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded bg-sky-500/10 border border-sky-500/30 text-sky-400 flex items-center justify-center font-mono text-xs font-semibold">
+              <span className="w-6 h-6 bg-stone-900 border border-stone-700 text-cyan-400 flex items-center justify-center text-xs font-bold">
                 AR
               </span>
-              <span className="text-base font-bold text-white tracking-tight">
-                {PERSONAL_INFO.displayName}
+              <span className="text-sm font-bold text-stone-100 tracking-tight">
+                {PROFILE.fullName}
               </span>
             </div>
-            <p className="text-xs text-slate-400 max-w-md">
-              {PERSONAL_INFO.headline} · Keeping retail systems and business operations reliable.
+            <p className="text-stone-400 text-xs font-sans max-w-md">
+              {PROFILE.title} · Selangor / Kuala Lumpur, Malaysia
+            </p>
+            <p className="text-stone-500 text-[11px]">
+              "Beep to Receipt": Tracing the 6 vertical strata of computing from laser photodiode to thermal printer head.
             </p>
           </div>
 
-          {/* Quick Links */}
-          <nav aria-label="Footer Navigation" className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-400 font-medium">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className="hover:text-white transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-            <button
-              type="button"
-              onClick={onOpenResume}
-              className="text-sky-400 hover:text-sky-300 transition-colors"
-            >
-              Resume Sheet
-            </button>
-          </nav>
-
-          {/* Channels */}
-          <div className="flex items-center gap-3">
+          {/* Social & Contact Actions */}
+          <div className="flex flex-wrap items-center gap-3">
             <a
-              href={`mailto:${PERSONAL_INFO.email}`}
-              aria-label="Email Aries"
-              className="w-8 h-8 rounded-md bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 flex items-center justify-center transition-colors"
+              href={`mailto:${PROFILE.email}`}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 transition-colors"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-3.5 h-3.5 text-cyan-400" />
+              <span>{PROFILE.email}</span>
             </a>
 
             <a
-              href={PERSONAL_INFO.linkedIn}
+              href={PROFILE.linkedIn}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn profile"
-              className="w-8 h-8 rounded-md bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 flex items-center justify-center transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 transition-colors"
             >
-              <Linkedin className="w-4 h-4" />
+              <Linkedin className="w-3.5 h-3.5 text-cyan-400" />
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              href="#receipt"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 transition-colors"
+            >
+              <Receipt className="w-3.5 h-3.5 text-amber-400" />
+              <span>Thermal Receipt</span>
             </a>
           </div>
         </div>
 
-        {/* Bottom Credits & Verification Note */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        {/* Strata Links & Navigation Grid */}
+        <div className="py-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-[11px] border-b border-stone-800">
+          {STRATA.map((st, i) => (
+            <a
+              key={st.id}
+              href={`#stratum-${st.id}`}
+              className="p-2 bg-stone-900/40 hover:bg-stone-900 border border-stone-800/80 hover:border-cyan-500/40 transition-colors"
+            >
+              <div className="text-cyan-400 font-bold mb-0.5">S0{i + 1}</div>
+              <div className="text-stone-200 font-semibold truncate">{st.title.split(' ')[0]}</div>
+              <div className="text-stone-500 text-[10px] truncate">{st.tagline}</div>
+            </a>
+          ))}
+        </div>
+
+        {/* Bottom Credits & Verification */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-500">
           <div>
-            © {currentYear} {PERSONAL_INFO.fullName}. All professional experience verified against confirmed employment records.
+            © {currentYear} {PROFILE.displayName} · Zero external trackers · Static React/TypeScript build
           </div>
 
-          <div className="flex items-center gap-4 text-[11px] font-mono">
-            <span>{PERSONAL_INFO.location}</span>
-            <span aria-hidden="true">·</span>
-            <span>AWS Cloud Practitioner</span>
+          <div className="flex items-center gap-4">
+            <span className="text-emerald-400">✓ 100% Truthful Provenance</span>
+            {showBackToTop && (
+              <button
+                type="button"
+                onClick={scrollToTop}
+                className="flex items-center gap-1 text-stone-400 hover:text-cyan-300 transition-colors cursor-pointer"
+                aria-label="Scroll back to top"
+              >
+                <span>Back to Top</span>
+                <ArrowUp className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
         </div>
 
       </div>
-
-      {/* Floating Back to Top Button */}
-      {showBackToTop && (
-        <button
-          type="button"
-          onClick={scrollToTop}
-          aria-label="Scroll back to top"
-          className="fixed bottom-6 right-6 z-40 p-2.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 shadow-xl backdrop-blur-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-        >
-          <ArrowUp className="w-4 h-4" />
-        </button>
-      )}
     </footer>
   );
 };
