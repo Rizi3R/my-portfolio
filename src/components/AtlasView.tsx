@@ -467,6 +467,18 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                 </div>
               )}
 
+              {/* Factual Applied Professional Usage */}
+              {selectedNode.usage && (
+                <div className="space-y-1 text-xs">
+                  <span className="text-stone-500 text-[10px] uppercase tracking-wider block">
+                    [APPLIED_OPERATIONAL_USAGE]
+                  </span>
+                  <div className="p-2.5 bg-stone-900/60 border border-stone-800 text-stone-300 font-sans text-xs leading-relaxed">
+                    {selectedNode.usage}
+                  </div>
+                </div>
+              )}
+
               {/* Stratum Deep Dive Navigation */}
               {onJumpToStratum && (
                 <div>

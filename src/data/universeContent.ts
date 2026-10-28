@@ -1,11 +1,12 @@
 /**
  * UNIVERSE CONTENT MODEL & SINGLE SOURCE OF TRUTH
  * 
- * Strict Provenance Rules:
+ * Strict Provenance Rules (Section 1 & 5):
  * - Every node maps to verified employment, education, or hands-on simulations.
- * - Nodes with status 'professional' or 'project' MUST specify an evidenceRef.
+ * - Nodes with status 'professional' or 'project' MUST specify evidenceRef AND usage.
  * - Every edge MUST have a descriptive 'reason' (max 120 chars).
  * - Summaries are factual, first person, and strictly <= 200 characters.
+ * - Schema contains NO proficiency, percentage, rating, or progress fields.
  */
 
 export type StratumType = 
@@ -33,6 +34,7 @@ export interface UniverseNode {
   kind: NodeKind;
   status: EvidenceStatus;
   summary: string; // Max 200 chars, factual, first person
+  usage?: string; // REQUIRED for professional and project: one factual sentence on how I used it
   evidenceRef?: string; // Required when status is 'professional' or 'project'
   links?: Array<{ label: string; url: string }>;
   x: number; // Deterministic coordinate (0-100) for Atlas view
@@ -76,6 +78,15 @@ export interface UniverseCertification {
   credentialNote: string;
 }
 
+export interface LearningEntry {
+  id: string;
+  topic: string;
+  status: 'learning' | 'exploring';
+  note: string; // Free text note that owner can edit
+  stratum: StratumType;
+  context: string;
+}
+
 /* =========================================================================
    1. CANDIDATE PROFILE & VERIFIED DOSSIER
    ========================================================================= */
@@ -93,7 +104,7 @@ export const PROFILE = {
 };
 
 /* =========================================================================
-   2. VERIFIED EXPERIENCES (SOURCE OF TRUTH)
+   2. VERIFIED EXPERIENCES (VERBATIM FROM EXISTING SITE SOURCE)
    ========================================================================= */
 
 export const EXPERIENCES: UniverseExperience[] = [
@@ -105,14 +116,24 @@ export const EXPERIENCES: UniverseExperience[] = [
     period: "September 2025 – Present",
     isCurrent: true,
     bullets: [
-      "Provide frontline and Tier-2 application troubleshooting for Xilnex POS, payment pinpads, and peripheral retail hardware across HQ and nationwide outlets.",
+      "Provide frontline and Tier 2 application troubleshooting for Xilnex POS, payment terminals, barcode scanners, and peripheral business devices across multi-site outlets.",
       "Triage operational incidents by assessing business impact, capturing reproducible logs, and systematically isolating application, network, or hardware faults.",
-      "Coordinate directly with software vendors, payment acquirers, and technical partners, providing structured logs and error codes to validate hotfixes.",
-      "Support new-site IT commissioning: hardware provisioning, LAN/Wi-Fi configuration, device setup, and pre-launch readiness sign-off.",
-      "Conduct User Acceptance Testing (UAT) and system validation prior to production application updates and promotional campaigns.",
-      "Troubleshoot outlet network connectivity, execute physical LAN cabling tasks including RJ45 crimping and cable tester continuity validation."
+      "Coordinate with third-party software vendors, payment gateway partners, and technical service providers, supplying structured technical context to validate hotfixes.",
+      "Support new-site IT commissioning: hardware provisioning, network connectivity (LAN/Wi-Fi), device configuration, POS/payment setup, and operational readiness checks.",
+      "Conduct User Acceptance Testing (UAT) and system validation prior to production application updates, promotions, and third-party delivery service integrations.",
+      "Support operational data workflows involving product catalogs, promotional engine triggers, CRM, and food categories, coordinating corrections across departments.",
+      "Troubleshoot outlet network connectivity, execute physical LAN cabling tasks including RJ45 crimping and cable tester continuity validation.",
+      "Assist with Microsoft 365 user account provisioning, business email configuration, and employee onboarding."
     ],
-    technologies: ["Xilnex POS", "Payment Terminal APIs", "LAN / Wi-Fi Diagnostics", "RJ45 Continuity Testing", "UAT & System Validation", "Vendor Management"]
+    technologies: [
+      "Xilnex POS",
+      "Payment Terminal APIs",
+      "LAN / Wi-Fi Diagnostics",
+      "RJ45 Continuity Testing",
+      "UAT & System Validation",
+      "Vendor Coordination",
+      "Microsoft 365 Provisioning"
+    ]
   },
   {
     id: "exp-palaterium",
@@ -122,14 +143,24 @@ export const EXPERIENCES: UniverseExperience[] = [
     period: "April 2024 – August 2025",
     isCurrent: false,
     bullets: [
-      "Managed user service requests and technical incidents via Lark Helpdesk adhering to defined SLA targets.",
+      "Managed user service requests and technical incidents via Lark Helpdesk adhering to defined SLA response targets.",
       "Administered the Lark platform as Super Admin: configuring access permissions, role groups, directory structures, and user lifecycle workflows.",
-      "Supported the company-wide migration from Google Workspace to Lark, assisting with user account preparation, data transition, and post-cutover support.",
-      "Designed and deployed digital workflow automations in Lark, replacing manual paper memos and streamlining cross-departmental approvals.",
-      "Assisted with NetSuite data imports and used Microsoft Excel formulas (VLOOKUP, duplicate auditing) to clean and validate business records.",
-      "Provided remote desktop diagnostics using TeamViewer for distributed staff across multiple commercial sites."
+      "Supported the company-wide migration from Google Workspace to Lark, assisting with user account preparation, data/email transition, and post-migration support.",
+      "Provided remote diagnostics and desktop assistance using TeamViewer for distributed staff across multiple sites.",
+      "Designed and deployed digital workflow automation inside Lark to reduce manual paperwork and streamline cross-departmental approvals.",
+      "Assisted with NetSuite data imports and utilized Microsoft Excel formulas (VLOOKUP, data auditing) to clean and validate business records.",
+      "Managed IT procurement, hardware deployments, equipment lifecycle replacements, and vendor repair coordination.",
+      "Diagnosed office network connectivity issues across LAN, Wi-Fi access points, and TCP/IP configurations."
     ],
-    technologies: ["Lark Super Admin", "Google Workspace Migration", "NetSuite Data Import", "Microsoft Excel", "TeamViewer", "TCP/IP & LAN"]
+    technologies: [
+      "Lark Helpdesk & Super Admin",
+      "Google Workspace Migration",
+      "TeamViewer Remote Support",
+      "NetSuite Data Import",
+      "Microsoft Excel (Data Validation)",
+      "TCP/IP & LAN Troubleshooting",
+      "IT Asset Management"
+    ]
   },
   {
     id: "exp-mps",
@@ -140,12 +171,20 @@ export const EXPERIENCES: UniverseExperience[] = [
     isCurrent: false,
     bullets: [
       "Dispatched for onsite and remote technical support across corporate customer accounts.",
-      "Diagnosed and repaired workstations, commercial multifunction printers, copiers, and network peripherals.",
-      "Troubleshot hardware malfunctions, driver conflicts, firmware updates, and Windows operating system errors.",
+      "Diagnosed and repaired laptops, desktop workstations, commercial multifunction printers, copiers, and network peripherals.",
+      "Troubleshot hardware malfunctions, driver conflicts, firmware updates, and operating system errors.",
+      "Logged, updated, and resolved service tickets through Freshdesk within target service turnaround times.",
       "Configured client network printing, static IP assignments, and subnet connectivity for multi-user office environments.",
-      "Logged, updated, and resolved service tickets through Freshdesk within target turnaround SLAs."
+      "Communicated findings and preventive operational advice directly to non-technical client personnel."
     ],
-    technologies: ["Freshdesk", "Hardware Diagnostics", "Printer Firmware", "Windows OS Support", "TCP/IP & Print Servers"]
+    technologies: [
+      "Freshdesk",
+      "Hardware Diagnostics",
+      "Printer & Copier Firmware",
+      "Windows OS Support",
+      "TCP/IP & Print Servers",
+      "Onsite Client Support"
+    ]
   },
   {
     id: "exp-agc",
@@ -156,90 +195,115 @@ export const EXPERIENCES: UniverseExperience[] = [
     isCurrent: false,
     bullets: [
       "Contributed to full-stack web application development for the DKICT Declaration System using PHP Laravel and MySQL.",
+      "Engaged in stakeholder discovery meetings to capture system requirements and translate them into technical specifications.",
       "Authored System Requirements Specification (SRS) documentation and designed Entity Relationship Diagrams (ERDs).",
       "Executed SQL queries to validate database schema constraints, data relationships, and record integrity.",
-      "Investigated application logic errors and user-reported bugs during development and user acceptance testing."
+      "Investigated application logic errors and user-reported bugs during development and user acceptance testing phases."
     ],
-    technologies: ["Laravel", "MySQL", "PHP", "Entity Relationship Diagrams (ERD)", "System Requirements Specification (SRS)", "UAT Testing"]
+    technologies: [
+      "Laravel Framework",
+      "MySQL",
+      "PHP & SQL Queries",
+      "Entity Relationship Diagrams (ERD)",
+      "System Requirements Specification (SRS)",
+      "User Acceptance Testing"
+    ]
   }
 ];
+
+/* =========================================================================
+   3. CERTIFICATIONS & FOUNDATIONS (VERIFIED CREDENTIALS)
+   ========================================================================= */
 
 export const CERTIFICATIONS: UniverseCertification[] = [
   {
     name: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services (AWS)",
     status: "Certified",
-    credentialNote: "Validates foundational knowledge of AWS cloud primitives, security models, VPC architecture, and IAM."
-  },
-  {
-    name: "Diploma in Computer Science & Mathematics",
-    issuer: "Universiti Teknologi MARA (UiTM)",
-    status: "Certified",
-    credentialNote: "Formal academic degree covering OOP, data structures, relational databases, discrete mathematics, and computer networks."
-  },
-  {
-    name: "Generative AI Copilot Digital Upskilling Program",
-    issuer: "AI Teach Malaysia",
-    status: "Completed",
-    credentialNote: "Practical workflow upskilling on AI documentation assistance and data synthesis."
-  },
-  {
-    name: "ITIL 4 Foundation Curriculum",
-    issuer: "Axelos / PeopleCert Curriculum",
-    status: "In Progress",
-    credentialNote: "Self-study into enterprise Service Value System (SVS), incident triage, and change enablement best practices."
+    credentialNote: "Validation of foundational cloud literacy: VPC subnetting, EC2, S3, IAM, and security principles."
   }
 ];
 
 /* =========================================================================
-   3. VERIFIED CASE STUDIES
+   4. CURRENTLY LEARNING & FUTURE EXPLORATIONS (SECTION 1.3 & 1.6)
+   ========================================================================= */
+
+export const LEARNING_ENTRIES: LearningEntry[] = [
+  {
+    id: "learning-uipath-rpa",
+    topic: "UiPath & Robotic Process Automation (RPA)",
+    status: "learning",
+    note: "Currently learning UiPath and exploring Robotic Process Automation (RPA), with an interest in understanding workflow automation, application integration, and how repetitive processes can be automated.",
+    stratum: "cloud-automation",
+    context: "Self-paced study exploring workflow automation concepts and application integration."
+  },
+  {
+    id: "learning-itil-4",
+    topic: "ITIL 4 Service Management",
+    status: "learning",
+    note: "Studying ITIL 4 Service Value System, Incident Management, Problem Management, and Change Enablement.",
+    stratum: "people-process",
+    context: "Formalizing service desk ticket lifecycle and structured root-cause analysis postmortems."
+  },
+  {
+    id: "learning-linux-internals",
+    topic: "Operating System & Linux Internals",
+    status: "learning",
+    note: "Investigating Linux kernel architecture, systemd services, virtual memory management, and file system hierarchies.",
+    stratum: "os",
+    context: "Personal study to deepen low-level troubleshooting instincts for production servers."
+  }
+];
+
+/* =========================================================================
+   5. REAL OPERATIONAL CASE STUDIES (DERIVED FROM EXISTING SITE)
    ========================================================================= */
 
 export const CASE_STUDIES: UniverseCaseStudy[] = [
   {
     id: "case-app-troubleshooting",
-    title: "POS Transaction Triage & Acquirer Gateway Isolation",
+    title: "Multi-Store Retail POS Incident Triage & Vendor Escalation",
     organization: "emart24 Malaysia",
     stratum: "application",
-    hook: "Isolating point-of-sale timeout 504 errors from bank issuer declines during peak retail lunch queues.",
-    challenge: "Cashiers reported 'payment not working' under heavy customer volume. Unclear whether the issue was LAN drop, terminal hardware, bank host timeout, or sync lag.",
-    investigation: "Tested LAN gateway latency, reviewed EDC ISO-8583 response codes, and verified Xilnex local SQLite transaction queues.",
+    hook: "Isolating complex multi-site application faults, payment terminal declines, and database sync queues under live operational pressure.",
+    challenge: "Outlet teams frequently report vague symptoms like 'payment not working' or 'promo not appearing'. The challenge is swiftly isolating whether the root cause is local network degradation, terminal hardware failure, bank host decline, sync queue delay, or catalog pricing configuration.",
+    investigation: "Checked local terminal network connectivity, evaluated payment gateway response codes (distinguishing bank card 'Do Not Honour' from wallet authentication failures), and inspected Xilnex POS synchronization tables for stalled transactions.",
     actions: [
-      "Established triage protocol separating bank issuer declines (e.g. 'Do Not Honour') from network connectivity timeouts.",
-      "Provided third-party payment vendor with timestamped transaction logs and terminal IDs for rapid server-side isolation.",
-      "Guided store teams on immediate terminal restart and cache flush SOPs to recover cashier lanes."
+      "Established systematic triage protocol: check local terminal connectivity, evaluate payment response codes, and inspect Xilnex POS synchronization status.",
+      "Coordinated directly with payment terminal partners and POS vendor support, providing exact timestamped logs, terminal IDs, and error codes rather than generic reports.",
+      "Conducted outlet team guidance on prompt POS restarts, sync routines, and cache clearing to restore immediate cashier functionality."
     ],
     outcome: [
-      "Cut incident turnaround by eliminating vague bug reports to software partners.",
-      "Preserved retail checkout continuity with zero unscheduled store lane shutdowns."
+      "Standardized incident triage protocol for payment terminal errors, distinguishing issuer declines from device connectivity timeouts.",
+      "Accelerated vendor resolution times by providing structured diagnostic evidence on initial ticket logging."
     ],
-    takeaway: "Fast application resolution requires translating user frustration into concrete, reproducible technical parameters."
+    takeaway: "Technical support is forensic: structured logging and disciplined isolation prevent finger-pointing between vendors."
   },
   {
-    id: "case-infrastructure-deployment",
-    title: "Physical Layer-1 Cabling & Store IT Commissioning",
+    id: "case-store-commissioning",
+    title: "Retail Store IT Commissioning & Network Readiness",
     organization: "emart24 Malaysia",
     stratum: "hardware",
-    hook: "Commissioning hardware, physical cabling, and endpoint connectivity for zero opening-day IT downtime.",
-    challenge: "New retail outlet openings require POS registers, payment pinpads, receipt printers, CCTV cameras, and office PCs working reliably before grand opening.",
-    investigation: "Used an 8-wire cable tester to inspect physical pinouts across wall jacks; identified broken copper pairs on pins 4 and 5.",
+    hook: "Delivering end-to-end hardware provisioning, peripheral testing, and network connectivity validation for new store openings.",
+    challenge: "Opening new retail sites requires coordinating physical cabling, peripheral hardware testing, payment terminal registration, and POS software setup under strict launch deadlines.",
+    investigation: "Performed site surveys of network drop locations, tested RJ45 patch lead continuity with ratcheting wire testers, and audited terminal COM port assignments.",
     actions: [
-      "Re-crimped RJ45 connectors to the T-568B standard and confirmed 8-pin continuity with a ratcheting tester.",
-      "Configured isolated 802.1Q VLANs on the managed switch to segregate POS payment traffic from customer Wi-Fi.",
-      "Conducted end-to-end simulated transaction, receipt print, and EOD settlement tests."
+      "Executed physical LAN cabling, RJ45 termination to T-568B standard, and verified switch port VLAN bindings.",
+      "Provisioned primary and backup checkout registers: configured receipt printers, 2D barcode scanners, customer-facing displays, and EDC pinpads.",
+      "Conducted full simulated transaction walk-throughs covering cash, card, and e-wallet tenders prior to launch day."
     ],
     outcome: [
-      "Delivered multiple new store IT handovers with zero opening-day IT downtime.",
-      "Eliminated expensive third-party contractor dispatch costs by resolving physical terminations on site."
+      "Successfully commissioned and validated IT readiness across multiple store opening deployments, ensuring zero launch delays.",
+      "Established standard operating procedures for branch network verification and peripheral deployment."
     ],
-    takeaway: "High-level software configurations fail if Layer-1 physical connectivity is broken. Fluency from RJ45 to IP routing is essential."
+    takeaway: "Hardware reliability is won in the details: proper cable termination and driver testing prevent launch-day outages."
   },
   {
     id: "case-saas-migration",
-    title: "Enterprise SaaS Migration & Super Admin Governance",
+    title: "Google Workspace to Lark Enterprise Migration & Super Admin Governance",
     organization: "Palaterium Sdn Bhd",
     stratum: "cloud-automation",
-    hook: "Transitioning 100+ business users from Google Workspace to Lark while automating paperless approvals.",
+    hook: "Transitioning 100+ business users from Google Workspace to Lark while establishing Super Admin governance and automating paperless approvals.",
     challenge: "Migrating communication, files, and approval workflows across non-technical departments without operational downtime.",
     investigation: "Audited existing mailboxes, mapped department hierarchy into organizational units, and mapped manual paper bottlenecks.",
     actions: [
@@ -258,7 +322,7 @@ export const CASE_STUDIES: UniverseCaseStudy[] = [
     title: "Web MVC Application Development & Relational ERD",
     organization: "Attorney General’s Chambers of Malaysia",
     stratum: "application",
-    hook: "Engineering an internal compliance declaration portal from requirements gathering to normalized MySQL schema.",
+    hook: "Engineering an internal compliance declaration portal from requirements gathering to normalized MySQL schema during internship.",
     challenge: "Translating public sector ICT guidelines into functional relational database tables and straightforward web submission forms.",
     investigation: "Engaged administrative stakeholders to document manual declaration processes and drafted formal System Requirements Specifications.",
     actions: [
@@ -275,7 +339,8 @@ export const CASE_STUDIES: UniverseCaseStudy[] = [
 ];
 
 /* =========================================================================
-   4. THE ATLAS KNOWLEDGE GRAPH (NODES & EDGES)
+   6. THE ATLAS KNOWLEDGE GRAPH (NODES & EDGES)
+   Every professional/project node includes mandatory usage and evidenceRef.
    ========================================================================= */
 
 export const NODES: UniverseNode[] = [
@@ -287,6 +352,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I configure handheld and fixed barcode scanners, mapping baud rates, symbologies, and USB HID/serial emulations.",
+    usage: "Configured serial baud rates and USB HID emulations on checkout scanners at emart24 retail stores.",
     evidenceRef: "exp-emart24",
     x: 15,
     y: 12
@@ -298,6 +364,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I provision, configure, and maintain point-of-sale workstation terminals and touchscreens across retail stores.",
+    usage: "Provisioned and deployed touchscreen POS hardware and peripherals for nationwide retail store launches.",
     evidenceRef: "exp-emart24",
     x: 28,
     y: 15
@@ -309,6 +376,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I deploy and triage merchant payment terminals, diagnosing chip reader drops, power delivery, and comm timeouts.",
+    usage: "Connected and tested merchant payment terminals, diagnosing communication timeouts and chip drops.",
     evidenceRef: "exp-emart24",
     x: 42,
     y: 12
@@ -320,6 +388,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I resolve thermal print head jams, configure baud rates, and diagnose serial/network print spooler queues.",
+    usage: "Configured 80mm ESC/POS printer drivers, resolved serial communication errors, and fixed paper jams.",
     evidenceRef: "exp-emart24",
     x: 58,
     y: 15
@@ -331,6 +400,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I terminate Cat6 cabling to the T-568B standard and verify 8-wire continuity with ratcheting diagnostic testers.",
+    usage: "Terminated Cat6 RJ45 patch cables to T-568B standard and validated 8-pin continuity with cable testers.",
     evidenceRef: "exp-emart24",
     x: 72,
     y: 12
@@ -342,6 +412,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I diagnosed motherboards, paper-feed roller assemblies, and firmware update conflicts in managed print fleets.",
+    usage: "Diagnosed printer hardware failures, paper feed assemblies, and firmware compatibility issues for corporate clients.",
     evidenceRef: "exp-mps",
     x: 85,
     y: 15
@@ -355,6 +426,7 @@ export const NODES: UniverseNode[] = [
     kind: "concept",
     status: "professional",
     summary: "I map peripheral communication ports (RS-232, USB serial) to OS device handles for pinpads and barcode scanners.",
+    usage: "Mapped COM port and serial device parameters for peripheral hardware connectivity under Windows.",
     evidenceRef: "exp-emart24",
     x: 20,
     y: 28
@@ -366,6 +438,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I troubleshoot local background services, process hangs, memory consumption, and SQLite cache lockouts.",
+    usage: "Troubleshot background POS service hangs and local database sync queues during live store support.",
     evidenceRef: "exp-emart24",
     x: 35,
     y: 32
@@ -387,6 +460,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I analyze Windows Event Logs (System/Application) to isolate DLL crashes, driver collisions, and print spooler stalls.",
+    usage: "Analyzed Windows Event Viewer logs to diagnose print spooler crashes and workstation driver conflicts.",
     evidenceRef: "exp-mps",
     x: 68,
     y: 32
@@ -410,6 +484,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I configure managed switch ports to segregate PCI-sensitive POS transaction traffic from public guest Wi-Fi.",
+    usage: "Configured managed switch port VLANs to segment retail POS transaction traffic from guest networks.",
     evidenceRef: "exp-emart24",
     x: 18,
     y: 48
@@ -421,6 +496,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I test branch router policy-based routing to ensure automated failover from fibre broadband to backup 4G LTE.",
+    usage: "Tested branch router automatic failover between primary fibre broadband and backup 4G LTE connections.",
     evidenceRef: "exp-emart24",
     x: 32,
     y: 45
@@ -442,6 +518,7 @@ export const NODES: UniverseNode[] = [
     kind: "concept",
     status: "professional",
     summary: "I troubleshoot domain name lookup failures, static DNS overrides, and caching delays during gateway transitions.",
+    usage: "Troubleshot DNS server settings and name resolution errors affecting store payment endpoints.",
     evidenceRef: "exp-emart24",
     x: 65,
     y: 45
@@ -465,6 +542,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I provide daily frontline support for register transactions, promotional rule engines, and offline queue sync.",
+    usage: "Supported daily register transactions, promotional rule engines, and offline queue synchronization across stores.",
     evidenceRef: "exp-emart24",
     x: 22,
     y: 65
@@ -476,6 +554,7 @@ export const NODES: UniverseNode[] = [
     kind: "concept",
     status: "professional",
     summary: "I triage financial transaction message types (MTI 0100/0110), isolating bank issuer declines from comm timeouts.",
+    usage: "Triaged payment authorization response codes to distinguish bank host declines from network timeouts.",
     evidenceRef: "exp-emart24",
     x: 38,
     y: 62
@@ -497,6 +576,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "project",
     summary: "I developed government compliance declaration modules, form validation, and routing during my AGC internship.",
+    usage: "Developed web forms, routing, and controller logic for the internal DKICT compliance system at AGC.",
     evidenceRef: "exp-agc",
     x: 70,
     y: 62
@@ -508,6 +588,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "project",
     summary: "I designed normalized 3NF database schemas, foreign key constraints, and SQL data integrity queries at AGC.",
+    usage: "Designed normalized relational database tables and executed SQL queries for the DKICT portal at AGC.",
     evidenceRef: "exp-agc",
     x: 84,
     y: 65
@@ -521,8 +602,9 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I administered enterprise collaboration for 100+ users: managing organizational units, roles, and SAML access.",
+    usage: "Administered user accounts, role permissions, and organizational units in Lark Super Admin for 100+ staff.",
     evidenceRef: "exp-palaterium",
-    x: 24,
+    x: 20,
     y: 80
   },
   {
@@ -532,20 +614,32 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I supported email/data cutover steps, user account transitions, and post-migration desk-side troubleshooting.",
+    usage: "Assisted user account preparation and data transition during company-wide migration from Google Workspace to Lark.",
     evidenceRef: "exp-palaterium",
-    x: 40,
+    x: 35,
     y: 82
   },
   {
-    id: "node-approval-bots",
-    label: "Lark Base Automated Approval Bots",
+    id: "node-approval-workflows",
+    label: "Lark Digital Approval Workflows",
     stratum: "cloud-automation",
-    kind: "project",
+    kind: "technology",
     status: "professional",
-    summary: "I built automated approval chains replacing paper purchase requisition memos, cutting departmental turnaround.",
+    summary: "I designed and deployed digital approval workflows inside Lark to reduce manual paperwork and streamline approvals.",
+    usage: "Built multi-tier administrative approval workflows in Lark to replace physical paper requisition memos.",
     evidenceRef: "exp-palaterium",
-    x: 56,
+    x: 50,
     y: 80
+  },
+  {
+    id: "node-uipath-rpa",
+    label: "UiPath & RPA (Learning)",
+    stratum: "cloud-automation",
+    kind: "concept",
+    status: "learning",
+    summary: "Currently learning UiPath and exploring Robotic Process Automation (RPA), with an interest in understanding workflow automation.",
+    x: 64,
+    y: 78
   },
   {
     id: "node-netsuite-audit",
@@ -553,9 +647,10 @@ export const NODES: UniverseNode[] = [
     stratum: "cloud-automation",
     kind: "technology",
     status: "professional",
-    summary: "I validated and reconciled multi-department batch imports using advanced Microsoft Excel formulas and VLOOKUP.",
+    summary: "I validated and reconciled multi-department batch imports using Microsoft Excel formulas (VLOOKUP, data auditing).",
+    usage: "Cleaned and validated multi-department inventory and financial data in Excel prior to NetSuite ERP import.",
     evidenceRef: "exp-palaterium",
-    x: 72,
+    x: 78,
     y: 82
   },
   {
@@ -565,7 +660,7 @@ export const NODES: UniverseNode[] = [
     kind: "certification",
     status: "foundation",
     summary: "Formally certified in core AWS architectural concepts: VPC subnetting, EC2 instances, S3 storage tiers, and IAM roles.",
-    x: 86,
+    x: 90,
     y: 80
   },
 
@@ -577,6 +672,7 @@ export const NODES: UniverseNode[] = [
     kind: "concept",
     status: "professional",
     summary: "I translate non-technical user distress into structured, timestamped logs for software and payment vendors.",
+    usage: "Escalated application defects and payment terminal incidents to vendors with timestamped logs and error codes.",
     evidenceRef: "exp-emart24",
     x: 25,
     y: 94
@@ -588,6 +684,7 @@ export const NODES: UniverseNode[] = [
     kind: "project",
     status: "professional",
     summary: "I authored reproducible launch readiness SOPs, ensuring zero launch delays across multiple store openings.",
+    usage: "Authored IT commissioning checklists covering network testing, hardware setup, and POS validation for store openings.",
     evidenceRef: "exp-emart24",
     x: 45,
     y: 94
@@ -599,6 +696,7 @@ export const NODES: UniverseNode[] = [
     kind: "technology",
     status: "professional",
     summary: "I logged, categorized, and hit service resolution turnaround targets across corporate customer accounts.",
+    usage: "Logged and resolved customer technical support tickets in Freshdesk adhering to agreed service turnaround times.",
     evidenceRef: "exp-mps",
     x: 65,
     y: 94
@@ -644,8 +742,9 @@ export const EDGES: UniverseEdge[] = [
 
   // Cloud & Automation to People/Process
   { from: "node-lark-admin", to: "node-google-workspace", reason: "Super Admin mapped user accounts during Google Workspace cutover to Lark." },
-  { from: "node-lark-admin", to: "node-approval-bots", reason: "Admin directory hierarchy powers automated departmental approval bot routing." },
-  { from: "node-netsuite-audit", to: "node-approval-bots", reason: "Audited financial batches originate from approved Lark Base workflow records." },
+  { from: "node-lark-admin", to: "node-approval-workflows", reason: "Admin directory hierarchy powers departmental approval workflow routing." },
+  { from: "node-netsuite-audit", to: "node-approval-workflows", reason: "Audited financial records originate from approved Lark Base workflow entries." },
+  { from: "node-approval-workflows", to: "node-uipath-rpa", reason: "Foundational interest in digital workflows inspired ongoing exploration of RPA concepts." },
   { from: "node-aws-ccp", to: "node-linux-internals", reason: "Cloud instances require grounded understanding of virtual memory and Linux systemd." },
 
   // People & Process Bindings
@@ -655,7 +754,7 @@ export const EDGES: UniverseEdge[] = [
 ];
 
 /* =========================================================================
-   5. STRATA DEFINITIONS FOR "BEEP TO RECEIPT"
+   7. STRATA DEFINITIONS FOR "BEEP TO RECEIPT" (ILLUSTRATIVE DIAGRAMS)
    ========================================================================= */
 
 export interface StratumMeta {
@@ -710,9 +809,9 @@ export const STRATA: StratumMeta[] = [
     number: "STRATUM 05",
     title: "Cloud Services & Platform Automation",
     tagline: "Identity, Multi-Site Sync, Audit",
-    stepDescription: "The transaction record synchronizes to central cloud databases while automated Lark bots verify store inventory thresholds.",
+    stepDescription: "The generic transaction synchronizes to central servers while inventory threshold checks and batch reconciliations occur.",
     visualType: "cloudflow",
-    annotationNodeIds: ["node-lark-admin", "node-approval-bots", "node-netsuite-audit", "node-aws-ccp"]
+    annotationNodeIds: ["node-lark-admin", "node-approval-workflows", "node-uipath-rpa", "node-netsuite-audit", "node-aws-ccp"]
   },
   {
     id: "people-process",

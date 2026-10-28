@@ -6,7 +6,8 @@ import {
   CERTIFICATIONS, 
   STRATA, 
   NODES, 
-  EDGES 
+  EDGES,
+  LEARNING_ENTRIES
 } from '../data/universeContent';
 import { Printer, ArrowUpRight } from 'lucide-react';
 
@@ -63,8 +64,9 @@ export const PlainView: React.FC = () => {
           <li><a href="#plain-strata" className="hover:underline">The 6 Computing Strata (Beep to Receipt)</a></li>
           <li><a href="#plain-experience" className="hover:underline">Verified Employment History</a></li>
           <li><a href="#plain-case-studies" className="hover:underline">Operational Case Studies</a></li>
+          <li><a href="#plain-learning" className="hover:underline">Currently Learning & Active Explorations</a></li>
           <li><a href="#plain-credentials" className="hover:underline">Certifications & Education</a></li>
-          <li><a href="#plain-knowledge-graph" className="hover:underline">Full Knowledge Graph Competencies (30 Nodes)</a></li>
+          <li><a href="#plain-knowledge-graph" className="hover:underline">Full Technical Topology ({NODES.length} Verified Nodes)</a></li>
         </ol>
       </nav>
 
@@ -186,10 +188,38 @@ export const PlainView: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 4: CERTIFICATIONS & EDUCATION */}
+      {/* SECTION 4: CURRENTLY LEARNING & ACTIVE EXPLORATIONS */}
+      <section id="plain-learning" className="mb-14 scroll-mt-10">
+        <h2 className="text-xl font-bold font-mono uppercase tracking-wide border-b border-stone-900 pb-2 mb-6">
+          4. Currently Learning & Active Explorations
+        </h2>
+        <p className="text-xs font-mono text-stone-600 mb-4 uppercase">
+          Active technical investigations and learning areas (strictly isolated from production claims)
+        </p>
+        <div className="space-y-4">
+          {LEARNING_ENTRIES.map(entry => (
+            <div key={entry.id} className="p-4 border border-stone-300 bg-stone-50">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <span className="font-mono text-sm font-bold text-stone-900">{entry.topic}</span>
+                <span className="px-2 py-0.5 bg-stone-200 text-stone-800 font-mono text-[10px] uppercase font-bold tracking-wider">
+                  STATUS: {entry.status}
+                </span>
+              </div>
+              <div className="text-xs font-mono text-stone-600 mb-2">
+                <strong>Context:</strong> {entry.context}
+              </div>
+              <p className="text-xs text-stone-700 leading-relaxed font-sans">
+                "{entry.note}"
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 5: CERTIFICATIONS & EDUCATION */}
       <section id="plain-credentials" className="mb-14 scroll-mt-10">
         <h2 className="text-xl font-bold font-mono uppercase tracking-wide border-b border-stone-900 pb-2 mb-6">
-          4. Certifications & Academic Credentials
+          5. Certifications & Academic Credentials
         </h2>
         <div className="space-y-4 text-sm">
           {CERTIFICATIONS.map(cert => (
@@ -216,10 +246,10 @@ export const PlainView: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 5: FULL KNOWLEDGE GRAPH COMPETENCIES */}
+      {/* SECTION 6: FULL TECHNICAL TOPOLOGY */}
       <section id="plain-knowledge-graph" className="mb-14 scroll-mt-10">
         <h2 className="text-xl font-bold font-mono uppercase tracking-wide border-b border-stone-900 pb-2 mb-6">
-          5. Full Technical Topology (All 30 Verified Nodes)
+          6. Full Technical Topology (All {NODES.length} Verified Nodes)
         </h2>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border border-stone-300 font-sans">
@@ -228,6 +258,7 @@ export const PlainView: React.FC = () => {
                 <th className="p-2.5 border-r border-stone-300">Node Label</th>
                 <th className="p-2.5 border-r border-stone-300">Stratum</th>
                 <th className="p-2.5 border-r border-stone-300">Status</th>
+                <th className="p-2.5 border-r border-stone-300">Applied Operational Usage</th>
                 <th className="p-2.5">Factual Operational Summary</th>
               </tr>
             </thead>
@@ -243,7 +274,10 @@ export const PlainView: React.FC = () => {
                   <td className="p-2.5 font-mono uppercase text-stone-800 border-r border-stone-200 whitespace-nowrap font-semibold">
                     {node.status}
                   </td>
-                  <td className="p-2.5 text-stone-700 leading-relaxed">
+                  <td className="p-2.5 text-stone-800 font-mono text-[11px] border-r border-stone-200 leading-relaxed min-w-[220px]">
+                    {node.usage || 'Exploratory architecture node'}
+                  </td>
+                  <td className="p-2.5 text-stone-700 leading-relaxed min-w-[260px]">
                     {node.summary}
                   </td>
                 </tr>

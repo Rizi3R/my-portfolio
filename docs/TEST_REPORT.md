@@ -11,9 +11,9 @@
 
 | Command | Purpose | Result | Notes |
 | :--- | :--- | :--- | :--- |
-| `npm run validate:content` | Provenance validation (`scripts/validate-content.ts`) | **PASS** (0 errors, 0 warnings) | 30 Nodes, 25 Edges, 4 Experiences, 4 Case Studies verified against strict schema. |
+| `npm run validate:content` | Provenance validation (`scripts/validate-content.ts`) | **PASS** (0 errors, 0 warnings) | 31 Nodes, 26 Edges, 4 Experiences, 4 Case Studies verified against strict schema. |
 | `npm run lint` | TypeScript type-checking (`tsc --noEmit`) | **PASS** (0 errors) | Strict typing across all components, interfaces, and event handlers. |
-| `npm run build` | Production Vite build & tree-shaking | **PASS** (798ms) | Code-splitting generated separate async chunks for heavy interactive modules. |
+| `npm run build` | Production Vite build & tree-shaking | **PASS** (858ms) | Code-splitting generated separate async chunks for heavy interactive modules. |
 
 ---
 
@@ -22,12 +22,12 @@
 | Chunk File | Unminified / Minified | Gzip Size | Role / Lazy Boundary |
 | :--- | :--- | :--- | :--- |
 | `dist/index.html` | 5.55 kB | 2.37 kB | Entry HTML with JSON-LD schema and `<noscript>` fallback |
-| `dist/assets/index-*.css` | 95.24 kB | 14.54 kB | Tailwind v4 design system, font tokens, and print rules |
-| `dist/assets/ResumeModal-*.js` | 10.15 kB | 2.22 kB | Lazy-loaded ATS Resume Modal (down from 12.21 kB) |
-| `dist/assets/PlainView-*.js` | 17.82 kB | 3.18 kB | Lazy-loaded semantic paper document specification |
-| `dist/assets/AtlasView-*.js` | 22.58 kB | 5.40 kB | Lazy-loaded deterministic 2D knowledge graph |
+| `dist/assets/index-*.css` | 95.76 kB | 14.62 kB | Tailwind v4 design system, font tokens, and print rules |
+| `dist/assets/ResumeModal-*.js` | 10.15 kB | 2.22 kB | Lazy-loaded ATS Resume Modal |
+| `dist/assets/PlainView-*.js` | 20.42 kB | 3.55 kB | Lazy-loaded semantic paper document specification |
+| `dist/assets/AtlasView-*.js` | 23.11 kB | 5.45 kB | Lazy-loaded deterministic 2D knowledge graph |
 | `dist/assets/TheLab-*.js` | 49.38 kB | 11.44 kB | Lazy-loaded interactive simulation workbench |
-| `dist/assets/index-*.js` | 545.91 kB | 157.97 kB | Core application (down from 554.54 kB / 162.60 kB gzip) |
+| `dist/assets/index-*.js` | 554.62 kB | 159.69 kB | Core application bundle with TraceView & CommandPalette |
 
 *Note: `CyberBackground.tsx` (184-line 60fps canvas particle script) was deleted during the Critical Review Pass, saving continuous CPU/GPU rendering frames and memory allocation.*
 

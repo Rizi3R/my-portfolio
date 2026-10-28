@@ -23,4 +23,4 @@
 | **Stage 10** | Testing & Verification | **DONE** | `docs/TEST_REPORT.md` | Automated checks passed (`validate:content`, `lint`, `build`). WCAG 2.2 AA accessibility audit documented. |
 | **Stage 11** | Critical Self-Review | **DONE** | `docs/REVIEW.md` | Skeptical review across 10 categories; ranked top 10 high-impact fixes. |
 | **Stage 12** | Fixes & Removals | **DONE** | Codebase edits | Cut `CyberBackground.tsx` (184-line 60fps canvas loop); replaced with pure CSS `.tech-universe-bg`; added Hero intro; unified Lab tokens. |
-| **Stage 13** | Copy-Truth Audit & Report | **DONE** | `docs/COPY_AUDIT.md`, Final Report | Visitor-facing sentence audit with provenance flags; final 11-section delivery report. |
+| **Stage 13** | Copy-Truth Audit & Report | **DONE** | `docs/FACT_CHECK.md`, `docs/EVIDENCE_INVENTORY.md` | Full sentence audit with provenance flags, 6-part summary, and 12-section delivery report. |

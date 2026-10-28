@@ -1,0 +1,284 @@
+# MISSION
+
+You are a coordinated senior team (creative director, creative technologist, frontend architect, interaction designer, accessibility engineer, performance engineer, security reviewer, technical-content editor, fact-checker) working directly inside my existing project. Upgrade my personal portfolio, live at https://aries-razak.vercel.app/, into a distinctive, fully functional, accessible, fast "personal technology universe" by modifying the actual project files.
+
+Improve the existing project; do not rebuild from scratch. If the audit proves a rewrite of some part is necessary, justify it in writing before doing it.
+
+Do not stop at planning, mockups or recommendations. Notes are intermediate artifacts; the deliverable is a working modified codebase plus an honest report. This single prompt covers the whole job: truthful content audit, concept, implementation, testing, critical self-review with fixes, fact-check and final report. Complete it in order.
+
+Conflict-resolution priority: (1) correctness, truthfulness and authenticity, (2) user experience and accessibility, (3) originality, (4) technical reliability, (5) performance and security, (6) maintainability, (7) visual polish. Independently of that order, never expose secrets and never publish confidential employer information (section 11).
+
+FINAL RULE: If making my portfolio look more impressive conflicts with representing my actual abilities accurately, choose accuracy. I would rather have a technically impressive portfolio that honestly shows an early-stage learner in some areas than one that makes me look highly experienced in technologies I cannot confidently use. Help me demonstrate potential without pretending that potential is already proven experience.
+
+# 1. TRUTHFULNESS AND AUTHENTICITY (CRITICAL; overrides design, creativity, marketing and technical ambition)
+
+I want an impressive portfolio that represents my REAL abilities, experience, projects and learning journey. I do not want an AI-generated fantasy version of myself. The objective is to present my actual background as effectively as possible, not to make me appear more experienced or advanced than I am.
+
+1.1 Never invent, assume, embellish or fabricate: professional experience, job responsibilities, employment dates, achievements or measurable results, project history, technical skills, certifications, qualifications, programming proficiency, production-system experience, cloud infrastructure experience, cybersecurity expertise, AI or automation experience, customer or business impact, performance metrics, technologies used professionally, or projects supposedly completed. Do not add impressive-sounding statements because they would appeal to recruiters. Do not claim I built a system, developed an application, automated a workflow, managed infrastructure or implemented an integration unless existing evidence supports it. If something cannot be verified from the existing website, the project files or information I have explicitly provided, preserve the uncertainty. If an important fact is missing, ask me (see Stage 2 for how); if I cannot answer, omit the unsupported claim rather than invent one.
+
+1.2 Inspect before editing. Before changing any professional content, inspect the existing website, source code, project descriptions, experience entries, skills and certifications. Build an evidence inventory and classify every item as exactly one of:
+- A. VERIFIED PROFESSIONAL EXPERIENCE: work I actually performed in an employment or internship role. Status: professional.
+- B. VERIFIED PERSONAL PROJECT: a project I genuinely built or completed. Status: project.
+- (Demonstrations built specifically for this website are Status: experiment, labeled as portfolio experiments or educational demonstrations.)
+- C. FOUNDATIONAL KNOWLEDGE: concepts or tools I understand at an introductory level. Status: foundation.
+- D. CURRENTLY LEARNING: technologies I am actively learning but have not mastered. Status: learning.
+- E. FUTURE INTEREST: things I may want to explore but have not necessarily started. Status: exploring.
+Do not mix categories. Do not convert a technology mentioned in my interests into a professional skill. Do not assume a certification proves professional experience with the technology (for example, my AWS Certified Cloud Practitioner certification is a certification and foundational knowledge unless existing content shows applied professional work). If the existing portfolio contains an unsupported claim, flag it for my review; do not silently add more detail around it.
+
+1.3 UiPath and RPA. I am currently learning UiPath and exploring Robotic Process Automation (RPA). I must not be represented as an experienced RPA developer. Default copy, which you may adapt to the site's tone while preserving its meaning:
+"Currently learning UiPath and exploring Robotic Process Automation (RPA), with an interest in understanding workflow automation, application integration, and how repetitive processes can be automated."
+- Status for UiPath/RPA: learning. Place it in a clearly labeled "Currently Learning" area, not in professional skills.
+- Only state that I studied, built, tested or maintained a specific automation if I have told you so or existing content says so.
+- Do not claim ownership of any existing company automation projects, production robots, automation workflows I developed, or work as an RPA developer.
+- Do not mention any colleague, any company-internal automation project, or any detail of internal automations anywhere on the site.
+- Do not invent a completion date, certification, proficiency rating or percentage of progress.
+- The entry must be easy for me to update as my knowledge grows: it lives in the single content file (section 5), and editing that one entry updates every view.
+
+1.4 No technology padding. The portfolio must not become a catalogue of technologies I do not know. Do not add Linux, Kubernetes, Docker, advanced SQL, AWS engineering, Azure, cybersecurity, machine learning, React, TypeScript, UiPath or anything else to skills unless there is evidence of actual knowledge or experience. (The fact that this website may be built with a given framework does not make it a listed professional skill unless my existing content says so.) A technology may appear as a future interest only if genuinely relevant and clearly labeled as such. Prioritize skills and experiences I can confidently explain in a job interview. No skill percentages, proficiency scores, star ratings, fabricated experience levels or progress bars. Use clear, meaningful descriptions instead.
+
+1.5 No invented projects or fake systems. Do not create fake case studies or attribute AI-generated demonstrations to my employment history. A browser-based network visualization demonstrates how a concept works; it is never described as a network deployment I implemented at work. A simulated automation demonstrates a workflow concept; it is never described as a production UiPath automation. A new programming demonstration is listed as a personal project only after the implementation genuinely exists and works. Never fabricate user numbers, efficiency gains, financial savings, processing speeds, uptime figures or other business outcomes. No fake terminal output, no simulated live monitoring, no decorative dashboards implying nonexistent capabilities.
+
+1.6 Honest content structure. Use these site categories where there is real content: Professional Experience, Technical Skills and Tools, Selected Projects, Personal Experiments, Currently Learning, Future Areas of Interest. Do not create empty sections to look comprehensive. If a section has little verified content, keep it minimal or omit it. If I have only a few verified projects, present those well rather than inventing more. Make a small amount of real content look deliberate and well crafted, not sparse and apologetic.
+
+1.7 Impressive through craftsmanship, not false claims. The site should stand out through original visual design, thoughtful interaction design, well-executed responsive layouts, strong technical explanations, clean implementation, meaningful interactive demonstrations, clear presentation of real work, and honest descriptions of what I know and what I am learning. The visual experience can be ambitious while the professional content stays grounded in reality.
+
+1.8 Other hard rules.
+1. No fake functionality. No buttons that do nothing. No interfaces implying a live connection that does not exist. Never claim the site monitors devices, scans networks, performs security analysis or runs AI models unless genuinely implemented. Every simulation carries a persistent "SIMULATION" label and a short "Models / Does not model" note. Illustrative data is labeled "Illustrative".
+2. Honest verification. Never say a test, build, audit or check passed unless you actually ran it. If you cannot run something, write "Not run" with the reason and give me the exact command to run locally.
+3. No hidden scope. No backend, database, auth, analytics, third-party trackers, paid services or API keys. If the project template wires a Gemini or other API key, do not expose it, extend it or add new key usage.
+4. No overclaiming identity. Do not describe me as a security specialist, cloud engineer, AI engineer or senior software engineer. Use the titles already on the site.
+5. Preserve what works. Keep working features, routes, URLs, content and deployment configuration unless you document why a change is needed.
+6. Do not respond to any weakness by simply adding more animation or visual effects. Prefer clearer hierarchy, better interaction design, better copy and cleaner engineering.
+
+# 2. CONTEXT
+
+Owner: Aries Razak (confirm the display name from the existing site).
+Stack and workflow: Google AI Studio, GitHub, Vercel. The actual framework, dependencies, routing, styling and build setup are UNKNOWN to this prompt. Inspect the repo and report; do not assume. If git is available, work on a new branch (for example portfolio-upgrade), not main, and commit after each stage.
+
+Observed from the live page's HTML head only (not from source):
+- title: "Aries Razak | Systems Support & Technology Explorer"
+- description: personal technology universe; Systems Support Specialist and computing explorer; hands-on retail POS, SaaS administration, Layer 1-4 networking, interactive computing lab, active learning frontiers
+- OG description mentions interactive packet routing simulations, a cache eviction workbench and learning frontiers
+- theme-color #090D16; viewport and canonical set; referrer policy strict-origin-when-cross-origin
+- The initial HTML contained no body content, suggesting client-side rendering. Verify, and if true, address crawler/no-JS content (section 6.6).
+I describe the existing design as dark, futuristic, chapter-based, with interactive elements and a strong professional-experience emphasis. Verify against the source.
+
+Professional background (an outline only; the site's existing content is the source of truth for exact titles, dates and responsibilities; if the two conflict, keep the site's content and flag the discrepancy):
+- System Application Specialist, emart24 Malaysia (current)
+- IT Executive, Palaterium Sdn Bhd
+- IT Technician, managed print services company
+- IT Intern (full-stack development), Attorney General's Chambers of Malaysia
+- AWS Certified Cloud Practitioner
+Experience areas I have described: application support, POS systems, troubleshooting, vendor coordination, store technology setups, business systems, SaaS administration, data management, networking fundamentals, hardware troubleshooting, web development exposure. Treat these as an outline to verify against existing content, not as permission to write detail.
+
+Audience: recruiters and hiring managers (need experience and contact quickly) and technically curious people (need something worth exploring).
+
+# 3. PROCESS (follow in order; do not skip stages)
+
+Keep docs/PROGRESS.md updated after every stage: what is done, in progress, remaining, and decisions made. If you are running out of room, stop at a clean point, make sure the code builds, update docs/PROGRESS.md, and tell me exactly what to paste to continue. Prefer a complete, polished core over many unfinished features.
+
+Stage 1 - Inspect the repository. List framework, build tool, language, styling approach, routing, state management, animation libraries, dependencies with versions, content/data files, existing components, vercel.json or Vercel settings, scripts, tests, lint config. Write to docs/AUDIT.md. Flag anything you could not determine.
+
+Stage 2 - Audit the site and build the evidence inventory. Audit source and rendered behavior (if you can run it): strongest and weakest elements, useful vs decorative interactions, generic patterns, mobile and accessibility defects, bundle size and Core Web Vitals baseline (numbers or "not measurable"). Then create docs/EVIDENCE_INVENTORY.md classifying every existing claim, skill, project, certification and experience entry per 1.2, flagging unsupported or exaggerated claims. End the stage by posting ONE consolidated list of questions about missing or doubtful facts. Do not wait idle for answers: continue with the safe default (omit or keep as-is and flag) and incorporate my answers whenever I give them.
+
+Stage 3 - Explore directions. Write three fundamentally different concepts in about 100 words each. One must be "Beep to Receipt" (section 4). The other two must be your own and must not rely on neon, 3D or particles as their identity.
+
+Stage 4 - Select and justify. Adopt "Beep to Receipt" unless you can justify in 150 words or fewer a stronger concept that satisfies every rule in section 1. Record in docs/DESIGN_DECISIONS.md.
+
+Stage 5 - Define the design system and information architecture (sections 5 and 7). Implement tokens before components.
+
+Stage 6 - Define the technical architecture: component tree, data flow, content model, folder structure, lazy-loading boundaries, fallback strategy. Reuse existing structure where sound. Document in docs/ARCHITECTURE.md.
+
+Stage 7 - Implement the core: content model migration (only verified content), layout shell, Plain view, Trace skeleton with static fallbacks, Receipt, navigation, view switching, SEO fundamentals. Must be independently shippable.
+
+Stage 8 - Implement the signature features: animated Trace line, stratum diagrams, Atlas (if the section 6.2 gate is met), Lab integration.
+
+Stage 9 - Adapt across devices (section 8). Do not just shrink desktop layouts.
+
+Stage 10 - Test functionality, accessibility, security and performance (section 13). Record in docs/TEST_REPORT.md.
+
+Stage 11 - Critical self-review. Act as a skeptical external reviewer who did not build this. List specific findings (file paths, component names, viewport widths; no vague statements) in docs/REVIEW.md:
+- Generic patterns: remove my name and logo; could this be confused with another portfolio? What is distinctive and what is not?
+- Unnecessary complexity: components, dependencies, effects or abstractions that do not earn their cost.
+- Low-value interactions: anything a visitor would not miss.
+- Performance bottlenecks (numbers or "Not measured").
+- Mobile problems at 360, 390, 430 and 768px.
+- Accessibility weaknesses: keyboard traps, missing names, contrast, motion, canvas content unavailable to assistive technology.
+- Unsupported claims and simulation honesty: anything not traceable to a source; anything implying live data, real scanning, real AI, or work I did not do; any skill, tool or learning entry that reads as more advanced than the evidence.
+- Broken or incomplete functionality: dead controls, unhandled errors, unreachable states.
+- Design-system inconsistencies: bypassed tokens, one-off colors or spacings, inconsistent states.
+- Confidentiality: anything revealing internal employer details.
+Rank by impact (truthfulness, usability and accessibility, distinctiveness, performance) divided by effort. List the top ten.
+
+Stage 12 - Fix. Implement the top review fixes plus every Stage 10 failure, highest impact first. You must remove or simplify at least one feature, effect or dependency that fails the value test and explain what you cut; any new visual element must replace something, not add to it. Re-run every available check and update docs/TEST_REPORT.md.
+
+Stage 13 - Fact-check and final report. Create docs/FACT_CHECK.md containing: (a) a table of every sentence of visitor-facing copy: text, location, source (existing site content / my brief / written by you), evidence status, with every sentence you wrote yourself flagged for my approval; (b) the six-part summary: 1) claims retained because supported, 2) claims rewritten for accuracy, 3) claims omitted because unverifiable, 4) new features built specifically for the portfolio, 5) technologies added only to a learning or interest section, 6) remaining questions needing my confirmation. Then produce the final report (section 15).
+
+# 4. CREATIVE CONCEPT: "BEEP TO RECEIPT"
+
+One barcode scan at a till touches hardware, operating system, network, application, cloud/automation and people/process. The site follows that single generic transaction down through those layers, then links each layer to my real work and real learning with honest evidence statuses. The journey ends at a printed receipt, which is my experience and contact section.
+
+Entry: a short premise line, for example "One scan. Six layers. Here is what happens between the beep and the receipt." No loading screen and no intro that delays content.
+
+Strata (4 to 6, depending on how much verified or honestly-labeled content exists; merge or omit a stratum that would otherwise be empty or padded). Each has: a title, a one-line description of what happens to a scan at this layer in general, an illustrative diagram, 2-4 annotations linking to my actual content with evidence badges.
+1. Hardware and peripherals - scanner, terminal, receipt printer, cabling. SVG schematic.
+2. Operating system and device - drivers, processes, filesystem. Annotated layer diagram.
+3. Network - LAN, router, WAN, Layers 1-4. Node diagram hosting the packet routing simulation (labeled as a personal experiment).
+4. Application - POS software, SaaS administration, data. Annotated data-flow of a generic transaction record using clearly illustrative fields.
+5. Cloud and automation - SaaS, cloud foundations, scripting, RPA, integrations. Flow diagram. Content here is mostly foundation/learning; label it honestly.
+6. People and process - vendor coordination, support, deployments, handoffs. Handoff diagram.
+Security, AI-assisted development and similar topics are cross-cutting themes shown as nodes, not strata.
+
+Honesty constraints on the visuals: all stratum diagrams explain how a retail scan works in general and are labeled "Illustrative diagram". They are never logs, terminals, dashboards, live monitoring, or a depiction of my employer's actual systems, and must never be readable as a record of what I built. Do not describe any specific employer system architecture.
+
+Signature element: one continuous SVG trace line running through the strata, its position encoding scroll progress. Under reduced motion or without scroll-driven support, it is fully drawn and static.
+
+Views: Trace (default), Atlas (if gated in), Plain. A compact persistent header shows the name, the view switch, and "Experience" and "Contact" links that jump to the Receipt. A recruiter must reach experience and contact within one interaction, without any animation needing to complete.
+
+# 5. CONTENT MODEL AND PROVENANCE
+
+Create one typed content source (adapt to the existing structure) from which Trace annotations, Atlas, Plain view, Receipt and structured data are all generated. No content is duplicated across views.
+
+Node: id, label, stratum, kind (technology | concept | project | role | certification), status (professional | project | experiment | foundation | learning | exploring), summary (max 200 characters, factual, first person), usage (REQUIRED for professional and project: one factual sentence on how I used it, copied or closely derived from existing content; if none exists, omit the node), evidenceRef (REQUIRED for professional and project: id of an experience entry, a project entry or a URL), links (optional).
+Edge: from, to, reason (REQUIRED, max 120 characters, a real relationship).
+Experience entry: id, title, organization, start, end, bullets. Migrate verbatim from the existing site. Do not embellish.
+Learning entry (for example UiPath/RPA): free text note that I can edit; no completion date, rating, percentage or progress field unless I supply one.
+The schema must contain no proficiency, percentage, rating or progress fields.
+
+Evidence statuses and site categories (always shown with text plus a shape or fill pattern, never color alone):
+- professional -> Professional Experience, and Technical Skills and Tools (only with a usage line)
+- project -> Selected Projects
+- experiment -> Personal Experiments (labeled portfolio experiment or educational demonstration)
+- foundation -> Technical Skills and Tools or Certifications, marked foundational
+- learning -> Currently Learning
+- exploring -> Future Areas of Interest
+
+Derive nodes only from existing site content and what I have told you. If a topic (for example Linux, DNS, defensive security, RPA beyond the approved learning line) has no support, do not create a node or status for it; list it under "Owner questions". Do not add nodes to reach a number.
+
+Add scripts/validate-content.mjs, runnable as `npm run validate:content`, that fails on: missing status, professional or project node without evidenceRef or usage, edge without reason, duplicate ids, dangling edges, over-length text, any proficiency/percentage/rating/progress field. It must also warn on seniority or mastery words (expert, advanced, proficient, senior, mastery, extensive) for my review. Wire it into the build only if that cannot break the Vercel deployment; otherwise document it.
+
+# 6. FEATURES, BEHAVIOR AND ACCEPTANCE CRITERIA
+
+6.1 Trace
+- Native scrolling only. No scroll-jacking, no scroll snapping that traps users.
+- A rail (desktop) or top progress bar with the current stratum label (mobile) shows depth; items are links that jump to strata.
+- Each stratum has a shareable URL (route or hash) and Back works correctly.
+- Scroll-linked line drawing uses CSS scroll-driven animations when `CSS.supports('animation-timeline: scroll()')`; otherwise IntersectionObserver.
+- Every stratum diagram has a static, fully rendered fallback.
+- Acceptance: all strata readable with animation disabled; no layout shift when the trace line draws; keyboard users reach every annotation.
+
+6.2 Atlas (gated)
+- Build the graph view only if there are at least about 12 evidence-backed nodes with real edge reasons. Otherwise ship a compact, filterable "Stack Map" list grouped by status and stratum, and report that the gate was not met. Do not pad.
+- If built: renders every node and edge from the content model; deterministic stable layout; stratum by position/region and color, evidence status by shape or fill pattern plus text label.
+- Selecting a node opens a panel: label, status, summary, usage, evidence link, related nodes with edge reasons.
+- Filters: evidence status and stratum; simple text search.
+- Keyboard: Tab enters the graph, arrow keys move between related nodes, Enter selects, Escape clears. An equivalent accessible list or tree is the primary screen-reader representation; the canvas or SVG is decorative to assistive technology.
+- Any dragging has a single-pointer non-drag alternative.
+- Mobile (below 768px): no full-graph view; filter chips, a list, and a focused view of the selected node with at most 8 neighbors.
+- Acceptance: contrast at least 3:1 for graphics and 4.5:1 for text; touch targets at least 44px on touch devices (never below 24px); no hover-only information; at 360px nothing overlaps or requires horizontal scroll.
+
+6.3 Lab (Personal Experiments)
+- Verify that the packet routing simulation and the cache eviction workbench exist in the source; improve them, do not replace them. If either does not exist, report it and do not fabricate.
+- Label each as a "Portfolio experiment / Educational demonstration", never as work I did for an employer. Shared chrome: "SIMULATION" label, Models / Does not model note, play/pause/step/reset, speed control, seed or scenario selector, readable state log (also exposed through a throttled aria-live region).
+- Separate pure logic from rendering. Review the algorithms for correctness (eviction order for each policy offered; hop counts and path selection for routing). Add unit tests for the pure logic if a test runner exists or a minimal one (such as Vitest) is justified.
+- Pause animation when offscreen or the tab is hidden. Cap canvas DPR at 2. Under reduced motion: no autoplay, step-driven.
+- Acceptance: deterministic for a given seed; fully operable by keyboard; usable at 360px with controls below the canvas.
+
+6.4 Receipt
+- Generated from the experience data. Columns: role, organization, period. Include certification (labeled as a certification) and contact.
+- Contact uses only mechanisms that already exist (mailto, LinkedIn, GitHub, existing form). Add a copy-email button with a clipboard fallback. No backend.
+- Link to a résumé file only if one already exists in the repo or public folder. Do not generate or invent one.
+- A print stylesheet produces a clean one-to-two page résumé from this section.
+- Entry animation (lines printing sequentially) is under 1.5 seconds total, skippable, disabled under reduced motion. No gimmick totals or joke lines that misrepresent anything.
+
+6.5 Plain view
+- Text-first, light "paper" theme, linear document of all content from the same data. Fully functional with minimal JavaScript. Also the print source.
+
+6.6 Crawlability and sharing
+- Ensure meaningful content exists without running JavaScript: at minimum a static fallback in the HTML, plus JSON-LD Person data using only verified fields and existing links, canonical, correct title and meta, and verified OG/Twitter tags (check that the OG image exists and renders). Consider build-time prerendering only if the audit shows it is low risk. Do not migrate frameworks.
+
+6.7 Case file (conditional)
+- Build only if real case-study content already exists on the site or in the repo (problem, investigation, decisions, actions, outcome). Do not invent a case. If none exists, list it under "Owner questions" and skip.
+
+# 7. DESIGN SYSTEM
+
+Define everything as tokens (CSS variables or the existing styling system) and document in docs/DESIGN_SYSTEM.md.
+- Color: base ink starting at #090D16 with 3-4 lifted surface steps; one warm thermal accent for trace and active states; muted blue-gray for structure; paper off-white for receipt and Plain surfaces. Status encoding is never color-only. Verify contrast for every text/background pair. Avoid purple or cyan gradients, neon glow, glassmorphism, floating particles and generic dashboard cards unless justified for this concept.
+- Type: at most two families (a variable grotesque and a mono with tabular numerals), self-hosted or from the existing font setup, font-display: swap, metric-matched fallbacks, roughly 100 KB total at most. Fluid scale with clamp(); body line length 60-75ch.
+- Spacing and grid: 8px base unit; 12-column desktop, 8-column tablet, 4-column mobile; content max width about 1280px, wider canvases permitted.
+- Surfaces and depth: hairline 1px rules, tick marks and dimension-style labels; depth through overlap only; a restrained shadow only on receipt surfaces.
+- Motion: tokens for duration (120/200/320ms) and easing. Principle: things trace, print and settle. No parallax. Every animation has a purpose, a reduced-motion variant and an off-screen pause.
+- Icons: a small custom inline SVG set with 1.5px stroke; no icon library sprawl.
+- States: default, hover (pointer only), focus-visible (at least 2px ring with offset), active, disabled, loading (skeleton or static placeholder preventing layout shift), error (plain-language message with a recovery action), empty.
+- Different content types get different representations (diagrams, receipt, list, graph) while feeling like one system.
+
+# 8. RESPONSIVE REQUIREMENTS
+
+Verify at 360, 390, 430, 768, 1024, 1440 and 1920px widths.
+- 360-430: single column; top progress bar with stratum label; simplified or static diagrams; Atlas as filter chips plus list plus focused neighbor view; Lab controls beneath the canvas; no hover dependence; respect safe-area insets; use svh/dvh instead of 100vh.
+- 768: two-column where it helps; Atlas as list plus canvas split.
+- 1024+: side rail; full Atlas canvas with detail panel (if gated in).
+- 1440 and 1920: constrained text measure, composed (not stretched) layouts; no empty-looking voids.
+- Reduce effects on low-power devices: if more than 30 consecutive frames exceed 24ms, automatically drop to a simplified visual mode.
+- No horizontal page scroll at any width; wide tables and diagrams scroll inside their own container.
+
+# 9. ACCESSIBILITY (WCAG 2.2 AA target)
+
+Semantic landmarks, a skip link, one h1, logical heading order; keyboard access to every function with visible focus; prefers-reduced-motion honored everywhere; prefers-contrast and forced-colors do not break the layout; any motion longer than 5 seconds has a pause control; no flashing; text alternatives for every informational graphic; aria-live used sparingly and throttled; do not rely on color, hover or drag alone; touch targets as in 6.2; meaningful alt text.
+
+# 10. PERFORMANCE
+
+Measure a baseline first. Targets (mobile, throttled): LCP at most 2.5s, INP at most 200ms, CLS at most 0.1. Initial-route JavaScript must not grow by more than about 60 KB gzipped over baseline; lazy-load Atlas and Lab. Compress and size images; modern formats; no unoptimized hero media. Preload only the critical font; no layout shift from fonts. Animations use transform and opacity; pause offscreen; clean up listeners and rAF loops on unmount. If Lighthouse is runnable, target mobile Performance 90+, Accessibility 95+, Best Practices 95+, SEO 90+ as a minimum, not as proof of quality.
+
+# 11. SECURITY AND PRIVACY
+
+- No secrets, API keys, tokens or private URLs in the repo or bundle. No .env files with real values.
+- External links use rel="noopener noreferrer". No dangerouslySetInnerHTML or equivalent with unsanitized content. No eval. No new third-party scripts.
+- Add or tighten security headers in vercel.json only if you test that nothing breaks (for example a conservative Content-Security-Policy, X-Content-Type-Options, Referrer-Policy, Permissions-Policy). Report exactly what changed.
+- Confidentiality: describe employer systems at a general level only. No internal hostnames, IP addresses, vendor pricing, store addresses, credentials, screenshots or configuration details of internal systems, and no details of colleagues' work or internal automation projects. If existing content already contains any of these, flag it.
+- Security demonstrations are educational and defensive only. No scanning, probing or attack tooling.
+- Do not publish personal data beyond what already appears on the site (no home address, ID numbers or private phone numbers).
+
+# 12. ENGINEERING RULES
+
+- Keep the current framework, language and styling approach unless justified. TypeScript strict-friendly if the project uses TypeScript.
+- Add a dependency only if clearly justified, small, maintained and necessary; list every addition with size and reason. Prefer native APIs.
+- Reusable, small components; no component over about 250 lines without reason; data separated from presentation; pure logic separated from rendering.
+- Lazy-load heavy views. Handle unsupported capabilities with feature detection and tested fallbacks.
+- Remove dead code and unused dependencies you introduce or confirm are unused.
+- Keep Vercel configuration, build command, output directory and environment settings unchanged unless required, and report any change.
+- Do not use WebGL, WebGPU, Three.js, Web Workers or audio unless the audit produces a specific, documented need that nothing simpler can meet.
+
+# 13. VERIFICATION
+
+Run what your environment allows: install, lint, type-check, unit tests, validate:content, production build. Then check, and record in docs/TEST_REPORT.md as Pass / Fail / Not run (with reason):
+- all views at the seven widths; keyboard-only pass of every feature; reduced-motion emulation; no-JS or low-JS view of Plain; print preview of the Receipt; 4x CPU throttling and slow 4G; automated accessibility scan (axe or equivalent); bundle size versus baseline; Lighthouse if available.
+For anything you cannot run, give me the exact command or manual steps. Screen-reader testing (VoiceOver, NVDA) is a manual step for me; include a checklist.
+
+# 14. DEFINITION OF DONE
+
+- Every claim on the site traces to existing content or something I explicitly told you; nothing in section 1.1 was invented.
+- UiPath/RPA appears only as an honest, editable "currently learning" entry, with no ownership, completion, rating or progress claims, and no mention of colleagues or internal projects.
+- No skill percentages, progress bars or empty sections; no technology added without evidence or a clear interest/learning label.
+- No dead buttons; every simulation is labeled and functional; every diagram labeled illustrative; no fake terminal output or monitoring.
+- Experience and contact reachable in one interaction from the first screen.
+- Trace, Receipt, Plain view and the Lab (and Atlas, if gated in) work at all seven widths, by keyboard, and with reduced motion.
+- Content validator passes (or "Not run" is reported); production build succeeds (or "Not run" is reported).
+- No new secrets or unexpected network calls.
+- At least one feature, effect or dependency was removed or simplified during the critical review.
+- docs/ files exist and match the code.
+
+# 15. FINAL REPORT (plain, specific, no marketing language)
+
+1. Files created, modified, deleted (grouped).
+2. Architecture summary and why.
+3. Dependencies added or removed, with sizes and reasons.
+4. What was implemented vs. skipped, and why (including whether the Atlas gate was met).
+5. Fact-check summary: the six items from Stage 13, plus a pointer to docs/FACT_CHECK.md.
+6. Test and verification results: Pass / Fail / Not run, with reasons and commands.
+7. Baseline vs. final performance numbers, if measured.
+8. Critical review: top findings, what was fixed, what was cut, remaining weaknesses stated plainly.
+9. Known limitations, browser-support caveats and fallbacks.
+10. Vercel/deployment considerations and any configuration changes.
+11. Owner questions: facts, statuses or evidence you could not determine, and every sentence you wrote that I must approve.
+12. Suggested next steps, ranked by impact.

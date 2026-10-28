@@ -4,7 +4,8 @@ import {
   NODES, 
   CASE_STUDIES, 
   StratumType, 
-  PROFILE 
+  PROFILE,
+  LEARNING_ENTRIES 
 } from '../data/universeContent';
 import { 
   Scan, 
@@ -264,9 +265,15 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
                             </span>
                             {getStatusBadge(node.status)}
                           </div>
-                          <p className="text-xs text-stone-400 leading-relaxed font-sans mb-3">
+                          <p className="text-xs text-stone-400 leading-relaxed font-sans mb-2">
                             {node.summary}
                           </p>
+                          {node.usage && (
+                            <div className="text-[11px] font-sans text-stone-300 bg-stone-950/70 p-2 border border-stone-800/80 mb-3 leading-snug">
+                              <span className="font-mono text-[10px] text-stone-400 uppercase font-semibold block mb-0.5">Applied Usage:</span>
+                              {node.usage}
+                            </div>
+                          )}
                         </div>
 
                         <div className="flex items-center justify-between text-[11px] font-mono text-stone-500 pt-2 border-t border-stone-800/60">
@@ -384,6 +391,54 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
           );
         })}
       </div>
+
+      {/* =========================================================================
+         4. CURRENTLY LEARNING & ACTIVE EXPLORATIONS (SECTION 1.3 & 1.6)
+         ========================================================================= */}
+      <section 
+        aria-labelledby="learning-heading"
+        className="mt-16 pt-12 border-t border-stone-800"
+      >
+        <div className="mb-6">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-stone-900 border border-stone-700 text-stone-300 text-xs font-mono uppercase tracking-wider mb-2">
+            <span>○</span>
+            <span>Active Study Frontiers · Early Stage</span>
+          </div>
+          <h3 id="learning-heading" className="text-xl sm:text-2xl font-mono font-bold text-stone-100">
+            Currently Learning & Active Explorations
+          </h3>
+          <p className="text-xs sm:text-sm text-stone-400 font-sans mt-1 max-w-2xl leading-relaxed">
+            Honest boundaries: technologies I am actively investigating and learning. Demonstrating curiosity without pretending potential is already proven production experience.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {LEARNING_ENTRIES.map(entry => (
+            <div 
+              key={entry.id}
+              className="p-4 bg-stone-950 border border-stone-800 flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="font-mono font-bold text-sm text-stone-200">
+                    {entry.topic}
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 bg-stone-900 text-stone-300 border border-stone-700 font-semibold shrink-0">
+                    <span>○</span> [LEARNING]
+                  </span>
+                </div>
+                <p className="text-xs text-stone-300 leading-relaxed font-sans mb-3">
+                  "{entry.note}"
+                </p>
+              </div>
+              <div className="pt-2 border-t border-stone-800/80 text-[10px] font-mono text-stone-500">
+                <span className="uppercase font-semibold">Context: </span>
+                <span className="text-stone-400">{entry.context}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Culmination Bridge to the Thermal Receipt */}
       <div className="mt-20 pt-10 border-t border-stone-800 text-center">
