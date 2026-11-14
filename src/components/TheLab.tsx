@@ -75,7 +75,7 @@ const PACKET_PRESETS: PacketPreset[] = [
         label: 'Store Edge Gateway & NAT Router (192.168.10.1)',
         layer: 'Layer 3 (Network)',
         action: 'Network Address Translation (PAT) & Routing',
-        details: 'Rewrites private source IP 192.168.10.42:49152 to public WAN IP 175.143.22.8:51022. Selects primary broadband route.',
+        details: 'Rewrites private source IP 192.168.10.42:49152 to documentation WAN IP 198.51.100.22:51022. Selects primary broadband route.',
         latencyMs: 1.2
       },
       {
@@ -114,10 +114,10 @@ const PACKET_PRESETS: PacketPreset[] = [
   },
   {
     id: 'dns-lookup',
-    name: 'DNS Query (api.internal Domain Resolution)',
+    name: 'DNS Query (Demo Domain Resolution)',
     protocol: 'DNS',
     port: 'UDP 53',
-    payloadSummary: 'Standard Query 0x3f2a A api.emart24.internal',
+    payloadSummary: 'Standard Query 0x3f2a A catalog.retail-demo.example',
     description: 'Simulates recursive DNS resolution translating a human-friendly domain into a destination IP address.',
     hops: [
       {
@@ -149,7 +149,7 @@ const PACKET_PRESETS: PacketPreset[] = [
         label: 'Recursive DNS Resolver (1.1.1.1)',
         layer: 'Layer 7 (Application)',
         action: 'Root Nameserver & Authoritative Zone Lookup',
-        details: 'Authoritative zone hit: api.emart24.internal resolves to A-record 203.0.113.84 with TTL 300s.',
+        details: 'Authoritative zone hit: catalog.retail-demo.example resolves to A-record 203.0.113.84 with TTL 300s.',
         latencyMs: 7.4
       },
       {
@@ -505,63 +505,64 @@ export const TheLab: React.FC = () => {
   };
 
   return (
-    <section id="lab" className="py-20 lg:py-28 relative bg-[#050811] border-y border-slate-800/80">
-      {/* Background ambient lighting */}
-      <div 
-        aria-hidden="true" 
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-sky-950/20 blur-[160px] pointer-events-none rounded-full"
-      />
-
+    <section id="lab" className="py-10 lg:py-16 relative bg-[#1B1B1D] border-y border-[#323238]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-3xl">
-            <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-semibold tracking-wider text-sky-400 uppercase mb-3">
-              <span className="px-2 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[11px] font-bold">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-semibold tracking-wider text-[#B0E0E6] uppercase mb-3">
+              <span className="px-2 py-0.5 rounded bg-[#DC343B]/20 text-[#DC343B] border border-[#DC343B]/40 text-[11px] font-bold">
                 [SIMULATION]
               </span>
-              <Cpu className="w-4 h-4 text-sky-400" />
+              <Cpu className="w-4 h-4 text-[#B0E0E6]" aria-hidden="true" />
               <span>THE PERSONAL TECHNOLOGY LAB</span>
-              <span aria-hidden="true" className="text-slate-600">·</span>
-              <span className="text-stone-400">BROWSER-NATIVE SANDBOX</span>
+              <span aria-hidden="true" className="text-[#4B5563]">·</span>
+              <span className="text-[#9CA3AF]">BROWSER-NATIVE SANDBOX</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-mono font-bold text-white tracking-tight leading-snug mb-3">
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug mb-3">
               Interactive Computing Experiments & Simulations
             </h2>
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans mb-4">
-              Real computing happens beneath the surface. Step into this browser-run laboratory to inspect how network packets hop across OSI layers, test cache eviction algorithms, and calculate UNIX permission bitmasks in real time.
+            <p className="text-sm sm:text-base text-[#D1D5DB] leading-relaxed font-sans mb-4">
+              Explore what happens beneath the interface. Step into this client-side workbench to
+              inspect OSI Layer 2–7 packet hops, test cache eviction algorithms, and calculate UNIX
+              permission bitmasks in real time.
             </p>
 
             {/* Persistent Educational Simulation Disclaimer */}
-            <div className="p-3 bg-stone-900/90 border border-stone-800 text-xs font-mono space-y-1 mb-6 text-stone-300">
+            <div className="p-3.5 rounded-xl bg-[#222226] border border-[#323238] text-xs font-mono space-y-1.5 mb-6 text-[#D1D5DB]">
               <div className="flex items-start gap-2">
-                <span className="text-emerald-400 font-bold shrink-0">MODELS:</span>
-                <span>Deterministic OSI Layer 2–7 packet hops, RFC 793 TCP handshake flags, in-memory FIFO & LRU cache eviction cycles, and UNIX octal permission bitmasks.</span>
+                <span className="text-[#B0E0E6] font-bold shrink-0">MODELS:</span>
+                <span>
+                  Deterministic OSI Layer 2–7 packet hops, RFC 793 TCP handshake flags, in-memory
+                  FIFO & LRU cache eviction cycles, and UNIX octal permission bitmasks.
+                </span>
               </div>
-              <div className="flex items-start gap-2 pt-1 border-t border-stone-800/80">
-                <span className="text-amber-400 font-bold shrink-0">DOES NOT MODEL:</span>
-                <span>Live network sniffing, real server transactions, or real-time payment gateway clearance. All data is illustrative and generated locally.</span>
+              <div className="flex items-start gap-2 pt-1.5 border-t border-[#323238]">
+                <span className="text-[#DC343B] font-bold shrink-0">DOES NOT MODEL:</span>
+                <span>
+                  Live network sniffing, real server transactions, or real-time payment gateway
+                  clearance. All data is illustrative and generated locally.
+                </span>
               </div>
             </div>
           </div>
 
           {/* Workbench Tabs */}
-          <div className="flex items-center gap-1.5 p-1 bg-stone-900 border border-stone-800 self-start md:self-auto overflow-x-auto max-w-full font-mono text-xs">
+          <div className="flex items-center gap-1.5 p-1 bg-[#222226] border border-[#323238] rounded-lg self-start md:self-auto overflow-x-auto max-w-full font-mono text-xs">
             <button
               type="button"
               onClick={() => {
                 audioFx.playClick(500);
                 setActiveTab('network');
               }}
-              className={`px-3 py-1.5 transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
+              className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'network'
-                  ? 'bg-stone-800 text-cyan-300 border border-cyan-500/60 font-bold'
-                  : 'text-stone-400 hover:text-stone-200'
+                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/50 font-bold'
+                  : 'text-[#9CA3AF] hover:text-white'
               }`}
             >
-              <Network className="w-3.5 h-3.5 text-cyan-400" />
-              <span>01. Packet Flight Simulator</span>
+              <Network className="w-3.5 h-3.5 text-[#B0E0E6]" aria-hidden="true" />
+              <span>01. Packet Flight</span>
             </button>
 
             <button
@@ -570,14 +571,14 @@ export const TheLab: React.FC = () => {
                 audioFx.playClick(500);
                 setActiveTab('cache');
               }}
-              className={`px-3 py-1.5 transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
+              className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'cache'
-                  ? 'bg-stone-800 text-emerald-300 border border-emerald-500/60 font-bold'
-                  : 'text-stone-400 hover:text-stone-200'
+                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/50 font-bold'
+                  : 'text-[#9CA3AF] hover:text-white'
               }`}
             >
-              <Database className="w-3.5 h-3.5 text-emerald-400" />
-              <span>02. Cache Algorithm (LRU / FIFO)</span>
+              <Database className="w-3.5 h-3.5 text-[#B0E0E6]" aria-hidden="true" />
+              <span>02. Cache (LRU / FIFO)</span>
             </button>
 
             <button
@@ -586,14 +587,14 @@ export const TheLab: React.FC = () => {
                 audioFx.playClick(500);
                 setActiveTab('permissions');
               }}
-              className={`px-3 py-1.5 transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
+              className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'permissions'
-                  ? 'bg-stone-800 text-amber-300 border border-amber-500/60 font-bold'
-                  : 'text-stone-400 hover:text-stone-200'
+                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/50 font-bold'
+                  : 'text-[#9CA3AF] hover:text-white'
               }`}
             >
-              <Lock className="w-3.5 h-3.5 text-amber-400" />
-              <span>03. UNIX Permissions & Bitmask</span>
+              <Lock className="w-3.5 h-3.5 text-[#DC343B]" aria-hidden="true" />
+              <span>03. UNIX Permissions</span>
             </button>
           </div>
         </div>
@@ -603,10 +604,9 @@ export const TheLab: React.FC = () => {
            ========================================================================= */}
         {activeTab === 'network' && (
           <div className="space-y-6">
-            
-            {/* Protocol Preset Selector Pills */}
-            <div className="flex flex-wrap items-center gap-2 bg-slate-900/80 p-2 rounded-xl border border-slate-800">
-              <span className="text-xs font-mono text-slate-400 px-2 uppercase tracking-wider">
+            {/* Protocol Preset Selector */}
+            <div className="flex flex-wrap items-center gap-2 bg-[#222226] p-2.5 rounded-xl border border-[#323238]">
+              <span className="text-xs font-mono text-[#9CA3AF] px-2 uppercase tracking-wider">
                 SELECT PROTOCOL:
               </span>
               {PACKET_PRESETS.map((preset, idx) => (
@@ -614,13 +614,13 @@ export const TheLab: React.FC = () => {
                   key={preset.id}
                   type="button"
                   onClick={() => handleSelectPreset(idx)}
-                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors flex items-center gap-2 ${
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors flex items-center gap-2 cursor-pointer ${
                     selectedPresetIndex === idx
-                      ? 'bg-sky-500/20 text-sky-300 border border-sky-500/40 font-medium'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                      ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/60 font-medium'
+                      : 'text-[#9CA3AF] hover:text-white hover:bg-[#2B2B30]'
                   }`}
                 >
-                  <span className="font-mono text-[10px] text-sky-400">[{preset.protocol}]</span>
+                  <span className="font-mono text-[10px] text-[#DC343B]">[{preset.protocol}]</span>
                   <span>{preset.name}</span>
                 </button>
               ))}
@@ -628,45 +628,38 @@ export const TheLab: React.FC = () => {
 
             {/* Interactive Simulation Arena */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              
-              {/* Left 8 Cols: Visual Network Canvas & Active Node Topology */}
-              <div className="lg:col-span-8 bg-[#070B16] border border-slate-800 rounded-2xl p-6 relative overflow-hidden shadow-2xl">
-                
-                {/* Visual Canvas Header */}
-                <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-800 text-xs font-mono">
+              {/* Left 8 Cols: Visual Network Canvas */}
+              <div className="lg:col-span-8 bg-[#222226] border border-[#323238] rounded-2xl p-6 relative overflow-hidden">
+                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#323238] text-xs font-mono">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-slate-300 font-semibold">{activePreset.name}</span>
-                    <span className="text-slate-600">·</span>
-                    <span className="text-sky-400 font-mono">{activePreset.port}</span>
+                    <span className="w-2 h-2 rounded-full bg-[#B0E0E6]" aria-hidden="true" />
+                    <span className="text-white font-semibold">{activePreset.name}</span>
+                    <span className="text-[#4B5563]">·</span>
+                    <span className="text-[#B0E0E6] font-mono">{activePreset.port}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-400 text-[11px]">
-                    <span>HOP {currentHopIndex + 1} OF {activePreset.hops.length}</span>
+                  <div className="flex items-center gap-2 text-[#9CA3AF] text-[11px]">
+                    <span>
+                      HOP {currentHopIndex + 1} OF {activePreset.hops.length}
+                    </span>
                   </div>
                 </div>
 
                 {/* Network Nodes Coordinate Canvas */}
-                <div className="relative h-[320px] sm:h-[360px] w-full bg-slate-950/70 border border-slate-900 rounded-xl overflow-hidden p-4">
-                  {/* Subtle Grid Background */}
-                  <div className="absolute inset-0 cyber-grid opacity-30 pointer-events-none" />
+                <div className="relative h-[320px] sm:h-[360px] w-full bg-[#151517] border border-[#323238] rounded-xl overflow-hidden p-4">
+                  <div className="absolute inset-0 cyber-grid opacity-40 pointer-events-none" />
 
-                  {/* SVG Node Connection Paths */}
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                    {/* Switch to Client */}
-                    <line x1="10%" y1="50%" x2="26%" y2="25%" stroke="#334155" strokeWidth="2" strokeDasharray="3 3" />
-                    {/* Switch to Gateway */}
-                    <line x1="26%" y1="25%" x2="44%" y2="50%" stroke="#334155" strokeWidth="2" />
-                    {/* Gateway to DNS */}
-                    <line x1="44%" y1="50%" x2="44%" y2="82%" stroke="#334155" strokeWidth="1.5" strokeDasharray="4 4" />
-                    {/* Gateway to Proxy */}
-                    <line x1="44%" y1="50%" x2="65%" y2="35%" stroke="#334155" strokeWidth="2" />
-                    {/* Proxy to Backend */}
-                    <line x1="65%" y1="35%" x2="84%" y2="35%" stroke="#334155" strokeWidth="2" />
-                    {/* Backend to Database */}
-                    <line x1="84%" y1="35%" x2="84%" y2="72%" stroke="#334155" strokeWidth="2" />
+                  <svg
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line x1="10%" y1="50%" x2="26%" y2="25%" stroke="#323238" strokeWidth="2" strokeDasharray="3 3" />
+                    <line x1="26%" y1="25%" x2="44%" y2="50%" stroke="#323238" strokeWidth="2" />
+                    <line x1="44%" y1="50%" x2="44%" y2="82%" stroke="#323238" strokeWidth="1.5" strokeDasharray="4 4" />
+                    <line x1="44%" y1="50%" x2="65%" y2="35%" stroke="#323238" strokeWidth="2" />
+                    <line x1="65%" y1="35%" x2="84%" y2="35%" stroke="#323238" strokeWidth="2" />
+                    <line x1="84%" y1="35%" x2="84%" y2="72%" stroke="#323238" strokeWidth="2" />
                   </svg>
 
-                  {/* Render Hardware & Server Nodes */}
                   {NETWORK_NODES.map((node) => {
                     const isCurrent = activeHop?.nodeId === node.id;
                     const NodeIcon = node.icon;
@@ -686,8 +679,8 @@ export const TheLab: React.FC = () => {
                         <div
                           className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center border shadow-lg transition-all ${
                             isCurrent
-                              ? 'bg-sky-500/25 border-sky-400 text-sky-200 shadow-sky-500/40 ring-4 ring-sky-500/20'
-                              : 'bg-slate-900 border-slate-700/80 text-slate-400'
+                              ? 'bg-[#DC343B]/20 border-[#DC343B] text-white ring-4 ring-[#DC343B]/20'
+                              : 'bg-[#1B1B1D] border-[#323238] text-[#B0E0E6]'
                           }`}
                         >
                           <NodeIcon className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -695,42 +688,40 @@ export const TheLab: React.FC = () => {
                         <span className="text-[11px] font-semibold text-white mt-1.5 whitespace-nowrap">
                           {node.name}
                         </span>
-                        <span className="text-[9px] font-mono text-slate-400 whitespace-nowrap">
+                        <span className="text-[9px] font-mono text-[#9CA3AF] whitespace-nowrap">
                           {node.category}
                         </span>
                       </div>
                     );
                   })}
 
-                  {/* Animated Active Packet Marker Badge */}
                   {activeHop && (
-                    <div 
-                      className="absolute bottom-3 left-3 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-lg text-[11px] font-mono flex items-center gap-2 text-sky-300 backdrop-blur-sm"
-                    >
-                      <span className="w-2 h-2 rounded-full bg-sky-400 animate-ping" />
-                      <span>PACKET AT: <strong className="text-white">{activeHop.label.split('(')[0]}</strong></span>
+                    <div className="absolute bottom-3 left-3 bg-[#1B1B1D]/95 border border-[#323238] px-3 py-1.5 rounded-lg text-[11px] font-mono flex items-center gap-2 text-[#B0E0E6]">
+                      <span className="w-2 h-2 rounded-full bg-[#DC343B]" aria-hidden="true" />
+                      <span>
+                        PACKET AT: <strong className="text-white">{activeHop.label.split('(')[0]}</strong>
+                      </span>
                     </div>
                   )}
 
-                  {/* Latency Readout */}
                   {activeHop && (
-                    <div className="absolute top-3 right-3 bg-slate-900/90 border border-slate-800 px-3 py-1 rounded text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
-                      <Clock className="w-3 h-3 text-emerald-400" />
+                    <div className="absolute top-3 right-3 bg-[#1B1B1D]/95 border border-[#323238] px-3 py-1 rounded text-[11px] font-mono text-[#B0E0E6] flex items-center gap-1.5">
+                      <Clock className="w-3 h-3 text-[#B0E0E6]" aria-hidden="true" />
                       <span>+{activeHop.latencyMs}ms elapsed</span>
                     </div>
                   )}
                 </div>
 
                 {/* Controls Bar */}
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-800">
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#323238]">
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={handleDispatch}
                       disabled={isPlaying}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-sky-400 hover:bg-sky-300 disabled:opacity-50 text-slate-950 text-xs font-semibold rounded-lg transition-all shadow-md shadow-sky-500/20"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#DC343B] hover:bg-[#c52b31] disabled:opacity-50 text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer"
                     >
-                      <Play className="w-3.5 h-3.5 fill-current" />
+                      <Play className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
                       <span>{isPlaying ? 'Simulating...' : 'Dispatch Packet'}</span>
                     </button>
 
@@ -738,30 +729,32 @@ export const TheLab: React.FC = () => {
                       type="button"
                       onClick={handleStepNext}
                       disabled={isPlaying}
-                      className="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#1B1B1D] hover:bg-[#2B2B30] text-[#B0E0E6] text-xs font-medium rounded-lg border border-[#323238] transition-colors cursor-pointer"
                     >
                       <span>Step Next</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                     </button>
 
                     <button
                       type="button"
                       onClick={handleResetSim}
-                      className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors border border-slate-800"
+                      className="p-2 text-[#9CA3AF] hover:text-white hover:bg-[#1B1B1D] rounded-lg transition-colors border border-[#323238] cursor-pointer"
+                      aria-label="Reset Simulation"
                       title="Reset Simulation"
                     >
                       <RotateCcw className="w-4 h-4" />
                     </button>
                   </div>
 
-                  {/* Speed Selector */}
-                  <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#9CA3AF]">
                     <span>SPEED:</span>
                     <button
                       type="button"
                       onClick={() => setPlaySpeed(1)}
-                      className={`px-2 py-0.5 rounded text-[11px] ${
-                        playSpeed === 1 ? 'bg-sky-500/20 text-sky-300 font-bold border border-sky-500/30' : 'text-slate-500'
+                      className={`px-2 py-0.5 rounded text-[11px] cursor-pointer ${
+                        playSpeed === 1
+                          ? 'bg-[#B0E0E6]/20 text-[#B0E0E6] font-bold border border-[#B0E0E6]/40'
+                          : 'text-[#9CA3AF]'
                       }`}
                     >
                       1x
@@ -769,67 +762,66 @@ export const TheLab: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setPlaySpeed(2)}
-                      className={`px-2 py-0.5 rounded text-[11px] ${
-                        playSpeed === 2 ? 'bg-sky-500/20 text-sky-300 font-bold border border-sky-500/30' : 'text-slate-500'
+                      className={`px-2 py-0.5 rounded text-[11px] cursor-pointer ${
+                        playSpeed === 2
+                          ? 'bg-[#B0E0E6]/20 text-[#B0E0E6] font-bold border border-[#B0E0E6]/40'
+                          : 'text-[#9CA3AF]'
                       }`}
                     >
                       2x
                     </button>
                   </div>
                 </div>
-
               </div>
 
-              {/* Right 4 Cols: Real-Time Packet Header & OSI Layer Telemetry Dossier */}
-              <div className="lg:col-span-4 bg-[#070B16] border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-5">
+              {/* Right 4 Cols: Packet Telemetry Inspector */}
+              <div className="lg:col-span-4 bg-[#222226] border border-[#323238] rounded-2xl p-6 space-y-5">
                 <div>
-                  <div className="flex items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-wider mb-1">
-                    <Info className="w-3.5 h-3.5" />
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#B0E0E6] uppercase tracking-wider mb-1">
+                    <Info className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>HOP INSPECTOR TELEMETRY</span>
                   </div>
                   <h3 className="text-lg font-bold text-white tracking-tight">
                     {activeHop?.label}
                   </h3>
-                  <span className="inline-block mt-1 text-[11px] font-mono text-amber-300 bg-amber-950/60 border border-amber-800/60 px-2 py-0.5 rounded">
+                  <span className="inline-block mt-1.5 text-[11px] font-mono text-[#DC343B] bg-[#1B1B1D] border border-[#DC343B]/40 px-2 py-0.5 rounded">
                     {activeHop?.layer}
                   </span>
                 </div>
 
-                {/* Encapsulation Action Box */}
-                <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
-                  <span className="text-[11px] font-mono text-slate-400 uppercase block">
+                <div className="p-3.5 rounded-xl bg-[#1B1B1D] border border-[#323238] space-y-2">
+                  <span className="text-[11px] font-mono text-[#9CA3AF] uppercase block">
                     CURRENT NODE ACTION:
                   </span>
                   <p className="text-xs font-medium text-white leading-relaxed">
                     {activeHop?.action}
                   </p>
-                  <p className="text-xs text-slate-300 leading-relaxed pt-1 border-t border-slate-800/80">
+                  <p className="text-xs text-[#D1D5DB] leading-relaxed pt-1.5 border-t border-[#323238]">
                     {activeHop?.details}
                   </p>
                 </div>
 
-                {/* Packet Header Snippet */}
-                <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 font-mono text-[11px] space-y-1 text-slate-300">
-                  <div className="text-slate-500 text-[10px] pb-1 border-b border-slate-800 flex justify-between">
+                <div className="p-3.5 rounded-xl bg-[#151517] border border-[#323238] font-mono text-[11px] space-y-1 text-[#D1D5DB]">
+                  <div className="text-[#9CA3AF] text-[10px] pb-1 border-b border-[#323238] flex justify-between">
                     <span>PAYLOAD HEADER</span>
-                    <span className="text-sky-400">{activePreset.protocol}</span>
+                    <span className="text-[#B0E0E6]">{activePreset.protocol}</span>
                   </div>
-                  <div className="pt-1 text-sky-300 break-all">
+                  <div className="pt-1 text-[#B0E0E6] break-all">
                     {activePreset.payloadSummary}
                   </div>
-                  <div className="text-slate-400 text-[10px] pt-1">
-                    Port: {activePreset.port} · Hops traversed: {currentHopIndex + 1}/{activePreset.hops.length}
+                  <div className="text-[#9CA3AF] text-[10px] pt-1">
+                    Port: {activePreset.port} · Hops traversed: {currentHopIndex + 1}/
+                    {activePreset.hops.length}
                   </div>
                 </div>
 
-                {/* Educational Simulation Disclaimer */}
-                <div className="p-3 rounded-lg bg-sky-950/30 border border-sky-800/40 text-[11px] text-sky-200 leading-relaxed">
-                  <strong>Educational Simulation:</strong> Demonstrates real-world packet routing, NAT translation, 802.1Q tagging, and protocol responses based on verified multi-site retail infrastructure.
+                <div className="p-3 rounded-lg bg-[#1B1B1D] border border-[#323238] text-[11px] text-[#D1D5DB] leading-relaxed">
+                  <strong className="text-[#B0E0E6]">Educational Simulation:</strong> Demonstrates
+                  packet routing, NAT translation, 802.1Q tagging, and protocol steps cleanly in the
+                  browser.
                 </div>
               </div>
-
             </div>
-
           </div>
         )}
 
@@ -837,39 +829,37 @@ export const TheLab: React.FC = () => {
            VIEW 2: CACHE EVICTION ALGORITHM PLAYGROUND (LRU vs FIFO)
            ========================================================================= */}
         {activeTab === 'cache' && (
-          <div className="bg-[#070B16] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-8">
-            
-            {/* Workbench Header & Policy Switch */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+          <div className="bg-[#222226] border border-[#323238] rounded-2xl p-6 sm:p-8 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#323238]">
               <div>
-                <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-wider mb-1">
-                  <Database className="w-3.5 h-3.5" />
+                <div className="flex items-center gap-2 text-xs font-mono text-[#B0E0E6] uppercase tracking-wider mb-1">
+                  <Database className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>ALGORITHM BENCHMARK · CAPACITY: 4 SLOTS</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
                   Cache Eviction Simulator (LRU vs. FIFO)
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                  Watch how operating systems and web proxies retain hot data and evict expired records when memory fills up.
+                <p className="text-xs sm:text-sm text-[#D1D5DB] mt-1">
+                  Watch how operating systems and proxies retain hot data and evict records when
+                  capacity fills.
                 </p>
               </div>
 
-              {/* Policy Toggle Buttons */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono text-slate-400 mr-1">POLICY:</span>
+                <span className="text-xs font-mono text-[#9CA3AF] mr-1">POLICY:</span>
                 <button
                   type="button"
                   onClick={() => {
                     audioFx.playClick(500);
                     setCachePolicy('LRU');
                   }}
-                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors font-mono ${
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors font-mono cursor-pointer ${
                     cachePolicy === 'LRU'
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold'
-                      : 'text-slate-400 hover:text-white bg-slate-900 border border-slate-800'
+                      ? 'bg-[#DC343B] text-white font-bold'
+                      : 'text-[#9CA3AF] hover:text-white bg-[#1B1B1D] border border-[#323238]'
                   }`}
                 >
-                  LRU (Least Recently Used)
+                  LRU
                 </button>
 
                 <button
@@ -878,52 +868,57 @@ export const TheLab: React.FC = () => {
                     audioFx.playClick(500);
                     setCachePolicy('FIFO');
                   }}
-                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors font-mono ${
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-colors font-mono cursor-pointer ${
                     cachePolicy === 'FIFO'
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold'
-                      : 'text-slate-400 hover:text-white bg-slate-900 border border-slate-800'
+                      ? 'bg-[#DC343B] text-white font-bold'
+                      : 'text-[#9CA3AF] hover:text-white bg-[#1B1B1D] border border-[#323238]'
                   }`}
                 >
-                  FIFO (First In First Out)
+                  FIFO
                 </button>
               </div>
             </div>
 
-            {/* Quick Request Key Buttons */}
             <div>
-              <span className="text-xs font-mono text-slate-400 uppercase tracking-wider block mb-2.5">
+              <span className="text-xs font-mono text-[#9CA3AF] uppercase tracking-wider block mb-2.5">
                 DISPATCH REQUEST FOR KEY (CLICK TO TRIGGER CACHE LOOKUP):
               </span>
               <div className="flex flex-wrap items-center gap-2">
-                {['SKU_1001', 'USER_882', 'TOKEN_AUTH', 'ORDER_904', 'PROMO_CODE', 'CATEGORY_FOOD'].map((k) => (
-                  <button
-                    key={k}
-                    type="button"
-                    onClick={() => accessKey(k)}
-                    className="px-3 py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700/80 rounded-lg text-xs font-mono transition-all hover:-translate-y-0.5 active:translate-y-0"
-                  >
-                    + GET "{k}"
-                  </button>
-                ))}
+                {['SKU_1001', 'USER_882', 'TOKEN_AUTH', 'ORDER_904', 'PROMO_CODE', 'CATEGORY_FOOD'].map(
+                  (k) => (
+                    <button
+                      key={k}
+                      type="button"
+                      onClick={() => accessKey(k)}
+                      className="px-3 py-2 bg-[#1B1B1D] hover:bg-[#2B2B30] text-white border border-[#323238] hover:border-[#B0E0E6]/60 rounded-lg text-xs font-mono transition-colors cursor-pointer"
+                    >
+                      + GET "{k}"
+                    </button>
+                  )
+                )}
 
                 <button
                   type="button"
                   onClick={handleResetCache}
-                  className="px-3 py-2 text-xs font-mono text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg border border-slate-800 transition-colors ml-auto flex items-center gap-1.5"
+                  className="px-3 py-2 text-xs font-mono text-[#9CA3AF] hover:text-white hover:bg-[#1B1B1D] rounded-lg border border-[#323238] transition-colors ml-auto flex items-center gap-1.5 cursor-pointer"
                 >
-                  <RotateCcw className="w-3.5 h-3.5" />
+                  <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>Reset Cache</span>
                 </button>
               </div>
             </div>
 
-            {/* Visual Slots Grid (Capacity 4) */}
             <div>
-              <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
-                <span>ACTIVE MEMORY SLOTS ({cacheItems.length}/{CACHE_CAPACITY})</span>
-                <span className="text-emerald-400">
-                  HIT RATIO: {cacheStats.total > 0 ? Math.round((cacheStats.hits / cacheStats.total) * 100) : 0}% 
-                  ({cacheStats.hits} Hits / {cacheStats.misses} Misses)
+              <div className="flex items-center justify-between text-xs font-mono text-[#9CA3AF] mb-3">
+                <span>
+                  ACTIVE MEMORY SLOTS ({cacheItems.length}/{CACHE_CAPACITY})
+                </span>
+                <span className="text-[#B0E0E6]">
+                  HIT RATIO:{' '}
+                  {cacheStats.total > 0
+                    ? Math.round((cacheStats.hits / cacheStats.total) * 100)
+                    : 0}
+                  % ({cacheStats.hits} Hits / {cacheStats.misses} Misses)
                 </span>
               </div>
 
@@ -936,14 +931,14 @@ export const TheLab: React.FC = () => {
                       key={slotIdx}
                       className={`p-4 rounded-xl border transition-all ${
                         item
-                          ? 'bg-slate-900/90 border-slate-700 shadow-lg'
-                          : 'bg-slate-950/60 border-dashed border-slate-800 text-slate-600'
+                          ? 'bg-[#1B1B1D] border-[#323238]'
+                          : 'bg-[#151517] border-dashed border-[#323238] text-[#9CA3AF]'
                       }`}
                     >
-                      <div className="flex items-center justify-between text-xs font-mono text-slate-500 mb-2">
+                      <div className="flex items-center justify-between text-xs font-mono text-[#9CA3AF] mb-2">
                         <span>SLOT #{slotIdx + 1}</span>
                         {item && (
-                          <span className="text-[10px] text-emerald-400 font-semibold bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/60">
+                          <span className="text-[10px] text-[#B0E0E6] font-semibold bg-[#222226] px-2 py-0.5 rounded border border-[#323238]">
                             CYCLE {item.lastAccessCycle}
                           </span>
                         )}
@@ -954,18 +949,16 @@ export const TheLab: React.FC = () => {
                           <div className="font-mono text-sm font-bold text-white tracking-tight mb-1 truncate">
                             {item.key}
                           </div>
-                          <div className="text-xs text-slate-400 truncate mb-3">
-                            {item.value}
-                          </div>
-                          <div className="pt-2 border-t border-slate-800 text-[11px] font-mono text-slate-400 flex justify-between">
+                          <div className="text-xs text-[#9CA3AF] truncate mb-3">{item.value}</div>
+                          <div className="pt-2 border-t border-[#323238] text-[11px] font-mono text-[#D1D5DB] flex justify-between">
                             <span>Hits: {item.accessCount}</span>
-                            <span className="text-slate-500">
-                              {cachePolicy === 'LRU' && slotIdx === 0 ? 'Oldest (Next Evict)' : ''}
+                            <span className="text-[#DC343B]">
+                              {cachePolicy === 'LRU' && slotIdx === 0 ? 'Next Evict' : ''}
                             </span>
                           </div>
                         </div>
                       ) : (
-                        <div className="h-18 flex items-center justify-center text-xs font-mono text-slate-600">
+                        <div className="h-18 flex items-center justify-center text-xs font-mono text-[#9CA3AF]">
                           [EMPTY SLOT]
                         </div>
                       )}
@@ -975,23 +968,21 @@ export const TheLab: React.FC = () => {
               </div>
             </div>
 
-            {/* Real-time Operation Logs & Algorithmic Notes */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-2">
-              {/* Event Log Output */}
-              <div className="lg:col-span-7 bg-slate-950 border border-slate-800 rounded-xl p-4 font-mono text-xs">
-                <span className="text-[11px] text-slate-500 block mb-2 font-semibold">
+              <div className="lg:col-span-7 bg-[#151517] border border-[#323238] rounded-xl p-4 font-mono text-xs">
+                <span className="text-[11px] text-[#9CA3AF] block mb-2 font-semibold">
                   CACHE OPERATION LOG STREAM:
                 </span>
-                <div className="space-y-1.5 h-[130px] overflow-y-auto scrollbar-none text-[11px]">
+                <div className="space-y-1.5 h-[130px] overflow-y-auto text-[11px]">
                   {cacheLogs.map((log, idx) => (
                     <div
                       key={idx}
                       className={
                         log.includes('HIT:')
-                          ? 'text-emerald-400'
+                          ? 'text-[#B0E0E6]'
                           : log.includes('MISS:')
-                          ? 'text-amber-400'
-                          : 'text-slate-400'
+                          ? 'text-[#DC343B]'
+                          : 'text-[#D1D5DB]'
                       }
                     >
                       {log}
@@ -1000,20 +991,21 @@ export const TheLab: React.FC = () => {
                 </div>
               </div>
 
-              {/* Algorithmic Implementation Breakdown */}
-              <div className="lg:col-span-5 p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2 text-xs">
-                <span className="font-mono text-sky-400 text-[11px] font-semibold block uppercase">
+              <div className="lg:col-span-5 p-4 rounded-xl bg-[#1B1B1D] border border-[#323238] space-y-2 text-xs">
+                <span className="font-mono text-[#B0E0E6] text-[11px] font-semibold block uppercase">
                   HOW LRU WORKS UNDER THE HOOD:
                 </span>
-                <p className="text-slate-300 leading-relaxed">
-                  To achieve <strong className="text-white">O(1) lookup</strong> and <strong className="text-white">O(1) eviction</strong>, real-world LRU caches combine a <strong>Hash Map</strong> with a <strong>Doubly Linked List</strong>.
+                <p className="text-[#D1D5DB] leading-relaxed">
+                  To achieve <strong className="text-white">O(1) lookup</strong> and{' '}
+                  <strong className="text-white">O(1) eviction</strong>, production LRU caches
+                  pair a <strong>Hash Map</strong> with a <strong>Doubly Linked List</strong>.
                 </p>
-                <p className="text-slate-400 leading-relaxed text-[11px]">
-                  When an item is accessed, it is unlinked and moved to the head. When capacity is exceeded, the node at the tail is unlinked and evicted in constant time.
+                <p className="text-[#9CA3AF] leading-relaxed text-[11px]">
+                  Accessing an item promotes it to the head. When capacity fills, the tail node is
+                  unlinked and evicted in constant time.
                 </p>
               </div>
             </div>
-
           </div>
         )}
 
@@ -1021,66 +1013,62 @@ export const TheLab: React.FC = () => {
            VIEW 3: UNIX PERMISSIONS & BITMASK MATRIX
            ========================================================================= */}
         {activeTab === 'permissions' && (
-          <div className="bg-[#070B16] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-8">
-            
-            {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+          <div className="bg-[#222226] border border-[#323238] rounded-2xl p-6 sm:p-8 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#323238]">
               <div>
-                <div className="flex items-center gap-2 text-xs font-mono text-amber-400 uppercase tracking-wider mb-1">
-                  <Lock className="w-3.5 h-3.5" />
+                <div className="flex items-center gap-2 text-xs font-mono text-[#DC343B] uppercase tracking-wider mb-1">
+                  <Lock className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>LINUX SECURITY & ACCESS CONTROL</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
                   UNIX File Permission Bitmask Calculator
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                  Interact with read, write, and execute bits to inspect octal modes, symbolic notations, and 9-bit binary representation.
+                <p className="text-xs sm:text-sm text-[#D1D5DB] mt-1">
+                  Toggle read, write, and execute bits to inspect octal modes, symbolic notations,
+                  and 9-bit binary representations.
                 </p>
               </div>
 
-              {/* Quick Preset Buttons */}
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-mono text-slate-400">PRESETS:</span>
+                <span className="text-xs font-mono text-[#9CA3AF]">PRESETS:</span>
                 <button
                   type="button"
                   onClick={() => applyPreset(7, 5, 5)}
-                  className="px-2.5 py-1 text-xs font-mono bg-slate-900 hover:bg-slate-800 text-sky-300 border border-slate-700 rounded"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#1B1B1D] hover:bg-[#2B2B30] text-[#B0E0E6] border border-[#323238] rounded cursor-pointer"
                 >
-                  chmod 755 (Exec)
+                  chmod 755
                 </button>
                 <button
                   type="button"
                   onClick={() => applyPreset(6, 4, 4)}
-                  className="px-2.5 py-1 text-xs font-mono bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 rounded"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#1B1B1D] hover:bg-[#2B2B30] text-white border border-[#323238] rounded cursor-pointer"
                 >
-                  chmod 644 (Doc)
+                  chmod 644
                 </button>
                 <button
                   type="button"
                   onClick={() => applyPreset(6, 0, 0)}
-                  className="px-2.5 py-1 text-xs font-mono bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-700 rounded"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#1B1B1D] hover:bg-[#2B2B30] text-[#DC343B] border border-[#323238] rounded cursor-pointer"
                 >
-                  chmod 600 (Secret)
+                  chmod 600
                 </button>
                 <button
                   type="button"
                   onClick={() => applyPreset(4, 0, 0)}
-                  className="px-2.5 py-1 text-xs font-mono bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-slate-700 rounded"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#1B1B1D] hover:bg-[#2B2B30] text-[#B0E0E6] border border-[#323238] rounded cursor-pointer"
                 >
-                  chmod 400 (SSH Key)
+                  chmod 400
                 </button>
               </div>
             </div>
 
-            {/* Interactive 3-Column Bitmask Switcher Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
               {/* Owner Bits */}
-              <div className="p-5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div className="p-5 rounded-xl bg-[#1B1B1D] border border-[#323238] space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#323238]">
                   <span className="font-bold text-white text-sm">OWNER (u)</span>
-                  <span className="font-mono text-sm font-bold text-sky-400">
-                    Octal: {octalOwner} (Value: {octalOwner})
+                  <span className="font-mono text-sm font-bold text-[#B0E0E6]">
+                    Octal: {octalOwner}
                   </span>
                 </div>
                 <div className="space-y-2">
@@ -1093,10 +1081,10 @@ export const TheLab: React.FC = () => {
                       key={bit}
                       type="button"
                       onClick={() => togglePerm('owner', bit)}
-                      className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors ${
+                      className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors cursor-pointer ${
                         permissions.owner[bit]
-                          ? 'bg-sky-500/15 border-sky-500/40 text-white font-medium'
-                          : 'bg-slate-950/60 border-slate-800 text-slate-500'
+                          ? 'bg-[#B0E0E6]/15 border-[#B0E0E6]/50 text-white font-medium'
+                          : 'bg-[#151517] border-[#323238] text-[#9CA3AF]'
                       }`}
                     >
                       <span className="text-xs">{label}</span>
@@ -1107,11 +1095,11 @@ export const TheLab: React.FC = () => {
               </div>
 
               {/* Group Bits */}
-              <div className="p-5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div className="p-5 rounded-xl bg-[#1B1B1D] border border-[#323238] space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#323238]">
                   <span className="font-bold text-white text-sm">GROUP (g)</span>
-                  <span className="font-mono text-sm font-bold text-indigo-400">
-                    Octal: {octalGroup} (Value: {octalGroup})
+                  <span className="font-mono text-sm font-bold text-[#B0E0E6]">
+                    Octal: {octalGroup}
                   </span>
                 </div>
                 <div className="space-y-2">
@@ -1124,10 +1112,10 @@ export const TheLab: React.FC = () => {
                       key={bit}
                       type="button"
                       onClick={() => togglePerm('group', bit)}
-                      className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors ${
+                      className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors cursor-pointer ${
                         permissions.group[bit]
-                          ? 'bg-indigo-500/15 border-indigo-500/40 text-white font-medium'
-                          : 'bg-slate-950/60 border-slate-800 text-slate-500'
+                          ? 'bg-[#B0E0E6]/15 border-[#B0E0E6]/50 text-white font-medium'
+                          : 'bg-[#151517] border-[#323238] text-[#9CA3AF]'
                       }`}
                     >
                       <span className="text-xs">{label}</span>
@@ -1138,11 +1126,11 @@ export const TheLab: React.FC = () => {
               </div>
 
               {/* Others Bits */}
-              <div className="p-5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div className="p-5 rounded-xl bg-[#1B1B1D] border border-[#323238] space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#323238]">
                   <span className="font-bold text-white text-sm">OTHERS (o)</span>
-                  <span className="font-mono text-sm font-bold text-amber-400">
-                    Octal: {octalOthers} (Value: {octalOthers})
+                  <span className="font-mono text-sm font-bold text-[#DC343B]">
+                    Octal: {octalOthers}
                   </span>
                 </div>
                 <div className="space-y-2">
@@ -1155,10 +1143,10 @@ export const TheLab: React.FC = () => {
                       key={bit}
                       type="button"
                       onClick={() => togglePerm('others', bit)}
-                      className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors ${
+                      className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors cursor-pointer ${
                         permissions.others[bit]
-                          ? 'bg-amber-500/15 border-amber-500/40 text-white font-medium'
-                          : 'bg-slate-950/60 border-slate-800 text-slate-500'
+                          ? 'bg-[#DC343B]/15 border-[#DC343B]/50 text-white font-medium'
+                          : 'bg-[#151517] border-[#323238] text-[#9CA3AF]'
                       }`}
                     >
                       <span className="text-xs">{label}</span>
@@ -1167,52 +1155,53 @@ export const TheLab: React.FC = () => {
                   ))}
                 </div>
               </div>
-
             </div>
 
-            {/* Calculated Output Readout Strip */}
-            <div className="p-4 sm:p-5 rounded-xl bg-slate-950 border border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
+            <div className="p-4 sm:p-5 rounded-xl bg-[#151517] border border-[#323238] grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
               <div>
-                <span className="text-[11px] font-mono text-slate-500 uppercase block mb-1">
+                <span className="text-[11px] font-mono text-[#9CA3AF] uppercase block mb-1">
                   OCTAL NOTATION (CHMOD)
                 </span>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-sky-400">
+                <span className="font-mono text-xl sm:text-2xl font-bold text-[#B0E0E6]">
                   chmod {octalString.slice(1)}
                 </span>
               </div>
 
               <div>
-                <span className="text-[11px] font-mono text-slate-500 uppercase block mb-1">
+                <span className="text-[11px] font-mono text-[#9CA3AF] uppercase block mb-1">
                   SYMBOLIC STRING (LS -L)
                 </span>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-emerald-400">
+                <span className="font-mono text-xl sm:text-2xl font-bold text-white">
                   {symbolicString}
                 </span>
               </div>
 
               <div>
-                <span className="text-[11px] font-mono text-slate-500 uppercase block mb-1">
+                <span className="text-[11px] font-mono text-[#9CA3AF] uppercase block mb-1">
                   9-BIT BINARY BITMASK
                 </span>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-amber-300">
+                <span className="font-mono text-xl sm:text-2xl font-bold text-[#DC343B]">
                   {binaryString}
                 </span>
               </div>
             </div>
 
-            {/* Defensive Security Context Note */}
-            <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 text-xs space-y-2">
-              <span className="font-mono text-sky-400 font-semibold block uppercase">
-                DEFENSIVE SECURITY & REAL-WORLD IMPLICATIONS:
+            <div className="p-4 rounded-xl bg-[#1B1B1D] border border-[#323238] text-xs space-y-2">
+              <span className="font-mono text-[#B0E0E6] font-semibold block uppercase">
+                DEFENSIVE SECURITY & LEAST PRIVILEGE:
               </span>
-              <p className="text-slate-300 leading-relaxed">
-                Why does OpenSSH immediately reject private keys with <code className="text-amber-300 bg-slate-950 px-1 py-0.5 rounded">chmod 777</code>? Because in a multi-user Linux environment, any local user or compromised service account could read the secret key. Securing files to <code className="text-emerald-300 bg-slate-950 px-1 py-0.5 rounded">600</code> or <code className="text-emerald-300 bg-slate-950 px-1 py-0.5 rounded">400</code> guarantees that only the file owner has read access, enforcing the principle of least privilege.
+              <p className="text-[#D1D5DB] leading-relaxed">
+                OpenSSH rejects private keys with{' '}
+                <code className="text-[#DC343B] bg-[#151517] px-1.5 py-0.5 rounded">chmod 777</code>{' '}
+                because any local user or service account on a shared Linux host could read the
+                key. Setting{' '}
+                <code className="text-[#B0E0E6] bg-[#151517] px-1.5 py-0.5 rounded">600</code> or{' '}
+                <code className="text-[#B0E0E6] bg-[#151517] px-1.5 py-0.5 rounded">400</code>{' '}
+                restricts read access solely to the owner.
               </p>
             </div>
-
           </div>
         )}
-
       </div>
     </section>
   );

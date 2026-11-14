@@ -103,6 +103,7 @@ EXPERIENCES.forEach(exp => validEvidenceIds.add(exp.id));
 CASE_STUDIES.forEach(cs => validEvidenceIds.add(cs.id));
 validEvidenceIds.add('exp-uitm');
 validEvidenceIds.add('cert-aws');
+validEvidenceIds.add('cert-ai-teach');
 validEvidenceIds.add('sim-network');
 validEvidenceIds.add('sim-cache');
 validEvidenceIds.add('sim-incident');

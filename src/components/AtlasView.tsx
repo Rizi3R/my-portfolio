@@ -1,26 +1,14 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { 
-  NODES, 
-  EDGES, 
-  STRATA, 
-  EXPERIENCES, 
-  CASE_STUDIES, 
-  UniverseNode, 
-  StratumType, 
-  EvidenceStatus 
+import React, { useState, useMemo, useEffect } from 'react';
+import {
+  NODES,
+  EDGES,
+  STRATA,
+  EVIDENCE_META,
+  UniverseNode,
+  StratumType,
+  EvidenceStatus,
 } from '../data/universeContent';
-import { 
-  Search, 
-  X, 
-  Filter, 
-  ArrowRight, 
-  Layers, 
-  ExternalLink, 
-  Info,
-  Maximize2,
-  List,
-  Network
-} from 'lucide-react';
+import { Search, X, ArrowRight, List, Network } from 'lucide-react';
 
 interface AtlasViewProps {
   initialSelectedNodeId?: string | null;
@@ -28,12 +16,14 @@ interface AtlasViewProps {
   onOpenExperience?: (expId: string) => void;
 }
 
-export const AtlasView: React.FC<AtlasViewProps> = ({ 
-  initialSelectedNodeId, 
+export const AtlasView: React.FC<AtlasViewProps> = ({
+  initialSelectedNodeId,
   onJumpToStratum,
-  onOpenExperience 
+  onOpenExperience,
 }) => {
-  const [selectedNodeId, setSelectedNodeId] = useState<string>(initialSelectedNodeId || NODES[0].id);
+  const [selectedNodeId, setSelectedNodeId] = useState<string>(
+    initialSelectedNodeId || NODES[0].id
+  );
   const [stratumFilter, setStratumFilter] = useState<string>('all');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -45,51 +35,51 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
   });
   const [announcement, setAnnouncement] = useState<string>('');
 
-  // Update selectedNodeId if initialSelectedNodeId changes
   useEffect(() => {
     if (initialSelectedNodeId) {
       setSelectedNodeId(initialSelectedNodeId);
-      const target = NODES.find(n => n.id === initialSelectedNodeId);
+      const target = NODES.find((n) => n.id === initialSelectedNodeId);
       if (target) {
         setAnnouncement(`Selected node: ${target.label}, status: ${target.status}`);
       }
     }
   }, [initialSelectedNodeId]);
 
-  // Filtered nodes
   const filteredNodes = useMemo(() => {
-    return NODES.filter(node => {
+    return NODES.filter((node) => {
       const matchesStratum = stratumFilter === 'all' || node.stratum === stratumFilter;
       const matchesStatus = statusFilter === 'all' || node.status === statusFilter;
-      const matchesSearch = searchQuery.trim() === '' || 
+      const matchesSearch =
+        searchQuery.trim() === '' ||
         node.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        node.summary.toLowerCase().includes(searchQuery.toLowerCase());
+        node.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        node.category.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesStratum && matchesStatus && matchesSearch;
     });
   }, [stratumFilter, statusFilter, searchQuery]);
 
-  const filteredNodeIds = useMemo(() => new Set(filteredNodes.map(n => n.id)), [filteredNodes]);
+  const filteredNodeIds = useMemo(() => new Set(filteredNodes.map((n) => n.id)), [filteredNodes]);
 
-  // Filtered edges (both endpoints must be in filtered nodes)
   const filteredEdges = useMemo(() => {
-    return EDGES.filter(edge => filteredNodeIds.has(edge.from) && filteredNodeIds.has(edge.to));
+    return EDGES.filter((edge) => filteredNodeIds.has(edge.from) && filteredNodeIds.has(edge.to));
   }, [filteredNodeIds]);
 
   const selectedNode = useMemo(() => {
-    return NODES.find(n => n.id === selectedNodeId) || filteredNodes[0] || NODES[0];
+    return NODES.find((n) => n.id === selectedNodeId) || filteredNodes[0] || NODES[0];
   }, [selectedNodeId, filteredNodes]);
 
-  // Related edges for selected node
   const relatedEdges = useMemo(() => {
     if (!selectedNode) return [];
-    return EDGES.filter(edge => edge.from === selectedNode.id || edge.to === selectedNode.id).map(edge => {
+    return EDGES.filter(
+      (edge) => edge.from === selectedNode.id || edge.to === selectedNode.id
+    ).map((edge) => {
       const isOutgoing = edge.from === selectedNode.id;
       const partnerId = isOutgoing ? edge.to : edge.from;
-      const partnerNode = NODES.find(n => n.id === partnerId);
+      const partnerNode = NODES.find((n) => n.id === partnerId);
       return {
         direction: isOutgoing ? 'outgoing' : 'incoming',
         partner: partnerNode,
-        reason: edge.reason
+        reason: edge.reason,
       };
     });
   }, [selectedNode]);
@@ -100,81 +90,87 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
   };
 
   const getStatusBadge = (status: EvidenceStatus) => {
-    switch (status) {
-      case 'professional':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 font-semibold"><span>◆</span> [PROFESSIONAL]</span>;
-      case 'project':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 bg-sky-950/80 text-sky-300 border border-sky-700/60 font-semibold"><span>■</span> [PROJECT]</span>;
-      case 'experiment':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 bg-amber-950/80 text-amber-300 border border-amber-700/60 font-semibold"><span>△</span> [EXPERIMENT]</span>;
-      case 'foundation':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 bg-teal-950/80 text-teal-300 border border-teal-700/60 font-semibold"><span>⊕</span> [FOUNDATION]</span>;
-      case 'learning':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 bg-stone-900 text-stone-300 border border-stone-600 font-semibold"><span>○</span> [LEARNING]</span>;
-      default:
-        return <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 bg-stone-800 text-stone-300 border border-stone-600"><span>◇</span> [EXPLORING]</span>;
-    }
+    const meta = EVIDENCE_META[status];
+    const badgeStyle =
+      status === 'learning'
+        ? 'bg-[#DC343B]/15 text-[#DC343B] border-[#DC343B]/40'
+        : status === 'professional'
+        ? 'bg-[#B0E0E6]/15 text-[#B0E0E6] border-[#B0E0E6]/40'
+        : 'bg-[#1B1B1D] text-[#D1D5DB] border-[#323238]';
+
+    return (
+      <span
+        className={`inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded border font-semibold ${badgeStyle}`}
+      >
+        <span aria-hidden="true">{meta.glyph}</span>
+        <span>{meta.label}</span>
+      </span>
+    );
   };
 
   const getStratumColor = (stratum: StratumType) => {
     switch (stratum) {
-      case 'hardware': return '#22d3ee'; // cyan-400
-      case 'os': return '#34d399'; // emerald-400
-      case 'network': return '#38bdf8'; // sky-400
-      case 'application': return '#fbbf24'; // amber-400
-      case 'cloud-automation': return '#c084fc'; // purple-400
-      case 'people-process': return '#fb7185'; // rose-400
-      default: return '#a8a29e';
+      case 'hardware':
+      case 'network':
+      case 'cloud-automation':
+        return '#B0E0E6';
+      case 'application':
+      case 'people-process':
+        return '#DC343B';
+      case 'os':
+      default:
+        return '#FFFFFF';
     }
   };
 
   return (
-    <div className="relative py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Hidden announcer for screen readers */}
+    <div className="relative py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="sr-only" aria-live="polite" role="status">
         {announcement}
       </div>
 
       {/* Header */}
       <div className="mb-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-stone-800 pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#323238] pb-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-stone-900 border border-stone-800 text-stone-300 text-xs font-mono uppercase tracking-widest mb-3">
-              <span>◆</span>
-              <span>Deterministic Knowledge Topology</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-mono font-bold text-stone-100 tracking-tight">
-              THE ATLAS GRAPH
+            <p className="text-xs font-mono uppercase tracking-widest text-[#B0E0E6] mb-2">
+              Deterministic Knowledge Topology
+            </p>
+            <h1 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              The Atlas Graph
             </h1>
-            <p className="mt-2 text-stone-400 font-mono text-xs sm:text-sm max-w-2xl leading-relaxed">
-              Explore all 30 verified technologies, tools, and protocols across 6 computing strata. Every node contains verifiable evidence; every edge represents a documented technical interaction.
+            <p className="mt-2 text-[#D1D5DB] font-sans text-xs sm:text-sm max-w-2xl leading-relaxed">
+              Explore all {NODES.length} verified technologies, protocols, and systems across 6
+              computing strata. Every node maps to concrete experience, academic grounding,
+              simulation work, or ongoing study.
             </p>
           </div>
 
-          {/* Graph / List View Toggle */}
-          <div className="flex items-center gap-2 self-start md:self-auto font-mono text-xs">
+          <div className="flex items-center gap-1.5 p-1 bg-[#222226] border border-[#323238] rounded-lg self-start md:self-auto font-mono text-xs">
             <button
+              type="button"
               onClick={() => setViewMode('graph')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 border transition-colors cursor-pointer ${
-                viewMode === 'graph' 
-                  ? 'bg-stone-800 text-cyan-300 border-cyan-500' 
-                  : 'bg-stone-950 text-stone-400 border-stone-800 hover:text-stone-200'
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+                viewMode === 'graph'
+                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/40'
+                  : 'text-[#9CA3AF] hover:text-white'
               }`}
               aria-label="Switch to 2D Graph Canvas View"
             >
-              <Network className="w-3.5 h-3.5" />
+              <Network className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Canvas Graph</span>
             </button>
             <button
+              type="button"
               onClick={() => setViewMode('list')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 border transition-colors cursor-pointer ${
-                viewMode === 'list' 
-                  ? 'bg-stone-800 text-cyan-300 border-cyan-500' 
-                  : 'bg-stone-950 text-stone-400 border-stone-800 hover:text-stone-200'
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+                viewMode === 'list'
+                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/40'
+                  : 'text-[#9CA3AF] hover:text-white'
               }`}
               aria-label="Switch to Accessible List Tree View"
             >
-              <List className="w-3.5 h-3.5" />
+              <List className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Accessible List</span>
             </button>
           </div>
@@ -182,21 +178,24 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
 
         {/* Filter Toolbar */}
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-6 font-mono text-xs">
-          {/* Search Input */}
           <div className="relative">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-stone-500" />
+            <Search
+              className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]"
+              aria-hidden="true"
+            />
             <input
               type="text"
               placeholder="Search nodes..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-stone-950 border border-stone-800 text-stone-200 pl-9 pr-8 py-2 focus:outline-none focus:border-cyan-500 transition-colors"
+              className="w-full bg-[#222226] border border-[#323238] rounded-lg text-white pl-9 pr-8 py-2.5 focus:outline-none focus:border-[#B0E0E6] transition-colors"
               aria-label="Search Atlas nodes by title or summary"
             />
             {searchQuery && (
               <button
+                type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-500 hover:text-stone-300"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-white cursor-pointer"
                 aria-label="Clear search query"
               >
                 <X className="w-3.5 h-3.5" />
@@ -204,12 +203,11 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
             )}
           </div>
 
-          {/* Stratum Filter */}
           <div>
             <select
               value={stratumFilter}
               onChange={(e) => setStratumFilter(e.target.value)}
-              className="w-full bg-stone-950 border border-stone-800 text-stone-300 px-3 py-2 focus:outline-none focus:border-cyan-500 cursor-pointer"
+              className="w-full bg-[#222226] border border-[#323238] rounded-lg text-[#D1D5DB] px-3 py-2.5 focus:outline-none focus:border-[#B0E0E6] cursor-pointer"
               aria-label="Filter nodes by stratum"
             >
               <option value="all">All Strata (1–6)</option>
@@ -221,72 +219,64 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
             </select>
           </div>
 
-          {/* Status Filter */}
           <div>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full bg-stone-950 border border-stone-800 text-stone-300 px-3 py-2 focus:outline-none focus:border-cyan-500 cursor-pointer"
+              className="w-full bg-[#222226] border border-[#323238] rounded-lg text-[#D1D5DB] px-3 py-2.5 focus:outline-none focus:border-[#B0E0E6] cursor-pointer"
               aria-label="Filter nodes by evidence status"
             >
-              <option value="all">All Evidence Types</option>
-              <option value="professional">◆ Professional (Verified Role)</option>
-              <option value="project">■ Project (Implemented Code)</option>
-              <option value="experiment">△ Experiment (Sandbox Simulation)</option>
-              <option value="foundation">⊕ Foundation (Degree Curriculum)</option>
-              <option value="learning">○ Learning (Active Study)</option>
+              <option value="all">All Evidence Levels</option>
+              <option value="professional">◆ Production Experience</option>
+              <option value="project">■ Practical Exposure</option>
+              <option value="experiment">△ Personal Experiment</option>
+              <option value="foundation">⊕ Foundational Knowledge</option>
+              <option value="learning">○ Currently Learning</option>
             </select>
           </div>
 
-          {/* Active Node Counter */}
-          <div className="flex items-center justify-between sm:justify-end gap-3 px-3 py-2 bg-stone-900/50 border border-stone-800 text-stone-400">
+          <div className="flex items-center justify-between sm:justify-end gap-3 px-3 py-2 bg-[#222226] border border-[#323238] rounded-lg text-[#9CA3AF]">
             <span>Showing:</span>
-            <span className="font-bold text-stone-200">{filteredNodes.length} of {NODES.length} Nodes</span>
+            <span className="font-bold text-[#B0E0E6]">
+              {filteredNodes.length} of {NODES.length} Nodes
+            </span>
           </div>
         </div>
       </div>
 
       {/* Main Graph & Inspector Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Canvas or List View Area (8 cols on desktop) */}
-        <div className="lg:col-span-8 bg-stone-950 border border-stone-800 overflow-hidden relative">
+        <div className="lg:col-span-8 bg-[#151517] border border-[#323238] rounded-2xl overflow-hidden relative">
           {viewMode === 'graph' ? (
-            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] bg-[#07090E] select-none overflow-hidden">
-              {/* Background Coordinate Grid */}
-              <div 
-                className="absolute inset-0 opacity-15 pointer-events-none"
-                style={{
-                  backgroundImage: 'radial-gradient(circle, #38bdf8 1px, transparent 1px)',
-                  backgroundSize: '24px 24px'
-                }}
-                aria-hidden="true"
-              />
-
-              {/* Strata Division Visual Guides */}
-              <div className="absolute inset-0 flex flex-col pointer-events-none opacity-20">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] cyber-grid select-none overflow-hidden">
+              {/* Strata Guides */}
+              <div className="absolute inset-0 flex flex-col pointer-events-none opacity-30">
                 {STRATA.map((st, i) => (
-                  <div key={st.id} className="flex-1 border-b border-stone-700/60 px-3 pt-1 text-[9px] font-mono uppercase text-stone-500">
-                    S{i+1}: {st.title}
+                  <div
+                    key={st.id}
+                    className="flex-1 border-b border-[#323238] px-3 pt-1 text-[9px] font-mono uppercase text-[#9CA3AF]"
+                  >
+                    S{i + 1}: {st.title}
                   </div>
                 ))}
               </div>
 
-              {/* SVG Canvas for Edges and Nodes */}
-              <svg 
+              <svg
                 className="w-full h-full"
                 viewBox="0 0 100 100"
                 preserveAspectRatio="none"
                 role="region"
                 aria-label="Atlas topology graph canvas"
               >
-                {/* Edges */}
                 <g className="edges" aria-hidden="true">
                   {filteredEdges.map((edge, idx) => {
-                    const fromNode = NODES.find(n => n.id === edge.from);
-                    const toNode = NODES.find(n => n.id === edge.to);
+                    const fromNode = NODES.find((n) => n.id === edge.from);
+                    const toNode = NODES.find((n) => n.id === edge.to);
                     if (!fromNode || !toNode) return null;
 
-                    const isConnectedToSelected = selectedNode && (edge.from === selectedNode.id || edge.to === selectedNode.id);
+                    const isConnectedToSelected =
+                      selectedNode &&
+                      (edge.from === selectedNode.id || edge.to === selectedNode.id);
 
                     return (
                       <line
@@ -295,7 +285,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                         y1={fromNode.y}
                         x2={toNode.x}
                         y2={toNode.y}
-                        stroke={isConnectedToSelected ? '#22d3ee' : '#334155'}
+                        stroke={isConnectedToSelected ? '#B0E0E6' : '#323238'}
                         strokeWidth={isConnectedToSelected ? 0.6 : 0.25}
                         strokeDasharray={isConnectedToSelected ? undefined : '0.8, 0.8'}
                         className="transition-all duration-300"
@@ -304,18 +294,17 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                   })}
                 </g>
 
-                {/* Nodes */}
                 <g className="nodes">
-                  {filteredNodes.map(node => {
+                  {filteredNodes.map((node) => {
                     const isSelected = selectedNode && selectedNode.id === node.id;
                     const color = getStratumColor(node.stratum);
 
                     return (
-                      <g 
+                      <g
                         key={node.id}
                         transform={`translate(${node.x}, ${node.y})`}
                         onClick={() => handleSelectNode(node)}
-                        className="cursor-pointer"
+                        className="cursor-pointer focus:outline-none"
                         role="button"
                         tabIndex={0}
                         aria-pressed={isSelected}
@@ -327,40 +316,33 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                           }
                         }}
                       >
-                        {/* Generous invisible touch/pointer hit target (44px equivalent in SVG scale) */}
-                        <circle
-                          r="4.5"
-                          fill="transparent"
-                          stroke="transparent"
-                        />
+                        <circle r="4.5" fill="transparent" stroke="transparent" />
 
-                        {/* Node Outer Selection Ring */}
                         {isSelected && (
                           <circle
                             r="2.8"
                             fill="none"
-                            stroke="#22d3ee"
+                            stroke="#DC343B"
                             strokeWidth="0.35"
                             strokeDasharray="0.6, 0.6"
                           />
                         )}
 
-                        {/* Node Center Dot */}
                         <circle
                           r={isSelected ? 1.6 : 1.1}
-                          fill={isSelected ? '#22d3ee' : color}
-                          stroke="#07090E"
+                          fill={isSelected ? '#DC343B' : color}
+                          stroke="#1B1B1D"
                           strokeWidth="0.3"
                           className="transition-all duration-200"
                         />
 
-                        {/* Node Label Text */}
                         <text
                           y={isSelected ? -2.2 : -1.8}
                           textAnchor="middle"
-                          fill={isSelected ? '#f8fafc' : '#94a3b8'}
-                          fontSize={isSelected ? '2.2' : '1.8'}
-                          fontFamily="monospace"
+                          fill={isSelected ? '#FFFFFF' : '#B0E0E6'}
+                          fillOpacity={isSelected ? 1 : 0.85}
+                          fontSize={isSelected ? '2.2' : '1.75'}
+                          fontFamily="JetBrains Mono, monospace"
                           fontWeight={isSelected ? 'bold' : 'normal'}
                           className="pointer-events-none select-none transition-all"
                         >
@@ -373,10 +355,9 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               </svg>
             </div>
           ) : (
-            /* Accessible Tree List View */
-            <div className="p-4 max-h-[500px] overflow-y-auto font-mono text-xs">
+            <div className="p-4 max-h-[520px] overflow-y-auto font-mono text-xs">
               <ol role="tree" aria-label="Atlas Nodes Tree" className="space-y-2">
-                {filteredNodes.map(node => {
+                {filteredNodes.map((node) => {
                   const isSelected = selectedNode && selectedNode.id === node.id;
                   return (
                     <li
@@ -384,10 +365,10 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                       role="treeitem"
                       aria-selected={isSelected}
                       onClick={() => handleSelectNode(node)}
-                      className={`p-3 border cursor-pointer transition-colors flex items-center justify-between ${
-                        isSelected 
-                          ? 'bg-stone-900 border-cyan-500 text-stone-100' 
-                          : 'bg-stone-950/60 border-stone-800 text-stone-400 hover:text-stone-200 hover:border-stone-700'
+                      className={`p-3.5 rounded-xl border cursor-pointer transition-colors flex items-center justify-between gap-3 ${
+                        isSelected
+                          ? 'bg-[#222226] border-[#B0E0E6] text-white'
+                          : 'bg-[#1B1B1D] border-[#323238] text-[#D1D5DB] hover:border-[#B0E0E6]/40'
                       }`}
                     >
                       <div>
@@ -395,13 +376,11 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                           <span style={{ color: getStratumColor(node.stratum) }}>●</span>
                           <span>{node.label}</span>
                         </div>
-                        <div className="text-[11px] text-stone-500 mt-1 line-clamp-1">
+                        <div className="text-[11px] text-[#9CA3AF] mt-1 line-clamp-1">
                           {node.summary}
                         </div>
                       </div>
-                      <div className="ml-3 shrink-0">
-                        {getStatusBadge(node.status)}
-                      </div>
+                      <div className="ml-3 shrink-0">{getStatusBadge(node.status)}</div>
                     </li>
                   );
                 })}
@@ -410,54 +389,53 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
           )}
         </div>
 
-        {/* Selected Node Detail Inspector (4 cols on desktop) */}
-        <aside 
-          className="lg:col-span-4 bg-stone-950 border border-stone-800 p-5 font-mono text-xs space-y-5"
+        {/* Selected Node Inspector */}
+        <aside
+          className="lg:col-span-4 bg-[#222226] border border-[#323238] rounded-2xl p-6 font-mono text-xs space-y-5"
           aria-label="Node Details Inspector"
         >
           {selectedNode ? (
             <>
-              {/* Header */}
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] text-stone-500 uppercase tracking-widest">
+                  <span className="text-[10px] text-[#9CA3AF] uppercase tracking-widest">
                     NODE INSPECTOR
                   </span>
                   {getStatusBadge(selectedNode.status)}
                 </div>
-                <h3 className="text-xl font-bold text-stone-100 tracking-tight">
+                <h3 className="font-display text-xl font-bold text-white tracking-tight">
                   {selectedNode.label}
                 </h3>
-                <div className="mt-1 text-stone-400 text-[11px] flex items-center gap-2">
-                  <span className="capitalize">Stratum:</span>
-                  <span className="text-stone-200 font-semibold">{selectedNode.stratum}</span>
+                <div className="mt-1 text-[#9CA3AF] text-[11px] flex flex-wrap items-center gap-2">
+                  <span>{selectedNode.category}</span>
                   <span>·</span>
-                  <span className="capitalize">Kind: {selectedNode.kind}</span>
+                  <span className="text-[#B0E0E6]">{selectedNode.stratum}</span>
                 </div>
               </div>
 
-              {/* Verified Summary */}
-              <div className="p-3 bg-stone-900/60 border border-stone-800 text-stone-300 font-sans text-xs leading-relaxed">
-                "{selectedNode.summary}"
+              <div className="p-3.5 rounded-xl bg-[#1B1B1D] border border-[#323238] text-[#D1D5DB] font-sans text-xs leading-relaxed">
+                {selectedNode.summary}
               </div>
 
-              {/* Evidence Provenance Reference */}
               {selectedNode.evidenceRef && (
                 <div className="space-y-1 text-xs">
-                  <span className="text-stone-500 text-[10px] uppercase tracking-wider block">
-                    [EVIDENCE_PROVENANCE]
+                  <span className="text-[#9CA3AF] text-[10px] uppercase tracking-wider block">
+                    Evidence Provenance
                   </span>
-                  <div className="p-2.5 bg-stone-900 border border-stone-800 text-stone-300 flex items-center justify-between">
+                  <div className="p-3 rounded-xl bg-[#1B1B1D] border border-[#323238] text-[#D1D5DB] flex items-center justify-between gap-2">
                     <div>
-                      <div className="font-bold text-stone-200">
+                      <div className="font-bold text-white">
                         {getEvidenceLabel(selectedNode.evidenceRef)}
                       </div>
-                      <div className="text-[10px] text-stone-500">Ref ID: {selectedNode.evidenceRef}</div>
+                      <div className="text-[10px] text-[#9CA3AF]">
+                        Ref ID: {selectedNode.evidenceRef}
+                      </div>
                     </div>
                     {onOpenExperience && selectedNode.evidenceRef.startsWith('exp-') && (
                       <button
+                        type="button"
                         onClick={() => onOpenExperience(selectedNode.evidenceRef!)}
-                        className="text-cyan-400 hover:text-cyan-300 text-[10px] flex items-center gap-1 cursor-pointer"
+                        className="text-[#B0E0E6] hover:text-white text-[10px] flex items-center gap-1 cursor-pointer shrink-0"
                       >
                         <span>View</span>
                         <ArrowRight className="w-3 h-3" />
@@ -467,67 +445,64 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                 </div>
               )}
 
-              {/* Factual Applied Professional Usage */}
               {selectedNode.usage && (
                 <div className="space-y-1 text-xs">
-                  <span className="text-stone-500 text-[10px] uppercase tracking-wider block">
-                    [APPLIED_OPERATIONAL_USAGE]
+                  <span className="text-[#9CA3AF] text-[10px] uppercase tracking-wider block">
+                    Applied Operational Usage
                   </span>
-                  <div className="p-2.5 bg-stone-900/60 border border-stone-800 text-stone-300 font-sans text-xs leading-relaxed">
+                  <div className="p-3 rounded-xl bg-[#1B1B1D] border border-[#323238] text-[#D1D5DB] font-sans text-xs leading-relaxed">
                     {selectedNode.usage}
                   </div>
                 </div>
               )}
 
-              {/* Stratum Deep Dive Navigation */}
               {onJumpToStratum && (
-                <div>
-                  <button
-                    onClick={() => onJumpToStratum(selectedNode.stratum)}
-                    className="w-full py-2 px-3 bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 flex items-center justify-between transition-colors cursor-pointer text-xs"
-                  >
-                    <span>View Stratum Journey Step</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-cyan-400" />
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => onJumpToStratum(selectedNode.stratum)}
+                  className="w-full py-2.5 px-3.5 rounded-lg bg-[#1B1B1D] hover:bg-[#2B2B30] text-[#B0E0E6] border border-[#323238] hover:border-[#B0E0E6]/50 flex items-center justify-between transition-colors cursor-pointer text-xs font-semibold"
+                >
+                  <span>View Stratum Journey Step</span>
+                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </button>
               )}
 
-              {/* Connected Relationships with Technical Reason */}
               <div>
-                <div className="flex items-center justify-between text-stone-500 text-[10px] uppercase tracking-wider mb-2">
+                <div className="flex items-center justify-between text-[#9CA3AF] text-[10px] uppercase tracking-wider mb-2">
                   <span>Connected Topology ({relatedEdges.length})</span>
-                  <span>Protocol Interaction</span>
+                  <span>Interaction</span>
                 </div>
 
                 {relatedEdges.length === 0 ? (
-                  <div className="text-stone-500 italic p-2 border border-dashed border-stone-800 text-center">
+                  <div className="text-[#9CA3AF] italic p-3 rounded-xl border border-dashed border-[#323238] text-center">
                     No active edges in current filter.
                   </div>
                 ) : (
-                  <div className="space-y-2 max-h-64 overflow-y-auto pr-1">
+                  <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
                     {relatedEdges.map((rel, idx) => {
                       if (!rel.partner) return null;
                       return (
-                        <div 
+                        <button
                           key={idx}
+                          type="button"
                           onClick={() => handleSelectNode(rel.partner!)}
-                          className="p-2.5 bg-stone-900/50 hover:bg-stone-900 border border-stone-800/80 hover:border-cyan-500/50 transition-colors cursor-pointer"
+                          className="w-full text-left p-2.5 rounded-xl bg-[#1B1B1D] hover:bg-[#2B2B30] border border-[#323238] hover:border-[#B0E0E6]/50 transition-colors cursor-pointer"
                         >
-                          <div className="flex items-center justify-between text-xs font-bold text-stone-200 mb-1">
+                          <div className="flex items-center justify-between text-xs font-bold text-white mb-1">
                             <span className="flex items-center gap-1.5">
-                              <span className="text-cyan-400 text-[10px]">
+                              <span className="text-[#B0E0E6] text-[10px]">
                                 {rel.direction === 'outgoing' ? '→' : '←'}
                               </span>
                               <span>{rel.partner.label}</span>
                             </span>
-                            <span className="text-[9px] text-stone-500 font-normal uppercase">
+                            <span className="text-[9px] text-[#9CA3AF] font-normal uppercase">
                               {rel.partner.stratum}
                             </span>
                           </div>
-                          <div className="text-[11px] text-stone-400 leading-snug font-sans">
+                          <div className="text-[11px] text-[#D1D5DB] leading-snug font-sans">
                             {rel.reason}
                           </div>
-                        </div>
+                        </button>
                       );
                     })}
                   </div>
@@ -535,7 +510,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               </div>
             </>
           ) : (
-            <div className="text-center py-12 text-stone-500">
+            <div className="text-center py-12 text-[#9CA3AF]">
               Select any node in the graph or list to inspect its operational evidence.
             </div>
           )}
@@ -547,19 +522,37 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
 
 function getEvidenceLabel(refId: string): string {
   switch (refId) {
-    case 'exp-emart24': return 'emart24 Malaysia · System Application Specialist';
-    case 'exp-palaterium': return 'Palaterium Sdn Bhd · IT Executive';
-    case 'exp-mps': return 'Managed Print Services · IT Technician';
-    case 'exp-agc': return 'Attorney General’s Chambers · IT Intern';
-    case 'exp-uitm': return 'UiTM · Diploma in Computer Science & Mathematics';
-    case 'cert-aws': return 'AWS Certified Cloud Practitioner';
-    case 'sim-network': return 'Deterministic Packet Hop Lab';
-    case 'sim-cache': return 'Cache Eviction Simulation';
-    case 'sim-incident': return 'Operational Triage Simulator';
-    case 'case-emart24-rollout': return 'Case Study: Multi-Store POS Rollout';
-    case 'case-palaterium-failover': return 'Case Study: Dual-WAN Failover';
-    case 'case-lark-migration': return 'Case Study: Google Workspace to Lark Cutover';
-    case 'case-dkict-system': return 'Case Study: Internal MVC Compliance Portal';
-    default: return refId;
+    case 'exp-emart24':
+      return 'emart24 Malaysia · System Application Specialist';
+    case 'exp-palaterium':
+      return 'Palaterium Sdn Bhd · IT Executive';
+    case 'exp-mps':
+      return 'Managed Print Services · IT Technician';
+    case 'exp-agc':
+      return 'Attorney General’s Chambers · IT Intern';
+    case 'exp-uitm':
+      return 'UiTM · Diploma in Computer Science & Mathematics';
+    case 'cert-aws':
+      return 'AWS Certified Cloud Practitioner';
+    case 'cert-ai-teach':
+      return 'Generative AI Copilot Digital Upskilling Program';
+    case 'sim-network':
+      return 'Deterministic Packet Hop Lab';
+    case 'sim-cache':
+      return 'Cache Eviction Simulation';
+    case 'sim-incident':
+      return 'Operational Triage Simulator';
+    case 'case-emart24-rollout':
+      return 'Case Study: Multi-Store POS Rollout';
+    case 'case-palaterium-failover':
+      return 'Case Study: Dual-WAN Failover';
+    case 'case-lark-migration':
+      return 'Case Study: Google Workspace to Lark Cutover';
+    case 'case-dkict-system':
+      return 'Case Study: Internal MVC Compliance Portal';
+    case 'case-hardware-network':
+      return 'Case Study: Hardware & Print Fleet Provisioning';
+    default:
+      return refId;
   }
 }

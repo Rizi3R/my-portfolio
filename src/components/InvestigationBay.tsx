@@ -71,7 +71,7 @@ SYMPTOM: Cashier screen reports "HOST TIMEOUT 504 - UNABLE TO REACH ACQUIRER"
 $ ping -c 3 192.168.1.1 (Store Default Gateway)
 64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=1.12 ms (0% packet loss)
 
-$ curl -I -m 4 https://bank-acquirer.internal:8443/edc/authorize
+$ curl -I -m 4 https://acquirer-gw.demo.example:8443/edc/authorize
 curl: (28) Connection timed out after 4001 milliseconds
 
 $ route print | grep WAN

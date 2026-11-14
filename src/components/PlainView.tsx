@@ -290,7 +290,7 @@ export const PlainView: React.FC = () => {
       {/* Footer */}
       <footer className="pt-8 border-t-2 border-stone-900 font-mono text-xs text-stone-500 text-center">
         <div>Generated directly from single source of truth: <code>src/data/universeContent.ts</code></div>
-        <div className="mt-1">Zero external tracking cookies · No backend server calls · Static deployment ready</div>
+        <div className="mt-1">Zero external tracking cookies · Privacy-preserving aggregate visitor counter · Static deployment ready</div>
       </footer>
     </article>
   );

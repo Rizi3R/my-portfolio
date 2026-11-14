@@ -114,7 +114,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume, onOpenCommandPalette }
     } else if (cleanCmd === 'help') {
       output = 'Available Commands:\n• profile    - View verified background\n• lab        - Jump directly to interactive computing lab\n• systems    - Inspect systems architecture pipeline\n• stack      - View verified daily driver tools\n• philosophy - Read core engineering mindset\n• ping       - Execute network latency probe\n• clear      - Clear console output';
     } else if (cleanCmd === 'ping') {
-      output = 'PING branch-gw.internal (192.168.10.1): 56 data bytes\n64 bytes: icmp_seq=1 ttl=64 time=1.4 ms\n64 bytes: icmp_seq=2 ttl=64 time=1.2 ms\n--- 0% packet loss, RTT avg 1.3ms ---';
+      output = 'PING branch-gw.demo.example (192.168.10.1): 56 data bytes\n64 bytes: icmp_seq=1 ttl=64 time=1.4 ms\n64 bytes: icmp_seq=2 ttl=64 time=1.2 ms\n--- 0% packet loss, RTT avg 1.3ms ---';
     } else if (cleanCmd === 'clear') {
       setTerminalLogs([]);
       return;

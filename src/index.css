@@ -2,51 +2,84 @@
 
 @layer base {
   :root {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --color-raven: #1B1B1D;
+    --color-raven-elevated: #222226;
+    --color-charcoal: #2B2B30;
+    --color-border-subtle: #323238;
+    --color-powder: #B0E0E6;
+    --color-poppy: #DC343B;
+    --color-muted: #9CA3AF;
+
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color-scheme: dark;
   }
 
-  code, kbd, samp, pre {
+  h1, h2, h3, .font-display {
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    text-wrap: balance;
+  }
+
+  code, kbd, samp, pre, .font-mono {
     font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 }
 
-/* Static architectural engineering dot-grid background (Zero CPU/GPU cost) */
+/* Architectural Raven Black canvas with faint Powder Blue technical grid */
 .tech-universe-bg {
-  background-color: #050811;
-  background-image: radial-gradient(circle, rgba(34, 211, 238, 0.06) 1px, transparent 1px);
+  background-color: #1B1B1D;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -15%, rgba(176, 224, 230, 0.08), transparent 70%),
+    radial-gradient(circle, rgba(176, 224, 230, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 32px 32px;
+}
+
+/* Refined Powder Blue & Poppy Red surface elevation utilities */
+.surface-card {
+  background-color: #222226;
+  border: 1px solid #323238;
+}
+
+.surface-card-hover {
+  transition: border-color 180ms cubic-bezier(0.16, 1, 0.3, 1), transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.surface-card-hover:hover {
+  border-color: rgba(176, 224, 230, 0.45);
+}
+
+.glow-powder {
+  box-shadow: 0 0 28px -8px rgba(176, 224, 230, 0.22);
+}
+
+.glow-poppy {
+  box-shadow: 0 0 24px -6px rgba(220, 52, 59, 0.35);
+}
+
+/* Subtle architectural grid for SVG/workbench interiors */
+.cyber-grid {
+  background-image:
+    linear-gradient(to right, rgba(176, 224, 230, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(176, 224, 230, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-/* Subtle holographic scanline overlay */
-.cyber-scanlines {
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0) 50%,
-    rgba(0, 0, 0, 0.25) 50%,
-    rgba(0, 0, 0, 0.25)
-  );
-  background-size: 100% 4px;
+/* Smooth reveal animation (compositor-only properties) */
+@keyframes fade-up-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Glowing text & border utilities */
-.text-glow-cyan {
-  text-shadow: 0 0 16px rgba(56, 189, 248, 0.55), 0 0 32px rgba(56, 189, 248, 0.2);
+.animate-fade-up {
+  animation: fade-up-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.text-glow-emerald {
-  text-shadow: 0 0 16px rgba(52, 211, 153, 0.55), 0 0 32px rgba(52, 211, 153, 0.2);
-}
-
-.box-glow-cyan {
-  box-shadow: 0 0 20px -3px rgba(56, 189, 248, 0.25), 0 0 8px -2px rgba(56, 189, 248, 0.15);
-}
-
-.box-glow-emerald {
-  box-shadow: 0 0 20px -3px rgba(52, 211, 153, 0.25), 0 0 8px -2px rgba(52, 211, 153, 0.15);
-}
-
-/* Laser pulse horizontal sweep animation */
+/* Subtle horizontal scanner sweep */
 @keyframes laser-sweep {
   0% {
     transform: translateX(-100%);
@@ -60,23 +93,23 @@
   animation: laser-sweep 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-/* Custom smooth dark scrollbar */
+/* Custom Raven Black scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #030712;
+  background: #1B1B1D;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #323238;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
+  background: #B0E0E6;
 }
 
 /* Accessible Motion Preference Fallbacks */
@@ -91,13 +124,13 @@
   }
 }
 
-/* Print styling for resume viewer and thermal receipt */
+/* Print styling for resume viewer, Plain Spec, and thermal receipt */
 @media print {
   body {
     background-color: #ffffff !important;
-    color: #0f172a !important;
+    color: #1B1B1D !important;
   }
-  
+
   header,
   nav,
   .print\:hidden,
@@ -120,7 +153,7 @@
     border: none !important;
     padding: 0 !important;
     max-width: 100% !important;
-    color: #0f172a !important;
+    color: #1B1B1D !important;
     background: #ffffff !important;
   }
 }

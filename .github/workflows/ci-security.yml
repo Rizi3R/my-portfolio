@@ -1,0 +1,49 @@
+name: Security & Build Verification
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: TypeScript & lint verification
+        run: npm run lint
+
+      - name: Validate portfolio content integrity
+        run: npm run validate:content
+
+      - name: Production build
+        run: npm run build
+
+      - name: Verify production bundle contains no source maps or secret leaks
+        run: |
+          if find dist -name '*.map' | grep -q .; then
+            echo "ERROR: Source maps found in production dist/"
+            exit 1
+          fi
+          if grep -rnE 'UPSTASH_REDIS_REST_TOKEN|KV_REST_API_TOKEN|5582 2313|sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}' dist/; then
+            echo "ERROR: Sensitive pattern found in production dist/"
+            exit 1
+          fi
+
+      - name: Audit dependencies (high/critical)
+        run: npm audit --audit-level=high
