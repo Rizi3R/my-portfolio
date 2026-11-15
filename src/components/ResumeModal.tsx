@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { X, Printer, Mail, Linkedin, MapPin } from 'lucide-react';
+import { X, Printer, Mail, MapPin } from 'lucide-react';
+import { LinkedInIcon } from './LinkedInIcon';
 import { PROFILE, EXPERIENCES, CERTIFICATIONS, EDUCATION } from '../data/universeContent';
 
 interface ResumeModalProps {
@@ -101,7 +102,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               </a>
               <span aria-hidden="true">·</span>
               <a href={PROFILE.linkedIn} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-stone-900 underline">
-                <Linkedin className="w-3.5 h-3.5" aria-hidden="true" />
+                <LinkedInIcon className="w-3.5 h-3.5" />
                 <span>LinkedIn Profile</span>
               </a>
             </div>

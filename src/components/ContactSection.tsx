@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PROFILE } from '../data/universeContent';
-import { Mail, Linkedin, MapPin, Copy, Check, ArrowUpRight, FileText } from 'lucide-react';
+import { Mail, MapPin, Copy, Check, ArrowUpRight, FileText } from 'lucide-react';
+import { LinkedInIcon } from './LinkedInIcon';
 import { InteractiveTerminal } from './InteractiveTerminal';
 
 interface ContactSectionProps {
@@ -137,7 +138,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 <div className="text-sm font-semibold text-white">Aries Razak Profile</div>
               </div>
               <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#D1D5DB]">
-                <Linkedin className="w-3.5 h-3.5 text-[#B0E0E6]" aria-hidden="true" />
+                <LinkedInIcon className="w-3.5 h-3.5 text-[#B0E0E6]" />
                 <span>Connect on LinkedIn</span>
                 <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
               </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PROFILE } from '../data/universeContent';
-import { ArrowUp, Mail, Linkedin, FileText, Terminal, Command } from 'lucide-react';
+import { ArrowUp, Mail, FileText, Terminal, Command } from 'lucide-react';
+import { LinkedInIcon } from './LinkedInIcon';
 import { VisitorCounter } from './VisitorCounter';
 
 interface FooterProps {
@@ -60,7 +61,7 @@ export const Footer: React.FC<FooterProps> = ({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#222226] hover:bg-[#2B2B30] text-white border border-[#323238] transition-colors"
             >
-              <Linkedin className="w-3.5 h-3.5 text-[#B0E0E6]" aria-hidden="true" />
+              <LinkedInIcon className="w-3.5 h-3.5 text-[#B0E0E6]" />
               <span>LinkedIn</span>
             </a>
 
