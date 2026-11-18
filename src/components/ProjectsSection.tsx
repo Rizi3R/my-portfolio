@@ -76,9 +76,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
       <div className="space-y-2">
         <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
-          What I Did
+          {cs.id === 'case-pos-triage' ? 'Typical Troubleshooting Steps' : 'What I Did'}
         </h4>
-        <ul className="list-disc list-inside space-y-1.5 text-sm text-[#191723] leading-relaxed">
+        <ul className="list-disc pl-5 space-y-1.5 text-sm text-[#191723] leading-relaxed">
           {cs.whatIDid.map((step, i) => (
             <li key={i}>{step}</li>
           ))}
@@ -105,7 +105,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     <section
       id="featured-work"
       aria-labelledby="featured-work-heading"
-      className="scroll-mt-16 bg-[#F6F2E9] text-[#191723] py-14 sm:py-20 border-b border-[#DDD6C7]"
+      className="scroll-mt-20 bg-[#F6F2E9] text-[#191723] py-14 sm:py-20 border-b border-[#DDD6C7]"
     >
       {/* Keep #projects alias anchor so links targeting #projects still land at the top of Case Studies */}
       <div id="projects" className="scroll-mt-20" />

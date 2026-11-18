@@ -45,26 +45,26 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
       role="dialog"
       aria-modal="true"
       aria-labelledby="resume-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#0A0913]/88 backdrop-blur-md overflow-y-auto resume-print-overlay"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-2 sm:p-6 bg-[#0A0913]/88 backdrop-blur-md resume-print-overlay"
       onClick={onClose}
     >
       <div
-        className="bg-white text-[#191723] rounded-xl border border-[#242138] max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative my-6 resume-print-sheet"
+        className="bg-white text-[#191723] rounded-xl border border-[#242138] max-w-4xl w-full max-h-[calc(100dvh-1rem)] sm:max-h-[90dvh] flex flex-col overflow-hidden shadow-2xl relative resume-print-sheet"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Sticky Control Bar inside modal (hidden in print) */}
-        <div className="sticky top-0 z-20 bg-[#0A0913] text-[#F6F2E9] px-6 py-3.5 flex items-center justify-between border-b border-[#242138] no-print font-mono text-xs">
-          <div className="flex items-center gap-2">
+        {/* Pinned Control Bar inside modal (always reachable while scrolling on mobile; hidden in print) */}
+        <div className="shrink-0 z-20 bg-[#0A0913] text-[#F6F2E9] px-4 sm:px-6 py-3 flex items-center justify-between gap-2 border-b border-[#242138] no-print font-mono text-xs">
+          <div className="flex items-center gap-2 min-w-0">
             <span className="font-bold text-[#A8C5FF]">Résumé</span>
-            <span className="text-[#524E66]">·</span>
+            <span className="text-[#524E66] hidden sm:inline">·</span>
             <span className="text-[#CFCAC0] hidden sm:inline">Selectable &amp; Printable View</span>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 min-h-[40px] rounded-lg text-xs font-semibold bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] transition-colors cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
             >
               <Printer className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Print / Save PDF</span>
@@ -75,56 +75,59 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               type="button"
               onClick={onClose}
               aria-label="Close résumé viewer"
-              className="p-2 rounded-lg text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/50 cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+              className="p-2 rounded-lg text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/50 cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Selectable Résumé Content */}
-        <div className="p-6 sm:p-10 space-y-7 font-sans text-[#191723] select-text">
+        {/* Selectable & Scrollable Résumé Content */}
+        <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-8 md:p-10 space-y-6 sm:space-y-7 font-sans text-[#191723] select-text resume-print-body">
           {/* Header */}
           <div className="border-b border-[#DDD6C7] pb-5">
             <h1
               id="resume-modal-title"
-              className="text-2xl sm:text-3xl font-bold font-display tracking-tight text-[#191723] mb-1"
+              className="text-xl sm:text-3xl font-bold font-display tracking-tight text-[#191723] mb-1"
             >
               {PROFILE.fullName}
             </h1>
             <p className="text-xs font-mono font-semibold text-[#474457] mb-2">
               {PROFILE.displayName}
             </p>
-            <p className="text-sm font-semibold font-mono text-[#191723] tracking-wide uppercase mb-3">
+            <p className="text-xs sm:text-sm font-semibold font-mono text-[#191723] tracking-wide uppercase mb-3">
               {PROFILE.title}
             </p>
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#474457] font-mono">
+            <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-xs text-[#474457] font-mono break-words">
               <span className="flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-[#474457]" aria-hidden="true" />
+                <MapPin className="w-3.5 h-3.5 text-[#474457] shrink-0" aria-hidden="true" />
                 <span>{PROFILE.location}</span>
               </span>
-              <span aria-hidden="true">·</span>
-              <a href={`mailto:${PROFILE.email}`} className="flex items-center gap-1 text-[#191723] underline">
-                <Mail className="w-3.5 h-3.5" aria-hidden="true" />
+              <span aria-hidden="true" className="hidden sm:inline">·</span>
+              <a
+                href={`mailto:${PROFILE.email}`}
+                className="flex items-center gap-1 text-[#191723] underline break-all sm:break-normal"
+              >
+                <Mail className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                 <span>{PROFILE.email}</span>
               </a>
-              <span aria-hidden="true">·</span>
+              <span aria-hidden="true" className="hidden sm:inline">·</span>
               <a
                 href={PROFILE.linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 text-[#191723] underline"
               >
-                <LinkedInIcon className="w-3.5 h-3.5" />
+                <LinkedInIcon className="w-3.5 h-3.5 shrink-0" />
                 <span>LinkedIn Profile</span>
               </a>
             </div>
           </div>
 
           {/* Summary */}
-          <div>
-            <h2 className="text-xs font-bold font-mono uppercase tracking-wider text-[#191723] border-b border-[#DDD6C7] pb-1 mb-2">
+          <div className="break-inside-avoid">
+            <h2 className="text-xs font-bold font-mono uppercase tracking-wider text-[#191723] border-b border-[#DDD6C7] pb-1 mb-2 break-after-avoid">
               Summary
             </h2>
             <p className="text-xs sm:text-sm text-[#474457] leading-relaxed">
@@ -134,7 +137,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
           {/* Work Experience */}
           <div>
-            <h2 className="text-xs font-bold font-mono uppercase tracking-wider text-[#191723] border-b border-[#DDD6C7] pb-1 mb-4">
+            <h2 className="text-xs font-bold font-mono uppercase tracking-wider text-[#191723] border-b border-[#DDD6C7] pb-1 mb-4 break-after-avoid">
               Experience
             </h2>
 
@@ -143,7 +146,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 <div key={exp.id} className="space-y-1.5 break-inside-avoid">
                   <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
                     <div>
-                      <h3 className="text-sm font-bold font-mono text-[#191723]">
+                      <h3 className="text-sm font-bold font-mono text-[#191723] break-after-avoid">
                         {exp.role}
                         {exp.isInternship ? ' (Internship)' : ''}
                       </h3>
@@ -156,7 +159,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                     </span>
                   </div>
 
-                  <ul className="list-disc list-inside text-xs text-[#191723] space-y-1 pl-1">
+                  <ul className="list-disc pl-4 text-xs text-[#191723] space-y-1.5">
                     {exp.highlights.map((b, i) => (
                       <li key={i} className="leading-relaxed">
                         <span>{b}</span>

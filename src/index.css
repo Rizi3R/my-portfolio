@@ -72,9 +72,13 @@
     margin: 14mm;
   }
 
-  body {
+  html,
+  body,
+  #root {
     background-color: #ffffff !important;
     color: #191723 !important;
+    overflow: visible !important;
+    height: auto !important;
   }
 
   header,
@@ -86,6 +90,12 @@
 
   .print-only {
     display: block !important;
+  }
+
+  h2,
+  h3 {
+    break-after: avoid;
+    page-break-after: avoid;
   }
 
   .break-inside-avoid {
@@ -101,6 +111,7 @@
 
   .resume-print-overlay {
     position: static !important;
+    display: block !important;
     overflow: visible !important;
     background: transparent !important;
     padding: 0 !important;
@@ -114,8 +125,17 @@
     margin: 0 !important;
     max-width: 100% !important;
     max-height: none !important;
+    height: auto !important;
+    display: block !important;
     overflow: visible !important;
     color: #191723 !important;
     background: #ffffff !important;
+  }
+
+  .resume-print-body {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    padding: 0 !important;
   }
 }

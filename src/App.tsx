@@ -246,7 +246,7 @@ export default function App() {
         onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
       />
 
-      <main className="flex-1 relative z-10 pt-16">
+      <main className={`flex-1 relative z-10 pt-16 ${resumeModalOpen ? 'print:hidden' : ''}`}>
         {activeView === 'plain' ? (
           <Suspense
             fallback={

@@ -448,26 +448,27 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'case-pos-triage',
     title: 'Application incident triage and vendor escalation',
-    organization: 'emart24 Malaysia · Recurring Support Work',
+    organization: 'emart24 Malaysia · Example of Recurring Support Work',
     period: 'September 2025 to present',
     featuredOnHome: true,
     summaryLine:
-      'Confirm Xilnex POS sync, promotion, and payment symptoms with outlet teams, guide first-line steps, and pass clean observations to vendors.',
+      'Example of recurring Xilnex POS triage across outlets: confirming symptoms, checking sync progress to 100%, guiding a safe POS restart, and escalating with observations.',
     situation:
-      'In day-to-day store support, outlets experience recurring Xilnex POS issues involving sales or catalog sync, promotions, and payment-related disruptions.',
+      'In day-to-day retail support across multiple outlets, store teams report recurring Xilnex POS issues affecting sync, promotions, or payment flows. Because each issue can stem from an incomplete sync, local register state, or an application defect, first-line triage needs consistent checks before deciding whether to restart locally or escalate.',
     responsibility:
-      'First point of application troubleshooting for Xilnex POS across HQ and outlets, plus coordination with external vendors or internal teams when deeper investigation is needed.',
+      'As System Application Specialist, I serve as the first-line application support point for Xilnex POS across HQ and outlets, guiding outlet staff through initial checks and coordinating with external vendors or internal teams when deeper investigation is needed.',
     whatIDid: [
-      'Confirm the symptom directly with outlet staff and inspect the POS application and sync status.',
-      'Guide staff through appropriate first-line steps such as triggering a manual sync or restarting the affected terminal when safe.',
-      'Document verified observations and checks already attempted to relay to the vendor or internal team when further investigation is needed.',
+      'Confirm symptoms with the outlet team first to clarify what staff see on screen and which register functions are affected.',
+      'Check Xilnex application and sync status with outlet teams, and ask them to let the sync reach 100% before rechecking the affected item, promotion, or register behavior when appropriate.',
+      'Guide outlet staff through a controlled POS restart as a next first-line step when sync checks alone do not clear the symptom.',
+      'Escalate to the Xilnex vendor or internal teams with documented observations, sync status, and first-line steps already completed when the issue requires deeper investigation.',
     ],
     technologies: [
       'Xilnex POS',
-      'Sync Troubleshooting',
-      'Promotion Checks',
-      'Payment Issue Triage',
-      'Vendor Coordination',
+      'Symptom Confirmation',
+      'Sync Status Checks',
+      'Guided First-Line Steps',
+      'Vendor Escalation',
     ],
     stratumFocus: 'application',
   },

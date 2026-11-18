@@ -69,7 +69,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       />
 
       {/* Clean 3-Zone Editorial Bar: [Aries Razak] - [4 nav links] - [Résumé CTA] */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3 sm:gap-6">
         <a
           href="#top"
           onClick={(e) => {
