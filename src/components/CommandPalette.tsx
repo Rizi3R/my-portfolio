@@ -123,7 +123,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'nav-projects',
         category: 'Navigation',
         label: 'Case Studies',
-        sublabel: `Featured Work & ${CASE_STUDIES.length} real support cases`,
+        sublabel: `Selected Work & ${CASE_STUDIES.length} real support cases`,
         icon: <FolderGit2 className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('featured-work');

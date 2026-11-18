@@ -12,16 +12,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenCaseStudy,
 }) => {
   const heroRef = useRef<HTMLElement | null>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
   const [sculptureOffsetPx, setSculptureOffsetPx] = useState(0);
   const [imageMissing, setImageMissing] = useState(false);
 
+  // Detect already-failed image loads if the browser resolved before hydration attached onError
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img && img.complete && img.naturalWidth === 0) {
+      setImageMissing(true);
+    }
+  }, []);
+
   // Restrained parallax strictly on the sculpture wrapper:
-  // - only while hero is visible
+  // - only while hero is visible and artwork is rendered
   // - static (0px) on < 1024px mobile/tablet viewports
   // - static (0px) when prefers-reduced-motion: reduce is set
   useEffect(() => {
     const heroEl = heroRef.current;
-    if (!heroEl || typeof window === 'undefined') return;
+    if (!heroEl || imageMissing || typeof window === 'undefined') {
+      setSculptureOffsetPx(0);
+      return;
+    }
 
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const desktopQuery = window.matchMedia('(min-width: 1024px)');
@@ -76,7 +88,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       desktopQuery.removeEventListener('change', updateParallax);
       if (rafId !== null) window.cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [imageMissing]);
 
   return (
     <section
@@ -87,8 +99,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          {/* Left Column: Intro, Controlled-Measure Headline, Primary Actions (Always first on mobile & desktop) */}
-          <div className="order-1 lg:col-span-7 space-y-6">
+          {/* Left Column: Always first on mobile & desktop; expands cleanly into a full text-first layout when artwork is unavailable */}
+          <div
+            className={
+              imageMissing
+                ? 'order-1 lg:col-span-10 xl:col-span-9 space-y-6 py-2 sm:py-4'
+                : 'order-1 lg:col-span-7 space-y-6'
+            }
+          >
             <div className="space-y-4">
               <p className="text-sm sm:text-base font-medium text-[#F6F2E9] tracking-wide">
                 {PROFILE.displayName}
@@ -96,7 +114,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
               <h1
                 id="hero-heading"
-                className="font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#F6F2E9] tracking-tight leading-[1.08] max-w-[16ch]"
+                className={`font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#F6F2E9] tracking-tight leading-[1.08] ${
+                  imageMissing ? 'max-w-[22ch]' : 'max-w-[16ch]'
+                }`}
               >
                 {PROFILE.title}
               </h1>
@@ -104,7 +124,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {/* One restrained Soft Copper accent rule */}
               <div className="h-px w-16 bg-[#F2A77D]" aria-hidden="true" />
 
-              <p className="text-base sm:text-lg text-[#E6E1D6] leading-relaxed max-w-xl">
+              <p
+                className={`text-base sm:text-lg text-[#E6E1D6] leading-relaxed ${
+                  imageMissing ? 'max-w-2xl' : 'max-w-xl'
+                }`}
+              >
                 {PROFILE.intro}
               </p>
             </div>
@@ -148,42 +172,47 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
           </div>
 
-          {/* Right Column: Smoked-Glass & Titanium Ribbon Artwork Stage */}
-          <div className="order-2 lg:col-span-5">
-            <div
-              className="relative w-full max-w-md mx-auto lg:max-w-none aspect-[4/3] sm:aspect-[16/11] lg:aspect-[5/6] lg:max-h-[540px] bg-[#0A0913] overflow-hidden select-none"
-              style={{
-                transform: `translate3d(0, -${sculptureOffsetPx}px, 0)`,
-              }}
-            >
-              {!imageMissing && (
-                <picture>
-                  <source srcSet="/assets/hero-sculpture.avif" type="image/avif" />
-                  <source srcSet="/assets/hero-sculpture.webp" type="image/webp" />
-                  <img
-                    src="/assets/hero-sculpture.png"
-                    alt="Abstract smoked-glass and brushed titanium ribbon sculpture against a deep ink-violet backdrop"
-                    width={1200}
-                    height={1440}
-                    decoding="async"
-                    fetchPriority="high"
-                    onError={() => setImageMissing(true)}
-                    className="w-full h-full object-cover object-center"
-                  />
-                </picture>
-              )}
-
-              {/* Directional ink-violet edge blend so the artwork integrates cleanly into #0A0913 */}
+          {/* Right Column: Smoked-Glass & Titanium Ribbon Artwork Stage (unmounts completely if asset fails to load) */}
+          {!imageMissing && (
+            <div className="order-2 lg:col-span-5">
               <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0"
+                className="relative w-full max-w-md mx-auto lg:max-w-none aspect-[4/3] sm:aspect-[16/10] lg:aspect-[5/6] lg:max-h-[540px] bg-[#0A0913] overflow-hidden select-none"
                 style={{
-                  background:
-                    'radial-gradient(circle at 54% 48%, transparent 45%, #0A0913 96%), linear-gradient(to right, #0A0913 0%, transparent 18%, transparent 88%, #0A0913 100%), linear-gradient(to bottom, #0A0913 0%, transparent 14%, transparent 84%, #0A0913 100%)',
+                  transform:
+                    sculptureOffsetPx > 0
+                      ? `translate3d(0, -${sculptureOffsetPx}px, 0)`
+                      : undefined,
                 }}
-              />
+              >
+                <img
+                  ref={imgRef}
+                  src="/assets/hero-sculpture.png"
+                  alt="Abstract smoked-glass and brushed titanium ribbon sculpture against a deep ink-violet backdrop"
+                  width={1200}
+                  height={1440}
+                  decoding="async"
+                  fetchPriority="high"
+                  onLoad={(e) => {
+                    if (e.currentTarget.naturalWidth === 0) {
+                      setImageMissing(true);
+                    }
+                  }}
+                  onError={() => setImageMissing(true)}
+                  className="block w-full h-full object-cover object-[50%_26%] lg:object-[54%_48%]"
+                />
+
+                {/* Directional ink-violet edge blend so the artwork integrates cleanly into #0A0913 */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    background:
+                      'radial-gradient(circle at 54% 48%, transparent 52%, #0A0913 98%), linear-gradient(to right, #0A0913 0%, transparent 16%, transparent 88%, #0A0913 100%), linear-gradient(to bottom, #0A0913 0%, transparent 12%, transparent 86%, #0A0913 100%)',
+                  }}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

@@ -382,6 +382,22 @@ async function startServer() {
   });
 
   if (!isProd) {
+    const publicDir = path.resolve(process.cwd(), 'public');
+    app.use('/assets', async (req, res, next) => {
+      const requested = path.normalize(req.path).replace(/^(\.\.[/\\])+/, '');
+      const fullPath = path.join(publicDir, 'assets', requested);
+      if (!fullPath.startsWith(path.join(publicDir, 'assets'))) {
+        res.status(404).end();
+        return;
+      }
+      try {
+        await fs.access(fullPath);
+        next();
+      } catch {
+        res.status(404).end();
+      }
+    });
+
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
@@ -390,7 +406,11 @@ async function startServer() {
   } else {
     const distDir = path.resolve(process.cwd(), 'dist');
     app.use(express.static(distDir));
-    app.get('*', (_req, res) => {
+    app.get('*', (req, res) => {
+      if (req.path.startsWith('/assets/') || path.extname(req.path)) {
+        res.status(404).end();
+        return;
+      }
       res.sendFile(path.join(distDir, 'index.html'));
     });
   }

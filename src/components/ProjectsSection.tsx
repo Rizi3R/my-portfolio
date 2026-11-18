@@ -117,15 +117,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#DDD6C7] pb-6">
-          <div className="max-w-2xl space-y-2">
-            <p className="text-xs font-mono uppercase tracking-wider text-[#474457]">
-              Featured Work
-            </p>
+          <div className="max-w-2xl">
             <h2
               id="featured-work-heading"
               className="font-display text-3xl sm:text-4xl font-bold text-[#191723] tracking-tight"
             >
-              Owned SaaS Migration &amp; Application Support Cases
+              Selected Work
             </h2>
           </div>
           <p className="text-sm text-[#474457] max-w-md leading-relaxed">
@@ -138,13 +135,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           <article
             id={primaryCase.id}
             aria-labelledby={`${primaryCase.id}-heading`}
-            className="scroll-mt-24 bg-white/75 border border-[#DDD6C7] rounded-2xl p-6 sm:p-8"
+            className="scroll-mt-24 bg-white border border-[#191723]/15 border-l-4 border-l-[#191723] rounded-2xl p-6 sm:p-8 shadow-sm"
           >
             <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-5">
               <div className="space-y-3 max-w-3xl">
-                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs font-mono text-[#474457]">
-                  <span className="font-semibold text-[#191723]">Case 01 · Featured Project</span>
-                  <span aria-hidden="true">·</span>
+                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-xs font-mono text-[#474457]">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded bg-[#191723] text-[#F6F2E9] font-semibold tracking-wide">
+                    Case 01 · Lead Migration
+                  </span>
                   <span>{primaryCase.organization}</span>
                   {primaryCase.period && (
                     <>
@@ -156,7 +154,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
                 <h3
                   id={`${primaryCase.id}-heading`}
-                  className="font-display text-2xl sm:text-3xl font-bold text-[#191723] tracking-tight"
+                  className="font-display text-2xl sm:text-[2rem] font-bold text-[#191723] tracking-tight leading-tight"
                 >
                   {primaryCase.title}
                 </h3>
