@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { Navbar, ActiveView } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
-import { AboutSection } from './components/AboutSection';
+import { ProjectsSection } from './components/ProjectsSection';
 import { TimelineSection } from './components/TimelineSection';
 import { ConstellationSection } from './components/ConstellationSection';
-import { ProjectsSection } from './components/ProjectsSection';
+import { AboutSection } from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
 import { ReceiptSection } from './components/ReceiptSection';
 import { InteractiveTerminal } from './components/InteractiveTerminal';
@@ -98,7 +98,6 @@ export default function App() {
       if (linkedCaseId) {
         setActiveView('portfolio');
         setExpandedCaseId(linkedCaseId);
-        // Wait for layout paint so the expanded case sits right below sticky header
         setTimeout(() => {
           scrollToElementCleanly(linkedCaseId, isInitialLoad);
         }, 120);
@@ -143,7 +142,7 @@ export default function App() {
   };
 
   const handleOpenCaseStudy = (caseId?: string) => {
-    const targetId = caseId || 'projects';
+    const targetId = caseId || 'featured-work';
     if (caseId && CASE_STUDY_IDS.has(caseId)) {
       setExpandedCaseId(caseId);
       const url = new URL(window.location.href);
@@ -236,8 +235,8 @@ export default function App() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col font-sans selection:bg-[#B0E0E6]/25 selection:text-[#B0E0E6] relative overflow-x-hidden ${
-        activeView === 'plain' ? 'bg-white text-stone-900' : 'tech-universe-bg text-white'
+      className={`min-h-screen flex flex-col font-sans selection:bg-[#A8C5FF]/25 selection:text-[#F6F2E9] relative overflow-x-hidden ${
+        activeView === 'plain' ? 'bg-white text-[#191723]' : 'tech-universe-bg text-[#F6F2E9]'
       }`}
     >
       <Navbar
@@ -251,8 +250,8 @@ export default function App() {
         {activeView === 'plain' ? (
           <Suspense
             fallback={
-              <div className="py-24 text-center font-mono text-sm text-stone-600 flex items-center justify-center gap-2">
-                <Loader2 className="w-5 h-5 animate-spin text-stone-800" />
+              <div className="py-24 text-center font-mono text-sm text-[#474457] flex items-center justify-center gap-2">
+                <Loader2 className="w-5 h-5 animate-spin text-[#191723]" />
                 <span>Loading Printable Summary...</span>
               </div>
             }
@@ -261,7 +260,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => handleViewChange('portfolio')}
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#1B1B1D] text-[#B0E0E6] text-xs font-mono hover:bg-[#2B2B30] transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#0A0913] text-[#F6F2E9] text-xs font-mono hover:bg-[#191723] transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Back to Overview</span>
@@ -272,7 +271,7 @@ export default function App() {
         ) : activeView === 'atlas' ? (
           <Suspense
             fallback={
-              <div className="py-32 text-center font-mono text-sm text-[#B0E0E6] flex items-center justify-center gap-2">
+              <div className="py-32 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
                 <Loader2 className="w-5 h-5 animate-spin" />
                 <span>Loading Skill Atlas...</span>
               </div>
@@ -282,7 +281,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => handleViewChange('portfolio')}
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#222226] border border-[#323238] hover:border-[#B0E0E6]/60 text-[#B0E0E6] text-xs font-mono transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Back to Overview</span>
@@ -298,7 +297,7 @@ export default function App() {
         ) : activeView === 'trace' ? (
           <Suspense
             fallback={
-              <div className="py-32 text-center font-mono text-sm text-[#B0E0E6] flex items-center justify-center gap-2">
+              <div className="py-32 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
                 <Loader2 className="w-5 h-5 animate-spin" />
                 <span>Loading Educational Walkthrough...</span>
               </div>
@@ -308,7 +307,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => handleViewChange('portfolio')}
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#222226] border border-[#323238] hover:border-[#B0E0E6]/60 text-[#B0E0E6] text-xs font-mono transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Back to Overview</span>
@@ -323,32 +322,28 @@ export default function App() {
         ) : (
           <>
             <HeroSection
-              onChangeView={handleViewChange}
               onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
-              onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
-              onOpenCommandPalette={() => captureFocusAndOpen(setCommandPaletteOpen)}
               onOpenCaseStudy={handleOpenCaseStudy}
-              isAudioMuted={isAudioMuted}
-              onToggleAudio={handleToggleAudio}
             />
-            <AboutSection
-              onOpenLab={() => captureFocusAndOpen(setLabModalOpen)}
-              onOpenBeepToReceipt={() => handleViewChange('trace')}
-              onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
+            <ProjectsSection
+              expandedCaseId={expandedCaseId}
+              onSelectCaseId={handleToggleCaseCard}
+              onJumpToCase={handleOpenCaseStudy}
             />
             <TimelineSection />
             <ConstellationSection
               onOpenFullAtlas={(nodeId) => handleSelectNodeInAtlas(nodeId || '')}
             />
-            <ProjectsSection
-              expandedCaseId={expandedCaseId}
-              onSelectCaseId={handleToggleCaseCard}
+            <AboutSection
               onOpenLab={() => captureFocusAndOpen(setLabModalOpen)}
               onOpenBeepToReceipt={() => handleViewChange('trace')}
+              onOpenAtlas={() => handleSelectNodeInAtlas('')}
+              onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
+              onOpenPlainSummary={() => handleViewChange('plain')}
             />
             <ContactSection
               onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
-              onJumpToSection={handleNavigateSection}
+              onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
             />
             <ReceiptSection />
           </>
@@ -361,7 +356,7 @@ export default function App() {
           role="dialog"
           aria-modal="true"
           aria-label="Interactive Portfolio Shell"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm no-print"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#0A0913]/85 backdrop-blur-sm no-print"
           onClick={() => closeOverlayAndRestoreFocus(setTerminalModalOpen)}
         >
           <div className="max-w-3xl w-full" onClick={(e) => e.stopPropagation()}>
@@ -387,19 +382,19 @@ export default function App() {
           role="dialog"
           aria-modal="true"
           aria-label="Interactive Computing Lab Workbench"
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto no-print"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#0A0913]/88 backdrop-blur-md overflow-y-auto no-print"
           onClick={() => closeOverlayAndRestoreFocus(setLabModalOpen)}
         >
           <div
-            className="bg-[#1B1B1D] border border-[#323238] rounded-2xl max-w-6xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative my-6"
+            className="bg-[#0A0913] border border-[#242138] rounded-2xl max-w-6xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative my-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="sticky top-0 z-20 bg-[#222226] px-6 py-3.5 flex items-center justify-between border-b border-[#323238] font-mono text-xs">
+            <div className="sticky top-0 z-20 bg-[#12101F] px-6 py-3.5 flex items-center justify-between border-b border-[#242138] font-mono text-xs">
               <div className="flex items-center gap-2.5">
-                <span className="px-2 py-0.5 rounded bg-[#DC343B]/20 text-[#DC343B] border border-[#DC343B]/40 text-[10px] font-bold">
+                <span className="px-2 py-0.5 rounded bg-[#F2A77D]/15 text-[#F2A77D] border border-[#F2A77D]/40 text-[10px] font-bold">
                   SIMULATION
                 </span>
-                <span className="text-white font-semibold">
+                <span className="text-[#F6F2E9] font-semibold">
                   Interactive Computing Workbench
                 </span>
               </div>
@@ -407,7 +402,7 @@ export default function App() {
                 ref={labCloseRef}
                 type="button"
                 onClick={() => closeOverlayAndRestoreFocus(setLabModalOpen)}
-                className="p-1.5 rounded-lg text-[#D1D5DB] hover:text-white border border-[#323238] hover:border-[#B0E0E6]/60 cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B0E0E6]"
+                className="p-1.5 rounded-lg text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/60 cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
                 aria-label="Close interactive lab modal"
               >
                 <X className="w-4 h-4" />
@@ -417,7 +412,7 @@ export default function App() {
             <div className="p-4 sm:p-8">
               <Suspense
                 fallback={
-                  <div className="py-20 text-center font-mono text-sm text-[#B0E0E6] flex items-center justify-center gap-2">
+                  <div className="py-20 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
                     <Loader2 className="w-5 h-5 animate-spin" />
                     <span>Loading Simulations...</span>
                   </div>

@@ -88,10 +88,10 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
     const meta = EVIDENCE_META[status];
     const badgeStyle =
       status === 'learning'
-        ? 'bg-[#DC343B]/15 text-[#DC343B] border-[#DC343B]/40'
+        ? 'bg-[#F2A77D]/15 text-[#F2A77D] border-[#F2A77D]/40'
         : status === 'professional'
-        ? 'bg-[#B0E0E6]/15 text-[#B0E0E6] border-[#B0E0E6]/40'
-        : 'bg-[#1B1B1D] text-[#D1D5DB] border-[#323238]';
+        ? 'bg-[#A8C5FF]/15 text-[#A8C5FF] border-[#A8C5FF]/40'
+        : 'bg-[#0A0913] text-[#CFCAC0] border-[#242138]';
 
     return (
       <span
@@ -108,45 +108,45 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
       case 'hardware':
       case 'network':
       case 'cloud':
-        return '#B0E0E6';
+        return '#A8C5FF';
       case 'application':
       case 'operations':
-        return '#DC343B';
+        return '#F2A77D';
       case 'kernel':
       default:
-        return '#FFFFFF';
+        return '#F6F2E9';
     }
   };
 
   return (
-    <div className="relative py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="relative py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-[#F6F2E9]">
       <div className="sr-only" aria-live="polite" role="status">
         {announcement}
       </div>
 
       {/* Header */}
       <div className="mb-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#323238] pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#242138] pb-6">
           <div>
-            <p className="text-xs font-mono uppercase tracking-widest text-[#B0E0E6] mb-2">
+            <p className="text-xs font-mono uppercase tracking-widest text-[#A8C5FF] mb-2">
               Skills &amp; Experience Map
             </p>
-            <h1 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            <h1 className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight">
               The Skill Atlas
             </h1>
-            <p className="mt-2 text-[#D1D5DB] font-sans text-xs sm:text-sm max-w-2xl leading-relaxed">
+            <p className="mt-2 text-[#CFCAC0] font-sans text-xs sm:text-sm max-w-2xl leading-relaxed">
               Browse all {NODES.length} documented capabilities, internship &amp; credential items, and active learning areas in list or graph format.
             </p>
           </div>
 
-          <div className="flex items-center gap-1.5 p-1 bg-[#222226] border border-[#323238] rounded-lg self-start md:self-auto font-mono text-xs">
+          <div className="flex items-center gap-1.5 p-1 bg-[#12101F] border border-[#242138] rounded-lg self-start md:self-auto font-mono text-xs">
             <button
               type="button"
               onClick={() => setViewMode('list')}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
                 viewMode === 'list'
-                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/40'
-                  : 'text-[#9CA3AF] hover:text-white'
+                  ? 'bg-[#A8C5FF] text-[#191723] font-semibold'
+                  : 'text-[#9A94A8] hover:text-[#F6F2E9]'
               }`}
               aria-label="Switch to Accessible List Tree View"
             >
@@ -158,8 +158,8 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               onClick={() => setViewMode('graph')}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
                 viewMode === 'graph'
-                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/40'
-                  : 'text-[#9CA3AF] hover:text-white'
+                  ? 'bg-[#A8C5FF] text-[#191723] font-semibold'
+                  : 'text-[#9A94A8] hover:text-[#F6F2E9]'
               }`}
               aria-label="Switch to 2D Graph Canvas View"
             >
@@ -173,7 +173,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-6 font-mono text-xs">
           <div className="relative">
             <Search
-              className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]"
+              className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#9A94A8]"
               aria-hidden="true"
             />
             <input
@@ -181,14 +181,14 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               placeholder="Search skills..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#222226] border border-[#323238] rounded-lg text-white pl-9 pr-8 py-2.5 focus:outline-none focus:border-[#B0E0E6] transition-colors"
+              className="w-full bg-[#12101F] border border-[#242138] rounded-lg text-[#F6F2E9] pl-9 pr-8 py-2.5 focus:outline-none focus:border-[#A8C5FF] transition-colors"
               aria-label="Search Atlas skills by title or summary"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-white cursor-pointer"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#9A94A8] hover:text-[#F6F2E9] cursor-pointer"
                 aria-label="Clear search query"
               >
                 <X className="w-3.5 h-3.5" />
@@ -200,7 +200,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
             <select
               value={stratumFilter}
               onChange={(e) => setStratumFilter(e.target.value)}
-              className="w-full bg-[#222226] border border-[#323238] rounded-lg text-[#D1D5DB] px-3 py-2.5 focus:outline-none focus:border-[#B0E0E6] cursor-pointer"
+              className="w-full bg-[#12101F] border border-[#242138] rounded-lg text-[#CFCAC0] px-3 py-2.5 focus:outline-none focus:border-[#A8C5FF] cursor-pointer"
               aria-label="Filter skills by layer"
             >
               <option value="all">All Layers (1 to 6)</option>
@@ -216,7 +216,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full bg-[#222226] border border-[#323238] rounded-lg text-[#D1D5DB] px-3 py-2.5 focus:outline-none focus:border-[#B0E0E6] cursor-pointer"
+              className="w-full bg-[#12101F] border border-[#242138] rounded-lg text-[#CFCAC0] px-3 py-2.5 focus:outline-none focus:border-[#A8C5FF] cursor-pointer"
               aria-label="Filter skills by experience level"
             >
               <option value="all">All Levels</option>
@@ -226,9 +226,9 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
             </select>
           </div>
 
-          <div className="flex items-center justify-between sm:justify-end gap-3 px-3 py-2 bg-[#222226] border border-[#323238] rounded-lg text-[#9CA3AF]">
+          <div className="flex items-center justify-between sm:justify-end gap-3 px-3 py-2 bg-[#12101F] border border-[#242138] rounded-lg text-[#9A94A8]">
             <span>Showing:</span>
-            <span className="font-bold text-[#B0E0E6]">
+            <span className="font-bold text-[#A8C5FF]">
               {filteredNodes.length} of {NODES.length} Items
             </span>
           </div>
@@ -237,14 +237,14 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
 
       {/* Main List / Graph & Inspector Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <div className="lg:col-span-8 bg-[#151517] border border-[#323238] rounded-2xl overflow-hidden relative">
+        <div className="lg:col-span-8 bg-[#0A0913] border border-[#242138] rounded-2xl overflow-hidden relative">
           {viewMode === 'graph' ? (
-            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] cyber-grid select-none overflow-hidden">
-              <div className="absolute inset-0 flex flex-col pointer-events-none opacity-30">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] bg-[#12101F] select-none overflow-hidden">
+              <div className="absolute inset-0 flex flex-col pointer-events-none opacity-35">
                 {STRATA.map((st, i) => (
                   <div
                     key={st.id}
-                    className="flex-1 border-b border-[#323238] px-3 pt-1 text-[9px] font-mono uppercase text-[#9CA3AF]"
+                    className="flex-1 border-b border-[#242138] px-3 pt-1 text-[9px] font-mono uppercase text-[#9A94A8]"
                   >
                     L{i + 1}: {st.title}
                   </div>
@@ -275,7 +275,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                         y1={fromNode.y}
                         x2={toNode.x}
                         y2={toNode.y}
-                        stroke={isConnectedToSelected ? '#B0E0E6' : '#323238'}
+                        stroke={isConnectedToSelected ? '#A8C5FF' : '#242138'}
                         strokeWidth={isConnectedToSelected ? 0.6 : 0.25}
                         strokeDasharray={isConnectedToSelected ? undefined : '0.8, 0.8'}
                         className="transition-all duration-300"
@@ -312,7 +312,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                           <circle
                             r="2.8"
                             fill="none"
-                            stroke="#DC343B"
+                            stroke="#F2A77D"
                             strokeWidth="0.35"
                             strokeDasharray="0.6, 0.6"
                           />
@@ -320,8 +320,8 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
 
                         <circle
                           r={isSelected ? 1.6 : 1.1}
-                          fill={isSelected ? '#DC343B' : color}
-                          stroke="#1B1B1D"
+                          fill={isSelected ? '#F2A77D' : color}
+                          stroke="#0A0913"
                           strokeWidth="0.3"
                           className="transition-all duration-200"
                         />
@@ -329,7 +329,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                         <text
                           y={isSelected ? -2.2 : -1.8}
                           textAnchor="middle"
-                          fill={isSelected ? '#FFFFFF' : '#B0E0E6'}
+                          fill={isSelected ? '#F6F2E9' : '#A8C5FF'}
                           fillOpacity={isSelected ? 1 : 0.85}
                           fontSize={isSelected ? '2.2' : '1.75'}
                           fontFamily="JetBrains Mono, monospace"
@@ -346,7 +346,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
             </div>
           ) : (
             <div className="p-4 max-h-[540px] overflow-y-auto font-mono text-xs">
-              <ol role="tree" aria-label="Atlas Skills Tree" className="space-y-2">
+              <ol role="tree" aria-label="Atlas Skills Tree" className="divide-y divide-[#242138]">
                 {filteredNodes.map((node) => {
                   const isSelected = selectedNode && selectedNode.id === node.id;
                   return (
@@ -354,10 +354,10 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                       <button
                         type="button"
                         onClick={() => handleSelectNode(node)}
-                        className={`w-full text-left p-3.5 rounded-xl border cursor-pointer transition-colors flex items-center justify-between gap-3 ${
+                        className={`w-full text-left p-3.5 cursor-pointer transition-colors flex items-center justify-between gap-3 ${
                           isSelected
-                            ? 'bg-[#222226] border-[#B0E0E6] text-white'
-                            : 'bg-[#1B1B1D] border-[#323238] text-[#D1D5DB] hover:border-[#B0E0E6]/40'
+                            ? 'bg-[#12101F] text-[#F6F2E9]'
+                            : 'text-[#CFCAC0] hover:bg-[#12101F]/60'
                         }`}
                       >
                         <div>
@@ -365,7 +365,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                             <span style={{ color: getStratumColor(node.stratum) }}>●</span>
                             <span>{node.label}</span>
                           </div>
-                          <div className="text-[11px] text-[#9CA3AF] mt-1 font-sans">
+                          <div className="text-[11px] text-[#9A94A8] mt-1 font-sans">
                             {node.summary}
                           </div>
                         </div>
@@ -381,40 +381,40 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
 
         {/* Selected Node Inspector */}
         <aside
-          className="lg:col-span-4 bg-[#222226] border border-[#323238] rounded-2xl p-6 font-mono text-xs space-y-5"
+          className="lg:col-span-4 bg-[#12101F] border border-[#242138] rounded-2xl p-6 font-mono text-xs space-y-5"
           aria-label="Skill Details Inspector"
         >
           {selectedNode ? (
             <>
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] text-[#9CA3AF] uppercase tracking-widest">
+                  <span className="text-[10px] text-[#9A94A8] uppercase tracking-widest">
                     DETAIL VIEW
                   </span>
                   {getStatusBadge(selectedNode.status)}
                 </div>
-                <h3 className="font-display text-xl font-bold text-white tracking-tight">
+                <h3 className="font-display text-xl font-bold text-[#F6F2E9] tracking-tight">
                   {selectedNode.label}
                 </h3>
-                <div className="mt-1 text-[#9CA3AF] text-[11px] flex flex-wrap items-center gap-2">
+                <div className="mt-1 text-[#9A94A8] text-[11px] flex flex-wrap items-center gap-2">
                   <span>{selectedNode.category}</span>
                   <span>·</span>
-                  <span className="text-[#B0E0E6]">{selectedNode.stratum}</span>
+                  <span className="text-[#A8C5FF]">{selectedNode.stratum}</span>
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#1B1B1D] border border-[#323238] text-[#D1D5DB] font-sans text-xs leading-relaxed">
+              <div className="p-3.5 rounded-xl bg-[#0A0913] border border-[#242138] text-[#CFCAC0] font-sans text-xs leading-relaxed">
                 {selectedNode.summary}
               </div>
 
               {selectedNode.evidenceRef && (
                 <div className="space-y-1 text-xs">
-                  <span className="text-[#9CA3AF] text-[10px] uppercase tracking-wider block">
+                  <span className="text-[#9A94A8] text-[10px] uppercase tracking-wider block">
                     Supporting Context
                   </span>
-                  <div className="p-3 rounded-xl bg-[#1B1B1D] border border-[#323238] text-[#D1D5DB] flex items-center justify-between gap-2">
+                  <div className="p-3 rounded-xl bg-[#0A0913] border border-[#242138] text-[#CFCAC0] flex items-center justify-between gap-2">
                     <div>
-                      <div className="font-bold text-white">
+                      <div className="font-bold text-[#F6F2E9]">
                         {getEvidenceLabel(selectedNode.evidenceRef)}
                       </div>
                     </div>
@@ -422,7 +422,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                       <button
                         type="button"
                         onClick={() => onOpenExperience(selectedNode.evidenceRef!)}
-                        className="text-[#B0E0E6] hover:text-white text-[10px] flex items-center gap-1 cursor-pointer shrink-0"
+                        className="text-[#A8C5FF] hover:text-[#F6F2E9] text-[10px] flex items-center gap-1 cursor-pointer shrink-0"
                       >
                         <span>View</span>
                         <ArrowRight className="w-3 h-3" />
@@ -434,10 +434,10 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
 
               {selectedNode.usage && (
                 <div className="space-y-1 text-xs">
-                  <span className="text-[#9CA3AF] text-[10px] uppercase tracking-wider block">
+                  <span className="text-[#9A94A8] text-[10px] uppercase tracking-wider block">
                     Where Applied
                   </span>
-                  <div className="p-3 rounded-xl bg-[#1B1B1D] border border-[#323238] text-[#D1D5DB] font-sans text-xs leading-relaxed">
+                  <div className="p-3 rounded-xl bg-[#0A0913] border border-[#242138] text-[#CFCAC0] font-sans text-xs leading-relaxed">
                     {selectedNode.usage}
                   </div>
                 </div>
@@ -447,7 +447,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                 <button
                   type="button"
                   onClick={() => onJumpToStratum(selectedNode.stratum)}
-                  className="w-full py-2.5 px-3.5 rounded-lg bg-[#1B1B1D] hover:bg-[#2B2B30] text-[#B0E0E6] border border-[#323238] hover:border-[#B0E0E6]/50 flex items-center justify-between transition-colors cursor-pointer text-xs font-semibold"
+                  className="w-full py-2.5 px-3.5 rounded-lg bg-[#0A0913] hover:bg-[#19162B] text-[#A8C5FF] border border-[#242138] hover:border-[#A8C5FF]/50 flex items-center justify-between transition-colors cursor-pointer text-xs font-semibold"
                 >
                   <span>View Related Walkthrough Layer</span>
                   <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -455,12 +455,12 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               )}
 
               <div>
-                <div className="flex items-center justify-between text-[#9CA3AF] text-[10px] uppercase tracking-wider mb-2">
+                <div className="flex items-center justify-between text-[#9A94A8] text-[10px] uppercase tracking-wider mb-2">
                   <span>Connected Skills ({relatedEdges.length})</span>
                 </div>
 
                 {relatedEdges.length === 0 ? (
-                  <div className="text-[#9CA3AF] italic p-3 rounded-xl border border-dashed border-[#323238] text-center">
+                  <div className="text-[#9A94A8] italic p-3 rounded-xl border border-dashed border-[#242138] text-center">
                     No active connections in current filter.
                   </div>
                 ) : (
@@ -472,20 +472,20 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                           key={idx}
                           type="button"
                           onClick={() => handleSelectNode(rel.partner!)}
-                          className="w-full text-left p-2.5 rounded-xl bg-[#1B1B1D] hover:bg-[#2B2B30] border border-[#323238] hover:border-[#B0E0E6]/50 transition-colors cursor-pointer"
+                          className="w-full text-left p-2.5 rounded-xl bg-[#0A0913] hover:bg-[#19162B] border border-[#242138] hover:border-[#A8C5FF]/50 transition-colors cursor-pointer"
                         >
-                          <div className="flex items-center justify-between text-xs font-bold text-white mb-1">
+                          <div className="flex items-center justify-between text-xs font-bold text-[#F6F2E9] mb-1">
                             <span className="flex items-center gap-1.5">
-                              <span className="text-[#B0E0E6] text-[10px]">
+                              <span className="text-[#A8C5FF] text-[10px]">
                                 {rel.direction === 'outgoing' ? '→' : '←'}
                               </span>
                               <span>{rel.partner.label}</span>
                             </span>
-                            <span className="text-[9px] text-[#9CA3AF] font-normal uppercase">
+                            <span className="text-[9px] text-[#9A94A8] font-normal uppercase">
                               {rel.partner.stratum}
                             </span>
                           </div>
-                          <div className="text-[11px] text-[#D1D5DB] leading-snug font-sans">
+                          <div className="text-[11px] text-[#CFCAC0] leading-snug font-sans">
                             {rel.reason}
                           </div>
                         </button>
@@ -496,7 +496,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               </div>
             </>
           ) : (
-            <div className="text-center py-12 text-[#9CA3AF]">
+            <div className="text-center py-12 text-[#9A94A8]">
               Select any skill item to inspect details.
             </div>
           )}

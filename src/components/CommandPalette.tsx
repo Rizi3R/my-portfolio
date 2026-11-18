@@ -13,12 +13,12 @@ import {
   ExternalLink,
   Terminal,
   Home,
-  User,
   Briefcase,
   FolderGit2,
   Sparkles,
   BookOpen,
   Phone,
+  Layers,
 } from 'lucide-react';
 import { PROFILE, STRATA, NODES, CASE_STUDIES, EXPERIENCES, StratumType } from '../data/universeContent';
 import { audioFx } from '../utils/audioFx';
@@ -110,9 +110,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'nav-home',
         category: 'Navigation',
         label: 'Home',
-        sublabel: 'Overview, intro, and work snapshot',
+        sublabel: 'Overview, intro, and hero',
         shortcut: 'H',
-        icon: <Home className="w-4 h-4 text-[#B0E0E6]" />,
+        icon: <Home className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onSelectView('portfolio');
           setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 60);
@@ -120,13 +120,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         },
       },
       {
-        id: 'nav-about',
+        id: 'nav-projects',
         category: 'Navigation',
-        label: 'About',
-        sublabel: 'Day-to-day scope and active learning',
-        icon: <User className="w-4 h-4 text-[#B0E0E6]" />,
+        label: 'Case Studies',
+        sublabel: `Featured Work & ${CASE_STUDIES.length} real support cases`,
+        icon: <FolderGit2 className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
-          onNavigateSection('about');
+          onNavigateSection('featured-work');
           onClose();
         },
       },
@@ -135,7 +135,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         label: 'Experience',
         sublabel: `Work & internship timeline (${EXPERIENCES.length} roles)`,
-        icon: <Briefcase className="w-4 h-4 text-[#B0E0E6]" />,
+        icon: <Briefcase className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('experience');
           onClose();
@@ -144,22 +144,22 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-skills',
         category: 'Navigation',
-        label: 'Skills & Systems Map',
-        sublabel: 'Structured skills list and optional atlas',
-        icon: <Sparkles className="w-4 h-4 text-[#B0E0E6]" />,
+        label: 'Skills & Core Capabilities',
+        sublabel: 'Core capabilities, structured skills list, and optional atlas',
+        icon: <Sparkles className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('constellation');
           onClose();
         },
       },
       {
-        id: 'nav-projects',
+        id: 'nav-workbenches',
         category: 'Navigation',
-        label: 'Case Studies',
-        sublabel: `${CASE_STUDIES.length} case studies and optional computing lab`,
-        icon: <FolderGit2 className="w-4 h-4 text-[#B0E0E6]" />,
+        label: 'Workbenches & Practice',
+        sublabel: 'Beep to Receipt, Skill Atlas, Shell, Lab & Summary',
+        icon: <Layers className="w-4 h-4 text-[#F2A77D]" />,
         perform: () => {
-          onNavigateSection('projects');
+          onNavigateSection('workbenches');
           onClose();
         },
       },
@@ -168,9 +168,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Navigation',
         label: 'Active Learning',
         sublabel: 'Currently learning UiPath & RPA',
-        icon: <BookOpen className="w-4 h-4 text-[#DC343B]" />,
+        icon: <BookOpen className="w-4 h-4 text-[#F2A77D]" />,
         perform: () => {
-          onNavigateSection('about');
+          onNavigateSection('experience');
           onClose();
         },
       },
@@ -178,8 +178,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'nav-contact',
         category: 'Navigation',
         label: 'Contact',
-        sublabel: 'Direct email, LinkedIn, and interactive shell',
-        icon: <Phone className="w-4 h-4 text-[#B0E0E6]" />,
+        sublabel: 'Direct email, LinkedIn, and résumé access',
+        icon: <Phone className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('contact');
           onClose();
@@ -191,7 +191,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         label: 'View Résumé',
         sublabel: 'Open printable résumé preview',
         shortcut: 'R',
-        icon: <FileText className="w-4 h-4 text-[#DC343B]" />,
+        icon: <FileText className="w-4 h-4 text-[#F2A77D]" />,
         perform: () => {
           onClose();
           onOpenResume();
@@ -203,7 +203,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         label: 'Open Interactive Shell',
         sublabel: 'Run commands: help, about, skills, experience, projects',
         shortcut: 'T',
-        icon: <Terminal className="w-4 h-4 text-[#B0E0E6]" />,
+        icon: <Terminal className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onClose();
           onOpenTerminal();
@@ -214,7 +214,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Perspectives & Tools',
         label: 'Beep to Receipt (Educational Walkthrough)',
         sublabel: 'Educational model of how a retail checkout works across 6 layers',
-        icon: <Compass className="w-4 h-4 text-[#B0E0E6]" />,
+        icon: <Compass className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onSelectView('trace');
           onClose();
@@ -225,7 +225,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Perspectives & Tools',
         label: 'Full Skill Atlas',
         sublabel: `${NODES.length} capabilities across 4 tracks`,
-        icon: <Network className="w-4 h-4 text-[#B0E0E6]" />,
+        icon: <Network className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onSelectView('atlas');
           onClose();
@@ -236,7 +236,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Perspectives & Tools',
         label: 'Printable Summary',
         sublabel: 'High-contrast printable portfolio summary',
-        icon: <FileText className="w-4 h-4 text-[#D1D5DB]" />,
+        icon: <FileText className="w-4 h-4 text-[#CFCAC0]" />,
         perform: () => {
           onSelectView('plain');
           onClose();
@@ -247,7 +247,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Perspectives & Tools',
         label: 'Summary Receipt',
         sublabel: 'Printable experience and education receipt view',
-        icon: <Receipt className="w-4 h-4 text-[#B0E0E6]" />,
+        icon: <Receipt className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onClose();
           setTimeout(() => {
@@ -260,7 +260,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Perspectives & Tools' as const,
         label: `Layer 0${i + 1}: ${st.title}`,
         sublabel: st.subtitle,
-        icon: <span className="text-xs font-mono font-bold text-[#B0E0E6]">0{i + 1}</span>,
+        icon: <span className="text-xs font-mono font-bold text-[#A8C5FF]">0{i + 1}</span>,
         perform: () => {
           onJumpToStratum(st.id);
           onClose();
@@ -273,9 +273,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         sublabel: 'Copy contact email to clipboard',
         shortcut: 'C',
         icon: copiedEmail ? (
-          <Check className="w-4 h-4 text-[#B0E0E6]" />
+          <Check className="w-4 h-4 text-[#A8C5FF]" />
         ) : (
-          <Mail className="w-4 h-4 text-[#B0E0E6]" />
+          <Mail className="w-4 h-4 text-[#A8C5FF]" />
         ),
         perform: copyEmail,
       },
@@ -286,9 +286,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         sublabel: 'Subtle click and scanner feedback tones',
         shortcut: 'M',
         icon: isAudioMuted ? (
-          <VolumeX className="w-4 h-4 text-[#9CA3AF]" />
+          <VolumeX className="w-4 h-4 text-[#9A94A8]" />
         ) : (
-          <Volume2 className="w-4 h-4 text-[#B0E0E6]" />
+          <Volume2 className="w-4 h-4 text-[#A8C5FF]" />
         ),
         perform: onToggleAudio,
       },
@@ -297,7 +297,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Actions',
         label: 'Open LinkedIn Profile',
         sublabel: 'External LinkedIn profile',
-        icon: <ExternalLink className="w-4 h-4 text-[#D1D5DB]" />,
+        icon: <ExternalLink className="w-4 h-4 text-[#CFCAC0]" />,
         perform: () => {
           const anchor = document.createElement('a');
           anchor.href = PROFILE.linkedIn;
@@ -319,7 +319,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Skills',
         label: `${node.label}`,
         sublabel: `${node.category} · ${node.summary}`,
-        icon: <span className="text-xs font-mono text-[#B0E0E6]">◆</span>,
+        icon: <span className="text-xs font-mono text-[#A8C5FF]">◆</span>,
         perform: () => {
           onSelectNode(node.id);
           onClose();
@@ -370,33 +370,33 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-[#0A0913]/85 backdrop-blur-sm"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Command navigation palette"
     >
       <div
-        className="w-full max-w-xl bg-[#1B1B1D] border border-[#323238] rounded-2xl shadow-2xl overflow-hidden text-xs"
+        className="w-full max-w-xl bg-[#0A0913] border border-[#242138] rounded-2xl shadow-2xl overflow-hidden text-xs"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center px-4 border-b border-[#323238] bg-[#222226]">
-          <Search className="w-4 h-4 text-[#B0E0E6] mr-3 shrink-0" aria-hidden="true" />
+        <div className="flex items-center px-4 border-b border-[#242138] bg-[#12101F]">
+          <Search className="w-4 h-4 text-[#A8C5FF] mr-3 shrink-0" aria-hidden="true" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Jump to About, Experience, Case Studies, Skills, Contact, Resume..."
-            className="w-full py-3.5 bg-transparent text-white placeholder-[#9CA3AF] focus:outline-none text-xs sm:text-sm"
+            placeholder="Jump to Case Studies, Experience, Skills, Workbenches, Contact, Résumé..."
+            className="w-full py-3.5 bg-transparent text-[#F6F2E9] placeholder-[#9A94A8] focus:outline-none text-xs sm:text-sm"
             aria-label="Search sections, commands, or skills"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery('')}
-              className="text-[#9CA3AF] hover:text-white p-1 cursor-pointer"
+              className="text-[#9A94A8] hover:text-[#F6F2E9] p-1 cursor-pointer"
               aria-label="Clear search"
             >
               <X className="w-4 h-4" />
@@ -404,9 +404,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           )}
         </div>
 
-        <div className="max-h-80 overflow-y-auto divide-y divide-[#28282E]" role="listbox">
+        <div className="max-h-80 overflow-y-auto divide-y divide-[#242138]" role="listbox">
           {filteredActions.length === 0 ? (
-            <div className="p-8 text-center text-[#9CA3AF]">
+            <div className="p-8 text-center text-[#9A94A8]">
               No matching destination found for "{query}".
             </div>
           ) : (
@@ -420,8 +420,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   onMouseEnter={() => setSelectedIndex(idx)}
                   className={`w-full text-left p-3.5 flex items-center justify-between cursor-pointer transition-colors ${
                     isSelected
-                      ? 'bg-[#222226] text-white'
-                      : 'text-[#D1D5DB] hover:bg-[#222226]/60'
+                      ? 'bg-[#12101F] text-[#F6F2E9]'
+                      : 'text-[#CFCAC0] hover:bg-[#12101F]/60'
                   }`}
                   role="option"
                   aria-selected={isSelected}
@@ -429,19 +429,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   <div className="flex items-center gap-3 overflow-hidden">
                     <span className="shrink-0">{action.icon}</span>
                     <div className="truncate">
-                      <div className="font-semibold text-white truncate flex items-center gap-2">
+                      <div className="font-semibold text-[#F6F2E9] truncate flex items-center gap-2">
                         {isSelected && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#DC343B]" aria-hidden="true" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#F2A77D]" aria-hidden="true" />
                         )}
                         <span>{action.label}</span>
                       </div>
                       {action.sublabel && (
-                        <div className="text-[11px] text-[#9CA3AF] truncate">{action.sublabel}</div>
+                        <div className="text-[11px] text-[#9A94A8] truncate">{action.sublabel}</div>
                       )}
                     </div>
                   </div>
                   {action.shortcut && (
-                    <kbd className="shrink-0 ml-2 px-2 py-0.5 rounded bg-[#1B1B1D] border border-[#323238] text-[10px] font-mono text-[#B0E0E6]">
+                    <kbd className="shrink-0 ml-2 px-2 py-0.5 rounded bg-[#12101F] border border-[#242138] text-[10px] font-mono text-[#A8C5FF]">
                       {action.shortcut}
                     </kbd>
                   )}
@@ -451,13 +451,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           )}
         </div>
 
-        <div className="px-4 py-2.5 border-t border-[#323238] bg-[#222226] flex items-center justify-between text-[11px] font-mono text-[#9CA3AF]">
+        <div className="px-4 py-2.5 border-t border-[#242138] bg-[#12101F] flex items-center justify-between text-[11px] font-mono text-[#9A94A8]">
           <div className="flex items-center gap-3">
             <span>↑↓ Navigate</span>
             <span>↵ Open</span>
             <span>Esc Close</span>
           </div>
-          <span className="text-[#B0E0E6]">{NODES.length} Skills · ⌘K / Ctrl+K</span>
+          <span className="text-[#A8C5FF]">{NODES.length} Skills · ⌘K / Ctrl+K</span>
         </div>
       </div>
     </div>

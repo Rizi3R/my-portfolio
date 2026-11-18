@@ -60,6 +60,7 @@ export interface ProfileData {
   email: string;
   linkedIn: string;
   intro: string;
+  resumeSummary: string;
   availabilityNote: string;
 }
 
@@ -106,7 +107,9 @@ export interface CaseStudy {
   id: string;
   title: string;
   organization: string;
+  period?: string;
   featuredOnHome?: boolean;
+  summaryLine: string;
   situation: string;
   responsibility: string;
   whatIDid: string[];
@@ -168,7 +171,9 @@ export const PROFILE: ProfileData = {
   email: 'ariesirhan25@gmail.com',
   linkedIn: 'https://www.linkedin.com/in/aries-razak-a36045256',
   intro:
-    'I troubleshoot business applications, support users across multiple sites, and coordinate with vendors when an issue needs further investigation. At emart24 Malaysia, I support Xilnex POS, payments, and new-site IT setups. At HWC Coffee Malaysia, I led the Google Workspace to Lark migration internally and administered Lark.',
+    'I troubleshoot business applications, support users across multiple sites, and help teams adopt new tools. At HWC Coffee Malaysia, I led the Google Workspace to Lark migration internally with support from the Lark team.',
+  resumeSummary:
+    'I troubleshoot business applications, support users across multiple sites, and coordinate with vendors when an issue needs further investigation. At emart24 Malaysia, I support Xilnex POS, payments, and new-site IT setups. At HWC Coffee Malaysia, I led the Google Workspace to Lark migration internally with support from the Lark team and administered Lark.',
   availabilityNote:
     'Open to Application Support, IT Operations, Business Systems, and SaaS Support roles.',
 };
@@ -179,7 +184,7 @@ export const CORE_CAPABILITIES: CoreCapability[] = [
     title: 'Application Troubleshooting',
     exampleTag: 'Xilnex POS · Sync, Promos & Payments',
     description:
-      'Confirm symptoms directly with staff, inspect application and sync status in Xilnex, guide safe first-line steps, and relay verified details to vendors or internal teams.',
+      'Confirm symptoms directly with staff, inspect application and sync status in Xilnex, guide first-line steps, and pass verified details to vendors or internal teams.',
   },
   {
     id: 'cap-saas-migration',
@@ -193,7 +198,7 @@ export const CORE_CAPABILITIES: CoreCapability[] = [
     title: 'IT Operations & User Support',
     exampleTag: 'Multi-Site Readiness · Helpdesk · Hardware',
     description:
-      'Remote and onsite support across TeamViewer, Lark Helpdesk, and Freshdesk, NetSuite Excel data checks, plus counter hardware and LAN/Wi-Fi readiness for new sites.',
+      'Remote and onsite support across TeamViewer, Lark Helpdesk, and Freshdesk, Excel spreadsheets for NetSuite imports, and counter hardware plus LAN/Wi-Fi readiness.',
   },
 ];
 
@@ -217,7 +222,7 @@ export const ABOUT_APPROACH: AboutApproachItem[] = [
     id: 'approach-vendors',
     title: 'Prepared handoffs to vendors and internal teams',
     detail:
-      'When an application or platform issue requires vendor engineering, I summarize confirmed symptoms and checks already completed to save back-and-forth.',
+      'When an application or platform issue requires vendor engineering, I summarize confirmed symptoms and checks already completed to avoid repeat troubleshooting.',
   },
 ];
 
@@ -239,7 +244,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'A barcode scanner reads reflected light, decodes bars into digits, and passes keystrokes or input events to the active checkout application.',
     exampleComponents: ['Barcode Scanner', 'Receipt Printer', 'Payment Terminal', 'Ethernet Drop'],
-    accentColor: '#DC343B',
+    accentColor: '#F2A77D',
   },
   {
     id: 'kernel',
@@ -253,7 +258,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'Input drivers route scan events to the active window, while the operating system print queue formats output for the connected thermal printer.',
     exampleComponents: ['USB Drivers', 'Print Spooler', 'Network Adapter', 'Local Cache'],
-    accentColor: '#B0E0E6',
+    accentColor: '#A8C5FF',
   },
   {
     id: 'network',
@@ -267,7 +272,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'If a wall port, patch lead, or gateway link drops, local terminals cannot pull updated catalog pricing or sync completed sales.',
     exampleComponents: ['Ethernet Links', 'Site Wi-Fi', 'Local Switch', 'Gateway Router'],
-    accentColor: '#B0E0E6',
+    accentColor: '#A8C5FF',
   },
   {
     id: 'application',
@@ -281,7 +286,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'When catalogs or promotions stall during sync, front-line users see outdated prices or missing discounts until a sync finishes.',
     exampleComponents: ['SKU Lookup', 'Promotion Rules', 'Tender Trigger', 'Sales Sync'],
-    accentColor: '#DC343B',
+    accentColor: '#F2A77D',
   },
   {
     id: 'cloud',
@@ -295,7 +300,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'Shared platforms depend on accurate account provisioning, clean import templates, and steady connectivity across teams.',
     exampleComponents: ['Central Sync', 'Workplace Mail & Chat', 'ERP Data Prep', 'Access Control'],
-    accentColor: '#B0E0E6',
+    accentColor: '#A8C5FF',
   },
   {
     id: 'operations',
@@ -309,7 +314,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'Support specialists verify what a user sees, run safe initial checks first, and share focused context with vendors when code or platform fixes are needed.',
     exampleComponents: ['User Support', 'Remote Triage', 'Vendor Escalation', 'Site Readiness'],
-    accentColor: '#DC343B',
+    accentColor: '#F2A77D',
   },
 ];
 
@@ -416,18 +421,21 @@ export const CASE_STUDIES: CaseStudy[] = [
     id: 'case-lark-migration',
     title: 'Leading a Google Workspace to Lark migration',
     organization: 'HWC Coffee Malaysia (Palaterium Sdn Bhd)',
+    period: '27 March 2024 to 27 September 2025',
     featuredOnHome: true,
+    summaryLine:
+      'Internal migration lead with Lark team support, workspace administration, onboarding/offboarding, approvals, and colleague adoption.',
     situation:
-      'Colleagues moving from Google Workspace to Lark needed a single point of internal coordination for account transition, platform setup, and day-to-day guidance on using new workplace tools.',
+      'Colleagues moving from Google Workspace to Lark needed internal coordination for user accounts, approval workflows, and daily guidance on using Lark.',
     responsibility:
-      'Internal lead for the Google Workspace to Lark migration (with support from the Lark team) and ongoing Lark platform administrator.',
+      'I led the migration internally with support from the Lark team, administered the platform, and helped colleagues transition to Lark.',
     whatIDid: [
-      'Led the Google Workspace to Lark migration internally, coordinating steps and questions with the Lark team.',
-      'Administered the Lark workspace, including user account setup, onboarding and offboarding, and approval workflows.',
-      'Assisted colleagues directly as they shifted onto Lark messaging, mail, approvals, and helpdesk requests.',
+      'Led the Google Workspace to Lark migration internally at HWC Coffee Malaysia with support from the Lark team.',
+      'Administered the Lark platform, managing user accounts, onboarding and offboarding, and approval workflows.',
+      'Helped colleagues adopt Lark across daily messaging, mail, approvals, and helpdesk support.',
     ],
     outcome:
-      'Transitioned users onto Lark for messaging, mail, and approvals with internal workspace administration and user support established.',
+      'Transitioned colleagues onto Lark for messaging, mail, and approvals with internal workspace administration and ongoing colleague support in place.',
     technologies: [
       'Google Workspace to Lark Migration',
       'Lark Administration',
@@ -441,15 +449,18 @@ export const CASE_STUDIES: CaseStudy[] = [
     id: 'case-pos-triage',
     title: 'Application incident triage and vendor escalation',
     organization: 'emart24 Malaysia · Recurring Support Work',
+    period: 'September 2025 to present',
     featuredOnHome: true,
+    summaryLine:
+      'Confirm Xilnex POS sync, promotion, and payment symptoms with outlet teams, guide first-line steps, and pass clean observations to vendors.',
     situation:
-      'In day-to-day store support, outlets experience recurring Xilnex POS issues involving sales or catalog sync, promotions not reflecting cleanly, and payment-related disruptions.',
+      'In day-to-day store support, outlets experience recurring Xilnex POS issues involving sales or catalog sync, promotions, and payment-related disruptions.',
     responsibility:
-      'Front-line application troubleshooting for Xilnex POS across HQ and outlets, plus structured coordination with external vendors or internal teams when deeper investigation is required.',
+      'First point of application troubleshooting for Xilnex POS across HQ and outlets, plus coordination with external vendors or internal teams when deeper investigation is needed.',
     whatIDid: [
       'Confirm the symptom directly with outlet staff and inspect the POS application and sync status.',
-      'Guide staff through safe first-line steps such as triggering a manual sync or restarting the affected terminal when appropriate.',
-      'Relay verified observations and checks already attempted to the vendor or internal team when the issue requires further investigation.',
+      'Guide staff through appropriate first-line steps such as triggering a manual sync or restarting the affected terminal when safe.',
+      'Document verified observations and checks already attempted to relay to the vendor or internal team when further investigation is needed.',
     ],
     technologies: [
       'Xilnex POS',
@@ -464,14 +475,17 @@ export const CASE_STUDIES: CaseStudy[] = [
     id: 'case-store-launch',
     title: 'New-site IT readiness and an RJ45 cabling fix',
     organization: 'emart24 Malaysia',
+    period: 'September 2025 to present',
     featuredOnHome: false,
+    summaryLine:
+      'Set up and checked POS devices, payment terminals, scanners, printers, and LAN/Wi-Fi links; reterminated an RJ45 plug when a cable tester skipped pin 4 during one setup.',
     situation:
       'Before new outlets open, counter hardware and store connectivity need to be set up and checked ready for trading.',
     responsibility:
-      'Helped set up and test site equipment and local LAN/Wi-Fi connectivity during new-store preparations.',
+      'Helped set up and check site equipment and local LAN/Wi-Fi connectivity during new-store openings.',
     whatIDid: [
       'Set up and checked POS devices, payment terminals, barcode scanners, receipt printers, and LAN/Wi-Fi connectivity.',
-      'During one new-store setup, tested an Ethernet run where the cable tester skipped pin 4 and reterminated the RJ45 connector on site.',
+      'During one new-store setup, tested a network line where the cable tester skipped pin 4 and reterminated the RJ45 connector on site.',
     ],
     technologies: [
       'POS Devices',

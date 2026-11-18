@@ -215,9 +215,9 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     if (cmd === 'resume') {
       if (onOpenResume) {
         onOpenResume();
-        appendLines([{ type: 'accent', text: 'Opening resume preview...' }]);
+        appendLines([{ type: 'accent', text: 'Opening résumé preview...' }]);
       } else {
-        appendLines([{ type: 'output', text: 'Use the View Resume button in the navigation bar.' }]);
+        appendLines([{ type: 'output', text: 'Use the Résumé button in the navigation bar.' }]);
       }
       return;
     }
@@ -264,11 +264,11 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
   };
 
   return (
-    <div className="bg-[#141416] border border-[#323238] rounded-2xl overflow-hidden shadow-2xl font-mono text-xs sm:text-sm">
-      <div className="px-4 py-3 bg-[#1B1B1D] border-b border-[#323238] flex items-center justify-between gap-4">
+    <div className="bg-[#0A0913] border border-[#242138] rounded-2xl overflow-hidden shadow-2xl font-mono text-xs sm:text-sm">
+      <div className="px-4 py-3 bg-[#12101F] border-b border-[#242138] flex items-center justify-between gap-4">
         <div className="flex items-center gap-2.5">
-          <TerminalIcon className="w-3.5 h-3.5 text-[#B0E0E6]" aria-hidden="true" />
-          <span className="text-xs font-semibold text-white">
+          <TerminalIcon className="w-3.5 h-3.5 text-[#A8C5FF]" aria-hidden="true" />
+          <span className="text-xs font-semibold text-[#F6F2E9]">
             aries-portfolio : interactive shell
           </span>
         </div>
@@ -277,7 +277,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           <button
             type="button"
             onClick={() => setLines(INITIAL_LINES)}
-            className="p-1.5 rounded text-[#D1D5DB] hover:text-[#B0E0E6] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B0E0E6]"
+            className="p-1.5 rounded text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
             aria-label="Reset terminal output"
             title="Reset terminal"
           >
@@ -287,7 +287,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded text-[#D1D5DB] hover:text-white border border-[#323238] cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B0E0E6]"
+              className="p-1.5 rounded text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
               aria-label="Close terminal modal"
             >
               <X className="w-4 h-4" />
@@ -308,12 +308,12 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
             key={line.id}
             className={
               line.type === 'command'
-                ? 'text-[#B0E0E6] font-semibold pt-1'
+                ? 'text-[#A8C5FF] font-semibold pt-1'
                 : line.type === 'accent'
-                ? 'text-white font-semibold'
+                ? 'text-[#F6F2E9] font-semibold'
                 : line.type === 'error'
-                ? 'text-[#F87171]'
-                : 'text-[#E5E7EB]'
+                ? 'text-[#F2A77D]'
+                : 'text-[#CFCAC0]'
             }
           >
             {line.text}
@@ -321,15 +321,15 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
         ))}
       </div>
 
-      <div className="px-4 py-2.5 bg-[#1B1B1D] border-t border-[#323238] flex items-center gap-1.5 overflow-x-auto text-[11px]">
-        <span className="text-[#D1D5DB] mr-1 shrink-0">Quick run:</span>
+      <div className="px-4 py-2.5 bg-[#12101F] border-t border-[#242138] flex items-center gap-1.5 overflow-x-auto text-[11px]">
+        <span className="text-[#CFCAC0] mr-1 shrink-0">Quick run:</span>
         {['help', 'about', 'skills', 'experience', 'projects', 'education', 'contact', 'beep', 'clear'].map(
           (cmd) => (
             <button
               key={cmd}
               type="button"
               onClick={() => executeCommand(cmd)}
-              className="px-2.5 py-1 rounded bg-[#222226] hover:bg-[#2B2B30] text-[#B0E0E6] border border-[#323238] hover:border-[#B0E0E6]/60 transition-colors shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B0E0E6]"
+              className="px-2.5 py-1 rounded bg-[#0A0913] hover:bg-[#19162B] text-[#A8C5FF] border border-[#242138] hover:border-[#A8C5FF]/60 transition-colors shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
             >
               {cmd}
             </button>
@@ -342,11 +342,11 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           e.preventDefault();
           executeCommand(input);
         }}
-        className="px-4 py-3 bg-[#161618] border-t border-[#323238] flex items-center gap-2.5"
+        className="px-4 py-3 bg-[#12101F] border-t border-[#242138] flex items-center gap-2.5"
       >
         <label
           htmlFor={isModal ? 'terminal-modal-input' : 'terminal-inline-input'}
-          className="text-[#B0E0E6] text-xs font-semibold shrink-0"
+          className="text-[#A8C5FF] text-xs font-semibold shrink-0"
         >
           aries@portfolio:~$
         </label>
@@ -360,11 +360,11 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           placeholder="type 'help' and press Enter..."
           autoComplete="off"
           spellCheck={false}
-          className="flex-1 bg-transparent text-white placeholder-[#9CA3AF] text-xs focus:outline-none"
+          className="flex-1 bg-transparent text-[#F6F2E9] placeholder-[#9A94A8] text-xs focus:outline-none"
         />
         <button
           type="submit"
-          className="px-3 py-1 rounded bg-[#DC343B] hover:bg-[#c52b31] text-white text-xs font-semibold cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B0E0E6]"
+          className="px-3 py-1 rounded bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-xs font-semibold cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
         >
           Run
         </button>

@@ -2,114 +2,56 @@
 
 @layer base {
   :root {
-    --color-raven: #1B1B1D;
-    --color-raven-elevated: #222226;
-    --color-charcoal: #2B2B30;
-    --color-border-subtle: #323238;
-    --color-powder: #B0E0E6;
-    --color-poppy: #DC343B;
-    --color-muted: #9CA3AF;
+    --bg-ink-violet: #0A0913;
+    --bg-ink-surface: #12101F;
+    --bg-warm-ivory: #F6F2E9;
+    --text-ivory: #F6F2E9;
+    --text-dark-ink: #191723;
+    --accent-ice: #A8C5FF;
+    --accent-copper: #F2A77D;
+    --rule-dark: #242138;
+    --rule-ivory: #DDD6C7;
 
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color-scheme: dark;
   }
 
   h1, h2, h3, .font-display {
-    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
     text-wrap: balance;
   }
 
   code, kbd, samp, pre, .font-mono {
     font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
   }
 }
 
-/* Architectural Raven Black canvas with faint Powder Blue technical grid */
-.tech-universe-bg {
-  background-color: #1B1B1D;
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -15%, rgba(176, 224, 230, 0.08), transparent 70%),
-    radial-gradient(circle, rgba(176, 224, 230, 0.05) 1px, transparent 1px);
-  background-size: 100% 100%, 32px 32px;
-}
-
-/* Refined Powder Blue & Poppy Red surface elevation utilities */
-.surface-card {
-  background-color: #222226;
-  border: 1px solid #323238;
-}
-
-.surface-card-hover {
-  transition: border-color 180ms cubic-bezier(0.16, 1, 0.3, 1), transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.surface-card-hover:hover {
-  border-color: rgba(176, 224, 230, 0.45);
-}
-
-.glow-powder {
-  box-shadow: 0 0 28px -8px rgba(176, 224, 230, 0.22);
-}
-
-.glow-poppy {
-  box-shadow: 0 0 24px -6px rgba(220, 52, 59, 0.35);
-}
-
-/* Subtle architectural grid for SVG/workbench interiors */
+/* Subtle architectural grid reserved strictly for Skill Atlas canvas / workbench interiors */
 .cyber-grid {
   background-image:
-    linear-gradient(to right, rgba(176, 224, 230, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(176, 224, 230, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(168, 197, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(168, 197, 255, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-/* Smooth reveal animation (compositor-only properties) */
-@keyframes fade-up-enter {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-up {
-  animation: fade-up-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Subtle horizontal scanner sweep */
-@keyframes laser-sweep {
-  0% {
-    transform: translateX(-100%);
-  }
-  50%, 100% {
-    transform: translateX(100%);
-  }
-}
-
-.animate-laser {
-  animation: laser-sweep 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-/* Custom Raven Black scrollbar */
+/* Custom dark scrollbar aligned to ink violet canvas */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1B1B1D;
+  background: #0A0913;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #323238;
+  background: #242138;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #B0E0E6;
+  background: #A8C5FF;
 }
 
 /* Accessible Motion Preference Fallbacks */
@@ -132,7 +74,7 @@
 
   body {
     background-color: #ffffff !important;
-    color: #1B1B1D !important;
+    color: #191723 !important;
   }
 
   header,
@@ -173,7 +115,7 @@
     max-width: 100% !important;
     max-height: none !important;
     overflow: visible !important;
-    color: #1B1B1D !important;
+    color: #191723 !important;
     background: #ffffff !important;
   }
 }

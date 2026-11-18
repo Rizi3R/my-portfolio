@@ -63,9 +63,9 @@ export const PlainView: React.FC = () => {
             </a>
           </span>
         </div>
-        <div className="p-4 bg-stone-100 border border-stone-300 text-sm leading-relaxed text-stone-800">
-          <p className="font-bold font-mono text-xs uppercase text-stone-900 mb-1">Summary</p>
-          <p>{PROFILE.intro}</p>
+        <div className="p-4 bg-[#F6F2E9] border border-[#DDD6C7] text-sm leading-relaxed text-[#191723]">
+          <p className="font-bold font-mono text-xs uppercase text-[#191723] mb-1">Summary</p>
+          <p>{PROFILE.resumeSummary}</p>
         </div>
       </header>
 

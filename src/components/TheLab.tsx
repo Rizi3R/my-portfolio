@@ -504,40 +504,40 @@ export const TheLab: React.FC = () => {
   };
 
   return (
-    <section id="lab" className="py-10 lg:py-16 relative bg-[#1B1B1D] border-y border-[#323238]">
+    <section id="lab" className="py-10 lg:py-16 relative bg-[#0A0913] border-y border-[#242138] text-[#F6F2E9]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-3xl">
-            <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-semibold tracking-wider text-[#B0E0E6] uppercase mb-3">
-              <span className="px-2 py-0.5 rounded bg-[#DC343B]/20 text-[#DC343B] border border-[#DC343B]/40 text-[11px] font-bold">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-semibold tracking-wider text-[#A8C5FF] uppercase mb-3">
+              <span className="px-2 py-0.5 rounded bg-[#F2A77D]/15 text-[#F2A77D] border border-[#F2A77D]/40 text-[11px] font-bold">
                 [SIMULATION]
               </span>
-              <Cpu className="w-4 h-4 text-[#B0E0E6]" aria-hidden="true" />
+              <Cpu className="w-4 h-4 text-[#A8C5FF]" aria-hidden="true" />
               <span>THE PERSONAL TECHNOLOGY LAB</span>
-              <span aria-hidden="true" className="text-[#4B5563]">·</span>
-              <span className="text-[#9CA3AF]">BROWSER-NATIVE SANDBOX</span>
+              <span aria-hidden="true" className="text-[#524E66]">·</span>
+              <span className="text-[#9A94A8]">BROWSER-NATIVE SANDBOX</span>
             </div>
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug mb-3">
-              Interactive Computing Experiments & Simulations
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F6F2E9] tracking-tight leading-snug mb-3">
+              Interactive Computing Experiments &amp; Simulations
             </h2>
-            <p className="text-sm sm:text-base text-[#D1D5DB] leading-relaxed font-sans mb-4">
+            <p className="text-sm sm:text-base text-[#CFCAC0] leading-relaxed font-sans mb-4">
               Explore what happens beneath the interface. Step into this client-side workbench to
               inspect OSI Layer 2–7 packet hops, test cache eviction algorithms, and calculate UNIX
               permission bitmasks in real time.
             </p>
 
             {/* Persistent Educational Simulation Disclaimer */}
-            <div className="p-3.5 rounded-xl bg-[#222226] border border-[#323238] text-xs font-mono space-y-1.5 mb-6 text-[#D1D5DB]">
+            <div className="p-3.5 rounded-xl bg-[#12101F] border border-[#242138] text-xs font-mono space-y-1.5 mb-6 text-[#CFCAC0]">
               <div className="flex items-start gap-2">
-                <span className="text-[#B0E0E6] font-bold shrink-0">MODELS:</span>
+                <span className="text-[#A8C5FF] font-bold shrink-0">MODELS:</span>
                 <span>
                   Deterministic OSI Layer 2–7 packet hops, RFC 793 TCP handshake flags, in-memory
-                  FIFO & LRU cache eviction cycles, and UNIX octal permission bitmasks.
+                  FIFO &amp; LRU cache eviction cycles, and UNIX octal permission bitmasks.
                 </span>
               </div>
-              <div className="flex items-start gap-2 pt-1.5 border-t border-[#323238]">
-                <span className="text-[#DC343B] font-bold shrink-0">DOES NOT MODEL:</span>
+              <div className="flex items-start gap-2 pt-1.5 border-t border-[#242138]">
+                <span className="text-[#F2A77D] font-bold shrink-0">DOES NOT MODEL:</span>
                 <span>
                   Live network sniffing, real server transactions, or real-time payment gateway
                   clearance. All data is illustrative and generated locally.
@@ -547,7 +547,7 @@ export const TheLab: React.FC = () => {
           </div>
 
           {/* Workbench Tabs */}
-          <div className="flex items-center gap-1.5 p-1 bg-[#222226] border border-[#323238] rounded-lg self-start md:self-auto overflow-x-auto max-w-full font-mono text-xs">
+          <div className="flex items-center gap-1.5 p-1 bg-[#12101F] border border-[#242138] rounded-lg self-start md:self-auto overflow-x-auto max-w-full font-mono text-xs">
             <button
               type="button"
               onClick={() => {
@@ -556,11 +556,11 @@ export const TheLab: React.FC = () => {
               }}
               className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'network'
-                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/50 font-bold'
-                  : 'text-[#9CA3AF] hover:text-white'
+                  ? 'bg-[#A8C5FF] text-[#191723] font-bold'
+                  : 'text-[#9A94A8] hover:text-[#F6F2E9]'
               }`}
             >
-              <Network className="w-3.5 h-3.5 text-[#B0E0E6]" aria-hidden="true" />
+              <Network className="w-3.5 h-3.5" aria-hidden="true" />
               <span>01. Packet Flight</span>
             </button>
 
@@ -572,11 +572,11 @@ export const TheLab: React.FC = () => {
               }}
               className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'cache'
-                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/50 font-bold'
-                  : 'text-[#9CA3AF] hover:text-white'
+                  ? 'bg-[#A8C5FF] text-[#191723] font-bold'
+                  : 'text-[#9A94A8] hover:text-[#F6F2E9]'
               }`}
             >
-              <Database className="w-3.5 h-3.5 text-[#B0E0E6]" aria-hidden="true" />
+              <Database className="w-3.5 h-3.5" aria-hidden="true" />
               <span>02. Cache (LRU / FIFO)</span>
             </button>
 
@@ -588,11 +588,11 @@ export const TheLab: React.FC = () => {
               }}
               className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'permissions'
-                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/50 font-bold'
-                  : 'text-[#9CA3AF] hover:text-white'
+                  ? 'bg-[#A8C5FF] text-[#191723] font-bold'
+                  : 'text-[#9A94A8] hover:text-[#F6F2E9]'
               }`}
             >
-              <Lock className="w-3.5 h-3.5 text-[#DC343B]" aria-hidden="true" />
+              <Lock className="w-3.5 h-3.5" aria-hidden="true" />
               <span>03. UNIX Permissions</span>
             </button>
           </div>
@@ -604,8 +604,8 @@ export const TheLab: React.FC = () => {
         {activeTab === 'network' && (
           <div className="space-y-6">
             {/* Protocol Preset Selector */}
-            <div className="flex flex-wrap items-center gap-2 bg-[#222226] p-2.5 rounded-xl border border-[#323238]">
-              <span className="text-xs font-mono text-[#9CA3AF] px-2 uppercase tracking-wider">
+            <div className="flex flex-wrap items-center gap-2 bg-[#12101F] p-2.5 rounded-xl border border-[#242138]">
+              <span className="text-xs font-mono text-[#9A94A8] px-2 uppercase tracking-wider">
                 SELECT PROTOCOL:
               </span>
               {PACKET_PRESETS.map((preset, idx) => (
@@ -615,11 +615,11 @@ export const TheLab: React.FC = () => {
                   onClick={() => handleSelectPreset(idx)}
                   className={`px-3 py-1.5 text-xs rounded-lg transition-colors flex items-center gap-2 cursor-pointer ${
                     selectedPresetIndex === idx
-                      ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/60 font-medium'
-                      : 'text-[#9CA3AF] hover:text-white hover:bg-[#2B2B30]'
+                      ? 'bg-[#0A0913] text-[#A8C5FF] border border-[#A8C5FF]/60 font-medium'
+                      : 'text-[#9A94A8] hover:text-[#F6F2E9] hover:bg-[#19162B]'
                   }`}
                 >
-                  <span className="font-mono text-[10px] text-[#DC343B]">[{preset.protocol}]</span>
+                  <span className="font-mono text-[10px] text-[#F2A77D]">[{preset.protocol}]</span>
                   <span>{preset.name}</span>
                 </button>
               ))}
@@ -628,15 +628,15 @@ export const TheLab: React.FC = () => {
             {/* Interactive Simulation Arena */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               {/* Left 8 Cols: Visual Network Canvas */}
-              <div className="lg:col-span-8 bg-[#222226] border border-[#323238] rounded-2xl p-6 relative overflow-hidden">
-                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#323238] text-xs font-mono">
+              <div className="lg:col-span-8 bg-[#12101F] border border-[#242138] rounded-2xl p-6 relative overflow-hidden">
+                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#242138] text-xs font-mono">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#B0E0E6]" aria-hidden="true" />
-                    <span className="text-white font-semibold">{activePreset.name}</span>
-                    <span className="text-[#4B5563]">·</span>
-                    <span className="text-[#B0E0E6] font-mono">{activePreset.port}</span>
+                    <span className="w-2 h-2 rounded-full bg-[#A8C5FF]" aria-hidden="true" />
+                    <span className="text-[#F6F2E9] font-semibold">{activePreset.name}</span>
+                    <span className="text-[#524E66]">·</span>
+                    <span className="text-[#A8C5FF] font-mono">{activePreset.port}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-[#9CA3AF] text-[11px]">
+                  <div className="flex items-center gap-2 text-[#9A94A8] text-[11px]">
                     <span>
                       HOP {currentHopIndex + 1} OF {activePreset.hops.length}
                     </span>
@@ -644,19 +644,17 @@ export const TheLab: React.FC = () => {
                 </div>
 
                 {/* Network Nodes Coordinate Canvas */}
-                <div className="relative h-[320px] sm:h-[360px] w-full bg-[#151517] border border-[#323238] rounded-xl overflow-hidden p-4">
-                  <div className="absolute inset-0 cyber-grid opacity-40 pointer-events-none" />
-
+                <div className="relative h-[320px] sm:h-[360px] w-full bg-[#0A0913] border border-[#242138] rounded-xl overflow-hidden p-4">
                   <svg
                     className="absolute inset-0 w-full h-full pointer-events-none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <line x1="10%" y1="50%" x2="26%" y2="25%" stroke="#323238" strokeWidth="2" strokeDasharray="3 3" />
-                    <line x1="26%" y1="25%" x2="44%" y2="50%" stroke="#323238" strokeWidth="2" />
-                    <line x1="44%" y1="50%" x2="44%" y2="82%" stroke="#323238" strokeWidth="1.5" strokeDasharray="4 4" />
-                    <line x1="44%" y1="50%" x2="65%" y2="35%" stroke="#323238" strokeWidth="2" />
-                    <line x1="65%" y1="35%" x2="84%" y2="35%" stroke="#323238" strokeWidth="2" />
-                    <line x1="84%" y1="35%" x2="84%" y2="72%" stroke="#323238" strokeWidth="2" />
+                    <line x1="10%" y1="50%" x2="26%" y2="25%" stroke="#242138" strokeWidth="2" strokeDasharray="3 3" />
+                    <line x1="26%" y1="25%" x2="44%" y2="50%" stroke="#242138" strokeWidth="2" />
+                    <line x1="44%" y1="50%" x2="44%" y2="82%" stroke="#242138" strokeWidth="1.5" strokeDasharray="4 4" />
+                    <line x1="44%" y1="50%" x2="65%" y2="35%" stroke="#242138" strokeWidth="2" />
+                    <line x1="65%" y1="35%" x2="84%" y2="35%" stroke="#242138" strokeWidth="2" />
+                    <line x1="84%" y1="35%" x2="84%" y2="72%" stroke="#242138" strokeWidth="2" />
                   </svg>
 
                   {NETWORK_NODES.map((node) => {
@@ -678,16 +676,16 @@ export const TheLab: React.FC = () => {
                         <div
                           className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center border shadow-lg transition-all ${
                             isCurrent
-                              ? 'bg-[#DC343B]/20 border-[#DC343B] text-white ring-4 ring-[#DC343B]/20'
-                              : 'bg-[#1B1B1D] border-[#323238] text-[#B0E0E6]'
+                              ? 'bg-[#F2A77D]/20 border-[#F2A77D] text-[#F6F2E9] ring-4 ring-[#F2A77D]/20'
+                              : 'bg-[#12101F] border-[#242138] text-[#A8C5FF]'
                           }`}
                         >
                           <NodeIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                         </div>
-                        <span className="text-[11px] font-semibold text-white mt-1.5 whitespace-nowrap">
+                        <span className="text-[11px] font-semibold text-[#F6F2E9] mt-1.5 whitespace-nowrap">
                           {node.name}
                         </span>
-                        <span className="text-[9px] font-mono text-[#9CA3AF] whitespace-nowrap">
+                        <span className="text-[9px] font-mono text-[#9A94A8] whitespace-nowrap">
                           {node.category}
                         </span>
                       </div>
@@ -695,30 +693,30 @@ export const TheLab: React.FC = () => {
                   })}
 
                   {activeHop && (
-                    <div className="absolute bottom-3 left-3 bg-[#1B1B1D]/95 border border-[#323238] px-3 py-1.5 rounded-lg text-[11px] font-mono flex items-center gap-2 text-[#B0E0E6]">
-                      <span className="w-2 h-2 rounded-full bg-[#DC343B]" aria-hidden="true" />
+                    <div className="absolute bottom-3 left-3 bg-[#12101F]/95 border border-[#242138] px-3 py-1.5 rounded-lg text-[11px] font-mono flex items-center gap-2 text-[#A8C5FF]">
+                      <span className="w-2 h-2 rounded-full bg-[#F2A77D]" aria-hidden="true" />
                       <span>
-                        PACKET AT: <strong className="text-white">{activeHop.label.split('(')[0]}</strong>
+                        PACKET AT: <strong className="text-[#F6F2E9]">{activeHop.label.split('(')[0]}</strong>
                       </span>
                     </div>
                   )}
 
                   {activeHop && (
-                    <div className="absolute top-3 right-3 bg-[#1B1B1D]/95 border border-[#323238] px-3 py-1 rounded text-[11px] font-mono text-[#B0E0E6] flex items-center gap-1.5">
-                      <Clock className="w-3 h-3 text-[#B0E0E6]" aria-hidden="true" />
+                    <div className="absolute top-3 right-3 bg-[#12101F]/95 border border-[#242138] px-3 py-1 rounded text-[11px] font-mono text-[#A8C5FF] flex items-center gap-1.5">
+                      <Clock className="w-3 h-3 text-[#A8C5FF]" aria-hidden="true" />
                       <span>+{activeHop.latencyMs}ms elapsed</span>
                     </div>
                   )}
                 </div>
 
                 {/* Controls Bar */}
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#323238]">
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#242138]">
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={handleDispatch}
                       disabled={isPlaying}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#DC343B] hover:bg-[#c52b31] disabled:opacity-50 text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#A8C5FF] hover:bg-[#bfd5ff] disabled:opacity-50 text-[#191723] text-xs font-semibold rounded-lg transition-colors cursor-pointer"
                     >
                       <Play className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
                       <span>{isPlaying ? 'Simulating...' : 'Dispatch Packet'}</span>
@@ -728,7 +726,7 @@ export const TheLab: React.FC = () => {
                       type="button"
                       onClick={handleStepNext}
                       disabled={isPlaying}
-                      className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#1B1B1D] hover:bg-[#2B2B30] text-[#B0E0E6] text-xs font-medium rounded-lg border border-[#323238] transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#0A0913] hover:bg-[#19162B] text-[#A8C5FF] text-xs font-medium rounded-lg border border-[#242138] transition-colors cursor-pointer"
                     >
                       <span>Step Next</span>
                       <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -737,7 +735,7 @@ export const TheLab: React.FC = () => {
                     <button
                       type="button"
                       onClick={handleResetSim}
-                      className="p-2 text-[#9CA3AF] hover:text-white hover:bg-[#1B1B1D] rounded-lg transition-colors border border-[#323238] cursor-pointer"
+                      className="p-2 text-[#9A94A8] hover:text-[#F6F2E9] hover:bg-[#0A0913] rounded-lg transition-colors border border-[#242138] cursor-pointer"
                       aria-label="Reset Simulation"
                       title="Reset Simulation"
                     >
@@ -745,15 +743,15 @@ export const TheLab: React.FC = () => {
                     </button>
                   </div>
 
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#9CA3AF]">
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#9A94A8]">
                     <span>SPEED:</span>
                     <button
                       type="button"
                       onClick={() => setPlaySpeed(1)}
                       className={`px-2 py-0.5 rounded text-[11px] cursor-pointer ${
                         playSpeed === 1
-                          ? 'bg-[#B0E0E6]/20 text-[#B0E0E6] font-bold border border-[#B0E0E6]/40'
-                          : 'text-[#9CA3AF]'
+                          ? 'bg-[#A8C5FF]/20 text-[#A8C5FF] font-bold border border-[#A8C5FF]/40'
+                          : 'text-[#9A94A8]'
                       }`}
                     >
                       1x
@@ -763,8 +761,8 @@ export const TheLab: React.FC = () => {
                       onClick={() => setPlaySpeed(2)}
                       className={`px-2 py-0.5 rounded text-[11px] cursor-pointer ${
                         playSpeed === 2
-                          ? 'bg-[#B0E0E6]/20 text-[#B0E0E6] font-bold border border-[#B0E0E6]/40'
-                          : 'text-[#9CA3AF]'
+                          ? 'bg-[#A8C5FF]/20 text-[#A8C5FF] font-bold border border-[#A8C5FF]/40'
+                          : 'text-[#9A94A8]'
                       }`}
                     >
                       2x
@@ -774,48 +772,48 @@ export const TheLab: React.FC = () => {
               </div>
 
               {/* Right 4 Cols: Packet Telemetry Inspector */}
-              <div className="lg:col-span-4 bg-[#222226] border border-[#323238] rounded-2xl p-6 space-y-5">
+              <div className="lg:col-span-4 bg-[#12101F] border border-[#242138] rounded-2xl p-6 space-y-5">
                 <div>
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#B0E0E6] uppercase tracking-wider mb-1">
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#A8C5FF] uppercase tracking-wider mb-1">
                     <Info className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>HOP INSPECTOR TELEMETRY</span>
                   </div>
-                  <h3 className="text-lg font-bold text-white tracking-tight">
+                  <h3 className="text-lg font-bold text-[#F6F2E9] tracking-tight">
                     {activeHop?.label}
                   </h3>
-                  <span className="inline-block mt-1.5 text-[11px] font-mono text-[#DC343B] bg-[#1B1B1D] border border-[#DC343B]/40 px-2 py-0.5 rounded">
+                  <span className="inline-block mt-1.5 text-[11px] font-mono text-[#F2A77D] bg-[#0A0913] border border-[#F2A77D]/40 px-2 py-0.5 rounded">
                     {activeHop?.layer}
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#1B1B1D] border border-[#323238] space-y-2">
-                  <span className="text-[11px] font-mono text-[#9CA3AF] uppercase block">
+                <div className="p-3.5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-2">
+                  <span className="text-[11px] font-mono text-[#9A94A8] uppercase block">
                     CURRENT NODE ACTION:
                   </span>
-                  <p className="text-xs font-medium text-white leading-relaxed">
+                  <p className="text-xs font-medium text-[#F6F2E9] leading-relaxed">
                     {activeHop?.action}
                   </p>
-                  <p className="text-xs text-[#D1D5DB] leading-relaxed pt-1.5 border-t border-[#323238]">
+                  <p className="text-xs text-[#CFCAC0] leading-relaxed pt-1.5 border-t border-[#242138]">
                     {activeHop?.details}
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#151517] border border-[#323238] font-mono text-[11px] space-y-1 text-[#D1D5DB]">
-                  <div className="text-[#9CA3AF] text-[10px] pb-1 border-b border-[#323238] flex justify-between">
+                <div className="p-3.5 rounded-xl bg-[#0A0913] border border-[#242138] font-mono text-[11px] space-y-1 text-[#CFCAC0]">
+                  <div className="text-[#9A94A8] text-[10px] pb-1 border-b border-[#242138] flex justify-between">
                     <span>PAYLOAD HEADER</span>
-                    <span className="text-[#B0E0E6]">{activePreset.protocol}</span>
+                    <span className="text-[#A8C5FF]">{activePreset.protocol}</span>
                   </div>
-                  <div className="pt-1 text-[#B0E0E6] break-all">
+                  <div className="pt-1 text-[#A8C5FF] break-all">
                     {activePreset.payloadSummary}
                   </div>
-                  <div className="text-[#9CA3AF] text-[10px] pt-1">
+                  <div className="text-[#9A94A8] text-[10px] pt-1">
                     Port: {activePreset.port} · Hops traversed: {currentHopIndex + 1}/
                     {activePreset.hops.length}
                   </div>
                 </div>
 
-                <div className="p-3 rounded-lg bg-[#1B1B1D] border border-[#323238] text-[11px] text-[#D1D5DB] leading-relaxed">
-                  <strong className="text-[#B0E0E6]">Educational Simulation:</strong> Demonstrates
+                <div className="p-3 rounded-lg bg-[#0A0913] border border-[#242138] text-[11px] text-[#CFCAC0] leading-relaxed">
+                  <strong className="text-[#A8C5FF]">Educational Simulation:</strong> Demonstrates
                   general packet routing, NAT translation, Ethernet switching, and protocol steps
                   cleanly in the browser.
                 </div>
@@ -828,24 +826,24 @@ export const TheLab: React.FC = () => {
            VIEW 2: CACHE EVICTION ALGORITHM PLAYGROUND (LRU vs FIFO)
            ========================================================================= */}
         {activeTab === 'cache' && (
-          <div className="bg-[#222226] border border-[#323238] rounded-2xl p-6 sm:p-8 space-y-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#323238]">
+          <div className="bg-[#12101F] border border-[#242138] rounded-2xl p-6 sm:p-8 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#242138]">
               <div>
-                <div className="flex items-center gap-2 text-xs font-mono text-[#B0E0E6] uppercase tracking-wider mb-1">
+                <div className="flex items-center gap-2 text-xs font-mono text-[#A8C5FF] uppercase tracking-wider mb-1">
                   <Database className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>ALGORITHM BENCHMARK · CAPACITY: 4 SLOTS</span>
                 </div>
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-[#F6F2E9] tracking-tight">
                   Cache Eviction Simulator (LRU vs. FIFO)
                 </h3>
-                <p className="text-xs sm:text-sm text-[#D1D5DB] mt-1">
+                <p className="text-xs sm:text-sm text-[#CFCAC0] mt-1">
                   Watch how operating systems and proxies retain hot data and evict records when
                   capacity fills.
                 </p>
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono text-[#9CA3AF] mr-1">POLICY:</span>
+                <span className="text-xs font-mono text-[#9A94A8] mr-1">POLICY:</span>
                 <button
                   type="button"
                   onClick={() => {
@@ -854,8 +852,8 @@ export const TheLab: React.FC = () => {
                   }}
                   className={`px-3 py-1.5 text-xs rounded-lg transition-colors font-mono cursor-pointer ${
                     cachePolicy === 'LRU'
-                      ? 'bg-[#DC343B] text-white font-bold'
-                      : 'text-[#9CA3AF] hover:text-white bg-[#1B1B1D] border border-[#323238]'
+                      ? 'bg-[#A8C5FF] text-[#191723] font-bold'
+                      : 'text-[#9A94A8] hover:text-[#F6F2E9] bg-[#0A0913] border border-[#242138]'
                   }`}
                 >
                   LRU
@@ -869,8 +867,8 @@ export const TheLab: React.FC = () => {
                   }}
                   className={`px-3 py-1.5 text-xs rounded-lg transition-colors font-mono cursor-pointer ${
                     cachePolicy === 'FIFO'
-                      ? 'bg-[#DC343B] text-white font-bold'
-                      : 'text-[#9CA3AF] hover:text-white bg-[#1B1B1D] border border-[#323238]'
+                      ? 'bg-[#A8C5FF] text-[#191723] font-bold'
+                      : 'text-[#9A94A8] hover:text-[#F6F2E9] bg-[#0A0913] border border-[#242138]'
                   }`}
                 >
                   FIFO
@@ -879,7 +877,7 @@ export const TheLab: React.FC = () => {
             </div>
 
             <div>
-              <span className="text-xs font-mono text-[#9CA3AF] uppercase tracking-wider block mb-2.5">
+              <span className="text-xs font-mono text-[#9A94A8] uppercase tracking-wider block mb-2.5">
                 DISPATCH REQUEST FOR KEY (CLICK TO TRIGGER CACHE LOOKUP):
               </span>
               <div className="flex flex-wrap items-center gap-2">
@@ -889,7 +887,7 @@ export const TheLab: React.FC = () => {
                       key={k}
                       type="button"
                       onClick={() => accessKey(k)}
-                      className="px-3 py-2 bg-[#1B1B1D] hover:bg-[#2B2B30] text-white border border-[#323238] hover:border-[#B0E0E6]/60 rounded-lg text-xs font-mono transition-colors cursor-pointer"
+                      className="px-3 py-2 bg-[#0A0913] hover:bg-[#19162B] text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/60 rounded-lg text-xs font-mono transition-colors cursor-pointer"
                     >
                       + GET "{k}"
                     </button>
@@ -899,7 +897,7 @@ export const TheLab: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleResetCache}
-                  className="px-3 py-2 text-xs font-mono text-[#9CA3AF] hover:text-white hover:bg-[#1B1B1D] rounded-lg border border-[#323238] transition-colors ml-auto flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-2 text-xs font-mono text-[#9A94A8] hover:text-[#F6F2E9] hover:bg-[#0A0913] rounded-lg border border-[#242138] transition-colors ml-auto flex items-center gap-1.5 cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>Reset Cache</span>
@@ -908,11 +906,11 @@ export const TheLab: React.FC = () => {
             </div>
 
             <div>
-              <div className="flex items-center justify-between text-xs font-mono text-[#9CA3AF] mb-3">
+              <div className="flex items-center justify-between text-xs font-mono text-[#9A94A8] mb-3">
                 <span>
                   ACTIVE MEMORY SLOTS ({cacheItems.length}/{CACHE_CAPACITY})
                 </span>
-                <span className="text-[#B0E0E6]">
+                <span className="text-[#A8C5FF]">
                   HIT RATIO:{' '}
                   {cacheStats.total > 0
                     ? Math.round((cacheStats.hits / cacheStats.total) * 100)
@@ -930,14 +928,14 @@ export const TheLab: React.FC = () => {
                       key={slotIdx}
                       className={`p-4 rounded-xl border transition-all ${
                         item
-                          ? 'bg-[#1B1B1D] border-[#323238]'
-                          : 'bg-[#151517] border-dashed border-[#323238] text-[#9CA3AF]'
+                          ? 'bg-[#0A0913] border-[#242138]'
+                          : 'bg-[#0A0913]/60 border-dashed border-[#242138] text-[#9A94A8]'
                       }`}
                     >
-                      <div className="flex items-center justify-between text-xs font-mono text-[#9CA3AF] mb-2">
+                      <div className="flex items-center justify-between text-xs font-mono text-[#9A94A8] mb-2">
                         <span>SLOT #{slotIdx + 1}</span>
                         {item && (
-                          <span className="text-[10px] text-[#B0E0E6] font-semibold bg-[#222226] px-2 py-0.5 rounded border border-[#323238]">
+                          <span className="text-[10px] text-[#A8C5FF] font-semibold bg-[#12101F] px-2 py-0.5 rounded border border-[#242138]">
                             CYCLE {item.lastAccessCycle}
                           </span>
                         )}
@@ -945,19 +943,19 @@ export const TheLab: React.FC = () => {
 
                       {item ? (
                         <div>
-                          <div className="font-mono text-sm font-bold text-white tracking-tight mb-1 truncate">
+                          <div className="font-mono text-sm font-bold text-[#F6F2E9] tracking-tight mb-1 truncate">
                             {item.key}
                           </div>
-                          <div className="text-xs text-[#9CA3AF] truncate mb-3">{item.value}</div>
-                          <div className="pt-2 border-t border-[#323238] text-[11px] font-mono text-[#D1D5DB] flex justify-between">
+                          <div className="text-xs text-[#9A94A8] truncate mb-3">{item.value}</div>
+                          <div className="pt-2 border-t border-[#242138] text-[11px] font-mono text-[#CFCAC0] flex justify-between">
                             <span>Hits: {item.accessCount}</span>
-                            <span className="text-[#DC343B]">
+                            <span className="text-[#F2A77D]">
                               {cachePolicy === 'LRU' && slotIdx === 0 ? 'Next Evict' : ''}
                             </span>
                           </div>
                         </div>
                       ) : (
-                        <div className="h-18 flex items-center justify-center text-xs font-mono text-[#9CA3AF]">
+                        <div className="h-18 flex items-center justify-center text-xs font-mono text-[#9A94A8]">
                           [EMPTY SLOT]
                         </div>
                       )}
@@ -968,8 +966,8 @@ export const TheLab: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-2">
-              <div className="lg:col-span-7 bg-[#151517] border border-[#323238] rounded-xl p-4 font-mono text-xs">
-                <span className="text-[11px] text-[#9CA3AF] block mb-2 font-semibold">
+              <div className="lg:col-span-7 bg-[#0A0913] border border-[#242138] rounded-xl p-4 font-mono text-xs">
+                <span className="text-[11px] text-[#9A94A8] block mb-2 font-semibold">
                   CACHE OPERATION LOG STREAM:
                 </span>
                 <div className="space-y-1.5 h-[130px] overflow-y-auto text-[11px]">
@@ -978,10 +976,10 @@ export const TheLab: React.FC = () => {
                       key={idx}
                       className={
                         log.includes('HIT:')
-                          ? 'text-[#B0E0E6]'
+                          ? 'text-[#A8C5FF]'
                           : log.includes('MISS:')
-                          ? 'text-[#DC343B]'
-                          : 'text-[#D1D5DB]'
+                          ? 'text-[#F2A77D]'
+                          : 'text-[#CFCAC0]'
                       }
                     >
                       {log}
@@ -990,16 +988,16 @@ export const TheLab: React.FC = () => {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 p-4 rounded-xl bg-[#1B1B1D] border border-[#323238] space-y-2 text-xs">
-                <span className="font-mono text-[#B0E0E6] text-[11px] font-semibold block uppercase">
+              <div className="lg:col-span-5 p-4 rounded-xl bg-[#0A0913] border border-[#242138] space-y-2 text-xs">
+                <span className="font-mono text-[#A8C5FF] text-[11px] font-semibold block uppercase">
                   HOW LRU WORKS UNDER THE HOOD:
                 </span>
-                <p className="text-[#D1D5DB] leading-relaxed">
-                  To achieve <strong className="text-white">O(1) lookup</strong> and{' '}
-                  <strong className="text-white">O(1) eviction</strong>, production LRU caches
+                <p className="text-[#CFCAC0] leading-relaxed">
+                  To achieve <strong className="text-[#F6F2E9]">O(1) lookup</strong> and{' '}
+                  <strong className="text-[#F6F2E9]">O(1) eviction</strong>, production LRU caches
                   pair a <strong>Hash Map</strong> with a <strong>Doubly Linked List</strong>.
                 </p>
-                <p className="text-[#9CA3AF] leading-relaxed text-[11px]">
+                <p className="text-[#9A94A8] leading-relaxed text-[11px]">
                   Accessing an item promotes it to the head. When capacity fills, the tail node is
                   unlinked and evicted in constant time.
                 </p>
@@ -1012,49 +1010,49 @@ export const TheLab: React.FC = () => {
            VIEW 3: UNIX PERMISSIONS & BITMASK MATRIX
            ========================================================================= */}
         {activeTab === 'permissions' && (
-          <div className="bg-[#222226] border border-[#323238] rounded-2xl p-6 sm:p-8 space-y-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#323238]">
+          <div className="bg-[#12101F] border border-[#242138] rounded-2xl p-6 sm:p-8 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#242138]">
               <div>
-                <div className="flex items-center gap-2 text-xs font-mono text-[#DC343B] uppercase tracking-wider mb-1">
+                <div className="flex items-center gap-2 text-xs font-mono text-[#F2A77D] uppercase tracking-wider mb-1">
                   <Lock className="w-3.5 h-3.5" aria-hidden="true" />
-                  <span>LINUX SECURITY & ACCESS CONTROL</span>
+                  <span>LINUX SECURITY &amp; ACCESS CONTROL</span>
                 </div>
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-[#F6F2E9] tracking-tight">
                   UNIX File Permission Bitmask Calculator
                 </h3>
-                <p className="text-xs sm:text-sm text-[#D1D5DB] mt-1">
+                <p className="text-xs sm:text-sm text-[#CFCAC0] mt-1">
                   Toggle read, write, and execute bits to inspect octal modes, symbolic notations,
                   and 9-bit binary representations.
                 </p>
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-mono text-[#9CA3AF]">PRESETS:</span>
+                <span className="text-xs font-mono text-[#9A94A8]">PRESETS:</span>
                 <button
                   type="button"
                   onClick={() => applyPreset(7, 5, 5)}
-                  className="px-2.5 py-1 text-xs font-mono bg-[#1B1B1D] hover:bg-[#2B2B30] text-[#B0E0E6] border border-[#323238] rounded cursor-pointer"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#0A0913] hover:bg-[#19162B] text-[#A8C5FF] border border-[#242138] rounded cursor-pointer"
                 >
                   chmod 755
                 </button>
                 <button
                   type="button"
                   onClick={() => applyPreset(6, 4, 4)}
-                  className="px-2.5 py-1 text-xs font-mono bg-[#1B1B1D] hover:bg-[#2B2B30] text-white border border-[#323238] rounded cursor-pointer"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#0A0913] hover:bg-[#19162B] text-[#F6F2E9] border border-[#242138] rounded cursor-pointer"
                 >
                   chmod 644
                 </button>
                 <button
                   type="button"
                   onClick={() => applyPreset(6, 0, 0)}
-                  className="px-2.5 py-1 text-xs font-mono bg-[#1B1B1D] hover:bg-[#2B2B30] text-[#DC343B] border border-[#323238] rounded cursor-pointer"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#0A0913] hover:bg-[#19162B] text-[#F2A77D] border border-[#242138] rounded cursor-pointer"
                 >
                   chmod 600
                 </button>
                 <button
                   type="button"
                   onClick={() => applyPreset(4, 0, 0)}
-                  className="px-2.5 py-1 text-xs font-mono bg-[#1B1B1D] hover:bg-[#2B2B30] text-[#B0E0E6] border border-[#323238] rounded cursor-pointer"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#0A0913] hover:bg-[#19162B] text-[#A8C5FF] border border-[#242138] rounded cursor-pointer"
                 >
                   chmod 400
                 </button>
@@ -1063,10 +1061,10 @@ export const TheLab: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Owner Bits */}
-              <div className="p-5 rounded-xl bg-[#1B1B1D] border border-[#323238] space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#323238]">
-                  <span className="font-bold text-white text-sm">OWNER (u)</span>
-                  <span className="font-mono text-sm font-bold text-[#B0E0E6]">
+              <div className="p-5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#242138]">
+                  <span className="font-bold text-[#F6F2E9] text-sm">OWNER (u)</span>
+                  <span className="font-mono text-sm font-bold text-[#A8C5FF]">
                     Octal: {octalOwner}
                   </span>
                 </div>
@@ -1082,8 +1080,8 @@ export const TheLab: React.FC = () => {
                       onClick={() => togglePerm('owner', bit)}
                       className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors cursor-pointer ${
                         permissions.owner[bit]
-                          ? 'bg-[#B0E0E6]/15 border-[#B0E0E6]/50 text-white font-medium'
-                          : 'bg-[#151517] border-[#323238] text-[#9CA3AF]'
+                          ? 'bg-[#A8C5FF]/15 border-[#A8C5FF]/50 text-[#F6F2E9] font-medium'
+                          : 'bg-[#12101F] border-[#242138] text-[#9A94A8]'
                       }`}
                     >
                       <span className="text-xs">{label}</span>
@@ -1094,10 +1092,10 @@ export const TheLab: React.FC = () => {
               </div>
 
               {/* Group Bits */}
-              <div className="p-5 rounded-xl bg-[#1B1B1D] border border-[#323238] space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#323238]">
-                  <span className="font-bold text-white text-sm">GROUP (g)</span>
-                  <span className="font-mono text-sm font-bold text-[#B0E0E6]">
+              <div className="p-5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#242138]">
+                  <span className="font-bold text-[#F6F2E9] text-sm">GROUP (g)</span>
+                  <span className="font-mono text-sm font-bold text-[#A8C5FF]">
                     Octal: {octalGroup}
                   </span>
                 </div>
@@ -1113,8 +1111,8 @@ export const TheLab: React.FC = () => {
                       onClick={() => togglePerm('group', bit)}
                       className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors cursor-pointer ${
                         permissions.group[bit]
-                          ? 'bg-[#B0E0E6]/15 border-[#B0E0E6]/50 text-white font-medium'
-                          : 'bg-[#151517] border-[#323238] text-[#9CA3AF]'
+                          ? 'bg-[#A8C5FF]/15 border-[#A8C5FF]/50 text-[#F6F2E9] font-medium'
+                          : 'bg-[#12101F] border-[#242138] text-[#9A94A8]'
                       }`}
                     >
                       <span className="text-xs">{label}</span>
@@ -1125,10 +1123,10 @@ export const TheLab: React.FC = () => {
               </div>
 
               {/* Others Bits */}
-              <div className="p-5 rounded-xl bg-[#1B1B1D] border border-[#323238] space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#323238]">
-                  <span className="font-bold text-white text-sm">OTHERS (o)</span>
-                  <span className="font-mono text-sm font-bold text-[#DC343B]">
+              <div className="p-5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#242138]">
+                  <span className="font-bold text-[#F6F2E9] text-sm">OTHERS (o)</span>
+                  <span className="font-mono text-sm font-bold text-[#F2A77D]">
                     Octal: {octalOthers}
                   </span>
                 </div>
@@ -1144,8 +1142,8 @@ export const TheLab: React.FC = () => {
                       onClick={() => togglePerm('others', bit)}
                       className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors cursor-pointer ${
                         permissions.others[bit]
-                          ? 'bg-[#DC343B]/15 border-[#DC343B]/50 text-white font-medium'
-                          : 'bg-[#151517] border-[#323238] text-[#9CA3AF]'
+                          ? 'bg-[#F2A77D]/15 border-[#F2A77D]/50 text-[#F6F2E9] font-medium'
+                          : 'bg-[#12101F] border-[#242138] text-[#9A94A8]'
                       }`}
                     >
                       <span className="text-xs">{label}</span>
@@ -1156,46 +1154,46 @@ export const TheLab: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-4 sm:p-5 rounded-xl bg-[#151517] border border-[#323238] grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
+            <div className="p-4 sm:p-5 rounded-xl bg-[#0A0913] border border-[#242138] grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
               <div>
-                <span className="text-[11px] font-mono text-[#9CA3AF] uppercase block mb-1">
+                <span className="text-[11px] font-mono text-[#9A94A8] uppercase block mb-1">
                   OCTAL NOTATION (CHMOD)
                 </span>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-[#B0E0E6]">
+                <span className="font-mono text-xl sm:text-2xl font-bold text-[#A8C5FF]">
                   chmod {octalString.slice(1)}
                 </span>
               </div>
 
               <div>
-                <span className="text-[11px] font-mono text-[#9CA3AF] uppercase block mb-1">
+                <span className="text-[11px] font-mono text-[#9A94A8] uppercase block mb-1">
                   SYMBOLIC STRING (LS -L)
                 </span>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-white">
+                <span className="font-mono text-xl sm:text-2xl font-bold text-[#F6F2E9]">
                   {symbolicString}
                 </span>
               </div>
 
               <div>
-                <span className="text-[11px] font-mono text-[#9CA3AF] uppercase block mb-1">
+                <span className="text-[11px] font-mono text-[#9A94A8] uppercase block mb-1">
                   9-BIT BINARY BITMASK
                 </span>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-[#DC343B]">
+                <span className="font-mono text-xl sm:text-2xl font-bold text-[#F2A77D]">
                   {binaryString}
                 </span>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#1B1B1D] border border-[#323238] text-xs space-y-2">
-              <span className="font-mono text-[#B0E0E6] font-semibold block uppercase">
-                DEFENSIVE SECURITY & LEAST PRIVILEGE:
+            <div className="p-4 rounded-xl bg-[#0A0913] border border-[#242138] text-xs space-y-2">
+              <span className="font-mono text-[#A8C5FF] font-semibold block uppercase">
+                DEFENSIVE SECURITY &amp; LEAST PRIVILEGE:
               </span>
-              <p className="text-[#D1D5DB] leading-relaxed">
+              <p className="text-[#CFCAC0] leading-relaxed">
                 OpenSSH rejects private keys with{' '}
-                <code className="text-[#DC343B] bg-[#151517] px-1.5 py-0.5 rounded">chmod 777</code>{' '}
+                <code className="text-[#F2A77D] bg-[#12101F] px-1.5 py-0.5 rounded">chmod 777</code>{' '}
                 because any local user or service account on a shared Linux host could read the
                 key. Setting{' '}
-                <code className="text-[#B0E0E6] bg-[#151517] px-1.5 py-0.5 rounded">600</code> or{' '}
-                <code className="text-[#B0E0E6] bg-[#151517] px-1.5 py-0.5 rounded">400</code>{' '}
+                <code className="text-[#A8C5FF] bg-[#12101F] px-1.5 py-0.5 rounded">600</code> or{' '}
+                <code className="text-[#A8C5FF] bg-[#12101F] px-1.5 py-0.5 rounded">400</code>{' '}
                 restricts read access solely to the owner.
               </p>
             </div>

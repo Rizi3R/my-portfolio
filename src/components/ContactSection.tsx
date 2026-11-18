@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { PROFILE } from '../data/universeContent';
-import { Mail, MapPin, Copy, Check, ArrowUpRight, FileText } from 'lucide-react';
+import { Mail, MapPin, Copy, Check, ArrowUpRight, FileText, Terminal } from 'lucide-react';
 import { LinkedInIcon } from './LinkedInIcon';
-import { InteractiveTerminal } from './InteractiveTerminal';
 
 interface ContactSectionProps {
   onOpenResume: () => void;
-  onJumpToSection: (id: string) => void;
+  onOpenTerminal: () => void;
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({
   onOpenResume,
-  onJumpToSection,
+  onOpenTerminal,
 }) => {
   const [copied, setCopied] = useState(false);
 
@@ -41,51 +40,31 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="scroll-mt-20 py-16 sm:py-20 border-b border-[#323238]"
+      className="scroll-mt-20 bg-[#0A0913] text-[#F6F2E9] py-16 sm:py-20 border-b border-[#242138]"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
-        {/* Interactive Terminal Showcase */}
-        <div id="terminal-section" className="scroll-mt-24 space-y-5">
-          <div className="max-w-2xl">
-            <p className="text-xs font-mono uppercase tracking-wider text-[#B0E0E6] mb-2">
-              05. Interactive Shell
-            </p>
-            <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              Explore via Command Line
-            </h2>
-            <p className="mt-1.5 text-sm text-[#D1D5DB] leading-relaxed">
-              An optional read-only sandbox shell to query background, skills, education, or jump directly to contact channels below.
-            </p>
-          </div>
-
-          <InteractiveTerminal
-            onOpenResume={onOpenResume}
-            onJumpToSection={onJumpToSection}
-          />
-        </div>
-
-        {/* Direct Contact & Opportunities */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-4">
-          <div className="lg:col-span-6 space-y-5 flex flex-col justify-between bg-[#222226] border border-[#323238] rounded-2xl p-6 sm:p-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* Left 7 Cols: Contact Headline & Primary Actions */}
+          <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
-              <p className="text-xs font-mono uppercase tracking-wider text-[#DC343B]">
-                06. Contact &amp; Roles
+              <p className="text-xs font-mono uppercase tracking-wider text-[#F2A77D]">
+                Contact &amp; Roles
               </p>
               <h2
                 id="contact-heading"
-                className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight"
+                className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight max-w-2xl"
               >
                 Open to Application Support, IT Operations &amp; Business Systems conversations.
               </h2>
-              <p className="text-sm text-[#D1D5DB] leading-relaxed">
-                {PROFILE.availabilityNote} Reach out anytime by email or LinkedIn, or view and print my resume directly.
+              <p className="text-sm sm:text-base text-[#CFCAC0] leading-relaxed max-w-xl">
+                {PROFILE.availabilityNote} Reach out anytime by email or LinkedIn, or review and save a printable résumé directly.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            <div className="flex flex-wrap items-center gap-3 pt-1">
               <a
                 href={`mailto:${PROFILE.email}`}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#DC343B] hover:bg-[#c52b31] text-white text-sm font-semibold transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
               >
                 <Mail className="w-4 h-4" aria-hidden="true" />
                 <span>Send Email</span>
@@ -94,34 +73,48 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               <button
                 type="button"
                 onClick={onOpenResume}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#1B1B1D] border border-[#B0E0E6]/40 hover:border-[#B0E0E6] text-[#B0E0E6] text-sm font-semibold transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-transparent border border-[#F6F2E9]/35 hover:border-[#A8C5FF] hover:text-[#A8C5FF] text-[#F6F2E9] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
               >
                 <FileText className="w-4 h-4" aria-hidden="true" />
-                <span>View Resume</span>
+                <span>View Résumé</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={onOpenTerminal}
+                className="inline-flex items-center gap-2 px-4 py-3 rounded-lg text-xs font-mono text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+              >
+                <Terminal className="w-3.5 h-3.5 text-[#A8C5FF]" aria-hidden="true" />
+                <span>Open Shell</span>
               </button>
             </div>
           </div>
 
-          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="bg-[#222226] border border-[#323238] rounded-2xl p-6 flex flex-col justify-between gap-4">
-              <div>
-                <div className="text-xs font-mono text-[#B0E0E6] mb-1">Direct Email</div>
-                <div className="text-sm font-semibold text-white break-all">{PROFILE.email}</div>
+          {/* Right 5 Cols: Rule-Divided Direct Details */}
+          <div className="lg:col-span-5 divide-y divide-[#242138] border-y border-[#242138]">
+            <div className="py-5 flex items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="text-xs font-mono text-[#9A94A8] uppercase tracking-wider">
+                  Direct Email
+                </div>
+                <div className="text-sm font-semibold text-[#F6F2E9] break-all">
+                  {PROFILE.email}
+                </div>
               </div>
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="inline-flex items-center gap-1.5 text-xs font-mono text-[#D1D5DB] hover:text-[#B0E0E6] transition-colors cursor-pointer self-start"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-xs font-mono text-[#A8C5FF] transition-colors cursor-pointer shrink-0"
               >
                 {copied ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-[#B0E0E6]" aria-hidden="true" />
-                    <span className="text-[#B0E0E6]">Copied to clipboard</span>
+                    <Check className="w-3.5 h-3.5" aria-hidden="true" />
+                    <span>Copied</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5" aria-hidden="true" />
-                    <span>Copy address</span>
+                    <span>Copy</span>
                   </>
                 )}
               </button>
@@ -131,25 +124,29 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               href={PROFILE.linkedIn}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#222226] border border-[#323238] hover:border-[#B0E0E6]/50 rounded-2xl p-6 flex flex-col justify-between gap-4 transition-colors"
+              className="py-5 flex items-center justify-between gap-4 group transition-colors"
             >
-              <div>
-                <div className="text-xs font-mono text-[#B0E0E6] mb-1">LinkedIn</div>
-                <div className="text-sm font-semibold text-white">Aries Razak Profile</div>
+              <div className="space-y-1">
+                <div className="text-xs font-mono text-[#9A94A8] uppercase tracking-wider">
+                  LinkedIn
+                </div>
+                <div className="text-sm font-semibold text-[#F6F2E9] group-hover:text-[#A8C5FF] transition-colors">
+                  Aries Razak Profile
+                </div>
               </div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#D1D5DB]">
-                <LinkedInIcon className="w-3.5 h-3.5 text-[#B0E0E6]" />
-                <span>Connect on LinkedIn</span>
+              <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#A8C5FF] shrink-0">
+                <LinkedInIcon className="w-3.5 h-3.5" />
+                <span>Connect</span>
                 <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
               </div>
             </a>
 
-            <div className="sm:col-span-2 bg-[#222226] border border-[#323238] rounded-2xl p-5 flex flex-wrap items-center justify-between gap-3 text-xs text-[#D1D5DB]">
+            <div className="py-5 flex flex-wrap items-center justify-between gap-3 text-xs text-[#CFCAC0]">
               <span className="inline-flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#DC343B]" aria-hidden="true" />
+                <MapPin className="w-4 h-4 text-[#F2A77D]" aria-hidden="true" />
                 <span>Based in {PROFILE.location}</span>
               </span>
-              <span className="font-mono text-[#9CA3AF]">
+              <span className="font-mono text-[#9A94A8]">
                 {PROFILE.currentRole} · {PROFILE.currentCompany}
               </span>
             </div>
