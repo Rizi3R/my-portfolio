@@ -360,6 +360,26 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
 
                         {isExpanded && (
                           <div className="px-4 sm:px-5 pb-5 pt-3 border-t border-[#242138] text-xs sm:text-sm space-y-4 font-sans text-[#CFCAC0]">
+                            {cs.workflowSteps && cs.workflowSteps.length > 0 && (
+                              <div className="bg-[#0A0913] p-3 rounded-xl border border-[#242138]">
+                                <div className="font-mono font-semibold text-[#A8C5FF] uppercase text-[11px] mb-1.5">
+                                  Integration Workflow
+                                </div>
+                                <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-[#F6F2E9]">
+                                  {cs.workflowSteps.map((step, stepIdx) => (
+                                    <li key={step} className="inline-flex items-center gap-1.5">
+                                      <span>{step}</span>
+                                      {stepIdx < cs.workflowSteps!.length - 1 && (
+                                        <span aria-hidden="true" className="text-[#A8C5FF]">
+                                          →
+                                        </span>
+                                      )}
+                                    </li>
+                                  ))}
+                                </ol>
+                              </div>
+                            )}
+
                             <div>
                               <div className="font-mono font-semibold text-[#A8C5FF] uppercase text-xs mb-1">
                                 My Responsibility
@@ -383,6 +403,53 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
                                   Outcome
                                 </span>
                                 <p>{cs.outcome}</p>
+                              </div>
+                            )}
+
+                            {cs.sampleHandoff && (
+                              <div className="bg-[#0A0913] p-3.5 rounded-xl border border-[#F2A77D]/35 text-xs space-y-2.5">
+                                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#242138] pb-2">
+                                  <span className="font-mono font-semibold text-[#F6F2E9] uppercase">
+                                    Sample vendor handoff
+                                  </span>
+                                  <span className="font-mono text-[10px] uppercase text-[#F2A77D] font-semibold">
+                                    {cs.sampleHandoff.label}
+                                  </span>
+                                </div>
+                                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                  <div>
+                                    <dt className="font-mono text-[10px] uppercase text-[#A8C5FF]">
+                                      Issue reported
+                                    </dt>
+                                    <dd className="text-[#CFCAC0] mt-0.5">
+                                      {cs.sampleHandoff.issueReported}
+                                    </dd>
+                                  </div>
+                                  <div>
+                                    <dt className="font-mono text-[10px] uppercase text-[#A8C5FF]">
+                                      Checks completed
+                                    </dt>
+                                    <dd className="text-[#CFCAC0] mt-0.5">
+                                      {cs.sampleHandoff.checksCompleted}
+                                    </dd>
+                                  </div>
+                                  <div>
+                                    <dt className="font-mono text-[10px] uppercase text-[#A8C5FF]">
+                                      Evidence available
+                                    </dt>
+                                    <dd className="text-[#CFCAC0] mt-0.5">
+                                      {cs.sampleHandoff.evidenceAvailable}
+                                    </dd>
+                                  </div>
+                                  <div>
+                                    <dt className="font-mono text-[10px] uppercase text-[#A8C5FF]">
+                                      Action requested
+                                    </dt>
+                                    <dd className="text-[#CFCAC0] mt-0.5">
+                                      {cs.sampleHandoff.actionRequested}
+                                    </dd>
+                                  </div>
+                                </dl>
                               </div>
                             )}
                           </div>

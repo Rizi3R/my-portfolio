@@ -95,6 +95,45 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         </div>
       )}
 
+      {cs.sampleHandoff && (
+        <div className="bg-[#F6F2E9] border border-[#CCC4B3] rounded-xl p-4 sm:p-5 space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#DDD6C7] pb-2.5">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
+              Sample vendor handoff
+            </h4>
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#474457] font-semibold">
+              {cs.sampleHandoff.label}
+            </span>
+          </div>
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs sm:text-sm leading-relaxed">
+            <div>
+              <dt className="font-mono text-[11px] uppercase tracking-wider text-[#474457] font-semibold">
+                Issue reported
+              </dt>
+              <dd className="text-[#191723] mt-0.5">{cs.sampleHandoff.issueReported}</dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[11px] uppercase tracking-wider text-[#474457] font-semibold">
+                Checks completed
+              </dt>
+              <dd className="text-[#191723] mt-0.5">{cs.sampleHandoff.checksCompleted}</dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[11px] uppercase tracking-wider text-[#474457] font-semibold">
+                Evidence available
+              </dt>
+              <dd className="text-[#191723] mt-0.5">{cs.sampleHandoff.evidenceAvailable}</dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[11px] uppercase tracking-wider text-[#474457] font-semibold">
+                Action requested
+              </dt>
+              <dd className="text-[#191723] mt-0.5">{cs.sampleHandoff.actionRequested}</dd>
+            </div>
+          </dl>
+        </div>
+      )}
+
       <div className="pt-3 border-t border-[#DDD6C7] text-xs font-mono text-[#474457]">
         {cs.technologies.join(' · ')}
       </div>
@@ -126,7 +165,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             </h2>
           </div>
           <p className="text-sm text-[#474457] max-w-md leading-relaxed">
-            Real work across SaaS workspace administration, multi-site POS application triage, and new-store readiness.
+            Real work across SaaS migration, third-party delivery integrations, multi-site POS triage, and new-store readiness.
           </p>
         </div>
 
@@ -250,6 +289,27 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     </h3>
 
                     <p className="text-sm text-[#474457] leading-relaxed">{cs.summaryLine}</p>
+
+                    {cs.workflowSteps && cs.workflowSteps.length > 0 && (
+                      <ol
+                        aria-label="Integration workflow"
+                        className="pt-2 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs font-mono text-[#191723]"
+                      >
+                        {cs.workflowSteps.map((step, stepIdx) => (
+                          <li key={step} className="inline-flex items-center gap-2">
+                            <span className="font-semibold">
+                              0{stepIdx + 1}. {step}
+                            </span>
+                            {stepIdx < cs.workflowSteps!.length - 1 && (
+                              <ArrowRight
+                                className="w-3.5 h-3.5 text-[#474457] shrink-0"
+                                aria-hidden="true"
+                              />
+                            )}
+                          </li>
+                        ))}
+                      </ol>
+                    )}
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2 shrink-0">

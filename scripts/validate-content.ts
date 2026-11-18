@@ -181,8 +181,14 @@ console.log('\n[4/7] Checking Case Study Ordering & Tone...');
 if (CASE_STUDIES[0]?.id !== 'case-lark-migration') {
   logError('First case study must be Google Workspace to Lark migration (case-lark-migration).');
 }
-if (CASE_STUDIES[1]?.id !== 'case-pos-triage') {
-  logError('Second case study must be Application incident triage (case-pos-triage).');
+if (CASE_STUDIES[1]?.id !== 'case-integrations') {
+  logError('Second case study must be Third-Party Integrations & Application Configuration (case-integrations).');
+}
+if (CASE_STUDIES[2]?.id !== 'case-pos-triage') {
+  logError('Third case study must be Application incident triage (case-pos-triage).');
+}
+if (CASE_STUDIES[3]?.id !== 'case-store-launch') {
+  logError('Fourth case study must be New-site IT readiness (case-store-launch).');
 }
 const larkCaseJson = JSON.stringify(CASE_STUDIES[0] || {}).toLowerCase();
 if (larkCaseJson.includes('netsuite') || larkCaseJson.includes('excel')) {

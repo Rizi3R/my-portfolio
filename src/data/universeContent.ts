@@ -103,6 +103,14 @@ export interface ExperienceEntry {
   isInternship?: boolean;
 }
 
+export interface SampleVendorHandoff {
+  label: string;
+  issueReported: string;
+  checksCompleted: string;
+  evidenceAvailable: string;
+  actionRequested: string;
+}
+
 export interface CaseStudy {
   id: string;
   title: string;
@@ -110,10 +118,12 @@ export interface CaseStudy {
   period?: string;
   featuredOnHome?: boolean;
   summaryLine: string;
+  workflowSteps?: string[];
   situation: string;
   responsibility: string;
   whatIDid: string[];
   outcome?: string;
+  sampleHandoff?: SampleVendorHandoff;
   technologies: string[];
   stratumFocus: StratumType;
 }
@@ -164,41 +174,41 @@ export interface UniverseEdge {
 export const PROFILE: ProfileData = {
   fullName: 'Muhammad Aries Irhan bin Abd Razak',
   displayName: 'Aries Razak',
-  title: 'Application Support, IT Operations & Business Systems',
+  title: 'Application Support, IT Operations, Business Systems & Integration Support',
   currentRole: 'System Application Specialist',
   currentCompany: 'emart24 Malaysia',
   location: 'Selangor / Kuala Lumpur, Malaysia',
   email: 'ariesirhan25@gmail.com',
   linkedIn: 'https://www.linkedin.com/in/aries-razak-a36045256',
   intro:
-    'I troubleshoot business applications, support users across multiple sites, and help teams adopt new tools. At HWC Coffee Malaysia, I led the Google Workspace to Lark migration internally with support from the Lark team.',
+    'I troubleshoot business applications, administer user access, configure outlet integrations, and help teams adopt new tools. At HWC Coffee Malaysia, I led the Google Workspace to Lark migration internally with support from the Lark team.',
   resumeSummary:
-    'I troubleshoot business applications, support users across multiple sites, and coordinate with vendors when an issue needs further investigation. At emart24 Malaysia, I support Xilnex POS, payments, and new-site IT setups. At HWC Coffee Malaysia, I led the Google Workspace to Lark migration internally with support from the Lark team and administered Lark.',
+    'I troubleshoot business applications, administer user access, configure outlet integrations, and coordinate with vendors when deeper investigation is needed. At emart24 Malaysia, I configure Xilnex POS outlet integrations, provision store accounts from HR requests, structure promotion import templates, and support new-site setups. At HWC Coffee Malaysia, I led the Google Workspace to Lark migration internally with support from the Lark team and administered Lark.',
   availabilityNote:
-    'Open to Application Support, IT Operations, Business Systems, and SaaS Support roles.',
+    'Open to Application Support, IT Operations, Business Systems, and Integration Support roles.',
 };
 
 export const CORE_CAPABILITIES: CoreCapability[] = [
   {
     id: 'cap-app-troubleshooting',
-    title: 'Application Troubleshooting',
-    exampleTag: 'Xilnex POS · Sync, Promos & Payments',
+    title: 'Application & Integration Support',
+    exampleTag: 'Xilnex POS · Integrations, Promos & Payments',
     description:
-      'Confirm symptoms directly with staff, inspect application and sync status in Xilnex, guide first-line steps, and pass verified details to vendors or internal teams.',
+      'Coordinate third-party delivery integrations and configure outlet settings in Xilnex, confirm application symptoms with staff, check sync status, and escalate verified details to vendors.',
   },
   {
     id: 'cap-saas-migration',
-    title: 'SaaS Administration & Migration',
-    exampleTag: 'Lark · Google Workspace · Microsoft 365',
+    title: 'User Access & SaaS Administration',
+    exampleTag: 'Lark · Xilnex Access · Microsoft 365',
     description:
-      'Led the Google Workspace to Lark migration internally with Lark team support, administered Lark accounts and approval workflows, and assisted with Microsoft 365 provisioning.',
+      'Led the Google Workspace to Lark migration internally with Lark team support, provisioned Xilnex POS user accounts from HR onboarding requests, and assisted with Microsoft 365 provisioning.',
   },
   {
     id: 'cap-it-operations',
-    title: 'IT Operations & User Support',
-    exampleTag: 'Multi-Site Readiness · Helpdesk · Hardware',
+    title: 'IT Operations & Workflow Tooling',
+    exampleTag: 'Multi-Site Readiness · Helpdesk · Excel Prep',
     description:
-      'Remote and onsite support across TeamViewer, Lark Helpdesk, and Freshdesk, Excel spreadsheets for NetSuite imports, and counter hardware plus LAN/Wi-Fi readiness.',
+      'Remote and onsite support across TeamViewer, Lark Helpdesk, and Freshdesk, Excel templates for Xilnex promotion imports and NetSuite data prep, plus counter hardware and LAN/Wi-Fi readiness.',
   },
 ];
 
@@ -327,19 +337,24 @@ export const EXPERIENCES: ExperienceEntry[] = [
     compactPeriod: 'Sep 2025 to present',
     location: 'Malaysia',
     summary:
-      'Supporting Xilnex POS across HQ and outlets, troubleshooting sync, promotion, and payment issues, coordinating with vendors and internal teams, and helping set up IT for multiple new-store openings.',
+      'Supporting Xilnex POS across HQ and outlets, administering store user access, configuring third-party delivery integrations, structuring recurring promotion import templates, escalating recurring application and payment issues, and helping set up IT for multiple new-store openings.',
     highlights: [
-      'Support Xilnex POS across HQ and outlets, troubleshooting sync, promotion, and payment issues.',
-      'Handle application troubleshooting and coordinate escalation with external vendors and internal teams when deeper investigation is needed.',
+      'Provisioned Xilnex POS user accounts from HR onboarding requests, checking staff details, user groups, and outlet assignments before applying the approved roles and store access.',
+      'Reviewed onboarding request status before processing accounts and handled recurring cleanup of Xilnex access and staff-discount eligibility for departed employees.',
+      'Coordinated with Xilnex and third-party delivery partners (GrabFood, foodpanda, and ShopeeFood) to configure and sync outlet settings in the Xilnex portal, including store linking, price schemes, and menu profiles.',
+      'Created an Excel template that structured recurring promotion requests for import into the Xilnex Promotion Portal. I also provided guidance on using the import function.',
+      'Support Xilnex POS across HQ and outlets, troubleshooting sync, promotion, and payment issues, and raised a recurring payment issue with Xilnex for investigation alongside broader vendor escalation.',
       'Help set up and check POS devices, payment terminals, peripherals, and LAN/Wi-Fi connectivity for multiple new-store openings.',
       'Assist with Microsoft 365 provisioning and UAT support within assigned project scope.',
     ],
     technologies: [
       'Xilnex POS',
+      'User Access Provisioning',
+      'Third-Party Integrations (GrabFood, foodpanda, ShopeeFood)',
+      'Excel Promotion Import Template',
       'Application Troubleshooting',
       'Vendor Coordination',
-      'POS Peripherals',
-      'LAN / Wi-Fi Checks',
+      'POS Peripherals & LAN / Wi-Fi',
       'Microsoft 365 Provisioning',
       'UAT Support',
     ],
@@ -446,13 +461,48 @@ export const CASE_STUDIES: CaseStudy[] = [
     stratumFocus: 'cloud',
   },
   {
+    id: 'case-integrations',
+    title: 'Third-Party Integrations & Application Configuration',
+    organization: 'emart24 Malaysia',
+    period: 'September 2025 to present',
+    featuredOnHome: true,
+    summaryLine:
+      'I coordinated with Xilnex and third-party delivery partners to prepare outlet integrations. Once both sides completed their setup, I configured the outlet in the Xilnex portal and synced the settings. For foodpanda, that included linking the partner outlet to the matching Xilnex store and configuring its price scheme and menu profile.',
+    workflowSteps: [
+      'Coordinate with the vendor and partner',
+      'Configure the outlet in Xilnex',
+      'Save and sync',
+    ],
+    situation:
+      'Integrating third-party delivery platforms (GrabFood, foodpanda, and ShopeeFood) across multiple emart24 outlets depends on vendor, partner, and outlet-side portal settings lining up accurately before syncing store data.',
+    responsibility:
+      'I coordinated readiness across Xilnex and third-party delivery partners (GrabFood, foodpanda, and ShopeeFood) for multiple emart24 outlets, then completed and synced the outlet-side configuration inside the Xilnex portal.',
+    whatIDid: [
+      'Coordinated setup prerequisites with Xilnex and delivery partners across GrabFood, foodpanda, and ShopeeFood for multiple emart24 outlets.',
+      'Verified that both vendor and partner sides completed their setup before applying outlet-side configuration in the Xilnex portal.',
+      'Configured outlet mappings and profiles in Xilnex: for example, on foodpanda, linked the partner outlet to the matching Xilnex store and configured its price scheme and menu profile.',
+      'Saved and synced the outlet settings in Xilnex as the completed outlet-side configuration deliverable.',
+    ],
+    outcome:
+      'Completed and synced outlet-side configuration in the Xilnex portal across assigned emart24 outlets for GrabFood, foodpanda, and ShopeeFood integrations.',
+    technologies: [
+      'Xilnex Portal Configuration',
+      'GrabFood',
+      'foodpanda',
+      'ShopeeFood',
+      'Price Schemes & Menu Profiles',
+      'Vendor & Partner Coordination',
+    ],
+    stratumFocus: 'application',
+  },
+  {
     id: 'case-pos-triage',
     title: 'Application incident triage and vendor escalation',
     organization: 'emart24 Malaysia · Example of Recurring Support Work',
     period: 'September 2025 to present',
     featuredOnHome: true,
     summaryLine:
-      'Example of recurring Xilnex POS triage across outlets: confirming symptoms, checking sync progress to 100%, guiding a safe POS restart, and escalating with observations.',
+      'Example of recurring Xilnex POS triage across outlets: confirming symptoms, checking sync progress to 100%, guiding a safe POS restart, and escalating confirmed issues including a recurring payment investigation.',
     situation:
       'In day-to-day retail support across multiple outlets, store teams report recurring Xilnex POS issues affecting sync, promotions, or payment flows. Because each issue can stem from an incomplete sync, local register state, or an application defect, first-line triage needs consistent checks before deciding whether to restart locally or escalate.',
     responsibility:
@@ -461,13 +511,24 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Confirm symptoms with the outlet team first to clarify what staff see on screen and which register functions are affected.',
       'Check Xilnex application and sync status with outlet teams, and ask them to let the sync reach 100% before rechecking the affected item, promotion, or register behavior when appropriate.',
       'Guide outlet staff through a controlled POS restart as a next first-line step when sync checks alone do not clear the symptom.',
-      'Escalate to the Xilnex vendor or internal teams with documented observations, sync status, and first-line steps already completed when the issue requires deeper investigation.',
+      'Escalate to the Xilnex vendor or internal teams with documented observations, sync status, and first-line steps already completed. For example, I raised a recurring payment issue with Xilnex for investigation.',
     ],
+    sampleHandoff: {
+      label: 'Illustrative example',
+      issueReported:
+        'Payment prompt remains stuck after card tap on Sample Outlet A (Register 02) during sample checkout.',
+      checksCompleted:
+        'Confirmed screen symptom with sample cashier, allowed Xilnex sync to reach 100%, checked local LAN connection and terminal power, and ran one guided POS restart.',
+      evidenceAvailable:
+        'Fictional sample timestamp (14:20 MYT), sample register identifier (REG-02-TEST), and confirmation that earlier sample transactions synced.',
+      actionRequested:
+        'Investigate recurring payment prompt hang on the application side and advise on vendor follow-up steps.',
+    },
     technologies: [
       'Xilnex POS',
       'Symptom Confirmation',
       'Sync Status Checks',
-      'Guided First-Line Steps',
+      'Recurring Payment Escalation',
       'Vendor Escalation',
     ],
     stratumFocus: 'application',
@@ -581,6 +642,20 @@ export const NODES: UniverseNode[] = [
     usage: 'Assisted with UAT checks and feature verification tasks at emart24 Malaysia.',
     year: '2025 to Present',
   },
+  {
+    id: 'node-delivery-integrations',
+    label: 'Third-Party POS Integrations',
+    category: 'Application Support',
+    stratum: 'application',
+    status: 'professional',
+    kind: 'project',
+    x: 91,
+    y: 46,
+    summary: 'Coordinating and configuring outlet-side delivery integrations in Xilnex for GrabFood, foodpanda, and ShopeeFood.',
+    evidenceRef: 'case-integrations',
+    usage: 'Linked stores and configured price schemes and menu profiles in the Xilnex portal, then saved and synced.',
+    year: '2025 to Present',
+  },
 
   // --- 02. Business Systems & SaaS ---
   {
@@ -627,17 +702,31 @@ export const NODES: UniverseNode[] = [
   },
   {
     id: 'node-excel-netsuite',
-    label: 'Excel & NetSuite Data Prep',
+    label: 'Excel Templates & Import Prep',
     category: 'Business Systems & SaaS',
     stratum: 'application',
     status: 'professional',
     kind: 'technology',
     x: 54,
     y: 56,
-    summary: 'Preparing and validating Excel spreadsheets to support clean data imports into NetSuite.',
-    evidenceRef: 'exp-hwc',
-    usage: 'Prepared and validated operational Excel files for NetSuite ERP imports at HWC Coffee Malaysia.',
-    year: '2024 to 2025',
+    summary: 'Structuring Excel templates for Xilnex Promotion Portal imports and preparing validated sheets for NetSuite.',
+    evidenceRef: 'exp-emart24',
+    usage: 'Built a recurring promotion import template for Xilnex (with import guidance) and prepared NetSuite data at HWC.',
+    year: '2024 to Present',
+  },
+  {
+    id: 'node-xilnex-access',
+    label: 'Xilnex User Access Admin',
+    category: 'Business Systems & SaaS',
+    stratum: 'cloud',
+    status: 'professional',
+    kind: 'technology',
+    x: 65,
+    y: 82,
+    summary: 'Provisioning Xilnex POS accounts from HR requests, checking roles and outlets, and cleaning up leaver access.',
+    evidenceRef: 'exp-emart24',
+    usage: 'Verified onboarding status, assigned approved roles/stores, and removed departed staff access and discount eligibility.',
+    year: '2025 to Present',
   },
 
   // --- 03. IT Operations & Helpdesk ---
@@ -789,8 +878,18 @@ export const EDGES: UniverseEdge[] = [
   },
   {
     from: 'node-m365-provisioning',
+    to: 'node-xilnex-access',
+    reason: 'Account provisioning practices align across Microsoft 365 and Xilnex POS.',
+  },
+  {
+    from: 'node-xilnex-pos',
+    to: 'node-delivery-integrations',
+    reason: 'Outlet POS stability supports synced third-party delivery configurations.',
+  },
+  {
+    from: 'node-delivery-integrations',
     to: 'node-uat-support',
-    reason: 'User provisioning and UAT support sit alongside application operations.',
+    reason: 'Configured outlet profiles align with structured UAT and readiness checks.',
   },
   {
     from: 'node-printers-onsite',

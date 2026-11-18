@@ -524,6 +524,8 @@ function getEvidenceLabel(refId: string): string {
       return 'Generative AI Copilot Digital Upskilling Program';
     case 'case-lark-migration':
       return 'Case Study: Leading a Google Workspace to Lark migration';
+    case 'case-integrations':
+      return 'Case Study: Third-Party Integrations & Application Configuration';
     case 'case-pos-triage':
       return 'Case Study: Application incident triage and vendor escalation';
     case 'case-store-launch':

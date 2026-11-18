@@ -111,7 +111,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
               <h1
                 id="hero-heading"
-                className="font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#F6F2E9] tracking-tight leading-[1.08] max-w-[16ch]"
+                className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-[#F6F2E9] tracking-tight leading-[1.09] max-w-[19ch]"
               >
                 {PROFILE.title}
               </h1>
