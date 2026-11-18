@@ -4,7 +4,6 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { createServer as createHttpServer } from 'node:http';
-import { createServer as createViteServer } from 'vite';
 
 dotenv.config({ path: '.env.local' });
 dotenv.config();
@@ -400,6 +399,7 @@ async function startServer() {
       }
     });
 
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: {
         middlewareMode: true,
