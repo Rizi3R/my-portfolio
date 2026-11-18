@@ -510,8 +510,8 @@ function getEvidenceLabel(refId: string): string {
   switch (refId) {
     case 'exp-emart24':
       return 'emart24 Malaysia · System Application Specialist';
-    case 'exp-palaterium':
-      return 'Palaterium Sdn Bhd · IT Support';
+    case 'exp-hwc':
+      return 'HWC Coffee Malaysia (Palaterium Sdn Bhd) · IT Support';
     case 'exp-mps':
       return 'Managed Print Services · IT Technician';
     case 'exp-agc':
@@ -522,12 +522,12 @@ function getEvidenceLabel(refId: string): string {
       return 'AWS Certified Cloud Practitioner';
     case 'cert-ai-teach':
       return 'Generative AI Copilot Digital Upskilling Program';
-    case 'case-pos-triage':
-      return 'Case Study: Xilnex POS incident triage & escalation';
     case 'case-lark-migration':
-      return 'Case Study: Google Workspace to Lark migration support';
+      return 'Case Study: Leading a Google Workspace to Lark migration';
+    case 'case-pos-triage':
+      return 'Case Study: Application incident triage and vendor escalation';
     case 'case-store-launch':
-      return 'Case Study: New-store IT readiness & cabling fix';
+      return 'Case Study: New-site IT readiness and an RJ45 cabling fix';
     default:
       return refId;
   }

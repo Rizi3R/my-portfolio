@@ -124,7 +124,7 @@
   }
 }
 
-/* Print styling for resume viewer, Plain Spec, and thermal receipt */
+/* Print styling for resume viewer, Printable Summary, and thermal receipt */
 @media print {
   @page {
     margin: 14mm;

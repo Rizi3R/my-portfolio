@@ -74,7 +74,7 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
           <div className="max-w-3xl">
             <p className="text-xs font-mono uppercase tracking-wider text-[#B0E0E6] mb-3">
-              {PROFILE.displayName} · Illustrative Walkthrough
+              {PROFILE.displayName} · Educational Walkthrough
             </p>
 
             <h1
@@ -83,7 +83,7 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
             >
               Beep to Receipt:{' '}
               <span className="text-[#B0E0E6] font-normal">
-                how a retail checkout can work across 6 layers.
+                an educational walkthrough across 6 layers.
               </span>
             </h1>
 
@@ -128,11 +128,11 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
           </div>
         </div>
 
-        {/* Explicit Illustrative Model Disclaimer */}
-        <div className="mt-8 p-4 rounded-xl bg-[#222226] border border-[#B0E0E6]/35 flex items-start gap-3 text-xs sm:text-sm text-[#D1D5DB]">
+        {/* Explicit Educational Walkthrough Disclaimer */}
+        <div className="mt-8 p-4 rounded-xl bg-[#222226] border border-[#B0E0E6]/40 flex items-start gap-3 text-xs sm:text-sm text-[#E5E7EB]">
           <Info className="w-4 h-4 text-[#B0E0E6] shrink-0 mt-0.5" aria-hidden="true" />
           <p className="leading-relaxed">
-            <strong className="text-white">Illustrative Walkthrough Notice:</strong> The six layers below provide an educational model of how a barcode scan can move from checkout counter hardware to back-office systems and human support teams. Simulated payloads and architecture diagrams illustrate general concepts rather than any employer’s internal production setup.
+            <strong className="text-white">Educational Walkthrough:</strong> The six layers below provide an illustrative generic model of how a retail barcode scan can travel from counter peripherals to business applications and human support teams. Simulated payloads depict general concepts rather than any employer’s production environment.
           </p>
         </div>
       </section>
@@ -343,7 +343,7 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
                               {cs.title}
                             </h4>
                             <p className="text-xs sm:text-sm text-[#D1D5DB] mt-1 font-sans">
-                              {cs.issue}
+                              {cs.situation}
                             </p>
                           </div>
                           <span className="text-[#B0E0E6] p-1 font-mono text-xs flex items-center gap-1 self-center shrink-0">
@@ -360,6 +360,12 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
                           <div className="px-4 sm:px-5 pb-5 pt-3 border-t border-[#323238] text-xs sm:text-sm space-y-4 font-sans text-[#D1D5DB]">
                             <div>
                               <div className="font-mono font-semibold text-[#B0E0E6] uppercase text-xs mb-1">
+                                My Responsibility
+                              </div>
+                              <p>{cs.responsibility}</p>
+                            </div>
+                            <div>
+                              <div className="font-mono font-semibold text-[#B0E0E6] uppercase text-xs mb-1">
                                 What I Did
                               </div>
                               <ul className="list-disc list-inside space-y-1">
@@ -369,12 +375,14 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
                               </ul>
                             </div>
 
-                            <div className="bg-[#1B1B1D] p-3.5 rounded-xl border border-[#323238] text-xs">
-                              <span className="font-mono font-semibold text-[#B0E0E6] uppercase block mb-1">
-                                Scope &amp; Status
-                              </span>
-                              <p>{cs.outcomeOrStatus}</p>
-                            </div>
+                            {cs.outcome && (
+                              <div className="bg-[#1B1B1D] p-3.5 rounded-xl border border-[#323238] text-xs">
+                                <span className="font-mono font-semibold text-[#B0E0E6] uppercase block mb-1">
+                                  Outcome
+                                </span>
+                                <p>{cs.outcome}</p>
+                              </div>
+                            )}
                           </div>
                         )}
                       </article>

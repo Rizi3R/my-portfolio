@@ -14,7 +14,7 @@ import { audioFx } from './utils/audioFx';
 import { CASE_STUDIES, StratumType } from './data/universeContent';
 import { Loader2, X, ArrowLeft } from 'lucide-react';
 
-// Code-split secondary views and heavy simulation modules
+// Code-split secondary views and interactive workbench
 const TraceView = lazy(() =>
   import('./components/TraceView').then((m) => ({ default: m.TraceView }))
 );
@@ -31,6 +31,21 @@ const ResumeModal = lazy(() =>
   import('./components/ResumeModal').then((m) => ({ default: m.ResumeModal }))
 );
 
+const CASE_STUDY_IDS = new Set(CASE_STUDIES.map((cs) => cs.id));
+
+function resolveCaseIdFromLocation(): string | null {
+  const params = new URLSearchParams(window.location.search);
+  const queryCase = params.get('case');
+  if (queryCase && CASE_STUDY_IDS.has(queryCase)) {
+    return queryCase;
+  }
+  const hashId = window.location.hash.replace(/^#/, '');
+  if (hashId && CASE_STUDY_IDS.has(hashId)) {
+    return hashId;
+  }
+  return null;
+}
+
 export default function App() {
   const [activeView, setActiveView] = useState<ActiveView>('portfolio');
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
@@ -39,9 +54,11 @@ export default function App() {
   const [labModalOpen, setLabModalOpen] = useState(false);
   const [isAudioMuted, setIsAudioMuted] = useState(true);
   const [selectedAtlasNodeId, setSelectedAtlasNodeId] = useState<string | null>(null);
-  const [expandedCaseId, setExpandedCaseId] = useState<string | null>(CASE_STUDIES[0]?.id || null);
+  const [expandedCaseId, setExpandedCaseId] = useState<string | null>(
+    () => resolveCaseIdFromLocation() || CASE_STUDIES[0]?.id || null
+  );
 
-  // Store triggering element so Escape / Close restores keyboard focus properly
+  // Store triggering element so Escape / Close restores keyboard focus cleanly
   const lastFocusedRef = useRef<HTMLElement | null>(null);
   const labCloseRef = useRef<HTMLButtonElement | null>(null);
 
@@ -59,18 +76,47 @@ export default function App() {
     }, 20);
   };
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const viewParam = params.get('view') as ActiveView | null;
-    if (viewParam && ['portfolio', 'trace', 'atlas', 'plain'].includes(viewParam)) {
-      setActiveView(viewParam);
-    } else if (window.location.hash === '#trace') {
-      setActiveView('trace');
-    } else if (window.location.hash === '#atlas') {
-      setActiveView('atlas');
-    } else if (window.location.hash === '#plain') {
-      setActiveView('plain');
+  const scrollToElementCleanly = (elementId: string, instant = false) => {
+    const prefersReduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const behavior: ScrollBehavior = instant || prefersReduced ? 'auto' : 'smooth';
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.scrollIntoView({ behavior, block: 'start' });
     }
+  };
+
+  // Sync initial view or deep-linked case study on fresh load and browser hash changes
+  useEffect(() => {
+    const applyUrlState = (isInitialLoad: boolean) => {
+      const params = new URLSearchParams(window.location.search);
+      const viewParam = params.get('view') as ActiveView | null;
+      const hashId = window.location.hash.replace(/^#/, '');
+      const linkedCaseId = resolveCaseIdFromLocation();
+
+      if (linkedCaseId) {
+        setActiveView('portfolio');
+        setExpandedCaseId(linkedCaseId);
+        // Wait for layout paint so the expanded case sits right below sticky header
+        setTimeout(() => {
+          scrollToElementCleanly(linkedCaseId, isInitialLoad);
+        }, 120);
+        return;
+      }
+
+      if (viewParam && ['portfolio', 'trace', 'atlas', 'plain'].includes(viewParam)) {
+        setActiveView(viewParam);
+      } else if (hashId === 'trace' || hashId === 'atlas' || hashId === 'plain') {
+        setActiveView(hashId as ActiveView);
+      }
+    };
+
+    applyUrlState(true);
+
+    const onHashChange = () => applyUrlState(false);
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
   const handleViewChange = (view: ActiveView) => {
@@ -80,35 +126,50 @@ export default function App() {
       url.searchParams.delete('view');
     } else {
       url.searchParams.set('view', view);
+      url.hash = '';
     }
     window.history.replaceState({}, '', url.toString());
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
   };
 
   const handleNavigateSection = (sectionId: string) => {
     if (activeView !== 'portfolio') {
       handleViewChange('portfolio');
-      setTimeout(() => {
-        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-      }, 90);
+      setTimeout(() => scrollToElementCleanly(sectionId), 100);
     } else {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      scrollToElementCleanly(sectionId);
     }
   };
 
   const handleOpenCaseStudy = (caseId?: string) => {
-    if (caseId) {
-      setExpandedCaseId(caseId);
-    }
     const targetId = caseId || 'projects';
-    if (activeView !== 'portfolio') {
-      handleViewChange('portfolio');
-      setTimeout(() => {
-        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    } else {
-      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+    if (caseId && CASE_STUDY_IDS.has(caseId)) {
+      setExpandedCaseId(caseId);
+      const url = new URL(window.location.href);
+      url.searchParams.delete('view');
+      url.searchParams.delete('case');
+      url.hash = `#${caseId}`;
+      window.history.replaceState({}, '', url.toString());
     }
+
+    if (activeView !== 'portfolio') {
+      setActiveView('portfolio');
+      setTimeout(() => scrollToElementCleanly(targetId), 120);
+    } else {
+      setTimeout(() => scrollToElementCleanly(targetId), 40);
+    }
+  };
+
+  const handleToggleCaseCard = (caseId: string | null) => {
+    setExpandedCaseId(caseId);
+    const url = new URL(window.location.href);
+    if (caseId) {
+      url.hash = `#${caseId}`;
+    } else if (CASE_STUDY_IDS.has(url.hash.replace(/^#/, ''))) {
+      url.hash = '';
+    }
+    window.history.replaceState({}, '', url.toString());
   };
 
   useEffect(() => {
@@ -165,7 +226,7 @@ export default function App() {
   const handleJumpToStratum = (stratumId: StratumType) => {
     handleViewChange('trace');
     setTimeout(() => {
-      document.getElementById(`stratum-${stratumId}`)?.scrollIntoView({ behavior: 'smooth' });
+      scrollToElementCleanly(`stratum-${stratumId}`);
     }, 120);
   };
 
@@ -192,7 +253,7 @@ export default function App() {
             fallback={
               <div className="py-24 text-center font-mono text-sm text-stone-600 flex items-center justify-center gap-2">
                 <Loader2 className="w-5 h-5 animate-spin text-stone-800" />
-                <span>Loading Plain Print Edition...</span>
+                <span>Loading Printable Summary...</span>
               </div>
             }
           >
@@ -200,7 +261,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => handleViewChange('portfolio')}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#1B1B1D] text-[#B0E0E6] text-xs font-mono hover:bg-[#2B2B30] transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#1B1B1D] text-[#B0E0E6] text-xs font-mono hover:bg-[#2B2B30] transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Back to Overview</span>
@@ -217,11 +278,11 @@ export default function App() {
               </div>
             }
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 print:hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 print:hidden">
               <button
                 type="button"
                 onClick={() => handleViewChange('portfolio')}
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#222226] border border-[#323238] hover:border-[#B0E0E6]/50 text-[#B0E0E6] text-xs font-mono transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#222226] border border-[#323238] hover:border-[#B0E0E6]/60 text-[#B0E0E6] text-xs font-mono transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Back to Overview</span>
@@ -239,15 +300,15 @@ export default function App() {
             fallback={
               <div className="py-32 text-center font-mono text-sm text-[#B0E0E6] flex items-center justify-center gap-2">
                 <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Loading Beep to Receipt Walkthrough...</span>
+                <span>Loading Educational Walkthrough...</span>
               </div>
             }
           >
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 print:hidden">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 print:hidden">
               <button
                 type="button"
                 onClick={() => handleViewChange('portfolio')}
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#222226] border border-[#323238] hover:border-[#B0E0E6]/50 text-[#B0E0E6] text-xs font-mono transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#222226] border border-[#323238] hover:border-[#B0E0E6]/60 text-[#B0E0E6] text-xs font-mono transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Back to Overview</span>
@@ -262,7 +323,6 @@ export default function App() {
         ) : (
           <>
             <HeroSection
-              activeView={activeView}
               onChangeView={handleViewChange}
               onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
               onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
@@ -282,7 +342,7 @@ export default function App() {
             />
             <ProjectsSection
               expandedCaseId={expandedCaseId}
-              onSelectCaseId={setExpandedCaseId}
+              onSelectCaseId={handleToggleCaseCard}
               onOpenLab={() => captureFocusAndOpen(setLabModalOpen)}
               onOpenBeepToReceipt={() => handleViewChange('trace')}
             />
@@ -337,7 +397,7 @@ export default function App() {
             <div className="sticky top-0 z-20 bg-[#222226] px-6 py-3.5 flex items-center justify-between border-b border-[#323238] font-mono text-xs">
               <div className="flex items-center gap-2.5">
                 <span className="px-2 py-0.5 rounded bg-[#DC343B]/20 text-[#DC343B] border border-[#DC343B]/40 text-[10px] font-bold">
-                  [SIMULATION]
+                  SIMULATION
                 </span>
                 <span className="text-white font-semibold">
                   Interactive Computing Workbench
@@ -347,7 +407,7 @@ export default function App() {
                 ref={labCloseRef}
                 type="button"
                 onClick={() => closeOverlayAndRestoreFocus(setLabModalOpen)}
-                className="p-1.5 rounded-lg text-[#9CA3AF] hover:text-white border border-[#323238] hover:border-[#B0E0E6]/50 cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
+                className="p-1.5 rounded-lg text-[#D1D5DB] hover:text-white border border-[#323238] hover:border-[#B0E0E6]/60 cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B0E0E6]"
                 aria-label="Close interactive lab modal"
               >
                 <X className="w-4 h-4" />
@@ -375,6 +435,7 @@ export default function App() {
           onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
           onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
           onOpenCommandPalette={() => captureFocusAndOpen(setCommandPaletteOpen)}
+          onChangeView={handleViewChange}
         />
       )}
 

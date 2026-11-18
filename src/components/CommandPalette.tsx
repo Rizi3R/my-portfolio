@@ -212,8 +212,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'view-trace',
         category: 'Perspectives & Tools',
-        label: 'Beep to Receipt (Illustrative Walkthrough)',
-        sublabel: 'Educational model of how a retail checkout can work across 6 layers',
+        label: 'Beep to Receipt (Educational Walkthrough)',
+        sublabel: 'Educational model of how a retail checkout works across 6 layers',
         icon: <Compass className="w-4 h-4 text-[#B0E0E6]" />,
         perform: () => {
           onSelectView('trace');
@@ -224,7 +224,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'view-atlas',
         category: 'Perspectives & Tools',
         label: 'Full Skill Atlas',
-        sublabel: `${NODES.length} documented skill and learning items across 6 layers`,
+        sublabel: `${NODES.length} capabilities across 4 tracks`,
         icon: <Network className="w-4 h-4 text-[#B0E0E6]" />,
         perform: () => {
           onSelectView('atlas');
@@ -234,9 +234,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'view-plain',
         category: 'Perspectives & Tools',
-        label: 'Plain Print Specification',
-        sublabel: 'High-contrast printable document edition',
-        icon: <FileText className="w-4 h-4 text-[#9CA3AF]" />,
+        label: 'Printable Summary',
+        sublabel: 'High-contrast printable portfolio summary',
+        icon: <FileText className="w-4 h-4 text-[#D1D5DB]" />,
         perform: () => {
           onSelectView('plain');
           onClose();
@@ -297,9 +297,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Actions',
         label: 'Open LinkedIn Profile',
         sublabel: 'External LinkedIn profile',
-        icon: <ExternalLink className="w-4 h-4 text-[#9CA3AF]" />,
+        icon: <ExternalLink className="w-4 h-4 text-[#D1D5DB]" />,
         perform: () => {
-          window.open(PROFILE.linkedIn, '_blank', 'noopener,noreferrer');
+          const anchor = document.createElement('a');
+          anchor.href = PROFILE.linkedIn;
+          anchor.target = '_blank';
+          anchor.rel = 'noopener noreferrer';
+          anchor.click();
           onClose();
         },
       },

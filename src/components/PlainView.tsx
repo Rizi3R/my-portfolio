@@ -20,17 +20,17 @@ export const PlainView: React.FC = () => {
       {/* Top Document Meta Bar */}
       <div className="flex flex-wrap items-center justify-between border-b-2 border-stone-900 pb-4 mb-8 font-mono text-xs">
         <div>
-          <span className="font-bold">DOCUMENT:</span> ARIES RAZAK PORTFOLIO SUMMARY
+          <span className="font-bold">PRINTABLE SUMMARY:</span> ARIES RAZAK
         </div>
         <div className="flex items-center gap-4 print:hidden">
-          <span className="text-stone-600">Plain Print Edition</span>
+          <span className="text-stone-700">High-Contrast Summary</span>
           <button
             type="button"
             onClick={() => window.print()}
-            className="inline-flex items-center gap-1.5 px-3 py-1 bg-stone-900 text-white font-mono text-xs uppercase hover:bg-stone-800 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-stone-900 text-white font-mono text-xs uppercase hover:bg-stone-800 transition-colors cursor-pointer"
           >
             <Printer className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Print Specification</span>
+            <span>Print / Save PDF</span>
           </button>
         </div>
       </div>
@@ -63,7 +63,7 @@ export const PlainView: React.FC = () => {
             </a>
           </span>
         </div>
-        <div className="p-4 bg-stone-100 border-l-4 border-stone-800 text-sm leading-relaxed text-stone-800">
+        <div className="p-4 bg-stone-100 border border-stone-300 text-sm leading-relaxed text-stone-800">
           <p className="font-bold font-mono text-xs uppercase text-stone-900 mb-1">Summary</p>
           <p>{PROFILE.intro}</p>
         </div>
@@ -71,11 +71,11 @@ export const PlainView: React.FC = () => {
 
       {/* Table of Contents */}
       <nav
-        aria-label="Plain Document Table of Contents"
+        aria-label="Printable Summary Table of Contents"
         className="mb-12 p-4 bg-stone-50 border border-stone-200 text-xs font-mono"
       >
         <div className="font-bold uppercase tracking-wider mb-2 text-stone-900">
-          Document Sections
+          Summary Sections
         </div>
         <ol className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 list-decimal list-inside text-stone-700">
           <li>
@@ -100,12 +100,12 @@ export const PlainView: React.FC = () => {
           </li>
           <li>
             <a href="#plain-knowledge-graph" className="hover:underline">
-              Skills &amp; Application Overview ({NODES.length} Items)
+              Skills Overview ({NODES.length} Items)
             </a>
           </li>
           <li>
             <a href="#plain-strata" className="hover:underline">
-              Illustrative Walkthrough: Beep to Receipt
+              Educational Walkthrough: Beep to Receipt
             </a>
           </li>
         </ol>
@@ -124,7 +124,7 @@ export const PlainView: React.FC = () => {
                   {exp.role}
                   {exp.isInternship ? ' (Internship)' : ''}
                 </h3>
-                <span className="font-mono text-xs font-bold text-stone-600 uppercase">
+                <span className="font-mono text-xs font-bold text-stone-700 uppercase">
                   {exp.period}
                 </span>
               </div>
@@ -136,15 +136,8 @@ export const PlainView: React.FC = () => {
                   <li key={idx}>{bullet}</li>
                 ))}
               </ul>
-              <div className="flex flex-wrap gap-1.5">
-                {exp.technologies.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2 py-0.5 bg-stone-100 text-stone-800 border border-stone-300 text-xs font-mono"
-                  >
-                    {t}
-                  </span>
-                ))}
+              <div className="text-xs font-mono text-stone-700">
+                {exp.technologies.join(' · ')}
               </div>
             </div>
           ))}
@@ -168,8 +161,12 @@ export const PlainView: React.FC = () => {
 
               <div className="space-y-3 text-xs leading-relaxed text-stone-800">
                 <div>
-                  <strong className="font-mono uppercase text-stone-900">Context &amp; Issue: </strong>
-                  {cs.issue}
+                  <strong className="font-mono uppercase text-stone-900">The Situation: </strong>
+                  {cs.situation}
+                </div>
+                <div>
+                  <strong className="font-mono uppercase text-stone-900">My Responsibility: </strong>
+                  {cs.responsibility}
                 </div>
                 <div>
                   <strong className="font-mono uppercase text-stone-900 block mb-1">
@@ -181,12 +178,14 @@ export const PlainView: React.FC = () => {
                     ))}
                   </ul>
                 </div>
-                <div className="p-3 bg-stone-100 border border-stone-300">
-                  <strong className="font-mono uppercase text-stone-900 block mb-1">
-                    Scope &amp; Status:{' '}
-                  </strong>
-                  <p>{cs.outcomeOrStatus}</p>
-                </div>
+                {cs.outcome && (
+                  <div className="p-3 bg-stone-100 border border-stone-300">
+                    <strong className="font-mono uppercase text-stone-900 block mb-1">
+                      Outcome:{' '}
+                    </strong>
+                    <p>{cs.outcome}</p>
+                  </div>
+                )}
               </div>
             </div>
           ))}

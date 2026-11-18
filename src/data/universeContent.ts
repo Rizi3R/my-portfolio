@@ -17,20 +17,16 @@ export type EvidenceStatus = 'professional' | 'project' | 'learning';
 export type NodeKind = 'role' | 'project' | 'technology' | 'concept';
 
 export type ConstellationCategory =
-  | 'POS & Retail Support'
-  | 'Business Systems & Admin'
-  | 'Hardware & Connectivity'
-  | 'Helpdesk & User Support'
-  | 'Credentials & Internship'
-  | 'Active Learning';
+  | 'Application Support'
+  | 'Business Systems & SaaS'
+  | 'IT Operations & Helpdesk'
+  | 'Technical Foundations';
 
 export const CONSTELLATION_CATEGORIES: ConstellationCategory[] = [
-  'POS & Retail Support',
-  'Business Systems & Admin',
-  'Hardware & Connectivity',
-  'Helpdesk & User Support',
-  'Credentials & Internship',
-  'Active Learning',
+  'Application Support',
+  'Business Systems & SaaS',
+  'IT Operations & Helpdesk',
+  'Technical Foundations',
 ];
 
 export const EVIDENCE_META: Record<
@@ -40,17 +36,17 @@ export const EVIDENCE_META: Record<
   professional: {
     label: 'Work-Backed Experience',
     glyph: '◆',
-    description: 'Capabilities used directly in paid IT operations or application support roles.',
+    description: 'Capabilities applied directly in paid application support, SaaS administration, or IT operations roles.',
   },
   project: {
     label: 'Internship, Academic & Credential',
     glyph: '■',
-    description: 'Verified academic grounding, completed internship work, or earned certification.',
+    description: 'Verified academic grounding, supervised internship development, or earned credential.',
   },
   learning: {
     label: 'Currently Learning',
     glyph: '○',
-    description: 'Active self-directed exploration kept clearly separate from workplace claims.',
+    description: 'Active self-directed study kept separate from production experience claims.',
   },
 };
 
@@ -67,11 +63,17 @@ export interface ProfileData {
   availabilityNote: string;
 }
 
-export interface CoreIdentity {
+export interface CoreCapability {
   id: string;
-  label: string;
-  headline: string;
+  title: string;
+  exampleTag: string;
   description: string;
+}
+
+export interface AboutApproachItem {
+  id: string;
+  title: string;
+  detail: string;
 }
 
 export interface StratumDef {
@@ -92,6 +94,7 @@ export interface ExperienceEntry {
   role: string;
   organization: string;
   period: string;
+  compactPeriod: string;
   location: string;
   summary: string;
   highlights: string[];
@@ -104,9 +107,10 @@ export interface CaseStudy {
   title: string;
   organization: string;
   featuredOnHome?: boolean;
-  issue: string;
+  situation: string;
+  responsibility: string;
   whatIDid: string[];
-  outcomeOrStatus: string;
+  outcome?: string;
   technologies: string[];
   stratumFocus: StratumType;
 }
@@ -136,7 +140,7 @@ export interface LearningEntry {
 export interface UniverseNode {
   id: string;
   label: string;
-  category: string;
+  category: ConstellationCategory;
   stratum: StratumType;
   status: EvidenceStatus;
   kind: NodeKind;
@@ -164,123 +168,147 @@ export const PROFILE: ProfileData = {
   email: 'ariesirhan25@gmail.com',
   linkedIn: 'https://www.linkedin.com/in/aries-razak-a36045256',
   intro:
-    'I’m Aries Razak, a System Application Specialist at emart24 Malaysia. I troubleshoot Xilnex POS and payment issues, coordinate with vendors and outlet teams, and help get new stores ready to open. My experience also includes a Google Workspace to Lark migration and day-to-day IT support.',
+    'I troubleshoot business applications, support users across multiple sites, and coordinate with vendors when an issue needs further investigation. At emart24 Malaysia, I support Xilnex POS, payments, and new-site IT setups. At HWC Coffee Malaysia, I led the Google Workspace to Lark migration internally and administered Lark.',
   availabilityNote:
-    'Open to roles in Application Support, IT Operations, and Business Systems Administration.',
+    'Open to Application Support, IT Operations, Business Systems, and SaaS Support roles.',
 };
 
-export const CORE_IDENTITIES: CoreIdentity[] = [
+export const CORE_CAPABILITIES: CoreCapability[] = [
   {
-    id: 'pos-ops',
-    label: '01. Application & POS Operations',
-    headline: 'Keeping store checkout and back-office systems running',
+    id: 'cap-app-troubleshooting',
+    title: 'Application Troubleshooting',
+    exampleTag: 'Xilnex POS · Sync, Promos & Payments',
     description:
-      'Day-to-day troubleshooting of Xilnex POS sync, promotion, and payment issues across HQ and outlets, combined with vendor escalation and new-store setup checks.',
+      'Confirm symptoms directly with staff, inspect application and sync status in Xilnex, guide safe first-line steps, and relay verified details to vendors or internal teams.',
   },
   {
-    id: 'business-systems',
-    label: '02. Business Systems & Migration',
-    headline: 'Supporting tools teams rely on every day',
+    id: 'cap-saas-migration',
+    title: 'SaaS Administration & Migration',
+    exampleTag: 'Lark · Google Workspace · Microsoft 365',
     description:
-      'Hands-on help with a Google Workspace to Lark migration, Lark administration, approvals and workflow support, user onboarding and offboarding, and NetSuite Excel data checks.',
+      'Led the Google Workspace to Lark migration internally with Lark team support, administered Lark accounts and approval workflows, and assisted with Microsoft 365 provisioning.',
   },
   {
-    id: 'tech-curiosity',
-    label: '03. Systems & Technology Curiosity',
-    headline: 'Exploring how hardware, networks, and software fit together',
+    id: 'cap-it-operations',
+    title: 'IT Operations & User Support',
+    exampleTag: 'Multi-Site Readiness · Helpdesk · Hardware',
     description:
-      'Beyond day-to-day support, I explore workflow automation with UiPath and build small interactive walkthroughs to understand networking, caching, and checkout flows.',
+      'Remote and onsite support across TeamViewer, Lark Helpdesk, and Freshdesk, NetSuite Excel data checks, plus counter hardware and LAN/Wi-Fi readiness for new sites.',
+  },
+];
+
+export const ABOUT_SUMMARY =
+  'Good support starts with listening carefully to the person facing the problem. Before escalating or restarting anything, I confirm what happened on screen, narrow down whether the issue sits in the user setup, hardware, connectivity, or application, and pass clean notes if a vendor needs to step in.';
+
+export const ABOUT_APPROACH: AboutApproachItem[] = [
+  {
+    id: 'approach-users',
+    title: 'Clear communication with non-technical teams',
+    detail:
+      'Whether coaching colleagues transitioning onto Lark or walking counter staff through a register check, I explain next steps in plain language.',
+  },
+  {
+    id: 'approach-triage',
+    title: 'Structured first-line troubleshooting',
+    detail:
+      'Isolate whether a problem stems from local cabling, peripheral connection, user permissions, or application sync before changing settings.',
+  },
+  {
+    id: 'approach-vendors',
+    title: 'Prepared handoffs to vendors and internal teams',
+    detail:
+      'When an application or platform issue requires vendor engineering, I summarize confirmed symptoms and checks already completed to save back-and-forth.',
   },
 ];
 
 /**
  * ILLUSTRATIVE EDUCATIONAL WALKTHROUGH ("BEEP TO RECEIPT")
- * Explicitly framed as a general educational model of how a retail checkout can work.
- * Not presented as verified proprietary production architecture or first-person employer claims.
+ * Explicitly framed as an educational walkthrough using generic examples.
+ * Not presented as verified proprietary employer production architecture.
  */
 export const STRATA: StratumDef[] = [
   {
     id: 'hardware',
     index: '01',
     title: 'Hardware & Peripherals',
-    subtitle: 'Illustrative Layer: Scanners, Terminals, Printers & Cabling',
+    subtitle: 'Educational Walkthrough: Scanners, Terminals, Printers & Cabling',
     description:
-      'At the counter, physical devices capture an item barcode or card tap and print a paper slip once approved. Clean USB/power connections and intact Ethernet drops keep peripherals reachable.',
+      'At a checkout counter, physical devices capture an item barcode or card tap and print a paper slip once approved. Clean power, peripheral cables, and intact network drops keep counter gear reachable.',
     exampleStage: 'Example Step: Barcode scan & peripheral input',
-    examplePayload: 'INPUT -> UPC/EAN string from handheld scanner to register host',
+    examplePayload: 'INPUT -> Sample SKU digits passed from handheld scanner to register host',
     whatHappensConceptually:
-      'A barcode scanner reads reflected light, decodes bars into digits, and passes keystrokes or serial input to the checkout terminal.',
-    exampleComponents: ['Barcode Scanner', 'Receipt Printer', 'Payment Terminal', 'RJ45 Cabling'],
+      'A barcode scanner reads reflected light, decodes bars into digits, and passes keystrokes or input events to the active checkout application.',
+    exampleComponents: ['Barcode Scanner', 'Receipt Printer', 'Payment Terminal', 'Ethernet Drop'],
     accentColor: '#DC343B',
   },
   {
     id: 'kernel',
     index: '02',
     title: 'Operating System & Drivers',
-    subtitle: 'Illustrative Layer: Device Recognition & Print Spooling',
+    subtitle: 'Educational Walkthrough: Device Recognition & Print Spooling',
     description:
-      'The operating system on the terminal exposes connected scanners, printers, and network adapters through standard device drivers so the POS software can read input and send print jobs.',
+      'The operating system on a terminal exposes connected scanners, printers, and network adapters through standard drivers so business software can read input and send print jobs.',
     exampleStage: 'Example Step: OS device & spooler handoff',
-    examplePayload: 'OS -> USB HID input event -> Print Spooler queue dispatch',
+    examplePayload: 'OS -> USB input event -> Print queue dispatch',
     whatHappensConceptually:
-      'Input drivers route scan events to the active checkout window, while the OS print queue formats receipt output for the attached thermal printer.',
-    exampleComponents: ['USB Drivers', 'Print Spooler', 'Network Interface', 'Local Storage'],
+      'Input drivers route scan events to the active window, while the operating system print queue formats output for the connected thermal printer.',
+    exampleComponents: ['USB Drivers', 'Print Spooler', 'Network Adapter', 'Local Cache'],
     accentColor: '#B0E0E6',
   },
   {
     id: 'network',
     index: '03',
     title: 'Local Network & Internet Link',
-    subtitle: 'Illustrative Layer: LAN Switching, Wi-Fi & Upstream Routing',
+    subtitle: 'Educational Walkthrough: LAN Switching, Wi-Fi & Upstream Routing',
     description:
-      'Store devices communicate over local Ethernet or Wi-Fi through switches and a gateway router to reach cloud POS backends, payment processors, and central inventory services.',
-    exampleStage: 'Example Step: Local LAN hop to WAN gateway',
-    examplePayload: 'LAN Ethernet -> Store Switch -> Edge Router -> ISP Uplink',
+      'Local terminals reach cloud application backends and payment hosts over site Ethernet or Wi-Fi through local switches and an upstream gateway.',
+    exampleStage: 'Example Step: Local link to upstream gateway',
+    examplePayload: 'Local Ethernet -> Switch -> Gateway Router -> Upstream ISP',
     whatHappensConceptually:
-      'If a wall port, patch lead, or gateway link drops, local registers cannot sync catalog pricing updates or reach external payment hosts.',
-    exampleComponents: ['Ethernet Links', 'Store Wi-Fi', 'Local Switch', 'Gateway Router'],
+      'If a wall port, patch lead, or gateway link drops, local terminals cannot pull updated catalog pricing or sync completed sales.',
+    exampleComponents: ['Ethernet Links', 'Site Wi-Fi', 'Local Switch', 'Gateway Router'],
     accentColor: '#B0E0E6',
   },
   {
     id: 'application',
     index: '04',
-    title: 'POS Application & Transaction Flow',
-    subtitle: 'Illustrative Layer: Basket Lookup, Promotions & Receipts',
+    title: 'Application & Transaction Flow',
+    subtitle: 'Educational Walkthrough: Item Lookup, Promotions & Receipts',
     description:
-      'The POS application matches scanned SKUs against the active price and promotion catalog, tallies taxes and totals, requests tender confirmation, and records the completed sale.',
-    exampleStage: 'Example Step: SKU lookup & tender state update',
-    examplePayload: 'POS App -> Match SKU price & promo rules -> Record basket total',
+      'The business application matches scanned SKUs against the active price and promotion rules, calculates totals, requests tender confirmation, and logs the sale.',
+    exampleStage: 'Example Step: Item lookup & promo calculation',
+    examplePayload: 'Application -> Match catalog price & promo rule -> Record transaction',
     whatHappensConceptually:
-      'When catalogs or promotions fail to sync between HQ and a branch register, cashiers see stale prices or missing promo discounts until a sync completes.',
-    exampleComponents: ['SKU Lookup', 'Promotion Rules', 'Payment Trigger', 'Sales Sync'],
+      'When catalogs or promotions stall during sync, front-line users see outdated prices or missing discounts until a sync finishes.',
+    exampleComponents: ['SKU Lookup', 'Promotion Rules', 'Tender Trigger', 'Sales Sync'],
     accentColor: '#DC343B',
   },
   {
     id: 'cloud',
     index: '05',
     title: 'Back-Office, ERP & Collaboration Platforms',
-    subtitle: 'Illustrative Layer: Central Reporting, Inventory & Accounts',
+    subtitle: 'Educational Walkthrough: Central Reporting, ERP & Accounts',
     description:
-      'Completed store transactions and operational requests feed into central retail reporting, ERP spreadsheets, and workplace collaboration tools used by HQ and store managers.',
-    exampleStage: 'Example Step: HQ sync & business systems handoff',
-    examplePayload: 'POS Sync -> HQ Catalog & Reporting -> Collaboration / ERP Tools',
+      'Operational records feed into central back-office reporting, ERP data sheets, and workplace messaging or mail platforms used across departments.',
+    exampleStage: 'Example Step: HQ sync & business tools handoff',
+    examplePayload: 'Site Sync -> Central Reporting -> Collaboration & ERP Tools',
     whatHappensConceptually:
-      'Central platforms rely on clean user accounts, structured import data, and steady branch connectivity to keep store records consistent.',
-    exampleComponents: ['HQ Catalog Sync', 'Business Email & Chat', 'ERP Data Imports', 'User Access'],
+      'Shared platforms depend on accurate account provisioning, clean import templates, and steady connectivity across teams.',
+    exampleComponents: ['Central Sync', 'Workplace Mail & Chat', 'ERP Data Prep', 'Access Control'],
     accentColor: '#B0E0E6',
   },
   {
     id: 'operations',
     index: '06',
     title: 'People, Triage & Vendor Coordination',
-    subtitle: 'Illustrative Layer: Store Staff, IT Support & Escalation',
+    subtitle: 'Educational Walkthrough: End Users, Support & Escalation',
     description:
-      'Technology works when teams know what to check first and where to escalate. Practical troubleshooting combines clear user communication, repeatable checks, and timely vendor follow-up.',
-    exampleStage: 'Example Step: Issue triage & escalation coordination',
-    examplePayload: 'Outlet Report -> Initial Check & Sync -> Escalate if unresolved',
+      'Systems stay dependable when support teams communicate clearly with users, run structured initial checks, and escalate confirmed findings cleanly.',
+    exampleStage: 'Example Step: Issue triage & escalation',
+    examplePayload: 'User Report -> Reproduce & Check -> Escalate with Observations',
     whatHappensConceptually:
-      'Support staff reproduce or verify symptoms with cashiers on the phone, try safe first-line checks, and pass clear context to external vendors when deeper fixes are required.',
-    exampleComponents: ['Outlet Support', 'Remote Triage', 'Vendor Escalation', 'New-Store Readiness'],
+      'Support specialists verify what a user sees, run safe initial checks first, and share focused context with vendors when code or platform fixes are needed.',
+    exampleComponents: ['User Support', 'Remote Triage', 'Vendor Escalation', 'Site Readiness'],
     accentColor: '#DC343B',
   },
 ];
@@ -291,47 +319,49 @@ export const EXPERIENCES: ExperienceEntry[] = [
     role: 'System Application Specialist',
     organization: 'emart24 Malaysia',
     period: 'September 2025 to present',
+    compactPeriod: 'Sep 2025 to present',
     location: 'Malaysia',
     summary:
-      'Supporting Xilnex POS across HQ and outlets, troubleshooting sync, promotion, and payment issues, coordinating with vendors and internal teams, and helping prepare IT setups for multiple new-store openings.',
+      'Supporting Xilnex POS across HQ and outlets, troubleshooting sync, promotion, and payment issues, coordinating with vendors and internal teams, and helping set up IT for multiple new-store openings.',
     highlights: [
-      'Support Xilnex POS across HQ and store outlets, troubleshooting sync, promotion, and payment issues.',
-      'Handle application troubleshooting and coordinate escalation with external vendors and internal teams when issues need deeper investigation.',
-      'Help set up and check POS devices, payment terminals, peripherals, and store LAN/Wi-Fi connectivity for multiple new-store openings.',
-      'Assist with Microsoft 365 account provisioning and UAT support within assigned project scope.',
+      'Support Xilnex POS across HQ and outlets, troubleshooting sync, promotion, and payment issues.',
+      'Handle application troubleshooting and coordinate escalation with external vendors and internal teams when deeper investigation is needed.',
+      'Help set up and check POS devices, payment terminals, peripherals, and LAN/Wi-Fi connectivity for multiple new-store openings.',
+      'Assist with Microsoft 365 provisioning and UAT support within assigned project scope.',
     ],
     technologies: [
       'Xilnex POS',
       'Application Troubleshooting',
-      'Vendor Escalation',
+      'Vendor Coordination',
       'POS Peripherals',
-      'LAN / Wi-Fi Setup',
-      'Microsoft 365 Support',
+      'LAN / Wi-Fi Checks',
+      'Microsoft 365 Provisioning',
       'UAT Support',
     ],
   },
   {
-    id: 'exp-palaterium',
-    role: 'IT Support at Palaterium Sdn Bhd',
-    organization: 'Palaterium Sdn Bhd (HWC Coffee)',
-    period: 'April 2024 to August 2025',
+    id: 'exp-hwc',
+    role: 'IT Support | HWC Coffee Malaysia',
+    organization: 'HWC Coffee Malaysia (Palaterium Sdn Bhd)',
+    period: '27 March 2024 to 27 September 2025',
+    compactPeriod: 'Mar 2024 to Sep 2025',
     location: 'Malaysia',
     summary:
-      'Day-to-day IT support for Xilnex, hardware, networking, and remote users alongside Google Workspace to Lark migration tasks, Lark administration, and NetSuite data preparation.',
+      'Led the Google Workspace to Lark migration internally at HWC Coffee Malaysia, with support from the Lark team. Administered Lark, managed user accounts and approval workflows, and helped colleagues adopt the platform.',
     highlights: [
-      'Supported Xilnex POS, workstation and store hardware, basic networking, and remote users using TeamViewer and Lark Helpdesk.',
-      'Helped with the Google Workspace to Lark migration and supported colleagues as they learned Lark day to day.',
-      'Managed Lark administration tasks, approvals and workflow support, and user onboarding and offboarding.',
-      'Prepared and validated Excel spreadsheets to support clean data imports into NetSuite.',
+      'Led the Google Workspace to Lark migration internally at HWC Coffee Malaysia, with support from the Lark team.',
+      'Administered Lark, managed user accounts, onboarding and offboarding, and approval workflows, and helped colleagues adopt the platform.',
+      'Supported Xilnex POS, hardware, networking, and remote users via TeamViewer and Lark Helpdesk.',
+      'Prepared and validated Excel spreadsheets for NetSuite imports.',
     ],
     technologies: [
+      'Google Workspace to Lark Migration',
       'Lark Administration',
-      'Google Workspace Migration',
-      'Xilnex POS',
-      'TeamViewer',
-      'Lark Helpdesk',
       'Approvals & Workflows',
-      'Excel / NetSuite Data Prep',
+      'Onboarding & Offboarding',
+      'Xilnex POS',
+      'TeamViewer & Lark Helpdesk',
+      'Excel & NetSuite Data Prep',
     ],
   },
   {
@@ -339,12 +369,13 @@ export const EXPERIENCES: ExperienceEntry[] = [
     role: 'IT Technician',
     organization: 'Managed Print Services',
     period: 'Oct 2023 to Mar 2024',
+    compactPeriod: 'Oct 2023 to Mar 2024',
     location: 'Malaysia',
     summary:
-      'Field and onsite technical support focused on printers, copiers, workstations, connectivity troubleshooting, and Freshdesk ticket handling.',
+      'Onsite technical support focused on office printers, multi-function copiers, user hardware/software checks, connectivity troubleshooting, and Freshdesk ticket handling.',
     highlights: [
-      'Delivered onsite technical support for office printers, multi-function copiers, and user workstations.',
-      'Troubleshot hardware, software, and local connectivity issues across customer sites.',
+      'Provided onsite technical support for office printers, multi-function copiers, and user workstations.',
+      'Troubleshot hardware, software, and local connectivity issues on customer sites.',
       'Tracked, updated, and handled support requests through Freshdesk ticket handling.',
     ],
     technologies: [
@@ -360,11 +391,12 @@ export const EXPERIENCES: ExperienceEntry[] = [
     role: 'IT Intern (Application Development)',
     organization: 'Attorney General’s Chambers of Malaysia',
     period: 'Sep 2021 to Feb 2022',
+    compactPeriod: 'Sep 2021 to Feb 2022',
     location: 'Putrajaya, Malaysia',
     summary:
-      'Internship experience contributing to the internal DKICT declaration web system using Laravel and MySQL, alongside requirements documentation and entity-relationship diagrams.',
+      'Internship experience contributing to the internal DKICT declaration web system using PHP Laravel and MySQL, alongside requirements documentation and entity-relationship diagrams.',
     highlights: [
-      'IT internship contribution to the internal DKICT declaration system built with PHP Laravel and MySQL.',
+      'Internship contribution to the internal DKICT declaration web system using PHP Laravel and MySQL.',
       'Assisted in preparing requirements documentation and entity-relationship diagrams (ERDs).',
       'Supported development and functional verification tasks under team supervision.',
     ],
@@ -381,19 +413,44 @@ export const EXPERIENCES: ExperienceEntry[] = [
 
 export const CASE_STUDIES: CaseStudy[] = [
   {
-    id: 'case-pos-triage',
-    title: 'Xilnex POS incident triage & escalation',
-    organization: 'emart24 Malaysia',
+    id: 'case-lark-migration',
+    title: 'Leading a Google Workspace to Lark migration',
+    organization: 'HWC Coffee Malaysia (Palaterium Sdn Bhd)',
     featuredOnHome: true,
-    issue:
-      'Store outlets report Xilnex POS sync delays, missing or mismatched promotions, and payment-related issues during active store hours.',
+    situation:
+      'Colleagues moving from Google Workspace to Lark needed a single point of internal coordination for account transition, platform setup, and day-to-day guidance on using new workplace tools.',
+    responsibility:
+      'Internal lead for the Google Workspace to Lark migration (with support from the Lark team) and ongoing Lark platform administrator.',
     whatIDid: [
-      'Verified reported symptoms directly with outlet staff and checked POS application and sync status.',
-      'Guided staff through initial safe checks such as triggering a manual sync or restarting the affected terminal when appropriate.',
-      'Collected clear context on what was checked and observed, then coordinated escalation with vendors and internal teams when deeper fixes were needed.',
+      'Led the Google Workspace to Lark migration internally, coordinating steps and questions with the Lark team.',
+      'Administered the Lark workspace, including user account setup, onboarding and offboarding, and approval workflows.',
+      'Assisted colleagues directly as they shifted onto Lark messaging, mail, approvals, and helpdesk requests.',
     ],
-    outcomeOrStatus:
-      'Kept initial application checks and vendor or internal escalation steps organized around confirmed observations rather than guesswork.',
+    outcome:
+      'Transitioned users onto Lark for messaging, mail, and approvals with internal workspace administration and user support established.',
+    technologies: [
+      'Google Workspace to Lark Migration',
+      'Lark Administration',
+      'User Onboarding & Offboarding',
+      'Approval Workflows',
+      'Lark Messaging & Mail Support',
+    ],
+    stratumFocus: 'cloud',
+  },
+  {
+    id: 'case-pos-triage',
+    title: 'Application incident triage and vendor escalation',
+    organization: 'emart24 Malaysia · Recurring Support Work',
+    featuredOnHome: true,
+    situation:
+      'In day-to-day store support, outlets experience recurring Xilnex POS issues involving sales or catalog sync, promotions not reflecting cleanly, and payment-related disruptions.',
+    responsibility:
+      'Front-line application troubleshooting for Xilnex POS across HQ and outlets, plus structured coordination with external vendors or internal teams when deeper investigation is required.',
+    whatIDid: [
+      'Confirm the symptom directly with outlet staff and inspect the POS application and sync status.',
+      'Guide staff through safe first-line steps such as triggering a manual sync or restarting the affected terminal when appropriate.',
+      'Relay verified observations and checks already attempted to the vendor or internal team when the issue requires further investigation.',
+    ],
     technologies: [
       'Xilnex POS',
       'Sync Troubleshooting',
@@ -404,47 +461,24 @@ export const CASE_STUDIES: CaseStudy[] = [
     stratumFocus: 'application',
   },
   {
-    id: 'case-lark-migration',
-    title: 'Google Workspace to Lark migration support',
-    organization: 'Palaterium Sdn Bhd',
-    featuredOnHome: true,
-    issue:
-      'Staff moving from Google Workspace to Lark needed hands-on assistance learning daily tools while keeping onboarding, approvals, and helpdesk requests moving.',
-    whatIDid: [
-      'Helped carry out operational tasks for the Google Workspace to Lark transition.',
-      'Supported colleagues directly as they learned how to use Lark messaging, mail, approvals, and helpdesk channels.',
-      'Maintained Lark administration duties, onboarding and offboarding accounts, approval workflow support, and Excel spreadsheet preparation for NetSuite imports.',
-    ],
-    outcomeOrStatus:
-      'Supported team adoption of Lark workflows alongside day-to-day helpdesk, account lifecycle, and NetSuite import preparation.',
-    technologies: [
-      'Google Workspace',
-      'Lark Administration',
-      'Approvals & Workflows',
-      'Onboarding & Offboarding',
-      'Excel / NetSuite',
-    ],
-    stratumFocus: 'cloud',
-  },
-  {
     id: 'case-store-launch',
-    title: 'New-store IT readiness & cabling fix',
+    title: 'New-site IT readiness and an RJ45 cabling fix',
     organization: 'emart24 Malaysia',
     featuredOnHome: false,
-    issue:
-      'Before new outlets open, POS devices, payment terminals, peripherals, and store LAN/Wi-Fi links must be assembled and checked ready for trading.',
+    situation:
+      'Before new outlets open, counter hardware and store connectivity need to be set up and checked ready for trading.',
+    responsibility:
+      'Helped set up and test site equipment and local LAN/Wi-Fi connectivity during new-store preparations.',
     whatIDid: [
-      'Helped set up and check POS terminals, payment terminals, receipt printers, scanners, and LAN/Wi-Fi connectivity across multiple new-store openings.',
-      'During one new-store setup, tested a network run where the cable tester skipped pin 4 and reterminated the RJ45 connector on site.',
+      'Set up and checked POS devices, payment terminals, barcode scanners, receipt printers, and LAN/Wi-Fi connectivity.',
+      'During one new-store setup, tested an Ethernet run where the cable tester skipped pin 4 and reterminated the RJ45 connector on site.',
     ],
-    outcomeOrStatus:
-      'Delivered hands-on counter equipment readiness and connector retermination across assigned store openings.',
     technologies: [
-      'POS Device Setup',
+      'POS Devices',
       'Payment Terminals',
-      'POS Peripherals',
-      'LAN / Wi-Fi Checks',
-      'RJ45 Termination',
+      'Scanners & Receipt Printers',
+      'LAN / Wi-Fi Connectivity',
+      'RJ45 Connector Retermination',
     ],
     stratumFocus: 'hardware',
   },
@@ -455,7 +489,7 @@ export const EDUCATION: EducationEntry = {
   institution: 'Universiti Teknologi MARA (UiTM)',
   period: '2019 to 2022',
   focus:
-    'Academic foundation in software engineering fundamentals, relational databases, data structures, and computing mathematics.',
+    'Academic foundation in software fundamentals, relational databases, data structures, and computing mathematics.',
 };
 
 export const CERTIFICATIONS: CertificationEntry[] = [
@@ -464,14 +498,14 @@ export const CERTIFICATIONS: CertificationEntry[] = [
     name: 'AWS Certified Cloud Practitioner',
     issuer: 'Amazon Web Services',
     status: 'credential',
-    note: 'Recognized foundational cloud credential covering core AWS services, cloud architecture concepts, security, and billing.',
+    note: 'Foundational cloud credential covering core AWS services, cloud architecture concepts, security, and billing.',
   },
   {
     id: 'cert-ai-teach',
     name: 'Generative AI Copilot Digital Upskilling Program',
     issuer: 'AI Teach Malaysia',
     status: 'completed',
-    note: 'Completed upskilling program exploring generative AI productivity workflows and practical workplace tools.',
+    note: 'Completed digital upskilling program covering generative AI productivity workflows and workplace tools.',
   },
 ];
 
@@ -485,210 +519,224 @@ export const LEARNING_ENTRIES: LearningEntry[] = [
 ];
 
 /**
- * WORK-BACKED & PROJECT SKILLS FIRST, FOLLOWED BY ACTIVE LEARNING
- * Zero unsupported technical claims (no 802.1Q VLANs, no ISO 8583 packet claim,
- * no Dual-WAN/DNS config claim, no SQLite locking claim, no Event Viewer/DHCP claim,
- * no ITIL 4 or Linux study claims).
+ * CORE SKILLS GROUPED ACROSS 4 CROSS-INDUSTRY TRACKS
+ * Ordered: Work-Backed Experience -> Credentials & Internship -> Active Learning
  */
 export const NODES: UniverseNode[] = [
-  // --- Work-Backed Skills (emart24 & Palaterium) ---
+  // --- 01. Application Support ---
   {
     id: 'node-xilnex-pos',
-    label: 'Xilnex POS Support',
-    category: 'POS & Retail Support',
+    label: 'Xilnex POS & App Triage',
+    category: 'Application Support',
     stratum: 'application',
     status: 'professional',
     kind: 'technology',
     x: 68,
-    y: 42,
-    summary: 'Application support for Xilnex POS across HQ and retail outlets, checking sync, promotions, and payment issues.',
+    y: 40,
+    summary: 'Supporting Xilnex POS across HQ and outlets, checking sync, promotion, and payment issues.',
     evidenceRef: 'exp-emart24',
-    usage: 'Daily troubleshooting of Xilnex POS sync, promotion, and payment issues plus escalation coordination.',
+    usage: 'Confirm symptoms with store staff, inspect app/sync status, and guide manual sync or restart steps.',
     year: '2024 to Present',
   },
   {
-    id: 'node-triage-escalation',
-    label: 'App Triage & Vendor Escalation',
-    category: 'POS & Retail Support',
+    id: 'node-vendor-escalation',
+    label: 'Vendor & Internal Escalation',
+    category: 'Application Support',
     stratum: 'operations',
     status: 'professional',
     kind: 'technology',
     x: 84,
     y: 34,
-    summary: 'Checking symptoms with outlet teams, guiding first-line sync or restart steps, and coordinating vendor escalation.',
+    summary: 'Packaging confirmed symptoms and initial checks cleanly for external vendors and internal teams.',
     evidenceRef: 'case-pos-triage',
-    usage: 'Coordinating store incident follow-up between cashiers, internal colleagues, and external application vendors.',
+    usage: 'Coordinated unresolved POS and platform incidents between front-line users and external application vendors.',
     year: '2025 to Present',
   },
   {
-    id: 'node-pos-peripherals',
-    label: 'POS Devices & Peripherals',
-    category: 'Hardware & Connectivity',
-    stratum: 'hardware',
-    status: 'professional',
-    kind: 'technology',
-    x: 16,
-    y: 42,
-    summary: 'Hands-on setup and functional checks for POS terminals, payment terminals, barcode scanners, and receipt printers.',
-    evidenceRef: 'case-store-launch',
-    usage: 'Helping set up and test store counter equipment across multiple new-store openings.',
-    year: '2024 to Present',
-  },
-  {
-    id: 'node-lan-cabling',
-    label: 'LAN / Wi-Fi & RJ45 Cabling',
-    category: 'Hardware & Connectivity',
-    stratum: 'network',
-    status: 'professional',
-    kind: 'technology',
-    x: 44,
-    y: 44,
-    summary: 'Checking store LAN and Wi-Fi links during setups and reterminating faulty RJ45 connectors identified on cable testers.',
-    evidenceRef: 'case-store-launch',
-    usage: 'Checked new-store connectivity and reterminated an RJ45 connector after a cable tester skipped pin 4.',
-    year: '2024 to Present',
-  },
-  {
-    id: 'node-lark-admin',
-    label: 'Lark Admin & Approvals',
-    category: 'Business Systems & Admin',
-    stratum: 'cloud',
+    id: 'node-uat-support',
+    label: 'UAT Support',
+    category: 'Application Support',
+    stratum: 'application',
     status: 'professional',
     kind: 'technology',
     x: 78,
-    y: 66,
-    summary: 'Lark administration, helpdesk queues, approval workflows, user onboarding and offboarding, and helping colleagues learn Lark.',
-    evidenceRef: 'case-lark-migration',
-    usage: 'Administered Lark accounts, approval workflows, and onboarding/offboarding at Palaterium Sdn Bhd.',
-    year: '2024 to 2025',
+    y: 48,
+    summary: 'Supporting user acceptance testing tasks within assigned project scope before rollout.',
+    evidenceRef: 'exp-emart24',
+    usage: 'Assisted with UAT checks and feature verification tasks at emart24 Malaysia.',
+    year: '2025 to Present',
   },
+
+  // --- 02. Business Systems & SaaS ---
   {
     id: 'node-gws-migration',
-    label: 'Google Workspace Migration',
-    category: 'Business Systems & Admin',
+    label: 'Google Workspace to Lark Migration',
+    category: 'Business Systems & SaaS',
     stratum: 'cloud',
     status: 'professional',
     kind: 'project',
-    x: 64,
-    y: 72,
-    summary: 'Operational support helping transition users and daily workflows from Google Workspace to Lark.',
+    x: 62,
+    y: 66,
+    summary: 'Led the Google Workspace to Lark migration internally with support from the Lark team.',
     evidenceRef: 'case-lark-migration',
-    usage: 'Helped carry out migration tasks and coached colleagues moving from Google Workspace to Lark.',
+    usage: 'Managed internal migration coordination, user onboarding, and day-to-day colleague adoption at HWC Coffee Malaysia.',
     year: '2024 to 2025',
+  },
+  {
+    id: 'node-lark-admin',
+    label: 'Lark Administration & Approvals',
+    category: 'Business Systems & SaaS',
+    stratum: 'cloud',
+    status: 'professional',
+    kind: 'technology',
+    x: 76,
+    y: 68,
+    summary: 'Administering Lark accounts, onboarding and offboarding, approval workflows, and mail/messaging support.',
+    evidenceRef: 'case-lark-migration',
+    usage: 'Administered Lark workspace accounts, approval workflows, and Lark Helpdesk support.',
+    year: '2024 to 2025',
+  },
+  {
+    id: 'node-m365-provisioning',
+    label: 'Microsoft 365 Provisioning',
+    category: 'Business Systems & SaaS',
+    stratum: 'cloud',
+    status: 'professional',
+    kind: 'technology',
+    x: 86,
+    y: 58,
+    summary: 'Assisting with Microsoft 365 user account provisioning and access tasks for operational teams.',
+    evidenceRef: 'exp-emart24',
+    usage: 'Supported Microsoft 365 account provisioning tasks within assigned scope at emart24 Malaysia.',
+    year: '2025 to Present',
   },
   {
     id: 'node-excel-netsuite',
     label: 'Excel & NetSuite Data Prep',
-    category: 'Business Systems & Admin',
+    category: 'Business Systems & SaaS',
     stratum: 'application',
     status: 'professional',
     kind: 'technology',
-    x: 56,
-    y: 60,
-    summary: 'Preparing and checking Excel datasets before import into NetSuite ERP workflows.',
-    evidenceRef: 'exp-palaterium',
-    usage: 'Prepared and validated operational Excel spreadsheets for NetSuite imports at Palaterium Sdn Bhd.',
+    x: 54,
+    y: 56,
+    summary: 'Preparing and validating Excel spreadsheets to support clean data imports into NetSuite.',
+    evidenceRef: 'exp-hwc',
+    usage: 'Prepared and validated operational Excel files for NetSuite ERP imports at HWC Coffee Malaysia.',
     year: '2024 to 2025',
   },
+
+  // --- 03. IT Operations & Helpdesk ---
   {
-    id: 'node-m365-uat',
-    label: 'Microsoft 365 & UAT Support',
-    category: 'Helpdesk & User Support',
-    stratum: 'operations',
-    status: 'professional',
-    kind: 'technology',
-    x: 86,
-    y: 54,
-    summary: 'Assisting with Microsoft 365 account provisioning tasks and supporting user acceptance testing when assigned.',
-    evidenceRef: 'exp-emart24',
-    usage: 'Assisted HQ teams with Microsoft 365 account provisioning and UAT support at emart24 Malaysia.',
-    year: '2025 to Present',
-  },
-  {
-    id: 'node-teamviewer-helpdesk',
-    label: 'Remote Support & Helpdesk',
-    category: 'Helpdesk & User Support',
+    id: 'node-remote-helpdesk',
+    label: 'Multi-Site & Remote Helpdesk',
+    category: 'IT Operations & Helpdesk',
     stratum: 'operations',
     status: 'professional',
     kind: 'technology',
     x: 82,
     y: 78,
-    summary: 'Supporting remote users and troubleshooting workstation and software issues via TeamViewer, Lark Helpdesk, and Freshdesk.',
-    evidenceRef: 'exp-palaterium',
-    usage: 'Handled remote troubleshooting and ticket workflows across TeamViewer, Lark Helpdesk, and Freshdesk.',
+    summary: 'Supporting remote users and multi-site teams using TeamViewer, Lark Helpdesk, and Freshdesk.',
+    evidenceRef: 'exp-hwc',
+    usage: 'Handled remote troubleshooting, ticket updates, and end-user guidance across retail and office sites.',
     year: '2023 to 2025',
+  },
+  {
+    id: 'node-pos-peripherals',
+    label: 'POS Devices & Counter Hardware',
+    category: 'IT Operations & Helpdesk',
+    stratum: 'hardware',
+    status: 'professional',
+    kind: 'technology',
+    x: 18,
+    y: 42,
+    summary: 'Setting up and checking POS devices, payment terminals, barcode scanners, and receipt printers.',
+    evidenceRef: 'case-store-launch',
+    usage: 'Assembled and verified store counter equipment readiness across multiple new-store openings.',
+    year: '2024 to Present',
+  },
+  {
+    id: 'node-lan-cabling',
+    label: 'LAN / Wi-Fi & RJ45 Termination',
+    category: 'IT Operations & Helpdesk',
+    stratum: 'network',
+    status: 'professional',
+    kind: 'technology',
+    x: 42,
+    y: 44,
+    summary: 'Checking LAN/Wi-Fi connectivity during setups and reterminating an RJ45 connector when pin 4 skipped.',
+    evidenceRef: 'case-store-launch',
+    usage: 'Checked new-site connectivity and reterminated an RJ45 plug during one store launch setup.',
+    year: '2024 to Present',
   },
   {
     id: 'node-printers-onsite',
     label: 'Printers, Copiers & Onsite IT',
-    category: 'Hardware & Connectivity',
+    category: 'IT Operations & Helpdesk',
     stratum: 'hardware',
     status: 'professional',
     kind: 'technology',
     x: 22,
-    y: 66,
-    summary: 'Onsite support for office printers, multi-function copiers, and end-user hardware, software, and connectivity checks.',
+    y: 68,
+    summary: 'Onsite support for office printers, multi-function copiers, workstation checks, and connectivity issues.',
     evidenceRef: 'exp-mps',
-    usage: 'Provided onsite printer, copier, and workstation support during IT Technician role.',
+    usage: 'Delivered field hardware/software troubleshooting and printer/copier servicing via Freshdesk.',
     year: '2023 to 2024',
   },
 
-  // --- Internship & Academic Foundations ---
-  {
-    id: 'node-laravel-mysql',
-    label: 'Laravel & MySQL (Internship)',
-    category: 'Credentials & Internship',
-    stratum: 'application',
-    status: 'project',
-    kind: 'project',
-    x: 52,
-    y: 24,
-    summary: 'Internship work contributing to the DKICT declaration web system with Laravel, MySQL, requirements docs, and ERDs.',
-    evidenceRef: 'exp-agc',
-    usage: 'Contributed to the internal DKICT declaration system during IT internship at Attorney General’s Chambers.',
-    year: '2021 to 2022',
-  },
-  {
-    id: 'node-uitm-cs',
-    label: 'CS & Math Fundamentals (UiTM)',
-    category: 'Credentials & Internship',
-    stratum: 'kernel',
-    status: 'project',
-    kind: 'project',
-    x: 30,
-    y: 24,
-    summary: 'Diploma in Computer Science & Mathematics providing software, database, and structured problem-solving foundations.',
-    evidenceRef: 'exp-uitm',
-    usage: 'Completed UiTM Diploma in Computer Science and Mathematics (2019 to 2022).',
-    year: '2019 to 2022',
-  },
+  // --- 04. Technical Foundations (Credential, Internship, Diploma & Active Learning) ---
   {
     id: 'node-aws-ccp',
-    label: 'AWS Cloud Practitioner',
-    category: 'Credentials & Internship',
+    label: 'AWS Certified Cloud Practitioner',
+    category: 'Technical Foundations',
     stratum: 'cloud',
     status: 'project',
     kind: 'project',
     x: 68,
     y: 22,
-    summary: 'AWS Certified Cloud Practitioner credential covering foundational cloud concepts, shared responsibility, and billing.',
+    summary: 'Foundational AWS credential covering core cloud services, shared responsibility, security, and billing.',
     evidenceRef: 'cert-aws',
-    usage: 'Earned AWS Certified Cloud Practitioner credential.',
+    usage: 'Verified foundational cloud credential.',
     year: 'Credential',
   },
-
-  // --- Active Learning (Strictly Isolated) ---
+  {
+    id: 'node-laravel-mysql',
+    label: 'Laravel & MySQL (Internship)',
+    category: 'Technical Foundations',
+    stratum: 'application',
+    status: 'project',
+    kind: 'project',
+    x: 50,
+    y: 24,
+    summary: 'IT internship contributing to the DKICT declaration web system with Laravel, MySQL, docs, and ERDs.',
+    evidenceRef: 'exp-agc',
+    usage: 'Built features and database schemas under supervision during IT internship at Attorney General’s Chambers.',
+    year: 'Sep 2021 to Feb 2022',
+  },
+  {
+    id: 'node-uitm-cs',
+    label: 'CS & Math Diploma (UiTM)',
+    category: 'Technical Foundations',
+    stratum: 'kernel',
+    status: 'project',
+    kind: 'project',
+    x: 30,
+    y: 24,
+    summary: 'Diploma in Computer Science and Mathematics covering databases, programming, and structured logic.',
+    evidenceRef: 'exp-uitm',
+    usage: 'Academic grounding from Universiti Teknologi MARA (UiTM), 2019 to 2022.',
+    year: '2019 to 2022',
+  },
   {
     id: 'node-uipath-rpa',
     label: 'UiPath & RPA',
-    category: 'Active Learning',
+    category: 'Technical Foundations',
     stratum: 'cloud',
     status: 'learning',
     kind: 'technology',
     x: 42,
     y: 78,
-    summary: 'Currently learning UiPath and exploring Robotic Process Automation (RPA) for workflow automation concepts.',
-    usage: 'Self-paced study exploring how repetitive processes can be automated safely.',
+    summary: 'Currently learning UiPath and Robotic Process Automation (RPA) concepts for workflow automation.',
+    usage: 'Current self-directed study kept separate from work experience.',
     year: 'Currently learning',
   },
 ];
@@ -706,18 +754,18 @@ export const EDGES: UniverseEdge[] = [
   },
   {
     from: 'node-xilnex-pos',
-    to: 'node-triage-escalation',
-    reason: 'POS sync or payment alerts move from initial checks to vendor escalation.',
+    to: 'node-vendor-escalation',
+    reason: 'Recurring POS triage connects initial checks with vendor escalation.',
   },
   {
     from: 'node-gws-migration',
     to: 'node-lark-admin',
-    reason: 'Migration handover leads into daily Lark admin, approvals, and onboarding.',
+    reason: 'Internal migration leadership flows into ongoing Lark administration.',
   },
   {
     from: 'node-lark-admin',
-    to: 'node-teamviewer-helpdesk',
-    reason: 'Lark Helpdesk connects internal users with remote troubleshooting.',
+    to: 'node-remote-helpdesk',
+    reason: 'Lark Helpdesk connects internal staff requests with remote support.',
   },
   {
     from: 'node-excel-netsuite',
@@ -725,13 +773,13 @@ export const EDGES: UniverseEdge[] = [
     reason: 'Business workflow support links validated Excel prep with internal ops.',
   },
   {
-    from: 'node-m365-uat',
-    to: 'node-triage-escalation',
+    from: 'node-m365-provisioning',
+    to: 'node-uat-support',
     reason: 'User provisioning and UAT support sit alongside application operations.',
   },
   {
     from: 'node-printers-onsite',
-    to: 'node-teamviewer-helpdesk',
+    to: 'node-remote-helpdesk',
     reason: 'Field hardware support pairs with ticket handling in Freshdesk.',
   },
   {
@@ -742,6 +790,6 @@ export const EDGES: UniverseEdge[] = [
   {
     from: 'node-aws-ccp',
     to: 'node-uipath-rpa',
-    reason: 'Cloud concepts complement current exploration of workflow automation.',
+    reason: 'Cloud foundations pair with current UiPath & RPA automation learning.',
   },
 ];

@@ -89,10 +89,10 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
               id="constellation-heading"
               className="font-display text-2xl sm:text-4xl font-bold text-white tracking-tight"
             >
-              Work-Backed Skills &amp; Active Learning
+              Core Skills Across Four Tracks
             </h2>
-            <p className="mt-2 text-sm text-[#D1D5DB] leading-relaxed">
-              Practical skills used at work appear first, followed by internship/academic grounding and active learning in UiPath RPA. Switch to the interactive atlas view anytime.
+            <p className="mt-2 text-sm text-[#E5E7EB] leading-relaxed">
+              Grouped across Application Support, Business Systems &amp; SaaS, IT Operations &amp; Helpdesk, and Technical Foundations. Work experience stays separate from credentials, internship work, and UiPath RPA learning.
             </p>
           </div>
 

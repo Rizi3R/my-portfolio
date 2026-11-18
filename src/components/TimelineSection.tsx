@@ -28,7 +28,7 @@ export const TimelineSection: React.FC = () => {
   const [filter, setFilter] = useState<TimelineFilter>('all');
   const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({
     'exp-emart24': true,
-    'exp-palaterium': true,
+    'exp-hwc': true,
   });
 
   const milestones: TimelineMilestone[] = [

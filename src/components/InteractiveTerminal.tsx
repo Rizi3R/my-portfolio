@@ -31,9 +31,8 @@ const SUPPORTED_COMMANDS = [
   'experience',
   'projects',
   'education',
-  'contact',
   'learning',
-  'visitors',
+  'contact',
   'beep',
   'resume',
   'clear',
@@ -48,7 +47,7 @@ const INITIAL_LINES: TerminalLine[] = [
   {
     id: 2,
     type: 'output',
-    text: 'Type "help" or click a command below to query roles, skills, case studies, or contact info.',
+    text: 'Type "help" or click a command below to inspect roles, skills, case studies, or contact info.',
   },
 ];
 
@@ -88,7 +87,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     ]);
   };
 
-  const executeCommand = async (rawCmd: string) => {
+  const executeCommand = (rawCmd: string) => {
     const trimmed = rawCmd.trim();
     if (!trimmed) return;
 
@@ -107,15 +106,15 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     if (cmd === 'help') {
       appendLines([
         { type: 'accent', text: 'Available commands:' },
-        { type: 'output', text: '  about        - Background and current role' },
-        { type: 'output', text: '  skills       - Work-backed skills and active learning' },
+        { type: 'output', text: '  about        - Background and focus areas' },
+        { type: 'output', text: '  skills       - Core capabilities grouped across 4 tracks' },
         { type: 'output', text: '  experience   - Work and internship chronology' },
-        { type: 'output', text: '  projects     - Featured case studies' },
+        { type: 'output', text: '  projects     - Case studies' },
         { type: 'output', text: '  education    - UiTM diploma and credentials' },
-        { type: 'output', text: '  learning     - Currently exploring (UiPath & RPA)' },
+        { type: 'output', text: '  learning     - Current learning (UiPath & RPA)' },
         { type: 'output', text: '  contact      - Email, LinkedIn, and location' },
-        { type: 'output', text: '  visitors     - Query server visitor count' },
-        { type: 'output', text: '  beep         - Simulated scanner beep walkthrough' },
+        { type: 'output', text: '  beep         - Educational checkout beep sample' },
+        { type: 'output', text: '  resume       - Open résumé preview' },
         { type: 'output', text: '  clear        - Clear terminal output' },
       ]);
       return;
@@ -143,16 +142,16 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     }
 
     if (cmd === 'skills') {
-      const prof = NODES.filter((n) => n.status === 'professional')
-        .slice(0, 6)
-        .map((n) => n.label);
-      const prac = NODES.filter((n) => n.status === 'project').map((n) => n.label);
-      const learn = NODES.filter((n) => n.status === 'learning').map((n) => n.label);
+      const appSupport = NODES.filter((n) => n.category === 'Application Support').map((n) => n.label);
+      const bizSystems = NODES.filter((n) => n.category === 'Business Systems & SaaS').map((n) => n.label);
+      const itOps = NODES.filter((n) => n.category === 'IT Operations & Helpdesk').map((n) => n.label);
+      const foundations = NODES.filter((n) => n.category === 'Technical Foundations').map((n) => n.label);
       appendLines([
-        { type: 'accent', text: 'Skills Grouped by Background:' },
-        { type: 'output', text: `  ◆ Work-Backed:               ${prof.join(', ')}` },
-        { type: 'output', text: `  ■ Internship / Education:    ${prac.join(', ')}` },
-        { type: 'output', text: `  ○ Currently Learning:        ${learn.join(', ')}` },
+        { type: 'accent', text: 'Core Skills Across 4 Tracks:' },
+        { type: 'output', text: `  ◆ Application Support:      ${appSupport.join(', ')}` },
+        { type: 'output', text: `  ◆ Business Systems & SaaS:  ${bizSystems.join(', ')}` },
+        { type: 'output', text: `  ◆ IT Operations & Helpdesk: ${itOps.join(', ')}` },
+        { type: 'output', text: `  ■ Technical Foundations:    ${foundations.join(', ')}` },
       ]);
       return;
     }
@@ -182,7 +181,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'learning') {
       appendLines([
-        { type: 'accent', text: 'Active Learning:' },
+        { type: 'accent', text: 'Current Learning:' },
         ...LEARNING_ENTRIES.map((l) => ({
           type: 'output' as const,
           text: `  ○ ${l.topic}: ${l.note}`,
@@ -201,32 +200,13 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
       return;
     }
 
-    if (cmd === 'visitors') {
-      try {
-        const res = await fetch('/api/visitors');
-        const data = (await res.json()) as { configured: boolean; count: number | null };
-        if (data.configured && data.count !== null) {
-          appendLines([
-            { type: 'accent', text: `People who have visited: ${data.count.toLocaleString()}` },
-          ]);
-        } else {
-          appendLines([
-            { type: 'output', text: 'Visitor persistence is currently awaiting configuration.' },
-          ]);
-        }
-      } catch {
-        appendLines([{ type: 'error', text: 'Unable to reach /api/visitors right now.' }]);
-      }
-      return;
-    }
-
     if (cmd === 'beep') {
       audioFx.playSuccess();
       appendLines([
-        { type: 'accent', text: '[ILLUSTRATIVE SIMULATION] Sample Barcode Scan' },
+        { type: 'accent', text: '[EDUCATIONAL WALKTHROUGH] Sample Barcode Scan' },
         {
           type: 'output',
-          text: 'Scanner input -> POS app SKU lookup -> sample basket total -> simulated receipt print.',
+          text: 'Scanner input -> App item lookup -> sample basket total -> simulated receipt print.',
         },
       ]);
       return;
@@ -235,14 +215,14 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     if (cmd === 'resume') {
       if (onOpenResume) {
         onOpenResume();
-        appendLines([{ type: 'accent', text: 'Opening resume viewer...' }]);
+        appendLines([{ type: 'accent', text: 'Opening resume preview...' }]);
       } else {
         appendLines([{ type: 'output', text: 'Use the View Resume button in the navigation bar.' }]);
       }
       return;
     }
 
-    if (cmd === 'skills' && onJumpToSection) {
+    if (cmd === 'goto skills' && onJumpToSection) {
       onJumpToSection('constellation');
       onClose?.();
       return;
@@ -287,10 +267,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     <div className="bg-[#141416] border border-[#323238] rounded-2xl overflow-hidden shadow-2xl font-mono text-xs sm:text-sm">
       <div className="px-4 py-3 bg-[#1B1B1D] border-b border-[#323238] flex items-center justify-between gap-4">
         <div className="flex items-center gap-2.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#DC343B]" aria-hidden="true" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#B0E0E6]" aria-hidden="true" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#4B5563]" aria-hidden="true" />
-          <TerminalIcon className="w-3.5 h-3.5 text-[#B0E0E6] ml-1" aria-hidden="true" />
+          <TerminalIcon className="w-3.5 h-3.5 text-[#B0E0E6]" aria-hidden="true" />
           <span className="text-xs font-semibold text-white">
             aries-portfolio : interactive shell
           </span>
@@ -300,7 +277,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           <button
             type="button"
             onClick={() => setLines(INITIAL_LINES)}
-            className="p-1.5 rounded text-[#9CA3AF] hover:text-[#B0E0E6] transition-colors cursor-pointer"
+            className="p-1.5 rounded text-[#D1D5DB] hover:text-[#B0E0E6] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B0E0E6]"
             aria-label="Reset terminal output"
             title="Reset terminal"
           >
@@ -310,7 +287,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded text-[#9CA3AF] hover:text-white border border-[#323238] cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
+              className="p-1.5 rounded text-[#D1D5DB] hover:text-white border border-[#323238] cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B0E0E6]"
               aria-label="Close terminal modal"
             >
               <X className="w-4 h-4" />
@@ -336,7 +313,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
                 ? 'text-white font-semibold'
                 : line.type === 'error'
                 ? 'text-[#F87171]'
-                : 'text-[#D1D5DB]'
+                : 'text-[#E5E7EB]'
             }
           >
             {line.text}
@@ -345,14 +322,14 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
       </div>
 
       <div className="px-4 py-2.5 bg-[#1B1B1D] border-t border-[#323238] flex items-center gap-1.5 overflow-x-auto text-[11px]">
-        <span className="text-[#9CA3AF] mr-1 shrink-0">Quick run:</span>
+        <span className="text-[#D1D5DB] mr-1 shrink-0">Quick run:</span>
         {['help', 'about', 'skills', 'experience', 'projects', 'education', 'contact', 'beep', 'clear'].map(
           (cmd) => (
             <button
               key={cmd}
               type="button"
               onClick={() => executeCommand(cmd)}
-              className="px-2.5 py-1 rounded bg-[#222226] hover:bg-[#2B2B30] text-[#B0E0E6] border border-[#323238] hover:border-[#B0E0E6]/50 transition-colors shrink-0 cursor-pointer"
+              className="px-2.5 py-1 rounded bg-[#222226] hover:bg-[#2B2B30] text-[#B0E0E6] border border-[#323238] hover:border-[#B0E0E6]/60 transition-colors shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B0E0E6]"
             >
               {cmd}
             </button>
@@ -383,11 +360,11 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           placeholder="type 'help' and press Enter..."
           autoComplete="off"
           spellCheck={false}
-          className="flex-1 bg-transparent text-white placeholder-[#6B7280] text-xs focus:outline-none"
+          className="flex-1 bg-transparent text-white placeholder-[#9CA3AF] text-xs focus:outline-none"
         />
         <button
           type="submit"
-          className="px-3 py-1 rounded bg-[#DC343B] hover:bg-[#c52b31] text-white text-xs font-semibold cursor-pointer shrink-0"
+          className="px-3 py-1 rounded bg-[#DC343B] hover:bg-[#c52b31] text-white text-xs font-semibold cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B0E0E6]"
         >
           Run
         </button>
