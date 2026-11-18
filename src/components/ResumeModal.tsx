@@ -23,14 +23,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
     };
     if (isOpen) {
       window.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden';
       setTimeout(() => closeButtonRef.current?.focus(), 40);
-    } else {
-      document.body.style.overflow = 'unset';
     }
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'unset';
     };
   }, [isOpen, onClose]);
 

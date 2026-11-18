@@ -63,7 +63,9 @@ export default function App() {
   const labCloseRef = useRef<HTMLButtonElement | null>(null);
 
   const captureFocusAndOpen = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
-    if (document.activeElement instanceof HTMLElement) {
+    const hasOpenOverlay =
+      resumeModalOpen || commandPaletteOpen || terminalModalOpen || labModalOpen;
+    if (!hasOpenOverlay && document.activeElement instanceof HTMLElement) {
       lastFocusedRef.current = document.activeElement;
     }
     setter(true);
@@ -72,7 +74,9 @@ export default function App() {
   const closeOverlayAndRestoreFocus = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
     setter(false);
     setTimeout(() => {
-      lastFocusedRef.current?.focus();
+      if (lastFocusedRef.current && lastFocusedRef.current.isConnected) {
+        lastFocusedRef.current.focus();
+      }
     }, 20);
   };
 
@@ -185,13 +189,14 @@ export default function App() {
           return !prev;
         });
       } else if (e.key === 'Escape') {
+        if (commandPaletteOpen) closeOverlayAndRestoreFocus(setCommandPaletteOpen);
         if (terminalModalOpen) closeOverlayAndRestoreFocus(setTerminalModalOpen);
         if (labModalOpen) closeOverlayAndRestoreFocus(setLabModalOpen);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [terminalModalOpen, labModalOpen]);
+  }, [commandPaletteOpen, terminalModalOpen, labModalOpen]);
 
   useEffect(() => {
     if (labModalOpen) {
@@ -200,7 +205,7 @@ export default function App() {
   }, [labModalOpen]);
 
   useEffect(() => {
-    if (terminalModalOpen || labModalOpen) {
+    if (resumeModalOpen || commandPaletteOpen || terminalModalOpen || labModalOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -208,7 +213,7 @@ export default function App() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [terminalModalOpen, labModalOpen]);
+  }, [resumeModalOpen, commandPaletteOpen, terminalModalOpen, labModalOpen]);
 
   const handleToggleAudio = () => {
     const isNowUnmuted = audioFx.toggleMute();
@@ -450,8 +455,14 @@ export default function App() {
         onNavigateSection={handleNavigateSection}
         onSelectNode={handleSelectNodeInAtlas}
         onJumpToStratum={handleJumpToStratum}
-        onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
-        onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
+        onOpenResume={() => {
+          setCommandPaletteOpen(false);
+          captureFocusAndOpen(setResumeModalOpen);
+        }}
+        onOpenTerminal={() => {
+          setCommandPaletteOpen(false);
+          captureFocusAndOpen(setTerminalModalOpen);
+        }}
         isAudioMuted={isAudioMuted}
         onToggleAudio={handleToggleAudio}
       />

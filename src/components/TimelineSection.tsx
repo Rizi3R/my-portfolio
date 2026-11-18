@@ -211,7 +211,7 @@ export const TimelineSection: React.FC = () => {
                     <div className="hidden lg:block lg:col-span-4" />
                     <div className="lg:col-span-8 space-y-4">
                       {item.bullets && item.bullets.length > 0 && (
-                        <ul className="space-y-2 text-sm text-[#E6E1D6] list-disc list-inside leading-relaxed">
+                        <ul className="space-y-2 text-sm text-[#E6E1D6] list-disc pl-5 leading-relaxed">
                           {item.bullets.map((bullet, idx) => (
                             <li key={idx}>{bullet}</li>
                           ))}

@@ -137,9 +137,9 @@ export const ReceiptSection: React.FC = () => {
               <MapPin className="w-3 h-3 text-[#474457]" aria-hidden="true" />
               {PROFILE.location}
             </span>
-            <span className="flex items-center gap-1">
-              <Mail className="w-3 h-3 text-[#474457]" aria-hidden="true" />
-              {PROFILE.email}
+            <span className="flex items-center gap-1 break-all sm:break-normal">
+              <Mail className="w-3 h-3 text-[#474457] shrink-0" aria-hidden="true" />
+              <span>{PROFILE.email}</span>
             </span>
           </div>
           <div className="mt-3 text-[11px] text-[#474457] uppercase tracking-widest">
@@ -175,7 +175,7 @@ export const ReceiptSection: React.FC = () => {
                   {exp.organization} · {exp.location}
                 </div>
 
-                <ul className="space-y-1.5 list-disc list-inside text-[#191723] pl-1">
+                <ul className="space-y-1.5 list-disc pl-5 text-[#191723]">
                   {exp.highlights.map((bullet, idx) => (
                     <li key={idx} className="leading-relaxed">
                       <span className="font-sans font-normal text-[#191723] text-xs">{bullet}</span>

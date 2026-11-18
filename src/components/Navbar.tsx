@@ -75,7 +75,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={(e) => {
             e.preventDefault();
             onChangeView('portfolio');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
             setMobileMenuOpen(false);
           }}
           className="font-display text-lg font-bold tracking-tight text-[#F6F2E9] hover:text-[#A8C5FF] transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded px-1"

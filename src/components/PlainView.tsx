@@ -72,7 +72,7 @@ export const PlainView: React.FC = () => {
       {/* Table of Contents */}
       <nav
         aria-label="Printable Summary Table of Contents"
-        className="mb-12 p-4 bg-stone-50 border border-stone-200 text-xs font-mono"
+        className="mb-12 p-4 bg-stone-50 border border-stone-200 text-xs font-mono print:hidden"
       >
         <div className="font-bold uppercase tracking-wider mb-2 text-stone-900">
           Summary Sections
@@ -131,7 +131,7 @@ export const PlainView: React.FC = () => {
               <div className="text-sm font-semibold text-stone-700 mb-3">
                 {exp.organization} · {exp.location}
               </div>
-              <ul className="list-disc list-inside space-y-1.5 text-sm text-stone-800 leading-relaxed mb-4">
+              <ul className="list-disc pl-5 space-y-1.5 text-sm text-stone-800 leading-relaxed mb-4">
                 {exp.highlights.map((bullet, idx) => (
                   <li key={idx}>{bullet}</li>
                 ))}
@@ -172,7 +172,7 @@ export const PlainView: React.FC = () => {
                   <strong className="font-mono uppercase text-stone-900 block mb-1">
                     What I Did:{' '}
                   </strong>
-                  <ul className="list-disc list-inside space-y-1 pl-2">
+                  <ul className="list-disc pl-5 space-y-1">
                     {cs.whatIDid.map((act, i) => (
                       <li key={i}>{act}</li>
                     ))}

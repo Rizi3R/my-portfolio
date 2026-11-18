@@ -368,7 +368,7 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
                               <div className="font-mono font-semibold text-[#A8C5FF] uppercase text-xs mb-1">
                                 What I Did
                               </div>
-                              <ul className="list-disc list-inside space-y-1">
+                              <ul className="list-disc pl-5 space-y-1">
                                 {cs.whatIDid.map((act, i) => (
                                   <li key={i}>{act}</li>
                                 ))}

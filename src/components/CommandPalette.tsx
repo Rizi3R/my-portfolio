@@ -69,13 +69,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       setQuery('');
       setSelectedIndex(0);
       setTimeout(() => inputRef.current?.focus(), 40);
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [isOpen]);
 
   const copyEmail = async () => {
@@ -115,7 +109,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         icon: <Home className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onSelectView('portfolio');
-          setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 60);
+          const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          setTimeout(
+            () => window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' }),
+            60
+          );
           onClose();
         },
       },
@@ -193,7 +191,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         shortcut: 'R',
         icon: <FileText className="w-4 h-4 text-[#F2A77D]" />,
         perform: () => {
-          onClose();
           onOpenResume();
         },
       },
@@ -205,7 +202,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         shortcut: 'T',
         icon: <Terminal className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
-          onClose();
           onOpenTerminal();
         },
       },
@@ -250,8 +246,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         icon: <Receipt className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onClose();
+          const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           setTimeout(() => {
-            document.getElementById('receipt')?.scrollIntoView({ behavior: 'smooth' });
+            document
+              .getElementById('receipt')
+              ?.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' });
           }, 60);
         },
       },

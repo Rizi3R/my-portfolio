@@ -3,6 +3,7 @@ import express from 'express';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { createServer as createHttpServer } from 'node:http';
 import { createServer as createViteServer } from 'vite';
 
 dotenv.config({ path: '.env.local' });
@@ -183,6 +184,7 @@ async function writeLocalStore(store: LocalStore): Promise<void> {
 
 async function startServer() {
   const app = express();
+  const httpServer = createHttpServer(app);
   app.disable('x-powered-by');
   app.set('trust proxy', 1);
 
@@ -399,7 +401,13 @@ async function startServer() {
     });
 
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        allowedHosts: true,
+        ws: {
+          server: httpServer,
+        },
+      },
       appType: 'spa',
     });
     app.use(vite.middlewares);
@@ -415,7 +423,7 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+  httpServer.listen(PORT, '0.0.0.0', () => {
     console.log(`Server listening on http://0.0.0.0:${PORT}`);
   });
 }
