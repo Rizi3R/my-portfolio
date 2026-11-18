@@ -313,7 +313,7 @@ export const TheLab: React.FC = () => {
 
   // Auto-play packet animation timer
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout> | undefined;
     if (isPlaying) {
       const intervalMs = (playSpeed === 1 ? 1400 : 700);
       timer = setTimeout(() => {
@@ -326,7 +326,11 @@ export const TheLab: React.FC = () => {
         }
       }, intervalMs);
     }
-    return () => clearTimeout(timer);
+    return () => {
+      if (timer !== undefined) {
+        clearTimeout(timer);
+      }
+    };
   }, [isPlaying, currentHopIndex, activePreset.hops.length, playSpeed]);
 
   const handleSelectPreset = (idx: number) => {

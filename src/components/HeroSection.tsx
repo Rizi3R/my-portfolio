@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { FileText, FolderOpen, Briefcase, Award } from 'lucide-react';
 import { PROFILE } from '../data/universeContent';
 
@@ -11,102 +11,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenResume,
   onOpenCaseStudy,
 }) => {
-  const heroRef = useRef<HTMLElement | null>(null);
-  const imgRef = useRef<HTMLImageElement | null>(null);
-  const [sculptureOffsetPx, setSculptureOffsetPx] = useState(0);
-  const [imageMissing, setImageMissing] = useState(false);
-
-  // Detect already-failed image loads if the browser resolved before hydration attached onError
-  useEffect(() => {
-    const img = imgRef.current;
-    if (img && img.complete && img.naturalWidth === 0) {
-      setImageMissing(true);
-    }
-  }, []);
-
-  // Restrained parallax strictly on the sculpture wrapper:
-  // - only while hero is visible and artwork is rendered
-  // - static (0px) on < 1024px mobile/tablet viewports
-  // - static (0px) when prefers-reduced-motion: reduce is set
-  useEffect(() => {
-    const heroEl = heroRef.current;
-    if (!heroEl || imageMissing || typeof window === 'undefined') {
-      setSculptureOffsetPx(0);
-      return;
-    }
-
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const desktopQuery = window.matchMedia('(min-width: 1024px)');
-
-    let isVisible = true;
-    let rafId: number | null = null;
-
-    const updateParallax = () => {
-      rafId = null;
-      if (motionQuery.matches || !desktopQuery.matches || !isVisible) {
-        setSculptureOffsetPx(0);
-        return;
-      }
-
-      const rect = heroEl.getBoundingClientRect();
-      // Progress from 0 when top sits near navbar down to 1 as hero scrolls out
-      const scrolledPast = Math.max(0, 64 - rect.top);
-      const maxTravel = Math.max(240, rect.height * 0.7);
-      const clamped = Math.min(24, (scrolledPast / maxTravel) * 24);
-      setSculptureOffsetPx(Number(clamped.toFixed(2)));
-    };
-
-    const handleScroll = () => {
-      if (rafId === null) {
-        rafId = window.requestAnimationFrame(updateParallax);
-      }
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        isVisible = Boolean(entries[0]?.isIntersecting);
-        if (!isVisible) {
-          setSculptureOffsetPx(0);
-        } else {
-          handleScroll();
-        }
-      },
-      { threshold: 0 }
-    );
-
-    observer.observe(heroEl);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    motionQuery.addEventListener('change', updateParallax);
-    desktopQuery.addEventListener('change', updateParallax);
-
-    updateParallax();
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
-      motionQuery.removeEventListener('change', updateParallax);
-      desktopQuery.removeEventListener('change', updateParallax);
-      if (rafId !== null) window.cancelAnimationFrame(rafId);
-    };
-  }, [imageMissing]);
-
   return (
     <section
-      ref={heroRef}
       id="top"
       aria-labelledby="hero-heading"
       className="relative bg-[#0A0913] text-[#F6F2E9] pt-8 sm:pt-12 lg:pt-14 pb-10 sm:pb-12 lg:pb-14 border-b border-[#242138] overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          {/* Left Column: Always first on mobile & desktop; expands cleanly into a full text-first layout when artwork is unavailable */}
-          <div
-            className={
-              imageMissing
-                ? 'order-1 lg:col-span-10 xl:col-span-9 space-y-6 py-2 sm:py-4'
-                : 'order-1 lg:col-span-7 space-y-6'
-            }
-          >
+          {/* Left Column: Intro, Controlled-Measure Headline, Primary Actions */}
+          <div className="lg:col-span-7 space-y-6">
             <div className="space-y-4">
               <p className="text-sm sm:text-base font-medium text-[#F6F2E9] tracking-wide">
                 {PROFILE.displayName}
@@ -114,9 +28,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
               <h1
                 id="hero-heading"
-                className={`font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#F6F2E9] tracking-tight leading-[1.08] ${
-                  imageMissing ? 'max-w-[22ch]' : 'max-w-[16ch]'
-                }`}
+                className="font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#F6F2E9] tracking-tight leading-[1.08] max-w-[16ch]"
               >
                 {PROFILE.title}
               </h1>
@@ -124,11 +36,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {/* One restrained Soft Copper accent rule */}
               <div className="h-px w-16 bg-[#F2A77D]" aria-hidden="true" />
 
-              <p
-                className={`text-base sm:text-lg text-[#E6E1D6] leading-relaxed ${
-                  imageMissing ? 'max-w-2xl' : 'max-w-xl'
-                }`}
-              >
+              <p className="text-base sm:text-lg text-[#E6E1D6] leading-relaxed max-w-xl">
                 {PROFILE.intro}
               </p>
             </div>
@@ -172,49 +80,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
           </div>
 
-          {/* Right Column: Smoked-Glass & Titanium Ribbon Artwork Stage (unmounts completely if asset fails to load) */}
-          {!imageMissing && (
-            <div className="order-2 lg:col-span-5">
-              <div
-                className="relative w-full max-w-md mx-auto lg:max-w-none aspect-[4/3] sm:aspect-[16/10] lg:aspect-[5/6] lg:max-h-[540px] bg-[#0A0913] overflow-hidden select-none"
-                style={{
-                  transform:
-                    sculptureOffsetPx > 0
-                      ? `translate3d(0, -${sculptureOffsetPx}px, 0)`
-                      : undefined,
-                }}
-              >
-                <img
-                  ref={imgRef}
-                  src="/assets/hero-sculpture.png"
-                  alt="Abstract smoked-glass and brushed titanium ribbon sculpture against a deep ink-violet backdrop"
-                  width={1200}
-                  height={1440}
-                  decoding="async"
-                  fetchPriority="high"
-                  onLoad={(e) => {
-                    if (e.currentTarget.naturalWidth === 0) {
-                      setImageMissing(true);
-                    }
-                  }}
-                  onError={() => setImageMissing(true)}
-                  className="block w-full h-full object-cover object-[50%_26%] lg:object-[54%_48%]"
-                />
+          {/* Right Column (Desktop Only): Three Static Overlapping Angled Glass Panels */}
+          <div
+            aria-hidden="true"
+            className="hidden lg:block lg:col-span-5 select-none pointer-events-none"
+          >
+            <div className="relative w-full h-[380px] xl:h-[420px] bg-[#0A0913]">
+              {/* Subtle ambient depth glow */}
+              <div className="absolute inset-8 rounded-full bg-[#A8C5FF]/[0.06] blur-3xl" />
 
-                {/* Directional ink-violet edge blend so the artwork integrates cleanly into #0A0913 */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0"
-                  style={{
-                    background:
-                      'radial-gradient(circle at 54% 48%, transparent 52%, #0A0913 98%), linear-gradient(to right, #0A0913 0%, transparent 16%, transparent 88%, #0A0913 100%), linear-gradient(to bottom, #0A0913 0%, transparent 12%, transparent 86%, #0A0913 100%)',
-                  }}
-                />
+              {/* Panel 1 (Back layer) */}
+              <div className="absolute top-6 left-4 w-[66%] h-[70%] -rotate-6 rounded-2xl border border-[#A8C5FF]/25 bg-gradient-to-br from-[#A8C5FF]/[0.08] via-[#12101F]/70 to-[#0A0913]/90 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(168,197,255,0.2),0_24px_48px_-16px_rgba(0,0,0,0.7)]" />
+
+              {/* Panel 2 (Mid layer with top specular edge highlight) */}
+              <div className="absolute top-12 right-2 w-[68%] h-[72%] rotate-3 rounded-2xl border border-[#A8C5FF]/35 bg-gradient-to-br from-[#A8C5FF]/[0.14] via-[#151226]/65 to-[#0A0913]/85 backdrop-blur-md shadow-[inset_0_1px_0_rgba(246,242,233,0.22),0_28px_56px_-14px_rgba(0,0,0,0.78)] overflow-hidden">
+                <div className="h-px w-full bg-gradient-to-r from-[#A8C5FF]/45 via-[#F6F2E9]/20 to-transparent" />
+              </div>
+
+              {/* Panel 3 (Front layer with specular highlight & single thin Soft Copper accent) */}
+              <div className="absolute bottom-4 left-12 w-[62%] h-[48%] -rotate-2 rounded-2xl border border-[#A8C5FF]/50 bg-gradient-to-tr from-[#0A0913]/80 via-[#18152B]/60 to-[#A8C5FF]/[0.18] backdrop-blur-lg shadow-[inset_0_1px_0_rgba(246,242,233,0.28),0_24px_50px_-12px_rgba(0,0,0,0.85)] overflow-hidden">
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-[#A8C5FF]/55 to-transparent" />
+                <div className="mt-7 ml-7 h-px w-16 bg-[#F2A77D]" />
               </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </section>
   );
 };
+
