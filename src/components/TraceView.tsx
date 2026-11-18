@@ -26,6 +26,7 @@ import {
   ExternalLink,
   Receipt,
   Info,
+  Printer,
 } from 'lucide-react';
 
 interface TraceViewProps {
@@ -36,6 +37,7 @@ interface TraceViewProps {
 export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpenLab }) => {
   const [activeStratum, setActiveStratum] = useState<StratumType>('hardware');
   const [expandedCaseStudy, setExpandedCaseStudy] = useState<string | null>(null);
+  const [showSampleReceipt, setShowSampleReceipt] = useState(false);
 
   const stratumIcons: Record<StratumType, React.ReactNode> = {
     hardware: <Scan className="w-5 h-5 text-[#A8C5FF]" />,
@@ -433,21 +435,96 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
 
       {/* Bridge to Summary Receipt */}
       <div className="mt-20 pt-10 border-t border-[#242138] text-center">
-        <div className="inline-block p-6 rounded-2xl bg-[#12101F] border border-[#242138] max-w-xl mx-auto">
+        <div className="inline-block p-6 rounded-2xl bg-[#12101F] border border-[#242138] max-w-xl mx-auto w-full">
           <div className="text-xs font-mono text-[#A8C5FF] uppercase tracking-wider mb-2">
             Walkthrough Complete
           </div>
-          <div className="text-[#F6F2E9] font-sans text-sm mb-4">
+          <div className="text-[#F6F2E9] font-sans text-sm mb-5">
             Scroll down or jump directly to the printable experience summary receipt.
           </div>
-          <a
-            href="#receipt"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
-          >
-            <Receipt className="w-4 h-4" aria-hidden="true" />
-            <span>View Summary Receipt</span>
-            <ArrowRight className="w-4 h-4" aria-hidden="true" />
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="#receipt"
+              className="inline-flex items-center justify-center gap-2 min-h-[44px] px-5 py-2.5 rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap shrink-0"
+            >
+              <Receipt className="w-4 h-4" aria-hidden="true" />
+              <span>View Summary Receipt</span>
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </a>
+
+            <button
+              type="button"
+              onClick={() => setShowSampleReceipt((prev) => !prev)}
+              aria-expanded={showSampleReceipt}
+              aria-controls="sample-test-receipt"
+              className="print:hidden inline-flex items-center justify-center gap-2 min-h-[44px] px-4 py-2.5 rounded-lg bg-[#0A0913] hover:bg-[#19162B] text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/40 font-mono text-xs uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+            >
+              <Printer className="w-3.5 h-3.5 text-[#F2A77D]" aria-hidden="true" />
+              <span>{showSampleReceipt ? 'Hide Test Receipt' : 'Print Test Receipt'}</span>
+            </button>
+          </div>
+
+          {showSampleReceipt && (
+            <div
+              id="sample-test-receipt"
+              className="print:hidden mt-6 mx-auto max-w-xs bg-[#F6F2E9] text-[#191723] border border-[#DDD6C7] rounded-lg px-4 py-5 font-mono text-xs text-left shadow-xl"
+            >
+              <div className="text-center pb-3 border-b border-dashed border-[#191723]/35">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-[#474457]">
+                  Sample receipt
+                </div>
+                <div className="font-bold text-sm tracking-tight mt-0.5">
+                  COUNTER POS · TEST #042
+                </div>
+                <div className="text-[11px] text-[#474457]">
+                  Illustrative Walkthrough Items
+                </div>
+              </div>
+
+              <div className="py-3 space-y-1.5 border-b border-dashed border-[#191723]/35 text-[11px]">
+                <div className="flex justify-between gap-2">
+                  <span>1x ICED AMERICANO</span>
+                  <span className="font-semibold">RM 10.90</span>
+                </div>
+                <div className="flex justify-between gap-2">
+                  <span>1x BUTTER CROISSANT</span>
+                  <span className="font-semibold">RM 8.50</span>
+                </div>
+                <div className="flex justify-between gap-2">
+                  <span>1x OAT MILK ADD-ON</span>
+                  <span className="font-semibold">RM 2.50</span>
+                </div>
+                <div className="flex justify-between gap-2 text-[#474457]">
+                  <span>SAMPLE PROMO (-10%)</span>
+                  <span>-RM 2.19</span>
+                </div>
+              </div>
+
+              <div className="py-3 space-y-1 border-b border-dashed border-[#191723]/35 text-[11px]">
+                <div className="flex justify-between gap-2">
+                  <span>SUBTOTAL</span>
+                  <span>RM 19.71</span>
+                </div>
+                <div className="flex justify-between gap-2 font-bold text-xs pt-0.5">
+                  <span>TOTAL</span>
+                  <span>RM 19.71</span>
+                </div>
+                <div className="text-[10px] text-[#474457] pt-1">
+                  TENDER: E-WALLET TEST · AUTH #0042
+                </div>
+              </div>
+
+              <div className="pt-3 text-center">
+                <div
+                  className="thermal-barcode-mini h-7 w-full max-w-[180px] mx-auto mb-2 opacity-85"
+                  aria-hidden="true"
+                />
+                <div className="text-[10px] text-[#474457] leading-snug">
+                  Sample receipt · Fictional walkthrough output only
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

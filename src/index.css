@@ -66,6 +66,144 @@
   }
 }
 
+/* Interactive Desktop Hero Glass Sculpture */
+.hero-sculpture-stage {
+  --hero-nx: 0;
+  --hero-ny: 0;
+  --hero-active: 0;
+  perspective: 1100px;
+}
+
+.hero-copper-beam {
+  background: linear-gradient(
+    90deg,
+    rgba(242, 167, 125, 0) 0%,
+    rgba(242, 167, 125, 0.04) 24%,
+    rgba(242, 167, 125, 0.16) 43%,
+    rgba(242, 167, 125, 0.44) 50%,
+    rgba(242, 167, 125, 0.16) 57%,
+    rgba(242, 167, 125, 0.04) 76%,
+    rgba(242, 167, 125, 0) 100%
+  );
+  transform: translate3d(-50%, -50%, 0) rotate(-28deg);
+}
+
+.hero-copper-beam--front {
+  opacity: calc(0.24 + var(--hero-active, 0) * 0.58);
+}
+
+.hero-copper-beam--mid {
+  opacity: calc(0.14 + var(--hero-active, 0) * 0.34);
+}
+
+.hero-copper-beam--back {
+  opacity: calc(0.08 + var(--hero-active, 0) * 0.18);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-sculpture-rig {
+    transform-style: preserve-3d;
+    transform: rotateX(calc(var(--hero-ny, 0) * -4deg)) rotateY(calc(var(--hero-nx, 0) * 6deg));
+    transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  .hero-sculpture-stage[data-active="true"] .hero-sculpture-rig {
+    transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-glass-layer {
+    transform-style: preserve-3d;
+    transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  .hero-sculpture-stage[data-active="true"] .hero-glass-layer {
+    transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-glass-layer--back {
+    transform: translate3d(
+      calc(var(--hero-nx, 0) * 3px),
+      calc(var(--hero-ny, 0) * 2px),
+      -18px
+    );
+  }
+
+  .hero-glass-layer--mid {
+    transform: translate3d(
+      calc(var(--hero-nx, 0) * 8px),
+      calc(var(--hero-ny, 0) * 5px),
+      0px
+    );
+  }
+
+  .hero-glass-layer--front {
+    transform: translate3d(
+      calc(var(--hero-nx, 0) * 14px),
+      calc(var(--hero-ny, 0) * 9px),
+      20px
+    );
+  }
+
+  .hero-copper-beam {
+    transform: translate3d(
+        calc(-50% + var(--hero-nx, 0) * 110px),
+        calc(-50% + var(--hero-ny, 0) * 32px),
+        0
+      )
+      rotate(-28deg);
+    transition:
+      transform 460ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 320ms ease-out;
+    will-change: transform, opacity;
+  }
+
+  .hero-sculpture-stage[data-active="true"] .hero-copper-beam {
+    transition:
+      transform 130ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 200ms ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-sculpture-rig,
+  .hero-glass-layer,
+  .hero-copper-beam {
+    transition: none !important;
+  }
+
+  .hero-sculpture-rig,
+  .hero-glass-layer--back,
+  .hero-glass-layer--mid,
+  .hero-glass-layer--front {
+    transform: none !important;
+  }
+
+  .hero-copper-beam {
+    transform: translate3d(-50%, -50%, 0) rotate(-28deg) !important;
+  }
+}
+
+/* Sample Receipt (Trace Walkthrough Easter Egg) */
+.thermal-barcode-mini {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #191723 0px,
+    #191723 2px,
+    transparent 2px,
+    transparent 4px,
+    #191723 4px,
+    #191723 5px,
+    transparent 5px,
+    transparent 8px,
+    #191723 8px,
+    #191723 10px,
+    transparent 10px,
+    transparent 12px
+  );
+}
+
 /* Print styling for resume viewer, Printable Summary, and thermal receipt */
 @media print {
   @page {
