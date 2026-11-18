@@ -4,7 +4,6 @@ import {
   EDGES,
   CONSTELLATION_CATEGORIES,
   EVIDENCE_META,
-  UniverseNode,
   EvidenceStatus,
   ConstellationCategory,
 } from '../data/universeContent';
@@ -22,12 +21,8 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedNodeId, setSelectedNodeId] = useState<string>(NODES[0].id);
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'constellation' | 'list'>(() => {
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
-      return 'list';
-    }
-    return 'constellation';
-  });
+  // Default to the scannable structured list first; interactive atlas stays optional
+  const [viewMode, setViewMode] = useState<'list' | 'constellation'>('list');
 
   const filteredNodes = useMemo(() => {
     return NODES.filter((node) => {
@@ -70,16 +65,11 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
   const getStatusColor = (status: EvidenceStatus) => {
     switch (status) {
       case 'professional':
-        return '#B0E0E6'; // Powder Blue
+        return '#B0E0E6';
       case 'project':
-        return '#FFFFFF'; // Crisp White
-      case 'foundation':
-        return '#93C5FD'; // Soft Sky
+        return '#FFFFFF';
       case 'learning':
-        return '#DC343B'; // Poppy Red
-      case 'experiment':
-      case 'exploring':
-        return '#FBBF24'; // Warm Amber
+        return '#DC343B';
     }
   };
 
@@ -87,44 +77,31 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
     <section
       id="constellation"
       aria-labelledby="constellation-heading"
-      className="py-16 sm:py-20 border-b border-[#323238]"
+      className="scroll-mt-20 py-16 sm:py-20 border-b border-[#323238]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Heading & View Mode Toggle */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div className="max-w-2xl">
             <p className="text-xs font-mono uppercase tracking-wider text-[#B0E0E6] mb-2">
-              03. Technology Constellation
+              03. Skills &amp; Systems Map
             </p>
             <h2
               id="constellation-heading"
               className="font-display text-2xl sm:text-4xl font-bold text-white tracking-tight"
             >
-              Capabilities, Exposure & Active Study
+              Work-Backed Skills &amp; Active Learning
             </h2>
             <p className="mt-2 text-sm text-[#D1D5DB] leading-relaxed">
-              Interactive map of the technologies I work with and explore. Every node explicitly separates production experience from foundational knowledge, personal experiments, and current study—with zero exaggerated proficiency percentages.
+              Practical skills used at work appear first, followed by internship/academic grounding and active learning in UiPath RPA. Switch to the interactive atlas view anytime.
             </p>
           </div>
 
           <div className="flex items-center gap-2 self-start">
             <div
               role="group"
-              aria-label="Constellation display mode"
+              aria-label="Skills display mode"
               className="inline-flex p-1 bg-[#222226] border border-[#323238] rounded-lg text-xs"
             >
-              <button
-                type="button"
-                onClick={() => setViewMode('constellation')}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md font-medium whitespace-nowrap shrink-0 cursor-pointer ${
-                  viewMode === 'constellation'
-                    ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/40'
-                    : 'text-[#9CA3AF] hover:text-white'
-                }`}
-              >
-                <Network className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Constellation</span>
-              </button>
               <button
                 type="button"
                 onClick={() => setViewMode('list')}
@@ -137,14 +114,26 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
                 <List className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Structured List</span>
               </button>
+              <button
+                type="button"
+                onClick={() => setViewMode('constellation')}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md font-medium whitespace-nowrap shrink-0 cursor-pointer ${
+                  viewMode === 'constellation'
+                    ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/40'
+                    : 'text-[#9CA3AF] hover:text-white'
+                }`}
+              >
+                <Network className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>Skill Atlas</span>
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Evidence Distinction Legend (Clickable Filter Buttons, Non-Color Glyphs) */}
+        {/* Status Filter Pills */}
         <div
           role="group"
-          aria-label="Filter by evidence status"
+          aria-label="Filter by experience level"
           className="flex flex-wrap items-center gap-2 mb-5 text-xs"
         >
           <button
@@ -156,11 +145,9 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
                 : 'bg-[#222226] border-[#323238] text-[#D1D5DB] hover:border-[#B0E0E6]/40'
             }`}
           >
-            All Levels ({NODES.length})
+            All ({NODES.length})
           </button>
-          {(
-            ['professional', 'project', 'foundation', 'learning', 'experiment'] as EvidenceStatus[]
-          ).map((status) => {
+          {(['professional', 'project', 'learning'] as EvidenceStatus[]).map((status) => {
             const meta = EVIDENCE_META[status];
             const isActive = statusFilter === status;
             return (
@@ -183,7 +170,7 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
           })}
         </div>
 
-        {/* 11-Category Horizontal Filter & Search Bar */}
+        {/* Domain Filter & Search */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 mb-6">
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1.5 text-xs">
             <button
@@ -195,7 +182,7 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
                   : 'bg-[#222226] text-[#9CA3AF] border-[#323238] hover:text-white'
               }`}
             >
-              All Domains
+              All Areas
             </button>
             {CONSTELLATION_CATEGORIES.map((cat) => (
               <button
@@ -222,8 +209,8 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Filter skills or nodes..."
-              aria-label="Filter constellation nodes"
+              placeholder="Filter skills..."
+              aria-label="Filter skills and tools"
               className="w-full bg-[#222226] border border-[#323238] focus:border-[#B0E0E6] rounded-lg pl-9 pr-8 py-2 text-xs text-white placeholder-[#9CA3AF] focus:outline-none"
             />
             {searchQuery && (
@@ -239,19 +226,67 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
           </div>
         </div>
 
-        {/* Interactive Split: Constellation Canvas / Tree List + Inspector */}
+        {/* Structured List First + Inspector */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           <div className="lg:col-span-8 bg-[#151517] border border-[#323238] rounded-2xl overflow-hidden">
-            {viewMode === 'constellation' ? (
+            {viewMode === 'list' ? (
+              <div className="p-4 sm:p-5 max-h-[540px] overflow-y-auto space-y-2">
+                {filteredNodes.length === 0 ? (
+                  <p className="py-10 text-center text-sm text-[#9CA3AF]">
+                    No matching skills found for this filter.
+                  </p>
+                ) : (
+                  <ol role="tree" aria-label="Skills List" className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {filteredNodes.map((node) => {
+                      const isSelected = activeNode?.id === node.id;
+                      const meta = EVIDENCE_META[node.status];
+                      return (
+                        <li key={node.id} role="treeitem" aria-selected={isSelected}>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedNodeId(node.id)}
+                            className={`w-full text-left p-3.5 rounded-xl border cursor-pointer transition-colors flex flex-col justify-between gap-2 h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B0E0E6] ${
+                              isSelected
+                                ? 'bg-[#222226] border-[#B0E0E6] text-white'
+                                : 'bg-[#1B1B1D] border-[#323238] text-[#D1D5DB] hover:border-[#B0E0E6]/40'
+                            }`}
+                          >
+                            <div>
+                              <div className="flex items-center justify-between gap-2 mb-1">
+                                <span className="text-sm font-semibold text-white">
+                                  {node.label}
+                                </span>
+                                <span
+                                  style={{ color: getStatusColor(node.status) }}
+                                  aria-hidden="true"
+                                  className="text-xs font-mono shrink-0"
+                                >
+                                  {meta.glyph}
+                                </span>
+                              </div>
+                              <p className="text-xs text-[#9CA3AF] leading-relaxed line-clamp-2">
+                                {node.summary}
+                              </p>
+                            </div>
+                            <div className="text-[11px] font-mono text-[#B0E0E6]/90">
+                              {node.category}
+                            </div>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                )}
+              </div>
+            ) : (
               <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] cyber-grid select-none">
                 <svg
                   className="w-full h-full"
                   viewBox="0 0 100 100"
                   preserveAspectRatio="none"
                   role="region"
-                  aria-label="Interactive technology constellation map"
+                  aria-label="Interactive skill atlas map"
                 >
-                  {/* Connection Edges */}
                   <g aria-hidden="true">
                     {filteredEdges.map((edge, idx) => {
                       const fromNode = NODES.find((n) => n.id === edge.from);
@@ -277,7 +312,6 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
                     })}
                   </g>
 
-                  {/* Constellation Nodes */}
                   <g>
                     {filteredNodes.map((node) => {
                       const isSelected = activeNode?.id === node.id;
@@ -321,13 +355,13 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
                             y={isSelected ? -2.3 : -1.8}
                             textAnchor="middle"
                             fill={isSelected ? '#FFFFFF' : '#B0E0E6'}
-                            fillOpacity={isSelected ? 1 : 0.8}
+                            fillOpacity={isSelected ? 1 : 0.85}
                             fontSize={isSelected ? '2.1' : '1.65'}
                             fontFamily="JetBrains Mono, monospace"
                             fontWeight={isSelected ? '700' : '400'}
                             className="pointer-events-none select-none"
                           >
-                            {node.label.length > 20 ? node.label.slice(0, 18) + '…' : node.label}
+                            {node.label.length > 22 ? node.label.slice(0, 20) + '…' : node.label}
                           </text>
                         </g>
                       );
@@ -337,55 +371,16 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
 
                 {filteredNodes.length === 0 && (
                   <div className="absolute inset-0 flex items-center justify-center p-6 text-center text-sm text-[#9CA3AF]">
-                    No constellation nodes match this filter. Reset filters to inspect all {NODES.length} nodes.
+                    No skill nodes match this filter.
                   </div>
-                )}
-              </div>
-            ) : (
-              /* Structured List Mode (Default on Mobile & Screen-Reader Accessible) */
-              <div className="p-4 max-h-[520px] overflow-y-auto space-y-2">
-                {filteredNodes.length === 0 ? (
-                  <p className="py-10 text-center text-sm text-[#9CA3AF]">
-                    No matching skills found for this filter.
-                  </p>
-                ) : (
-                  <ol role="tree" aria-label="Technology Constellation Nodes" className="space-y-2">
-                    {filteredNodes.map((node) => {
-                      const isSelected = activeNode?.id === node.id;
-                      const meta = EVIDENCE_META[node.status];
-                      return (
-                        <li
-                          key={node.id}
-                          role="treeitem"
-                          aria-selected={isSelected}
-                          onClick={() => setSelectedNodeId(node.id)}
-                          className={`p-3.5 rounded-xl border cursor-pointer transition-colors flex items-start justify-between gap-3 ${
-                            isSelected
-                              ? 'bg-[#222226] border-[#B0E0E6] text-white'
-                              : 'bg-[#1B1B1D] border-[#323238] text-[#D1D5DB] hover:border-[#B0E0E6]/40'
-                          }`}
-                        >
-                          <div>
-                            <div className="text-sm font-semibold text-white">{node.label}</div>
-                            <div className="text-xs text-[#9CA3AF] mt-0.5">
-                              {node.category} · {meta.glyph} {meta.label}
-                            </div>
-                          </div>
-                          <span className="text-xs font-mono text-[#B0E0E6] shrink-0">
-                            Inspect
-                          </span>
-                        </li>
-                      );
-                    })}
-                  </ol>
                 )}
               </div>
             )}
           </div>
 
-          {/* Right 4 Cols: Selected Node Inspector */}
+          {/* Right 4 Cols: Selected Skill Inspector */}
           <aside
-            aria-label="Selected skill node inspector"
+            aria-label="Selected skill inspector"
             className="lg:col-span-4 bg-[#222226] border border-[#323238] rounded-2xl p-6 space-y-5"
           >
             {activeNode && (
@@ -411,7 +406,7 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
 
                 {activeNode.usage && (
                   <div className="space-y-1.5">
-                    <div className="text-xs font-mono text-[#B0E0E6]">Applied Usage</div>
+                    <div className="text-xs font-mono text-[#B0E0E6]">Where Applied</div>
                     <p className="text-xs sm:text-sm text-[#D1D5DB] leading-relaxed">
                       {activeNode.usage}
                     </p>
@@ -421,7 +416,7 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
                 {relatedEdges.length > 0 && (
                   <div className="pt-3 border-t border-[#323238] space-y-2.5">
                     <div className="text-xs font-mono text-[#9CA3AF]">
-                      Connected Nodes ({relatedEdges.length})
+                      Related Capabilities ({relatedEdges.length})
                     </div>
                     <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
                       {relatedEdges.map((rel, i) =>
@@ -451,7 +446,7 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
                     onClick={() => onOpenFullAtlas(activeNode.id)}
                     className="w-full py-2.5 px-4 rounded-lg bg-[#1B1B1D] hover:bg-[#2B2B30] border border-[#323238] hover:border-[#B0E0E6]/50 text-xs font-semibold text-[#B0E0E6] flex items-center justify-between transition-colors cursor-pointer"
                   >
-                    <span>Open Full Stratum Atlas</span>
+                    <span>Open Full Skill Atlas</span>
                     <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </button>
                 )}

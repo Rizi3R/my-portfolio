@@ -20,7 +20,7 @@ import {
   BookOpen,
   Phone,
 } from 'lucide-react';
-import { PROFILE, STRATA, NODES, StratumType } from '../data/universeContent';
+import { PROFILE, STRATA, NODES, CASE_STUDIES, EXPERIENCES, StratumType } from '../data/universeContent';
 import { audioFx } from '../utils/audioFx';
 import { ActiveView } from './Navbar';
 
@@ -39,7 +39,7 @@ interface CommandPaletteProps {
 
 interface PaletteAction {
   id: string;
-  category: 'Navigation' | 'Perspectives & Tools' | 'Constellation Nodes' | 'Actions';
+  category: 'Navigation' | 'Perspectives & Tools' | 'Skills' | 'Actions';
   label: string;
   sublabel?: string;
   shortcut?: string;
@@ -110,7 +110,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'nav-home',
         category: 'Navigation',
         label: 'Home',
-        sublabel: 'Top overview, recruiter summary, and visitor counter',
+        sublabel: 'Overview, intro, and work snapshot',
         shortcut: 'H',
         icon: <Home className="w-4 h-4 text-[#B0E0E6]" />,
         perform: () => {
@@ -123,7 +123,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'nav-about',
         category: 'Navigation',
         label: 'About',
-        sublabel: 'Personal technology dashboard and approach',
+        sublabel: 'Day-to-day scope and active learning',
         icon: <User className="w-4 h-4 text-[#B0E0E6]" />,
         perform: () => {
           onNavigateSection('about');
@@ -134,7 +134,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'nav-experience',
         category: 'Navigation',
         label: 'Experience',
-        sublabel: 'Interactive career timeline across 4 verified roles',
+        sublabel: `Work & internship timeline (${EXPERIENCES.length} roles)`,
         icon: <Briefcase className="w-4 h-4 text-[#B0E0E6]" />,
         perform: () => {
           onNavigateSection('experience');
@@ -144,8 +144,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-skills',
         category: 'Navigation',
-        label: 'Skills (Technology Constellation)',
-        sublabel: 'Interactive 11-category skill graph with evidence levels',
+        label: 'Skills & Systems Map',
+        sublabel: 'Structured skills list and optional atlas',
         icon: <Sparkles className="w-4 h-4 text-[#B0E0E6]" />,
         perform: () => {
           onNavigateSection('constellation');
@@ -155,8 +155,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-projects',
         category: 'Navigation',
-        label: 'Projects',
-        sublabel: '5 operational case studies and interactive lab experiments',
+        label: 'Case Studies',
+        sublabel: `${CASE_STUDIES.length} case studies and optional computing lab`,
         icon: <FolderGit2 className="w-4 h-4 text-[#B0E0E6]" />,
         perform: () => {
           onNavigateSection('projects');
@@ -166,8 +166,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-learning',
         category: 'Navigation',
-        label: 'Learning',
-        sublabel: 'Currently exploring: UiPath RPA, ITIL 4, Linux Internals',
+        label: 'Active Learning',
+        sublabel: 'Currently learning UiPath & RPA',
         icon: <BookOpen className="w-4 h-4 text-[#DC343B]" />,
         perform: () => {
           onNavigateSection('about');
@@ -178,7 +178,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'nav-contact',
         category: 'Navigation',
         label: 'Contact',
-        sublabel: 'Direct email, LinkedIn, and interactive terminal',
+        sublabel: 'Direct email, LinkedIn, and interactive shell',
         icon: <Phone className="w-4 h-4 text-[#B0E0E6]" />,
         perform: () => {
           onNavigateSection('contact');
@@ -188,8 +188,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-resume',
         category: 'Navigation',
-        label: 'Resume',
-        sublabel: 'Open printable ATS-formatted technical resume',
+        label: 'View Résumé',
+        sublabel: 'Open printable résumé preview',
         shortcut: 'R',
         icon: <FileText className="w-4 h-4 text-[#DC343B]" />,
         perform: () => {
@@ -200,7 +200,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'tool-terminal',
         category: 'Perspectives & Tools',
-        label: 'Open Interactive Terminal',
+        label: 'Open Interactive Shell',
         sublabel: 'Run commands: help, about, skills, experience, projects',
         shortcut: 'T',
         icon: <Terminal className="w-4 h-4 text-[#B0E0E6]" />,
@@ -212,8 +212,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'view-trace',
         category: 'Perspectives & Tools',
-        label: 'Beep to Receipt (6 Computing Strata)',
-        sublabel: 'Trace a barcode scan from hardware laser to thermal receipt',
+        label: 'Beep to Receipt (Illustrative Walkthrough)',
+        sublabel: 'Educational model of how a retail checkout can work across 6 layers',
         icon: <Compass className="w-4 h-4 text-[#B0E0E6]" />,
         perform: () => {
           onSelectView('trace');
@@ -223,8 +223,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'view-atlas',
         category: 'Perspectives & Tools',
-        label: 'Full Atlas Knowledge Graph',
-        sublabel: `Deterministic ${NODES.length}-node topology across 6 strata`,
+        label: 'Full Skill Atlas',
+        sublabel: `${NODES.length} documented skill and learning items across 6 layers`,
         icon: <Network className="w-4 h-4 text-[#B0E0E6]" />,
         perform: () => {
           onSelectView('atlas');
@@ -234,8 +234,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'view-plain',
         category: 'Perspectives & Tools',
-        label: 'Plain Semantic Reader Specification',
-        sublabel: 'High-contrast printable paper document mode',
+        label: 'Plain Print Specification',
+        sublabel: 'High-contrast printable document edition',
         icon: <FileText className="w-4 h-4 text-[#9CA3AF]" />,
         perform: () => {
           onSelectView('plain');
@@ -245,8 +245,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'jump-receipt',
         category: 'Perspectives & Tools',
-        label: 'Thermal Receipt Dossier',
-        sublabel: 'Receipt-styled career verification summary',
+        label: 'Summary Receipt',
+        sublabel: 'Printable experience and education receipt view',
         icon: <Receipt className="w-4 h-4 text-[#B0E0E6]" />,
         perform: () => {
           onClose();
@@ -258,8 +258,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       ...STRATA.map((st, i) => ({
         id: `stratum-${st.id}`,
         category: 'Perspectives & Tools' as const,
-        label: `Stratum 0${i + 1}: ${st.title}`,
-        sublabel: st.tagline,
+        label: `Layer 0${i + 1}: ${st.title}`,
+        sublabel: st.subtitle,
         icon: <span className="text-xs font-mono font-bold text-[#B0E0E6]">0{i + 1}</span>,
         perform: () => {
           onJumpToStratum(st.id);
@@ -296,7 +296,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'act-linkedin',
         category: 'Actions',
         label: 'Open LinkedIn Profile',
-        sublabel: 'Verified external profile',
+        sublabel: 'External LinkedIn profile',
         icon: <ExternalLink className="w-4 h-4 text-[#9CA3AF]" />,
         perform: () => {
           window.open(PROFILE.linkedIn, '_blank', 'noopener,noreferrer');
@@ -312,7 +312,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     () =>
       NODES.map((node) => ({
         id: `node-${node.id}`,
-        category: 'Constellation Nodes',
+        category: 'Skills',
         label: `${node.label}`,
         sublabel: `${node.category} · ${node.summary}`,
         icon: <span className="text-xs font-mono text-[#B0E0E6]">◆</span>,
@@ -376,7 +376,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         className="w-full max-w-xl bg-[#1B1B1D] border border-[#323238] rounded-2xl shadow-2xl overflow-hidden text-xs"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Search Input Bar */}
         <div className="flex items-center px-4 border-b border-[#323238] bg-[#222226]">
           <Search className="w-4 h-4 text-[#B0E0E6] mr-3 shrink-0" aria-hidden="true" />
           <input
@@ -385,9 +384,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Jump to Home, About, Experience, Projects, Skills, Learning, Contact, Resume..."
+            placeholder="Jump to About, Experience, Case Studies, Skills, Contact, Resume..."
             className="w-full py-3.5 bg-transparent text-white placeholder-[#9CA3AF] focus:outline-none text-xs sm:text-sm"
-            aria-label="Search sections, commands, or skill nodes"
+            aria-label="Search sections, commands, or skills"
           />
           {query && (
             <button
@@ -401,11 +400,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           )}
         </div>
 
-        {/* Results List */}
         <div className="max-h-80 overflow-y-auto divide-y divide-[#28282E]" role="listbox">
           {filteredActions.length === 0 ? (
             <div className="p-8 text-center text-[#9CA3AF]">
-              No matching destination or skill node found for "{query}".
+              No matching destination found for "{query}".
             </div>
           ) : (
             filteredActions.map((action, idx) => {
@@ -449,14 +447,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           )}
         </div>
 
-        {/* Footer Hint Bar */}
         <div className="px-4 py-2.5 border-t border-[#323238] bg-[#222226] flex items-center justify-between text-[11px] font-mono text-[#9CA3AF]">
           <div className="flex items-center gap-3">
             <span>↑↓ Navigate</span>
             <span>↵ Open</span>
             <span>Esc Close</span>
           </div>
-          <span className="text-[#B0E0E6]">{NODES.length} Skill Nodes · ⌘K / Ctrl+K</span>
+          <span className="text-[#B0E0E6]">{NODES.length} Skills · ⌘K / Ctrl+K</span>
         </div>
       </div>
     </div>

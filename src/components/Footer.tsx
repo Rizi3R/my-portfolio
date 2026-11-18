@@ -42,7 +42,7 @@ export const Footer: React.FC<FooterProps> = ({
               {PROFILE.title} · {PROFILE.location}
             </p>
             <p className="text-xs text-[#9CA3AF]">
-              Built with React, TypeScript, and honest engineering notes—from checkout lasers to cloud primitives.
+              Application support, IT operations, and practical business systems notes.
             </p>
           </div>
 
@@ -71,7 +71,7 @@ export const Footer: React.FC<FooterProps> = ({
               className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#222226] hover:bg-[#2B2B30] text-white border border-[#323238] transition-colors cursor-pointer"
             >
               <FileText className="w-3.5 h-3.5 text-[#DC343B]" aria-hidden="true" />
-              <span>Resume</span>
+              <span>View Resume</span>
             </button>
 
             <button
@@ -88,9 +88,13 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <span>© {currentYear} {PROFILE.displayName}</span>
-            <span aria-hidden="true" className="text-[#4B5563]">·</span>
+            <span aria-hidden="true" className="text-[#4B5563]">
+              ·
+            </span>
             <VisitorCounter variant="inline" />
-            <span aria-hidden="true" className="text-[#4B5563]">·</span>
+            <span aria-hidden="true" className="text-[#4B5563]">
+              ·
+            </span>
             <button
               type="button"
               onClick={onOpenCommandPalette}

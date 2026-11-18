@@ -126,6 +126,10 @@
 
 /* Print styling for resume viewer, Plain Spec, and thermal receipt */
 @media print {
+  @page {
+    margin: 14mm;
+  }
+
   body {
     background-color: #ffffff !important;
     color: #1B1B1D !important;
@@ -142,17 +146,33 @@
     display: block !important;
   }
 
+  .break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
   #receipt {
     padding: 0 !important;
     margin: 0 !important;
     max-width: 100% !important;
   }
 
+  .resume-print-overlay {
+    position: static !important;
+    overflow: visible !important;
+    background: transparent !important;
+    padding: 0 !important;
+    backdrop-filter: none !important;
+  }
+
   .resume-print-sheet {
     box-shadow: none !important;
     border: none !important;
     padding: 0 !important;
+    margin: 0 !important;
     max-width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
     color: #1B1B1D !important;
     background: #ffffff !important;
   }

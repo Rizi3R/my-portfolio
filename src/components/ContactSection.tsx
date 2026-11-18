@@ -41,20 +41,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="py-16 sm:py-20 border-b border-[#323238]"
+      className="scroll-mt-20 py-16 sm:py-20 border-b border-[#323238]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
         {/* Interactive Terminal Showcase */}
         <div id="terminal-section" className="scroll-mt-24 space-y-5">
           <div className="max-w-2xl">
             <p className="text-xs font-mono uppercase tracking-wider text-[#B0E0E6] mb-2">
-              05. Interactive Terminal
+              05. Interactive Shell
             </p>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Explore via Command Line
             </h2>
             <p className="mt-1.5 text-sm text-[#D1D5DB] leading-relaxed">
-              An optional technology-themed sandbox shell. Query my background, skills, education, or run a few hidden commands—or skip straight to direct contact below.
+              An optional read-only sandbox shell to query background, skills, education, or jump directly to contact channels below.
             </p>
           </div>
 
@@ -64,21 +64,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           />
         </div>
 
-        {/* Direct Contact & Recruiter Dispatch */}
+        {/* Direct Contact & Opportunities */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-4">
           <div className="lg:col-span-6 space-y-5 flex flex-col justify-between bg-[#222226] border border-[#323238] rounded-2xl p-6 sm:p-8">
             <div className="space-y-3">
               <p className="text-xs font-mono uppercase tracking-wider text-[#DC343B]">
-                06. Contact & Opportunities
+                06. Contact &amp; Roles
               </p>
               <h2
                 id="contact-heading"
                 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight"
               >
-                Let’s talk systems, support, and engineering.
+                Open to Application Support, IT Operations &amp; Business Systems conversations.
               </h2>
               <p className="text-sm text-[#D1D5DB] leading-relaxed">
-                Open to conversations around Application Support, IT Operations, Business Systems Administration, and Infrastructure roles—as well as technical projects and collaborations.
+                {PROFILE.availabilityNote} Reach out anytime by email or LinkedIn, or view and print my resume directly.
               </p>
             </div>
 
@@ -97,7 +97,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#1B1B1D] border border-[#B0E0E6]/40 hover:border-[#B0E0E6] text-[#B0E0E6] text-sm font-semibold transition-colors cursor-pointer"
               >
                 <FileText className="w-4 h-4" aria-hidden="true" />
-                <span>View ATS Resume</span>
+                <span>View Resume</span>
               </button>
             </div>
           </div>
@@ -150,7 +150,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 <span>Based in {PROFILE.location}</span>
               </span>
               <span className="font-mono text-[#9CA3AF]">
-                Role: {PROFILE.currentRole} · {PROFILE.currentCompany}
+                {PROFILE.currentRole} · {PROFILE.currentCompany}
               </span>
             </div>
           </div>

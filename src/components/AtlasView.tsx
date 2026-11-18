@@ -27,12 +27,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
   const [stratumFilter, setStratumFilter] = useState<string>('all');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [viewMode, setViewMode] = useState<'graph' | 'list'>(() => {
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
-      return 'list';
-    }
-    return 'graph';
-  });
+  const [viewMode, setViewMode] = useState<'list' | 'graph'>('list');
   const [announcement, setAnnouncement] = useState<string>('');
 
   useEffect(() => {
@@ -40,7 +35,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
       setSelectedNodeId(initialSelectedNodeId);
       const target = NODES.find((n) => n.id === initialSelectedNodeId);
       if (target) {
-        setAnnouncement(`Selected node: ${target.label}, status: ${target.status}`);
+        setAnnouncement(`Selected node: ${target.label}, status: ${EVIDENCE_META[target.status].label}`);
       }
     }
   }, [initialSelectedNodeId]);
@@ -112,12 +107,12 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
     switch (stratum) {
       case 'hardware':
       case 'network':
-      case 'cloud-automation':
+      case 'cloud':
         return '#B0E0E6';
       case 'application':
-      case 'people-process':
+      case 'operations':
         return '#DC343B';
-      case 'os':
+      case 'kernel':
       default:
         return '#FFFFFF';
     }
@@ -134,32 +129,17 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#323238] pb-6">
           <div>
             <p className="text-xs font-mono uppercase tracking-widest text-[#B0E0E6] mb-2">
-              Deterministic Knowledge Topology
+              Skills &amp; Experience Map
             </p>
             <h1 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
-              The Atlas Graph
+              The Skill Atlas
             </h1>
             <p className="mt-2 text-[#D1D5DB] font-sans text-xs sm:text-sm max-w-2xl leading-relaxed">
-              Explore all {NODES.length} verified technologies, protocols, and systems across 6
-              computing strata. Every node maps to concrete experience, academic grounding,
-              simulation work, or ongoing study.
+              Browse all {NODES.length} documented capabilities, internship &amp; credential items, and active learning areas in list or graph format.
             </p>
           </div>
 
           <div className="flex items-center gap-1.5 p-1 bg-[#222226] border border-[#323238] rounded-lg self-start md:self-auto font-mono text-xs">
-            <button
-              type="button"
-              onClick={() => setViewMode('graph')}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
-                viewMode === 'graph'
-                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/40'
-                  : 'text-[#9CA3AF] hover:text-white'
-              }`}
-              aria-label="Switch to 2D Graph Canvas View"
-            >
-              <Network className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Canvas Graph</span>
-            </button>
             <button
               type="button"
               onClick={() => setViewMode('list')}
@@ -171,7 +151,20 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               aria-label="Switch to Accessible List Tree View"
             >
               <List className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Accessible List</span>
+              <span>Structured List</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode('graph')}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+                viewMode === 'graph'
+                  ? 'bg-[#1B1B1D] text-[#B0E0E6] border border-[#B0E0E6]/40'
+                  : 'text-[#9CA3AF] hover:text-white'
+              }`}
+              aria-label="Switch to 2D Graph Canvas View"
+            >
+              <Network className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>Atlas Graph</span>
             </button>
           </div>
         </div>
@@ -185,11 +178,11 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
             />
             <input
               type="text"
-              placeholder="Search nodes..."
+              placeholder="Search skills..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-[#222226] border border-[#323238] rounded-lg text-white pl-9 pr-8 py-2.5 focus:outline-none focus:border-[#B0E0E6] transition-colors"
-              aria-label="Search Atlas nodes by title or summary"
+              aria-label="Search Atlas skills by title or summary"
             />
             {searchQuery && (
               <button
@@ -208,12 +201,12 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               value={stratumFilter}
               onChange={(e) => setStratumFilter(e.target.value)}
               className="w-full bg-[#222226] border border-[#323238] rounded-lg text-[#D1D5DB] px-3 py-2.5 focus:outline-none focus:border-[#B0E0E6] cursor-pointer"
-              aria-label="Filter nodes by stratum"
+              aria-label="Filter skills by layer"
             >
-              <option value="all">All Strata (1–6)</option>
+              <option value="all">All Layers (1 to 6)</option>
               {STRATA.map((s, i) => (
                 <option key={s.id} value={s.id}>
-                  Stratum {i + 1}: {s.title}
+                  Layer {i + 1}: {s.title}
                 </option>
               ))}
             </select>
@@ -224,13 +217,11 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               className="w-full bg-[#222226] border border-[#323238] rounded-lg text-[#D1D5DB] px-3 py-2.5 focus:outline-none focus:border-[#B0E0E6] cursor-pointer"
-              aria-label="Filter nodes by evidence status"
+              aria-label="Filter skills by experience level"
             >
-              <option value="all">All Evidence Levels</option>
-              <option value="professional">◆ Production Experience</option>
-              <option value="project">■ Practical Exposure</option>
-              <option value="experiment">△ Personal Experiment</option>
-              <option value="foundation">⊕ Foundational Knowledge</option>
+              <option value="all">All Levels</option>
+              <option value="professional">◆ Work-Backed Experience</option>
+              <option value="project">■ Internship, Academic &amp; Credential</option>
               <option value="learning">○ Currently Learning</option>
             </select>
           </div>
@@ -238,25 +229,24 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
           <div className="flex items-center justify-between sm:justify-end gap-3 px-3 py-2 bg-[#222226] border border-[#323238] rounded-lg text-[#9CA3AF]">
             <span>Showing:</span>
             <span className="font-bold text-[#B0E0E6]">
-              {filteredNodes.length} of {NODES.length} Nodes
+              {filteredNodes.length} of {NODES.length} Items
             </span>
           </div>
         </div>
       </div>
 
-      {/* Main Graph & Inspector Grid */}
+      {/* Main List / Graph & Inspector Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         <div className="lg:col-span-8 bg-[#151517] border border-[#323238] rounded-2xl overflow-hidden relative">
           {viewMode === 'graph' ? (
             <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] cyber-grid select-none overflow-hidden">
-              {/* Strata Guides */}
               <div className="absolute inset-0 flex flex-col pointer-events-none opacity-30">
                 {STRATA.map((st, i) => (
                   <div
                     key={st.id}
                     className="flex-1 border-b border-[#323238] px-3 pt-1 text-[9px] font-mono uppercase text-[#9CA3AF]"
                   >
-                    S{i + 1}: {st.title}
+                    L{i + 1}: {st.title}
                   </div>
                 ))}
               </div>
@@ -308,7 +298,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                         role="button"
                         tabIndex={0}
                         aria-pressed={isSelected}
-                        aria-label={`${node.label}, status: ${node.status}, stratum: ${node.stratum}`}
+                        aria-label={`${node.label}, status: ${EVIDENCE_META[node.status].label}`}
                         onKeyDown={(e) => {
                           if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault();
@@ -346,7 +336,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                           fontWeight={isSelected ? 'bold' : 'normal'}
                           className="pointer-events-none select-none transition-all"
                         >
-                          {node.label.length > 18 ? node.label.slice(0, 16) + '…' : node.label}
+                          {node.label.length > 20 ? node.label.slice(0, 18) + '…' : node.label}
                         </text>
                       </g>
                     );
@@ -355,32 +345,32 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               </svg>
             </div>
           ) : (
-            <div className="p-4 max-h-[520px] overflow-y-auto font-mono text-xs">
-              <ol role="tree" aria-label="Atlas Nodes Tree" className="space-y-2">
+            <div className="p-4 max-h-[540px] overflow-y-auto font-mono text-xs">
+              <ol role="tree" aria-label="Atlas Skills Tree" className="space-y-2">
                 {filteredNodes.map((node) => {
                   const isSelected = selectedNode && selectedNode.id === node.id;
                   return (
-                    <li
-                      key={node.id}
-                      role="treeitem"
-                      aria-selected={isSelected}
-                      onClick={() => handleSelectNode(node)}
-                      className={`p-3.5 rounded-xl border cursor-pointer transition-colors flex items-center justify-between gap-3 ${
-                        isSelected
-                          ? 'bg-[#222226] border-[#B0E0E6] text-white'
-                          : 'bg-[#1B1B1D] border-[#323238] text-[#D1D5DB] hover:border-[#B0E0E6]/40'
-                      }`}
-                    >
-                      <div>
-                        <div className="font-bold flex items-center gap-2">
-                          <span style={{ color: getStratumColor(node.stratum) }}>●</span>
-                          <span>{node.label}</span>
+                    <li key={node.id} role="treeitem" aria-selected={isSelected}>
+                      <button
+                        type="button"
+                        onClick={() => handleSelectNode(node)}
+                        className={`w-full text-left p-3.5 rounded-xl border cursor-pointer transition-colors flex items-center justify-between gap-3 ${
+                          isSelected
+                            ? 'bg-[#222226] border-[#B0E0E6] text-white'
+                            : 'bg-[#1B1B1D] border-[#323238] text-[#D1D5DB] hover:border-[#B0E0E6]/40'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold flex items-center gap-2">
+                            <span style={{ color: getStratumColor(node.stratum) }}>●</span>
+                            <span>{node.label}</span>
+                          </div>
+                          <div className="text-[11px] text-[#9CA3AF] mt-1 font-sans">
+                            {node.summary}
+                          </div>
                         </div>
-                        <div className="text-[11px] text-[#9CA3AF] mt-1 line-clamp-1">
-                          {node.summary}
-                        </div>
-                      </div>
-                      <div className="ml-3 shrink-0">{getStatusBadge(node.status)}</div>
+                        <div className="ml-3 shrink-0">{getStatusBadge(node.status)}</div>
+                      </button>
                     </li>
                   );
                 })}
@@ -392,14 +382,14 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
         {/* Selected Node Inspector */}
         <aside
           className="lg:col-span-4 bg-[#222226] border border-[#323238] rounded-2xl p-6 font-mono text-xs space-y-5"
-          aria-label="Node Details Inspector"
+          aria-label="Skill Details Inspector"
         >
           {selectedNode ? (
             <>
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="text-[10px] text-[#9CA3AF] uppercase tracking-widest">
-                    NODE INSPECTOR
+                    DETAIL VIEW
                   </span>
                   {getStatusBadge(selectedNode.status)}
                 </div>
@@ -420,15 +410,12 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               {selectedNode.evidenceRef && (
                 <div className="space-y-1 text-xs">
                   <span className="text-[#9CA3AF] text-[10px] uppercase tracking-wider block">
-                    Evidence Provenance
+                    Supporting Context
                   </span>
                   <div className="p-3 rounded-xl bg-[#1B1B1D] border border-[#323238] text-[#D1D5DB] flex items-center justify-between gap-2">
                     <div>
                       <div className="font-bold text-white">
                         {getEvidenceLabel(selectedNode.evidenceRef)}
-                      </div>
-                      <div className="text-[10px] text-[#9CA3AF]">
-                        Ref ID: {selectedNode.evidenceRef}
                       </div>
                     </div>
                     {onOpenExperience && selectedNode.evidenceRef.startsWith('exp-') && (
@@ -448,7 +435,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               {selectedNode.usage && (
                 <div className="space-y-1 text-xs">
                   <span className="text-[#9CA3AF] text-[10px] uppercase tracking-wider block">
-                    Applied Operational Usage
+                    Where Applied
                   </span>
                   <div className="p-3 rounded-xl bg-[#1B1B1D] border border-[#323238] text-[#D1D5DB] font-sans text-xs leading-relaxed">
                     {selectedNode.usage}
@@ -462,20 +449,19 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                   onClick={() => onJumpToStratum(selectedNode.stratum)}
                   className="w-full py-2.5 px-3.5 rounded-lg bg-[#1B1B1D] hover:bg-[#2B2B30] text-[#B0E0E6] border border-[#323238] hover:border-[#B0E0E6]/50 flex items-center justify-between transition-colors cursor-pointer text-xs font-semibold"
                 >
-                  <span>View Stratum Journey Step</span>
+                  <span>View Related Walkthrough Layer</span>
                   <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </button>
               )}
 
               <div>
                 <div className="flex items-center justify-between text-[#9CA3AF] text-[10px] uppercase tracking-wider mb-2">
-                  <span>Connected Topology ({relatedEdges.length})</span>
-                  <span>Interaction</span>
+                  <span>Connected Skills ({relatedEdges.length})</span>
                 </div>
 
                 {relatedEdges.length === 0 ? (
                   <div className="text-[#9CA3AF] italic p-3 rounded-xl border border-dashed border-[#323238] text-center">
-                    No active edges in current filter.
+                    No active connections in current filter.
                   </div>
                 ) : (
                   <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
@@ -511,7 +497,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
             </>
           ) : (
             <div className="text-center py-12 text-[#9CA3AF]">
-              Select any node in the graph or list to inspect its operational evidence.
+              Select any skill item to inspect details.
             </div>
           )}
         </aside>
@@ -525,33 +511,23 @@ function getEvidenceLabel(refId: string): string {
     case 'exp-emart24':
       return 'emart24 Malaysia · System Application Specialist';
     case 'exp-palaterium':
-      return 'Palaterium Sdn Bhd · IT Executive';
+      return 'Palaterium Sdn Bhd · IT Support';
     case 'exp-mps':
       return 'Managed Print Services · IT Technician';
     case 'exp-agc':
-      return 'Attorney General’s Chambers · IT Intern';
+      return 'Attorney General’s Chambers of Malaysia · IT Intern';
     case 'exp-uitm':
-      return 'UiTM · Diploma in Computer Science & Mathematics';
+      return 'UiTM · Diploma in Computer Science and Mathematics';
     case 'cert-aws':
       return 'AWS Certified Cloud Practitioner';
     case 'cert-ai-teach':
       return 'Generative AI Copilot Digital Upskilling Program';
-    case 'sim-network':
-      return 'Deterministic Packet Hop Lab';
-    case 'sim-cache':
-      return 'Cache Eviction Simulation';
-    case 'sim-incident':
-      return 'Operational Triage Simulator';
-    case 'case-emart24-rollout':
-      return 'Case Study: Multi-Store POS Rollout';
-    case 'case-palaterium-failover':
-      return 'Case Study: Dual-WAN Failover';
+    case 'case-pos-triage':
+      return 'Case Study: Xilnex POS incident triage & escalation';
     case 'case-lark-migration':
-      return 'Case Study: Google Workspace to Lark Cutover';
-    case 'case-dkict-system':
-      return 'Case Study: Internal MVC Compliance Portal';
-    case 'case-hardware-network':
-      return 'Case Study: Hardware & Print Fleet Provisioning';
+      return 'Case Study: Google Workspace to Lark migration support';
+    case 'case-store-launch':
+      return 'Case Study: New-store IT readiness & cabling fix';
     default:
       return refId;
   }

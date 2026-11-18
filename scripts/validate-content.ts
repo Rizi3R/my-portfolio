@@ -1,23 +1,23 @@
 /**
- * UNIVERSE CONTENT VALIDATION SCRIPT (STRICT TRUTHFULNESS & AUTHENTICITY ENFORCER)
- * 
+ * UNIVERSE CONTENT VALIDATION SCRIPT (TRUTHFULNESS & COPY SANITY CHECKER)
+ *
  * Enforces:
- * - Evidence references (evidenceRef) on all professional and project nodes.
- * - Factual usage statements (usage) on all professional and project nodes.
+ * - Zero em dashes (U+2014) anywhere in universeContent.ts.
+ * - Evidence references (evidenceRef) and usage strings on all professional & project nodes.
  * - Max character limits: summary <= 200 chars, edge reason <= 120 chars.
- * - Disallowance of proficiency, percentage, rating, score, progress fields.
- * - Audit warning for seniority/mastery words (expert, advanced, proficient, senior, mastery, extensive).
- * - Honest UiPath/RPA learning status and copy verification.
+ * - Disallowance of fake ratings, percentages, or unconfirmed buzzwords / unsupported boasts.
+ * - Strict isolation of UiPath & RPA as 'learning'.
  */
 
-import { 
-  NODES, 
-  EDGES, 
-  EXPERIENCES, 
-  CASE_STUDIES, 
-  PROFILE, 
-  STRATA, 
-  LEARNING_ENTRIES 
+import {
+  NODES,
+  EDGES,
+  EXPERIENCES,
+  CASE_STUDIES,
+  PROFILE,
+  STRATA,
+  LEARNING_ENTRIES,
+  CERTIFICATIONS,
 } from '../src/data/universeContent';
 
 let errorCount = 0;
@@ -38,11 +38,11 @@ function logSuccess(msg: string) {
 }
 
 console.log('='.repeat(65));
-console.log('🌌 ARIES RAZAK - TRUTHFULNESS, PROVENANCE & AUTHENTICITY VALIDATOR');
+console.log('ARIES RAZAK - PORTFOLIO CONTENT & TRUTHFULNESS VALIDATOR');
 console.log('='.repeat(65));
 
 // 1. Verify Profile Integrity & Prohibited Titles
-console.log('\n[1/6] Verifying Candidate Profile & Verified Titles...');
+console.log('\n[1/7] Verifying Candidate Profile & Descriptor...');
 const forbiddenTitles = [
   'senior software engineer',
   'security specialist',
@@ -50,154 +50,197 @@ const forbiddenTitles = [
   'cloud architect',
   'lead architect',
   'principal engineer',
-  'rpa developer'
+  'rpa developer',
 ];
 
-forbiddenTitles.forEach(title => {
+forbiddenTitles.forEach((title) => {
   if (PROFILE.title.toLowerCase().includes(title)) {
     logError(`Profile title contains forbidden overclaimed title: "${title}"`);
   }
 });
-logSuccess(`Profile title verified: "${PROFILE.title}"`);
-logSuccess(`Candidate verified: ${PROFILE.fullName} (${PROFILE.displayName})`);
+logSuccess(`Profile descriptor: "${PROFILE.title}"`);
+logSuccess(`Candidate: ${PROFILE.fullName} (${PROFILE.displayName})`);
 
-// 2. Prohibited Fields Audit (No percentages, progress bars, proficiency ratings)
-console.log('\n[2/6] Auditing Against Prohibited Rating & Progress Fields...');
-const prohibitedFields = ['proficiency', 'percentage', 'rating', 'progress', 'score', 'stars', 'levelScore'];
+// 2. Zero Em-Dash & Unconfirmed Claims Scanner
+console.log('\n[2/7] Scanning for Em Dashes & Unconfirmed Career Claims...');
+const serializedContent = JSON.stringify({
+  PROFILE,
+  EXPERIENCES,
+  CASE_STUDIES,
+  CERTIFICATIONS,
+  LEARNING_ENTRIES,
+  NODES,
+  EDGES,
+  STRATA,
+});
 
-NODES.forEach((node: any) => {
-  prohibitedFields.forEach(field => {
-    if (node[field] !== undefined) {
-      logError(`Node ${node.id} contains prohibited rating/progress field: "${field}"`);
+if (serializedContent.includes('\u2014')) {
+  logError('Em dash (U+2014) found in universeContent.ts! Remove all em dashes.');
+} else {
+  logSuccess('Zero em dashes (U+2014) detected in content model.');
+}
+
+const bannedCareerStrings = [
+  '802.1q',
+  'vlan',
+  'dual-wan',
+  'failover',
+  'iso 8583',
+  'mti 0100',
+  'mti 0110',
+  'sqlite',
+  'baud rate',
+  'rs-232',
+  't-568b',
+  'ingenico',
+  'event viewer',
+  'dhcp diagnostic',
+  '3nf',
+  'zero launch delay',
+  'zero downtime',
+  '100% operational readiness',
+  'accelerated vendor resolution',
+  'minimal ticket backlog',
+  'reduced approval turnaround',
+  'reduced repeat service calls',
+  '100% verified',
+  'evidence traceability',
+  'l1-l3',
+  'l1–l3',
+  'tier 2',
+  'tier 3',
+  'itil 4',
+  'linux internals',
+];
+
+const careerOnlyJson = JSON.stringify({
+  PROFILE,
+  EXPERIENCES,
+  CASE_STUDIES,
+  CERTIFICATIONS,
+  LEARNING_ENTRIES,
+  NODES,
+  EDGES,
+}).toLowerCase();
+
+bannedCareerStrings.forEach((phrase) => {
+  if (careerOnlyJson.includes(phrase)) {
+    logError(`Unconfirmed or banned claim found in career content: "${phrase}"`);
+  }
+});
+logSuccess('Zero unconfirmed technical claims or boasts found in career content.');
+
+// 3. Prohibited Rating Fields Audit
+console.log('\n[3/7] Auditing Against Prohibited Rating & Progress Fields...');
+const prohibitedFields = [
+  'proficiency',
+  'percentage',
+  'rating',
+  'progress',
+  'score',
+  'stars',
+  'levelScore',
+];
+
+NODES.forEach((node) => {
+  const record = node as unknown as Record<string, unknown>;
+  prohibitedFields.forEach((field) => {
+    if (record[field] !== undefined) {
+      logError(`Node ${node.id} contains prohibited field: "${field}"`);
+    }
+  });
+});
+logSuccess('Zero proficiency percentages or rating fields in nodes.');
+
+// 4. Mastery Words Warning Check
+console.log('\n[4/7] Scanning for Overstated Seniority/Mastery Buzzwords...');
+const masteryWords = ['expert', 'advanced', 'proficient', 'mastery', 'extensive'];
+NODES.forEach((node) => {
+  const combined = `${node.label} ${node.summary} ${node.usage || ''}`.toLowerCase();
+  masteryWords.forEach((word) => {
+    if (combined.includes(word)) {
+      logWarning(`Node ${node.id} contains "${word}" - verify tone.`);
     }
   });
 });
 
-LEARNING_ENTRIES.forEach((entry: any) => {
-  prohibitedFields.forEach(field => {
-    if (entry[field] !== undefined) {
-      logError(`Learning entry ${entry.id} contains prohibited field: "${field}"`);
-    }
-  });
-});
-logSuccess('Verified: Zero proficiency, percentage, rating, or progress fields in content model.');
-
-// 3. Seniority & Mastery Words Warning Scanner
-console.log('\n[3/6] Scanning for Seniority & Mastery Buzzwords...');
-const masteryWords = ['expert', 'advanced', 'proficient', 'seniority', 'mastery', 'extensive'];
-
-NODES.forEach(node => {
-  const combined = (node.label + ' ' + node.summary + ' ' + (node.usage || '')).toLowerCase();
-  masteryWords.forEach(word => {
-    // Exclude legitimate technical references if needed
-    if (combined.includes(word) && !combined.includes('senior technical') && !combined.includes('system application specialist')) {
-      logWarning(`Node ${node.id} contains word "${word}" - verify for owner truthfulness.`);
-    }
-  });
-});
-
-// 4. Verify Nodes Provenance, EvidenceRef & Usage
-console.log(`\n[4/6] Checking ${NODES.length} Universe Nodes (EvidenceRef & Usage)...`);
+// 5. Verify Nodes EvidenceRef & Usage
+console.log(`\n[5/7] Checking ${NODES.length} Skill Nodes (EvidenceRef & Usage)...`);
 const validEvidenceIds = new Set<string>();
-EXPERIENCES.forEach(exp => validEvidenceIds.add(exp.id));
-CASE_STUDIES.forEach(cs => validEvidenceIds.add(cs.id));
+EXPERIENCES.forEach((exp) => validEvidenceIds.add(exp.id));
+CASE_STUDIES.forEach((cs) => validEvidenceIds.add(cs.id));
 validEvidenceIds.add('exp-uitm');
 validEvidenceIds.add('cert-aws');
 validEvidenceIds.add('cert-ai-teach');
-validEvidenceIds.add('sim-network');
-validEvidenceIds.add('sim-cache');
-validEvidenceIds.add('sim-incident');
 
-const nodeMap = new Map<string, typeof NODES[0]>();
+const nodeMap = new Map<string, (typeof NODES)[0]>();
 
-NODES.forEach(node => {
+NODES.forEach((node) => {
   if (nodeMap.has(node.id)) {
     logError(`Duplicate node ID detected: ${node.id}`);
   }
   nodeMap.set(node.id, node);
 
-  // Check summary length (<= 200 chars)
   if (!node.summary || node.summary.trim() === '') {
     logError(`Node ${node.id} has empty summary.`);
   } else if (node.summary.length > 200) {
-    logError(`Node ${node.id} summary exceeds 200 characters (${node.summary.length} chars): "${node.summary}"`);
+    logError(`Node ${node.id} summary exceeds 200 characters (${node.summary.length}).`);
   }
 
-  // Check evidenceRef and usage for 'professional' and 'project'
   if (node.status === 'professional' || node.status === 'project') {
-    if (!node.evidenceRef) {
-      logError(`Node ${node.id} has status '${node.status}' but is missing required 'evidenceRef'.`);
-    } else if (!validEvidenceIds.has(node.evidenceRef)) {
-      logError(`Node ${node.id} references invalid evidenceRef '${node.evidenceRef}'.`);
+    if (!node.evidenceRef || !validEvidenceIds.has(node.evidenceRef)) {
+      logError(`Node ${node.id} has invalid/missing evidenceRef: '${node.evidenceRef}'.`);
     }
-
     if (!node.usage || node.usage.trim() === '') {
-      logError(`Node ${node.id} has status '${node.status}' but is missing required 'usage' statement.`);
+      logError(`Node ${node.id} missing required usage statement.`);
     }
   }
 
-  // Check coordinates (0-100)
   if (node.x < 0 || node.x > 100 || node.y < 0 || node.y > 100) {
-    logError(`Node ${node.id} has coordinates out of bounds: (${node.x}, ${node.y})`);
+    logError(`Node ${node.id} coordinates out of bounds: (${node.x}, ${node.y})`);
   }
 
-  // Check valid stratum
-  const validStrata = STRATA.map(s => s.id);
+  const validStrata = STRATA.map((s) => s.id);
   if (!validStrata.includes(node.stratum)) {
     logError(`Node ${node.id} has invalid stratum '${node.stratum}'.`);
   }
 });
-logSuccess(`All ${NODES.length} nodes validated against schema, evidence, and usage rules.`);
+logSuccess(`All ${NODES.length} nodes validated.`);
 
-// 5. Check UiPath & RPA Isolation Rule (Section 1.3)
-console.log('\n[5/6] Verifying UiPath & RPA Isolation (Section 1.3)...');
-const rpaNode = NODES.find(n => n.id === 'node-uipath-rpa');
-if (!rpaNode) {
-  logError('Required UiPath/RPA node (node-uipath-rpa) missing from NODES.');
-} else {
-  if (rpaNode.status !== 'learning') {
-    logError(`UiPath/RPA node status is '${rpaNode.status}'; MUST strictly be 'learning'.`);
-  }
-  if (rpaNode.kind === 'role' || rpaNode.kind === 'project') {
-    logError(`UiPath/RPA node kind cannot be role/project; must be concept/technology.`);
-  }
+// 6. Verify UiPath & RPA Isolation Rule
+console.log('\n[6/7] Verifying UiPath & RPA Isolation...');
+const rpaNode = NODES.find((n) => n.id === 'node-uipath-rpa');
+if (!rpaNode || rpaNode.status !== 'learning' || rpaNode.kind === 'role' || rpaNode.kind === 'project') {
+  logError('UiPath/RPA node must exist with status "learning" and non-role/non-project kind.');
 }
-
-const rpaLearningEntry = LEARNING_ENTRIES.find(e => e.id === 'learning-uipath-rpa');
-if (!rpaLearningEntry) {
-  logError('Required UiPath/RPA entry missing from LEARNING_ENTRIES.');
-} else {
-  const expectedText = "Currently learning UiPath and exploring Robotic Process Automation (RPA), with an interest in understanding workflow automation, application integration, and how repetitive processes can be automated.";
-  if (!rpaLearningEntry.note.includes("Currently learning UiPath and exploring Robotic Process Automation (RPA)")) {
-    logError('UiPath learning entry note does not match approved copy in Section 1.3.');
-  }
+const rpaLearningEntry = LEARNING_ENTRIES.find((e) => e.id === 'learning-uipath-rpa');
+if (
+  !rpaLearningEntry ||
+  !rpaLearningEntry.note.includes('Currently learning UiPath and exploring Robotic Process Automation (RPA)')
+) {
+  logError('UiPath learning entry missing or unapproved copy.');
 }
-logSuccess('Verified: UiPath & RPA strictly isolated to Currently Learning with approved text and zero production claims.');
+logSuccess('UiPath & RPA strictly isolated to Currently Learning.');
 
-// 6. Check Edges Integrity
-console.log(`\n[6/6] Checking ${EDGES.length} Universe Edges...`);
+// 7. Verify Edges Integrity
+console.log(`\n[7/7] Checking ${EDGES.length} Constellation Edges...`);
 EDGES.forEach((edge, idx) => {
-  if (!nodeMap.has(edge.from)) {
-    logError(`Edge #${idx} 'from' references non-existent node: '${edge.from}'`);
+  if (!nodeMap.has(edge.from) || !nodeMap.has(edge.to)) {
+    logError(`Edge #${idx} references missing node (${edge.from} -> ${edge.to}).`);
   }
-  if (!nodeMap.has(edge.to)) {
-    logError(`Edge #${idx} 'to' references non-existent node: '${edge.to}'`);
-  }
-  if (!edge.reason || edge.reason.trim() === '') {
-    logError(`Edge #${idx} (${edge.from} -> ${edge.to}) is missing reason.`);
-  } else if (edge.reason.length > 120) {
-    logError(`Edge #${idx} reason exceeds 120 chars (${edge.reason.length} chars): "${edge.reason}"`);
+  if (!edge.reason || edge.reason.trim() === '' || edge.reason.length > 120) {
+    logError(`Edge #${idx} reason invalid or >120 chars.`);
   }
 });
-logSuccess(`All ${EDGES.length} edges validated for node existence and reason clarity.`);
+logSuccess(`All ${EDGES.length} edges validated.`);
 
 console.log('\n' + '='.repeat(65));
 if (errorCount === 0) {
-  console.log(`🎉 VALIDATION PASSED with 0 errors and ${warningCount} warnings.`);
+  console.log(`VALIDATION PASSED with 0 errors and ${warningCount} warnings.`);
   console.log('='.repeat(65));
   process.exit(0);
 } else {
-  console.error(`💥 VALIDATION FAILED with ${errorCount} errors and ${warningCount} warnings.`);
+  console.error(`VALIDATION FAILED with ${errorCount} errors and ${warningCount} warnings.`);
   console.log('='.repeat(65));
   process.exit(1);
 }

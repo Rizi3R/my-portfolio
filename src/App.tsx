@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { Navbar, ActiveView } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
@@ -11,10 +11,10 @@ import { InteractiveTerminal } from './components/InteractiveTerminal';
 import { CommandPalette } from './components/CommandPalette';
 import { Footer } from './components/Footer';
 import { audioFx } from './utils/audioFx';
-import { StratumType } from './data/universeContent';
+import { CASE_STUDIES, StratumType } from './data/universeContent';
 import { Loader2, X, ArrowLeft } from 'lucide-react';
 
-// Code-split secondary workspace perspectives and heavy simulation modules
+// Code-split secondary views and heavy simulation modules
 const TraceView = lazy(() =>
   import('./components/TraceView').then((m) => ({ default: m.TraceView }))
 );
@@ -39,8 +39,26 @@ export default function App() {
   const [labModalOpen, setLabModalOpen] = useState(false);
   const [isAudioMuted, setIsAudioMuted] = useState(true);
   const [selectedAtlasNodeId, setSelectedAtlasNodeId] = useState<string | null>(null);
+  const [expandedCaseId, setExpandedCaseId] = useState<string | null>(CASE_STUDIES[0]?.id || null);
 
-  // Initialize view from URL query param or hash on first render
+  // Store triggering element so Escape / Close restores keyboard focus properly
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
+  const labCloseRef = useRef<HTMLButtonElement | null>(null);
+
+  const captureFocusAndOpen = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
+    if (document.activeElement instanceof HTMLElement) {
+      lastFocusedRef.current = document.activeElement;
+    }
+    setter(true);
+  };
+
+  const closeOverlayAndRestoreFocus = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
+    setter(false);
+    setTimeout(() => {
+      lastFocusedRef.current?.focus();
+    }, 20);
+  };
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const viewParam = params.get('view') as ActiveView | null;
@@ -55,7 +73,6 @@ export default function App() {
     }
   }, []);
 
-  // Sync view updates cleanly to URL search params without reload
   const handleViewChange = (view: ActiveView) => {
     setActiveView(view);
     const url = new URL(window.location.href);
@@ -79,23 +96,49 @@ export default function App() {
     }
   };
 
-  // Global keyboard shortcuts (Cmd/Ctrl+K for Command Palette, Escape for open drawers)
+  const handleOpenCaseStudy = (caseId?: string) => {
+    if (caseId) {
+      setExpandedCaseId(caseId);
+    }
+    const targetId = caseId || 'projects';
+    if (activeView !== 'portfolio') {
+      handleViewChange('portfolio');
+      setTimeout(() => {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         audioFx.playClick(600);
-        setCommandPaletteOpen((prev) => !prev);
+        setCommandPaletteOpen((prev) => {
+          if (!prev && document.activeElement instanceof HTMLElement) {
+            lastFocusedRef.current = document.activeElement;
+          } else if (prev) {
+            setTimeout(() => lastFocusedRef.current?.focus(), 20);
+          }
+          return !prev;
+        });
       } else if (e.key === 'Escape') {
-        if (terminalModalOpen) setTerminalModalOpen(false);
-        if (labModalOpen) setLabModalOpen(false);
+        if (terminalModalOpen) closeOverlayAndRestoreFocus(setTerminalModalOpen);
+        if (labModalOpen) closeOverlayAndRestoreFocus(setLabModalOpen);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [terminalModalOpen, labModalOpen]);
 
-  // Lock body scroll when overlay dialogs are mounted
+  useEffect(() => {
+    if (labModalOpen) {
+      setTimeout(() => labCloseRef.current?.focus(), 40);
+    }
+  }, [labModalOpen]);
+
   useEffect(() => {
     if (terminalModalOpen || labModalOpen) {
       document.body.style.overflow = 'hidden';
@@ -136,22 +179,20 @@ export default function App() {
         activeView === 'plain' ? 'bg-white text-stone-900' : 'tech-universe-bg text-white'
       }`}
     >
-      {/* Top Bar Navigation (3-Zone Contract) */}
       <Navbar
         activeView={activeView}
         onChangeView={handleViewChange}
         onNavigateSection={handleNavigateSection}
-        onOpenResume={() => setResumeModalOpen(true)}
+        onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
       />
 
-      {/* Main Content */}
       <main className="flex-1 relative z-10 pt-16">
         {activeView === 'plain' ? (
           <Suspense
             fallback={
               <div className="py-24 text-center font-mono text-sm text-stone-600 flex items-center justify-center gap-2">
                 <Loader2 className="w-5 h-5 animate-spin text-stone-800" />
-                <span>Loading Semantic Specification...</span>
+                <span>Loading Plain Print Edition...</span>
               </div>
             }
           >
@@ -162,7 +203,7 @@ export default function App() {
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#1B1B1D] text-[#B0E0E6] text-xs font-mono hover:bg-[#2B2B30] transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Back to Portfolio Overview</span>
+                <span>Back to Overview</span>
               </button>
             </div>
             <PlainView />
@@ -172,7 +213,7 @@ export default function App() {
             fallback={
               <div className="py-32 text-center font-mono text-sm text-[#B0E0E6] flex items-center justify-center gap-2">
                 <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Loading Knowledge Topology Atlas...</span>
+                <span>Loading Skill Atlas...</span>
               </div>
             }
           >
@@ -183,7 +224,7 @@ export default function App() {
                 className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#222226] border border-[#323238] hover:border-[#B0E0E6]/50 text-[#B0E0E6] text-xs font-mono transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Back to Portfolio Overview</span>
+                <span>Back to Overview</span>
               </button>
             </div>
             <AtlasView
@@ -198,7 +239,7 @@ export default function App() {
             fallback={
               <div className="py-32 text-center font-mono text-sm text-[#B0E0E6] flex items-center justify-center gap-2">
                 <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Loading Beep to Receipt Strata...</span>
+                <span>Loading Beep to Receipt Walkthrough...</span>
               </div>
             }
           >
@@ -209,43 +250,44 @@ export default function App() {
                 className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#222226] border border-[#323238] hover:border-[#B0E0E6]/50 text-[#B0E0E6] text-xs font-mono transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Back to Portfolio Overview</span>
+                <span>Back to Overview</span>
               </button>
             </div>
             <TraceView
               onSelectNodeInAtlas={handleSelectNodeInAtlas}
-              onOpenLab={() => setLabModalOpen(true)}
+              onOpenLab={() => captureFocusAndOpen(setLabModalOpen)}
             />
             <ReceiptSection />
           </Suspense>
         ) : (
-          /* Default Primary Portfolio Experience */
           <>
             <HeroSection
               activeView={activeView}
               onChangeView={handleViewChange}
-              onOpenResume={() => setResumeModalOpen(true)}
-              onOpenTerminal={() => setTerminalModalOpen(true)}
-              onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-              onNavigateSection={handleNavigateSection}
+              onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
+              onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
+              onOpenCommandPalette={() => captureFocusAndOpen(setCommandPaletteOpen)}
+              onOpenCaseStudy={handleOpenCaseStudy}
               isAudioMuted={isAudioMuted}
               onToggleAudio={handleToggleAudio}
             />
             <AboutSection
-              onOpenLab={() => setLabModalOpen(true)}
+              onOpenLab={() => captureFocusAndOpen(setLabModalOpen)}
               onOpenBeepToReceipt={() => handleViewChange('trace')}
-              onOpenTerminal={() => setTerminalModalOpen(true)}
+              onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
             />
             <TimelineSection />
             <ConstellationSection
               onOpenFullAtlas={(nodeId) => handleSelectNodeInAtlas(nodeId || '')}
             />
             <ProjectsSection
-              onOpenLab={() => setLabModalOpen(true)}
+              expandedCaseId={expandedCaseId}
+              onSelectCaseId={setExpandedCaseId}
+              onOpenLab={() => captureFocusAndOpen(setLabModalOpen)}
               onOpenBeepToReceipt={() => handleViewChange('trace')}
             />
             <ContactSection
-              onOpenResume={() => setResumeModalOpen(true)}
+              onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
               onJumpToSection={handleNavigateSection}
             />
             <ReceiptSection />
@@ -258,20 +300,20 @@ export default function App() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Interactive Portfolio Terminal"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm"
-          onClick={() => setTerminalModalOpen(false)}
+          aria-label="Interactive Portfolio Shell"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm no-print"
+          onClick={() => closeOverlayAndRestoreFocus(setTerminalModalOpen)}
         >
           <div className="max-w-3xl w-full" onClick={(e) => e.stopPropagation()}>
             <InteractiveTerminal
               isModal
-              onClose={() => setTerminalModalOpen(false)}
+              onClose={() => closeOverlayAndRestoreFocus(setTerminalModalOpen)}
               onOpenResume={() => {
                 setTerminalModalOpen(false);
-                setResumeModalOpen(true);
+                captureFocusAndOpen(setResumeModalOpen);
               }}
               onJumpToSection={(id) => {
-                setTerminalModalOpen(false);
+                closeOverlayAndRestoreFocus(setTerminalModalOpen);
                 handleNavigateSection(id);
               }}
             />
@@ -285,8 +327,8 @@ export default function App() {
           role="dialog"
           aria-modal="true"
           aria-label="Interactive Computing Lab Workbench"
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto"
-          onClick={() => setLabModalOpen(false)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto no-print"
+          onClick={() => closeOverlayAndRestoreFocus(setLabModalOpen)}
         >
           <div
             className="bg-[#1B1B1D] border border-[#323238] rounded-2xl max-w-6xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative my-6"
@@ -302,9 +344,10 @@ export default function App() {
                 </span>
               </div>
               <button
+                ref={labCloseRef}
                 type="button"
-                onClick={() => setLabModalOpen(false)}
-                className="p-1.5 rounded-lg text-[#9CA3AF] hover:text-white border border-[#323238] hover:border-[#B0E0E6]/50 cursor-pointer"
+                onClick={() => closeOverlayAndRestoreFocus(setLabModalOpen)}
+                className="p-1.5 rounded-lg text-[#9CA3AF] hover:text-white border border-[#323238] hover:border-[#B0E0E6]/50 cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
                 aria-label="Close interactive lab modal"
               >
                 <X className="w-4 h-4" />
@@ -316,7 +359,7 @@ export default function App() {
                 fallback={
                   <div className="py-20 text-center font-mono text-sm text-[#B0E0E6] flex items-center justify-center gap-2">
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Mounting Simulation Sandbox...</span>
+                    <span>Loading Simulations...</span>
                   </div>
                 }
               >
@@ -327,35 +370,32 @@ export default function App() {
         </div>
       )}
 
-      {/* Footer */}
       {activeView !== 'plain' && (
         <Footer
-          onOpenResume={() => setResumeModalOpen(true)}
-          onOpenTerminal={() => setTerminalModalOpen(true)}
-          onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+          onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
+          onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
+          onOpenCommandPalette={() => captureFocusAndOpen(setCommandPaletteOpen)}
         />
       )}
 
-      {/* ATS-Optimized Technical Resume Modal */}
       {resumeModalOpen && (
         <Suspense fallback={null}>
           <ResumeModal
             isOpen={resumeModalOpen}
-            onClose={() => setResumeModalOpen(false)}
+            onClose={() => closeOverlayAndRestoreFocus(setResumeModalOpen)}
           />
         </Suspense>
       )}
 
-      {/* Global Command Palette */}
       <CommandPalette
         isOpen={commandPaletteOpen}
-        onClose={() => setCommandPaletteOpen(false)}
+        onClose={() => closeOverlayAndRestoreFocus(setCommandPaletteOpen)}
         onSelectView={handleViewChange}
         onNavigateSection={handleNavigateSection}
         onSelectNode={handleSelectNodeInAtlas}
         onJumpToStratum={handleJumpToStratum}
-        onOpenResume={() => setResumeModalOpen(true)}
-        onOpenTerminal={() => setTerminalModalOpen(true)}
+        onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
+        onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
         isAudioMuted={isAudioMuted}
         onToggleAudio={handleToggleAudio}
       />

@@ -20,7 +20,6 @@ import {
   FileCode
 } from 'lucide-react';
 import { audioFx } from '../utils/audioFx';
-import { TiltCard } from './TiltCard';
 
 /* =========================================================================
    WORKBENCH 1: NETWORK PACKET FLIGHT SIMULATOR DATA & TYPES
@@ -38,7 +37,7 @@ interface PacketHop {
 interface PacketPreset {
   id: string;
   name: string;
-  protocol: 'HTTP/2' | 'DNS' | 'TCP' | 'ISO-8583' | 'ICMP';
+  protocol: 'HTTP/2' | 'DNS' | 'TCP' | 'PAYMENT' | 'ICMP';
   port: string;
   payloadSummary: string;
   description: string;
@@ -64,10 +63,10 @@ const PACKET_PRESETS: PacketPreset[] = [
       },
       {
         nodeId: 'switch',
-        label: 'Managed Store Switch (VLAN 10)',
+        label: 'Store Local Switch',
         layer: 'Layer 2 (Data Link)',
-        action: '802.1Q Ethernet Frame forwarding based on MAC address table',
-        details: 'Switch inspects destination MAC, tags packet with VLAN 10 (POS Network), forwards to trunk port.',
+        action: 'Ethernet Frame forwarding based on MAC address table',
+        details: 'Switch inspects destination MAC address and forwards the frame toward the router uplink port.',
         latencyMs: 0.4
       },
       {
@@ -206,50 +205,50 @@ const PACKET_PRESETS: PacketPreset[] = [
   },
   {
     id: 'pos-payment',
-    name: 'POS Payment Authorization (ISO 8583)',
-    protocol: 'ISO-8583',
+    name: 'Payment Request Flow (Illustrative Example)',
+    protocol: 'PAYMENT',
     port: 'TCP 8443',
-    payloadSummary: 'MTI 0100: Auth Request [PAN: **** **** **** 4821, Amount: RM 24.50]',
-    description: 'Simulates the financial transaction protocol used when a customer taps a card or scans a QR code on an EDC pinpad.',
+    payloadSummary: 'Example Auth Message [Amount: RM 24.50]',
+    description: 'Illustrative simulation of how a retail payment terminal communicates with an acquirer gateway.',
     hops: [
       {
         nodeId: 'client',
-        label: 'Ingenico EDC Payment Pinpad (Store Counter)',
+        label: 'Sample Card Pinpad (Store Counter)',
         layer: 'Layer 7 (Application)',
-        action: 'EMV Chip Read & Pinpad Cryptogram Generation',
-        details: 'Generates ISO 8583 MTI 0100 message with encrypted PIN block and dynamic terminal transaction counter.',
+        action: 'EMV Chip Read & Request Message Preparation',
+        details: 'Constructs an illustrative encrypted payment authorization request payload.',
         latencyMs: 0.2
       },
       {
         nodeId: 'switch',
-        label: 'Isolated Retail POS Switch (VLAN 20)',
+        label: 'Store Local Switch',
         layer: 'Layer 2 (Data Link)',
-        action: 'PCI-DSS Isolated Network Transport',
-        details: 'Traffic physically segregated from in-store guest Wi-Fi and CCTV traffic via dedicated 802.1Q VLAN.',
+        action: 'Local Network Transport',
+        details: 'Forwards frame from the counter port toward the store gateway uplink.',
         latencyMs: 0.5
       },
       {
         nodeId: 'gateway',
-        label: 'Store Router (Dual-WAN Tunnel)',
+        label: 'Store Gateway Router',
         layer: 'Layer 3 (Network)',
-        action: 'IPSec VPN Tunnel Egress to Bank Gateway',
-        details: 'Encapsulates payload into encrypted tunnel directed to merchant bank acquirer gateway IP.',
+        action: 'Encrypted WAN Egress',
+        details: 'Routes outbound payment request over the store internet uplink to the acquirer host.',
         latencyMs: 1.8
       },
       {
         nodeId: 'proxy',
         label: 'Merchant Acquirer Payment Switch',
         layer: 'Layer 7 (Application)',
-        action: 'Card Scheme Clearing & Issuer Bank Handshake',
-        details: 'Routes to card network (Visa/Mastercard/PayNet DuitNow). Validates available credit line, holds funds.',
+        action: 'Card Scheme & Issuer Verification',
+        details: 'Routes request to card network / issuer simulation and validates funds.',
         latencyMs: 240.0
       },
       {
         nodeId: 'client',
-        label: 'Ingenico EDC Pinpad (Received MTI 0110)',
+        label: 'Sample Card Pinpad (Approved)',
         layer: 'Layer 7 (Application)',
-        action: 'Response Code 00: Transaction Approved',
-        details: 'Approval code #849201 generated. Thermal receipt printer prints customer slip. POS register drawer triggers.',
+        action: 'Approval Response Returned',
+        details: 'Sample authorization approved. Receipt printer outputs slip.',
         latencyMs: 265.4
       }
     ]
@@ -268,12 +267,12 @@ interface CanvasNode {
 
 const NETWORK_NODES: CanvasNode[] = [
   { id: 'client', name: 'Terminal / Client', category: 'Endpoint Station', x: 10, y: 50, icon: Terminal },
-  { id: 'switch', name: 'Managed Switch', category: 'VLAN 10 / L2', x: 26, y: 25, icon: Server },
-  { id: 'gateway', name: 'Dual-WAN Gateway', category: 'NAT Router / L3', x: 44, y: 50, icon: Wifi },
+  { id: 'switch', name: 'Managed Switch', category: 'LAN / L2', x: 26, y: 25, icon: Server },
+  { id: 'gateway', name: 'Edge Gateway', category: 'NAT Router / L3', x: 44, y: 50, icon: Wifi },
   { id: 'dns', name: 'DNS Resolver', category: 'Recursive 1.1.1.1', x: 44, y: 82, icon: Radio },
   { id: 'proxy', name: 'Edge WAF / Proxy', category: 'Cloud Ingress / L7', x: 65, y: 35, icon: Lock },
-  { id: 'backend', name: 'App Cluster', category: 'Laravel API / L7', x: 84, y: 35, icon: Cpu },
-  { id: 'database', name: 'Database Engine', category: 'MySQL 8.0 Storage', x: 84, y: 72, icon: Database },
+  { id: 'backend', name: 'App Cluster', category: 'API Server / L7', x: 84, y: 35, icon: Cpu },
+  { id: 'database', name: 'Database Engine', category: 'SQL Storage', x: 84, y: 72, icon: Database },
 ];
 
 /* =========================================================================
@@ -363,7 +362,7 @@ export const TheLab: React.FC = () => {
   const CACHE_CAPACITY = 4;
   const [cachePolicy, setCachePolicy] = useState<'LRU' | 'FIFO'>('LRU');
   const [cacheItems, setCacheItems] = useState<CacheItem[]>([
-    { key: 'SKU_1001', value: 'Milk 1L (emart24)', accessCount: 3, lastAccessCycle: 1 },
+    { key: 'SKU_1001', value: 'Milk 1L (Demo Store)', accessCount: 3, lastAccessCycle: 1 },
     { key: 'USER_882', value: 'Cashier Session #4', accessCount: 1, lastAccessCycle: 2 },
     { key: 'TOKEN_AUTH', value: 'JWT Bearer Key', accessCount: 4, lastAccessCycle: 3 },
   ]);
@@ -451,7 +450,7 @@ export const TheLab: React.FC = () => {
   const handleResetCache = () => {
     audioFx.playClick(400);
     setCacheItems([
-      { key: 'SKU_1001', value: 'Milk 1L (emart24)', accessCount: 1, lastAccessCycle: 1 },
+      { key: 'SKU_1001', value: 'Milk 1L (Demo Store)', accessCount: 1, lastAccessCycle: 1 },
       { key: 'USER_882', value: 'Cashier Session #4', accessCount: 1, lastAccessCycle: 2 },
     ]);
     setCycleCounter(3);
@@ -817,8 +816,8 @@ export const TheLab: React.FC = () => {
 
                 <div className="p-3 rounded-lg bg-[#1B1B1D] border border-[#323238] text-[11px] text-[#D1D5DB] leading-relaxed">
                   <strong className="text-[#B0E0E6]">Educational Simulation:</strong> Demonstrates
-                  packet routing, NAT translation, 802.1Q tagging, and protocol steps cleanly in the
-                  browser.
+                  general packet routing, NAT translation, Ethernet switching, and protocol steps
+                  cleanly in the browser.
                 </div>
               </div>
             </div>

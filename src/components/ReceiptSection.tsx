@@ -5,6 +5,7 @@ import {
   CERTIFICATIONS,
   EDUCATION,
   NODES,
+  LEARNING_ENTRIES,
 } from '../data/universeContent';
 import { Copy, Check, Printer, ExternalLink, ShieldCheck, Mail, MapPin } from 'lucide-react';
 
@@ -46,24 +47,24 @@ export const ReceiptSection: React.FC = () => {
     <section
       id="receipt"
       aria-labelledby="receipt-heading"
-      className="relative py-20 px-4 sm:px-6 max-w-4xl mx-auto"
+      className="scroll-mt-20 relative py-20 px-4 sm:px-6 max-w-4xl mx-auto"
     >
       <div className="sr-only" aria-live="polite" role="status">
         {copyFeedback}
       </div>
 
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 print:hidden">
         <p className="text-xs font-mono uppercase tracking-wider text-[#B0E0E6] mb-2">
-          07. Verified Summary Dossier
+          07. Printable Summary
         </p>
         <h2
           id="receipt-heading"
           className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight"
         >
-          The Thermal Receipt
+          The Summary Receipt
         </h2>
         <p className="text-[#D1D5DB] text-sm max-w-xl mx-auto mt-2 leading-relaxed">
-          All verified roles, academic grounding, and certifications printed on a clean, printable high-contrast thermal receipt artifact.
+          Experience history, education, credentials, and direct contact info formatted as a printable receipt.
         </p>
       </div>
 
@@ -98,7 +99,7 @@ export const ReceiptSection: React.FC = () => {
           type="button"
           onClick={handlePrint}
           className="inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-lg bg-[#DC343B] hover:bg-[#c52b31] text-white font-mono text-xs uppercase tracking-wider font-semibold transition-colors cursor-pointer"
-          aria-label="Print or save as PDF resume dossier"
+          aria-label="Print or save summary receipt as PDF"
         >
           <Printer className="w-4 h-4" aria-hidden="true" />
           <span>Print / Save PDF</span>
@@ -114,7 +115,7 @@ export const ReceiptSection: React.FC = () => {
       >
         {/* Top Serrated Edge Pattern */}
         <div
-          className="absolute -top-3 left-0 right-0 h-3 overflow-hidden select-none pointer-events-none"
+          className="absolute -top-3 left-0 right-0 h-3 overflow-hidden select-none pointer-events-none print:hidden"
           style={{
             backgroundImage:
               'radial-gradient(circle, transparent, transparent 50%, #F9F7F1 50%, #F9F7F1 100%)',
@@ -131,7 +132,7 @@ export const ReceiptSection: React.FC = () => {
           <div className="font-semibold text-stone-700 tracking-wider text-xs uppercase">
             {PROFILE.title}
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-stone-600 mt-2">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-stone-700 mt-2">
             <span className="flex items-center gap-1">
               <MapPin className="w-3 h-3 text-stone-700" aria-hidden="true" />
               {PROFILE.location}
@@ -141,29 +142,32 @@ export const ReceiptSection: React.FC = () => {
               {PROFILE.email}
             </span>
           </div>
-          <div className="mt-3 text-[11px] text-stone-500 uppercase tracking-widest">
-            REG: AR-PORTFOLIO · TERMINAL: POS-01 · DOSSIER SUMMARY
+          <div className="mt-3 text-[11px] text-stone-600 uppercase tracking-widest">
+            SUMMARY RECEIPT · APPLICATION SUPPORT &amp; IT OPERATIONS
           </div>
         </div>
 
-        {/* Operational Premise */}
-        <div className="py-4 border-b border-dashed border-stone-800/60 text-stone-800 leading-relaxed text-center sm:text-left text-xs">
+        {/* Intro */}
+        <div className="py-4 border-b border-dashed border-stone-800/60 text-stone-800 leading-relaxed text-center sm:text-left text-xs font-sans">
           {PROFILE.intro}
         </div>
 
-        {/* Employment History */}
+        {/* Work History */}
         <div className="py-5 border-b border-dashed border-stone-800/60">
           <div className="flex justify-between items-center text-xs font-bold uppercase tracking-wider text-stone-900 mb-4 pb-1 border-b border-stone-400">
-            <span>EXPERIENCE HISTORY</span>
+            <span>WORK &amp; INTERNSHIP HISTORY</span>
             <span>PERIOD</span>
           </div>
 
           <div className="space-y-6">
             {EXPERIENCES.map((exp) => (
-              <div key={exp.id} className="text-xs">
+              <div key={exp.id} className="text-xs break-inside-avoid">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline font-bold text-stone-900 gap-1">
-                  <span className="text-sm uppercase tracking-wide">{exp.role}</span>
-                  <span className="text-stone-600 font-mono text-[11px] uppercase">
+                  <span className="text-sm uppercase tracking-wide">
+                    {exp.role}
+                    {exp.isInternship ? ' (Internship)' : ''}
+                  </span>
+                  <span className="text-stone-700 font-mono text-[11px] uppercase">
                     {exp.period}
                   </span>
                 </div>
@@ -172,7 +176,7 @@ export const ReceiptSection: React.FC = () => {
                 </div>
 
                 <ul className="space-y-1.5 list-disc list-inside text-stone-800 pl-1">
-                  {exp.bullets.map((bullet, idx) => (
+                  {exp.highlights.map((bullet, idx) => (
                     <li key={idx} className="leading-relaxed">
                       <span className="font-sans font-normal text-stone-800 text-xs">{bullet}</span>
                     </li>
@@ -194,35 +198,15 @@ export const ReceiptSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Certifications & Education */}
-        <div className="py-5 border-b border-dashed border-stone-800/60">
+        {/* Credentials & Education */}
+        <div className="py-5 border-b border-dashed border-stone-800/60 break-inside-avoid">
           <div className="flex justify-between items-center text-xs font-bold uppercase tracking-wider text-stone-900 mb-3 pb-1 border-b border-stone-400">
-            <span>CREDENTIALS & EDUCATION</span>
+            <span>EDUCATION &amp; CREDENTIALS</span>
             <span>STATUS</span>
           </div>
 
           <div className="space-y-3">
-            {CERTIFICATIONS.map((cert) => (
-              <div
-                key={cert.name}
-                className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 text-xs"
-              >
-                <div>
-                  <div className="font-bold text-stone-900 flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-stone-700" aria-hidden="true" />
-                    <span>{cert.name}</span>
-                  </div>
-                  <div className="text-stone-600 text-[11px]">
-                    {cert.issuer} · {cert.credentialNote}
-                  </div>
-                </div>
-                <span className="text-[11px] font-bold text-stone-800 bg-stone-200 px-2 py-0.5 self-start sm:self-auto uppercase">
-                  {cert.status}
-                </span>
-              </div>
-            ))}
-
-            <div className="pt-2 border-t border-stone-300/80 flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 text-xs">
+            <div className="pb-2 border-b border-stone-300/80 flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 text-xs">
               <div>
                 <div className="font-bold text-stone-900">{EDUCATION.degree}</div>
                 <div className="text-stone-600 text-[11px]">
@@ -230,29 +214,43 @@ export const ReceiptSection: React.FC = () => {
                 </div>
               </div>
               <span className="text-[11px] font-bold text-stone-800 bg-stone-200 px-2 py-0.5 self-start sm:self-auto uppercase">
-                Graduated
+                Diploma
               </span>
             </div>
+
+            {CERTIFICATIONS.map((cert) => (
+              <div
+                key={cert.id}
+                className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 text-xs"
+              >
+                <div>
+                  <div className="font-bold text-stone-900 flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-stone-700" aria-hidden="true" />
+                    <span>{cert.name}</span>
+                  </div>
+                  <div className="text-stone-600 text-[11px]">{cert.issuer}</div>
+                </div>
+                <span className="text-[11px] font-bold text-stone-800 bg-stone-200 px-2 py-0.5 self-start sm:self-auto uppercase">
+                  {cert.status}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Verification Summary */}
-        <div className="py-4 border-b border-dashed border-stone-800/60 font-mono text-xs">
+        {/* Summary Totals (Factual Counts Only) */}
+        <div className="py-4 border-b border-dashed border-stone-800/60 font-mono text-xs break-inside-avoid">
           <div className="flex justify-between py-1">
-            <span>VERIFIED WORK ENTRIES</span>
+            <span>WORK &amp; INTERNSHIP ENTRIES</span>
             <span className="font-bold">0{EXPERIENCES.length} ROLES</span>
           </div>
           <div className="flex justify-between py-1">
-            <span>CONSTELLATION SKILLS & NODES</span>
-            <span className="font-bold">{NODES.length} NODES</span>
+            <span>DOCUMENTED SKILLS</span>
+            <span className="font-bold">{NODES.length} ITEMS</span>
           </div>
           <div className="flex justify-between py-1">
-            <span>EVIDENCE TRACEABILITY</span>
-            <span className="font-bold">100% VERIFIED</span>
-          </div>
-          <div className="flex justify-between py-2 border-t border-stone-400 text-sm font-bold mt-2">
-            <span>CANDIDATE DOSSIER</span>
-            <span>COMPLETE ✓</span>
+            <span>ACTIVE LEARNING</span>
+            <span className="font-bold">{LEARNING_ENTRIES[0].topic}</span>
           </div>
         </div>
 
@@ -267,16 +265,13 @@ export const ReceiptSection: React.FC = () => {
             aria-hidden="true"
           />
           <div className="text-[11px] tracking-widest text-stone-700 font-mono">
-            * 9 5 5 5 0 1 8 4 2 0 2 6 9 *
-          </div>
-          <div className="text-[10px] text-stone-500 uppercase mt-3">
-            Aries Razak · Application Support & Systems Dossier
+            ARIES RAZAK · PORTFOLIO RECEIPT
           </div>
         </div>
 
         {/* Bottom Serrated Edge Pattern */}
         <div
-          className="absolute -bottom-3 left-0 right-0 h-3 overflow-hidden select-none pointer-events-none"
+          className="absolute -bottom-3 left-0 right-0 h-3 overflow-hidden select-none pointer-events-none print:hidden"
           style={{
             backgroundImage:
               'radial-gradient(circle, transparent, transparent 50%, #F9F7F1 50%, #F9F7F1 100%)',

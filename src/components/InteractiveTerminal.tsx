@@ -35,7 +35,7 @@ const SUPPORTED_COMMANDS = [
   'learning',
   'visitors',
   'beep',
-  'sudo',
+  'resume',
   'clear',
 ];
 
@@ -43,12 +43,12 @@ const INITIAL_LINES: TerminalLine[] = [
   {
     id: 1,
     type: 'accent',
-    text: `Welcome to ${PROFILE.displayName}'s Interactive Portfolio Shell (Read-Only Sandbox).`,
+    text: `${PROFILE.displayName} Portfolio Shell (Read-Only Sandbox)`,
   },
   {
     id: 2,
     type: 'output',
-    text: `Type "help" or tap a command below to explore background, verified skills, projects, or contact details.`,
+    text: 'Type "help" or click a command below to query roles, skills, case studies, or contact info.',
   },
 ];
 
@@ -97,7 +97,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     setHistoryIdx(-1);
     setInput('');
 
-    appendLines([{ type: 'command', text: `aries@universe:~$ ${trimmed}` }]);
+    appendLines([{ type: 'command', text: `aries@portfolio:~$ ${trimmed}` }]);
 
     if (cmd === 'clear') {
       setLines(INITIAL_LINES);
@@ -107,16 +107,16 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     if (cmd === 'help') {
       appendLines([
         { type: 'accent', text: 'Available commands:' },
-        { type: 'output', text: '  about        — Who I am and what I work on' },
-        { type: 'output', text: '  skills       — Capabilities grouped by evidence level' },
-        { type: 'output', text: '  experience   — Verified employment chronology' },
-        { type: 'output', text: '  projects     — Operational case studies & lab work' },
-        { type: 'output', text: '  education    — Academic qualification & certifications' },
-        { type: 'output', text: '  learning     — Currently exploring (UiPath RPA, ITIL 4, Linux)' },
-        { type: 'output', text: '  contact      — Email, LinkedIn, and location' },
-        { type: 'output', text: '  visitors     — Query persistent server visitor count' },
-        { type: 'output', text: '  beep         — Easter egg: simulate a POS scanner beep' },
-        { type: 'output', text: '  clear        — Clear terminal history' },
+        { type: 'output', text: '  about        - Background and current role' },
+        { type: 'output', text: '  skills       - Work-backed skills and active learning' },
+        { type: 'output', text: '  experience   - Work and internship chronology' },
+        { type: 'output', text: '  projects     - Featured case studies' },
+        { type: 'output', text: '  education    - UiTM diploma and credentials' },
+        { type: 'output', text: '  learning     - Currently exploring (UiPath & RPA)' },
+        { type: 'output', text: '  contact      - Email, LinkedIn, and location' },
+        { type: 'output', text: '  visitors     - Query server visitor count' },
+        { type: 'output', text: '  beep         - Simulated scanner beep walkthrough' },
+        { type: 'output', text: '  clear        - Clear terminal output' },
       ]);
       return;
     }
@@ -124,7 +124,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     if (cmd === 'about' || cmd === 'whoami') {
       appendLines([
         { type: 'accent', text: `${PROFILE.fullName} (${PROFILE.displayName})` },
-        { type: 'output', text: `Role: ${PROFILE.title}` },
+        { type: 'output', text: `Focus: ${PROFILE.title}` },
         { type: 'output', text: `Current: ${PROFILE.currentRole} at ${PROFILE.currentCompany}` },
         { type: 'output', text: `Summary: ${PROFILE.intro}` },
       ]);
@@ -133,31 +133,33 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'experience') {
       appendLines([
-        { type: 'accent', text: `Verified Employment History (${EXPERIENCES.length} Roles):` },
+        { type: 'accent', text: `Work & Internship History (${EXPERIENCES.length} Entries):` },
         ...EXPERIENCES.map((exp) => ({
           type: 'output' as const,
-          text: `• ${exp.role} @ ${exp.organization} (${exp.period}) — ${exp.technologies.slice(0, 4).join(', ')}`,
+          text: `• ${exp.role} @ ${exp.organization} (${exp.period}) - ${exp.technologies.slice(0, 4).join(', ')}`,
         })),
       ]);
       return;
     }
 
     if (cmd === 'skills') {
-      const prof = NODES.filter((n) => n.status === 'professional').slice(0, 6).map((n) => n.label);
+      const prof = NODES.filter((n) => n.status === 'professional')
+        .slice(0, 6)
+        .map((n) => n.label);
       const prac = NODES.filter((n) => n.status === 'project').map((n) => n.label);
       const learn = NODES.filter((n) => n.status === 'learning').map((n) => n.label);
       appendLines([
-        { type: 'accent', text: 'Technical Snapshot (Separated by Honest Evidence Status):' },
-        { type: 'output', text: `  ◆ Professional Experience: ${prof.join(', ')}` },
-        { type: 'output', text: `  ■ Practical Exposure:      ${prac.join(', ')}` },
-        { type: 'output', text: `  ○ Currently Learning:      ${learn.join(', ')}` },
+        { type: 'accent', text: 'Skills Grouped by Background:' },
+        { type: 'output', text: `  ◆ Work-Backed:               ${prof.join(', ')}` },
+        { type: 'output', text: `  ■ Internship / Education:    ${prac.join(', ')}` },
+        { type: 'output', text: `  ○ Currently Learning:        ${learn.join(', ')}` },
       ]);
       return;
     }
 
     if (cmd === 'projects') {
       appendLines([
-        { type: 'accent', text: `Field Case Studies & Implementations (${CASE_STUDIES.length}):` },
+        { type: 'accent', text: `Case Studies (${CASE_STUDIES.length}):` },
         ...CASE_STUDIES.map((cs, i) => ({
           type: 'output' as const,
           text: `  0${i + 1}. ${cs.title} (${cs.organization})`,
@@ -168,11 +170,11 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'education' || cmd === 'certifications') {
       appendLines([
-        { type: 'accent', text: 'Education & Verified Credentials:' },
-        { type: 'output', text: `  • ${EDUCATION.degree} — ${EDUCATION.institution} (${EDUCATION.period})` },
+        { type: 'accent', text: 'Education & Credentials:' },
+        { type: 'output', text: `  • ${EDUCATION.degree} - ${EDUCATION.institution} (${EDUCATION.period})` },
         ...CERTIFICATIONS.map((c) => ({
           type: 'output' as const,
-          text: `  • ${c.name} — ${c.issuer} [${c.status}]`,
+          text: `  • ${c.name} - ${c.issuer} [${c.status}]`,
         })),
       ]);
       return;
@@ -180,7 +182,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'learning') {
       appendLines([
-        { type: 'accent', text: 'Currently Learning & Active Explorations:' },
+        { type: 'accent', text: 'Active Learning:' },
         ...LEARNING_ENTRIES.map((l) => ({
           type: 'output' as const,
           text: `  ○ ${l.topic}: ${l.note}`,
@@ -221,34 +223,26 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     if (cmd === 'beep') {
       audioFx.playSuccess();
       appendLines([
-        { type: 'accent', text: '[SCANNER BEEP] EAN-13: 9555018420269' },
-        { type: 'output', text: 'IRQ 04 -> /dev/ttyS0 -> POS Daemon -> VLAN 10 -> ISO 8583 MTI 0110 -> Receipt Printed.' },
+        { type: 'accent', text: '[ILLUSTRATIVE SIMULATION] Sample Barcode Scan' },
+        {
+          type: 'output',
+          text: 'Scanner input -> POS app SKU lookup -> sample basket total -> simulated receipt print.',
+        },
       ]);
-      return;
-    }
-
-    if (cmd === 'sudo' || cmd.startsWith('sudo ')) {
-      appendLines([
-        { type: 'accent', text: 'Nice try! Standard user privileges active (Principle of Least Privilege).' },
-        { type: 'output', text: 'If you are a recruiter looking to connect, opening the verified resume or email works without sudo.' },
-      ]);
-      if (cmd.includes('resume') && onOpenResume) {
-        onOpenResume();
-      }
       return;
     }
 
     if (cmd === 'resume') {
       if (onOpenResume) {
         onOpenResume();
-        appendLines([{ type: 'accent', text: 'Opening verified resume modal...' }]);
+        appendLines([{ type: 'accent', text: 'Opening resume viewer...' }]);
       } else {
-        appendLines([{ type: 'output', text: 'Use the Resume button in the top navigation bar.' }]);
+        appendLines([{ type: 'output', text: 'Use the View Resume button in the navigation bar.' }]);
       }
       return;
     }
 
-    if (cmd === 'constellation' && onJumpToSection) {
+    if (cmd === 'skills' && onJumpToSection) {
       onJumpToSection('constellation');
       onClose?.();
       return;
@@ -291,7 +285,6 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
   return (
     <div className="bg-[#141416] border border-[#323238] rounded-2xl overflow-hidden shadow-2xl font-mono text-xs sm:text-sm">
-      {/* Terminal Window Chrome */}
       <div className="px-4 py-3 bg-[#1B1B1D] border-b border-[#323238] flex items-center justify-between gap-4">
         <div className="flex items-center gap-2.5">
           <span className="w-2.5 h-2.5 rounded-full bg-[#DC343B]" aria-hidden="true" />
@@ -299,7 +292,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           <span className="w-2.5 h-2.5 rounded-full bg-[#4B5563]" aria-hidden="true" />
           <TerminalIcon className="w-3.5 h-3.5 text-[#B0E0E6] ml-1" aria-hidden="true" />
           <span className="text-xs font-semibold text-white">
-            aries-portfolio — interactive shell
+            aries-portfolio : interactive shell
           </span>
         </div>
 
@@ -317,7 +310,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded text-[#9CA3AF] hover:text-white border border-[#323238] cursor-pointer"
+              className="p-1.5 rounded text-[#9CA3AF] hover:text-white border border-[#323238] cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center"
               aria-label="Close terminal modal"
             >
               <X className="w-4 h-4" />
@@ -326,7 +319,6 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
         </div>
       </div>
 
-      {/* Output Log Area */}
       <div
         ref={outputRef}
         onClick={() => inputRef.current?.focus()}
@@ -352,7 +344,6 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
         ))}
       </div>
 
-      {/* Quick Tap Command Buttons (Friendly on Mobile & Desktop) */}
       <div className="px-4 py-2.5 bg-[#1B1B1D] border-t border-[#323238] flex items-center gap-1.5 overflow-x-auto text-[11px]">
         <span className="text-[#9CA3AF] mr-1 shrink-0">Quick run:</span>
         {['help', 'about', 'skills', 'experience', 'projects', 'education', 'contact', 'beep', 'clear'].map(
@@ -369,7 +360,6 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
         )}
       </div>
 
-      {/* Prompt Input Form */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -377,8 +367,11 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
         }}
         className="px-4 py-3 bg-[#161618] border-t border-[#323238] flex items-center gap-2.5"
       >
-        <label htmlFor={isModal ? 'terminal-modal-input' : 'terminal-inline-input'} className="text-[#B0E0E6] text-xs font-semibold shrink-0">
-          aries@universe:~$
+        <label
+          htmlFor={isModal ? 'terminal-modal-input' : 'terminal-inline-input'}
+          className="text-[#B0E0E6] text-xs font-semibold shrink-0"
+        >
+          aries@portfolio:~$
         </label>
         <input
           id={isModal ? 'terminal-modal-input' : 'terminal-inline-input'}
