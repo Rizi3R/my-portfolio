@@ -63,8 +63,8 @@ forbiddenTitles.forEach((title) => {
 });
 
 const hwcRole = EXPERIENCES.find((e) => e.id === 'exp-hwc');
-if (!hwcRole || hwcRole.period !== '27 March 2024 to 27 September 2025') {
-  logError('HWC Coffee employment period must equal "27 March 2024 to 27 September 2025".');
+if (!hwcRole || hwcRole.period !== 'March 2024 to September 2025') {
+  logError('HWC Coffee employment period must equal "March 2024 to September 2025".');
 }
 if (!hwcRole || hwcRole.role !== 'IT Support | HWC Coffee Malaysia') {
   logError('HWC Coffee public role label must equal "IT Support | HWC Coffee Malaysia".');

@@ -363,7 +363,7 @@ export const EXPERIENCES: ExperienceEntry[] = [
     id: 'exp-hwc',
     role: 'IT Support | HWC Coffee Malaysia',
     organization: 'HWC Coffee Malaysia (Palaterium Sdn Bhd)',
-    period: '27 March 2024 to 27 September 2025',
+    period: 'March 2024 to September 2025',
     compactPeriod: 'Mar 2024 to Sep 2025',
     location: 'Malaysia',
     summary:
@@ -436,7 +436,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     id: 'case-lark-migration',
     title: 'Leading a Google Workspace to Lark migration',
     organization: 'HWC Coffee Malaysia (Palaterium Sdn Bhd)',
-    period: '27 March 2024 to 27 September 2025',
+    period: 'March 2024 to September 2025',
     featuredOnHome: true,
     summaryLine:
       'Internal migration lead with Lark team support, workspace administration, onboarding/offboarding, approvals, and colleague adoption.',
