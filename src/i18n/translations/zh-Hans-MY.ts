@@ -75,7 +75,7 @@ export const zhHansMYUi: UiTranslations = {
     eyebrow: '项目案例',
     heading: '精选案例',
     intro:
-      '涵盖内部 SaaS 平台迁移协调、第三方外送平台配置、应用故障分诊与协调跟进，以及新门店 IT 开业准备的四个代表案例。',
+      '涵盖内部 SaaS 平台迁移协调、第三方外送平台配置、应用故障初步排查与厂商协调跟进，以及新门店 IT 开业准备的四个代表案例。',
     caseLabelPrefix: '案例 {number}',
     contextLabel: '背景情况',
     myRoleLabel: '我的职责',
@@ -692,7 +692,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
       items: [
         'Xilnex 故障排查',
         '一线问题分诊与排查',
-        '外部厂商升级跟进',
+        '问题转交厂商跟进',
         '用户验收测试（UAT）支持',
       ],
     },
@@ -736,7 +736,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
       highlights: [
         '根据人力资源部门（HR）的入职申请单，在核对审批状态、用户权限组和所属门店后开通 Xilnex POS 账号，并及时清理离职员工的系统访问权限及员工折扣资格。',
         '与 Xilnex 及第三方外送平台（GrabFood、foodpanda、ShopeeFood）沟通衔接，在 Xilnex 门户完成并同步门店端配置；其中以 foodpanda 为例，负责将合作门店绑定至对应的 Xilnex 门店并配置价格方案与菜单档案。',
-        '排查总部与门店在 Xilnex POS 同步、促销活动及支付环节出现的问题，核实故障现象、引导初步检查，并在需要深入排查时协调厂商升级处理。',
+        '排查总部与门店在 Xilnex POS 同步、促销活动及支付环节出现的问题，核实故障现象、引导初步检查，并在需要深入排查时协调转交厂商跟进。',
         '制作了用于规范周期性促销申请并导入至 Xilnex Promotion Portal 的 Excel 模板，并提供导入功能的使用指导。',
         '在新门店筹备开业期间安装并检查 POS 主机、刷卡终端、扫码枪、小票打印机及门店 LAN / Wi-Fi 网络连通性。',
         '在指定职责范围内协助开展 Microsoft 365 账号开通与用户验收测试（UAT）。',
@@ -862,20 +862,20 @@ export const zhHansMYContent: PortfolioContentTranslations = {
       ],
     },
     'case-pos-triage': {
-      title: '应用故障一线分诊与厂商升级协作',
+      title: '应用故障初步排查与厂商协调跟进',
       organization: 'emart24 Malaysia',
       roleScope: '日常支持流程 · 一线排查分诊',
       summaryLine:
-        '在总部与门店开展日常排查，针对 Xilnex POS 常见的数据同步、促销及支付问题核实症状与相关设置，在需要时协调厂商升级跟进并确认后续状态。',
+        '在总部与门店开展日常排查，针对 Xilnex POS 常见的数据同步、促销及支付问题核实症状与相关设置，在需要时协调转交厂商跟进并确认后续状态。',
       situation:
         '在总部与多门店日常运营中，涉及 Xilnex POS 同步、促销计算或收银支付的问题经常需要一线系统排查，以准确区分本地环境因素与需交由厂商解决的平台层问题。',
       responsibility:
-        '我负责总部及门店的一线应用排查工作，与用户核实具体现象、引导完成恰当的初步核查，并在必要时将情况升级至 Xilnex 或相关内部团队。',
+        '我负责总部及门店的一线应用排查工作，与用户核实具体现象、引导完成恰当的初步核查，并在必要时将情况转交 Xilnex 或相关内部团队跟进。',
       whatIDid: [
         '与门店或总部员工确认报错现象，明确涉及的界面、商品、促销或结账步骤。',
         '围绕问题特征检查对应的 Xilnex 同步状态、促销设置、支付环节、账号权限或本地网络连接情况。',
         '针对具体排查点引导工作人员执行恰当的初步检查，随后复测确认状态。',
-        '在需要平台深层排查时，整理已收集的现象和初步检查结果升级至 Xilnex 或内部技术团队跟进。',
+        '在需要更深入排查时，整理已收集的现象和初步检查结果，协调转交 Xilnex 或相关内部团队跟进。',
       ],
       triageBreakdown: {
         checksPerformed: [
@@ -898,7 +898,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
         'Xilnex POS',
         '一线问题排查',
         '同步与促销核查',
-        '厂商升级协同',
+        '厂商协调跟进',
       ],
     },
     'case-store-launch': {
@@ -1033,14 +1033,14 @@ export const zhHansMYContent: PortfolioContentTranslations = {
     },
     operations: {
       title: '一线人员、问题排查与厂商协作',
-      subtitle: '教学分层示意：门店用户、支持团队与厂商升级',
+      subtitle: '教学分层示意：业务用户、支持团队与问题转交跟进',
       description:
-        '系统长期可靠运行离不开支持团队与用户的清晰沟通、结构化的初步核查以及高质量的问题升级交接。',
-      exampleStage: '示例环节：故障分诊与线索升级',
-      examplePayload: '用户上报 -> 复现现象并初步检查 -> 整理上下文升级给厂商',
+        '系统长期可靠运行离不开支持团队与用户的清晰沟通、结构化的初步核查以及清晰的问题转交跟进。',
+      exampleStage: '示例环节：问题初步排查与转交跟进',
+      examplePayload: '用户上报 -> 复现现象并初步检查 -> 附带排查情况转交跟进',
       whatHappensConceptually:
         '应用支持专员首先核实用户实际看到的问题现象，执行安全合理的初步检查，并在涉及平台侧缺陷时把清楚的上下文交给厂商。',
-      exampleComponents: ['用户使用支持', '远程初步排查', '外部厂商升级', '开业现场就绪'],
+      exampleComponents: ['用户使用支持', '远程初步排查', '问题转交厂商跟进', '开业现场就绪'],
     },
   },
   nodes: {
@@ -1051,9 +1051,9 @@ export const zhHansMYContent: PortfolioContentTranslations = {
       year: '2024年至今',
     },
     'node-vendor-escalation': {
-      label: '厂商问题升级协同',
+      label: '问题转交厂商跟进',
       summary: '将已记录现象与初步检查结果整理清晰后协调外部厂商跟进。',
-      usage: '把无法在本地解决的 Xilnex POS 或支付异常升级至外部厂商或内部相关团队。',
+      usage: '将无法在本地解决的 Xilnex POS 或支付异常转交外部厂商或相关内部团队跟进。',
       year: '2025年至今',
     },
     'node-uat-support': {
@@ -1150,7 +1150,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
   edges: [
     '收银柜台设备依赖经过检查的本地网线与 Wi-Fi 连接。',
     '门店网络通畅是 Xilnex 数据同步与结账测试正常运行的前提。',
-    '一线 POS 排查将初步现象核查与外部厂商升级衔接起来。',
+    '一线 POS 排查将初步现象核查与问题转交厂商跟进衔接起来。',
     '内部迁移统筹工作自然过渡到日常 Lark 平台运维管理。',
     'Lark Helpdesk 将员工内部求助与远程支持排障连通。',
     '严谨的导入表格规范支撑着办公及财务系统的日常运作。',

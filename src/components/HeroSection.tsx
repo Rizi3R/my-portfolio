@@ -203,30 +203,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="text-xs font-mono uppercase tracking-wider text-[#CFCAC0]">
                   {t.hero.triageFlowLabel}
                 </div>
-                <ol className="flex flex-col sm:flex-row sm:flex-wrap sm:items-stretch gap-2 text-xs sm:text-[13px] font-sans text-[#F6F2E9]">
+                <ol className="flex flex-col gap-1.5 text-xs sm:text-[13px] font-sans text-[#F6F2E9]">
                   {t.hero.triageSteps.map((step, index) => (
                     <li
-                      key={step}
-                      className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 max-w-full"
+                      key={index}
+                      className="flex flex-col items-stretch gap-1.5"
                     >
-                      <span className="px-3 py-2 rounded-lg bg-[#0A0913] border border-[#242138] text-[#F6F2E9] leading-relaxed break-words">
+                      <div className="w-full px-3.5 py-2 rounded-lg bg-[#0A0913] border border-[#242138] text-[#F6F2E9] leading-relaxed break-words">
                         {index + 1}. {step}
-                      </span>
+                      </div>
                       {index < t.hero.triageSteps.length - 1 && (
-                        <>
-                          <span
-                            aria-hidden="true"
-                            className="sm:hidden text-[#F2A77D] font-mono self-center text-xs leading-none"
-                          >
-                            ↓
-                          </span>
-                          <span
-                            aria-hidden="true"
-                            className="hidden sm:inline text-[#F2A77D] font-mono shrink-0"
-                          >
-                            →
-                          </span>
-                        </>
+                        <span
+                          aria-hidden="true"
+                          className="text-[#F2A77D] font-mono self-center text-xs leading-none py-0.5 select-none"
+                        >
+                          ↓
+                        </span>
                       )}
                     </li>
                   ))}

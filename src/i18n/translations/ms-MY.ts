@@ -841,7 +841,7 @@ export const msMYContent: PortfolioContentTranslations = {
         'Saya mengetuai migrasi ini secara dalaman dengan sokongan daripada pasukan Lark serta mengendalikan pentadbiran ruang kerja dan sokongan pengguna.',
       whatIDid: [
         'Menyelaraskan aktiviti pelaksanaan dalaman sambil bekerjasama dengan pasukan Lark bagi langkah sokongan migrasi.',
-        'Mengkonfigurasi akaun pengguna Lark, perubahan akses bagi penyediaan akaun dan penamatan akses kakitangan, serta aliran kerja kelulusan digital.',
+        'Menyediakan akaun pengguna Lark, mengurus perubahan dan penamatan akses kakitangan, serta mengkonfigurasi aliran kerja kelulusan digital.',
         'Membantu rakan sekerja menggunakan pemesejan, e-mel, kelulusan, dan Lark Helpdesk dalam tugasan harian.',
       ],
       outcomeLabel: 'Hasil',
