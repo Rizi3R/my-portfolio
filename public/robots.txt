@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aries-razak.vercel.app/sitemap.xml

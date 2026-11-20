@@ -32,7 +32,7 @@ export const TimelineSection: React.FC = () => {
             </h2>
           </div>
           <p className="text-sm text-[#CFCAC0] max-w-md leading-relaxed">
-            Paid application support and IT operations experience alongside my undergraduate application development internship.
+            My experience across application support, business systems, IT operations, and application development.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export const TimelineSection: React.FC = () => {
             const roleBadge = isCurrent
               ? 'Current Role'
               : exp.isInternship
-              ? 'Internship Experience'
+              ? 'Diploma Internship'
               : 'Work Experience';
 
             return (
@@ -64,7 +64,7 @@ export const TimelineSection: React.FC = () => {
                     </div>
                     <div
                       className={`text-xs sm:text-sm font-mono ${
-                        isCurrent ? 'text-[#F2A77D] font-semibold' : 'text-[#9A94A8]'
+                        isCurrent ? 'text-[#F2A77D] font-semibold' : 'text-[#B5B0C2]'
                       }`}
                     >
                       {exp.period}
@@ -109,7 +109,7 @@ export const TimelineSection: React.FC = () => {
                         ))}
                       </ul>
 
-                      <div className="text-xs font-mono text-[#9A94A8]">
+                      <div className="text-xs font-mono text-[#B5B0C2]">
                         <span className="text-[#A8C5FF] mr-2">Tools:</span>
                         <span>{exp.technologies.join(' · ')}</span>
                       </div>

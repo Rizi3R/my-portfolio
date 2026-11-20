@@ -38,10 +38,12 @@ export const Footer: React.FC<FooterProps> = ({
           <span className="font-display text-sm font-bold text-[#F6F2E9]">
             {PROFILE.displayName}
           </span>
-          <span aria-hidden="true" className="text-[#524E66]">
+          <span aria-hidden="true" className="text-[#B5B0C2]">
             ·
           </span>
-          <span>© {currentYear} {PROFILE.fullName}</span>
+          <span>
+            © {currentYear} {PROFILE.fullName}
+          </span>
         </div>
 
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -85,7 +87,7 @@ export const Footer: React.FC<FooterProps> = ({
             onClick={(e) => onOpenCommandPalette(e.currentTarget)}
             className="inline-flex items-center gap-1 text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
           >
-            <Command className="w-3 h-3" aria-hidden="true" />
+            <Command className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Cmd/Ctrl + K</span>
           </button>
 

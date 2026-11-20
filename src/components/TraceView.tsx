@@ -140,7 +140,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
         <div className="mt-8 p-4 rounded-xl bg-[#12101F] border border-[#A8C5FF]/40 flex items-start gap-3 text-xs sm:text-sm text-[#E6E1D6]">
           <Info className="w-4 h-4 text-[#A8C5FF] shrink-0 mt-0.5" aria-hidden="true" />
           <p className="leading-relaxed">
-            <strong className="text-[#F6F2E9]">Educational Walkthrough:</strong> The six layers below provide an illustrative generic model of how a retail barcode scan can travel from counter peripherals to business applications and human support teams. Simulated payloads depict general concepts rather than any employer’s production environment.
+            <strong className="text-[#F6F2E9]">Illustrative Walkthrough:</strong> The six layers below provide an educational model of how a retail barcode scan can travel across hardware, software, networks, and people. Not every transaction system uses this exact sequence, and simulated examples do not depict any employer’s production architecture.
           </p>
         </div>
       </section>
@@ -406,32 +406,9 @@ export const TraceView: React.FC<TraceViewProps> = ({
                             {cs.outcome && (
                               <div className="bg-[#0A0913] p-3.5 rounded-xl border border-[#242138] text-xs">
                                 <span className="font-mono font-semibold text-[#A8C5FF] uppercase block mb-1">
-                                  Outcome
+                                  {cs.outcomeLabel}
                                 </span>
                                 <p>{cs.outcome}</p>
-                              </div>
-                            )}
-
-                            {cs.supportingMaterial && (
-                              <div className="bg-[#0A0913] p-3.5 rounded-xl border border-[#F2A77D]/35 text-xs space-y-2.5">
-                                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#242138] pb-2">
-                                  <span className="font-mono font-semibold text-[#F6F2E9] uppercase">
-                                    {cs.supportingMaterial.title}
-                                  </span>
-                                  <span className="font-mono text-[10px] uppercase text-[#F2A77D] font-semibold">
-                                    {cs.supportingMaterial.label}
-                                  </span>
-                                </div>
-                                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                                  {cs.supportingMaterial.items.map((item) => (
-                                    <div key={item.key}>
-                                      <dt className="font-mono text-[10px] uppercase text-[#A8C5FF]">
-                                        {item.key}
-                                      </dt>
-                                      <dd className="text-[#CFCAC0] mt-0.5">{item.value}</dd>
-                                    </div>
-                                  ))}
-                                </dl>
                               </div>
                             )}
                           </div>

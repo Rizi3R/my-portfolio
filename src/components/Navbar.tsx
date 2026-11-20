@@ -35,6 +35,8 @@ export const Navbar: React.FC<NavbarProps> = ({
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       if (totalScroll > 0) {
         setScrollProgress((window.scrollY / totalScroll) * 100);
+      } else {
+        setScrollProgress(0);
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -53,7 +55,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [mobileMenuOpen]);
 
-  const handleLinkClick = (sectionId: string) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
     setMobileMenuOpen(false);
     if (activeView !== 'portfolio') {
       onChangeView('portfolio');
@@ -68,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-200 print:hidden ${
         isScrolled
           ? 'bg-[#0A0913]/95 backdrop-blur-md border-b border-[#242138]'
-          : 'bg-[#0A0913]/90 backdrop-blur-sm border-b border-[#242138]/70'
+          : 'bg-[#0A0913]/92 backdrop-blur-sm border-b border-[#242138]/70'
       }`}
     >
       <div
@@ -87,10 +90,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           href="#top"
           onClick={(e) => {
             e.preventDefault();
-            onChangeView('portfolio');
-            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
             setMobileMenuOpen(false);
+            if (activeView !== 'portfolio') {
+              onChangeView('portfolio');
+            } else {
+              onNavigateSection('top');
+            }
           }}
           className="font-display text-lg font-bold tracking-tight text-[#F6F2E9] hover:text-[#A8C5FF] transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded px-1 py-1"
         >
@@ -102,14 +107,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           className="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium text-[#E6E1D6]"
         >
           {NAV_LINKS.map((link) => (
-            <button
+            <a
               key={link.id}
-              type="button"
-              onClick={() => handleLinkClick(link.id)}
-              className="hover:text-[#A8C5FF] transition-colors whitespace-nowrap shrink-0 cursor-pointer py-1.5 border-b border-transparent hover:border-[#A8C5FF]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded-sm"
+              href={`#${link.id}`}
+              onClick={(e) => handleLinkClick(e, link.id)}
+              className="hover:text-[#A8C5FF] transition-colors whitespace-nowrap shrink-0 py-1.5 border-b border-transparent hover:border-[#A8C5FF]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded-sm"
             >
               {link.label}
-            </button>
+            </a>
           ))}
         </nav>
 
@@ -120,7 +125,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               setMobileMenuOpen(false);
               onOpenResume(e.currentTarget);
             }}
-            className="inline-flex items-center gap-1.5 px-4 py-2 min-h-[40px] rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
+            className="inline-flex items-center gap-1.5 px-4 py-2 min-h-[40px] rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] active:bg-[#9bb9fa] text-[#191723] text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
           >
             <FileText className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Résumé</span>
@@ -147,14 +152,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           className="md:hidden bg-[#0A0913] border-b border-[#242138] px-4 py-3 space-y-1"
         >
           {NAV_LINKS.map((link) => (
-            <button
+            <a
               key={link.id}
-              type="button"
-              onClick={() => handleLinkClick(link.id)}
-              className="w-full text-left px-3 py-3 rounded-lg text-sm font-medium text-[#F6F2E9] hover:text-[#A8C5FF] hover:bg-[#12101F] transition-colors cursor-pointer min-h-[44px]"
+              href={`#${link.id}`}
+              onClick={(e) => handleLinkClick(e, link.id)}
+              className="block w-full text-left px-3 py-3 rounded-lg text-sm font-medium text-[#F6F2E9] hover:text-[#A8C5FF] hover:bg-[#12101F] transition-colors min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
             >
               {link.label}
-            </button>
+            </a>
           ))}
         </nav>
       )}

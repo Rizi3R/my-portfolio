@@ -648,69 +648,71 @@ export const TheLab: React.FC = () => {
                 </div>
 
                 {/* Network Nodes Coordinate Canvas */}
-                <div className="relative h-[320px] sm:h-[360px] w-full bg-[#0A0913] border border-[#242138] rounded-xl overflow-hidden p-4">
-                  <svg
-                    className="absolute inset-0 w-full h-full pointer-events-none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <line x1="10%" y1="50%" x2="26%" y2="25%" stroke="#242138" strokeWidth="2" strokeDasharray="3 3" />
-                    <line x1="26%" y1="25%" x2="44%" y2="50%" stroke="#242138" strokeWidth="2" />
-                    <line x1="44%" y1="50%" x2="44%" y2="82%" stroke="#242138" strokeWidth="1.5" strokeDasharray="4 4" />
-                    <line x1="44%" y1="50%" x2="65%" y2="35%" stroke="#242138" strokeWidth="2" />
-                    <line x1="65%" y1="35%" x2="84%" y2="35%" stroke="#242138" strokeWidth="2" />
-                    <line x1="84%" y1="35%" x2="84%" y2="72%" stroke="#242138" strokeWidth="2" />
-                  </svg>
+                <div className="overflow-x-auto bg-[#0A0913] border border-[#242138] rounded-xl">
+                  <div className="relative min-w-[520px] h-[320px] sm:h-[360px] w-full overflow-hidden p-4">
+                    <svg
+                      className="absolute inset-0 w-full h-full pointer-events-none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <line x1="10%" y1="50%" x2="26%" y2="25%" stroke="#242138" strokeWidth="2" strokeDasharray="3 3" />
+                      <line x1="26%" y1="25%" x2="44%" y2="50%" stroke="#242138" strokeWidth="2" />
+                      <line x1="44%" y1="50%" x2="44%" y2="82%" stroke="#242138" strokeWidth="1.5" strokeDasharray="4 4" />
+                      <line x1="44%" y1="50%" x2="65%" y2="35%" stroke="#242138" strokeWidth="2" />
+                      <line x1="65%" y1="35%" x2="84%" y2="35%" stroke="#242138" strokeWidth="2" />
+                      <line x1="84%" y1="35%" x2="84%" y2="72%" stroke="#242138" strokeWidth="2" />
+                    </svg>
 
-                  {NETWORK_NODES.map((node) => {
-                    const isCurrent = activeHop?.nodeId === node.id;
-                    const NodeIcon = node.icon;
+                    {NETWORK_NODES.map((node) => {
+                      const isCurrent = activeHop?.nodeId === node.id;
+                      const NodeIcon = node.icon;
 
-                    return (
-                      <div
-                        key={node.id}
-                        style={{
-                          left: `${node.x}%`,
-                          top: `${node.y}%`,
-                          transform: 'translate(-50%, -50%)',
-                        }}
-                        className={`absolute flex flex-col items-center text-center transition-all duration-300 z-10 ${
-                          isCurrent ? 'scale-110' : 'opacity-85'
-                        }`}
-                      >
+                      return (
                         <div
-                          className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center border shadow-lg transition-all ${
-                            isCurrent
-                              ? 'bg-[#F2A77D]/20 border-[#F2A77D] text-[#F6F2E9] ring-4 ring-[#F2A77D]/20'
-                              : 'bg-[#12101F] border-[#242138] text-[#A8C5FF]'
+                          key={node.id}
+                          style={{
+                            left: `${node.x}%`,
+                            top: `${node.y}%`,
+                            transform: 'translate(-50%, -50%)',
+                          }}
+                          className={`absolute flex flex-col items-center text-center transition-all duration-300 z-10 ${
+                            isCurrent ? 'scale-110' : 'opacity-85'
                           }`}
                         >
-                          <NodeIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                          <div
+                            className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center border shadow-lg transition-all ${
+                              isCurrent
+                                ? 'bg-[#F2A77D]/20 border-[#F2A77D] text-[#F6F2E9] ring-4 ring-[#F2A77D]/20'
+                                : 'bg-[#12101F] border-[#242138] text-[#A8C5FF]'
+                            }`}
+                          >
+                            <NodeIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                          </div>
+                          <span className="text-[11px] font-semibold text-[#F6F2E9] mt-1.5 whitespace-nowrap">
+                            {node.name}
+                          </span>
+                          <span className="text-[10px] font-mono text-[#B5B0C2] whitespace-nowrap">
+                            {node.category}
+                          </span>
                         </div>
-                        <span className="text-[11px] font-semibold text-[#F6F2E9] mt-1.5 whitespace-nowrap">
-                          {node.name}
-                        </span>
-                        <span className="text-[9px] font-mono text-[#9A94A8] whitespace-nowrap">
-                          {node.category}
+                      );
+                    })}
+
+                    {activeHop && (
+                      <div className="absolute bottom-3 left-3 bg-[#12101F]/95 border border-[#242138] px-3 py-1.5 rounded-lg text-[11px] font-mono flex items-center gap-2 text-[#A8C5FF]">
+                        <span className="w-2 h-2 rounded-full bg-[#F2A77D]" aria-hidden="true" />
+                        <span>
+                          PACKET AT: <strong className="text-[#F6F2E9]">{activeHop.label.split('(')[0]}</strong>
                         </span>
                       </div>
-                    );
-                  })}
+                    )}
 
-                  {activeHop && (
-                    <div className="absolute bottom-3 left-3 bg-[#12101F]/95 border border-[#242138] px-3 py-1.5 rounded-lg text-[11px] font-mono flex items-center gap-2 text-[#A8C5FF]">
-                      <span className="w-2 h-2 rounded-full bg-[#F2A77D]" aria-hidden="true" />
-                      <span>
-                        PACKET AT: <strong className="text-[#F6F2E9]">{activeHop.label.split('(')[0]}</strong>
-                      </span>
-                    </div>
-                  )}
-
-                  {activeHop && (
-                    <div className="absolute top-3 right-3 bg-[#12101F]/95 border border-[#242138] px-3 py-1 rounded text-[11px] font-mono text-[#A8C5FF] flex items-center gap-1.5">
-                      <Clock className="w-3 h-3 text-[#A8C5FF]" aria-hidden="true" />
-                      <span>+{activeHop.latencyMs}ms elapsed</span>
-                    </div>
-                  )}
+                    {activeHop && (
+                      <div className="absolute top-3 right-3 bg-[#12101F]/95 border border-[#242138] px-3 py-1 rounded text-[11px] font-mono text-[#A8C5FF] flex items-center gap-1.5">
+                        <Clock className="w-3 h-3 text-[#A8C5FF]" aria-hidden="true" />
+                        <span>+{activeHop.latencyMs}ms elapsed</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Controls Bar */}

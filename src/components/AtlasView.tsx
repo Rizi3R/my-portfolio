@@ -239,25 +239,26 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         <div className="lg:col-span-8 bg-[#0A0913] border border-[#242138] rounded-2xl overflow-hidden relative">
           {viewMode === 'graph' ? (
-            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] bg-[#12101F] select-none overflow-hidden">
-              <div className="absolute inset-0 flex flex-col pointer-events-none opacity-35">
-                {STRATA.map((st, i) => (
-                  <div
-                    key={st.id}
-                    className="flex-1 border-b border-[#242138] px-3 pt-1 text-[9px] font-mono uppercase text-[#9A94A8]"
-                  >
-                    L{i + 1}: {st.title}
-                  </div>
-                ))}
-              </div>
+            <div className="overflow-x-auto bg-[#12101F] select-none">
+              <div className="relative min-w-[540px] w-full aspect-[16/10] overflow-hidden">
+                <div className="absolute inset-0 flex flex-col pointer-events-none opacity-40">
+                  {STRATA.map((st, i) => (
+                    <div
+                      key={st.id}
+                      className="flex-1 border-b border-[#242138] px-3 pt-1 text-[11px] font-mono uppercase text-[#B5B0C2]"
+                    >
+                      L{i + 1}: {st.title}
+                    </div>
+                  ))}
+                </div>
 
-              <svg
-                className="w-full h-full"
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-                role="region"
-                aria-label="Atlas topology graph canvas"
-              >
+                <svg
+                  className="w-full h-full"
+                  viewBox="0 0 160 100"
+                  preserveAspectRatio="xMidYMid meet"
+                  role="region"
+                  aria-label="Atlas topology graph canvas"
+                >
                 <g className="edges" aria-hidden="true">
                   {filteredEdges.map((edge, idx) => {
                     const fromNode = NODES.find((n) => n.id === edge.from);
@@ -271,13 +272,13 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                     return (
                       <line
                         key={`edge-${idx}`}
-                        x1={fromNode.x}
+                        x1={fromNode.x * 1.44 + 8}
                         y1={fromNode.y}
-                        x2={toNode.x}
+                        x2={toNode.x * 1.44 + 8}
                         y2={toNode.y}
                         stroke={isConnectedToSelected ? '#A8C5FF' : '#242138'}
-                        strokeWidth={isConnectedToSelected ? 0.6 : 0.25}
-                        strokeDasharray={isConnectedToSelected ? undefined : '0.8, 0.8'}
+                        strokeWidth={isConnectedToSelected ? 0.65 : 0.3}
+                        strokeDasharray={isConnectedToSelected ? undefined : '1, 1'}
                         className="transition-all duration-300"
                       />
                     );
@@ -289,10 +290,12 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                     const isSelected = selectedNode && selectedNode.id === node.id;
                     const color = getStratumColor(node.stratum);
 
+                    const cx = node.x * 1.44 + 8;
+
                     return (
                       <g
                         key={node.id}
-                        transform={`translate(${node.x}, ${node.y})`}
+                        transform={`translate(${cx}, ${node.y})`}
                         onClick={() => handleSelectNode(node)}
                         className="cursor-pointer focus:outline-none"
                         role="button"
@@ -306,43 +309,44 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                           }
                         }}
                       >
-                        <circle r="4.5" fill="transparent" stroke="transparent" />
+                        <circle r="5.5" fill="transparent" stroke="transparent" />
 
                         {isSelected && (
                           <circle
-                            r="2.8"
+                            r="3.2"
                             fill="none"
                             stroke="#F2A77D"
-                            strokeWidth="0.35"
-                            strokeDasharray="0.6, 0.6"
+                            strokeWidth="0.45"
+                            strokeDasharray="0.8, 0.8"
                           />
                         )}
 
                         <circle
-                          r={isSelected ? 1.6 : 1.1}
+                          r={isSelected ? 2 : 1.4}
                           fill={isSelected ? '#F2A77D' : color}
                           stroke="#0A0913"
-                          strokeWidth="0.3"
+                          strokeWidth="0.35"
                           className="transition-all duration-200"
                         />
 
                         <text
-                          y={isSelected ? -2.2 : -1.8}
+                          y={isSelected ? -2.8 : -2.3}
                           textAnchor="middle"
                           fill={isSelected ? '#F6F2E9' : '#A8C5FF'}
-                          fillOpacity={isSelected ? 1 : 0.85}
-                          fontSize={isSelected ? '2.2' : '1.75'}
+                          fillOpacity={isSelected ? 1 : 0.9}
+                          fontSize={isSelected ? '2.8' : '2.25'}
                           fontFamily="JetBrains Mono, monospace"
                           fontWeight={isSelected ? 'bold' : 'normal'}
                           className="pointer-events-none select-none transition-all"
                         >
-                          {node.label.length > 20 ? node.label.slice(0, 18) + '…' : node.label}
+                          {node.label.length > 22 ? node.label.slice(0, 20) + '…' : node.label}
                         </text>
                       </g>
                     );
                   })}
                 </g>
               </svg>
+              </div>
             </div>
           ) : (
             <div className="p-4 max-h-[540px] overflow-y-auto font-mono text-xs">
@@ -513,9 +517,9 @@ function getEvidenceLabel(refId: string): string {
     case 'exp-hwc':
       return 'HWC Coffee Malaysia (Palaterium Sdn Bhd) · IT Support';
     case 'exp-mps':
-      return 'Managed Print Services · IT Technician';
+      return 'Managed print services (onsite support) · IT Technician';
     case 'exp-agc':
-      return 'Attorney General’s Chambers of Malaysia · IT Intern';
+      return 'Attorney General’s Chambers of Malaysia · Diploma Internship';
     case 'exp-uitm':
       return 'UiTM · Diploma in Computer Science and Mathematics';
     case 'cert-aws':

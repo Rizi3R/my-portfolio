@@ -10,6 +10,7 @@ import {
 } from '../data/universeContent';
 import { Terminal as TerminalIcon, X, RotateCcw } from 'lucide-react';
 import { audioFx } from '../utils/audioFx';
+import { useDialogFocusTrap } from '../utils/useDialogFocusTrap';
 
 interface TerminalLine {
   id: number;
@@ -42,12 +43,12 @@ const INITIAL_LINES: TerminalLine[] = [
   {
     id: 1,
     type: 'accent',
-    text: `${PROFILE.displayName} Portfolio Shell (Read-Only Sandbox)`,
+    text: `${PROFILE.displayName} Portfolio Shell (Read-Only Demo)`,
   },
   {
     id: 2,
     type: 'output',
-    text: 'Type "help" or click a command below to inspect roles, skills, case studies, or contact info.',
+    text: 'Type "help" or click a command below to inspect roles, skills, case studies, or contact details.',
   },
 ];
 
@@ -61,9 +62,12 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [historyIdx, setHistoryIdx] = useState<number>(-1);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const outputRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const nextIdRef = useRef(10);
+
+  useDialogFocusTrap(containerRef, isModal);
 
   useEffect(() => {
     if (outputRef.current) {
@@ -73,7 +77,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
   useEffect(() => {
     if (isModal) {
-      setTimeout(() => inputRef.current?.focus(), 60);
+      inputRef.current?.focus();
     }
   }, [isModal]);
 
@@ -96,7 +100,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     setHistoryIdx(-1);
     setInput('');
 
-    appendLines([{ type: 'command', text: `aries@portfolio:~$ ${trimmed}` }]);
+    appendLines([{ type: 'command', text: `shell> ${trimmed}` }]);
 
     if (cmd === 'clear') {
       setLines(INITIAL_LINES);
@@ -105,17 +109,17 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'help') {
       appendLines([
-        { type: 'accent', text: 'Available commands:' },
-        { type: 'output', text: '  about        - Background and focus areas' },
-        { type: 'output', text: '  skills       - Core capabilities grouped across 4 tracks' },
-        { type: 'output', text: '  experience   - Work and internship chronology' },
-        { type: 'output', text: '  projects     - Case studies' },
+        { type: 'accent', text: 'Supported commands:' },
+        { type: 'output', text: '  about        - Background and target roles' },
+        { type: 'output', text: '  skills       - Core capabilities across 4 groups' },
+        { type: 'output', text: '  experience   - Work and diploma internship history' },
+        { type: 'output', text: '  projects     - Featured case studies' },
         { type: 'output', text: '  education    - UiTM diploma and credentials' },
-        { type: 'output', text: '  learning     - Current learning (UiPath & RPA)' },
+        { type: 'output', text: '  learning     - Current study (UiPath & RPA)' },
         { type: 'output', text: '  contact      - Email, LinkedIn, and location' },
-        { type: 'output', text: '  beep         - Educational checkout beep sample' },
+        { type: 'output', text: '  beep         - Illustrative checkout beep step example' },
         { type: 'output', text: '  resume       - Open résumé preview' },
-        { type: 'output', text: '  clear        - Clear terminal output' },
+        { type: 'output', text: '  clear        - Reset output' },
       ]);
       return;
     }
@@ -132,10 +136,10 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'experience') {
       appendLines([
-        { type: 'accent', text: `Work & Internship History (${EXPERIENCES.length} Entries):` },
+        { type: 'accent', text: `Experience & Diploma Internship (${EXPERIENCES.length} Entries):` },
         ...EXPERIENCES.map((exp) => ({
           type: 'output' as const,
-          text: `• ${exp.role} @ ${exp.organization} (${exp.period}) - ${exp.technologies.slice(0, 4).join(', ')}`,
+          text: `• ${exp.role} · ${exp.organization} (${exp.period}) - ${exp.technologies.slice(0, 4).join(', ')}`,
         })),
       ]);
       return;
@@ -166,10 +170,13 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     if (cmd === 'education' || cmd === 'certifications') {
       appendLines([
         { type: 'accent', text: 'Education & Credentials:' },
-        { type: 'output', text: `  • ${EDUCATION.degree} - ${EDUCATION.institution} (${EDUCATION.period})` },
+        {
+          type: 'output',
+          text: `  • ${EDUCATION.degree} - ${EDUCATION.institution} (${EDUCATION.period})`,
+        },
         ...CERTIFICATIONS.map((c) => ({
           type: 'output' as const,
-          text: `  • ${c.name} - ${c.issuer} [${c.status}]`,
+          text: `  • ${c.name} - ${c.issuer} [${c.kindLabel}]`,
         })),
       ]);
       return;
@@ -188,7 +195,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'contact') {
       appendLines([
-        { type: 'accent', text: 'Direct Contact Channels:' },
+        { type: 'accent', text: 'Direct Contact:' },
         { type: 'output', text: `  Email:    ${PROFILE.email}` },
         { type: 'output', text: `  LinkedIn: ${PROFILE.linkedIn}` },
         { type: 'output', text: `  Location: ${PROFILE.location}` },
@@ -199,10 +206,10 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     if (cmd === 'beep') {
       audioFx.playSuccess();
       appendLines([
-        { type: 'accent', text: '[EDUCATIONAL WALKTHROUGH] Sample Barcode Scan' },
+        { type: 'accent', text: '[ILLUSTRATIVE EXAMPLE] Conceptual Checkout Flow' },
         {
           type: 'output',
-          text: 'Scanner input -> App item lookup -> sample basket total -> simulated receipt print.',
+          text: 'Scanner input -> Item lookup -> Promo check -> Sample receipt output.',
         },
       ]);
       return;
@@ -227,7 +234,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     appendLines([
       {
         type: 'error',
-        text: `Command not found: "${trimmed}". Type "help" to see supported commands.`,
+        text: `Unknown command: "${trimmed}". Try one of: ${SUPPORTED_COMMANDS.join(', ')}.`,
       },
     ]);
   };
@@ -250,32 +257,38 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
         setHistoryIdx(-1);
         setInput('');
       }
-    } else if (e.key === 'Tab') {
-      e.preventDefault();
+    } else if (e.key === 'Tab' && !e.shiftKey) {
       const q = input.trim().toLowerCase();
-      if (!q) return;
-      const match = SUPPORTED_COMMANDS.find((c) => c.startsWith(q));
-      if (match) setInput(match);
+      if (q) {
+        const match = SUPPORTED_COMMANDS.find((c) => c.startsWith(q));
+        if (match && match !== q) {
+          e.preventDefault();
+          setInput(match);
+        }
+      }
     }
   };
 
   return (
-    <div className="bg-[#0A0913] border border-[#242138] rounded-2xl overflow-hidden shadow-2xl font-mono text-xs sm:text-sm">
+    <div
+      ref={containerRef}
+      className="bg-[#0A0913] border border-[#242138] rounded-2xl overflow-hidden shadow-2xl font-mono text-xs sm:text-sm"
+    >
       <div className="px-4 py-3 bg-[#12101F] border-b border-[#242138] flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2.5">
-          <TerminalIcon className="w-3.5 h-3.5 text-[#A8C5FF]" aria-hidden="true" />
-          <span className="text-xs font-semibold text-[#F6F2E9]">
-            aries-portfolio : interactive shell
+        <div className="flex items-center gap-2.5 min-w-0">
+          <TerminalIcon className="w-4 h-4 text-[#A8C5FF] shrink-0" aria-hidden="true" />
+          <span className="text-xs font-semibold text-[#F6F2E9] truncate">
+            Portfolio Shell · Read-Only Demo
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <button
             type="button"
             onClick={() => setLines(INITIAL_LINES)}
-            className="p-1.5 rounded text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
-            aria-label="Reset terminal output"
-            title="Reset terminal"
+            className="p-2 rounded text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+            aria-label="Reset shell output"
+            title="Reset shell"
           >
             <RotateCcw className="w-3.5 h-3.5" />
           </button>
@@ -283,8 +296,8 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
-              aria-label="Close terminal modal"
+              className="p-2 rounded text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/50 cursor-pointer min-w-[40px] min-h-[40px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+              aria-label="Close portfolio shell dialog"
             >
               <X className="w-4 h-4" />
             </button>
@@ -295,14 +308,14 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
       <div
         ref={outputRef}
         onClick={() => inputRef.current?.focus()}
-        className="p-4 sm:p-5 h-72 sm:h-80 overflow-y-auto space-y-2 text-xs leading-relaxed cursor-text"
+        className="p-4 sm:p-5 h-72 sm:h-80 overflow-y-auto space-y-2 text-xs leading-relaxed cursor-text break-words"
         role="log"
         aria-live="polite"
       >
         {lines.map((line) => (
           <div
             key={line.id}
-            className={
+            className={`break-words whitespace-pre-wrap ${
               line.type === 'command'
                 ? 'text-[#A8C5FF] font-semibold pt-1'
                 : line.type === 'accent'
@@ -310,14 +323,14 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
                 : line.type === 'error'
                 ? 'text-[#F2A77D]'
                 : 'text-[#CFCAC0]'
-            }
+            }`}
           >
             {line.text}
           </div>
         ))}
       </div>
 
-      <div className="px-4 py-2.5 bg-[#12101F] border-t border-[#242138] flex items-center gap-1.5 overflow-x-auto text-[11px]">
+      <div className="px-4 py-2.5 bg-[#12101F] border-t border-[#242138] flex items-center gap-1.5 overflow-x-auto text-xs">
         <span className="text-[#CFCAC0] mr-1 shrink-0">Quick run:</span>
         {['help', 'about', 'skills', 'experience', 'projects', 'education', 'contact', 'beep', 'clear'].map(
           (cmd) => (
@@ -344,7 +357,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           htmlFor={isModal ? 'terminal-modal-input' : 'terminal-inline-input'}
           className="text-[#A8C5FF] text-xs font-semibold shrink-0"
         >
-          aries@portfolio:~$
+          shell&gt;
         </label>
         <input
           id={isModal ? 'terminal-modal-input' : 'terminal-inline-input'}
@@ -356,11 +369,11 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           placeholder="type 'help' and press Enter..."
           autoComplete="off"
           spellCheck={false}
-          className="flex-1 bg-transparent text-[#F6F2E9] placeholder-[#9A94A8] text-xs focus:outline-none"
+          className="flex-1 min-w-0 bg-transparent text-[#F6F2E9] placeholder-[#B5B0C2] text-xs focus:outline-none"
         />
         <button
           type="submit"
-          className="px-3 py-1 rounded bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-xs font-semibold cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
+          className="px-3 py-1.5 min-h-[36px] rounded bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-xs font-semibold cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
         >
           Run
         </button>

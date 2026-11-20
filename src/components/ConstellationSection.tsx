@@ -36,16 +36,16 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
         </div>
 
         {/* Clean 4-Group Grid without proficiency bars or scores */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {SKILL_GROUPS.map((group, idx) => (
             <div
               key={group.id}
               className={`space-y-4 ${
-                idx > 0 ? 'lg:border-l lg:border-[#242138] lg:pl-8' : ''
-              } ${idx % 2 === 1 ? 'md:border-l md:border-[#242138] md:pl-8 lg:pl-8' : ''} pt-4 md:pt-0 border-t md:border-t-0 border-[#242138] first:border-t-0 first:pt-0`}
+                idx > 0 ? 'lg:border-l lg:border-[#242138] lg:pl-7' : ''
+              } ${idx % 2 === 1 ? 'sm:border-l sm:border-[#242138] sm:pl-7' : ''} pt-5 sm:pt-0 border-t sm:border-t-0 border-[#242138] first:border-t-0 first:pt-0`}
             >
               <div className="space-y-1">
-                <div className="text-[11px] font-mono text-[#F2A77D] uppercase tracking-wider">
+                <div className="text-xs font-mono text-[#F2A77D] uppercase tracking-wider">
                   0{idx + 1}
                 </div>
                 <h3 className="font-display text-xl font-bold text-[#F6F2E9]">
@@ -56,7 +56,7 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
               <ul className="space-y-2.5 text-sm text-[#E6E1D6] leading-relaxed">
                 {group.items.map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
-                    <span className="text-[#A8C5FF] font-mono text-xs mt-1" aria-hidden="true">
+                    <span className="text-[#A8C5FF] font-mono text-xs mt-1 shrink-0" aria-hidden="true">
                       ·
                     </span>
                     <span>{item}</span>
@@ -68,10 +68,8 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
         </div>
 
         {onOpenFullAtlas && (
-          <div className="pt-2 border-t border-[#242138] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#CFCAC0]">
-            <span>
-              Want to inspect how these tools connect across roles?
-            </span>
+          <div className="pt-4 border-t border-[#242138] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#CFCAC0]">
+            <span>Want to inspect how these tools connect across roles?</span>
             <button
               type="button"
               onClick={() => onOpenFullAtlas()}

@@ -25,19 +25,19 @@ export const CredentialsSection: React.FC = () => {
             </h2>
           </div>
           <p className="text-sm text-[#CFCAC0] max-w-md leading-relaxed">
-            Formal computer science diploma, cloud certification, completed training, and active automation study.
+            Formal diploma, cloud certification, completed program, and current study kept clearly distinct.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {/* Formal Education */}
           <article className="space-y-2.5">
-            <div className="flex items-center justify-between gap-2 text-xs font-mono">
-              <span className="inline-flex items-center gap-1.5 text-[#A8C5FF]">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+              <span className="inline-flex items-center gap-1.5 text-[#A8C5FF] font-semibold">
                 <GraduationCap className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Education</span>
               </span>
-              <span className="text-[#9A94A8]">{EDUCATION.period}</span>
+              <span className="text-[#B5B0C2]">{EDUCATION.period}</span>
             </div>
             <h3 className="font-display text-lg font-bold text-[#F6F2E9] leading-snug">
               {EDUCATION.degree}
@@ -46,20 +46,30 @@ export const CredentialsSection: React.FC = () => {
             <p className="text-xs sm:text-sm text-[#CFCAC0] leading-relaxed">{EDUCATION.focus}</p>
           </article>
 
-          {/* Certifications & Completed Programs */}
-          {CERTIFICATIONS.map((cert) => {
-            const Icon = cert.status === 'credential' ? Award : BookOpen;
+          {/* Certifications & Completed Programs: visually distinguished */}
+          {CERTIFICATIONS.map((cert, idx) => {
+            const isCertification = cert.status === 'credential';
+            const Icon = isCertification ? Award : BookOpen;
             return (
               <article
                 key={cert.id}
-                className="space-y-2.5 md:border-l md:border-[#242138] md:pl-6 lg:pl-8 pt-6 md:pt-0 border-t md:border-t-0 border-[#242138]"
+                className={`space-y-2.5 lg:border-l lg:border-[#242138] lg:pl-7 ${
+                  idx % 2 === 0 ? 'sm:border-l sm:border-[#242138] sm:pl-7' : ''
+                } pt-6 sm:pt-0 border-t sm:border-t-0 border-[#242138]`}
               >
-                <div className="flex items-center justify-between gap-2 text-xs font-mono">
-                  <span className="inline-flex items-center gap-1.5 text-[#A8C5FF]">
-                    <Icon className="w-3.5 h-3.5" aria-hidden="true" />
-                    <span>{cert.kindLabel}</span>
-                  </span>
-                  <span className="text-[#9A94A8]">{cert.issuer}</span>
+                <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  {isCertification ? (
+                    <span className="inline-flex items-center gap-1.5 text-[#A8C5FF] font-semibold">
+                      <Icon className="w-3.5 h-3.5" aria-hidden="true" />
+                      <span>{cert.kindLabel}</span>
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1.5 text-[#B5B0C2]">
+                      <Icon className="w-3.5 h-3.5" aria-hidden="true" />
+                      <span>{cert.kindLabel}</span>
+                    </span>
+                  )}
+                  <span className="text-[#B5B0C2]">{cert.issuer}</span>
                 </div>
                 <h3 className="font-display text-lg font-bold text-[#F6F2E9] leading-snug">
                   {cert.name}
@@ -73,14 +83,14 @@ export const CredentialsSection: React.FC = () => {
           {LEARNING_ENTRIES.map((entry) => (
             <article
               key={entry.id}
-              className="space-y-2.5 md:border-l md:border-[#242138] md:pl-6 lg:pl-8 pt-6 md:pt-0 border-t md:border-t-0 border-[#242138]"
+              className="space-y-2.5 sm:border-l sm:border-[#242138] sm:pl-7 lg:pl-7 pt-6 sm:pt-0 border-t sm:border-t-0 border-[#242138]"
             >
-              <div className="flex items-center justify-between gap-2 text-xs font-mono">
-                <span className="inline-flex items-center gap-1.5 text-[#F2A77D]">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                <span className="inline-flex items-center gap-1.5 text-[#F2A77D] font-semibold">
                   <Compass className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>{entry.status}</span>
                 </span>
-                <span className="text-[#9A94A8]">Self-study</span>
+                <span className="text-[#B5B0C2]">Self-study</span>
               </div>
               <h3 className="font-display text-lg font-bold text-[#F6F2E9] leading-snug">
                 {entry.topic}

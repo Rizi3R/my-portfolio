@@ -1,0 +1,1124 @@
+Act as a senior frontend engineer, UX designer, accessibility specialist, and careful portfolio editor.
+
+Improve my existing portfolio directly in this project:
+https://aries-razak.vercel.app/
+
+My name is Aries Razak.
+My full name is Muhammad Aries Irhan bin Abd Razak.
+
+The objective is to make this portfolio feel exceptionally polished, clear, personal, and reliable for recruiters and hiring managers.
+
+Aim for excellent execution across design, writing, responsiveness, accessibility, interaction quality, and consistency. Do not claim a guaranteed “10/10” score or invent audit results.
+
+This is a refinement of the existing portfolio. Inspect the actual project before editing, preserve the strongest parts, and implement the work. Do not respond with only advice or a proposed redesign.
+
+IMPORTANT: I am deliberately postponing additional achievement evidence, screenshots, testimonials, metrics, and real-world artifacts. Do not add these or leave empty placeholders for them. Improve the portfolio using the truthful experience and content already available.
+
+────────────────────────────────────────
+1. THE MOST IMPORTANT RULE: FACTUAL INTEGRITY
+────────────────────────────────────────
+
+Every statement about my career must be supported by information I have provided or by verified content already in this project.
+
+The current website may contain AI-written wording. Its presence in the code does not automatically make a stronger claim true.
+
+Use this priority order:
+1. Explicit facts and boundaries in this prompt.
+2. My original factual notes or documents included in this project.
+3. Existing portfolio content, only where consistent with the above.
+
+When uncertain:
+- Use narrower, factual wording.
+- Omit an unsupported detail.
+- Flag the uncertainty privately in the final handover.
+- Do not publish “to be confirmed,” “coming soon,” or placeholder claims.
+
+Never invent:
+- Numbers of users, outlets, deployments, tickets, or departments.
+- Percentages, uptime, response times, resolution rates, cost savings, or productivity gains.
+- Project dates or durations inferred from employment dates.
+- Successful outcomes that have not been confirmed.
+- Technical root causes.
+- Testimonials, recommendations, awards, clients, or endorsements.
+- Job titles, promotions, qualifications, or certifications.
+- Leadership authority beyond the work described.
+- Production cloud engineering, DevOps, SRE, cybersecurity, or advanced database experience.
+- API development or middleware engineering from portal configuration work.
+- Professional UiPath delivery from current learning.
+- Advanced Microsoft 365 administration from basic provisioning assistance.
+
+Do not create fictional “real incidents” to make the case studies more compelling.
+
+Do not create sample screenshots, mock tickets, fake dashboards, or fabricated work artifacts for this revision.
+
+Do not add claims such as:
+- Zero downtime.
+- Seamless migration.
+- No disruption.
+- Guaranteed stability.
+- Eliminated errors.
+- Improved efficiency.
+- Reduced resolution time.
+- End-to-end ownership.
+Unless a specific supporting fact exists.
+
+A project objective must not be worded as a proven outcome.
+
+Keep my real experience confident and readable. Accuracy does not require surrounding every sentence with defensive qualifications.
+
+────────────────────────────────────────
+2. MY POSITIONING AND VERIFIED EXPERIENCE
+────────────────────────────────────────
+
+I am targeting:
+- Application Support
+- Business Systems Support
+- SaaS Support
+- IT Operations
+- Integration Support
+
+I want my experience to be understandable beyond retail and F&B.
+
+Keep the actual companies and technologies visible. Explain the transferable work through application troubleshooting, user access, platform administration, data preparation, vendor coordination, and deployment readiness.
+
+Do not pretend I worked in a different industry.
+
+CURRENT ROLE: EMART24 MALAYSIA
+
+Title:
+System Application Specialist
+
+Dates:
+September 2025 to present
+
+Supported facts:
+- Support Xilnex POS applications across HQ and outlets.
+- Troubleshoot sync, promotion, and payment issues.
+- Confirm symptoms with users and guide appropriate initial checks.
+- Coordinate vendor escalation for issues requiring deeper investigation.
+- Provision Xilnex accounts from HR onboarding requests.
+- Check request status, user groups, and outlet assignments.
+- Clean up departed employees’ access and staff-discount eligibility.
+- Coordinate with Xilnex and delivery partners including GrabFood, foodpanda, and ShopeeFood.
+- Configure outlet-side integration settings inside the Xilnex portal after the relevant prerequisites are ready.
+- For foodpanda specifically, link the partner outlet to the matching Xilnex store and configure its price scheme and menu profile.
+- Save and sync outlet settings.
+- Created an Excel template for recurring promotion requests to be imported into the Xilnex Promotion Portal.
+- Provided guidance on using the import function.
+- Support POS devices, payment terminals, scanners, printers, and LAN / Wi-Fi connectivity during new-store setups.
+- Assist with Microsoft 365 provisioning and UAT within assigned scope.
+
+Important:
+Do not assume foodpanda-specific configuration steps are identical for all delivery platforms.
+
+PREVIOUS ROLE: HWC COFFEE MALAYSIA / PALATERIUM SDN BHD
+
+Dates:
+March 2024 to September 2025
+
+Supported facts:
+- Led the Google Workspace to Lark migration internally with support from the Lark team.
+- Administered Lark.
+- Managed user accounts, onboarding and offboarding, and approval workflows.
+- Helped colleagues adopt Lark messaging, mail, approvals, and helpdesk support.
+- Supported Xilnex POS, hardware, networking, and remote users.
+- Used TeamViewer and Lark Helpdesk.
+- Prepared and validated Excel spreadsheets for NetSuite imports.
+
+Job title:
+Preserve the existing conservative title unless an official title is explicitly verified in the supplied project materials. Do not invent a more senior title.
+
+“Internal Migration Lead” may describe my role in that project, but it must not be confused with my official employment title.
+
+IT TECHNICIAN
+
+Dates:
+October 2023 to March 2024
+
+Supported facts:
+- Onsite technical support for printers, multifunction copiers, and user workstations.
+- Hardware, software, and connectivity troubleshooting.
+- Freshdesk ticket handling.
+
+If “Managed Print Services” is only an industry description rather than a verified employer name, do not make it look like a confirmed legal company name.
+
+INTERNSHIP
+
+Organisation:
+Attorney General’s Chambers of Malaysia
+
+Dates:
+September 2021 to February 2022
+
+Supported facts:
+- Application development internship during my diploma.
+- Contributed to the internal DKICT declaration web system using PHP Laravel and MySQL.
+- Assisted with requirements documentation and entity-relationship diagrams.
+- Supported development and functional verification tasks.
+
+Use “Diploma internship” or “Application development internship.”
+Avoid “undergraduate internship,” which could imply a bachelor’s degree context.
+
+EDUCATION AND LEARNING
+
+- Diploma in Computer Science and Mathematics, Universiti Teknologi MARA.
+- Preserve verified education dates already supplied.
+- AWS Certified Cloud Practitioner.
+- Preserve the existing AI Teach Malaysia completed program only within its actual verified scope.
+- Currently learning UiPath and Robotic Process Automation.
+
+Do not list my unfinished degree as completed.
+Do not present a training completion program as a professional certification.
+Do not add credential IDs or verification URLs unless authentic ones are supplied.
+
+────────────────────────────────────────
+3. OVERALL DESIGN DIRECTION
+────────────────────────────────────────
+
+Keep the current recognizable visual identity:
+- Dark hero and navigation.
+- Warm off-white case-study content.
+- Soft blue calls to action.
+- Restrained warm accent.
+- Clean typography.
+- Subtle technical character.
+
+The portfolio should feel like a thoughtful individual’s professional website.
+
+Preserve:
+- The shorter hero headline.
+- The meaningful systems/support visual.
+- Four clear skill groups.
+- Case-study expansion.
+- The résumé viewer.
+- Optional interactive features.
+- Clear email and LinkedIn access.
+
+Improve the details instead of introducing a completely different visual language.
+
+Avoid:
+- Excessive glassmorphism.
+- Decorative gradients on every component.
+- Endless floating animation.
+- Oversized empty sections.
+- Dense badges.
+- Tiny technical labels everywhere.
+- Cursor trails or glow effects that follow the pointer.
+- Fake terminal activity.
+- Fake “live system” status.
+- Generic agency-style sales language.
+- Unnecessary new dependencies.
+
+Use a consistent spacing, typography, color, border, radius, and button system throughout.
+
+────────────────────────────────────────
+4. HERO: POLISH THE FIRST IMPRESSION
+────────────────────────────────────────
+
+Keep this main headline:
+“Application Support & Business Systems”
+
+Use this supporting copy:
+“I troubleshoot business applications, manage user access, coordinate integrations, and help teams adopt the tools they use every day.”
+
+Keep the supporting role breadth concise. If the extra sentence about application support, SaaS administration, and multi-site IT operations feels repetitive, shorten it or remove it.
+
+The hero should communicate:
+- My name.
+- My professional focus.
+- What I actually do.
+- Current role.
+- Location.
+- AWS credential.
+- The next action to take.
+
+Main actions:
+- View Case Studies
+- View Résumé
+
+Keep Contact visible in the navigation.
+
+Improve the small identity details below the buttons:
+- Current role.
+- Location.
+- Certification.
+
+They currently wrap into uneven multi-line blocks. Create a more deliberate arrangement:
+- Use appropriately sized columns on desktop.
+- Stack cleanly on smaller screens.
+- Keep icons aligned with the first line.
+- Avoid awkward isolated words.
+- Keep supporting labels readable.
+- Do not force all three items into cramped widths.
+
+Use “Selangor / Kuala Lumpur, Malaysia” as the location.
+Avoid unnecessary duplication such as “Location: Based in ...” when one label is enough.
+
+Make the hero vertically balanced. Do not add large empty space solely to fill the viewport.
+
+────────────────────────────────────────
+5. HERO DIAGRAM: CLEARER AND MORE READABLE
+────────────────────────────────────────
+
+Keep the business applications / SaaS diagram as a conceptual illustration of my work.
+
+Use readable labels for:
+- Users
+- Access
+- Integrations
+- Vendors
+
+Keep explanatory text concise:
+- Users: Support and adoption.
+- Access: Onboarding and offboarding.
+- Integrations: Configuration and sync.
+- Vendors: Incident coordination.
+
+The diagram must not imply that I built a production architecture or integration platform.
+
+Use one small caption such as:
+“Illustrative support workflow”
+
+Avoid multiple competing labels such as:
+“ILLUSTRATIVE SYSTEMS & SUPPORT FLOW DIAGRAM”
+plus a separate “DIAGRAM” label.
+
+Improve the troubleshooting sequence. The current:
+“Confirm symptoms → Check sync & access → Escalate or close”
+omits the resolution and verification step and oversimplifies the process.
+
+A more accurate conceptual sequence is:
+“Confirm symptoms → Check relevant settings → Resolve or escalate → Verify status”
+
+Make clear that this is a simplified illustration, not a claim that every incident follows exactly this path.
+
+Do not imply I personally fix vendor-side issues.
+
+Display the sequence as readable steps that wrap or stack cleanly.
+Do not render tiny text with awkward arrow wrapping.
+
+Use modest motion only if it improves understanding.
+The static version must look complete.
+Respect reduced-motion preferences.
+
+────────────────────────────────────────
+6. PAGE STRUCTURE AND CONTENT DENSITY
+────────────────────────────────────────
+
+Keep the main page order:
+1. Hero
+2. Selected Work
+3. Experience
+4. Skills
+5. Education & Credentials
+6. Interactive Lab
+7. Contact
+8. Minimal footer
+
+Navigation:
+- Work
+- Experience
+- Skills
+- Contact
+- Résumé
+
+Keep the page concise enough to scan while retaining optional depth.
+
+Use progressive disclosure:
+- Concise project previews.
+- Expanded case-study details on demand.
+- Concise role summaries.
+- Optional role details.
+- Optional interactive modules.
+
+The first case may remain expanded if it does not overwhelm the first screen of work content. Evaluate its visual density rather than blindly expanding every section.
+
+Avoid hiding important identity or career information behind interactions.
+
+Do not bring back:
+- The long résumé receipt in the main page flow.
+- Duplicate education cards and timeline entries.
+- A large skill explorer as the default skills section.
+- Repeated paragraphs explaining the same Lark migration.
+- Interface descriptions that explain internal design decisions.
+
+The main page and résumé may naturally repeat key facts because they serve different purposes. Avoid repetition within the main page itself.
+
+────────────────────────────────────────
+7. CASE STUDIES: KEEP THEM TRUTHFUL AND SPECIFIC
+────────────────────────────────────────
+
+Keep these four titles:
+1. Google Workspace to Lark Migration
+2. Third-Party Integration Configuration
+3. Application Incident Triage & Vendor Escalation
+4. New-Site IT Deployment & Readiness
+
+Use consistent structure:
+- Context
+- My role
+- Actions taken
+- Outcome or Work delivered
+- Tools used
+
+Use “Work delivered” when the available facts describe completed tasks but do not establish measurable impact.
+
+Do not force an impressive business outcome when only the deliverable is known.
+
+Preview content should include:
+- Title.
+- Company.
+- Concise scope.
+- One short summary.
+- View Case Study action.
+
+Keep role descriptions visibly distinct from official employment titles.
+
+Remove overly long metadata strings. The project title and summary should carry the meaning without a dense line of labels above them.
+
+CASE 1: LARK MIGRATION
+
+Keep:
+- Internal leadership with Lark team support.
+- Workspace administration.
+- User lifecycle tasks.
+- Approvals.
+- Colleague adoption and support.
+
+Review language about support staying “uninterrupted.”
+Unless no interruption is explicitly documented, remove that implication.
+
+Suggested context:
+“The move from Google Workspace to Lark required internal coordination, account administration, approval setup, and guidance for colleagues adopting the platform.”
+
+Suggested role:
+“I led the migration internally with support from the Lark team and handled workspace administration and colleague support.”
+
+Avoid repeating that sentence in the preview, role, first bullet, and outcome.
+
+Do not invent:
+- Mailbox counts.
+- Data volumes.
+- Cutover dates.
+- No data loss.
+- Zero downtime.
+- Adoption percentages.
+
+CASE 2: INTEGRATION CONFIGURATION
+
+Keep the boundary clear:
+- Partner and vendor coordination.
+- Outlet-side configuration in Xilnex.
+- Foodpanda-specific store linking, price scheme, and menu profile details.
+- Saving and syncing settings.
+
+Do not describe this as building APIs.
+
+The outcome can remain:
+“Completed and synced the assigned outlet-side configurations in Xilnex.”
+
+Do not imply end-to-end order flow was tested or proven unless that is documented.
+
+Keep the workflow:
+Coordinate prerequisites → Configure outlet settings → Save and sync
+
+CASE 3: INCIDENT TRIAGE
+
+Keep the “recurring support process” framing.
+
+Explain:
+- Confirming user-reported symptoms.
+- Checking relevant sync, promotion, payment, access, or connectivity conditions as supported by existing facts.
+- Guiding appropriate initial troubleshooting.
+- Escalating details to vendors when needed.
+
+Do not manufacture a single dramatic incident.
+Do not invent a root cause, fix, ticket timeline, or final resolution.
+Do not imply that restarting an application is always appropriate.
+
+CASE 4: SITE READINESS
+
+Keep the larger deployment scope prominent:
+- POS devices.
+- Payment terminals.
+- Scanners.
+- Printers.
+- Connectivity checks.
+
+Replace:
+“so new outlets are checked ready to operate”
+
+With:
+“to prepare new outlets for opening.”
+
+The existing RJ45 pin-4 example may remain as a small factual troubleshooting detail. Do not turn it into a major headline or add unsupported claims about network performance.
+
+Do not add a deployment count.
+
+NO EVIDENCE EXPANSION IN THIS REVISION
+
+Do not create or add:
+- Mock screenshots.
+- Fake logs.
+- Sample customer tickets.
+- Invented before-and-after comparisons.
+- Placeholder evidence galleries.
+- “Coming soon” proof sections.
+- Testimonials.
+
+Written case studies are sufficient for this revision.
+
+────────────────────────────────────────
+8. EXPERIENCE: CLEAR AND NATURAL
+────────────────────────────────────────
+
+Replace the introduction:
+“Paid application support and IT operations experience alongside my undergraduate application development internship.”
+
+Use:
+“My experience across application support, business systems, IT operations, and application development.”
+
+Or omit the introduction if the section already explains itself.
+
+For each role:
+- Clearly show title, company or organisation, and dates.
+- Use a concise scope statement.
+- Keep three to five focused bullets when expanded.
+- Avoid paragraphs disguised as bullets.
+- Keep tools secondary.
+
+Use present tense for ongoing responsibilities.
+Use past tense for completed initiatives.
+Use past tense for former roles.
+
+Split unrelated responsibilities where necessary.
+
+For example, new-site device setup and Microsoft 365 provisioning do not need to be forced into one overloaded sentence merely to reach a five-bullet limit.
+
+Remove repetitive descriptions:
+- A summary should introduce the role.
+- Bullets should add concrete detail.
+- The tools line should not repeat every phrase in the bullets.
+
+Use natural terms:
+- “issues” instead of repeatedly saying “symptoms” where it sounds unnatural.
+- “vendor coordination” instead of “verified incident handoffs” where clarity improves.
+- “account setup and access cleanup” where “account lifecycle administration” is unnecessarily abstract.
+
+Do not weaken real ownership:
+- I led the Lark migration internally.
+- I created the Excel promotion-import template.
+
+Do not inflate supporting work:
+- Microsoft 365 provisioning assistance.
+- UAT support within assigned scope.
+
+For the internship:
+- Use “Application development internship” or “Diploma internship.”
+- Remove duplicate wording such as “IT Intern (Application Development) (Internship).”
+- Preserve the original level of involvement.
+- Do not silently change “assisted with documentation” into sole authorship.
+
+────────────────────────────────────────
+9. SKILLS: KEEP THE FOUR-GROUP APPROACH
+────────────────────────────────────────
+
+Keep the current concise grouping.
+
+Application Support:
+- Xilnex troubleshooting.
+- Incident triage.
+- Vendor escalation.
+- UAT support.
+
+Business Systems & SaaS:
+- Lark administration.
+- User onboarding and offboarding.
+- Approval workflows.
+- Microsoft 365 provisioning assistance.
+
+Integration & Data Preparation:
+- Delivery-platform configuration in Xilnex.
+- Outlet mappings, price schemes, and menu profiles.
+- Excel promotion-import templates.
+- NetSuite import preparation.
+
+IT Operations:
+- Remote and onsite support.
+- POS and peripheral setup.
+- LAN / Wi-Fi troubleshooting.
+- New-site readiness.
+
+Improve alignment and wrapping across the four columns.
+
+On smaller screens:
+- Use two columns when comfortable.
+- Use one column when necessary.
+- Avoid narrow columns with excessive line breaks.
+
+Do not add proficiency percentages, star ratings, years-per-skill estimates, or expert badges.
+
+Keep AWS under credentials.
+Keep Laravel and MySQL associated with internship experience.
+Keep UiPath under current learning.
+
+The optional skill atlas should use the same underlying factual content, without stronger claims than the main page.
+
+────────────────────────────────────────
+10. EDUCATION AND CREDENTIALS
+────────────────────────────────────────
+
+Keep this section compact.
+
+Clearly distinguish:
+- Education.
+- Certification.
+- Completed program.
+- Current learning.
+
+Do not repeat these items elsewhere in the main page.
+
+Keep credential descriptions brief and avoid sounding like course marketing copy.
+
+Only show authentic verification links already available in the project.
+Do not create guessed verification links.
+Do not invent issue dates, expiry dates, certificate numbers, or credential status.
+
+Do not visually imply that a completed training program has the same status as AWS certification.
+
+Current UiPath learning should be visible but should not dominate professional experience.
+
+────────────────────────────────────────
+11. CONTACT: FIX THE PERSPECTIVE
+────────────────────────────────────────
+
+Replace:
+“Let’s talk about your next support or systems role.”
+
+This incorrectly sounds as though I am offering the visitor a job.
+
+Use:
+“Let’s talk about how I can support your team.”
+
+Supporting copy:
+“I’m open to opportunities in application support, business systems, SaaS support, integration support, and IT operations.”
+
+Keep:
+- Email.
+- LinkedIn.
+- Résumé access.
+- General location.
+
+Use the verified existing contact details:
+ariesirhan25@gmail.com
+
+Preserve the existing verified LinkedIn destination.
+
+Avoid duplicating LinkedIn as multiple equally prominent actions inside the same small contact block.
+
+A simple layout is enough:
+- Send Email.
+- LinkedIn.
+- View Résumé.
+- Copyable email address.
+- Location.
+
+The email copy button should:
+- Copy the correct address.
+- Show a short success message.
+- Announce success accessibly.
+- Handle failure without falsely displaying “Copied.”
+- Preserve a visible email address as a fallback.
+
+Do not add a contact form.
+Do not invent notice period, relocation availability, salary expectations, or work authorisation.
+
+────────────────────────────────────────
+12. RÉSUMÉ VIEWER AND PDF
+────────────────────────────────────────
+
+Keep the résumé viewer.
+
+Ensure it uses the same verified career data as the main portfolio.
+
+Check consistency of:
+- Name.
+- Job titles.
+- Organisations.
+- Dates.
+- Education.
+- Certification.
+- Current learning.
+- Scope of responsibilities.
+
+Keep the résumé summary concise and factual.
+
+Add a direct PDF download only if a real résumé PDF has been provided or already exists in the project.
+
+If there is no PDF:
+- Keep “Print / Save PDF.”
+- Do not create a broken download control.
+- Do not invent a file path.
+- Report the missing asset privately in the handover.
+- Do not block the rest of the work.
+
+The viewer must:
+- Fit desktop and mobile viewports.
+- Allow comfortable internal scrolling.
+- Keep the close action accessible.
+- Support Escape to close.
+- Place focus appropriately when opened.
+- Return focus to the triggering control when closed.
+- Prevent keyboard interaction with the background while open.
+- Restore background scrolling correctly.
+- Use appropriate accessible dialog semantics.
+- Avoid duplicate element IDs.
+
+Print output must:
+- Use a clean white background.
+- Keep text selectable.
+- Hide navigation and interactive controls.
+- Avoid clipping.
+- Avoid unnecessary blank pages.
+- Use sensible page breaks.
+- Keep headings with the following content where practical.
+- Preserve useful contact information.
+
+Check the printable summary as well. If it merely duplicates the résumé with a weaker layout, consolidate the implementation instead of maintaining inconsistent versions.
+
+────────────────────────────────────────
+13. INTERACTIVE FEATURES: POLISH, DO NOT EXPAND
+────────────────────────────────────────
+
+Keep:
+- Portfolio Shell.
+- Skill Atlas.
+- Computing Lab.
+- Beep to Receipt.
+
+Do not add new games, chatbots, dashboards, or simulations.
+
+These features should support the site’s personality without obstructing recruitment information.
+
+For every module:
+- Clear opening action.
+- Clear title.
+- Brief purpose.
+- Clear close control.
+- Keyboard access.
+- Escape-to-close where appropriate.
+- Correct focus handling.
+- Mobile-safe layout.
+- Graceful loading and failure states.
+
+Portfolio Shell:
+- Keep a clear list of supported commands.
+- Provide a helpful response to unknown commands.
+- Keep input and output readable on mobile.
+- Do not execute arbitrary JavaScript or shell commands.
+- Do not use eval or equivalent dynamic execution.
+- Keep career facts consistent with the main page.
+- Avoid fake operating-system or server claims.
+
+Skill Atlas:
+- Offer a readable list alternative.
+- Do not rely on dragging or hovering alone.
+- Make node selection usable by keyboard.
+- Keep labels legible.
+- Avoid graph overflow on small screens.
+- Clearly separate work experience, credentials, internship exposure, and learning.
+
+Computing Lab:
+- Label simulations as educational.
+- Keep explanations technically accurate.
+- Check existing examples and controls.
+- Avoid claiming that interacting with a simulation proves professional experience.
+
+Beep to Receipt:
+- Label it as an illustrative workflow.
+- Do not imply the diagram is the actual architecture of my employer.
+- Do not claim every transaction system uses the same sequence.
+- Audio must require explicit user action.
+- No automatic sound.
+- Handle unavailable audio gracefully.
+
+Lazy-load optional modules where appropriate.
+Do not delay the hero or core content while loading them.
+
+────────────────────────────────────────
+14. NAVIGATION, ANCHORS, AND INTERACTION DETAILS
+────────────────────────────────────────
+
+Prefer semantic links for page-section navigation where appropriate.
+
+Preserve existing shared anchors, including:
+- #top
+- #featured-work
+- #experience
+- #constellation
+- #credentials
+- #workbenches
+- #contact
+- Existing case-study anchors.
+
+If changing IDs, maintain compatibility with existing links.
+
+Test:
+- Clicking navigation.
+- Opening a direct case-study URL.
+- Refreshing on an anchor.
+- Browser back and forward.
+- Opening and closing a case.
+- Copying a case link.
+- Returning to the top.
+
+For case-study links:
+- Copy a stable public URL.
+- Open the relevant case when arriving via its link.
+- Ensure the title is visible below the sticky header.
+- Do not unexpectedly jump the reader into the middle of the case.
+
+Use an appropriate scroll offset for sticky navigation.
+
+Avoid navigation animations that briefly leave the viewport looking blank.
+Core content should remain visible during scrolling and reveal effects.
+
+Do not delay essential content behind opacity animations.
+
+If the command palette remains:
+- Keep Cmd/Ctrl + K working.
+- Avoid triggering it while the user is typing in another input.
+- Support Escape.
+- Manage focus properly.
+- Keep listed actions accurate and usable.
+- Do not let it interfere with the résumé or another open dialog.
+
+────────────────────────────────────────
+15. TYPOGRAPHY AND VISUAL CONSISTENCY
+────────────────────────────────────────
+
+Create or refine shared design tokens for:
+- Colors.
+- Font sizes.
+- Line heights.
+- Spacing.
+- Container widths.
+- Borders.
+- Radii.
+- Shadows.
+- Motion durations.
+
+Keep body text comfortable to read.
+Keep long text lines within a sensible width.
+Use monospace selectively for small technical labels, not for large amounts of reading.
+
+Avoid tiny low-contrast text in:
+- Hero diagram.
+- Case metadata.
+- Tools lines.
+- Credential labels.
+- Footer controls.
+
+Make buttons consistent:
+- Primary.
+- Secondary.
+- Text action.
+- Icon button.
+
+Provide clear:
+- Hover.
+- Focus.
+- Active.
+- Disabled, only where needed.
+
+Do not use hover styling as the only indication that an element is interactive.
+
+Keep icons visually consistent.
+Decorative icons should not create redundant screen-reader announcements.
+
+Keep section spacing deliberate. Large margins should create hierarchy, not unnecessary scrolling.
+
+────────────────────────────────────────
+16. RESPONSIVE BEHAVIOUR
+────────────────────────────────────────
+
+Check the actual rendered site at representative widths:
+- 360px.
+- 390px.
+- 768px.
+- 1024px.
+- 1440px.
+
+These are checkpoints, not the only widths the layout should support.
+
+Verify:
+- No horizontal page overflow.
+- Hero heading wraps naturally.
+- Identity details are readable.
+- Hero diagram fits.
+- Buttons do not collide.
+- Case metadata wraps cleanly.
+- Skills become appropriate columns.
+- Credentials fit without cramped labels.
+- Contact links remain usable.
+- Modals fit the available height.
+- Shell output wraps or scrolls locally.
+- Graphs do not enlarge the page width.
+- Sticky elements do not cover content.
+
+For mobile navigation:
+- Use a clear menu control if needed.
+- Keep résumé access discoverable.
+- Close the menu after navigation.
+- Support keyboard and Escape.
+- Avoid leaving background scrolling locked.
+
+Do not disable zoom.
+Check text enlargement and browser zoom for obvious loss of content.
+
+────────────────────────────────────────
+17. ACCESSIBILITY
+────────────────────────────────────────
+
+Aim for WCAG 2.2 AA practices without claiming certification or full compliance unless actually audited.
+
+Implement or verify:
+- Semantic header, nav, main, section, and footer.
+- One clear main-page H1.
+- Logical heading order.
+- Working skip link.
+- Keyboard-operable controls.
+- Visible focus indicators.
+- Adequate text and control contrast.
+- Accessible names for icon-only controls.
+- Appropriate accordion expanded state.
+- Correct dialog labels and behaviour.
+- Reduced-motion support.
+- Adequate touch targets.
+- Status announcements for copy actions.
+- Meaningful text alternatives where needed.
+- No reliance on color alone.
+- No keyboard traps.
+- No clickable divs where buttons or links are appropriate.
+
+Decorative diagrams may be hidden from assistive technology only if equivalent meaningful content is available.
+
+Avoid duplicating a diagram’s entire content unnecessarily for screen-reader users.
+
+Do not add ARIA attributes without understanding their purpose.
+
+────────────────────────────────────────
+18. PERFORMANCE AND RELIABILITY
+────────────────────────────────────────
+
+Inspect the current stack and use its existing tools.
+
+Prefer targeted improvements:
+- Lazy-load optional interactive modules.
+- Avoid unnecessary JavaScript.
+- Avoid importing large libraries for simple effects.
+- Optimize existing assets.
+- Supply image dimensions.
+- Prevent layout shifts.
+- Load fonts deliberately.
+- Remove unused imports and confirmed unused assets.
+- Avoid unnecessary background requests.
+- Stop timers and event listeners when components close or unmount.
+- Handle lazy-load errors gracefully.
+
+Do not remove functionality merely to improve a score.
+
+Do not publish invented Lighthouse scores.
+If measurement tools are available, run them and report the actual conditions and results.
+Distinguish lab measurements from real-user performance.
+
+Do not repeatedly rebuild the whole application or replace the framework without a concrete need.
+
+Preserve compatibility with my existing Google AI Studio → GitHub → Vercel workflow.
+
+────────────────────────────────────────
+19. BASIC SECURITY AND PRIVACY HYGIENE
+────────────────────────────────────────
+
+This is a public portfolio, so keep its architecture simple.
+
+Review changes for:
+- Secrets in client-side code.
+- Secrets in publicly bundled environment variables.
+- Unsafe HTML insertion.
+- Unsafe handling of shell input.
+- Unnecessary third-party scripts.
+- Unnecessary data collection.
+- Broken or overly permissive new functionality.
+
+Do not add authentication, forms, databases, or AI APIs without a requirement.
+
+If a visitor counter or analytics integration already exists:
+- Preserve working behaviour unless it is demonstrably broken or unsafe.
+- Keep secret credentials server-side.
+- Do not add personally identifying tracking.
+- Do not invent visitor counts.
+- Handle unavailable services gracefully.
+
+Do not expose secret values in the final response.
+If a suspected secret is found, identify the file and variable name without printing its value, and explain the required remediation.
+
+Do not claim that storing a key in any .env file automatically makes it private. Respect the actual framework’s client/server boundary.
+
+Do not apply security headers blindly if they break required assets or functionality.
+Any configuration changes must be compatible with the existing deployment.
+
+Do not claim the site is “fully secure” or “unhackable.”
+
+────────────────────────────────────────
+20. METADATA AND SHARE PREVIEWS
+────────────────────────────────────────
+
+Use concise, accurate metadata.
+
+Suggested page title:
+“Aries Razak | Application Support & Business Systems”
+
+Suggested description:
+“Explore Aries Razak’s experience in application support, SaaS administration, integration configuration, and IT operations.”
+
+Check:
+- Canonical URL.
+- Favicon.
+- Open Graph title and description.
+- Social preview image if a real suitable asset exists.
+- Twitter card metadata if used.
+- Robots and sitemap configuration where appropriate for the existing framework.
+
+Do not create fake review ratings or endorsements in structured data.
+Only include verified public information.
+Do not add irrelevant keyword stuffing.
+
+Use the production URL consistently where appropriate:
+https://aries-razak.vercel.app/
+
+Do not accidentally make the public portfolio noindex.
+
+────────────────────────────────────────
+21. SHARED CONTENT AND MAINTAINABILITY
+────────────────────────────────────────
+
+Where practical, maintain a shared data source for:
+- Identity and contact.
+- Experience.
+- Skills.
+- Education and credentials.
+- Case studies.
+
+Use it across:
+- Main page.
+- Résumé.
+- Printable summary.
+- Shell.
+- Skill atlas.
+
+Do not force identical wording everywhere if different formats require different lengths, but facts must remain consistent.
+
+Keep components understandable.
+Avoid unnecessary abstraction.
+Remove obsolete components only after checking references.
+
+Do not delete existing assets just because they are not visible on the homepage.
+
+Do not introduce a large new content management system.
+
+────────────────────────────────────────
+22. IMPLEMENTATION ORDER
+────────────────────────────────────────
+
+Work in this order:
+
+1. Inspect the project and identify the relevant components and content sources.
+2. Correct factual risks and wording errors.
+3. Refine hero, case studies, experience, and contact.
+4. Polish spacing, typography, and responsive layouts.
+5. Fix navigation, dialogs, copy actions, and optional module behaviour.
+6. Improve accessibility.
+7. Apply justified performance and metadata improvements.
+8. Run checks and inspect the rendered result.
+9. Fix regressions introduced by the changes.
+
+Make the actual edits.
+
+Do not stop after planning.
+Do not ask me to provide optional achievement evidence before completing the work.
+Do not add evidence placeholders.
+Do not deploy, change repository permissions, or modify account settings unless that action is separately authorised.
+
+────────────────────────────────────────
+23. VALIDATION CHECKLIST
+────────────────────────────────────────
+
+Run available project checks:
+- Production build.
+- Type checking.
+- Linting.
+- Existing relevant tests.
+
+Use focused tests where meaningful. Do not add large amounts of shallow tests that merely repeat implementation details.
+
+Inspect the rendered page where the environment allows it.
+
+Verify:
+- Hero layout.
+- Navigation.
+- Direct section anchors.
+- Direct case-study anchors.
+- Case expansion and collapse.
+- Case-link copying.
+- Email copying.
+- Résumé opening and closing.
+- Focus restoration.
+- Print layout.
+- PDF download only if a real asset exists.
+- LinkedIn and mailto destinations.
+- Mobile menu.
+- Skill atlas.
+- Shell.
+- Computing lab.
+- Beep to Receipt.
+- Reduced-motion behaviour.
+- Keyboard access.
+- Browser back and forward where relevant.
+- No obvious console errors caused by the application.
+- No broken asset references.
+- No missing content after transitions.
+- No horizontal overflow at the checked widths.
+
+If browser inspection, printing, or a particular test is unavailable, state that clearly.
+Do not report a check as passed merely because the code looks correct.
+
+────────────────────────────────────────
+24. FINAL HANDOVER
+────────────────────────────────────────
+
+After implementation, provide:
+
+1. A concise summary of the completed improvements.
+2. The main wording corrections.
+3. Any content removed or consolidated.
+4. The checks actually run and their results.
+5. Any unresolved issues or verification limitations.
+6. Any genuinely necessary missing asset, such as an existing résumé PDF.
+
+Do not list additional achievement evidence as a blocker. I have deliberately deferred that work.
+
+Do not claim that the portfolio guarantees interviews or is objectively 10/10.
+
+The finished result should be:
+- Clear.
+- Truthful.
+- Visually consistent.
+- Easy to scan.
+- Comfortable on mobile.
+- Accessible by keyboard.
+- Reliable in its interactions.
+- Professional without losing personality.
+- Based entirely on my actual experience.
+
+Implement the improvements now.

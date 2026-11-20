@@ -8,34 +8,25 @@ import {
   LEARNING_ENTRIES,
 } from '../data/universeContent';
 import { Copy, Check, Printer, ExternalLink, ShieldCheck, Mail, MapPin } from 'lucide-react';
+import { copyTextToClipboard } from '../utils/clipboard';
 
 export const ReceiptSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [copyFeedback, setCopyFeedback] = useState('');
 
   const handleCopyEmail = async () => {
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(PROFILE.email);
-      } else {
-        const textArea = document.createElement('textarea');
-        textArea.value = PROFILE.email;
-        textArea.style.position = 'fixed';
-        textArea.style.left = '-9999px';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-      }
+    const ok = await copyTextToClipboard(PROFILE.email);
+    if (ok) {
       setCopied(true);
       setCopyFeedback('Email copied to clipboard: ' + PROFILE.email);
       setTimeout(() => {
         setCopied(false);
         setCopyFeedback('');
       }, 3000);
-    } catch {
+    } else {
+      setCopied(false);
       setCopyFeedback('Direct copy failed. Email is: ' + PROFILE.email);
+      setTimeout(() => setCopyFeedback(''), 3500);
     }
   };
 
@@ -163,10 +154,7 @@ export const ReceiptSection: React.FC = () => {
             {EXPERIENCES.map((exp) => (
               <div key={exp.id} className="text-xs break-inside-avoid">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline font-bold text-[#191723] gap-1">
-                  <span className="text-sm uppercase tracking-wide">
-                    {exp.role}
-                    {exp.isInternship ? ' (Internship)' : ''}
-                  </span>
+                  <span className="text-sm uppercase tracking-wide">{exp.role}</span>
                   <span className="text-[#474457] font-mono text-[11px] uppercase">
                     {exp.period}
                   </span>

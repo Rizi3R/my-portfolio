@@ -19,9 +19,12 @@ import {
   BookOpen,
   Phone,
   Layers,
+  AlertCircle,
 } from 'lucide-react';
 import { PROFILE, STRATA, NODES, CASE_STUDIES, EXPERIENCES, StratumType } from '../data/universeContent';
 import { audioFx } from '../utils/audioFx';
+import { copyTextToClipboard } from '../utils/clipboard';
+import { useDialogFocusTrap } from '../utils/useDialogFocusTrap';
 import { ActiveView } from './Navbar';
 
 interface CommandPaletteProps {
@@ -61,40 +64,35 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 }) => {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle');
+  const dialogRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useDialogFocusTrap(dialogRef, isOpen);
 
   useEffect(() => {
     if (isOpen) {
       setQuery('');
       setSelectedIndex(0);
-      setTimeout(() => inputRef.current?.focus(), 40);
+      setCopyStatus('idle');
+      inputRef.current?.focus();
     }
   }, [isOpen]);
 
   const copyEmail = async () => {
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(PROFILE.email);
-      } else {
-        const textArea = document.createElement('textarea');
-        textArea.value = PROFILE.email;
-        textArea.style.position = 'fixed';
-        textArea.style.left = '-9999px';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-      }
-      setCopiedEmail(true);
+    const ok = await copyTextToClipboard(PROFILE.email);
+    if (ok) {
+      setCopyStatus('copied');
       audioFx.playSuccess();
       setTimeout(() => {
-        setCopiedEmail(false);
+        setCopyStatus('idle');
         onClose();
-      }, 1200);
-    } catch {
-      onClose();
+      }, 1100);
+    } else {
+      setCopyStatus('error');
+      setTimeout(() => {
+        setCopyStatus('idle');
+      }, 2400);
     }
   };
 
@@ -121,7 +119,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'nav-projects',
         category: 'Navigation',
         label: 'Work (Case Studies)',
-        sublabel: `Selected Work & ${CASE_STUDIES.length} real support cases`,
+        sublabel: `Selected Work & ${CASE_STUDIES.length} support case studies`,
         icon: <FolderGit2 className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('featured-work');
@@ -132,7 +130,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'nav-experience',
         category: 'Navigation',
         label: 'Experience',
-        sublabel: `Work & internship timeline (${EXPERIENCES.length} roles)`,
+        sublabel: `Work & diploma internship timeline (${EXPERIENCES.length} entries)`,
         icon: <Briefcase className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('experience');
@@ -154,7 +152,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'nav-credentials',
         category: 'Navigation',
         label: 'Education & Credentials',
-        sublabel: 'UiTM Diploma, AWS Certified Cloud Practitioner, and UiPath RPA study',
+        sublabel: 'UiTM Diploma, AWS Certified Cloud Practitioner, and UiPath study',
         icon: <BookOpen className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('credentials');
@@ -231,7 +229,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         id: 'view-plain',
         category: 'Perspectives & Tools',
         label: 'Printable Summary',
-        sublabel: 'High-contrast printable portfolio summary',
+        sublabel: 'Unified high-contrast printable résumé view',
         icon: <FileText className="w-4 h-4 text-[#CFCAC0]" />,
         perform: () => {
           onSelectView('plain');
@@ -263,24 +261,32 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'act-copy-email',
         category: 'Actions',
-        label: copiedEmail ? 'Email Copied!' : `Copy Email (${PROFILE.email})`,
+        label:
+          copyStatus === 'copied'
+            ? 'Email Copied!'
+            : copyStatus === 'error'
+            ? `Copy failed automatically (${PROFILE.email})`
+            : `Copy Email (${PROFILE.email})`,
         sublabel: 'Copy contact email to clipboard',
         shortcut: 'C',
-        icon: copiedEmail ? (
-          <Check className="w-4 h-4 text-[#A8C5FF]" />
-        ) : (
-          <Mail className="w-4 h-4 text-[#A8C5FF]" />
-        ),
+        icon:
+          copyStatus === 'copied' ? (
+            <Check className="w-4 h-4 text-[#A8C5FF]" />
+          ) : copyStatus === 'error' ? (
+            <AlertCircle className="w-4 h-4 text-[#F2A77D]" />
+          ) : (
+            <Mail className="w-4 h-4 text-[#A8C5FF]" />
+          ),
         perform: copyEmail,
       },
       {
         id: 'act-toggle-audio',
         category: 'Actions',
         label: isAudioMuted ? 'Enable Audio Cues' : 'Mute Audio Cues',
-        sublabel: 'Subtle click and scanner feedback tones',
+        sublabel: 'Subtle user-triggered sound cues in lab & shell',
         shortcut: 'M',
         icon: isAudioMuted ? (
-          <VolumeX className="w-4 h-4 text-[#9A94A8]" />
+          <VolumeX className="w-4 h-4 text-[#B5B0C2]" />
         ) : (
           <Volume2 className="w-4 h-4 text-[#A8C5FF]" />
         ),
@@ -303,7 +309,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [copiedEmail, isAudioMuted]
+    [copyStatus, isAudioMuted]
   );
 
   const nodeActions: PaletteAction[] = useMemo(
@@ -371,6 +377,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       aria-label="Command navigation palette"
     >
       <div
+        ref={dialogRef}
         className="w-full max-w-xl bg-[#0A0913] border border-[#242138] rounded-2xl shadow-2xl overflow-hidden text-xs"
         onClick={(e) => e.stopPropagation()}
       >
@@ -383,24 +390,32 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Jump to Work, Experience, Skills, Credentials, Interactive Lab, Contact..."
-            className="w-full py-3.5 bg-transparent text-[#F6F2E9] placeholder-[#9A94A8] focus:outline-none text-xs sm:text-sm"
+            className="w-full py-3.5 bg-transparent text-[#F6F2E9] placeholder-[#B5B0C2] focus:outline-none text-xs sm:text-sm"
             aria-label="Search sections, commands, or skills"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery('')}
-              className="text-[#9A94A8] hover:text-[#F6F2E9] p-1 cursor-pointer"
+              className="text-[#B5B0C2] hover:text-[#F6F2E9] p-1.5 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
               aria-label="Clear search"
             >
               <X className="w-4 h-4" />
             </button>
           )}
+          <button
+            type="button"
+            onClick={onClose}
+            className="ml-1 text-[#B5B0C2] hover:text-[#F6F2E9] p-1.5 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+            aria-label="Close command palette"
+          >
+            <span className="font-mono text-xs">Esc</span>
+          </button>
         </div>
 
         <div className="max-h-80 overflow-y-auto divide-y divide-[#242138]" role="listbox">
           {filteredActions.length === 0 ? (
-            <div className="p-8 text-center text-[#9A94A8]">
+            <div className="p-8 text-center text-[#B5B0C2]">
               No matching destination found for "{query}".
             </div>
           ) : (
@@ -430,12 +445,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                         <span>{action.label}</span>
                       </div>
                       {action.sublabel && (
-                        <div className="text-[11px] text-[#9A94A8] truncate">{action.sublabel}</div>
+                        <div className="text-xs text-[#B5B0C2] truncate">{action.sublabel}</div>
                       )}
                     </div>
                   </div>
                   {action.shortcut && (
-                    <kbd className="shrink-0 ml-2 px-2 py-0.5 rounded bg-[#12101F] border border-[#242138] text-[10px] font-mono text-[#A8C5FF]">
+                    <kbd className="shrink-0 ml-2 px-2 py-0.5 rounded bg-[#12101F] border border-[#242138] text-xs font-mono text-[#A8C5FF]">
                       {action.shortcut}
                     </kbd>
                   )}
@@ -445,7 +460,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           )}
         </div>
 
-        <div className="px-4 py-2.5 border-t border-[#242138] bg-[#12101F] flex items-center justify-between text-[11px] font-mono text-[#9A94A8]">
+        <div className="px-4 py-2.5 border-t border-[#242138] bg-[#12101F] flex items-center justify-between text-xs font-mono text-[#B5B0C2]">
           <div className="flex items-center gap-3">
             <span>↑↓ Navigate</span>
             <span>↵ Open</span>

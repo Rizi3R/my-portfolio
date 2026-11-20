@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CASE_STUDIES } from '../data/universeContent';
+import { copyTextToClipboard } from '../utils/clipboard';
 import {
   ChevronDown,
   ChevronUp,
@@ -7,6 +8,7 @@ import {
   Check,
   CheckCircle2,
   ArrowRight,
+  AlertCircle,
 } from 'lucide-react';
 
 interface ProjectsSectionProps {
@@ -21,11 +23,13 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   onJumpToCase,
 }) => {
   const [copiedCaseId, setCopiedCaseId] = useState<string | null>(null);
+  const [copyErrorCaseId, setCopyErrorCaseId] = useState<string | null>(null);
+  const [copyAnnouncement, setCopyAnnouncement] = useState('');
 
   const primaryCase = CASE_STUDIES[0];
   const secondaryCases = CASE_STUDIES.slice(1);
 
-  const handleCopyCaseLink = async (e: React.MouseEvent, caseId: string) => {
+  const handleCopyCaseLink = async (e: React.MouseEvent, caseId: string, title: string) => {
     e.stopPropagation();
     const url = new URL(window.location.href);
     url.searchParams.delete('view');
@@ -33,23 +37,24 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     url.hash = `#${caseId}`;
     const shareUrl = url.toString();
 
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(shareUrl);
-      } else {
-        const textArea = document.createElement('textarea');
-        textArea.value = shareUrl;
-        textArea.style.position = 'fixed';
-        textArea.style.left = '-9999px';
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-      }
+    const ok = await copyTextToClipboard(shareUrl);
+    if (ok) {
+      setCopyErrorCaseId(null);
       setCopiedCaseId(caseId);
-      setTimeout(() => setCopiedCaseId(null), 2200);
-    } catch {
+      setCopyAnnouncement(`Shareable link for ${title} copied to clipboard.`);
+      setTimeout(() => {
+        setCopiedCaseId(null);
+        setCopyAnnouncement('');
+      }, 2400);
+    } else {
       window.history.replaceState({}, '', `#${caseId}`);
+      setCopiedCaseId(null);
+      setCopyErrorCaseId(caseId);
+      setCopyAnnouncement(`Could not copy automatically. Browser URL updated to #${caseId}.`);
+      setTimeout(() => {
+        setCopyErrorCaseId(null);
+        setCopyAnnouncement('');
+      }, 3000);
     }
   };
 
@@ -89,7 +94,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#F6F2E9] border border-[#DDD6C7] rounded-xl p-4 sm:p-5">
           <div className="space-y-1.5">
             <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
-              Checks I performed
+              Checks performed
             </h4>
             <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#191723] leading-relaxed">
               {cs.triageBreakdown.checksPerformed.map((item, idx) => (
@@ -100,7 +105,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
           <div className="space-y-1.5 md:border-l md:border-[#DDD6C7] md:pl-4 pt-3 md:pt-0 border-t md:border-t-0 border-[#DDD6C7]">
             <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
-              Information I provided to the vendor
+              Provided to vendor
             </h4>
             <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#191723] leading-relaxed">
               {cs.triageBreakdown.providedToVendor.map((item, idx) => (
@@ -111,7 +116,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
           <div className="space-y-1.5 md:border-l md:border-[#DDD6C7] md:pl-4 pt-3 md:pt-0 border-t md:border-t-0 border-[#DDD6C7]">
             <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
-              Findings or fixes that required vendor investigation
+              Vendor investigation scope
             </h4>
             <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#191723] leading-relaxed">
               {cs.triageBreakdown.vendorInvestigation.map((item, idx) => (
@@ -126,7 +131,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         <div className="border-t border-[#DDD6C7] pt-4 space-y-1">
           <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4 text-[#191723]" aria-hidden="true" />
-            <span>Outcome</span>
+            <span>{cs.outcomeLabel}</span>
           </h4>
           <p className="text-sm text-[#191723] leading-relaxed">{cs.outcome}</p>
         </div>
@@ -136,36 +141,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
           Tools used
         </h4>
-        <div className="text-xs font-mono text-[#191723]">
-          {cs.technologies.join(' · ')}
-        </div>
+        <div className="text-xs font-mono text-[#191723]">{cs.technologies.join(' · ')}</div>
       </div>
-
-      {cs.supportingMaterial && (
-        <div className="bg-[#F6F2E9] border border-[#CCC4B3] rounded-xl p-4 sm:p-5 space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#DDD6C7] pb-2.5">
-            <div>
-              <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
-                Supporting material: {cs.supportingMaterial.title}
-              </h4>
-              <p className="text-xs text-[#474457] mt-0.5">{cs.supportingMaterial.summary}</p>
-            </div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#191723] bg-white border border-[#CCC4B3] px-2 py-0.5 rounded font-semibold shrink-0">
-              {cs.supportingMaterial.label}
-            </span>
-          </div>
-          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs sm:text-sm leading-relaxed">
-            {cs.supportingMaterial.items.map((item) => (
-              <div key={item.key}>
-                <dt className="font-mono text-[11px] uppercase tracking-wider text-[#474457] font-semibold">
-                  {item.key}
-                </dt>
-                <dd className="text-[#191723] mt-0.5">{item.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      )}
     </div>
   );
 
@@ -179,7 +156,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="sr-only" aria-live="polite" role="status">
-          {copiedCaseId ? 'Direct link to case study copied to clipboard.' : ''}
+          {copyAnnouncement}
         </div>
 
         {/* Section Header */}
@@ -209,21 +186,36 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           >
             <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-5">
               <div className="space-y-2.5 max-w-3xl">
-                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-xs font-mono text-[#474457]">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded bg-[#191723] text-[#F6F2E9] font-semibold tracking-wide">
+                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-[#474457]">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded bg-[#191723] text-[#F6F2E9] font-mono font-semibold tracking-wide">
                     Case 01
                   </span>
-                  <span>{primaryCase.organization}</span>
-                  <span aria-hidden="true">·</span>
-                  <span>{primaryCase.roleScope}</span>
+                  <span className="font-medium text-[#191723]">{primaryCase.organization}</span>
                 </div>
 
                 <h3
                   id={`${primaryCase.id}-heading`}
                   className="font-display text-2xl sm:text-[2rem] font-bold text-[#191723] tracking-tight leading-tight"
                 >
-                  {primaryCase.title}
+                  <a
+                    href={`#${primaryCase.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (onJumpToCase) {
+                        onJumpToCase(primaryCase.id);
+                      } else {
+                        onSelectCaseId(expandedCaseId === primaryCase.id ? null : primaryCase.id);
+                      }
+                    }}
+                    className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723] rounded"
+                  >
+                    {primaryCase.title}
+                  </a>
                 </h3>
+
+                <p className="text-xs font-mono text-[#474457]">
+                  Scope: {primaryCase.roleScope}
+                </p>
 
                 <p className="text-sm sm:text-base text-[#191723] leading-relaxed">
                   {primaryCase.summaryLine}
@@ -233,7 +225,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               <div className="flex flex-wrap items-center gap-2 shrink-0">
                 <button
                   type="button"
-                  onClick={(e) => handleCopyCaseLink(e, primaryCase.id)}
+                  onClick={(e) => handleCopyCaseLink(e, primaryCase.id, primaryCase.title)}
                   className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-[#F6F2E9] hover:bg-[#EAE3D5] border border-[#CCC4B3] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                   aria-label={`Copy shareable link to ${primaryCase.title}`}
                 >
@@ -241,6 +233,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     <>
                       <Check className="w-3.5 h-3.5" aria-hidden="true" />
                       <span>Copied</span>
+                    </>
+                  ) : copyErrorCaseId === primaryCase.id ? (
+                    <>
+                      <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" />
+                      <span>URL Updated</span>
                     </>
                   ) : (
                     <>
@@ -278,6 +275,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           {secondaryCases.map((cs, idx) => {
             const isExpanded = expandedCaseId === cs.id;
             const isCopied = copiedCaseId === cs.id;
+            const hasCopyErr = copyErrorCaseId === cs.id;
 
             return (
               <article
@@ -286,14 +284,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 aria-labelledby={`${cs.id}-heading`}
                 className="scroll-mt-24 py-6 sm:py-7"
               >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                   <div className="space-y-1.5 max-w-3xl">
-                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono text-[#474457]">
-                      <span className="font-semibold text-[#191723]">Case 0{idx + 2}</span>
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#474457]">
+                      <span className="font-mono font-semibold text-[#191723]">Case 0{idx + 2}</span>
                       <span aria-hidden="true">·</span>
-                      <span>{cs.organization}</span>
-                      <span aria-hidden="true">·</span>
-                      <span>{cs.roleScope}</span>
+                      <span className="font-medium text-[#191723]">{cs.organization}</span>
                     </div>
 
                     <h3
@@ -315,6 +311,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                         {cs.title}
                       </a>
                     </h3>
+
+                    <p className="text-xs font-mono text-[#474457]">Scope: {cs.roleScope}</p>
 
                     <p className="text-sm text-[#474457] leading-relaxed">{cs.summaryLine}</p>
 
@@ -340,17 +338,22 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     )}
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2 shrink-0">
+                  <div className="flex flex-wrap items-center gap-2 shrink-0 md:pt-1">
                     <button
                       type="button"
-                      onClick={(e) => handleCopyCaseLink(e, cs.id)}
-                      className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-white/70 hover:bg-white border border-[#DDD6C7] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+                      onClick={(e) => handleCopyCaseLink(e, cs.id, cs.title)}
+                      className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-white/80 hover:bg-white border border-[#CCC4B3] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                       aria-label={`Copy shareable link to ${cs.title}`}
                     >
                       {isCopied ? (
                         <>
                           <Check className="w-3.5 h-3.5" aria-hidden="true" />
                           <span>Copied</span>
+                        </>
+                      ) : hasCopyErr ? (
+                        <>
+                          <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" />
+                          <span>URL Updated</span>
                         </>
                       ) : (
                         <>

@@ -3,7 +3,7 @@
  *
  * Enforces:
  * - Zero em dashes (U+2014) anywhere in universeContent.ts.
- * - Zero superseded dates or banned technical exaggerations.
+ * - Zero superseded dates, mock artifacts, or banned technical exaggerations.
  * - Valid evidence references (evidenceRef) and usage strings on work/project nodes.
  * - Max character limits: summary <= 200 chars, edge reason <= 120 chars.
  * - Strict isolation of UiPath & RPA as 'learning'.
@@ -42,7 +42,7 @@ console.log('='.repeat(65));
 console.log('ARIES RAZAK - PORTFOLIO CONTENT & TRUTHFULNESS VALIDATOR');
 console.log('='.repeat(65));
 
-// 1. Verify Profile Integrity & Confirmed HWC Dates
+// 1. Verify Profile Integrity & Confirmed Employment Dates
 console.log('\n[1/7] Verifying Profile, Title & Confirmed Employment Dates...');
 const forbiddenTitles = [
   'senior software engineer',
@@ -64,8 +64,8 @@ const hwcRole = EXPERIENCES.find((e) => e.id === 'exp-hwc');
 if (!hwcRole || hwcRole.period !== 'March 2024 to September 2025') {
   logError('HWC Coffee employment period must equal "March 2024 to September 2025".');
 }
-if (!hwcRole || hwcRole.role !== 'IT Support | HWC Coffee Malaysia') {
-  logError('HWC Coffee public role label must equal "IT Support | HWC Coffee Malaysia".');
+if (!hwcRole || hwcRole.role !== 'IT Support') {
+  logError('HWC Coffee public role label must equal "IT Support".');
 }
 if (SKILL_GROUPS.length !== 4) {
   logError(`Expected 4 main-page SKILL_GROUPS, found ${SKILL_GROUPS.length}.`);
@@ -113,6 +113,10 @@ const bannedCareerStrings = [
   '3nf',
   'zero launch delay',
   'zero downtime',
+  'uninterrupted',
+  'undergraduate internship',
+  'reg-02-test',
+  'sample outlet a',
   '100% operational readiness',
   'accelerated vendor resolution',
   'minimal ticket backlog',
@@ -149,7 +153,7 @@ bannedCareerStrings.forEach((phrase) => {
     logError(`Unconfirmed or superseded claim found in career content: "${phrase}"`);
   }
 });
-logSuccess('Zero unconfirmed claims, superseded dates, or banned strings found.');
+logSuccess('Zero unconfirmed claims, mock samples, or banned strings found.');
 
 // 3. Prohibited Rating Fields Audit
 console.log('\n[3/7] Auditing Against Prohibited Rating & Progress Fields...');

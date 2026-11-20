@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ink-violet: #0A0913;
+  --color-ink-surface: #12101F;
+  --color-ink-surface-hover: #19162B;
+  --color-warm-ivory: #F6F2E9;
+  --color-warm-ivory-muted: #EAE3D5;
+  --color-ink-text: #191723;
+  --color-ink-text-muted: #474457;
+  --color-accent-ice: #A8C5FF;
+  --color-accent-copper: #F2A77D;
+  --color-rule-dark: #242138;
+  --color-rule-ivory: #DDD6C7;
+  --color-muted-light: #CFCAC0;
+  --color-muted-subtle: #B5B0C2;
+
+  --font-display: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
+  --font-sans: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --radius-card: 1rem;
+  --radius-control: 0.5rem;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+}
+
 @layer base {
   :root {
     --bg-ink-violet: #0A0913;
@@ -11,23 +36,28 @@
     --accent-copper: #F2A77D;
     --rule-dark: #242138;
     --rule-ivory: #DDD6C7;
+    --container-max: 80rem;
+    --space-section-y: 4.5rem;
+    --space-header-offset: 5rem;
+    --shadow-card: 0 1px 3px rgba(25, 23, 35, 0.08);
+    --shadow-dialog: 0 24px 48px -12px rgba(0, 0, 0, 0.72);
 
-    font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: var(--font-sans);
     color-scheme: dark;
   }
 
   h1, h2, h3, .font-display {
-    font-family: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
+    font-family: var(--font-display);
     text-wrap: balance;
   }
 
   code, kbd, samp, pre, .font-mono {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
   }
 }
 
-/* Subtle architectural grid reserved strictly for Skill Atlas canvas / workbench interiors */
+/* Subtle architectural grid reserved strictly for Skill Atlas / workbench interiors */
 .cyber-grid {
   background-image:
     linear-gradient(to right, rgba(168, 197, 255, 0.05) 1px, transparent 1px),
@@ -65,8 +95,6 @@
     scroll-behavior: auto !important;
   }
 }
-
-/* Restrained static systems diagram helpers cleanly inherit @media (prefers-reduced-motion: reduce) */
 
 /* Sample Receipt (Trace Walkthrough Easter Egg) */
 .thermal-barcode-mini {
@@ -111,6 +139,7 @@
     display: block !important;
   }
 
+  h1,
   h2,
   h3 {
     break-after: avoid;
