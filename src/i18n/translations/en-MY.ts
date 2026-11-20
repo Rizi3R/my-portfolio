@@ -182,7 +182,7 @@ export const enMYUi: UiTranslations = {
     eyebrow: 'Case Studies',
     heading: 'Selected Work',
     intro:
-      'Four examples across SaaS migration leadership, third-party integration configuration, incident triage, and new-site IT readiness.',
+      'Four examples covering internal SaaS migration, third-party integration configuration, incident triage, and new-site IT readiness.',
     caseLabelPrefix: 'Case {number}',
     contextLabel: 'Context',
     myRoleLabel: 'My role',
@@ -222,8 +222,6 @@ export const enMYUi: UiTranslations = {
   credentials: {
     eyebrow: 'Foundations & Credentials',
     heading: 'Education & Credentials',
-    intro:
-      'Formal diploma, cloud certification, completed program, and current study kept clearly distinct.',
     educationBadge: 'Education',
     selfStudyBadge: 'Self-study',
   },
@@ -479,7 +477,7 @@ export const enMYUi: UiTranslations = {
     whatIDid: 'What I Did',
     activeLearning: 'Active Learning',
     currentlyExploring: 'Currently Exploring',
-    activeLearningDesc: 'Areas I am actively studying outside production experience claims.',
+    activeLearningDesc: 'Areas I am currently studying outside my work experience.',
     walkthroughComplete: 'Walkthrough Complete',
     receiptCtaDesc: 'Scroll down or jump directly to the printable experience summary receipt.',
     viewSummaryReceipt: 'View Summary Receipt',

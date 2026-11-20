@@ -57,7 +57,7 @@ export const msMYUi: UiTranslations = {
     coreFocusTitle: 'Aplikasi Perniagaan & SaaS',
     nodes: {
       users: { label: 'Pengguna', detail: 'Sokongan dan penggunaan' },
-      access: { label: 'Akses', detail: 'Kemasukan dan penamatan akaun' },
+      access: { label: 'Akses', detail: 'Penyediaan dan penamatan akses' },
       integrations: { label: 'Integrasi', detail: 'Konfigurasi dan penyegerakan' },
       vendors: { label: 'Vendor', detail: 'Penyelarasan insiden' },
     },
@@ -73,7 +73,7 @@ export const msMYUi: UiTranslations = {
   },
   caseStudies: {
     eyebrow: 'Kajian Kes',
-    heading: 'Pilihan Kerja',
+    heading: 'Hasil Kerja Terpilih',
     intro:
       'Empat contoh merangkumi penyelarasan migrasi SaaS, konfigurasi integrasi pihak ketiga, saringan insiden, dan kesediaan IT cawangan baharu.',
     caseLabelPrefix: 'Kes {number}',
@@ -116,8 +116,6 @@ export const msMYUi: UiTranslations = {
   credentials: {
     eyebrow: 'Asas & Kelayakan',
     heading: 'Pendidikan & Kelayakan',
-    intro:
-      'Diploma formal, pensijilan awan, program yang diselesaikan, dan pembelajaran semasa diasingkan dengan jelas.',
     educationBadge: 'Pendidikan',
     selfStudyBadge: 'Pembelajaran kendiri',
   },
@@ -209,7 +207,7 @@ export const msMYUi: UiTranslations = {
       home: { label: 'Utama', sublabel: 'Gambaran keseluruhan, pengenalan, dan bahagian utama' },
       work: {
         label: 'Hasil Kerja (Kajian Kes)',
-        sublabel: 'Pilihan Kerja & {count} kajian kes sokongan',
+        sublabel: 'Hasil Kerja Terpilih & {count} kajian kes sokongan',
       },
       experience: {
         label: 'Pengalaman',
@@ -373,7 +371,7 @@ export const msMYUi: UiTranslations = {
     whatIDid: 'Apa yang Saya Lakukan',
     activeLearning: 'Pembelajaran Aktif',
     currentlyExploring: 'Sedang Diterokai',
-    activeLearningDesc: 'Bidang yang sedang saya pelajari di luar dakwaan pengalaman kerja rasmi.',
+    activeLearningDesc: 'Bidang yang sedang saya pelajari di luar pengalaman kerja semasa saya.',
     walkthroughComplete: 'Panduan Selesai',
     receiptCtaDesc: 'Tatal ke bawah atau terus ke resit ringkasan pengalaman boleh cetak.',
     viewSummaryReceipt: 'Lihat Resit Ringkasan',
@@ -703,9 +701,9 @@ export const msMYContent: PortfolioContentTranslations = {
     currentRole: 'System Application Specialist',
     location: 'Selangor / Kuala Lumpur, Malaysia',
     intro:
-      'Saya menyelesaikan isu aplikasi perniagaan, mengurus akses pengguna, menyelaras integrasi, serta membantu pasukan menggunakan perisian kerja harian dengan lancar.',
+      'Saya menyelesaikan isu aplikasi perniagaan, mengurus akses pengguna, menyelaras integrasi, serta membantu pasukan menggunakan alat kerja harian mereka.',
     resumeSummary:
-      'System Application Specialist berpengalaman dalam sokongan aplikasi, pentadbiran sistem perniagaan, pengurusan akses masuk dan keluar pengguna, konfigurasi integrasi platform penghantaran pihak ketiga, dan penyediaan IT cawangan baharu. Mengetuai migrasi Google Workspace ke Lark secara dalaman di HWC Coffee Malaysia dengan sokongan daripada pasukan Lark serta menghasilkan templat Excel untuk pengimportan promosi berkala Xilnex di emart24 Malaysia.',
+      'System Application Specialist berpengalaman dalam sokongan aplikasi, pentadbiran sistem perniagaan, penyediaan akaun dan penamatan akses pengguna, konfigurasi integrasi platform penghantaran pihak ketiga, dan penyediaan IT cawangan baharu. Mengetuai migrasi Google Workspace ke Lark secara dalaman di HWC Coffee Malaysia dengan sokongan daripada pasukan Lark serta menghasilkan templat Excel untuk pengimportan promosi berkala Xilnex di emart24 Malaysia.',
     availabilityNote:
       'Saya terbuka kepada peluang dalam sokongan aplikasi, sistem perniagaan, sokongan SaaS, sokongan integrasi, dan operasi IT.',
   },
@@ -723,7 +721,7 @@ export const msMYContent: PortfolioContentTranslations = {
       title: 'Sistem Perniagaan & SaaS',
       items: [
         'Pentadbiran Lark',
-        'Pengurusan akaun masuk & keluar pengguna',
+        'Penyediaan akaun dan penamatan akses pengguna',
         'Aliran kerja kelulusan',
         'Bantuan penyediaan akaun Microsoft 365',
       ],
@@ -732,7 +730,7 @@ export const msMYContent: PortfolioContentTranslations = {
       title: 'Integrasi & Penyediaan Data',
       items: [
         'Konfigurasi platform penghantaran dalam Xilnex',
-        'Pemetaan cawangan, skema harga, dan profil menu',
+        'Pemetaan cawangan, skim harga, dan profil menu',
         'Templat Excel import promosi',
         'Penyediaan data import NetSuite',
       ],
@@ -757,10 +755,10 @@ export const msMYContent: PortfolioContentTranslations = {
       summary:
         'Menyokong Xilnex POS di pejabat induk dan cawangan, mengurus akses pengguna kedai, mengkonfigurasi integrasi penghantaran, serta menyediakan kelengkapan IT cawangan baharu.',
       highlights: [
-        'Menyediakan akaun Xilnex POS daripada permohonan kemasukan pekerja baharu HR selepas menyemak status permohonan, kumpulan pengguna, dan penempatan cawangan, serta mengemas kini dan menamatkan akses serta kelayakan diskaun staf yang telah berhenti.',
-        'Menyelaras dengan Xilnex dan rakan penghantaran (GrabFood, foodpanda, dan ShopeeFood) untuk mengkonfigurasi dan menyegerakkan tetapan cawangan di portal Xilnex, termasuk pautan kedai, skema harga, dan profil menu bagi foodpanda.',
+        'Menyediakan akaun Xilnex POS daripada permohonan kakitangan baharu daripada HR selepas menyemak status permohonan, kumpulan pengguna, dan penempatan cawangan, serta mengemas kini dan menamatkan akses serta kelayakan diskaun staf yang telah berhenti.',
+        'Menyelaras dengan Xilnex dan rakan penghantaran (GrabFood, foodpanda, dan ShopeeFood) untuk mengkonfigurasi dan menyegerakkan tetapan cawangan di portal Xilnex, termasuk pautan kedai, skim harga, dan profil menu bagi foodpanda.',
         'Menyelesaikan isu penyegerakan, promosi, dan pembayaran dalam Xilnex POS di pejabat induk dan cawangan dengan mengesahkan simptom, membimbing semakan awal, dan menyelaras eskalasi vendor apabila siasatan lanjut diperlukan.',
-        'Menghasilkan templat Excel yang menyusun permohonan promosi berkala untuk diimport ke Xilnex Promotion Portal serta menyediakan panduan penggunaan fungsi import tersebut.',
+        'Menghasilkan templat Excel yang menyusun permohonan promosi berkala untuk diimport ke Xilnex Promotion Portal serta memberikan panduan tentang penggunaan fungsi import tersebut.',
         'Memasang dan memeriksa peranti POS, terminal pembayaran, pengimbas, pencetak, serta sambungan LAN / Wi-Fi semasa penyediaan cawangan baharu.',
         'Membantu penyediaan akaun Microsoft 365 dan ujian penerimaan pengguna (UAT) mengikut skop yang ditetapkan.',
       ],
@@ -781,7 +779,7 @@ export const msMYContent: PortfolioContentTranslations = {
         'Mengetuai migrasi Google Workspace ke Lark secara dalaman dengan sokongan daripada pasukan Lark, mentadbir Lark, serta menyokong POS runcit, pengguna jarak jauh, dan penyediaan data import NetSuite.',
       highlights: [
         'Mengetuai migrasi Google Workspace ke Lark secara dalaman dengan sokongan daripada pasukan Lark serta membantu rakan sekerja menggunakan pemesejan, e-mel, kelulusan digital, dan sokongan meja bantuan.',
-        'Mentadbir Lark dengan mengurus akaun pengguna, akses masuk dan keluar kakitangan, serta aliran kerja kelulusan.',
+        'Mentadbir Lark dengan mengurus akaun pengguna, penyediaan akaun dan penamatan akses kakitangan, serta aliran kerja kelulusan.',
         'Menyokong Xilnex POS, perkakasan, rangkaian, dan pengguna jarak jauh melalui TeamViewer dan Lark Helpdesk.',
         'Menyediakan dan menyemak helaian kerja Excel untuk tujuan import ke dalam NetSuite.',
       ],
@@ -834,16 +832,16 @@ export const msMYContent: PortfolioContentTranslations = {
     'case-lark-migration': {
       title: 'Migrasi Google Workspace ke Lark',
       organization: 'HWC Coffee Malaysia (Palaterium Sdn Bhd)',
-      roleScope: 'Penyelaras Migrasi Dalaman & Pentadbiran Ruang Kerja',
+      roleScope: 'Ketua Migrasi Dalaman & Pentadbiran Ruang Kerja',
       summaryLine:
-        'Menyelaras peralihan daripada Google Workspace ke Lark, tetapan ruang kerja, perubahan akses pengguna, dan penggunaan harian oleh rakan sekerja.',
+        'Menyelaras peralihan daripada Google Workspace ke Lark, menyediakan ruang kerja, mengurus perubahan akses pengguna, serta membantu rakan sekerja menggunakan Lark dalam tugasan harian mereka.',
       situation:
         'Peralihan daripada Google Workspace ke Lark memerlukan penyelarasan dalaman, pentadbiran akaun, penyediaan aliran kelulusan, dan bimbingan kepada kakitangan yang mula menggunakan platform tersebut.',
       responsibility:
         'Saya mengetuai migrasi ini secara dalaman dengan sokongan daripada pasukan Lark serta mengendalikan pentadbiran ruang kerja dan sokongan pengguna.',
       whatIDid: [
         'Menyelaraskan aktiviti pelaksanaan dalaman sambil bekerjasama dengan pasukan Lark bagi langkah sokongan migrasi.',
-        'Mengkonfigurasi akaun pengguna Lark, perubahan akses kemasukan dan penamatan kakitangan, serta aliran kerja kelulusan digital.',
+        'Mengkonfigurasi akaun pengguna Lark, perubahan akses bagi penyediaan akaun dan penamatan akses kakitangan, serta aliran kerja kelulusan digital.',
         'Membantu rakan sekerja menggunakan pemesejan, e-mel, kelulusan, dan Lark Helpdesk dalam tugasan harian.',
       ],
       outcomeLabel: 'Hasil',
@@ -852,7 +850,7 @@ export const msMYContent: PortfolioContentTranslations = {
       technologies: [
         'Lark',
         'Google Workspace',
-        'Pengurusan Akaun Masuk & Keluar',
+        'Penyediaan Akaun & Penamatan Akses',
         'Aliran Kerja Kelulusan',
         'Lark Helpdesk',
       ],
@@ -871,7 +869,7 @@ export const msMYContent: PortfolioContentTranslations = {
       whatIDid: [
         'Menyelaras kesediaan prasyarat bersama Xilnex dan rakan penghantaran merangkumi GrabFood, foodpanda, dan ShopeeFood.',
         'Mengkonfigurasi tetapan integrasi pihak cawangan di dalam portal Xilnex setelah kedua-dua pihak mengesahkan prasyarat sedia.',
-        'Khusus bagi foodpanda, memautkan cawangan rakan kongsi ke kedai Xilnex yang sepadan serta menetapkan skema harga dan profil menunya.',
+        'Khusus bagi foodpanda, memautkan cawangan rakan kongsi ke kedai Xilnex yang sepadan serta menetapkan skim harga dan profil menunya.',
         'Menyimpan dan menyegerakkan tetapan cawangan dalam Xilnex setelah konfigurasi selesai.',
       ],
       outcomeLabel: 'Kerja yang disempurnakan',
@@ -881,7 +879,7 @@ export const msMYContent: PortfolioContentTranslations = {
         'GrabFood',
         'foodpanda',
         'ShopeeFood',
-        'Skema Harga & Profil Menu',
+        'Skim Harga & Profil Menu',
       ],
     },
     'case-pos-triage': {
@@ -941,7 +939,7 @@ export const msMYContent: PortfolioContentTranslations = {
       ],
       outcomeLabel: 'Kerja yang disempurnakan',
       outcome:
-        'Menyediakan serta memeriksa secara fizikal peranti kaunter kedai dan pautan sambungan bagi menyiapkan cawangan baharu untuk pembukaan.',
+        'Memasang dan memeriksa secara fizikal peranti kaunter kedai serta pautan sambungan bagi menyiapkan cawangan baharu untuk pembukaan.',
       technologies: [
         'Peranti POS',
         'Terminal Pembayaran',
@@ -968,7 +966,7 @@ export const msMYContent: PortfolioContentTranslations = {
     'cert-ai-teach': {
       name: 'Generative AI Copilot Digital Upskilling Program',
       issuer: 'AI Teach Malaysia',
-      kindLabel: 'Program Selesai',
+      kindLabel: 'Program yang Diselesaikan',
       note: 'Menyelesaikan latihan peningkatan kemahiran digital merangkumi alat produktiviti tempat kerja dan AI generatif.',
     },
   },
@@ -991,7 +989,7 @@ export const msMYContent: PortfolioContentTranslations = {
     },
     learning: {
       label: 'Sedang Dipelajari',
-      description: 'Pembelajaran kendiri yang diasingkan daripada pengalaman kerja profesional.',
+      description: 'Pembelajaran kendiri dan bukan pengalaman kerja berbayar.',
     },
   },
   constellationCategories: {
@@ -1090,18 +1088,18 @@ export const msMYContent: PortfolioContentTranslations = {
     'node-delivery-integrations': {
       label: 'Konfigurasi Portal Penghantaran (Xilnex)',
       summary: 'Mengkonfigurasi integrasi penghantaran pihak cawangan dalam Xilnex bagi GrabFood, foodpanda, dan ShopeeFood.',
-      usage: 'Menyelaras prasyarat; bagi foodpanda, memautkan kedai, skema harga, dan profil menu sebelum simpan dan segerak.',
+      usage: 'Menyelaras prasyarat; bagi foodpanda, memautkan kedai, skim harga, dan profil menu sebelum simpan dan segerak.',
       year: '2025 hingga kini',
     },
     'node-gws-migration': {
       label: 'Migrasi Google Workspace ke Lark',
       summary: 'Mengetuai migrasi Google Workspace ke Lark secara dalaman dengan sokongan pasukan Lark.',
-      usage: 'Penyelarasan migrasi dalaman, pentadbiran akaun, dan penerimaan rakan sekerja di HWC Coffee Malaysia.',
+      usage: 'Penyelarasan migrasi dalaman, pentadbiran akaun, dan membantu rakan sekerja menggunakan Lark di HWC Coffee Malaysia.',
       year: '2024 hingga 2025',
     },
     'node-lark-admin': {
       label: 'Pentadbiran & Kelulusan Lark',
-      summary: 'Mentadbir akaun Lark, akses masuk dan keluar, aliran kerja kelulusan, dan sokongan meja bantuan.',
+      summary: 'Mentadbir akaun Lark, penyediaan akaun dan penamatan akses, aliran kerja kelulusan, dan sokongan meja bantuan.',
       usage: 'Mengurus akaun pengguna, kelulusan, dan sokongan rakan sekerja melalui pemesejan, e-mel, dan Lark Helpdesk.',
       year: '2024 hingga 2025',
     },
@@ -1114,12 +1112,12 @@ export const msMYContent: PortfolioContentTranslations = {
     'node-excel-netsuite': {
       label: 'Templat Excel & Penyediaan Import',
       summary: 'Menghasilkan templat Excel import promosi Xilnex dan menyediakan helaian import NetSuite.',
-      usage: 'Membina templat import promosi berkala untuk Xilnex (beserta panduan) dan menyediakan helaian Excel untuk NetSuite di HWC.',
+      usage: 'Membina templat import promosi berkala untuk Xilnex dengan panduan penggunaan dan menyediakan helaian Excel untuk NetSuite di HWC.',
       year: '2024 hingga kini',
     },
     'node-xilnex-access': {
       label: 'Akses Xilnex & Kemas Kini Staf Berhenti',
-      summary: 'Menyediakan akaun Xilnex POS daripada permohonan kemasukan HR dan membersihkan akses staf berhenti.',
+      summary: 'Menyediakan akaun Xilnex POS daripada permohonan kakitangan baharu HR dan membersihkan akses staf berhenti.',
       usage: 'Menyemak status permohonan, kumpulan pengguna, dan cawangan; menamatkan akses serta kelayakan diskaun staf berhenti.',
       year: '2025 hingga kini',
     },
@@ -1150,7 +1148,7 @@ export const msMYContent: PortfolioContentTranslations = {
     'node-aws-ccp': {
       label: 'AWS Certified Cloud Practitioner',
       summary: 'Pensijilan asas AWS merangkumi konsep awan teras, perkhidmatan, tanggungjawab keselamatan, dan pengebilan.',
-      usage: 'Pensijilan (berasingan daripada pengalaman kejuruteraan awan produksi).',
+      usage: 'Pensijilan awan asas (AWS).',
       year: 'Kelayakan',
     },
     'node-laravel-mysql': {
@@ -1168,7 +1166,7 @@ export const msMYContent: PortfolioContentTranslations = {
     'node-uipath-rpa': {
       label: 'UiPath & RPA',
       summary: 'Sedang mempelajari UiPath serta konsep Robotic Process Automation (RPA).',
-      usage: 'Pembelajaran kendiri sahaja; berasingan daripada pengalaman kerja berbayar.',
+      usage: 'Pembelajaran kendiri sahaja; tidak disenaraikan sebagai pengalaman kerja berbayar.',
       year: 'Sedang dipelajari',
     },
   },

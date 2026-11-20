@@ -59,13 +59,13 @@ export const zhHansMYUi: UiTranslations = {
       users: { label: '业务用户', detail: '日常支持与使用引导' },
       access: { label: '账号权限', detail: '入职开通与离职清理' },
       integrations: { label: '平台集成', detail: '参数配置与数据同步' },
-      vendors: { label: '外部厂商', detail: '异常升级与协作跟进' },
+      vendors: { label: '外部厂商', detail: '故障协调跟进' },
     },
     triageFlowLabel: '常见问题排查示意流程',
     triageSteps: [
       '确认异常现象',
       '核查相关设置',
-      '处理或升级厂商',
+      '处理或转交厂商跟进',
       '复测并确认状态',
     ],
     diagramDisclaimer:
@@ -75,7 +75,7 @@ export const zhHansMYUi: UiTranslations = {
     eyebrow: '项目案例',
     heading: '精选案例',
     intro:
-      '涵盖内部 SaaS 平台迁移协调、第三方外送平台配置、应用故障排查与升级，以及新门店 IT 开业准备的四个代表案例。',
+      '涵盖内部 SaaS 平台迁移协调、第三方外送平台配置、应用故障分诊与协调跟进，以及新门店 IT 开业准备的四个代表案例。',
     caseLabelPrefix: '案例 {number}',
     contextLabel: '背景情况',
     myRoleLabel: '我的职责',
@@ -115,8 +115,6 @@ export const zhHansMYUi: UiTranslations = {
   credentials: {
     eyebrow: '学历与证书',
     heading: '教育背景与认证',
-    intro:
-      '清晰区分正式学历文凭、云端认证、已完成的培训课程以及目前自主学习的内容。',
     educationBadge: '正规学历',
     selfStudyBadge: '自主学习',
   },
@@ -236,7 +234,7 @@ export const zhHansMYUi: UiTranslations = {
         label: '扫码至小票流程演示（教学示意）',
         sublabel: '零售收银场景的六层概念教学模型',
       },
-      atlas: { label: '完整技能图谱', sublabel: '查看四大领域共 {count} 项记录能力' },
+      atlas: { label: '全部技能图谱', sublabel: '查看四大领域共 {count} 项记录能力' },
       plain: {
         label: '纯白可打印摘要视图',
         sublabel: '适合直接打印或保存的简洁单页版本',
@@ -345,7 +343,7 @@ export const zhHansMYUi: UiTranslations = {
     outputView: '视图切换',
     printable: '支持打印',
     receiptTitle: '小票样式摘要',
-    receiptDesc: '以收银小票形式呈现完整工作经历、教育背景、证书与联系信息。',
+    receiptDesc: '以收银小票形式呈现全部工作经历、教育背景、证书与联系信息。',
     openSummaryReceipt: '打开小票样式摘要',
     disclaimerTitle: '概念示意说明：',
     disclaimerBody:
@@ -370,7 +368,7 @@ export const zhHansMYUi: UiTranslations = {
     whatIDid: '具体执行',
     activeLearning: '持续学习',
     currentlyExploring: '当前学习方向',
-    activeLearningDesc: '与现有工作经验分开列出的个人当前学习内容。',
+    activeLearningDesc: '与现有工作经验分开列出的目前学习方向。',
     walkthroughComplete: '浏览完毕',
     receiptCtaDesc: '可继续查看或直接打开可打印的小票样式简历摘要。',
     viewSummaryReceipt: '查看小票样式摘要',
@@ -682,7 +680,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
     currentRole: 'System Application Specialist',
     location: '雪兰莪 / 吉隆坡，马来西亚',
     intro:
-      '我负责排查业务应用故障、管理用户账号权限、协调平台集成配置，并协助团队顺利使用日常工作系统。',
+      '我负责排查业务应用故障、管理用户账号权限、协调平台集成配置，并协助团队在日常工作中使用所需工具。',
     resumeSummary:
       '现任 System Application Specialist，拥有应用支持、业务系统管理、员工入离职权限治理、第三方外送平台配置以及新门店 IT 部署经验。曾在 HWC Coffee Malaysia 在 Lark 团队支持下主导公司内部从 Google Workspace 迁移至 Lark，并在 emart24 Malaysia 制作了用于 Xilnex 周期性促销批量导入的 Excel 模板。',
     availabilityNote:
@@ -738,8 +736,8 @@ export const zhHansMYContent: PortfolioContentTranslations = {
       highlights: [
         '根据人力资源部门（HR）的入职申请单，在核对审批状态、用户权限组和所属门店后开通 Xilnex POS 账号，并及时清理离职员工的系统访问权限及员工折扣资格。',
         '与 Xilnex 及第三方外送平台（GrabFood、foodpanda、ShopeeFood）沟通衔接，在 Xilnex 门户完成并同步门店端配置；其中以 foodpanda 为例，负责将合作门店绑定至对应的 Xilnex 门店并配置价格方案与菜单档案。',
-        '排查总部与门店在 Xilnex POS 同步、促销活动及支付环节出现的问题，核实故障现象、指导一线初步检查，并在需要深入排查时协调厂商升级处理。',
-        '制作了用于规范周期性促销申请并导入至 Xilnex Promotion Portal 的 Excel 模板，同时编写了导入功能使用指引。',
+        '排查总部与门店在 Xilnex POS 同步、促销活动及支付环节出现的问题，核实故障现象、引导初步检查，并在需要深入排查时协调厂商升级处理。',
+        '制作了用于规范周期性促销申请并导入至 Xilnex Promotion Portal 的 Excel 模板，并提供导入功能的使用指导。',
         '在新门店筹备开业期间安装并检查 POS 主机、刷卡终端、扫码枪、小票打印机及门店 LAN / Wi-Fi 网络连通性。',
         '在指定职责范围内协助开展 Microsoft 365 账号开通与用户验收测试（UAT）。',
       ],
@@ -813,9 +811,9 @@ export const zhHansMYContent: PortfolioContentTranslations = {
     'case-lark-migration': {
       title: 'Google Workspace 迁移至 Lark',
       organization: 'HWC Coffee Malaysia (Palaterium Sdn Bhd)',
-      roleScope: '内部迁移协调与协同平台管理',
+      roleScope: '内部迁移负责人与工作区管理',
       summaryLine:
-        '统筹内部从 Google Workspace 迁移至 Lark 的衔接工作，涵盖工作区初始化、账号权限管理及日常团队推广使用。',
+        '协调从 Google Workspace 迁移至 Lark，完成工作区设置、管理用户权限变更，并协助同事在日常工作中使用 Lark。',
       situation:
         '从 Google Workspace 切换至 Lark 需要内部各部门协调、统一账号权限体系、搭建审批流程，并为员工提供上手使用指导。',
       responsibility:
@@ -827,7 +825,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
       ],
       outcomeLabel: '成果',
       outcome:
-        '各团队顺利在通讯、邮件、审批与内部服务台场景启用 Lark，同步建成了完整的账号与审批管理机制。',
+        '各团队已在即时通讯、邮箱、审批与内部服务台中使用 Lark，工作区账号与审批工作流也已设置就绪。',
       technologies: [
         'Lark',
         'Google Workspace',
@@ -842,7 +840,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
       roleScope: '合作方沟通衔接与门户端配置',
       summaryLine:
         '在 Xilnex 门户端协同推进 GrabFood、foodpanda 及 ShopeeFood 接入前置条件并完成门店端参数配置与同步。',
-      workflowSteps: ['协同准备前置条件', '门户端配置门店参数', '保存并同步上线'],
+      workflowSteps: ['协调前置条件', '配置门店设置', '保存并同步'],
       situation:
         '门店商品菜单及价格对接第三方外送平台前，需由 Xilnex 与外送平台双方先完成各自端的前置准备工作，之后才可在门户端进行门店配置。',
       responsibility:
@@ -854,7 +852,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
         '配置核对无误后在 Xilnex 中执行保存与数据同步。',
       ],
       outcomeLabel: '交付成果',
-      outcome: '已完成并成功在 Xilnex 同步所负责门店的门户端集成配置。',
+      outcome: '已在 Xilnex 完成并同步所负责的门店端配置。',
       technologies: [
         'Xilnex 门户',
         'GrabFood',
@@ -868,15 +866,15 @@ export const zhHansMYContent: PortfolioContentTranslations = {
       organization: 'emart24 Malaysia',
       roleScope: '日常支持流程 · 一线排查分诊',
       summaryLine:
-        '针对总部及门店 Xilnex POS 常见的数据同步、促销及支付问题建立清晰的排查与厂商升级流程。',
+        '在总部与门店开展日常排查，针对 Xilnex POS 常见的数据同步、促销及支付问题核实症状与相关设置，在需要时协调厂商升级跟进并确认后续状态。',
       situation:
-        '在总部与多门店日常运营中，涉及 Xilnex POS 同步、促销计算或收银支付的问题经常需要一线先系统排查，以准确区分本地环境因素与需交由厂商解决的平台层问题。',
+        '在总部与多门店日常运营中，涉及 Xilnex POS 同步、促销计算或收银支付的问题经常需要一线系统排查，以准确区分本地环境因素与需交由厂商解决的平台层问题。',
       responsibility:
-        '我负责总部及门店的一线应用排查工作，与用户核实具体现象、引导完成恰当的初步核查，并在必要时将有效线索升级至 Xilnex 或相关内部团队。',
+        '我负责总部及门店的一线应用排查工作，与用户核实具体现象、引导完成恰当的初步核查，并在必要时将情况升级至 Xilnex 或相关内部团队。',
       whatIDid: [
         '与门店或总部员工确认报错现象，明确涉及的界面、商品、促销或结账步骤。',
         '围绕问题特征检查对应的 Xilnex 同步状态、促销设置、支付环节、账号权限或本地网络连接情况。',
-        '针对具体排查点引导工作人员执行合适的初步处理操作后再进行复测。',
+        '针对具体排查点引导工作人员执行恰当的初步检查，随后复测确认状态。',
         '在需要平台深层排查时，整理已收集的现象和初步检查结果升级至 Xilnex 或内部技术团队跟进。',
       ],
       triageBreakdown: {
@@ -895,7 +893,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
       },
       outcomeLabel: '交付成果',
       outcome:
-        '建立了可复用的一线分诊流程，明确划定了内部支持核查与外部厂商排查之间的交接边界。',
+        '保持了一贯的一线排查做法，并在本地支持核查与外部厂商排查之间维持了清晰的协作边界。',
       technologies: [
         'Xilnex POS',
         '一线问题排查',
@@ -910,7 +908,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
       summaryLine:
         '安装并测试 POS 主机、刷卡终端、扫码枪、打印机及门店 LAN / Wi-Fi 连接，为新店开业做好基础准备。',
       situation:
-        '新门店顺利开业依赖于收银台的 POS 设备、支付终端、条码扫码器、票据打印机及本地网络能够提前协同安装并测试通过。',
+        '新门店开业前需将收银台的 POS 设备、支付终端、扫码枪、小票打印机及本地网络提前协同安装并检查通过。',
       responsibility:
         '我在新门店筹备阶段负责收银台硬件组装调试以及本地有线和无线网络检查。',
       whatIDid: [
@@ -920,7 +918,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
       ],
       outcomeLabel: '交付成果',
       outcome:
-        '完成新店柜台核心设备搭建与物理链路检测，保障门店硬件与网络具备开业条件。',
+        '完成门店柜台设备与网络连接的配置及物理检查，为新门店开业做好准备。',
       technologies: [
         'POS 终端',
         '支付刷卡终端',
@@ -968,7 +966,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
     },
     learning: {
       label: '正在学习',
-      description: '个人自主学习方向，与正式工作履历明确区分。',
+      description: '自主学习方向，与有薪工作履历分开列出。',
     },
   },
   constellationCategories: {
@@ -1073,7 +1071,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
     'node-gws-migration': {
       label: 'Google Workspace 迁往 Lark',
       summary: '在 Lark 团队支持下主导公司内部从 Google Workspace 迁移至 Lark。',
-      usage: '负责 HWC Coffee Malaysia 内部迁移协调、平台账号配置以及同事上手支持。',
+      usage: '负责 HWC Coffee Malaysia 内部迁移协调、平台账号管理以及协助同事在日常工作中使用 Lark。',
       year: '2024年至2025年',
     },
     'node-lark-admin': {
@@ -1091,7 +1089,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
     'node-excel-netsuite': {
       label: 'Excel 模板与导入准备',
       summary: '制作 Xilnex 促销导入 Excel 模板并整理 NetSuite 系统导入工作表。',
-      usage: '设计并指导使用 Xilnex 促销批量导入模板，曾在 HWC 整理验证 NetSuite 导入表格。',
+      usage: '制作了 Xilnex 周期性促销导入模板并提供使用指导，曾在 HWC 整理 NetSuite 导入表格。',
       year: '2024年至今',
     },
     'node-xilnex-access': {
@@ -1109,7 +1107,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
     'node-pos-peripherals': {
       label: 'POS 主机与外设搭建',
       summary: '安装与核验 POS 设备、支付终端、扫码枪与小票打印机。',
-      usage: '在新门店筹备期完成柜台设备组装与检查，为门店按期开业打下基础。',
+      usage: '在新门店筹备期完成柜台设备组装与检查，为门店开业做好准备。',
       year: '2024年至今',
     },
     'node-lan-cabling': {
@@ -1127,7 +1125,7 @@ export const zhHansMYContent: PortfolioContentTranslations = {
     'node-aws-ccp': {
       label: 'AWS Certified Cloud Practitioner',
       summary: '涵盖 AWS 核心云概念、基础设施服务、安全共担及计费模型的基础认证。',
-      usage: '基础云端认证（与生产级云工程交付经验严格区分）。',
+      usage: '基础云端认证（AWS）。',
       year: '专业认证',
     },
     'node-laravel-mysql': {
@@ -1145,14 +1143,14 @@ export const zhHansMYContent: PortfolioContentTranslations = {
     'node-uipath-rpa': {
       label: 'UiPath 与 RPA 学习中',
       summary: '目前正在学习 UiPath 及机器人流程自动化（RPA）概念。',
-      usage: '目前仅限自主学习研究，不计入正式商业工作履历。',
+      usage: '仅限自主学习，未列为正式工作经历。',
       year: '正在学习',
     },
   },
   edges: [
     '收银柜台设备依赖经过检查的本地网线与 Wi-Fi 连接。',
     '门店网络通畅是 Xilnex 数据同步与结账测试正常运行的前提。',
-    '一线 POS 排查将初步现象核查与外部厂商升级有效衔接。',
+    '一线 POS 排查将初步现象核查与外部厂商升级衔接起来。',
     '内部迁移统筹工作自然过渡到日常 Lark 平台运维管理。',
     'Lark Helpdesk 将员工内部求助与远程支持排障连通。',
     '严谨的导入表格规范支撑着办公及财务系统的日常运作。',

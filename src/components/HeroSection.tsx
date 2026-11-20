@@ -149,68 +149,89 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {t.hero.workflowCaption}
               </figcaption>
 
-              {/* Central Systems Focus */}
-              <div className="rounded-xl border border-[#A8C5FF]/40 bg-[#0A0913] px-4 py-3 text-center">
-                <div className="text-xs font-mono uppercase tracking-wider text-[#F2A77D]">
-                  {t.hero.coreFocus}
+              {/* Central Systems Focus + Clean Connectors */}
+              <div>
+                <div className="rounded-xl border border-[#A8C5FF]/40 bg-[#0A0913] px-4 py-3 text-center">
+                  <div className="text-xs font-mono uppercase tracking-wider text-[#F2A77D]">
+                    {t.hero.coreFocus}
+                  </div>
+                  <div className="font-display text-base sm:text-lg font-bold text-[#F6F2E9] mt-0.5 leading-snug">
+                    {t.hero.coreFocusTitle}
+                  </div>
                 </div>
-                <div className="font-display text-base sm:text-lg font-bold text-[#F6F2E9] mt-0.5">
-                  {t.hero.coreFocusTitle}
-                </div>
-              </div>
 
-              {/* Clean Static Orthogonal Connectors (SVG) */}
-              <svg
-                className="w-full h-5 block text-[#242138]"
-                viewBox="0 0 320 20"
-                fill="none"
-                aria-hidden="true"
-              >
-                <line x1="160" y1="0" x2="160" y2="10" stroke="#A8C5FF" strokeOpacity="0.55" strokeWidth="1.25" />
-                <line x1="60" y1="10" x2="260" y2="10" stroke="#242138" strokeWidth="1.25" />
-                <line x1="60" y1="10" x2="60" y2="20" stroke="#A8C5FF" strokeOpacity="0.45" strokeWidth="1.25" />
-                <line x1="260" y1="10" x2="260" y2="20" stroke="#A8C5FF" strokeOpacity="0.45" strokeWidth="1.25" />
-              </svg>
+                {/* Desktop/Tablet 2-branch orthogonal connector */}
+                <svg
+                  className="hidden sm:block w-full h-5 text-[#242138]"
+                  viewBox="0 0 320 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <line x1="160" y1="0" x2="160" y2="10" stroke="#A8C5FF" strokeOpacity="0.65" strokeWidth="1.5" />
+                  <line x1="60" y1="10" x2="260" y2="10" stroke="#A8C5FF" strokeOpacity="0.35" strokeWidth="1.25" />
+                  <line x1="60" y1="10" x2="60" y2="20" stroke="#A8C5FF" strokeOpacity="0.55" strokeWidth="1.5" />
+                  <line x1="260" y1="10" x2="260" y2="20" stroke="#A8C5FF" strokeOpacity="0.55" strokeWidth="1.5" />
+                </svg>
 
-              {/* Four Connected Support Domains */}
-              <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-3 -mt-5">
-                {supportNodes.map((node) => {
-                  const Icon = node.icon;
-                  return (
-                    <div
-                      key={node.id}
-                      className="rounded-xl border border-[#242138] bg-[#0A0913] p-3.5 space-y-1 min-w-0"
-                    >
-                      <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#F6F2E9]">
-                        <Icon className="w-3.5 h-3.5 text-[#A8C5FF] shrink-0" aria-hidden="true" />
-                        <span>{node.label}</span>
+                {/* Mobile single vertical stem */}
+                <div className="sm:hidden w-px h-3.5 mx-auto bg-[#A8C5FF]/55" aria-hidden="true" />
+
+                {/* Four Connected Support Domains */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 items-stretch">
+                  {supportNodes.map((node) => {
+                    const Icon = node.icon;
+                    return (
+                      <div
+                        key={node.id}
+                        className="rounded-xl border border-[#242138] bg-[#0A0913] p-3.5 sm:p-4 space-y-1.5 min-w-0 flex flex-col justify-start"
+                      >
+                        <div className="flex items-start gap-2 text-xs sm:text-[13px] font-mono font-semibold text-[#F6F2E9] leading-snug">
+                          <Icon className="w-3.5 h-3.5 text-[#A8C5FF] shrink-0 mt-0.5" aria-hidden="true" />
+                          <span className="break-words min-w-0">{node.label}</span>
+                        </div>
+                        <p className="text-xs sm:text-[13px] text-[#E6E1D6] leading-relaxed break-words">
+                          {node.detail}
+                        </p>
                       </div>
-                      <p className="text-xs text-[#CFCAC0] leading-snug">{node.detail}</p>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Readable Conceptual Troubleshooting Sequence */}
-              <div className="pt-3 border-t border-[#242138] space-y-2">
-                <div className="text-xs font-mono uppercase tracking-wider text-[#B5B0C2]">
+              <div className="pt-3.5 border-t border-[#242138] space-y-3">
+                <div className="text-xs font-mono uppercase tracking-wider text-[#CFCAC0]">
                   {t.hero.triageFlowLabel}
                 </div>
-                <ol className="flex flex-wrap items-center gap-1.5 text-xs font-sans text-[#E6E1D6]">
+                <ol className="flex flex-col sm:flex-row sm:flex-wrap sm:items-stretch gap-2 text-xs sm:text-[13px] font-sans text-[#F6F2E9]">
                   {t.hero.triageSteps.map((step, index) => (
-                    <li key={step} className="inline-flex items-center gap-1.5">
-                      <span className="px-2 py-0.5 rounded bg-[#0A0913] border border-[#242138] text-[#F6F2E9]">
+                    <li
+                      key={step}
+                      className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 max-w-full"
+                    >
+                      <span className="px-3 py-2 rounded-lg bg-[#0A0913] border border-[#242138] text-[#F6F2E9] leading-relaxed break-words">
                         {index + 1}. {step}
                       </span>
                       {index < t.hero.triageSteps.length - 1 && (
-                        <span aria-hidden="true" className="text-[#F2A77D] font-mono">
-                          →
-                        </span>
+                        <>
+                          <span
+                            aria-hidden="true"
+                            className="sm:hidden text-[#F2A77D] font-mono self-center text-xs leading-none"
+                          >
+                            ↓
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            className="hidden sm:inline text-[#F2A77D] font-mono shrink-0"
+                          >
+                            →
+                          </span>
+                        </>
                       )}
                     </li>
                   ))}
                 </ol>
-                <p className="text-xs text-[#B5B0C2] leading-snug">
+                <p className="text-xs text-[#CFCAC0] leading-relaxed">
                   {t.hero.diagramDisclaimer}
                 </p>
               </div>

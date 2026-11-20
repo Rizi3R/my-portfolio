@@ -14,7 +14,7 @@ export const CredentialsSection: React.FC = () => {
       <div id="education" className="scroll-mt-20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#242138] pb-6">
+        <div className="border-b border-[#242138] pb-6">
           <div className="max-w-2xl space-y-2">
             <p className="text-xs font-mono uppercase tracking-wider text-[#A8C5FF]">
               {t.credentials.eyebrow}
@@ -26,9 +26,6 @@ export const CredentialsSection: React.FC = () => {
               {t.credentials.heading}
             </h2>
           </div>
-          <p className="text-sm text-[#CFCAC0] max-w-md leading-relaxed">
-            {t.credentials.intro}
-          </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">

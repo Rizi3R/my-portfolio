@@ -118,7 +118,6 @@ export interface UiTranslations {
   credentials: {
     eyebrow: string;
     heading: string;
-    intro: string;
     educationBadge: string;
     selfStudyBadge: string;
   };

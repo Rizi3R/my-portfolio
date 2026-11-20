@@ -46,7 +46,7 @@ export const EVIDENCE_META: Record<
   learning: {
     label: 'Currently Learning',
     glyph: '○',
-    description: 'Self-directed study kept distinct from professional delivery.',
+    description: 'Self-directed study rather than paid work experience.',
   },
 };
 
@@ -422,7 +422,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     roleScope: 'Internal Migration Lead & Workspace Administration',
     featuredOnHome: true,
     summaryLine:
-      'Coordinating the move from Google Workspace to Lark, workspace setup, user access changes, and everyday colleague adoption.',
+      'Coordinating the move from Google Workspace to Lark, setting up the workspace, managing user access changes, and helping colleagues use Lark in their daily work.',
     situation:
       'The move from Google Workspace to Lark required internal coordination, account administration, approval setup, and guidance for colleagues adopting the platform.',
     responsibility:
@@ -540,7 +540,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     outcomeLabel: 'Work delivered',
     outcome:
-      'Prepared and physically checked store counter devices and connectivity links to prepare new outlets for opening.',
+      'Set up and physically checked store counter devices and connectivity links to get new outlets ready for opening.',
     technologies: [
       'POS Devices',
       'Payment Terminals',
@@ -660,7 +660,7 @@ export const NODES: UniverseNode[] = [
     y: 66,
     summary: 'Led the Google Workspace to Lark migration internally with support from the Lark team.',
     evidenceRef: 'case-lark-migration',
-    usage: 'Internal migration coordination, account administration, and colleague adoption at HWC Coffee Malaysia.',
+    usage: 'Internal migration coordination, account administration, and helping colleagues use Lark at HWC Coffee Malaysia.',
     year: '2024 to 2025',
   },
   {
@@ -702,7 +702,7 @@ export const NODES: UniverseNode[] = [
     y: 56,
     summary: 'Created Excel promotion-import template for Xilnex and prepared NetSuite import sheets.',
     evidenceRef: 'exp-emart24',
-    usage: 'Created recurring promotion import template for Xilnex (with guidance) and prepared Excel sheets for NetSuite at HWC.',
+    usage: 'Created recurring promotion import template for Xilnex with import guidance, and prepared Excel sheets for NetSuite at HWC.',
     year: '2024 to present',
   },
   {
@@ -786,7 +786,7 @@ export const NODES: UniverseNode[] = [
     y: 22,
     summary: 'Foundational AWS certification covering core cloud concepts, services, security responsibilities, and billing.',
     evidenceRef: 'cert-aws',
-    usage: 'Certification (separate from production cloud engineering experience).',
+    usage: 'Foundational cloud certification (AWS).',
     year: 'Credential',
   },
   {
@@ -827,7 +827,7 @@ export const NODES: UniverseNode[] = [
     x: 42,
     y: 78,
     summary: 'Currently learning UiPath and Robotic Process Automation (RPA) concepts.',
-    usage: 'Self-study only; separate from paid work experience.',
+    usage: 'Self-study only; not listed as paid work experience.',
     year: 'Currently learning',
   },
 ];
