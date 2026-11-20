@@ -1,13 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import {
-  NODES,
-  EDGES,
-  STRATA,
   EVIDENCE_META,
   UniverseNode,
   StratumType,
   EvidenceStatus,
+  ConstellationCategory,
 } from '../data/universeContent';
+import type { MergedPortfolioContent } from '../i18n/I18nContext';
+import { useI18n } from '../i18n';
 import { Search, X, ArrowRight, List, Network } from 'lucide-react';
 
 interface AtlasViewProps {
@@ -21,8 +21,9 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
   onJumpToStratum,
   onOpenExperience,
 }) => {
+  const { t, content, format } = useI18n();
   const [selectedNodeId, setSelectedNodeId] = useState<string>(
-    initialSelectedNodeId || NODES[0].id
+    initialSelectedNodeId || content.nodes[0].id
   );
   const [stratumFilter, setStratumFilter] = useState<string>('all');
   const [statusFilter, setStatusFilter] = useState<string>('all');
@@ -30,62 +31,95 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
   const [viewMode, setViewMode] = useState<'list' | 'graph'>('list');
   const [announcement, setAnnouncement] = useState<string>('');
 
+  const localizedNodes = useMemo(
+    () =>
+      content.nodes.map((node) => ({
+        ...node,
+        categoryLabel:
+          content.constellationCategories[node.category as ConstellationCategory] ?? node.category,
+      })),
+    [content.nodes, content.constellationCategories]
+  );
+
+  const stratumTitleMap = useMemo(() => {
+    const map = {} as Record<StratumType, string>;
+    for (const st of content.strata) {
+      map[st.id] = st.title;
+    }
+    return map;
+  }, [content.strata]);
+
   useEffect(() => {
     if (initialSelectedNodeId) {
       setSelectedNodeId(initialSelectedNodeId);
-      const target = NODES.find((n) => n.id === initialSelectedNodeId);
+      const target = localizedNodes.find((n) => n.id === initialSelectedNodeId);
       if (target) {
-        setAnnouncement(`Selected node: ${target.label}, status: ${EVIDENCE_META[target.status].label}`);
+        setAnnouncement(
+          format(t.atlas.announcedInitialSelect, {
+            label: target.label,
+            status: content.evidenceMeta[target.status].label,
+          })
+        );
       }
     }
-  }, [initialSelectedNodeId]);
+  }, [initialSelectedNodeId, localizedNodes, content.evidenceMeta, t.atlas.announcedInitialSelect, format]);
 
   const filteredNodes = useMemo(() => {
-    return NODES.filter((node) => {
+    const query = searchQuery.trim().toLowerCase();
+    return localizedNodes.filter((node) => {
       const matchesStratum = stratumFilter === 'all' || node.stratum === stratumFilter;
       const matchesStatus = statusFilter === 'all' || node.status === statusFilter;
       const matchesSearch =
-        searchQuery.trim() === '' ||
-        node.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        node.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        node.category.toLowerCase().includes(searchQuery.toLowerCase());
+        query === '' ||
+        node.label.toLowerCase().includes(query) ||
+        node.summary.toLowerCase().includes(query) ||
+        node.categoryLabel.toLowerCase().includes(query) ||
+        node.category.toLowerCase().includes(query);
       return matchesStratum && matchesStatus && matchesSearch;
     });
-  }, [stratumFilter, statusFilter, searchQuery]);
+  }, [localizedNodes, stratumFilter, statusFilter, searchQuery]);
 
   const filteredNodeIds = useMemo(() => new Set(filteredNodes.map((n) => n.id)), [filteredNodes]);
 
   const filteredEdges = useMemo(() => {
-    return EDGES.filter((edge) => filteredNodeIds.has(edge.from) && filteredNodeIds.has(edge.to));
-  }, [filteredNodeIds]);
+    return content.edges.filter(
+      (edge) => filteredNodeIds.has(edge.from) && filteredNodeIds.has(edge.to)
+    );
+  }, [filteredNodeIds, content.edges]);
 
   const selectedNode = useMemo(() => {
-    return NODES.find((n) => n.id === selectedNodeId) || filteredNodes[0] || NODES[0];
-  }, [selectedNodeId, filteredNodes]);
+    return localizedNodes.find((n) => n.id === selectedNodeId) || filteredNodes[0] || localizedNodes[0];
+  }, [localizedNodes, selectedNodeId, filteredNodes]);
 
   const relatedEdges = useMemo(() => {
     if (!selectedNode) return [];
-    return EDGES.filter(
-      (edge) => edge.from === selectedNode.id || edge.to === selectedNode.id
-    ).map((edge) => {
-      const isOutgoing = edge.from === selectedNode.id;
-      const partnerId = isOutgoing ? edge.to : edge.from;
-      const partnerNode = NODES.find((n) => n.id === partnerId);
-      return {
-        direction: isOutgoing ? 'outgoing' : 'incoming',
-        partner: partnerNode,
-        reason: edge.reason,
-      };
-    });
-  }, [selectedNode]);
+    return content.edges
+      .filter((edge) => edge.from === selectedNode.id || edge.to === selectedNode.id)
+      .map((edge) => {
+        const isOutgoing = edge.from === selectedNode.id;
+        const partnerId = isOutgoing ? edge.to : edge.from;
+        const partnerNode = localizedNodes.find((n) => n.id === partnerId);
+        return {
+          direction: isOutgoing ? 'outgoing' : 'incoming',
+          partner: partnerNode,
+          reason: edge.reason,
+        };
+      });
+  }, [selectedNode, localizedNodes, content.edges]);
 
   const handleSelectNode = (node: UniverseNode) => {
     setSelectedNodeId(node.id);
-    setAnnouncement(`Inspecting ${node.label}. ${node.summary}`);
+    setAnnouncement(
+      format(t.atlas.announcedSelect, {
+        label: node.label,
+        summary: node.summary,
+      })
+    );
   };
 
   const getStatusBadge = (status: EvidenceStatus) => {
     const meta = EVIDENCE_META[status];
+    const localizedMeta = content.evidenceMeta[status];
     const badgeStyle =
       status === 'learning'
         ? 'bg-[#F2A77D]/15 text-[#F2A77D] border-[#F2A77D]/40'
@@ -98,7 +132,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
         className={`inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded border font-semibold ${badgeStyle}`}
       >
         <span aria-hidden="true">{meta.glyph}</span>
-        <span>{meta.label}</span>
+        <span>{localizedMeta.label}</span>
       </span>
     );
   };
@@ -129,13 +163,13 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#242138] pb-6">
           <div>
             <p className="text-xs font-mono uppercase tracking-widest text-[#A8C5FF] mb-2">
-              Skills &amp; Experience Map
+              {t.atlas.eyebrow}
             </p>
             <h1 className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight">
-              The Skill Atlas
+              {t.atlas.title}
             </h1>
             <p className="mt-2 text-[#CFCAC0] font-sans text-xs sm:text-sm max-w-2xl leading-relaxed">
-              Browse all {NODES.length} documented capabilities, internship &amp; credential items, and active learning areas in list or graph format.
+              {format(t.atlas.subtitle, { count: content.nodes.length })}
             </p>
           </div>
 
@@ -148,10 +182,10 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                   ? 'bg-[#A8C5FF] text-[#191723] font-semibold'
                   : 'text-[#9A94A8] hover:text-[#F6F2E9]'
               }`}
-              aria-label="Switch to Accessible List Tree View"
+              aria-label={t.atlas.listViewAria}
             >
               <List className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Structured List</span>
+              <span>{t.atlas.listView}</span>
             </button>
             <button
               type="button"
@@ -161,10 +195,10 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                   ? 'bg-[#A8C5FF] text-[#191723] font-semibold'
                   : 'text-[#9A94A8] hover:text-[#F6F2E9]'
               }`}
-              aria-label="Switch to 2D Graph Canvas View"
+              aria-label={t.atlas.graphViewAria}
             >
               <Network className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Atlas Graph</span>
+              <span>{t.atlas.graphView}</span>
             </button>
           </div>
         </div>
@@ -178,18 +212,18 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
             />
             <input
               type="text"
-              placeholder="Search skills..."
+              placeholder={t.atlas.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-[#12101F] border border-[#242138] rounded-lg text-[#F6F2E9] pl-9 pr-8 py-2.5 focus:outline-none focus:border-[#A8C5FF] transition-colors"
-              aria-label="Search Atlas skills by title or summary"
+              aria-label={t.atlas.searchAriaLabel}
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
                 className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#9A94A8] hover:text-[#F6F2E9] cursor-pointer"
-                aria-label="Clear search query"
+                aria-label={t.atlas.clearSearch}
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -201,12 +235,12 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               value={stratumFilter}
               onChange={(e) => setStratumFilter(e.target.value)}
               className="w-full bg-[#12101F] border border-[#242138] rounded-lg text-[#CFCAC0] px-3 py-2.5 focus:outline-none focus:border-[#A8C5FF] cursor-pointer"
-              aria-label="Filter skills by layer"
+              aria-label={t.atlas.layerFilterAria}
             >
-              <option value="all">All Layers (1 to 6)</option>
-              {STRATA.map((s, i) => (
+              <option value="all">{t.atlas.allLayers}</option>
+              {content.strata.map((s, i) => (
                 <option key={s.id} value={s.id}>
-                  Layer {i + 1}: {s.title}
+                  {format(t.atlas.layerOption, { index: i + 1, title: s.title })}
                 </option>
               ))}
             </select>
@@ -217,19 +251,25 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               className="w-full bg-[#12101F] border border-[#242138] rounded-lg text-[#CFCAC0] px-3 py-2.5 focus:outline-none focus:border-[#A8C5FF] cursor-pointer"
-              aria-label="Filter skills by experience level"
+              aria-label={t.atlas.levelFilterAria}
             >
-              <option value="all">All Levels</option>
-              <option value="professional">◆ Work-Backed Experience</option>
-              <option value="project">■ Internship, Academic &amp; Credential</option>
-              <option value="learning">○ Currently Learning</option>
+              <option value="all">{t.atlas.allLevels}</option>
+              <option value="professional">
+                {EVIDENCE_META.professional.glyph} {content.evidenceMeta.professional.label}
+              </option>
+              <option value="project">
+                {EVIDENCE_META.project.glyph} {content.evidenceMeta.project.label}
+              </option>
+              <option value="learning">
+                {EVIDENCE_META.learning.glyph} {content.evidenceMeta.learning.label}
+              </option>
             </select>
           </div>
 
           <div className="flex items-center justify-between sm:justify-end gap-3 px-3 py-2 bg-[#12101F] border border-[#242138] rounded-lg text-[#9A94A8]">
-            <span>Showing:</span>
+            <span>{t.atlas.showing}</span>
             <span className="font-bold text-[#A8C5FF]">
-              {filteredNodes.length} of {NODES.length} Items
+              {format(t.atlas.itemsCount, { shown: filteredNodes.length, total: content.nodes.length })}
             </span>
           </div>
         </div>
@@ -242,7 +282,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
             <div className="overflow-x-auto bg-[#12101F] select-none">
               <div className="relative min-w-[540px] w-full aspect-[16/10] overflow-hidden">
                 <div className="absolute inset-0 flex flex-col pointer-events-none opacity-40">
-                  {STRATA.map((st, i) => (
+                  {content.strata.map((st, i) => (
                     <div
                       key={st.id}
                       className="flex-1 border-b border-[#242138] px-3 pt-1 text-[11px] font-mono uppercase text-[#B5B0C2]"
@@ -257,100 +297,100 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                   viewBox="0 0 160 100"
                   preserveAspectRatio="xMidYMid meet"
                   role="region"
-                  aria-label="Atlas topology graph canvas"
+                  aria-label={t.atlas.graphAriaLabel}
                 >
-                <g className="edges" aria-hidden="true">
-                  {filteredEdges.map((edge, idx) => {
-                    const fromNode = NODES.find((n) => n.id === edge.from);
-                    const toNode = NODES.find((n) => n.id === edge.to);
-                    if (!fromNode || !toNode) return null;
+                  <g className="edges" aria-hidden="true">
+                    {filteredEdges.map((edge, idx) => {
+                      const fromNode = localizedNodes.find((n) => n.id === edge.from);
+                      const toNode = localizedNodes.find((n) => n.id === edge.to);
+                      if (!fromNode || !toNode) return null;
 
-                    const isConnectedToSelected =
-                      selectedNode &&
-                      (edge.from === selectedNode.id || edge.to === selectedNode.id);
+                      const isConnectedToSelected =
+                        selectedNode &&
+                        (edge.from === selectedNode.id || edge.to === selectedNode.id);
 
-                    return (
-                      <line
-                        key={`edge-${idx}`}
-                        x1={fromNode.x * 1.44 + 8}
-                        y1={fromNode.y}
-                        x2={toNode.x * 1.44 + 8}
-                        y2={toNode.y}
-                        stroke={isConnectedToSelected ? '#A8C5FF' : '#242138'}
-                        strokeWidth={isConnectedToSelected ? 0.65 : 0.3}
-                        strokeDasharray={isConnectedToSelected ? undefined : '1, 1'}
-                        className="transition-all duration-300"
-                      />
-                    );
-                  })}
-                </g>
-
-                <g className="nodes">
-                  {filteredNodes.map((node) => {
-                    const isSelected = selectedNode && selectedNode.id === node.id;
-                    const color = getStratumColor(node.stratum);
-
-                    const cx = node.x * 1.44 + 8;
-
-                    return (
-                      <g
-                        key={node.id}
-                        transform={`translate(${cx}, ${node.y})`}
-                        onClick={() => handleSelectNode(node)}
-                        className="cursor-pointer focus:outline-none"
-                        role="button"
-                        tabIndex={0}
-                        aria-pressed={isSelected}
-                        aria-label={`${node.label}, status: ${EVIDENCE_META[node.status].label}`}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            handleSelectNode(node);
-                          }
-                        }}
-                      >
-                        <circle r="5.5" fill="transparent" stroke="transparent" />
-
-                        {isSelected && (
-                          <circle
-                            r="3.2"
-                            fill="none"
-                            stroke="#F2A77D"
-                            strokeWidth="0.45"
-                            strokeDasharray="0.8, 0.8"
-                          />
-                        )}
-
-                        <circle
-                          r={isSelected ? 2 : 1.4}
-                          fill={isSelected ? '#F2A77D' : color}
-                          stroke="#0A0913"
-                          strokeWidth="0.35"
-                          className="transition-all duration-200"
+                      return (
+                        <line
+                          key={`edge-${idx}`}
+                          x1={fromNode.x * 1.44 + 8}
+                          y1={fromNode.y}
+                          x2={toNode.x * 1.44 + 8}
+                          y2={toNode.y}
+                          stroke={isConnectedToSelected ? '#A8C5FF' : '#242138'}
+                          strokeWidth={isConnectedToSelected ? 0.65 : 0.3}
+                          strokeDasharray={isConnectedToSelected ? undefined : '1, 1'}
+                          className="transition-all duration-300"
                         />
+                      );
+                    })}
+                  </g>
 
-                        <text
-                          y={isSelected ? -2.8 : -2.3}
-                          textAnchor="middle"
-                          fill={isSelected ? '#F6F2E9' : '#A8C5FF'}
-                          fillOpacity={isSelected ? 1 : 0.9}
-                          fontSize={isSelected ? '2.8' : '2.25'}
-                          fontFamily="JetBrains Mono, monospace"
-                          fontWeight={isSelected ? 'bold' : 'normal'}
-                          className="pointer-events-none select-none transition-all"
+                  <g className="nodes">
+                    {filteredNodes.map((node) => {
+                      const isSelected = selectedNode && selectedNode.id === node.id;
+                      const color = getStratumColor(node.stratum);
+
+                      const cx = node.x * 1.44 + 8;
+
+                      return (
+                        <g
+                          key={node.id}
+                          transform={`translate(${cx}, ${node.y})`}
+                          onClick={() => handleSelectNode(node)}
+                          className="cursor-pointer focus:outline-none"
+                          role="button"
+                          tabIndex={0}
+                          aria-pressed={isSelected}
+                          aria-label={`${node.label}, ${content.evidenceMeta[node.status].label}`}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              handleSelectNode(node);
+                            }
+                          }}
                         >
-                          {node.label.length > 22 ? node.label.slice(0, 20) + '…' : node.label}
-                        </text>
-                      </g>
-                    );
-                  })}
-                </g>
-              </svg>
+                          <circle r="5.5" fill="transparent" stroke="transparent" />
+
+                          {isSelected && (
+                            <circle
+                              r="3.2"
+                              fill="none"
+                              stroke="#F2A77D"
+                              strokeWidth="0.45"
+                              strokeDasharray="0.8, 0.8"
+                            />
+                          )}
+
+                          <circle
+                            r={isSelected ? 2 : 1.4}
+                            fill={isSelected ? '#F2A77D' : color}
+                            stroke="#0A0913"
+                            strokeWidth="0.35"
+                            className="transition-all duration-200"
+                          />
+
+                          <text
+                            y={isSelected ? -2.8 : -2.3}
+                            textAnchor="middle"
+                            fill={isSelected ? '#F6F2E9' : '#A8C5FF'}
+                            fillOpacity={isSelected ? 1 : 0.9}
+                            fontSize={isSelected ? '2.8' : '2.25'}
+                            fontFamily="JetBrains Mono, monospace"
+                            fontWeight={isSelected ? 'bold' : 'normal'}
+                            className="pointer-events-none select-none transition-all"
+                          >
+                            {node.label.length > 22 ? node.label.slice(0, 20) + '…' : node.label}
+                          </text>
+                        </g>
+                      );
+                    })}
+                  </g>
+                </svg>
               </div>
             </div>
           ) : (
             <div className="p-4 max-h-[540px] overflow-y-auto font-mono text-xs">
-              <ol role="tree" aria-label="Atlas Skills Tree" className="divide-y divide-[#242138]">
+              <ol role="tree" aria-label={t.atlas.treeAriaLabel} className="divide-y divide-[#242138]">
                 {filteredNodes.map((node) => {
                   const isSelected = selectedNode && selectedNode.id === node.id;
                   return (
@@ -386,14 +426,14 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
         {/* Selected Node Inspector */}
         <aside
           className="lg:col-span-4 bg-[#12101F] border border-[#242138] rounded-2xl p-6 font-mono text-xs space-y-5"
-          aria-label="Skill Details Inspector"
+          aria-label={t.atlas.inspectorAriaLabel}
         >
           {selectedNode ? (
             <>
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="text-[10px] text-[#9A94A8] uppercase tracking-widest">
-                    DETAIL VIEW
+                    {t.atlas.detailView}
                   </span>
                   {getStatusBadge(selectedNode.status)}
                 </div>
@@ -401,9 +441,11 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                   {selectedNode.label}
                 </h3>
                 <div className="mt-1 text-[#9A94A8] text-[11px] flex flex-wrap items-center gap-2">
-                  <span>{selectedNode.category}</span>
+                  <span>{selectedNode.categoryLabel}</span>
                   <span>·</span>
-                  <span className="text-[#A8C5FF]">{selectedNode.stratum}</span>
+                  <span className="text-[#A8C5FF]">
+                    {stratumTitleMap[selectedNode.stratum] ?? selectedNode.stratum}
+                  </span>
                 </div>
               </div>
 
@@ -414,12 +456,12 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               {selectedNode.evidenceRef && (
                 <div className="space-y-1 text-xs">
                   <span className="text-[#9A94A8] text-[10px] uppercase tracking-wider block">
-                    Supporting Context
+                    {t.atlas.supportingContext}
                   </span>
                   <div className="p-3 rounded-xl bg-[#0A0913] border border-[#242138] text-[#CFCAC0] flex items-center justify-between gap-2">
                     <div>
                       <div className="font-bold text-[#F6F2E9]">
-                        {getEvidenceLabel(selectedNode.evidenceRef)}
+                        {getEvidenceLabel(selectedNode.evidenceRef, content)}
                       </div>
                     </div>
                     {onOpenExperience && selectedNode.evidenceRef.startsWith('exp-') && (
@@ -428,7 +470,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                         onClick={() => onOpenExperience(selectedNode.evidenceRef!)}
                         className="text-[#A8C5FF] hover:text-[#F6F2E9] text-[10px] flex items-center gap-1 cursor-pointer shrink-0"
                       >
-                        <span>View</span>
+                        <span>{t.atlas.viewLabel}</span>
                         <ArrowRight className="w-3 h-3" />
                       </button>
                     )}
@@ -439,7 +481,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
               {selectedNode.usage && (
                 <div className="space-y-1 text-xs">
                   <span className="text-[#9A94A8] text-[10px] uppercase tracking-wider block">
-                    Where Applied
+                    {t.atlas.whereApplied}
                   </span>
                   <div className="p-3 rounded-xl bg-[#0A0913] border border-[#242138] text-[#CFCAC0] font-sans text-xs leading-relaxed">
                     {selectedNode.usage}
@@ -453,19 +495,19 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                   onClick={() => onJumpToStratum(selectedNode.stratum)}
                   className="w-full py-2.5 px-3.5 rounded-lg bg-[#0A0913] hover:bg-[#19162B] text-[#A8C5FF] border border-[#242138] hover:border-[#A8C5FF]/50 flex items-center justify-between transition-colors cursor-pointer text-xs font-semibold"
                 >
-                  <span>View Related Walkthrough Layer</span>
+                  <span>{t.atlas.viewWalkthroughLayer}</span>
                   <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </button>
               )}
 
               <div>
                 <div className="flex items-center justify-between text-[#9A94A8] text-[10px] uppercase tracking-wider mb-2">
-                  <span>Connected Skills ({relatedEdges.length})</span>
+                  <span>{format(t.atlas.connectedSkills, { count: relatedEdges.length })}</span>
                 </div>
 
                 {relatedEdges.length === 0 ? (
                   <div className="text-[#9A94A8] italic p-3 rounded-xl border border-dashed border-[#242138] text-center">
-                    No active connections in current filter.
+                    {t.atlas.noConnections}
                   </div>
                 ) : (
                   <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
@@ -486,7 +528,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                               <span>{rel.partner.label}</span>
                             </span>
                             <span className="text-[9px] text-[#9A94A8] font-normal uppercase">
-                              {rel.partner.stratum}
+                              {stratumTitleMap[rel.partner.stratum] ?? rel.partner.stratum}
                             </span>
                           </div>
                           <div className="text-[11px] text-[#CFCAC0] leading-snug font-sans">
@@ -501,7 +543,7 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
             </>
           ) : (
             <div className="text-center py-12 text-[#9A94A8]">
-              Select any skill item to inspect details.
+              {t.atlas.emptySelection}
             </div>
           )}
         </aside>
@@ -510,31 +552,21 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
   );
 };
 
-function getEvidenceLabel(refId: string): string {
-  switch (refId) {
-    case 'exp-emart24':
-      return 'emart24 Malaysia · System Application Specialist';
-    case 'exp-hwc':
-      return 'HWC Coffee Malaysia (Palaterium Sdn Bhd) · IT Support';
-    case 'exp-mps':
-      return 'Managed print services (onsite support) · IT Technician';
-    case 'exp-agc':
-      return 'Attorney General’s Chambers of Malaysia · Diploma Internship';
-    case 'exp-uitm':
-      return 'UiTM · Diploma in Computer Science and Mathematics';
-    case 'cert-aws':
-      return 'AWS Certified Cloud Practitioner';
-    case 'cert-ai-teach':
-      return 'Generative AI Copilot Digital Upskilling Program';
-    case 'case-lark-migration':
-      return 'Case Study: Google Workspace to Lark Migration';
-    case 'case-integrations':
-      return 'Case Study: Third-Party Integration Configuration';
-    case 'case-pos-triage':
-      return 'Case Study: Application Incident Triage & Vendor Escalation';
-    case 'case-store-launch':
-      return 'Case Study: New-Site IT Deployment & Readiness';
-    default:
-      return refId;
+function getEvidenceLabel(refId: string, content: MergedPortfolioContent): string {
+  const exp = content.experiences.find((e) => e.id === refId);
+  if (exp) {
+    return `${exp.organization} · ${exp.role}`;
   }
+  if (refId === 'exp-uitm') {
+    return `${content.education.institution} · ${content.education.degree}`;
+  }
+  const cert = content.certifications.find((c) => c.id === refId);
+  if (cert) {
+    return cert.name;
+  }
+  const cs = content.caseStudies.find((c) => c.id === refId);
+  if (cs) {
+    return cs.title;
+  }
+  return refId;
 }

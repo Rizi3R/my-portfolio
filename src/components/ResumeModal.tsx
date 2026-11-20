@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { X, Printer } from 'lucide-react';
 import { ResumeDocument } from './ResumeDocument';
 import { useDialogFocusTrap } from '../utils/useDialogFocusTrap';
+import { useI18n } from '../i18n';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -9,6 +10,7 @@ interface ResumeModalProps {
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
+  const { localeMeta, t, format } = useI18n();
   const sheetRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -53,10 +55,14 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
       >
         {/* Pinned Control Bar inside modal (always reachable while scrolling on mobile; hidden in print) */}
         <div className="shrink-0 z-20 bg-[#0A0913] text-[#F6F2E9] px-4 sm:px-6 py-3 flex items-center justify-between gap-2 border-b border-[#242138] no-print font-mono text-xs">
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="font-bold text-[#A8C5FF]">Résumé</span>
+          <div className="flex items-center gap-2 min-w-0 flex-wrap">
+            <span className="font-bold text-[#A8C5FF]">{t.resume.headerLabel}</span>
             <span className="text-[#B5B0C2] hidden sm:inline">·</span>
-            <span className="text-[#CFCAC0] hidden sm:inline">Selectable &amp; Printable View</span>
+            <span className="text-[#CFCAC0] hidden sm:inline">{t.resume.headerSubtitle}</span>
+            <span className="text-[#B5B0C2] hidden md:inline">·</span>
+            <span className="text-[#F2A77D] hidden md:inline">
+              {format(t.resume.languageTagPrefix, { language: localeMeta.nativeLabel })}
+            </span>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
@@ -65,15 +71,15 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               onClick={handlePrint}
               className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 min-h-[40px] rounded-lg text-xs font-semibold bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] transition-colors cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
             >
-              <Printer className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Print / Save PDF</span>
+              <Printer className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+              <span>{t.resume.printSavePdf}</span>
             </button>
 
             <button
               ref={closeButtonRef}
               type="button"
               onClick={onClose}
-              aria-label="Close résumé viewer"
+              aria-label={t.resume.closeAriaLabel}
               className="p-2 rounded-lg text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/50 cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
             >
               <X className="w-4 h-4" />

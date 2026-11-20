@@ -1,4 +1,5 @@
 import React from 'react';
+import { useI18n } from '../i18n';
 import {
   Compass,
   Network,
@@ -20,36 +21,38 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
   onOpenAtlas,
   onOpenTerminal,
 }) => {
+  const { t } = useI18n();
+
   const labItems = [
     {
       id: 'lab-shell',
-      title: 'Portfolio Shell',
-      description: 'Explore my profile through simple commands.',
-      cta: 'Open Shell',
+      title: t.interactiveLab.items.shell.title,
+      description: t.interactiveLab.items.shell.description,
+      cta: t.interactiveLab.items.shell.cta,
       icon: Terminal,
       onClick: (e: React.MouseEvent<HTMLButtonElement>) => onOpenTerminal(e.currentTarget),
     },
     {
       id: 'lab-atlas',
-      title: 'Skill Atlas',
-      description: 'Explore connections between my skills and experience.',
-      cta: 'Open Skill Atlas',
+      title: t.interactiveLab.items.atlas.title,
+      description: t.interactiveLab.items.atlas.description,
+      cta: t.interactiveLab.items.atlas.cta,
       icon: Network,
       onClick: () => onOpenAtlas(),
     },
     {
       id: 'lab-computing',
-      title: 'Computing Lab',
-      description: 'Try small educational simulations.',
-      cta: 'Open Lab',
+      title: t.interactiveLab.items.lab.title,
+      description: t.interactiveLab.items.lab.description,
+      cta: t.interactiveLab.items.lab.cta,
       icon: FlaskConical,
       onClick: (e: React.MouseEvent<HTMLButtonElement>) => onOpenLab(e.currentTarget),
     },
     {
       id: 'lab-beep',
-      title: 'Beep to Receipt',
-      description: 'Explore an illustrative transaction workflow.',
-      cta: 'Open Walkthrough',
+      title: t.interactiveLab.items.walkthrough.title,
+      description: t.interactiveLab.items.walkthrough.description,
+      cta: t.interactiveLab.items.walkthrough.cta,
       icon: Compass,
       onClick: () => onOpenBeepToReceipt(),
     },
@@ -68,17 +71,17 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#242138] pb-6">
           <div className="max-w-2xl space-y-2">
             <p className="text-xs font-mono uppercase tracking-wider text-[#F2A77D]">
-              Explorations
+              {t.interactiveLab.eyebrow}
             </p>
             <h2
               id="workbenches-heading"
               className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight"
             >
-              Interactive Lab
+              {t.interactiveLab.heading}
             </h2>
           </div>
           <p className="text-sm text-[#CFCAC0] max-w-md leading-relaxed">
-            Interactive tools and educational walkthroughs you can open anytime alongside my case studies and résumé.
+            {t.interactiveLab.intro}
           </p>
         </div>
 

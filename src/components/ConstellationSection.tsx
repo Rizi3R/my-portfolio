@@ -1,5 +1,5 @@
 import React from 'react';
-import { SKILL_GROUPS } from '../data/universeContent';
+import { useI18n } from '../i18n';
 import { ArrowRight } from 'lucide-react';
 
 interface ConstellationSectionProps {
@@ -9,6 +9,8 @@ interface ConstellationSectionProps {
 export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
   onOpenFullAtlas,
 }) => {
+  const { t, content } = useI18n();
+
   return (
     <section
       id="constellation"
@@ -21,23 +23,23 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#242138] pb-6">
           <div className="max-w-2xl space-y-2">
             <p className="text-xs font-mono uppercase tracking-wider text-[#A8C5FF]">
-              Capabilities
+              {t.skills.eyebrow}
             </p>
             <h2
               id="constellation-heading"
               className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight"
             >
-              Skills
+              {t.skills.heading}
             </h2>
           </div>
           <p className="text-sm text-[#CFCAC0] max-w-md leading-relaxed">
-            Core practical areas applied across application support, SaaS administration, integration configuration, and site operations.
+            {t.skills.intro}
           </p>
         </div>
 
         {/* Clean 4-Group Grid without proficiency bars or scores */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {SKILL_GROUPS.map((group, idx) => (
+          {content.skillGroups.map((group, idx) => (
             <div
               key={group.id}
               className={`space-y-4 ${
@@ -69,13 +71,13 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
 
         {onOpenFullAtlas && (
           <div className="pt-4 border-t border-[#242138] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#CFCAC0]">
-            <span>Want to inspect how these tools connect across roles?</span>
+            <span>{t.skills.atlasPrompt}</span>
             <button
               type="button"
               onClick={() => onOpenFullAtlas()}
               className="inline-flex items-center gap-1.5 text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded"
             >
-              <span>Open Skill Atlas in Interactive Lab</span>
+              <span>{t.skills.openAtlasCta}</span>
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </button>
           </div>

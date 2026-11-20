@@ -1,14 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import {
-  PROFILE,
-  EXPERIENCES,
-  CASE_STUDIES,
-  EDUCATION,
-  CERTIFICATIONS,
-  LEARNING_ENTRIES,
-  SKILL_GROUPS,
-} from '../data/universeContent';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Terminal as TerminalIcon, X, RotateCcw } from 'lucide-react';
+import { useI18n } from '../i18n';
 import { audioFx } from '../utils/audioFx';
 import { useDialogFocusTrap } from '../utils/useDialogFocusTrap';
 
@@ -39,26 +31,32 @@ const SUPPORTED_COMMANDS = [
   'clear',
 ];
 
-const INITIAL_LINES: TerminalLine[] = [
-  {
-    id: 1,
-    type: 'accent',
-    text: `${PROFILE.displayName} Portfolio Shell (Read-Only Demo)`,
-  },
-  {
-    id: 2,
-    type: 'output',
-    text: 'Type "help" or click a command below to inspect roles, skills, case studies, or contact details.',
-  },
-];
-
 export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
   isModal = false,
   onClose,
   onOpenResume,
   onJumpToSection,
 }) => {
-  const [lines, setLines] = useState<TerminalLine[]>(INITIAL_LINES);
+  const { locale, t, content, format } = useI18n();
+
+  const initialLines: TerminalLine[] = useMemo(
+    () => [
+      {
+        id: 1,
+        type: 'accent',
+        text: format(t.terminal.welcomeHeader, { name: content.profile.displayName }),
+      },
+      {
+        id: 2,
+        type: 'output',
+        text: t.terminal.welcomeBody,
+      },
+    ],
+    [t.terminal.welcomeHeader, t.terminal.welcomeBody, content.profile.displayName, format]
+  );
+
+  const [lines, setLines] = useState<TerminalLine[]>(initialLines);
+  const [hasUserHistory, setHasUserHistory] = useState(false);
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [historyIdx, setHistoryIdx] = useState<number>(-1);
@@ -68,6 +66,12 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
   const nextIdRef = useRef(10);
 
   useDialogFocusTrap(containerRef, isModal);
+
+  useEffect(() => {
+    if (!hasUserHistory) {
+      setLines(initialLines);
+    }
+  }, [locale, initialLines, hasUserHistory]);
 
   useEffect(() => {
     if (outputRef.current) {
@@ -91,6 +95,11 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     ]);
   };
 
+  const resetTerminal = () => {
+    setHasUserHistory(false);
+    setLines(initialLines);
+  };
+
   const executeCommand = (rawCmd: string) => {
     const trimmed = rawCmd.trim();
     if (!trimmed) return;
@@ -100,44 +109,50 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     setHistoryIdx(-1);
     setInput('');
 
-    appendLines([{ type: 'command', text: `shell> ${trimmed}` }]);
-
     if (cmd === 'clear') {
-      setLines(INITIAL_LINES);
+      resetTerminal();
       return;
     }
 
+    setHasUserHistory(true);
+    appendLines([{ type: 'command', text: `shell> ${trimmed}` }]);
+
     if (cmd === 'help') {
       appendLines([
-        { type: 'accent', text: 'Supported commands:' },
-        { type: 'output', text: '  about        - Background and target roles' },
-        { type: 'output', text: '  skills       - Core capabilities across 4 groups' },
-        { type: 'output', text: '  experience   - Work and diploma internship history' },
-        { type: 'output', text: '  projects     - Featured case studies' },
-        { type: 'output', text: '  education    - UiTM diploma and credentials' },
-        { type: 'output', text: '  learning     - Current study (UiPath & RPA)' },
-        { type: 'output', text: '  contact      - Email, LinkedIn, and location' },
-        { type: 'output', text: '  beep         - Illustrative checkout beep step example' },
-        { type: 'output', text: '  resume       - Open résumé preview' },
-        { type: 'output', text: '  clear        - Reset output' },
+        { type: 'accent', text: t.terminal.helpTitle },
+        ...Object.entries(t.terminal.helpCommands).map(([key, desc]) => ({
+          type: 'output' as const,
+          text: `  ${key.padEnd(13, ' ')}- ${desc}`,
+        })),
       ]);
       return;
     }
 
     if (cmd === 'about' || cmd === 'whoami') {
       appendLines([
-        { type: 'accent', text: `${PROFILE.fullName} (${PROFILE.displayName})` },
-        { type: 'output', text: `Focus: ${PROFILE.title}` },
-        { type: 'output', text: `Current: ${PROFILE.currentRole} at ${PROFILE.currentCompany}` },
-        { type: 'output', text: `Summary: ${PROFILE.intro}` },
+        { type: 'accent', text: `${content.profile.fullName} (${content.profile.displayName})` },
+        { type: 'output', text: format(t.terminal.labels.focus, { title: content.profile.title }) },
+        {
+          type: 'output',
+          text: format(t.terminal.labels.current, {
+            role: content.profile.currentRole,
+            company: content.profile.currentCompany,
+          }),
+        },
+        { type: 'output', text: format(t.terminal.labels.summary, { intro: content.profile.intro }) },
       ]);
       return;
     }
 
     if (cmd === 'experience') {
       appendLines([
-        { type: 'accent', text: `Experience & Diploma Internship (${EXPERIENCES.length} Entries):` },
-        ...EXPERIENCES.map((exp) => ({
+        {
+          type: 'accent',
+          text: format(t.terminal.labels.experienceHeader, {
+            count: content.experiences.length,
+          }),
+        },
+        ...content.experiences.map((exp) => ({
           type: 'output' as const,
           text: `• ${exp.role} · ${exp.organization} (${exp.period}) - ${exp.technologies.slice(0, 4).join(', ')}`,
         })),
@@ -147,8 +162,8 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'skills') {
       appendLines([
-        { type: 'accent', text: 'Core Skills Across 4 Groups:' },
-        ...SKILL_GROUPS.map((group) => ({
+        { type: 'accent', text: t.terminal.labels.skillsHeader },
+        ...content.skillGroups.map((group) => ({
           type: 'output' as const,
           text: `  • ${group.title}: ${group.items.join(', ')}`,
         })),
@@ -158,8 +173,11 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'projects') {
       appendLines([
-        { type: 'accent', text: `Case Studies (${CASE_STUDIES.length}):` },
-        ...CASE_STUDIES.map((cs, i) => ({
+        {
+          type: 'accent',
+          text: format(t.terminal.labels.projectsHeader, { count: content.caseStudies.length }),
+        },
+        ...content.caseStudies.map((cs, i) => ({
           type: 'output' as const,
           text: `  0${i + 1}. ${cs.title} (${cs.organization})`,
         })),
@@ -169,12 +187,12 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'education' || cmd === 'certifications') {
       appendLines([
-        { type: 'accent', text: 'Education & Credentials:' },
+        { type: 'accent', text: t.terminal.labels.educationHeader },
         {
           type: 'output',
-          text: `  • ${EDUCATION.degree} - ${EDUCATION.institution} (${EDUCATION.period})`,
+          text: `  • ${content.education.degree} - ${content.education.institution} (${content.education.period})`,
         },
-        ...CERTIFICATIONS.map((c) => ({
+        ...content.certifications.map((c) => ({
           type: 'output' as const,
           text: `  • ${c.name} - ${c.issuer} [${c.kindLabel}]`,
         })),
@@ -184,8 +202,8 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'learning') {
       appendLines([
-        { type: 'accent', text: 'Current Learning:' },
-        ...LEARNING_ENTRIES.map((l) => ({
+        { type: 'accent', text: t.terminal.labels.learningHeader },
+        ...content.learning.map((l) => ({
           type: 'output' as const,
           text: `  ○ ${l.topic}: ${l.note}`,
         })),
@@ -195,10 +213,10 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
 
     if (cmd === 'contact') {
       appendLines([
-        { type: 'accent', text: 'Direct Contact:' },
-        { type: 'output', text: `  Email:    ${PROFILE.email}` },
-        { type: 'output', text: `  LinkedIn: ${PROFILE.linkedIn}` },
-        { type: 'output', text: `  Location: ${PROFILE.location}` },
+        { type: 'accent', text: t.terminal.labels.contactHeader },
+        { type: 'output', text: `  ${t.terminal.labels.email}:    ${content.profile.email}` },
+        { type: 'output', text: `  ${t.terminal.labels.linkedIn}: ${content.profile.linkedIn}` },
+        { type: 'output', text: `  ${t.terminal.labels.location}: ${content.profile.location}` },
       ]);
       return;
     }
@@ -206,10 +224,10 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     if (cmd === 'beep') {
       audioFx.playSuccess();
       appendLines([
-        { type: 'accent', text: '[ILLUSTRATIVE EXAMPLE] Conceptual Checkout Flow' },
+        { type: 'accent', text: t.terminal.labels.beepHeader },
         {
           type: 'output',
-          text: 'Scanner input -> Item lookup -> Promo check -> Sample receipt output.',
+          text: t.terminal.labels.beepOutput,
         },
       ]);
       return;
@@ -218,9 +236,9 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     if (cmd === 'resume') {
       if (onOpenResume) {
         onOpenResume();
-        appendLines([{ type: 'accent', text: 'Opening résumé preview...' }]);
+        appendLines([{ type: 'accent', text: t.terminal.labels.openingResume }]);
       } else {
-        appendLines([{ type: 'output', text: 'Use the Résumé button in the navigation bar.' }]);
+        appendLines([{ type: 'output', text: t.terminal.labels.resumeHint }]);
       }
       return;
     }
@@ -234,7 +252,10 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     appendLines([
       {
         type: 'error',
-        text: `Unknown command: "${trimmed}". Try one of: ${SUPPORTED_COMMANDS.join(', ')}.`,
+        text: format(t.terminal.labels.unknownCommand, {
+          command: trimmed,
+          commands: SUPPORTED_COMMANDS.join(', '),
+        }),
       },
     ]);
   };
@@ -278,17 +299,17 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
         <div className="flex items-center gap-2.5 min-w-0">
           <TerminalIcon className="w-4 h-4 text-[#A8C5FF] shrink-0" aria-hidden="true" />
           <span className="text-xs font-semibold text-[#F6F2E9] truncate">
-            Portfolio Shell · Read-Only Demo
+            {t.terminal.headerTitle}
           </span>
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
           <button
             type="button"
-            onClick={() => setLines(INITIAL_LINES)}
+            onClick={resetTerminal}
             className="p-2 rounded text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
-            aria-label="Reset shell output"
-            title="Reset shell"
+            aria-label={t.terminal.resetAria}
+            title={t.terminal.resetAria}
           >
             <RotateCcw className="w-3.5 h-3.5" />
           </button>
@@ -297,7 +318,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
               type="button"
               onClick={onClose}
               className="p-2 rounded text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/50 cursor-pointer min-w-[40px] min-h-[40px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
-              aria-label="Close portfolio shell dialog"
+              aria-label={t.terminal.closeAria}
             >
               <X className="w-4 h-4" />
             </button>
@@ -331,7 +352,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
       </div>
 
       <div className="px-4 py-2.5 bg-[#12101F] border-t border-[#242138] flex items-center gap-1.5 overflow-x-auto text-xs">
-        <span className="text-[#CFCAC0] mr-1 shrink-0">Quick run:</span>
+        <span className="text-[#CFCAC0] mr-1 shrink-0">{t.terminal.quickRun}</span>
         {['help', 'about', 'skills', 'experience', 'projects', 'education', 'contact', 'beep', 'clear'].map(
           (cmd) => (
             <button
@@ -366,7 +387,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="type 'help' and press Enter..."
+          placeholder={t.terminal.placeholder}
           autoComplete="off"
           spellCheck={false}
           className="flex-1 min-w-0 bg-transparent text-[#F6F2E9] placeholder-[#B5B0C2] text-xs focus:outline-none"
@@ -375,7 +396,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           type="submit"
           className="px-3 py-1.5 min-h-[36px] rounded bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-xs font-semibold cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
         >
-          Run
+          {t.terminal.run}
         </button>
       </form>
     </div>

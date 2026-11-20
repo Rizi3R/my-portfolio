@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { EXPERIENCES } from '../data/universeContent';
+import { useI18n } from '../i18n';
 import { ChevronDown, ChevronUp, Briefcase } from 'lucide-react';
 
 export const TimelineSection: React.FC = () => {
+  const { t, content } = useI18n();
   const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({
     'exp-emart24': true,
     'exp-hwc': true,
@@ -22,30 +23,30 @@ export const TimelineSection: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8 border-b border-[#242138]">
           <div className="max-w-2xl space-y-2">
             <p className="text-xs font-mono uppercase tracking-wider text-[#A8C5FF]">
-              Work &amp; Internship History
+              {t.experience.eyebrow}
             </p>
             <h2
               id="timeline-heading"
               className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight"
             >
-              Experience
+              {t.experience.heading}
             </h2>
           </div>
           <p className="text-sm text-[#CFCAC0] max-w-md leading-relaxed">
-            My experience across application support, business systems, IT operations, and application development.
+            {t.experience.intro}
           </p>
         </div>
 
         {/* Open Editorial Role List */}
         <div className="divide-y divide-[#242138]">
-          {EXPERIENCES.map((exp, idx) => {
+          {content.experiences.map((exp, idx) => {
             const isExpanded = Boolean(expandedIds[exp.id]);
             const isCurrent = idx === 0;
             const roleBadge = isCurrent
-              ? 'Current Role'
+              ? t.experience.currentRoleBadge
               : exp.isInternship
-              ? 'Diploma Internship'
-              : 'Work Experience';
+              ? t.experience.internshipBadge
+              : t.experience.workExperienceBadge;
 
             return (
               <article key={exp.id} className="py-6 sm:py-8">
@@ -59,7 +60,7 @@ export const TimelineSection: React.FC = () => {
                   {/* Left Metadata Column */}
                   <div className="lg:col-span-4 space-y-1.5">
                     <div className="inline-flex items-center gap-2 text-xs font-mono">
-                      <Briefcase className="w-3.5 h-3.5 text-[#A8C5FF]" aria-hidden="true" />
+                      <Briefcase className="w-3.5 h-3.5 text-[#A8C5FF] shrink-0" aria-hidden="true" />
                       <span className="text-[#A8C5FF] font-medium">{roleBadge}</span>
                     </div>
                     <div
@@ -86,7 +87,7 @@ export const TimelineSection: React.FC = () => {
                     </div>
 
                     <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#A8C5FF] shrink-0 self-start sm:self-center">
-                      <span>{isExpanded ? 'Hide' : 'Details'}</span>
+                      <span>{isExpanded ? t.experience.hide : t.experience.details}</span>
                       {isExpanded ? (
                         <ChevronUp className="w-4 h-4" aria-hidden="true" />
                       ) : (
@@ -110,7 +111,7 @@ export const TimelineSection: React.FC = () => {
                       </ul>
 
                       <div className="text-xs font-mono text-[#B5B0C2]">
-                        <span className="text-[#A8C5FF] mr-2">Tools:</span>
+                        <span className="text-[#A8C5FF] mr-2">{t.common.tools}</span>
                         <span>{exp.technologies.join(' · ')}</span>
                       </div>
                     </div>

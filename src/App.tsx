@@ -14,6 +14,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { audioFx } from './utils/audioFx';
 import { useDialogFocusTrap } from './utils/useDialogFocusTrap';
 import { CASE_STUDIES, StratumType } from './data/universeContent';
+import { useI18n } from './i18n';
 import { Loader2, X, ArrowLeft } from 'lucide-react';
 
 // Code-split secondary views and interactive workbench
@@ -75,6 +76,7 @@ function isTypingInEditableElement(): boolean {
 }
 
 export default function App() {
+  const { t, format } = useI18n();
   const [activeView, setActiveView] = useState<ActiveView>('portfolio');
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
@@ -345,7 +347,7 @@ export default function App() {
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#A8C5FF] focus:text-[#191723] focus:text-xs focus:font-semibold focus:shadow-lg print:hidden"
         >
-          Skip to main content
+          {t.accessibility.skipToMain}
         </a>
 
         <Navbar
@@ -361,14 +363,14 @@ export default function App() {
         >
           {activeView === 'plain' ? (
             <ErrorBoundary
-              fallbackTitle="Unable to load Printable Summary"
+              fallbackTitle={t.common.errorBoundaryTitle}
               onResetView={() => handleViewChange('portfolio')}
             >
               <Suspense
                 fallback={
                   <div className="py-24 text-center font-mono text-sm text-[#474457] flex items-center justify-center gap-2">
                     <Loader2 className="w-5 h-5 animate-spin text-[#191723]" aria-hidden="true" />
-                    <span>Loading Printable Summary...</span>
+                    <span>{format(t.common.loadingView, { view: t.footer.printableSummary })}</span>
                   </div>
                 }
               >
@@ -379,7 +381,7 @@ export default function App() {
                     className="inline-flex items-center gap-2 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#0A0913] text-[#F6F2E9] text-xs font-mono hover:bg-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-                    <span>Back to Overview</span>
+                    <span>{t.accessibility.backToOverview}</span>
                   </button>
                 </div>
                 <PlainView />
@@ -387,14 +389,14 @@ export default function App() {
             </ErrorBoundary>
           ) : activeView === 'atlas' ? (
             <ErrorBoundary
-              fallbackTitle="Unable to load Skill Atlas"
+              fallbackTitle={t.common.errorBoundaryTitle}
               onResetView={() => handleViewChange('portfolio')}
             >
               <Suspense
                 fallback={
                   <div className="py-32 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
                     <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
-                    <span>Loading Skill Atlas...</span>
+                    <span>{format(t.common.loadingView, { view: t.atlas.title })}</span>
                   </div>
                 }
               >
@@ -405,7 +407,7 @@ export default function App() {
                     className="inline-flex items-center gap-2 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-                    <span>Back to Overview</span>
+                    <span>{t.accessibility.backToOverview}</span>
                   </button>
                 </div>
                 <AtlasView
@@ -417,14 +419,14 @@ export default function App() {
             </ErrorBoundary>
           ) : activeView === 'trace' ? (
             <ErrorBoundary
-              fallbackTitle="Unable to load Walkthrough"
+              fallbackTitle={t.common.errorBoundaryTitle}
               onResetView={() => handleViewChange('portfolio')}
             >
               <Suspense
                 fallback={
                   <div className="py-32 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
                     <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
-                    <span>Loading Educational Walkthrough...</span>
+                    <span>{format(t.common.loadingView, { view: t.interactiveLab.items.walkthrough.title })}</span>
                   </div>
                 }
               >
@@ -435,7 +437,7 @@ export default function App() {
                     className="inline-flex items-center gap-2 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-                    <span>Back to Overview</span>
+                    <span>{t.accessibility.backToOverview}</span>
                   </button>
                 </div>
                 <TraceView
@@ -447,14 +449,14 @@ export default function App() {
             </ErrorBoundary>
           ) : activeView === 'receipt' ? (
             <ErrorBoundary
-              fallbackTitle="Unable to load Summary Receipt"
+              fallbackTitle={t.common.errorBoundaryTitle}
               onResetView={() => handleViewChange('portfolio')}
             >
               <Suspense
                 fallback={
                   <div className="py-32 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
                     <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
-                    <span>Loading Summary Receipt...</span>
+                    <span>{format(t.common.loadingView, { view: t.receipt.heading })}</span>
                   </div>
                 }
               >
@@ -465,7 +467,7 @@ export default function App() {
                     className="inline-flex items-center gap-2 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-                    <span>Back to Overview</span>
+                    <span>{t.accessibility.backToOverview}</span>
                   </button>
                 </div>
                 <ReceiptSection />
@@ -514,7 +516,7 @@ export default function App() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Interactive Portfolio Shell"
+          aria-label={t.terminal.dialogLabel}
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#0A0913]/85 backdrop-blur-sm no-print"
           onClick={() => closeOverlayAndRestoreFocus(setTerminalModalOpen)}
         >
@@ -540,7 +542,7 @@ export default function App() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Interactive Computing Lab Workbench"
+          aria-label={t.lab.modalDialogLabel}
           className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#0A0913]/88 backdrop-blur-md overflow-y-auto no-print"
           onClick={() => closeOverlayAndRestoreFocus(setLabModalOpen)}
         >
@@ -549,33 +551,33 @@ export default function App() {
             className="bg-[#0A0913] border border-[#242138] rounded-2xl max-w-6xl w-full max-h-[92dvh] overflow-y-auto shadow-2xl relative my-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="sticky top-0 z-20 bg-[#12101F] px-6 py-3.5 flex items-center justify-between border-b border-[#242138] font-mono text-xs">
-              <div className="flex items-center gap-2.5">
+            <div className="sticky top-0 z-20 bg-[#12101F] px-6 py-3.5 flex items-center justify-between border-b border-[#242138] font-mono text-xs gap-2">
+              <div className="flex flex-wrap items-center gap-2.5 min-w-0">
                 <span className="px-2 py-0.5 rounded bg-[#F2A77D]/15 text-[#F2A77D] border border-[#F2A77D]/40 text-xs font-bold">
-                  Educational Simulation
+                  {t.lab.modalBadge}
                 </span>
                 <span className="text-[#F6F2E9] font-semibold">
-                  Interactive Computing Workbench
+                  {t.lab.modalTitle}
                 </span>
               </div>
               <button
                 ref={labCloseRef}
                 type="button"
                 onClick={() => closeOverlayAndRestoreFocus(setLabModalOpen)}
-                className="p-2 rounded-lg text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/60 cursor-pointer min-w-[40px] min-h-[40px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
-                aria-label="Close interactive lab modal"
+                className="p-2 rounded-lg text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/60 cursor-pointer min-w-[40px] min-h-[40px] flex items-center justify-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                aria-label={t.lab.closeModal}
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <div className="p-4 sm:p-8">
-              <ErrorBoundary fallbackTitle="Unable to load Computing Lab">
+              <ErrorBoundary fallbackTitle={t.common.errorBoundaryTitle}>
                 <Suspense
                   fallback={
                     <div className="py-20 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
                       <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
-                      <span>Loading Simulations...</span>
+                      <span>{t.lab.loading}</span>
                     </div>
                   }
                 >
@@ -589,7 +591,7 @@ export default function App() {
 
       {resumeModalOpen && (
         <ErrorBoundary
-          fallbackTitle="Unable to load Résumé"
+          fallbackTitle={t.common.errorBoundaryTitle}
           onResetView={() => closeOverlayAndRestoreFocus(setResumeModalOpen)}
         >
           <Suspense fallback={null}>

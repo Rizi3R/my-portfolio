@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { CASE_STUDIES } from '../data/universeContent';
+import { buildUrlWithLocale, useI18n } from '../i18n';
+import type { CaseStudy } from '../data/universeContent';
 import { copyTextToClipboard } from '../utils/clipboard';
 import {
   ChevronDown,
@@ -22,35 +23,35 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   onSelectCaseId,
   onJumpToCase,
 }) => {
+  const { locale, t, content, format } = useI18n();
   const [copiedCaseId, setCopiedCaseId] = useState<string | null>(null);
   const [copyErrorCaseId, setCopyErrorCaseId] = useState<string | null>(null);
   const [copyAnnouncement, setCopyAnnouncement] = useState('');
 
-  const primaryCase = CASE_STUDIES[0];
-  const secondaryCases = CASE_STUDIES.slice(1);
+  const primaryCase = content.caseStudies[0];
+  const secondaryCases = content.caseStudies.slice(1);
 
   const handleCopyCaseLink = async (e: React.MouseEvent, caseId: string, title: string) => {
     e.stopPropagation();
-    const url = new URL(window.location.href);
-    url.searchParams.delete('view');
-    url.searchParams.delete('case');
-    url.hash = `#${caseId}`;
-    const shareUrl = url.toString();
+    const shareUrl = buildUrlWithLocale(window.location.href, locale, {
+      hashOverride: `#${caseId}`,
+      deleteParams: ['view', 'case'],
+    });
 
     const ok = await copyTextToClipboard(shareUrl);
     if (ok) {
       setCopyErrorCaseId(null);
       setCopiedCaseId(caseId);
-      setCopyAnnouncement(`Shareable link for ${title} copied to clipboard.`);
+      setCopyAnnouncement(format(t.caseStudies.copiedAnnouncement, { title }));
       setTimeout(() => {
         setCopiedCaseId(null);
         setCopyAnnouncement('');
       }, 2400);
     } else {
-      window.history.replaceState({}, '', `#${caseId}`);
+      window.history.replaceState({}, '', shareUrl);
       setCopiedCaseId(null);
       setCopyErrorCaseId(caseId);
-      setCopyAnnouncement(`Could not copy automatically. Browser URL updated to #${caseId}.`);
+      setCopyAnnouncement(format(t.caseStudies.copyFallbackAnnouncement, { id: caseId }));
       setTimeout(() => {
         setCopyErrorCaseId(null);
         setCopyAnnouncement('');
@@ -58,7 +59,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     }
   };
 
-  const renderCaseBody = (cs: (typeof CASE_STUDIES)[number]) => (
+  const renderCaseBody = (cs: CaseStudy) => (
     <div
       id={`${cs.id}-body`}
       className="pt-5 mt-5 border-t border-[#DDD6C7] space-y-6 text-sm text-[#191723]"
@@ -66,14 +67,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-1.5">
           <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
-            Context
+            {t.caseStudies.contextLabel}
           </h4>
           <p className="text-sm text-[#191723] leading-relaxed">{cs.situation}</p>
         </div>
 
         <div className="space-y-1.5">
           <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
-            My role
+            {t.caseStudies.myRoleLabel}
           </h4>
           <p className="text-sm text-[#191723] leading-relaxed">{cs.responsibility}</p>
         </div>
@@ -81,7 +82,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
       <div className="space-y-2">
         <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
-          Actions taken
+          {t.caseStudies.actionsTakenLabel}
         </h4>
         <ul className="list-disc pl-5 space-y-1.5 text-sm text-[#191723] leading-relaxed">
           {cs.whatIDid.map((step, i) => (
@@ -94,7 +95,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#F6F2E9] border border-[#DDD6C7] rounded-xl p-4 sm:p-5">
           <div className="space-y-1.5">
             <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
-              Checks performed
+              {t.caseStudies.checksPerformedLabel}
             </h4>
             <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#191723] leading-relaxed">
               {cs.triageBreakdown.checksPerformed.map((item, idx) => (
@@ -105,7 +106,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
           <div className="space-y-1.5 md:border-l md:border-[#DDD6C7] md:pl-4 pt-3 md:pt-0 border-t md:border-t-0 border-[#DDD6C7]">
             <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
-              Provided to vendor
+              {t.caseStudies.providedToVendorLabel}
             </h4>
             <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#191723] leading-relaxed">
               {cs.triageBreakdown.providedToVendor.map((item, idx) => (
@@ -116,7 +117,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
           <div className="space-y-1.5 md:border-l md:border-[#DDD6C7] md:pl-4 pt-3 md:pt-0 border-t md:border-t-0 border-[#DDD6C7]">
             <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
-              Vendor investigation scope
+              {t.caseStudies.vendorScopeLabel}
             </h4>
             <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#191723] leading-relaxed">
               {cs.triageBreakdown.vendorInvestigation.map((item, idx) => (
@@ -139,7 +140,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
       <div className="border-t border-[#DDD6C7] pt-4 space-y-1.5">
         <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
-          Tools used
+          {t.caseStudies.toolsUsedLabel}
         </h4>
         <div className="text-xs font-mono text-[#191723]">{cs.technologies.join(' · ')}</div>
       </div>
@@ -163,17 +164,17 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#DDD6C7] pb-6">
           <div className="max-w-2xl">
             <p className="text-xs font-mono uppercase tracking-wider text-[#474457] mb-1.5">
-              Case Studies
+              {t.caseStudies.eyebrow}
             </p>
             <h2
               id="featured-work-heading"
               className="font-display text-3xl sm:text-4xl font-bold text-[#191723] tracking-tight"
             >
-              Selected Work
+              {t.caseStudies.heading}
             </h2>
           </div>
           <p className="text-sm text-[#474457] max-w-md leading-relaxed">
-            Four examples across SaaS migration leadership, third-party integration configuration, incident triage, and new-site IT readiness.
+            {t.caseStudies.intro}
           </p>
         </div>
 
@@ -188,7 +189,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               <div className="space-y-2.5 max-w-3xl">
                 <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-[#474457]">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded bg-[#191723] text-[#F6F2E9] font-mono font-semibold tracking-wide">
-                    Case 01
+                    {format(t.caseStudies.caseLabelPrefix, { number: '01' })}
                   </span>
                   <span className="font-medium text-[#191723]">{primaryCase.organization}</span>
                 </div>
@@ -214,7 +215,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 </h3>
 
                 <p className="text-xs font-mono text-[#474457]">
-                  Scope: {primaryCase.roleScope}
+                  {t.common.scope} {primaryCase.roleScope}
                 </p>
 
                 <p className="text-sm sm:text-base text-[#191723] leading-relaxed">
@@ -227,22 +228,22 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   type="button"
                   onClick={(e) => handleCopyCaseLink(e, primaryCase.id, primaryCase.title)}
                   className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-[#F6F2E9] hover:bg-[#EAE3D5] border border-[#CCC4B3] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
-                  aria-label={`Copy shareable link to ${primaryCase.title}`}
+                  aria-label={format(t.accessibility.copyCaseLinkLabel, { title: primaryCase.title })}
                 >
                   {copiedCaseId === primaryCase.id ? (
                     <>
                       <Check className="w-3.5 h-3.5" aria-hidden="true" />
-                      <span>Copied</span>
+                      <span>{t.caseStudies.copied}</span>
                     </>
                   ) : copyErrorCaseId === primaryCase.id ? (
                     <>
                       <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" />
-                      <span>URL Updated</span>
+                      <span>{t.caseStudies.urlUpdated}</span>
                     </>
                   ) : (
                     <>
                       <Link2 className="w-3.5 h-3.5" aria-hidden="true" />
-                      <span>Copy Link</span>
+                      <span>{t.caseStudies.copyLink}</span>
                     </>
                   )}
                 </button>
@@ -256,7 +257,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   aria-controls={`${primaryCase.id}-body`}
                   className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#191723] hover:bg-[#2A273B] text-[#F6F2E9] text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                 >
-                  <span>{expandedCaseId === primaryCase.id ? 'Collapse' : 'View Case Study'}</span>
+                  <span>
+                    {expandedCaseId === primaryCase.id
+                      ? t.caseStudies.collapse
+                      : t.caseStudies.viewCaseStudy}
+                  </span>
                   {expandedCaseId === primaryCase.id ? (
                     <ChevronUp className="w-4 h-4" aria-hidden="true" />
                   ) : (
@@ -287,7 +292,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                   <div className="space-y-1.5 max-w-3xl">
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#474457]">
-                      <span className="font-mono font-semibold text-[#191723]">Case 0{idx + 2}</span>
+                      <span className="font-mono font-semibold text-[#191723]">
+                        {format(t.caseStudies.caseLabelPrefix, { number: `0${idx + 2}` })}
+                      </span>
                       <span aria-hidden="true">·</span>
                       <span className="font-medium text-[#191723]">{cs.organization}</span>
                     </div>
@@ -312,13 +319,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       </a>
                     </h3>
 
-                    <p className="text-xs font-mono text-[#474457]">Scope: {cs.roleScope}</p>
+                    <p className="text-xs font-mono text-[#474457]">
+                      {t.common.scope} {cs.roleScope}
+                    </p>
 
                     <p className="text-sm text-[#474457] leading-relaxed">{cs.summaryLine}</p>
 
                     {cs.workflowSteps && cs.workflowSteps.length > 0 && (
                       <ol
-                        aria-label="Integration workflow"
+                        aria-label={t.caseStudies.workflowLabel}
                         className="pt-2 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs font-mono text-[#191723]"
                       >
                         {cs.workflowSteps.map((step, stepIdx) => (
@@ -343,22 +352,22 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       type="button"
                       onClick={(e) => handleCopyCaseLink(e, cs.id, cs.title)}
                       className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-white/80 hover:bg-white border border-[#CCC4B3] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
-                      aria-label={`Copy shareable link to ${cs.title}`}
+                      aria-label={format(t.accessibility.copyCaseLinkLabel, { title: cs.title })}
                     >
                       {isCopied ? (
                         <>
                           <Check className="w-3.5 h-3.5" aria-hidden="true" />
-                          <span>Copied</span>
+                          <span>{t.caseStudies.copied}</span>
                         </>
                       ) : hasCopyErr ? (
                         <>
                           <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" />
-                          <span>URL Updated</span>
+                          <span>{t.caseStudies.urlUpdated}</span>
                         </>
                       ) : (
                         <>
                           <Link2 className="w-3.5 h-3.5" aria-hidden="true" />
-                          <span>Copy Link</span>
+                          <span>{t.caseStudies.copyLink}</span>
                         </>
                       )}
                     </button>
@@ -370,7 +379,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       aria-controls={`${cs.id}-body`}
                       className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-lg border border-[#191723]/30 hover:border-[#191723] text-xs font-semibold text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                     >
-                      <span>{isExpanded ? 'Collapse' : 'View Case Study'}</span>
+                      <span>{isExpanded ? t.caseStudies.collapse : t.caseStudies.viewCaseStudy}</span>
                       {isExpanded ? (
                         <ChevronUp className="w-4 h-4" aria-hidden="true" />
                       ) : (

@@ -1,289 +1,127 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Cpu, 
-  Network, 
-  Terminal, 
-  Database, 
-  Play, 
-  RotateCcw, 
-  ShieldCheck, 
-  ArrowRight, 
-  Server, 
-  Wifi, 
-  Lock, 
-  Check, 
-  Layers,
-  Sparkles,
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import {
+  Cpu,
+  Network,
+  Terminal,
+  Database,
+  Play,
+  RotateCcw,
+  ArrowRight,
+  Server,
+  Wifi,
+  Lock,
   Info,
   Clock,
   Radio,
-  FileCode
 } from 'lucide-react';
 import { audioFx } from '../utils/audioFx';
+import { useI18n } from '../i18n';
 
 /* =========================================================================
-   WORKBENCH 1: NETWORK PACKET FLIGHT SIMULATOR DATA & TYPES
+   WORKBENCH 1: NETWORK PACKET FLIGHT SIMULATOR BASE DATA & TYPES
    ========================================================================= */
 
-interface PacketHop {
+interface BasePacketHop {
   nodeId: string;
-  label: string;
-  layer: 'Layer 2 (Data Link)' | 'Layer 3 (Network)' | 'Layer 4 (Transport)' | 'Layer 7 (Application)';
-  action: string;
-  details: string;
   latencyMs: number;
 }
 
-interface PacketPreset {
-  id: string;
-  name: string;
+interface BasePacketPreset {
+  id: 'http-catalog' | 'dns-lookup' | 'tcp-handshake' | 'pos-payment';
   protocol: 'HTTP/2' | 'DNS' | 'TCP' | 'PAYMENT' | 'ICMP';
   port: string;
   payloadSummary: string;
-  description: string;
-  hops: PacketHop[];
+  hops: BasePacketHop[];
 }
 
-const PACKET_PRESETS: PacketPreset[] = [
+const BASE_PACKET_PRESETS: BasePacketPreset[] = [
   {
     id: 'http-catalog',
-    name: 'HTTPS API Request (Store Catalog Sync)',
     protocol: 'HTTP/2',
     port: 'TCP 443',
     payloadSummary: 'GET /api/v2/catalog/retail-sku?branch=18 HTTP/2',
-    description: 'Simulates an encrypted web API request from a store checkout terminal to the central cloud catalog service.',
     hops: [
-      {
-        nodeId: 'client',
-        label: 'Client POS Terminal (192.168.10.42)',
-        layer: 'Layer 7 (Application)',
-        action: 'Formulates TLS ClientHello & serialized JSON payload',
-        details: 'Store terminal initiates connection via local TCP socket on ephemeral port 49152.',
-        latencyMs: 0.1
-      },
-      {
-        nodeId: 'switch',
-        label: 'Store Local Switch',
-        layer: 'Layer 2 (Data Link)',
-        action: 'Ethernet Frame forwarding based on MAC address table',
-        details: 'Switch inspects destination MAC address and forwards the frame toward the router uplink port.',
-        latencyMs: 0.4
-      },
-      {
-        nodeId: 'gateway',
-        label: 'Store Edge Gateway & NAT Router (192.168.10.1)',
-        layer: 'Layer 3 (Network)',
-        action: 'Network Address Translation (PAT) & Routing',
-        details: 'Rewrites private source IP 192.168.10.42:49152 to documentation WAN IP 198.51.100.22:51022. Selects primary broadband route.',
-        latencyMs: 1.2
-      },
-      {
-        nodeId: 'proxy',
-        label: 'Cloud Edge WAF & Reverse Proxy (203.0.113.84)',
-        layer: 'Layer 7 (Application)',
-        action: 'TLS 1.3 Termination, Rate Limiting & SSL Decryption',
-        details: 'Terminates TLS session, inspects request headers, validates API token, forwards to internal microservice.',
-        latencyMs: 12.8
-      },
-      {
-        nodeId: 'backend',
-        label: 'Application Server Cluster (10.0.4.15)',
-        layer: 'Layer 7 (Application)',
-        action: 'PHP Laravel Kernel & Route Dispatch',
-        details: 'Resolves CatalogController@getSKUs, verifies store branch authorization, queries database read-replica.',
-        latencyMs: 16.2
-      },
-      {
-        nodeId: 'database',
-        label: 'Relational Database Engine (MySQL 8.0)',
-        layer: 'Layer 7 (Application)',
-        action: 'InnoDB Index Scan & Prepared Query Execution',
-        details: 'SELECT * FROM tbl_products WHERE branch_id = 18 AND is_active = 1; Returns 124 record rows in 2.1ms.',
-        latencyMs: 18.5
-      },
-      {
-        nodeId: 'client',
-        label: 'Client POS Terminal (Received 200 OK)',
-        layer: 'Layer 7 (Application)',
-        action: 'Response Rendered on Checkout Register Screen',
-        details: 'HTTP/2 200 OK received with 14.8KB payload. Catalog cached locally in memory.',
-        latencyMs: 24.3
-      }
-    ]
+      { nodeId: 'client', latencyMs: 0.1 },
+      { nodeId: 'switch', latencyMs: 0.4 },
+      { nodeId: 'gateway', latencyMs: 1.2 },
+      { nodeId: 'proxy', latencyMs: 12.8 },
+      { nodeId: 'backend', latencyMs: 16.2 },
+      { nodeId: 'database', latencyMs: 18.5 },
+      { nodeId: 'client', latencyMs: 24.3 },
+    ],
   },
   {
     id: 'dns-lookup',
-    name: 'DNS Query (Demo Domain Resolution)',
     protocol: 'DNS',
     port: 'UDP 53',
     payloadSummary: 'Standard Query 0x3f2a A catalog.retail-demo.example',
-    description: 'Simulates recursive DNS resolution translating a human-friendly domain into a destination IP address.',
     hops: [
-      {
-        nodeId: 'client',
-        label: 'Client Workstation (192.168.10.15)',
-        layer: 'Layer 7 (Application)',
-        action: 'Queries local resolver stub',
-        details: 'Checks OS /etc/hosts cache; misses. Dispatches UDP packet to configured primary DNS server.',
-        latencyMs: 0.1
-      },
-      {
-        nodeId: 'switch',
-        label: 'Managed Store Switch',
-        layer: 'Layer 2 (Data Link)',
-        action: 'Layer 2 Frame Forwarding',
-        details: 'Forwarding UDP datagram frame to default gateway uplink.',
-        latencyMs: 0.3
-      },
-      {
-        nodeId: 'gateway',
-        label: 'Gateway Local DNS Proxy',
-        layer: 'Layer 3 (Network)',
-        action: 'Forwarding to Public Recursive Resolver',
-        details: 'NAT translation applied. Outgoing packet routed to Cloudflare/Google DNS resolver (1.1.1.1).',
-        latencyMs: 1.1
-      },
-      {
-        nodeId: 'dns',
-        label: 'Recursive DNS Resolver (1.1.1.1)',
-        layer: 'Layer 7 (Application)',
-        action: 'Root Nameserver & Authoritative Zone Lookup',
-        details: 'Authoritative zone hit: catalog.retail-demo.example resolves to A-record 203.0.113.84 with TTL 300s.',
-        latencyMs: 7.4
-      },
-      {
-        nodeId: 'client',
-        label: 'Client Workstation',
-        layer: 'Layer 7 (Application)',
-        action: 'IP Address Cached in OS Resolver Buffer',
-        details: 'Client caches IP 203.0.113.84. Ready to initiate TCP handshake.',
-        latencyMs: 9.8
-      }
-    ]
+      { nodeId: 'client', latencyMs: 0.1 },
+      { nodeId: 'switch', latencyMs: 0.3 },
+      { nodeId: 'gateway', latencyMs: 1.1 },
+      { nodeId: 'dns', latencyMs: 7.4 },
+      { nodeId: 'client', latencyMs: 9.8 },
+    ],
   },
   {
     id: 'tcp-handshake',
-    name: 'TCP 3-Way Handshake (Connection Establishment)',
     protocol: 'TCP',
     port: 'TCP 443',
     payloadSummary: '[SYN] -> [SYN, ACK] -> [ACK] Seq=0, Win=65535',
-    description: 'Simulates the reliable 3-step TCP synchronization protocol required before any HTTP/TLS data can be exchanged.',
     hops: [
-      {
-        nodeId: 'client',
-        label: 'Client Station',
-        layer: 'Layer 4 (Transport)',
-        action: 'Step 1: Dispatches TCP SYN',
-        details: 'Client sets SYN flag, chooses Initial Sequence Number (ISN=1001), advertises Window Size 65535.',
-        latencyMs: 0.1
-      },
-      {
-        nodeId: 'gateway',
-        label: 'Branch Gateway NAT',
-        layer: 'Layer 3 (Network)',
-        action: 'Stateful Connection Tracking (conntrack)',
-        details: 'Creates entry in firewall connection table: SYN_SENT state recorded.',
-        latencyMs: 1.0
-      },
-      {
-        nodeId: 'proxy',
-        label: 'Server Endpoint (Reverse Proxy)',
-        layer: 'Layer 4 (Transport)',
-        action: 'Step 2: Returns TCP SYN-ACK',
-        details: 'Server receives SYN, allocates socket buffers, sets ISN=5001, ACKs client Seq+1 (1002).',
-        latencyMs: 8.2
-      },
-      {
-        nodeId: 'client',
-        label: 'Client Station',
-        layer: 'Layer 4 (Transport)',
-        action: 'Step 3: Dispatches TCP ACK',
-        details: 'Client ACKs server sequence (5002). Connection state transitions to ESTABLISHED. Full-duplex stream ready.',
-        latencyMs: 14.6
-      }
-    ]
+      { nodeId: 'client', latencyMs: 0.1 },
+      { nodeId: 'gateway', latencyMs: 1.0 },
+      { nodeId: 'proxy', latencyMs: 8.2 },
+      { nodeId: 'client', latencyMs: 14.6 },
+    ],
   },
   {
     id: 'pos-payment',
-    name: 'Payment Request Flow (Illustrative Example)',
     protocol: 'PAYMENT',
     port: 'TCP 8443',
     payloadSummary: 'Example Auth Message [Amount: RM 24.50]',
-    description: 'Illustrative simulation of how a retail payment terminal communicates with an acquirer gateway.',
     hops: [
-      {
-        nodeId: 'client',
-        label: 'Sample Card Pinpad (Store Counter)',
-        layer: 'Layer 7 (Application)',
-        action: 'EMV Chip Read & Request Message Preparation',
-        details: 'Constructs an illustrative encrypted payment authorization request payload.',
-        latencyMs: 0.2
-      },
-      {
-        nodeId: 'switch',
-        label: 'Store Local Switch',
-        layer: 'Layer 2 (Data Link)',
-        action: 'Local Network Transport',
-        details: 'Forwards frame from the counter port toward the store gateway uplink.',
-        latencyMs: 0.5
-      },
-      {
-        nodeId: 'gateway',
-        label: 'Store Gateway Router',
-        layer: 'Layer 3 (Network)',
-        action: 'Encrypted WAN Egress',
-        details: 'Routes outbound payment request over the store internet uplink to the acquirer host.',
-        latencyMs: 1.8
-      },
-      {
-        nodeId: 'proxy',
-        label: 'Merchant Acquirer Payment Switch',
-        layer: 'Layer 7 (Application)',
-        action: 'Card Scheme & Issuer Verification',
-        details: 'Routes request to card network / issuer simulation and validates funds.',
-        latencyMs: 240.0
-      },
-      {
-        nodeId: 'client',
-        label: 'Sample Card Pinpad (Approved)',
-        layer: 'Layer 7 (Application)',
-        action: 'Approval Response Returned',
-        details: 'Sample authorization approved. Receipt printer outputs slip.',
-        latencyMs: 265.4
-      }
-    ]
-  }
+      { nodeId: 'client', latencyMs: 0.2 },
+      { nodeId: 'switch', latencyMs: 0.5 },
+      { nodeId: 'gateway', latencyMs: 1.8 },
+      { nodeId: 'proxy', latencyMs: 240.0 },
+      { nodeId: 'client', latencyMs: 265.4 },
+    ],
+  },
 ];
 
-/* Node layout positions on a 100x100 virtual canvas */
-interface CanvasNode {
+interface BaseCanvasNode {
   id: string;
-  name: string;
-  category: string;
-  x: number; // 0-100%
-  y: number; // 0-100%
+  x: number;
+  y: number;
   icon: React.ComponentType<{ className?: string }>;
 }
 
-const NETWORK_NODES: CanvasNode[] = [
-  { id: 'client', name: 'Terminal / Client', category: 'Endpoint Station', x: 10, y: 50, icon: Terminal },
-  { id: 'switch', name: 'Managed Switch', category: 'LAN / L2', x: 26, y: 25, icon: Server },
-  { id: 'gateway', name: 'Edge Gateway', category: 'NAT Router / L3', x: 44, y: 50, icon: Wifi },
-  { id: 'dns', name: 'DNS Resolver', category: 'Recursive 1.1.1.1', x: 44, y: 82, icon: Radio },
-  { id: 'proxy', name: 'Edge WAF / Proxy', category: 'Cloud Ingress / L7', x: 65, y: 35, icon: Lock },
-  { id: 'backend', name: 'App Cluster', category: 'API Server / L7', x: 84, y: 35, icon: Cpu },
-  { id: 'database', name: 'Database Engine', category: 'SQL Storage', x: 84, y: 72, icon: Database },
+const BASE_NETWORK_NODES: BaseCanvasNode[] = [
+  { id: 'client', x: 10, y: 50, icon: Terminal },
+  { id: 'switch', x: 26, y: 25, icon: Server },
+  { id: 'gateway', x: 44, y: 50, icon: Wifi },
+  { id: 'dns', x: 44, y: 82, icon: Radio },
+  { id: 'proxy', x: 65, y: 35, icon: Lock },
+  { id: 'backend', x: 84, y: 35, icon: Cpu },
+  { id: 'database', x: 84, y: 72, icon: Database },
 ];
 
 /* =========================================================================
-   WORKBENCH 2: CACHE EVICTION VISUALIZER DATA & LOGIC
+   WORKBENCH 2: CACHE EVICTION VISUALIZER DATA & TYPES
    ========================================================================= */
 
 interface CacheItem {
   key: string;
+  valueKey?: string;
   value: string;
   accessCount: number;
   lastAccessCycle: number;
+}
+
+interface CacheLogEntry {
+  type: 'info' | 'hit' | 'miss';
+  text: string;
 }
 
 /* =========================================================================
@@ -301,21 +139,52 @@ interface PermissionState {
    ========================================================================= */
 
 export const TheLab: React.FC = () => {
+  const { t, locale, format } = useI18n();
   const [activeTab, setActiveTab] = useState<'network' | 'cache' | 'permissions'>('network');
 
   /* ------------------- Workbench 1 State (Network Tracer) ------------------- */
   const [selectedPresetIndex, setSelectedPresetIndex] = useState<number>(0);
   const [currentHopIndex, setCurrentHopIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [playSpeed, setPlaySpeed] = useState<number>(1); // 1x or 2x
-  const activePreset = PACKET_PRESETS[selectedPresetIndex];
+  const [playSpeed, setPlaySpeed] = useState<number>(1);
+
+  const packetPresets = useMemo(
+    () =>
+      BASE_PACKET_PRESETS.map((preset) => {
+        const localized = t.lab.network.presets[preset.id];
+        return {
+          ...preset,
+          name: localized.name,
+          description: localized.description,
+          hops: preset.hops.map((hop, i) => ({
+            ...hop,
+            ...(localized.hops[i] || { label: hop.nodeId, layer: '', action: '', details: '' }),
+          })),
+        };
+      }),
+    [t.lab.network.presets]
+  );
+
+  const networkNodes = useMemo(
+    () =>
+      BASE_NETWORK_NODES.map((node) => {
+        const localized = t.lab.network.nodes[node.id];
+        return {
+          ...node,
+          name: localized?.name ?? node.id,
+          category: localized?.category ?? '',
+        };
+      }),
+    [t.lab.network.nodes]
+  );
+
+  const activePreset = packetPresets[selectedPresetIndex];
   const activeHop = activePreset.hops[currentHopIndex];
 
-  // Auto-play packet animation timer
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | undefined;
     if (isPlaying) {
-      const intervalMs = (playSpeed === 1 ? 1400 : 700);
+      const intervalMs = playSpeed === 1 ? 1400 : 700;
       timer = setTimeout(() => {
         if (currentHopIndex < activePreset.hops.length - 1) {
           setCurrentHopIndex((prev) => prev + 1);
@@ -365,19 +234,52 @@ export const TheLab: React.FC = () => {
   /* ------------------- Workbench 2 State (Cache Eviction) ------------------- */
   const CACHE_CAPACITY = 4;
   const [cachePolicy, setCachePolicy] = useState<'LRU' | 'FIFO'>('LRU');
-  const [cacheItems, setCacheItems] = useState<CacheItem[]>([
-    { key: 'SKU_1001', value: 'Milk 1L (Demo Store)', accessCount: 3, lastAccessCycle: 1 },
-    { key: 'USER_882', value: 'Cashier Session #4', accessCount: 1, lastAccessCycle: 2 },
-    { key: 'TOKEN_AUTH', value: 'JWT Bearer Key', accessCount: 4, lastAccessCycle: 3 },
+  const [cacheItems, setCacheItems] = useState<CacheItem[]>(() => [
+    {
+      key: 'SKU_1001',
+      valueKey: 'SKU_1001',
+      value: t.lab.cache.defaultValues.SKU_1001,
+      accessCount: 3,
+      lastAccessCycle: 1,
+    },
+    {
+      key: 'USER_882',
+      valueKey: 'USER_882',
+      value: t.lab.cache.defaultValues.USER_882,
+      accessCount: 1,
+      lastAccessCycle: 2,
+    },
+    {
+      key: 'TOKEN_AUTH',
+      valueKey: 'TOKEN_AUTH',
+      value: t.lab.cache.defaultValues.TOKEN_AUTH,
+      accessCount: 4,
+      lastAccessCycle: 3,
+    },
   ]);
   const [cycleCounter, setCycleCounter] = useState<number>(4);
   const [cacheStats, setCacheStats] = useState({ hits: 5, misses: 3, total: 8 });
-  const [cacheLogs, setCacheLogs] = useState<string[]>([
-    'Cache initialized with 3 items (Capacity: 4). Policy: LRU.'
+  const [cacheLogs, setCacheLogs] = useState<CacheLogEntry[]>(() => [
+    { type: 'info', text: t.lab.cache.initLog },
   ]);
-  const [customKeyInput, setCustomKeyInput] = useState<string>('');
+  const hasInteractedWithCacheRef = useRef(false);
+
+  // Sync default cache item labels and initial log when locale switches before interaction
+  useEffect(() => {
+    setCacheItems((prev) =>
+      prev.map((item) =>
+        item.valueKey && t.lab.cache.defaultValues[item.valueKey]
+          ? { ...item, value: t.lab.cache.defaultValues[item.valueKey] }
+          : item
+      )
+    );
+    if (!hasInteractedWithCacheRef.current) {
+      setCacheLogs([{ type: 'info', text: t.lab.cache.initLog }]);
+    }
+  }, [locale, t.lab.cache.defaultValues, t.lab.cache.initLog]);
 
   const accessKey = (keyName: string, keyValue?: string) => {
+    hasInteractedWithCacheRef.current = true;
     audioFx.playClick(500);
     const newCycle = cycleCounter + 1;
     setCycleCounter(newCycle);
@@ -385,13 +287,11 @@ export const TheLab: React.FC = () => {
     const existingIndex = cacheItems.findIndex((item) => item.key === keyName);
 
     if (existingIndex !== -1) {
-      // CACHE HIT!
       audioFx.playSuccess();
-      const updated = [...cacheItems];
+      const updated = cacheItems.map((item) => ({ ...item }));
       updated[existingIndex].accessCount += 1;
       updated[existingIndex].lastAccessCycle = newCycle;
 
-      // In LRU, hit items move to the most-recently-used position
       if (cachePolicy === 'LRU') {
         const item = updated.splice(existingIndex, 1)[0];
         updated.push(item);
@@ -401,23 +301,23 @@ export const TheLab: React.FC = () => {
       setCacheStats((prev) => ({
         ...prev,
         hits: prev.hits + 1,
-        total: prev.total + 1
+        total: prev.total + 1,
       }));
       setCacheLogs((prev) => [
-        `[CYCLE ${newCycle}] HIT: Key "${keyName}" found in cache. Updated access metadata.`,
-        ...prev.slice(0, 9)
+        {
+          type: 'hit',
+          text: format(t.lab.cache.hitLog, { cycle: newCycle, key: keyName }),
+        },
+        ...prev.slice(0, 9),
       ]);
     } else {
-      // CACHE MISS!
       audioFx.playAlert();
-      let updated = [...cacheItems];
-      let logMsg = `[CYCLE ${newCycle}] MISS: Key "${keyName}" not present in cache.`;
+      const updated = cacheItems.map((item) => ({ ...item }));
+      let logMsg = format(t.lab.cache.missLog, { cycle: newCycle, key: keyName });
 
       if (updated.length >= CACHE_CAPACITY) {
-        // Must evict an item!
         let evictedItem: CacheItem;
         if (cachePolicy === 'LRU') {
-          // Evict item with lowest lastAccessCycle (Least Recently Used)
           let minIndex = 0;
           for (let i = 1; i < updated.length; i++) {
             if (updated[i].lastAccessCycle < updated[minIndex].lastAccessCycle) {
@@ -425,19 +325,25 @@ export const TheLab: React.FC = () => {
             }
           }
           evictedItem = updated.splice(minIndex, 1)[0];
-          logMsg += ` Evicted "${evictedItem.key}" (Least Recently Used: cycle ${evictedItem.lastAccessCycle}).`;
+          logMsg += format(t.lab.cache.evictedLruSuffix, {
+            key: evictedItem.key,
+            cycle: evictedItem.lastAccessCycle,
+          });
         } else {
-          // FIFO: Evict first inserted (index 0)
           evictedItem = updated.shift()!;
-          logMsg += ` Evicted "${evictedItem.key}" (First In First Out order).`;
+          logMsg += format(t.lab.cache.evictedFifoSuffix, {
+            key: evictedItem.key,
+          });
         }
       }
 
+      const defaultVal = t.lab.cache.defaultValues[keyName];
       const newItem: CacheItem = {
         key: keyName,
-        value: keyValue || `Data payload for ${keyName}`,
+        valueKey: defaultVal ? keyName : undefined,
+        value: keyValue || defaultVal || format(t.lab.cache.customValuePrefix, { key: keyName }),
         accessCount: 1,
-        lastAccessCycle: newCycle
+        lastAccessCycle: newCycle,
       };
       updated.push(newItem);
 
@@ -445,28 +351,41 @@ export const TheLab: React.FC = () => {
       setCacheStats((prev) => ({
         ...prev,
         misses: prev.misses + 1,
-        total: prev.total + 1
+        total: prev.total + 1,
       }));
-      setCacheLogs((prev) => [logMsg, ...prev.slice(0, 9)]);
+      setCacheLogs((prev) => [{ type: 'miss', text: logMsg }, ...prev.slice(0, 9)]);
     }
   };
 
   const handleResetCache = () => {
+    hasInteractedWithCacheRef.current = true;
     audioFx.playClick(400);
     setCacheItems([
-      { key: 'SKU_1001', value: 'Milk 1L (Demo Store)', accessCount: 1, lastAccessCycle: 1 },
-      { key: 'USER_882', value: 'Cashier Session #4', accessCount: 1, lastAccessCycle: 2 },
+      {
+        key: 'SKU_1001',
+        valueKey: 'SKU_1001',
+        value: t.lab.cache.defaultValues.SKU_1001,
+        accessCount: 1,
+        lastAccessCycle: 1,
+      },
+      {
+        key: 'USER_882',
+        valueKey: 'USER_882',
+        value: t.lab.cache.defaultValues.USER_882,
+        accessCount: 1,
+        lastAccessCycle: 2,
+      },
     ]);
     setCycleCounter(3);
     setCacheStats({ hits: 0, misses: 0, total: 0 });
-    setCacheLogs(['Cache reset to fresh state. Capacity 4.']);
+    setCacheLogs([{ type: 'info', text: t.lab.cache.resetLog }]);
   };
 
   /* ------------------- Workbench 3 State (Unix Permissions) ------------------- */
   const [permissions, setPermissions] = useState<PermissionState>({
     owner: { r: true, w: true, x: true },
     group: { r: true, w: false, x: true },
-    others: { r: true, w: false, x: true }
+    others: { r: true, w: false, x: true },
   });
 
   const togglePerm = (category: 'owner' | 'group' | 'others', bit: 'r' | 'w' | 'x') => {
@@ -475,8 +394,8 @@ export const TheLab: React.FC = () => {
       ...prev,
       [category]: {
         ...prev[category],
-        [bit]: !prev[category][bit]
-      }
+        [bit]: !prev[category][bit],
+      },
     }));
   };
 
@@ -498,12 +417,12 @@ export const TheLab: React.FC = () => {
     const decode = (val: number) => ({
       r: (val & 4) !== 0,
       w: (val & 2) !== 0,
-      x: (val & 1) !== 0
+      x: (val & 1) !== 0,
     });
     setPermissions({
       owner: decode(ownerVal),
       group: decode(groupVal),
-      others: decode(othersVal)
+      others: decode(othersVal),
     });
   };
 
@@ -515,37 +434,29 @@ export const TheLab: React.FC = () => {
           <div className="max-w-3xl">
             <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-semibold tracking-wider text-[#A8C5FF] uppercase mb-3">
               <span className="px-2 py-0.5 rounded bg-[#F2A77D]/15 text-[#F2A77D] border border-[#F2A77D]/40 text-[11px] font-bold">
-                [SIMULATION]
+                {t.lab.badgeSimulation}
               </span>
               <Cpu className="w-4 h-4 text-[#A8C5FF]" aria-hidden="true" />
-              <span>THE PERSONAL TECHNOLOGY LAB</span>
+              <span>{t.lab.eyebrowTitle}</span>
               <span aria-hidden="true" className="text-[#524E66]">·</span>
-              <span className="text-[#9A94A8]">BROWSER-NATIVE SANDBOX</span>
+              <span className="text-[#9A94A8]">{t.lab.eyebrowSub}</span>
             </div>
             <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F6F2E9] tracking-tight leading-snug mb-3">
-              Interactive Computing Experiments &amp; Simulations
+              {t.lab.heading}
             </h2>
             <p className="text-sm sm:text-base text-[#CFCAC0] leading-relaxed font-sans mb-4">
-              Explore what happens beneath the interface. Step into this client-side workbench to
-              inspect OSI Layer 2–7 packet hops, test cache eviction algorithms, and calculate UNIX
-              permission bitmasks in real time.
+              {t.lab.intro}
             </p>
 
             {/* Persistent Educational Simulation Disclaimer */}
             <div className="p-3.5 rounded-xl bg-[#12101F] border border-[#242138] text-xs font-mono space-y-1.5 mb-6 text-[#CFCAC0]">
               <div className="flex items-start gap-2">
-                <span className="text-[#A8C5FF] font-bold shrink-0">MODELS:</span>
-                <span>
-                  Deterministic OSI Layer 2–7 packet hops, RFC 793 TCP handshake flags, in-memory
-                  FIFO &amp; LRU cache eviction cycles, and UNIX octal permission bitmasks.
-                </span>
+                <span className="text-[#A8C5FF] font-bold shrink-0">{t.lab.modelsLabel}</span>
+                <span>{t.lab.modelsText}</span>
               </div>
               <div className="flex items-start gap-2 pt-1.5 border-t border-[#242138]">
-                <span className="text-[#F2A77D] font-bold shrink-0">DOES NOT MODEL:</span>
-                <span>
-                  Live network sniffing, real server transactions, or real-time payment gateway
-                  clearance. All data is illustrative and generated locally.
-                </span>
+                <span className="text-[#F2A77D] font-bold shrink-0">{t.lab.doesNotModelLabel}</span>
+                <span>{t.lab.doesNotModelText}</span>
               </div>
             </div>
           </div>
@@ -565,7 +476,7 @@ export const TheLab: React.FC = () => {
               }`}
             >
               <Network className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>01. Packet Flight</span>
+              <span>{t.lab.tabs.network}</span>
             </button>
 
             <button
@@ -581,7 +492,7 @@ export const TheLab: React.FC = () => {
               }`}
             >
               <Database className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>02. Cache (LRU / FIFO)</span>
+              <span>{t.lab.tabs.cache}</span>
             </button>
 
             <button
@@ -597,7 +508,7 @@ export const TheLab: React.FC = () => {
               }`}
             >
               <Lock className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>03. UNIX Permissions</span>
+              <span>{t.lab.tabs.permissions}</span>
             </button>
           </div>
         </div>
@@ -610,9 +521,9 @@ export const TheLab: React.FC = () => {
             {/* Protocol Preset Selector */}
             <div className="flex flex-wrap items-center gap-2 bg-[#12101F] p-2.5 rounded-xl border border-[#242138]">
               <span className="text-xs font-mono text-[#9A94A8] px-2 uppercase tracking-wider">
-                SELECT PROTOCOL:
+                {t.lab.network.selectProtocol}
               </span>
-              {PACKET_PRESETS.map((preset, idx) => (
+              {packetPresets.map((preset, idx) => (
                 <button
                   key={preset.id}
                   type="button"
@@ -633,16 +544,19 @@ export const TheLab: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               {/* Left 8 Cols: Visual Network Canvas */}
               <div className="lg:col-span-8 bg-[#12101F] border border-[#242138] rounded-2xl p-6 relative overflow-hidden">
-                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#242138] text-xs font-mono">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#A8C5FF]" aria-hidden="true" />
-                    <span className="text-[#F6F2E9] font-semibold">{activePreset.name}</span>
+                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#242138] text-xs font-mono gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="w-2 h-2 rounded-full bg-[#A8C5FF] shrink-0" aria-hidden="true" />
+                    <span className="text-[#F6F2E9] font-semibold truncate">{activePreset.name}</span>
                     <span className="text-[#524E66]">·</span>
-                    <span className="text-[#A8C5FF] font-mono">{activePreset.port}</span>
+                    <span className="text-[#A8C5FF] font-mono shrink-0">{activePreset.port}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-[#9A94A8] text-[11px]">
+                  <div className="flex items-center gap-2 text-[#9A94A8] text-[11px] shrink-0">
                     <span>
-                      HOP {currentHopIndex + 1} OF {activePreset.hops.length}
+                      {format(t.lab.network.hopCounter, {
+                        current: currentHopIndex + 1,
+                        total: activePreset.hops.length,
+                      })}
                     </span>
                   </div>
                 </div>
@@ -662,7 +576,7 @@ export const TheLab: React.FC = () => {
                       <line x1="84%" y1="35%" x2="84%" y2="72%" stroke="#242138" strokeWidth="2" />
                     </svg>
 
-                    {NETWORK_NODES.map((node) => {
+                    {networkNodes.map((node) => {
                       const isCurrent = activeHop?.nodeId === node.id;
                       const NodeIcon = node.icon;
 
@@ -701,7 +615,10 @@ export const TheLab: React.FC = () => {
                       <div className="absolute bottom-3 left-3 bg-[#12101F]/95 border border-[#242138] px-3 py-1.5 rounded-lg text-[11px] font-mono flex items-center gap-2 text-[#A8C5FF]">
                         <span className="w-2 h-2 rounded-full bg-[#F2A77D]" aria-hidden="true" />
                         <span>
-                          PACKET AT: <strong className="text-[#F6F2E9]">{activeHop.label.split('(')[0]}</strong>
+                          {t.lab.network.packetAt}{' '}
+                          <strong className="text-[#F6F2E9]">
+                            {activeHop.label.split(/[（(]/)[0].trim()}
+                          </strong>
                         </span>
                       </div>
                     )}
@@ -709,7 +626,7 @@ export const TheLab: React.FC = () => {
                     {activeHop && (
                       <div className="absolute top-3 right-3 bg-[#12101F]/95 border border-[#242138] px-3 py-1 rounded text-[11px] font-mono text-[#A8C5FF] flex items-center gap-1.5">
                         <Clock className="w-3 h-3 text-[#A8C5FF]" aria-hidden="true" />
-                        <span>+{activeHop.latencyMs}ms elapsed</span>
+                        <span>{format(t.lab.network.elapsedMs, { ms: activeHop.latencyMs })}</span>
                       </div>
                     )}
                   </div>
@@ -725,7 +642,7 @@ export const TheLab: React.FC = () => {
                       className="inline-flex items-center gap-2 px-4 py-2 bg-[#A8C5FF] hover:bg-[#bfd5ff] disabled:opacity-50 text-[#191723] text-xs font-semibold rounded-lg transition-colors cursor-pointer"
                     >
                       <Play className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
-                      <span>{isPlaying ? 'Simulating...' : 'Dispatch Packet'}</span>
+                      <span>{isPlaying ? t.lab.network.simulating : t.lab.network.dispatchPacket}</span>
                     </button>
 
                     <button
@@ -734,7 +651,7 @@ export const TheLab: React.FC = () => {
                       disabled={isPlaying}
                       className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#0A0913] hover:bg-[#19162B] text-[#A8C5FF] text-xs font-medium rounded-lg border border-[#242138] transition-colors cursor-pointer"
                     >
-                      <span>Step Next</span>
+                      <span>{t.lab.network.stepNext}</span>
                       <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                     </button>
 
@@ -742,15 +659,15 @@ export const TheLab: React.FC = () => {
                       type="button"
                       onClick={handleResetSim}
                       className="p-2 text-[#9A94A8] hover:text-[#F6F2E9] hover:bg-[#0A0913] rounded-lg transition-colors border border-[#242138] cursor-pointer"
-                      aria-label="Reset Simulation"
-                      title="Reset Simulation"
+                      aria-label={t.lab.network.resetTooltip}
+                      title={t.lab.network.resetTooltip}
                     >
                       <RotateCcw className="w-4 h-4" />
                     </button>
                   </div>
 
                   <div className="flex items-center gap-2 text-xs font-mono text-[#9A94A8]">
-                    <span>SPEED:</span>
+                    <span>{t.lab.network.speedLabel}</span>
                     <button
                       type="button"
                       onClick={() => setPlaySpeed(1)}
@@ -782,7 +699,7 @@ export const TheLab: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-2 text-xs font-mono text-[#A8C5FF] uppercase tracking-wider mb-1">
                     <Info className="w-3.5 h-3.5" aria-hidden="true" />
-                    <span>HOP INSPECTOR TELEMETRY</span>
+                    <span>{t.lab.network.inspectorHeader}</span>
                   </div>
                   <h3 className="text-lg font-bold text-[#F6F2E9] tracking-tight">
                     {activeHop?.label}
@@ -794,7 +711,7 @@ export const TheLab: React.FC = () => {
 
                 <div className="p-3.5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-2">
                   <span className="text-[11px] font-mono text-[#9A94A8] uppercase block">
-                    CURRENT NODE ACTION:
+                    {t.lab.network.currentNodeAction}
                   </span>
                   <p className="text-xs font-medium text-[#F6F2E9] leading-relaxed">
                     {activeHop?.action}
@@ -806,22 +723,24 @@ export const TheLab: React.FC = () => {
 
                 <div className="p-3.5 rounded-xl bg-[#0A0913] border border-[#242138] font-mono text-[11px] space-y-1 text-[#CFCAC0]">
                   <div className="text-[#9A94A8] text-[10px] pb-1 border-b border-[#242138] flex justify-between">
-                    <span>PAYLOAD HEADER</span>
+                    <span>{t.lab.network.payloadHeader}</span>
                     <span className="text-[#A8C5FF]">{activePreset.protocol}</span>
                   </div>
                   <div className="pt-1 text-[#A8C5FF] break-all">
                     {activePreset.payloadSummary}
                   </div>
                   <div className="text-[#9A94A8] text-[10px] pt-1">
-                    Port: {activePreset.port} · Hops traversed: {currentHopIndex + 1}/
-                    {activePreset.hops.length}
+                    {format(t.lab.network.portLabel, {
+                      port: activePreset.port,
+                      current: currentHopIndex + 1,
+                      total: activePreset.hops.length,
+                    })}
                   </div>
                 </div>
 
                 <div className="p-3 rounded-lg bg-[#0A0913] border border-[#242138] text-[11px] text-[#CFCAC0] leading-relaxed">
-                  <strong className="text-[#A8C5FF]">Educational Simulation:</strong> Demonstrates
-                  general packet routing, NAT translation, Ethernet switching, and protocol steps
-                  cleanly in the browser.
+                  <strong className="text-[#A8C5FF]">{t.lab.network.simulationNoteTitle}</strong>{' '}
+                  {t.lab.network.simulationNoteBody}
                 </div>
               </div>
             </div>
@@ -837,19 +756,18 @@ export const TheLab: React.FC = () => {
               <div>
                 <div className="flex items-center gap-2 text-xs font-mono text-[#A8C5FF] uppercase tracking-wider mb-1">
                   <Database className="w-3.5 h-3.5" aria-hidden="true" />
-                  <span>ALGORITHM BENCHMARK · CAPACITY: 4 SLOTS</span>
+                  <span>{t.lab.cache.eyebrow}</span>
                 </div>
                 <h3 className="font-display text-xl sm:text-2xl font-bold text-[#F6F2E9] tracking-tight">
-                  Cache Eviction Simulator (LRU vs. FIFO)
+                  {t.lab.cache.heading}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#CFCAC0] mt-1">
-                  Watch how operating systems and proxies retain hot data and evict records when
-                  capacity fills.
+                  {t.lab.cache.intro}
                 </p>
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono text-[#9A94A8] mr-1">POLICY:</span>
+                <span className="text-xs font-mono text-[#9A94A8] mr-1">{t.lab.cache.policyLabel}</span>
                 <button
                   type="button"
                   onClick={() => {
@@ -884,7 +802,7 @@ export const TheLab: React.FC = () => {
 
             <div>
               <span className="text-xs font-mono text-[#9A94A8] uppercase tracking-wider block mb-2.5">
-                DISPATCH REQUEST FOR KEY (CLICK TO TRIGGER CACHE LOOKUP):
+                {t.lab.cache.dispatchLabel}
               </span>
               <div className="flex flex-wrap items-center gap-2">
                 {['SKU_1001', 'USER_882', 'TOKEN_AUTH', 'ORDER_904', 'PROMO_CODE', 'CATEGORY_FOOD'].map(
@@ -895,7 +813,7 @@ export const TheLab: React.FC = () => {
                       onClick={() => accessKey(k)}
                       className="px-3 py-2 bg-[#0A0913] hover:bg-[#19162B] text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/60 rounded-lg text-xs font-mono transition-colors cursor-pointer"
                     >
-                      + GET "{k}"
+                      {format(t.lab.cache.getPrefix, { key: k })}
                     </button>
                   )
                 )}
@@ -906,22 +824,30 @@ export const TheLab: React.FC = () => {
                   className="px-3 py-2 text-xs font-mono text-[#9A94A8] hover:text-[#F6F2E9] hover:bg-[#0A0913] rounded-lg border border-[#242138] transition-colors ml-auto flex items-center gap-1.5 cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-                  <span>Reset Cache</span>
+                  <span>{t.lab.cache.resetCache}</span>
                 </button>
               </div>
             </div>
 
             <div>
-              <div className="flex items-center justify-between text-xs font-mono text-[#9A94A8] mb-3">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[#9A94A8] mb-3">
                 <span>
-                  ACTIVE MEMORY SLOTS ({cacheItems.length}/{CACHE_CAPACITY})
+                  {format(t.lab.cache.activeSlots, {
+                    used: cacheItems.length,
+                    capacity: CACHE_CAPACITY,
+                  })}
                 </span>
                 <span className="text-[#A8C5FF]">
-                  HIT RATIO:{' '}
-                  {cacheStats.total > 0
-                    ? Math.round((cacheStats.hits / cacheStats.total) * 100)
-                    : 0}
-                  % ({cacheStats.hits} Hits / {cacheStats.misses} Misses)
+                  {format(t.lab.cache.hitRatio, {
+                    ratio:
+                      cacheStats.total > 0
+                        ? Math.round((cacheStats.hits / cacheStats.total) * 100)
+                        : 0,
+                    hits: cacheStats.hits,
+                    hitsWord: t.lab.cache.hitsWord,
+                    misses: cacheStats.misses,
+                    missesWord: t.lab.cache.missesWord,
+                  })}
                 </span>
               </div>
 
@@ -939,10 +865,10 @@ export const TheLab: React.FC = () => {
                       }`}
                     >
                       <div className="flex items-center justify-between text-xs font-mono text-[#9A94A8] mb-2">
-                        <span>SLOT #{slotIdx + 1}</span>
+                        <span>{format(t.lab.cache.slotPrefix, { number: slotIdx + 1 })}</span>
                         {item && (
                           <span className="text-[10px] text-[#A8C5FF] font-semibold bg-[#12101F] px-2 py-0.5 rounded border border-[#242138]">
-                            CYCLE {item.lastAccessCycle}
+                            {format(t.lab.cache.cyclePrefix, { cycle: item.lastAccessCycle })}
                           </span>
                         )}
                       </div>
@@ -954,15 +880,15 @@ export const TheLab: React.FC = () => {
                           </div>
                           <div className="text-xs text-[#9A94A8] truncate mb-3">{item.value}</div>
                           <div className="pt-2 border-t border-[#242138] text-[11px] font-mono text-[#CFCAC0] flex justify-between">
-                            <span>Hits: {item.accessCount}</span>
+                            <span>{format(t.lab.cache.hitsLabel, { count: item.accessCount })}</span>
                             <span className="text-[#F2A77D]">
-                              {cachePolicy === 'LRU' && slotIdx === 0 ? 'Next Evict' : ''}
+                              {cachePolicy === 'LRU' && slotIdx === 0 ? t.lab.cache.nextEvict : ''}
                             </span>
                           </div>
                         </div>
                       ) : (
                         <div className="h-18 flex items-center justify-center text-xs font-mono text-[#9A94A8]">
-                          [EMPTY SLOT]
+                          {t.lab.cache.emptySlot}
                         </div>
                       )}
                     </div>
@@ -974,21 +900,21 @@ export const TheLab: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-2">
               <div className="lg:col-span-7 bg-[#0A0913] border border-[#242138] rounded-xl p-4 font-mono text-xs">
                 <span className="text-[11px] text-[#9A94A8] block mb-2 font-semibold">
-                  CACHE OPERATION LOG STREAM:
+                  {t.lab.cache.logHeader}
                 </span>
                 <div className="space-y-1.5 h-[130px] overflow-y-auto text-[11px]">
                   {cacheLogs.map((log, idx) => (
                     <div
                       key={idx}
                       className={
-                        log.includes('HIT:')
+                        log.type === 'hit'
                           ? 'text-[#A8C5FF]'
-                          : log.includes('MISS:')
+                          : log.type === 'miss'
                           ? 'text-[#F2A77D]'
                           : 'text-[#CFCAC0]'
                       }
                     >
-                      {log}
+                      {log.text}
                     </div>
                   ))}
                 </div>
@@ -996,16 +922,13 @@ export const TheLab: React.FC = () => {
 
               <div className="lg:col-span-5 p-4 rounded-xl bg-[#0A0913] border border-[#242138] space-y-2 text-xs">
                 <span className="font-mono text-[#A8C5FF] text-[11px] font-semibold block uppercase">
-                  HOW LRU WORKS UNDER THE HOOD:
+                  {t.lab.cache.howItWorksTitle}
                 </span>
                 <p className="text-[#CFCAC0] leading-relaxed">
-                  To achieve <strong className="text-[#F6F2E9]">O(1) lookup</strong> and{' '}
-                  <strong className="text-[#F6F2E9]">O(1) eviction</strong>, production LRU caches
-                  pair a <strong>Hash Map</strong> with a <strong>Doubly Linked List</strong>.
+                  {t.lab.cache.howItWorksBody1}
                 </p>
                 <p className="text-[#9A94A8] leading-relaxed text-[11px]">
-                  Accessing an item promotes it to the head. When capacity fills, the tail node is
-                  unlinked and evicted in constant time.
+                  {t.lab.cache.howItWorksBody2}
                 </p>
               </div>
             </div>
@@ -1021,19 +944,20 @@ export const TheLab: React.FC = () => {
               <div>
                 <div className="flex items-center gap-2 text-xs font-mono text-[#F2A77D] uppercase tracking-wider mb-1">
                   <Lock className="w-3.5 h-3.5" aria-hidden="true" />
-                  <span>LINUX SECURITY &amp; ACCESS CONTROL</span>
+                  <span>{t.lab.permissions.eyebrow}</span>
                 </div>
                 <h3 className="font-display text-xl sm:text-2xl font-bold text-[#F6F2E9] tracking-tight">
-                  UNIX File Permission Bitmask Calculator
+                  {t.lab.permissions.heading}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#CFCAC0] mt-1">
-                  Toggle read, write, and execute bits to inspect octal modes, symbolic notations,
-                  and 9-bit binary representations.
+                  {t.lab.permissions.intro}
                 </p>
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-mono text-[#9A94A8]">PRESETS:</span>
+                <span className="text-xs font-mono text-[#9A94A8]">
+                  {t.lab.permissions.presetsLabel}
+                </span>
                 <button
                   type="button"
                   onClick={() => applyPreset(7, 5, 5)}
@@ -1069,16 +993,18 @@ export const TheLab: React.FC = () => {
               {/* Owner Bits */}
               <div className="p-5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-[#242138]">
-                  <span className="font-bold text-[#F6F2E9] text-sm">OWNER (u)</span>
+                  <span className="font-bold text-[#F6F2E9] text-sm">
+                    {t.lab.permissions.ownerLabel}
+                  </span>
                   <span className="font-mono text-sm font-bold text-[#A8C5FF]">
-                    Octal: {octalOwner}
+                    {format(t.lab.permissions.octalLabel, { value: octalOwner })}
                   </span>
                 </div>
                 <div className="space-y-2">
                   {[
-                    { bit: 'r' as const, label: 'Read (r)', weight: 4 },
-                    { bit: 'w' as const, label: 'Write (w)', weight: 2 },
-                    { bit: 'x' as const, label: 'Execute (x)', weight: 1 },
+                    { bit: 'r' as const, label: t.lab.permissions.readLabel, weight: 4 },
+                    { bit: 'w' as const, label: t.lab.permissions.writeLabel, weight: 2 },
+                    { bit: 'x' as const, label: t.lab.permissions.executeLabel, weight: 1 },
                   ].map(({ bit, label, weight }) => (
                     <button
                       key={bit}
@@ -1100,16 +1026,18 @@ export const TheLab: React.FC = () => {
               {/* Group Bits */}
               <div className="p-5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-[#242138]">
-                  <span className="font-bold text-[#F6F2E9] text-sm">GROUP (g)</span>
+                  <span className="font-bold text-[#F6F2E9] text-sm">
+                    {t.lab.permissions.groupLabel}
+                  </span>
                   <span className="font-mono text-sm font-bold text-[#A8C5FF]">
-                    Octal: {octalGroup}
+                    {format(t.lab.permissions.octalLabel, { value: octalGroup })}
                   </span>
                 </div>
                 <div className="space-y-2">
                   {[
-                    { bit: 'r' as const, label: 'Read (r)', weight: 4 },
-                    { bit: 'w' as const, label: 'Write (w)', weight: 2 },
-                    { bit: 'x' as const, label: 'Execute (x)', weight: 1 },
+                    { bit: 'r' as const, label: t.lab.permissions.readLabel, weight: 4 },
+                    { bit: 'w' as const, label: t.lab.permissions.writeLabel, weight: 2 },
+                    { bit: 'x' as const, label: t.lab.permissions.executeLabel, weight: 1 },
                   ].map(({ bit, label, weight }) => (
                     <button
                       key={bit}
@@ -1131,16 +1059,18 @@ export const TheLab: React.FC = () => {
               {/* Others Bits */}
               <div className="p-5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-[#242138]">
-                  <span className="font-bold text-[#F6F2E9] text-sm">OTHERS (o)</span>
+                  <span className="font-bold text-[#F6F2E9] text-sm">
+                    {t.lab.permissions.othersLabel}
+                  </span>
                   <span className="font-mono text-sm font-bold text-[#F2A77D]">
-                    Octal: {octalOthers}
+                    {format(t.lab.permissions.octalLabel, { value: octalOthers })}
                   </span>
                 </div>
                 <div className="space-y-2">
                   {[
-                    { bit: 'r' as const, label: 'Read (r)', weight: 4 },
-                    { bit: 'w' as const, label: 'Write (w)', weight: 2 },
-                    { bit: 'x' as const, label: 'Execute (x)', weight: 1 },
+                    { bit: 'r' as const, label: t.lab.permissions.readLabel, weight: 4 },
+                    { bit: 'w' as const, label: t.lab.permissions.writeLabel, weight: 2 },
+                    { bit: 'x' as const, label: t.lab.permissions.executeLabel, weight: 1 },
                   ].map(({ bit, label, weight }) => (
                     <button
                       key={bit}
@@ -1163,7 +1093,7 @@ export const TheLab: React.FC = () => {
             <div className="p-4 sm:p-5 rounded-xl bg-[#0A0913] border border-[#242138] grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
               <div>
                 <span className="text-[11px] font-mono text-[#9A94A8] uppercase block mb-1">
-                  OCTAL NOTATION (CHMOD)
+                  {t.lab.permissions.octalHeader}
                 </span>
                 <span className="font-mono text-xl sm:text-2xl font-bold text-[#A8C5FF]">
                   chmod {octalString.slice(1)}
@@ -1172,7 +1102,7 @@ export const TheLab: React.FC = () => {
 
               <div>
                 <span className="text-[11px] font-mono text-[#9A94A8] uppercase block mb-1">
-                  SYMBOLIC STRING (LS -L)
+                  {t.lab.permissions.symbolicHeader}
                 </span>
                 <span className="font-mono text-xl sm:text-2xl font-bold text-[#F6F2E9]">
                   {symbolicString}
@@ -1181,7 +1111,7 @@ export const TheLab: React.FC = () => {
 
               <div>
                 <span className="text-[11px] font-mono text-[#9A94A8] uppercase block mb-1">
-                  9-BIT BINARY BITMASK
+                  {t.lab.permissions.binaryHeader}
                 </span>
                 <span className="font-mono text-xl sm:text-2xl font-bold text-[#F2A77D]">
                   {binaryString}
@@ -1191,16 +1121,10 @@ export const TheLab: React.FC = () => {
 
             <div className="p-4 rounded-xl bg-[#0A0913] border border-[#242138] text-xs space-y-2">
               <span className="font-mono text-[#A8C5FF] font-semibold block uppercase">
-                DEFENSIVE SECURITY &amp; LEAST PRIVILEGE:
+                {t.lab.permissions.securityTitle}
               </span>
               <p className="text-[#CFCAC0] leading-relaxed">
-                OpenSSH rejects private keys with{' '}
-                <code className="text-[#F2A77D] bg-[#12101F] px-1.5 py-0.5 rounded">chmod 777</code>{' '}
-                because any local user or service account on a shared Linux host could read the
-                key. Setting{' '}
-                <code className="text-[#A8C5FF] bg-[#12101F] px-1.5 py-0.5 rounded">600</code> or{' '}
-                <code className="text-[#A8C5FF] bg-[#12101F] px-1.5 py-0.5 rounded">400</code>{' '}
-                restricts read access solely to the owner.
+                {t.lab.permissions.securityBody}
               </p>
             </div>
           </div>

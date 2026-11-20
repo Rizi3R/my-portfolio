@@ -15,9 +15,9 @@
   --color-muted-light: #CFCAC0;
   --color-muted-subtle: #B5B0C2;
 
-  --font-display: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
-  --font-sans: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display: 'Bricolage Grotesque', 'Geist', 'Noto Sans SC', 'Noto Sans Tamil', system-ui, sans-serif;
+  --font-sans: 'Geist', 'Noto Sans SC', 'Noto Sans Tamil', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Noto Sans SC', 'Noto Sans Tamil', monospace;
 
   --radius-card: 1rem;
   --radius-control: 0.5rem;
@@ -54,6 +54,50 @@
   code, kbd, samp, pre, .font-mono {
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
+  }
+
+  /* Script-appropriate typography adjustments for Simplified Chinese and Tamil */
+  html[lang="zh-Hans-MY"] body {
+    font-family: 'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+    line-height: 1.7;
+  }
+
+  html[lang="zh-Hans-MY"] h1,
+  html[lang="zh-Hans-MY"] h2,
+  html[lang="zh-Hans-MY"] h3,
+  html[lang="zh-Hans-MY"] .font-display {
+    font-family: 'Bricolage Grotesque', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+    line-height: 1.3;
+  }
+
+  html[lang="zh-Hans-MY"] .tracking-wider,
+  html[lang="zh-Hans-MY"] .tracking-widest {
+    letter-spacing: 0.02em;
+  }
+
+  html[lang="ta-MY"] body {
+    font-family: 'Geist', 'Noto Sans Tamil', 'Latha', 'Nirmala UI', system-ui, sans-serif;
+    line-height: 1.75;
+  }
+
+  html[lang="ta-MY"] h1,
+  html[lang="ta-MY"] h2,
+  html[lang="ta-MY"] h3,
+  html[lang="ta-MY"] .font-display {
+    font-family: 'Bricolage Grotesque', 'Noto Sans Tamil', 'Latha', 'Nirmala UI', system-ui, sans-serif;
+    line-height: 1.35;
+    text-wrap: wrap;
+  }
+
+  html[lang="ta-MY"] .tracking-wider,
+  html[lang="ta-MY"] .tracking-widest,
+  html[lang="ta-MY"] .tracking-tight {
+    letter-spacing: normal;
+  }
+
+  html[lang="ta-MY"] .uppercase,
+  html[lang="zh-Hans-MY"] .uppercase {
+    text-transform: none;
   }
 }
 

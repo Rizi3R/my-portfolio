@@ -21,7 +21,8 @@ import {
   Layers,
   AlertCircle,
 } from 'lucide-react';
-import { PROFILE, STRATA, NODES, CASE_STUDIES, EXPERIENCES, StratumType } from '../data/universeContent';
+import type { StratumType } from '../data/universeContent';
+import { useI18n } from '../i18n';
 import { audioFx } from '../utils/audioFx';
 import { copyTextToClipboard } from '../utils/clipboard';
 import { useDialogFocusTrap } from '../utils/useDialogFocusTrap';
@@ -45,6 +46,7 @@ interface PaletteAction {
   category: 'Navigation' | 'Perspectives & Tools' | 'Skills' | 'Actions';
   label: string;
   sublabel?: string;
+  keywords?: string;
   shortcut?: string;
   icon: React.ReactNode;
   perform: () => void;
@@ -62,6 +64,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   isAudioMuted,
   onToggleAudio,
 }) => {
+  const { t, content, format } = useI18n();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle');
@@ -80,7 +83,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   }, [isOpen]);
 
   const copyEmail = async () => {
-    const ok = await copyTextToClipboard(PROFILE.email);
+    const ok = await copyTextToClipboard(content.profile.email);
     if (ok) {
       setCopyStatus('copied');
       audioFx.playSuccess();
@@ -101,8 +104,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-home',
         category: 'Navigation',
-        label: 'Home',
-        sublabel: 'Overview, intro, and hero',
+        label: t.commandPalette.actions.home.label,
+        sublabel: t.commandPalette.actions.home.sublabel,
+        keywords: 'home overview intro hero top',
         shortcut: 'H',
         icon: <Home className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
@@ -118,8 +122,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-projects',
         category: 'Navigation',
-        label: 'Work (Case Studies)',
-        sublabel: `Selected Work & ${CASE_STUDIES.length} support case studies`,
+        label: t.commandPalette.actions.work.label,
+        sublabel: format(t.commandPalette.actions.work.sublabel, {
+          count: content.caseStudies.length,
+        }),
+        keywords: 'work projects case studies lark xilnex',
         icon: <FolderGit2 className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('featured-work');
@@ -129,8 +136,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-experience',
         category: 'Navigation',
-        label: 'Experience',
-        sublabel: `Work & diploma internship timeline (${EXPERIENCES.length} entries)`,
+        label: t.commandPalette.actions.experience.label,
+        sublabel: format(t.commandPalette.actions.experience.sublabel, {
+          count: content.experiences.length,
+        }),
+        keywords: 'experience timeline employment emart24 hwc',
         icon: <Briefcase className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('experience');
@@ -140,8 +150,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-skills',
         category: 'Navigation',
-        label: 'Skills',
-        sublabel: 'Core capabilities across 4 groups',
+        label: t.commandPalette.actions.skills.label,
+        sublabel: t.commandPalette.actions.skills.sublabel,
+        keywords: 'skills capabilities',
         icon: <Sparkles className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('constellation');
@@ -151,8 +162,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-credentials',
         category: 'Navigation',
-        label: 'Education & Credentials',
-        sublabel: 'UiTM Diploma, AWS Certified Cloud Practitioner, and UiPath study',
+        label: t.commandPalette.actions.credentials.label,
+        sublabel: t.commandPalette.actions.credentials.sublabel,
+        keywords: 'education credentials uitm aws uipath diploma',
         icon: <BookOpen className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('credentials');
@@ -162,8 +174,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-workbenches',
         category: 'Navigation',
-        label: 'Interactive Lab',
-        sublabel: 'Portfolio Shell, Skill Atlas, Computing Lab & Beep to Receipt',
+        label: t.commandPalette.actions.workbenches.label,
+        sublabel: t.commandPalette.actions.workbenches.sublabel,
+        keywords: 'interactive lab shell atlas trace computing',
         icon: <Layers className="w-4 h-4 text-[#F2A77D]" />,
         perform: () => {
           onNavigateSection('workbenches');
@@ -173,8 +186,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-contact',
         category: 'Navigation',
-        label: 'Contact',
-        sublabel: 'Direct email, LinkedIn, and résumé access',
+        label: t.commandPalette.actions.contact.label,
+        sublabel: t.commandPalette.actions.contact.sublabel,
+        keywords: 'contact email linkedin resume',
         icon: <Phone className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('contact');
@@ -184,8 +198,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-resume',
         category: 'Navigation',
-        label: 'View Résumé',
-        sublabel: 'Open printable résumé preview',
+        label: t.commandPalette.actions.resume.label,
+        sublabel: t.commandPalette.actions.resume.sublabel,
+        keywords: 'resume cv print pdf',
         shortcut: 'R',
         icon: <FileText className="w-4 h-4 text-[#F2A77D]" />,
         perform: () => {
@@ -195,8 +210,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'tool-terminal',
         category: 'Perspectives & Tools',
-        label: 'Open Portfolio Shell',
-        sublabel: 'Run commands: help, about, skills, experience, projects',
+        label: t.commandPalette.actions.terminal.label,
+        sublabel: t.commandPalette.actions.terminal.sublabel,
+        keywords: 'shell terminal cli portfolio shell',
         shortcut: 'T',
         icon: <Terminal className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
@@ -206,8 +222,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'view-trace',
         category: 'Perspectives & Tools',
-        label: 'Beep to Receipt (Illustrative Walkthrough)',
-        sublabel: 'Educational model of how a retail checkout works across 6 layers',
+        label: t.commandPalette.actions.trace.label,
+        sublabel: t.commandPalette.actions.trace.sublabel,
+        keywords: 'beep to receipt walkthrough trace layers',
         icon: <Compass className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onSelectView('trace');
@@ -217,8 +234,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'view-atlas',
         category: 'Perspectives & Tools',
-        label: 'Full Skill Atlas',
-        sublabel: `${NODES.length} capabilities across 4 tracks`,
+        label: t.commandPalette.actions.atlas.label,
+        sublabel: format(t.commandPalette.actions.atlas.sublabel, {
+          count: content.nodes.length,
+        }),
+        keywords: 'skill atlas graph network',
         icon: <Network className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onSelectView('atlas');
@@ -228,8 +248,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'view-plain',
         category: 'Perspectives & Tools',
-        label: 'Printable Summary',
-        sublabel: 'Unified high-contrast printable résumé view',
+        label: t.commandPalette.actions.plain.label,
+        sublabel: t.commandPalette.actions.plain.sublabel,
+        keywords: 'printable summary plain view',
         icon: <FileText className="w-4 h-4 text-[#CFCAC0]" />,
         perform: () => {
           onSelectView('plain');
@@ -239,19 +260,24 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'view-receipt',
         category: 'Perspectives & Tools',
-        label: 'Summary Receipt',
-        sublabel: 'Optional printable experience and education receipt view',
+        label: t.commandPalette.actions.receipt.label,
+        sublabel: t.commandPalette.actions.receipt.sublabel,
+        keywords: 'summary receipt printable',
         icon: <Receipt className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onSelectView('receipt');
           onClose();
         },
       },
-      ...STRATA.map((st, i) => ({
+      ...content.strata.map((st, i) => ({
         id: `stratum-${st.id}`,
         category: 'Perspectives & Tools' as const,
-        label: `Layer 0${i + 1}: ${st.title}`,
+        label: format(t.commandPalette.actions.layerPrefix, {
+          index: i + 1,
+          title: st.title,
+        }),
         sublabel: st.subtitle,
+        keywords: `layer 0${i + 1} ${st.id}`,
         icon: <span className="text-xs font-mono font-bold text-[#A8C5FF]">0{i + 1}</span>,
         perform: () => {
           onJumpToStratum(st.id);
@@ -263,11 +289,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         category: 'Actions',
         label:
           copyStatus === 'copied'
-            ? 'Email Copied!'
+            ? t.commandPalette.actions.copyEmail.copied
             : copyStatus === 'error'
-            ? `Copy failed automatically (${PROFILE.email})`
-            : `Copy Email (${PROFILE.email})`,
-        sublabel: 'Copy contact email to clipboard',
+            ? format(t.commandPalette.actions.copyEmail.failed, { email: content.profile.email })
+            : format(t.commandPalette.actions.copyEmail.label, { email: content.profile.email }),
+        sublabel: t.commandPalette.actions.copyEmail.sublabel,
+        keywords: 'copy email address clipboard',
         shortcut: 'C',
         icon:
           copyStatus === 'copied' ? (
@@ -282,8 +309,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'act-toggle-audio',
         category: 'Actions',
-        label: isAudioMuted ? 'Enable Audio Cues' : 'Mute Audio Cues',
-        sublabel: 'Subtle user-triggered sound cues in lab & shell',
+        label: isAudioMuted
+          ? t.commandPalette.actions.toggleAudio.enable
+          : t.commandPalette.actions.toggleAudio.mute,
+        sublabel: t.commandPalette.actions.toggleAudio.sublabel,
+        keywords: 'audio sound cues mute enable',
         shortcut: 'M',
         icon: isAudioMuted ? (
           <VolumeX className="w-4 h-4 text-[#B5B0C2]" />
@@ -295,12 +325,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'act-linkedin',
         category: 'Actions',
-        label: 'Open LinkedIn Profile',
-        sublabel: 'External LinkedIn profile',
+        label: t.commandPalette.actions.linkedIn.label,
+        sublabel: t.commandPalette.actions.linkedIn.sublabel,
+        keywords: 'linkedin external profile',
         icon: <ExternalLink className="w-4 h-4 text-[#CFCAC0]" />,
         perform: () => {
           const anchor = document.createElement('a');
-          anchor.href = PROFILE.linkedIn;
+          anchor.href = content.profile.linkedIn;
           anchor.target = '_blank';
           anchor.rel = 'noopener noreferrer';
           anchor.click();
@@ -309,16 +340,17 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [copyStatus, isAudioMuted]
+    [copyStatus, isAudioMuted, t, content]
   );
 
   const nodeActions: PaletteAction[] = useMemo(
     () =>
-      NODES.map((node) => ({
+      content.nodes.map((node) => ({
         id: `node-${node.id}`,
         category: 'Skills',
-        label: `${node.label}`,
-        sublabel: `${node.category} · ${node.summary}`,
+        label: node.label,
+        sublabel: `${content.constellationCategories[node.category]} · ${node.summary}`,
+        keywords: `${node.category} ${node.id}`,
         icon: <span className="text-xs font-mono text-[#A8C5FF]">◆</span>,
         perform: () => {
           onSelectNode(node.id);
@@ -326,7 +358,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         },
       })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [content]
   );
 
   const allActions = useMemo(() => [...baseActions, ...nodeActions], [baseActions, nodeActions]);
@@ -334,13 +366,17 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   const filteredActions = useMemo(() => {
     if (!query.trim()) return baseActions;
     const q = query.toLowerCase();
-    return allActions.filter(
-      (act) =>
+    return allActions.filter((act) => {
+      const localizedCat = t.commandPalette.categories[act.category] || act.category;
+      return (
         act.label.toLowerCase().includes(q) ||
         (act.sublabel && act.sublabel.toLowerCase().includes(q)) ||
+        (act.keywords && act.keywords.toLowerCase().includes(q)) ||
+        localizedCat.toLowerCase().includes(q) ||
         act.category.toLowerCase().includes(q)
-    );
-  }, [query, allActions, baseActions]);
+      );
+    });
+  }, [query, allActions, baseActions, t.commandPalette.categories]);
 
   useEffect(() => {
     setSelectedIndex(0);
@@ -374,7 +410,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label="Command navigation palette"
+      aria-label={t.commandPalette.dialogLabel}
     >
       <div
         ref={dialogRef}
@@ -389,16 +425,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Jump to Work, Experience, Skills, Credentials, Interactive Lab, Contact..."
+            placeholder={t.commandPalette.searchPlaceholder}
             className="w-full py-3.5 bg-transparent text-[#F6F2E9] placeholder-[#B5B0C2] focus:outline-none text-xs sm:text-sm"
-            aria-label="Search sections, commands, or skills"
+            aria-label={t.commandPalette.searchInputAriaLabel}
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery('')}
               className="text-[#B5B0C2] hover:text-[#F6F2E9] p-1.5 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
-              aria-label="Clear search"
+              aria-label={t.commandPalette.clearSearch}
             >
               <X className="w-4 h-4" />
             </button>
@@ -407,7 +443,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             type="button"
             onClick={onClose}
             className="ml-1 text-[#B5B0C2] hover:text-[#F6F2E9] p-1.5 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
-            aria-label="Close command palette"
+            aria-label={t.commandPalette.closeLabel}
           >
             <span className="font-mono text-xs">Esc</span>
           </button>
@@ -416,7 +452,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         <div className="max-h-80 overflow-y-auto divide-y divide-[#242138]" role="listbox">
           {filteredActions.length === 0 ? (
             <div className="p-8 text-center text-[#B5B0C2]">
-              No matching destination found for "{query}".
+              {format(t.commandPalette.emptyState, { query })}
             </div>
           ) : (
             filteredActions.map((action, idx) => {
@@ -440,7 +476,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     <div className="truncate">
                       <div className="font-semibold text-[#F6F2E9] truncate flex items-center gap-2">
                         {isSelected && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#F2A77D]" aria-hidden="true" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#F2A77D] shrink-0" aria-hidden="true" />
                         )}
                         <span>{action.label}</span>
                       </div>
@@ -460,13 +496,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           )}
         </div>
 
-        <div className="px-4 py-2.5 border-t border-[#242138] bg-[#12101F] flex items-center justify-between text-xs font-mono text-[#B5B0C2]">
+        <div className="px-4 py-2.5 border-t border-[#242138] bg-[#12101F] flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[#B5B0C2]">
           <div className="flex items-center gap-3">
-            <span>↑↓ Navigate</span>
-            <span>↵ Open</span>
-            <span>Esc Close</span>
+            <span>↑↓ {t.commandPalette.footerNavigate}</span>
+            <span>↵ {t.commandPalette.footerOpen}</span>
+            <span>Esc {t.commandPalette.footerClose}</span>
           </div>
-          <span className="text-[#A8C5FF]">{NODES.length} Skills · ⌘K / Ctrl+K</span>
+          <span className="text-[#A8C5FF]">
+            {format(t.commandPalette.footerSkillsCount, { count: content.nodes.length })}
+          </span>
         </div>
       </div>
     </div>

@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
-  STRATA,
-  NODES,
-  CASE_STUDIES,
   StratumType,
   PROFILE,
-  LEARNING_ENTRIES,
   EVIDENCE_META,
   EvidenceStatus,
+  ConstellationCategory,
 } from '../data/universeContent';
+import { useI18n } from '../i18n';
 import {
   Scan,
   Cpu,
@@ -40,9 +38,25 @@ export const TraceView: React.FC<TraceViewProps> = ({
   onOpenLab,
   onOpenReceipt,
 }) => {
+  const { t, content, format } = useI18n();
   const [activeStratum, setActiveStratum] = useState<StratumType>('hardware');
   const [expandedCaseStudy, setExpandedCaseStudy] = useState<string | null>(null);
   const [showSampleReceipt, setShowSampleReceipt] = useState(false);
+
+  const localizedStrata = content.strata;
+
+  const localizedNodes = useMemo(
+    () =>
+      content.nodes.map((node) => ({
+        ...node,
+        categoryLabel:
+          content.constellationCategories[node.category as ConstellationCategory] ?? node.category,
+      })),
+    [content.nodes, content.constellationCategories]
+  );
+
+  const localizedCaseStudies = content.caseStudies;
+  const localizedLearningEntries = content.learning;
 
   const stratumIcons: Record<StratumType, React.ReactNode> = {
     hardware: <Scan className="w-5 h-5 text-[#A8C5FF]" />,
@@ -55,6 +69,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
 
   const getStatusLabel = (status: EvidenceStatus) => {
     const meta = EVIDENCE_META[status];
+    const localizedMeta = content.evidenceMeta[status];
     const colorClass =
       status === 'learning'
         ? 'text-[#F2A77D] border-[#F2A77D]/40 bg-[#F2A77D]/10'
@@ -66,7 +81,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
         className={`inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded border font-medium shrink-0 ${colorClass}`}
       >
         <span aria-hidden="true">{meta.glyph}</span>
-        <span>{meta.label}</span>
+        <span>{localizedMeta.label}</span>
       </span>
     );
   };
@@ -81,21 +96,21 @@ export const TraceView: React.FC<TraceViewProps> = ({
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
           <div className="max-w-3xl">
             <p className="text-xs font-mono uppercase tracking-wider text-[#A8C5FF] mb-3">
-              {PROFILE.displayName} · Educational Walkthrough
+              {format(t.trace.eyebrow, { name: PROFILE.displayName })}
             </p>
 
             <h1
               id="candidate-intro-heading"
               className="font-display text-2xl sm:text-4xl lg:text-5xl font-bold text-[#F6F2E9] tracking-tight leading-tight mb-4"
             >
-              Beep to Receipt:{' '}
+              {t.trace.titleMain}{' '}
               <span className="text-[#A8C5FF] font-normal">
-                an educational walkthrough across 6 layers.
+                {t.trace.titleSub}
               </span>
             </h1>
 
             <p className="text-sm sm:text-base text-[#CFCAC0] font-sans leading-relaxed max-w-2xl mb-6">
-              {PROFILE.intro}
+              {content.profile.intro}
             </p>
 
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-[#9A94A8]">
@@ -106,31 +121,31 @@ export const TraceView: React.FC<TraceViewProps> = ({
               <span aria-hidden="true">·</span>
               <span className="inline-flex items-center gap-1.5">
                 <Award className="w-3.5 h-3.5 text-[#A8C5FF]" aria-hidden="true" />
-                <span>AWS Certified Cloud Practitioner</span>
+                <span>{t.hero.certificationName}</span>
               </span>
               <span aria-hidden="true">·</span>
               <span className="inline-flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-[#9A94A8]" aria-hidden="true" />
-                <span>{PROFILE.location}</span>
+                <span>{content.profile.location}</span>
               </span>
             </div>
           </div>
 
           <div className="bg-[#12101F] border border-[#242138] rounded-2xl p-5 font-mono text-xs max-w-xs shrink-0 self-start">
             <div className="flex items-center justify-between text-[#9A94A8] text-[10px] uppercase mb-2">
-              <span>Output View</span>
-              <span className="text-[#A8C5FF]">PRINTABLE</span>
+              <span>{t.trace.outputView}</span>
+              <span className="text-[#A8C5FF]">{t.trace.printable}</span>
             </div>
-            <div className="text-[#F6F2E9] font-bold mb-1">Summary Receipt</div>
+            <div className="text-[#F6F2E9] font-bold mb-1">{t.trace.receiptTitle}</div>
             <p className="text-[#CFCAC0] font-sans text-xs leading-relaxed mb-3">
-              Full work history, education, credentials, and contact links formatted as a printable receipt view.
+              {t.trace.receiptDesc}
             </p>
             <button
               type="button"
               onClick={() => onOpenReceipt?.()}
               className="inline-flex items-center gap-1.5 text-[#F2A77D] hover:text-[#F6F2E9] font-bold transition-colors cursor-pointer"
             >
-              <span>Open Summary Receipt</span>
+              <span>{t.trace.openSummaryReceipt}</span>
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </button>
           </div>
@@ -140,7 +155,8 @@ export const TraceView: React.FC<TraceViewProps> = ({
         <div className="mt-8 p-4 rounded-xl bg-[#12101F] border border-[#A8C5FF]/40 flex items-start gap-3 text-xs sm:text-sm text-[#E6E1D6]">
           <Info className="w-4 h-4 text-[#A8C5FF] shrink-0 mt-0.5" aria-hidden="true" />
           <p className="leading-relaxed">
-            <strong className="text-[#F6F2E9]">Illustrative Walkthrough:</strong> The six layers below provide an educational model of how a retail barcode scan can travel across hardware, software, networks, and people. Not every transaction system uses this exact sequence, and simulated examples do not depict any employer’s production architecture.
+            <strong className="text-[#F6F2E9]">{t.trace.disclaimerTitle}</strong>{' '}
+            {t.trace.disclaimerBody}
           </p>
         </div>
       </section>
@@ -150,34 +166,34 @@ export const TraceView: React.FC<TraceViewProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-4">
           <div>
             <div className="text-xs font-mono uppercase tracking-wider text-[#A8C5FF] font-semibold mb-1">
-              6 Illustrative Computing Layers
+              {t.trace.layersEyebrow}
             </div>
             <h2 className="font-display text-xl sm:text-2xl font-bold text-[#F6F2E9]">
-              From Scan Input to Printed Receipt
+              {t.trace.layersHeading}
             </h2>
           </div>
           <p className="text-[#9A94A8] font-mono text-xs max-w-md text-left sm:text-right">
-            Select a layer below to inspect conceptual steps and related areas from my experience.
+            {t.trace.layersHelp}
           </p>
         </div>
 
         <nav
-          aria-label="Checkout layer step navigation"
+          aria-label={t.trace.navAriaLabel}
           className="flex items-center gap-2 overflow-x-auto pb-2 pt-1 font-mono text-xs"
         >
-          {STRATA.map((st, i) => (
+          {localizedStrata.map((st, i) => (
             <a
               key={st.id}
               href={`#stratum-${st.id}`}
               onClick={() => setActiveStratum(st.id)}
-              className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border transition-colors ${
+              className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border transition-colors whitespace-nowrap ${
                 activeStratum === st.id
                   ? 'bg-[#12101F] text-[#A8C5FF] border-[#A8C5FF] font-semibold'
                   : 'bg-[#0A0913] text-[#9A94A8] border-[#242138] hover:text-[#F6F2E9] hover:border-[#A8C5FF]/40'
               }`}
             >
               <span className="text-[10px] text-[#9A94A8]">0{i + 1}.</span>
-              <span>{st.title.split(' ')[0]}</span>
+              <span>{st.title}</span>
             </a>
           ))}
         </nav>
@@ -185,9 +201,9 @@ export const TraceView: React.FC<TraceViewProps> = ({
 
       {/* The 6 Vertical Strata */}
       <div className="relative border-l border-[#242138] ml-3 sm:ml-8 pl-5 sm:pl-10 space-y-16">
-        {STRATA.map((st, idx) => {
-          const matchingNodes = NODES.filter((n) => n.stratum === st.id);
-          const matchingCaseStudies = CASE_STUDIES.filter((cs) => cs.stratumFocus === st.id);
+        {localizedStrata.map((st, idx) => {
+          const matchingNodes = localizedNodes.filter((n) => n.stratum === st.id);
+          const matchingCaseStudies = localizedCaseStudies.filter((cs) => cs.stratumFocus === st.id);
 
           return (
             <section
@@ -210,7 +226,9 @@ export const TraceView: React.FC<TraceViewProps> = ({
 
               <div className="mb-6">
                 <div className="flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#9A94A8] mb-1">
-                  <span className="font-bold text-[#F2A77D]">Layer {st.index}</span>
+                  <span className="font-bold text-[#F2A77D]">
+                    {format(t.trace.layerPrefix, { index: st.index })}
+                  </span>
                   <span aria-hidden="true">·</span>
                   <span className="text-[#A8C5FF]">{st.subtitle}</span>
                 </div>
@@ -229,10 +247,10 @@ export const TraceView: React.FC<TraceViewProps> = ({
               <div className="bg-[#12101F] border border-[#242138] rounded-2xl p-4 sm:p-6 mb-8 relative">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#242138] pb-3 mb-4 text-xs font-mono text-[#9A94A8]">
                   <span className="text-[#F6F2E9] font-semibold">
-                    Layer 0{idx + 1} · {st.exampleStage}
+                    {format(t.trace.layerPrefix, { index: `0${idx + 1}` })} · {st.exampleStage}
                   </span>
                   <span className="px-2 py-0.5 rounded bg-[#0A0913] border border-[#242138] text-[#A8C5FF] text-[10px] uppercase font-bold">
-                    ILLUSTRATIVE CONCEPT
+                    {t.trace.illustrativeConcept}
                   </span>
                 </div>
 
@@ -258,7 +276,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
                   {st.id === 'network' && onOpenLab && (
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-[11px] bg-[#0A0913] p-3 rounded-xl border border-[#242138]">
                       <span className="text-[#CFCAC0]">
-                        Interactive Simulation: Inspect sample packet hops in the browser
+                        {t.trace.interactiveSimPrompt}
                       </span>
                       <button
                         type="button"
@@ -266,7 +284,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
                         className="text-[#A8C5FF] hover:text-[#F6F2E9] flex items-center gap-1.5 text-[11px] font-bold uppercase cursor-pointer"
                       >
                         <FlaskConical className="w-3.5 h-3.5 text-[#F2A77D]" aria-hidden="true" />
-                        <span>Open Computing Lab</span>
+                        <span>{t.trace.openComputingLab}</span>
                         <ExternalLink className="w-3 h-3" aria-hidden="true" />
                       </button>
                     </div>
@@ -278,8 +296,8 @@ export const TraceView: React.FC<TraceViewProps> = ({
               {matchingNodes.length > 0 && (
                 <div className="mb-8">
                   <div className="text-xs font-mono text-[#9A94A8] uppercase tracking-wider mb-3 flex items-center justify-between">
-                    <span>Related Skills in This Layer ({matchingNodes.length})</span>
-                    <span className="text-[11px] hidden sm:inline">Select to open in Skill Atlas</span>
+                    <span>{format(t.trace.relatedSkillsLabel, { count: matchingNodes.length })}</span>
+                    <span className="text-[11px] hidden sm:inline">{t.trace.selectToOpenAtlas}</span>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -303,7 +321,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
                           {node.usage && (
                             <div className="text-[11px] font-sans text-[#CFCAC0] bg-[#0A0913] p-2.5 rounded-lg border border-[#242138] mb-3 leading-snug">
                               <span className="font-mono text-[10px] text-[#A8C5FF] uppercase font-semibold block mb-0.5">
-                                Where Applied:
+                                {t.trace.whereApplied}
                               </span>
                               {node.usage}
                             </div>
@@ -311,9 +329,9 @@ export const TraceView: React.FC<TraceViewProps> = ({
                         </div>
 
                         <div className="w-full flex items-center justify-between text-[11px] font-mono text-[#9A94A8] pt-2 border-t border-[#242138]">
-                          <span className="uppercase">{node.category}</span>
+                          <span className="uppercase">{node.categoryLabel}</span>
                           <span className="text-[#A8C5FF] group-hover:translate-x-0.5 transition-transform flex items-center gap-1 font-bold">
-                            Inspect <span>→</span>
+                            {t.trace.inspect} <span>→</span>
                           </span>
                         </div>
                       </button>
@@ -326,7 +344,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
               {matchingCaseStudies.length > 0 && (
                 <div className="space-y-4">
                   <div className="text-xs font-mono uppercase tracking-wider text-[#F2A77D] font-semibold">
-                    Related Case Study
+                    {t.trace.relatedCaseStudy}
                   </div>
 
                   {matchingCaseStudies.map((cs) => {
@@ -355,7 +373,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
                             </p>
                           </div>
                           <span className="text-[#A8C5FF] p-1 font-mono text-xs flex items-center gap-1 self-center shrink-0">
-                            <span>{isExpanded ? 'Less' : 'Details'}</span>
+                            <span>{isExpanded ? t.trace.less : t.trace.details}</span>
                             {isExpanded ? (
                               <ChevronUp className="w-4 h-4" aria-hidden="true" />
                             ) : (
@@ -369,7 +387,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
                             {cs.workflowSteps && cs.workflowSteps.length > 0 && (
                               <div className="bg-[#0A0913] p-3 rounded-xl border border-[#242138]">
                                 <div className="font-mono font-semibold text-[#A8C5FF] uppercase text-[11px] mb-1.5">
-                                  Integration Workflow
+                                  {t.trace.workflowLabel}
                                 </div>
                                 <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-[#F6F2E9]">
                                   {cs.workflowSteps.map((step, stepIdx) => (
@@ -388,13 +406,13 @@ export const TraceView: React.FC<TraceViewProps> = ({
 
                             <div>
                               <div className="font-mono font-semibold text-[#A8C5FF] uppercase text-xs mb-1">
-                                My Responsibility
+                                {t.trace.myResponsibility}
                               </div>
                               <p>{cs.responsibility}</p>
                             </div>
                             <div>
                               <div className="font-mono font-semibold text-[#A8C5FF] uppercase text-xs mb-1">
-                                What I Did
+                                {t.trace.whatIDid}
                               </div>
                               <ul className="list-disc pl-5 space-y-1">
                                 {cs.whatIDid.map((act, i) => (
@@ -427,18 +445,18 @@ export const TraceView: React.FC<TraceViewProps> = ({
       <section aria-labelledby="learning-heading" className="mt-16 pt-12 border-t border-[#242138]">
         <div className="mb-6">
           <div className="text-xs font-mono uppercase tracking-wider text-[#F2A77D] mb-2">
-            Active Learning
+            {t.trace.activeLearning}
           </div>
           <h3 id="learning-heading" className="font-display text-xl sm:text-2xl font-bold text-[#F6F2E9]">
-            Currently Exploring
+            {t.trace.currentlyExploring}
           </h3>
           <p className="text-xs sm:text-sm text-[#CFCAC0] font-sans mt-1 max-w-2xl leading-relaxed">
-            Areas I am actively studying outside production experience claims.
+            {t.trace.activeLearningDesc}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {LEARNING_ENTRIES.map((entry) => (
+          {localizedLearningEntries.map((entry) => (
             <div
               key={entry.id}
               className="p-4 rounded-xl bg-[#12101F] border border-[#242138] flex flex-col justify-between"
@@ -463,10 +481,10 @@ export const TraceView: React.FC<TraceViewProps> = ({
       <div className="mt-20 pt-10 border-t border-[#242138] text-center">
         <div className="inline-block p-6 rounded-2xl bg-[#12101F] border border-[#242138] max-w-xl mx-auto w-full">
           <div className="text-xs font-mono text-[#A8C5FF] uppercase tracking-wider mb-2">
-            Walkthrough Complete
+            {t.trace.walkthroughComplete}
           </div>
           <div className="text-[#F6F2E9] font-sans text-sm mb-5">
-            Scroll down or jump directly to the printable experience summary receipt.
+            {t.trace.receiptCtaDesc}
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <button
@@ -475,7 +493,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
               className="inline-flex items-center justify-center gap-2 min-h-[44px] px-5 py-2.5 rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap shrink-0"
             >
               <Receipt className="w-4 h-4" aria-hidden="true" />
-              <span>View Summary Receipt</span>
+              <span>{t.trace.viewSummaryReceipt}</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </button>
 
@@ -487,7 +505,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
               className="print:hidden inline-flex items-center justify-center gap-2 min-h-[44px] px-4 py-2.5 rounded-lg bg-[#0A0913] hover:bg-[#19162B] text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/40 font-mono text-xs uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
             >
               <Printer className="w-3.5 h-3.5 text-[#F2A77D]" aria-hidden="true" />
-              <span>{showSampleReceipt ? 'Hide Test Receipt' : 'Print Test Receipt'}</span>
+              <span>{showSampleReceipt ? t.trace.hideTestReceipt : t.trace.showTestReceipt}</span>
             </button>
           </div>
 
@@ -498,13 +516,13 @@ export const TraceView: React.FC<TraceViewProps> = ({
             >
               <div className="text-center pb-3 border-b border-dashed border-[#191723]/35">
                 <div className="text-[10px] font-bold uppercase tracking-widest text-[#474457]">
-                  Sample receipt
+                  {t.trace.sampleReceiptHeader}
                 </div>
                 <div className="font-bold text-sm tracking-tight mt-0.5">
-                  COUNTER POS · TEST #042
+                  {t.trace.sampleReceiptPos}
                 </div>
                 <div className="text-[11px] text-[#474457]">
-                  Illustrative Walkthrough Items
+                  {t.trace.sampleReceiptSub}
                 </div>
               </div>
 
@@ -522,22 +540,22 @@ export const TraceView: React.FC<TraceViewProps> = ({
                   <span className="font-semibold">RM 2.50</span>
                 </div>
                 <div className="flex justify-between gap-2 text-[#474457]">
-                  <span>SAMPLE PROMO (-10%)</span>
+                  <span>{t.trace.samplePromo}</span>
                   <span>-RM 2.19</span>
                 </div>
               </div>
 
               <div className="py-3 space-y-1 border-b border-dashed border-[#191723]/35 text-[11px]">
                 <div className="flex justify-between gap-2">
-                  <span>SUBTOTAL</span>
+                  <span>{t.trace.sampleSubtotal}</span>
                   <span>RM 19.71</span>
                 </div>
                 <div className="flex justify-between gap-2 font-bold text-xs pt-0.5">
-                  <span>TOTAL</span>
+                  <span>{t.trace.sampleTotal}</span>
                   <span>RM 19.71</span>
                 </div>
                 <div className="text-[10px] text-[#474457] pt-1">
-                  TENDER: E-WALLET TEST · AUTH #0042
+                  {t.trace.sampleTender}
                 </div>
               </div>
 
@@ -547,7 +565,7 @@ export const TraceView: React.FC<TraceViewProps> = ({
                   aria-hidden="true"
                 />
                 <div className="text-[10px] text-[#474457] leading-snug">
-                  Sample receipt · Fictional walkthrough output only
+                  {t.trace.sampleFooter}
                 </div>
               </div>
             </div>

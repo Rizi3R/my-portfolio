@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PROFILE } from '../data/universeContent';
+import { useI18n } from '../i18n';
 import { ArrowUp, Mail, FileText, Command } from 'lucide-react';
 import { LinkedInIcon } from './LinkedInIcon';
 import { ActiveView } from './Navbar';
@@ -15,6 +15,7 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenCommandPalette,
   onChangeView,
 }) => {
+  const { t, content } = useI18n();
   const [showBackToTop, setShowBackToTop] = useState(false);
   const currentYear = new Date().getFullYear();
 
@@ -36,33 +37,33 @@ export const Footer: React.FC<FooterProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
           <span className="font-display text-sm font-bold text-[#F6F2E9]">
-            {PROFILE.displayName}
+            {content.profile.displayName}
           </span>
           <span aria-hidden="true" className="text-[#B5B0C2]">
             ·
           </span>
           <span>
-            © {currentYear} {PROFILE.fullName}
+            © {currentYear} {content.profile.fullName}
           </span>
         </div>
 
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <a
-            href={`mailto:${PROFILE.email}`}
+            href={`mailto:${content.profile.email}`}
             className="inline-flex items-center gap-1.5 text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
           >
             <Mail className="w-3.5 h-3.5 text-[#A8C5FF]" aria-hidden="true" />
-            <span>Email</span>
+            <span>{t.footer.email}</span>
           </a>
 
           <a
-            href={PROFILE.linkedIn}
+            href={content.profile.linkedIn}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
           >
             <LinkedInIcon className="w-3.5 h-3.5 text-[#A8C5FF]" />
-            <span>LinkedIn</span>
+            <span>{t.footer.linkedIn}</span>
           </a>
 
           <button
@@ -71,7 +72,7 @@ export const Footer: React.FC<FooterProps> = ({
             className="inline-flex items-center gap-1.5 text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
           >
             <FileText className="w-3.5 h-3.5 text-[#F2A77D]" aria-hidden="true" />
-            <span>Résumé</span>
+            <span>{t.footer.resume}</span>
           </button>
 
           <button
@@ -79,7 +80,7 @@ export const Footer: React.FC<FooterProps> = ({
             onClick={() => onChangeView('plain')}
             className="inline-flex items-center gap-1.5 text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
           >
-            <span>Printable Summary</span>
+            <span>{t.footer.printableSummary}</span>
           </button>
 
           <button
@@ -96,9 +97,9 @@ export const Footer: React.FC<FooterProps> = ({
               type="button"
               onClick={scrollToTop}
               className="inline-flex items-center gap-1 text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
-              aria-label="Back to top"
+              aria-label={t.accessibility.backToTop}
             >
-              <span>Top</span>
+              <span>{t.footer.top}</span>
               <ArrowUp className="w-3.5 h-3.5" aria-hidden="true" />
             </button>
           )}
