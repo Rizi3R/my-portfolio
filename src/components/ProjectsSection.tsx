@@ -56,19 +56,19 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   const renderCaseBody = (cs: (typeof CASE_STUDIES)[number]) => (
     <div
       id={`${cs.id}-body`}
-      className="pt-5 mt-5 border-t border-[#DDD6C7] space-y-5 text-sm text-[#191723]"
+      className="pt-5 mt-5 border-t border-[#DDD6C7] space-y-6 text-sm text-[#191723]"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-1.5">
           <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
-            The Situation
+            Context
           </h4>
           <p className="text-sm text-[#191723] leading-relaxed">{cs.situation}</p>
         </div>
 
         <div className="space-y-1.5">
           <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
-            My Responsibility
+            My role
           </h4>
           <p className="text-sm text-[#191723] leading-relaxed">{cs.responsibility}</p>
         </div>
@@ -76,7 +76,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
       <div className="space-y-2">
         <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
-          {cs.id === 'case-pos-triage' ? 'Typical Troubleshooting Steps' : 'What I Did'}
+          Actions taken
         </h4>
         <ul className="list-disc pl-5 space-y-1.5 text-sm text-[#191723] leading-relaxed">
           {cs.whatIDid.map((step, i) => (
@@ -84,6 +84,43 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           ))}
         </ul>
       </div>
+
+      {cs.triageBreakdown && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#F6F2E9] border border-[#DDD6C7] rounded-xl p-4 sm:p-5">
+          <div className="space-y-1.5">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
+              Checks I performed
+            </h4>
+            <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#191723] leading-relaxed">
+              {cs.triageBreakdown.checksPerformed.map((item, idx) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-1.5 md:border-l md:border-[#DDD6C7] md:pl-4 pt-3 md:pt-0 border-t md:border-t-0 border-[#DDD6C7]">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
+              Information I provided to the vendor
+            </h4>
+            <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#191723] leading-relaxed">
+              {cs.triageBreakdown.providedToVendor.map((item, idx) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-1.5 md:border-l md:border-[#DDD6C7] md:pl-4 pt-3 md:pt-0 border-t md:border-t-0 border-[#DDD6C7]">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
+              Findings or fixes that required vendor investigation
+            </h4>
+            <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#191723] leading-relaxed">
+              {cs.triageBreakdown.vendorInvestigation.map((item, idx) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
 
       {cs.outcome && (
         <div className="border-t border-[#DDD6C7] pt-4 space-y-1">
@@ -95,48 +132,40 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         </div>
       )}
 
-      {cs.sampleHandoff && (
+      <div className="border-t border-[#DDD6C7] pt-4 space-y-1.5">
+        <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
+          Tools used
+        </h4>
+        <div className="text-xs font-mono text-[#191723]">
+          {cs.technologies.join(' · ')}
+        </div>
+      </div>
+
+      {cs.supportingMaterial && (
         <div className="bg-[#F6F2E9] border border-[#CCC4B3] rounded-xl p-4 sm:p-5 space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#DDD6C7] pb-2.5">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
-              Sample vendor handoff
-            </h4>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#474457] font-semibold">
-              {cs.sampleHandoff.label}
+            <div>
+              <h4 className="text-xs font-mono uppercase tracking-wider text-[#191723] font-bold">
+                Supporting material: {cs.supportingMaterial.title}
+              </h4>
+              <p className="text-xs text-[#474457] mt-0.5">{cs.supportingMaterial.summary}</p>
+            </div>
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#191723] bg-white border border-[#CCC4B3] px-2 py-0.5 rounded font-semibold shrink-0">
+              {cs.supportingMaterial.label}
             </span>
           </div>
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs sm:text-sm leading-relaxed">
-            <div>
-              <dt className="font-mono text-[11px] uppercase tracking-wider text-[#474457] font-semibold">
-                Issue reported
-              </dt>
-              <dd className="text-[#191723] mt-0.5">{cs.sampleHandoff.issueReported}</dd>
-            </div>
-            <div>
-              <dt className="font-mono text-[11px] uppercase tracking-wider text-[#474457] font-semibold">
-                Checks completed
-              </dt>
-              <dd className="text-[#191723] mt-0.5">{cs.sampleHandoff.checksCompleted}</dd>
-            </div>
-            <div>
-              <dt className="font-mono text-[11px] uppercase tracking-wider text-[#474457] font-semibold">
-                Evidence available
-              </dt>
-              <dd className="text-[#191723] mt-0.5">{cs.sampleHandoff.evidenceAvailable}</dd>
-            </div>
-            <div>
-              <dt className="font-mono text-[11px] uppercase tracking-wider text-[#474457] font-semibold">
-                Action requested
-              </dt>
-              <dd className="text-[#191723] mt-0.5">{cs.sampleHandoff.actionRequested}</dd>
-            </div>
+            {cs.supportingMaterial.items.map((item) => (
+              <div key={item.key}>
+                <dt className="font-mono text-[11px] uppercase tracking-wider text-[#474457] font-semibold">
+                  {item.key}
+                </dt>
+                <dd className="text-[#191723] mt-0.5">{item.value}</dd>
+              </div>
+            ))}
           </dl>
         </div>
       )}
-
-      <div className="pt-3 border-t border-[#DDD6C7] text-xs font-mono text-[#474457]">
-        {cs.technologies.join(' · ')}
-      </div>
     </div>
   );
 
@@ -146,7 +175,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       aria-labelledby="featured-work-heading"
       className="scroll-mt-20 bg-[#F6F2E9] text-[#191723] py-14 sm:py-20 border-b border-[#DDD6C7]"
     >
-      {/* Keep #projects alias anchor so links targeting #projects still land at the top of Case Studies */}
       <div id="projects" className="scroll-mt-20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
@@ -157,6 +185,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#DDD6C7] pb-6">
           <div className="max-w-2xl">
+            <p className="text-xs font-mono uppercase tracking-wider text-[#474457] mb-1.5">
+              Case Studies
+            </p>
             <h2
               id="featured-work-heading"
               className="font-display text-3xl sm:text-4xl font-bold text-[#191723] tracking-tight"
@@ -165,11 +196,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             </h2>
           </div>
           <p className="text-sm text-[#474457] max-w-md leading-relaxed">
-            Real work across SaaS migration, third-party delivery integrations, multi-site POS triage, and new-store readiness.
+            Four examples across SaaS migration leadership, third-party integration configuration, incident triage, and new-site IT readiness.
           </p>
         </div>
 
-        {/* Primary Lead Case Study: Leading a Google Workspace to Lark migration */}
+        {/* Lead Case Study: Google Workspace to Lark Migration */}
         {primaryCase && (
           <article
             id={primaryCase.id}
@@ -177,18 +208,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             className="scroll-mt-24 bg-white border border-[#191723]/15 border-l-4 border-l-[#191723] rounded-2xl p-6 sm:p-8 shadow-sm"
           >
             <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-5">
-              <div className="space-y-3 max-w-3xl">
+              <div className="space-y-2.5 max-w-3xl">
                 <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-xs font-mono text-[#474457]">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded bg-[#191723] text-[#F6F2E9] font-semibold tracking-wide">
-                    Case 01 · Lead Migration
+                    Case 01
                   </span>
                   <span>{primaryCase.organization}</span>
-                  {primaryCase.period && (
-                    <>
-                      <span aria-hidden="true">·</span>
-                      <span>{primaryCase.period}</span>
-                    </>
-                  )}
+                  <span aria-hidden="true">·</span>
+                  <span>{primaryCase.roleScope}</span>
                 </div>
 
                 <h3
@@ -198,9 +225,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   {primaryCase.title}
                 </h3>
 
-                {/* Exact Requested Responsibility Lead Statement */}
-                <p className="text-base sm:text-lg font-medium text-[#191723] leading-relaxed">
-                  {primaryCase.responsibility}
+                <p className="text-sm sm:text-base text-[#191723] leading-relaxed">
+                  {primaryCase.summaryLine}
                 </p>
               </div>
 
@@ -208,7 +234,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 <button
                   type="button"
                   onClick={(e) => handleCopyCaseLink(e, primaryCase.id)}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#F6F2E9] hover:bg-[#EAE3D5] border border-[#CCC4B3] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-[#F6F2E9] hover:bg-[#EAE3D5] border border-[#CCC4B3] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                   aria-label={`Copy shareable link to ${primaryCase.title}`}
                 >
                   {copiedCaseId === primaryCase.id ? (
@@ -231,9 +257,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   }
                   aria-expanded={expandedCaseId === primaryCase.id}
                   aria-controls={`${primaryCase.id}-body`}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#191723] hover:bg-[#2A273B] text-[#F6F2E9] text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#191723] hover:bg-[#2A273B] text-[#F6F2E9] text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                 >
-                  <span>{expandedCaseId === primaryCase.id ? 'Collapse' : 'Read Full Case'}</span>
+                  <span>{expandedCaseId === primaryCase.id ? 'Collapse' : 'View Case Study'}</span>
                   {expandedCaseId === primaryCase.id ? (
                     <ChevronUp className="w-4 h-4" aria-hidden="true" />
                   ) : (
@@ -247,7 +273,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           </article>
         )}
 
-        {/* Two Simpler Editorial Rows Underneath */}
+        {/* Secondary Case Studies */}
         <div className="divide-y divide-[#DDD6C7] border-t border-b border-[#DDD6C7]">
           {secondaryCases.map((cs, idx) => {
             const isExpanded = expandedCaseId === cs.id;
@@ -262,10 +288,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div className="space-y-1.5 max-w-3xl">
-                    <div className="flex flex-wrap items-center gap-x-2 text-xs font-mono text-[#474457]">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono text-[#474457]">
                       <span className="font-semibold text-[#191723]">Case 0{idx + 2}</span>
                       <span aria-hidden="true">·</span>
                       <span>{cs.organization}</span>
+                      <span aria-hidden="true">·</span>
+                      <span>{cs.roleScope}</span>
                     </div>
 
                     <h3
@@ -316,7 +344,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     <button
                       type="button"
                       onClick={(e) => handleCopyCaseLink(e, cs.id)}
-                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/70 hover:bg-white border border-[#DDD6C7] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-white/70 hover:bg-white border border-[#DDD6C7] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                       aria-label={`Copy shareable link to ${cs.title}`}
                     >
                       {isCopied ? (
@@ -337,9 +365,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       onClick={() => onSelectCaseId(isExpanded ? null : cs.id)}
                       aria-expanded={isExpanded}
                       aria-controls={`${cs.id}-body`}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-[#191723]/30 hover:border-[#191723] text-xs font-semibold text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-lg border border-[#191723]/30 hover:border-[#191723] text-xs font-semibold text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                     >
-                      <span>{isExpanded ? 'Collapse' : 'Open Case'}</span>
+                      <span>{isExpanded ? 'Collapse' : 'View Case Study'}</span>
                       {isExpanded ? (
                         <ChevronUp className="w-4 h-4" aria-hidden="true" />
                       ) : (

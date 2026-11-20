@@ -120,7 +120,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-projects',
         category: 'Navigation',
-        label: 'Case Studies',
+        label: 'Work (Case Studies)',
         sublabel: `Selected Work & ${CASE_STUDIES.length} real support cases`,
         icon: <FolderGit2 className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
@@ -142,8 +142,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'nav-skills',
         category: 'Navigation',
-        label: 'Skills & Core Capabilities',
-        sublabel: 'Core capabilities, structured skills list, and optional atlas',
+        label: 'Skills',
+        sublabel: 'Core capabilities across 4 groups',
         icon: <Sparkles className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
           onNavigateSection('constellation');
@@ -151,24 +151,24 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         },
       },
       {
-        id: 'nav-workbenches',
+        id: 'nav-credentials',
         category: 'Navigation',
-        label: 'Workbenches & Practice',
-        sublabel: 'Beep to Receipt, Skill Atlas, Shell, Lab & Summary',
-        icon: <Layers className="w-4 h-4 text-[#F2A77D]" />,
+        label: 'Education & Credentials',
+        sublabel: 'UiTM Diploma, AWS Certified Cloud Practitioner, and UiPath RPA study',
+        icon: <BookOpen className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
-          onNavigateSection('workbenches');
+          onNavigateSection('credentials');
           onClose();
         },
       },
       {
-        id: 'nav-learning',
+        id: 'nav-workbenches',
         category: 'Navigation',
-        label: 'Active Learning',
-        sublabel: 'Currently learning UiPath & RPA',
-        icon: <BookOpen className="w-4 h-4 text-[#F2A77D]" />,
+        label: 'Interactive Lab',
+        sublabel: 'Portfolio Shell, Skill Atlas, Computing Lab & Beep to Receipt',
+        icon: <Layers className="w-4 h-4 text-[#F2A77D]" />,
         perform: () => {
-          onNavigateSection('experience');
+          onNavigateSection('workbenches');
           onClose();
         },
       },
@@ -197,7 +197,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'tool-terminal',
         category: 'Perspectives & Tools',
-        label: 'Open Interactive Shell',
+        label: 'Open Portfolio Shell',
         sublabel: 'Run commands: help, about, skills, experience, projects',
         shortcut: 'T',
         icon: <Terminal className="w-4 h-4 text-[#A8C5FF]" />,
@@ -208,7 +208,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {
         id: 'view-trace',
         category: 'Perspectives & Tools',
-        label: 'Beep to Receipt (Educational Walkthrough)',
+        label: 'Beep to Receipt (Illustrative Walkthrough)',
         sublabel: 'Educational model of how a retail checkout works across 6 layers',
         icon: <Compass className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
@@ -239,19 +239,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         },
       },
       {
-        id: 'jump-receipt',
+        id: 'view-receipt',
         category: 'Perspectives & Tools',
         label: 'Summary Receipt',
-        sublabel: 'Printable experience and education receipt view',
+        sublabel: 'Optional printable experience and education receipt view',
         icon: <Receipt className="w-4 h-4 text-[#A8C5FF]" />,
         perform: () => {
+          onSelectView('receipt');
           onClose();
-          const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          setTimeout(() => {
-            document
-              .getElementById('receipt')
-              ?.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' });
-          }, 60);
         },
       },
       ...STRATA.map((st, i) => ({
@@ -387,7 +382,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Jump to Case Studies, Experience, Skills, Workbenches, Contact, Résumé..."
+            placeholder="Jump to Work, Experience, Skills, Credentials, Interactive Lab, Contact..."
             className="w-full py-3.5 bg-transparent text-[#F6F2E9] placeholder-[#9A94A8] focus:outline-none text-xs sm:text-sm"
             aria-label="Search sections, commands, or skills"
           />

@@ -161,16 +161,16 @@ export const PlainView: React.FC = () => {
 
               <div className="space-y-3 text-xs leading-relaxed text-stone-800">
                 <div>
-                  <strong className="font-mono uppercase text-stone-900">The Situation: </strong>
+                  <strong className="font-mono uppercase text-stone-900">Context: </strong>
                   {cs.situation}
                 </div>
                 <div>
-                  <strong className="font-mono uppercase text-stone-900">My Responsibility: </strong>
+                  <strong className="font-mono uppercase text-stone-900">My role: </strong>
                   {cs.responsibility}
                 </div>
                 <div>
                   <strong className="font-mono uppercase text-stone-900 block mb-1">
-                    What I Did:{' '}
+                    Actions taken:{' '}
                   </strong>
                   <ul className="list-disc pl-5 space-y-1">
                     {cs.whatIDid.map((act, i) => (
@@ -178,6 +178,28 @@ export const PlainView: React.FC = () => {
                     ))}
                   </ul>
                 </div>
+                {cs.triageBreakdown && (
+                  <div className="p-3 bg-white border border-stone-300 space-y-2">
+                    <div>
+                      <strong className="font-mono uppercase text-stone-900">
+                        Checks I performed:{' '}
+                      </strong>
+                      <span>{cs.triageBreakdown.checksPerformed.join(' ')}</span>
+                    </div>
+                    <div>
+                      <strong className="font-mono uppercase text-stone-900">
+                        Information provided to vendor:{' '}
+                      </strong>
+                      <span>{cs.triageBreakdown.providedToVendor.join(' ')}</span>
+                    </div>
+                    <div>
+                      <strong className="font-mono uppercase text-stone-900">
+                        Findings requiring vendor investigation:{' '}
+                      </strong>
+                      <span>{cs.triageBreakdown.vendorInvestigation.join(' ')}</span>
+                    </div>
+                  </div>
+                )}
                 {cs.outcome && (
                   <div className="p-3 bg-stone-100 border border-stone-300">
                     <strong className="font-mono uppercase text-stone-900 block mb-1">

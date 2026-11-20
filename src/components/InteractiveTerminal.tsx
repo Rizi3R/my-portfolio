@@ -6,7 +6,7 @@ import {
   EDUCATION,
   CERTIFICATIONS,
   LEARNING_ENTRIES,
-  NODES,
+  SKILL_GROUPS,
 } from '../data/universeContent';
 import { Terminal as TerminalIcon, X, RotateCcw } from 'lucide-react';
 import { audioFx } from '../utils/audioFx';
@@ -142,16 +142,12 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
     }
 
     if (cmd === 'skills') {
-      const appSupport = NODES.filter((n) => n.category === 'Application Support').map((n) => n.label);
-      const bizSystems = NODES.filter((n) => n.category === 'Business Systems & SaaS').map((n) => n.label);
-      const itOps = NODES.filter((n) => n.category === 'IT Operations & Helpdesk').map((n) => n.label);
-      const foundations = NODES.filter((n) => n.category === 'Technical Foundations').map((n) => n.label);
       appendLines([
-        { type: 'accent', text: 'Core Skills Across 4 Tracks:' },
-        { type: 'output', text: `  ◆ Application Support:      ${appSupport.join(', ')}` },
-        { type: 'output', text: `  ◆ Business Systems & SaaS:  ${bizSystems.join(', ')}` },
-        { type: 'output', text: `  ◆ IT Operations & Helpdesk: ${itOps.join(', ')}` },
-        { type: 'output', text: `  ■ Technical Foundations:    ${foundations.join(', ')}` },
+        { type: 'accent', text: 'Core Skills Across 4 Groups:' },
+        ...SKILL_GROUPS.map((group) => ({
+          type: 'output' as const,
+          text: `  • ${group.title}: ${group.items.join(', ')}`,
+        })),
       ]);
       return;
     }

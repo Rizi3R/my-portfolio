@@ -523,13 +523,13 @@ function getEvidenceLabel(refId: string): string {
     case 'cert-ai-teach':
       return 'Generative AI Copilot Digital Upskilling Program';
     case 'case-lark-migration':
-      return 'Case Study: Leading a Google Workspace to Lark migration';
+      return 'Case Study: Google Workspace to Lark Migration';
     case 'case-integrations':
-      return 'Case Study: Third-Party Integrations & Application Configuration';
+      return 'Case Study: Third-Party Integration Configuration';
     case 'case-pos-triage':
-      return 'Case Study: Application incident triage and vendor escalation';
+      return 'Case Study: Application Incident Triage & Vendor Escalation';
     case 'case-store-launch':
-      return 'Case Study: New-site IT readiness and an RJ45 cabling fix';
+      return 'Case Study: New-Site IT Deployment & Readiness';
     default:
       return refId;
   }

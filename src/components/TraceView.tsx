@@ -31,10 +31,15 @@ import {
 
 interface TraceViewProps {
   onSelectNodeInAtlas?: (nodeId: string) => void;
-  onOpenLab?: () => void;
+  onOpenLab?: (trigger?: HTMLElement | null) => void;
+  onOpenReceipt?: () => void;
 }
 
-export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpenLab }) => {
+export const TraceView: React.FC<TraceViewProps> = ({
+  onSelectNodeInAtlas,
+  onOpenLab,
+  onOpenReceipt,
+}) => {
   const [activeStratum, setActiveStratum] = useState<StratumType>('hardware');
   const [expandedCaseStudy, setExpandedCaseStudy] = useState<string | null>(null);
   const [showSampleReceipt, setShowSampleReceipt] = useState(false);
@@ -118,15 +123,16 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
             </div>
             <div className="text-[#F6F2E9] font-bold mb-1">Summary Receipt</div>
             <p className="text-[#CFCAC0] font-sans text-xs leading-relaxed mb-3">
-              Full work history, education, credentials, and contact links formatted as a receipt at the bottom of the page.
+              Full work history, education, credentials, and contact links formatted as a printable receipt view.
             </p>
-            <a
-              href="#receipt"
-              className="inline-flex items-center gap-1.5 text-[#F2A77D] hover:text-[#F6F2E9] font-bold transition-colors"
+            <button
+              type="button"
+              onClick={() => onOpenReceipt?.()}
+              className="inline-flex items-center gap-1.5 text-[#F2A77D] hover:text-[#F6F2E9] font-bold transition-colors cursor-pointer"
             >
-              <span>Jump to Receipt</span>
+              <span>Open Summary Receipt</span>
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-            </a>
+            </button>
           </div>
         </div>
 
@@ -256,7 +262,7 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
                       </span>
                       <button
                         type="button"
-                        onClick={onOpenLab}
+                        onClick={(e) => onOpenLab(e.currentTarget)}
                         className="text-[#A8C5FF] hover:text-[#F6F2E9] flex items-center gap-1.5 text-[11px] font-bold uppercase cursor-pointer"
                       >
                         <FlaskConical className="w-3.5 h-3.5 text-[#F2A77D]" aria-hidden="true" />
@@ -406,49 +412,25 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
                               </div>
                             )}
 
-                            {cs.sampleHandoff && (
+                            {cs.supportingMaterial && (
                               <div className="bg-[#0A0913] p-3.5 rounded-xl border border-[#F2A77D]/35 text-xs space-y-2.5">
                                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#242138] pb-2">
                                   <span className="font-mono font-semibold text-[#F6F2E9] uppercase">
-                                    Sample vendor handoff
+                                    {cs.supportingMaterial.title}
                                   </span>
                                   <span className="font-mono text-[10px] uppercase text-[#F2A77D] font-semibold">
-                                    {cs.sampleHandoff.label}
+                                    {cs.supportingMaterial.label}
                                   </span>
                                 </div>
                                 <dl className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                                  <div>
-                                    <dt className="font-mono text-[10px] uppercase text-[#A8C5FF]">
-                                      Issue reported
-                                    </dt>
-                                    <dd className="text-[#CFCAC0] mt-0.5">
-                                      {cs.sampleHandoff.issueReported}
-                                    </dd>
-                                  </div>
-                                  <div>
-                                    <dt className="font-mono text-[10px] uppercase text-[#A8C5FF]">
-                                      Checks completed
-                                    </dt>
-                                    <dd className="text-[#CFCAC0] mt-0.5">
-                                      {cs.sampleHandoff.checksCompleted}
-                                    </dd>
-                                  </div>
-                                  <div>
-                                    <dt className="font-mono text-[10px] uppercase text-[#A8C5FF]">
-                                      Evidence available
-                                    </dt>
-                                    <dd className="text-[#CFCAC0] mt-0.5">
-                                      {cs.sampleHandoff.evidenceAvailable}
-                                    </dd>
-                                  </div>
-                                  <div>
-                                    <dt className="font-mono text-[10px] uppercase text-[#A8C5FF]">
-                                      Action requested
-                                    </dt>
-                                    <dd className="text-[#CFCAC0] mt-0.5">
-                                      {cs.sampleHandoff.actionRequested}
-                                    </dd>
-                                  </div>
+                                  {cs.supportingMaterial.items.map((item) => (
+                                    <div key={item.key}>
+                                      <dt className="font-mono text-[10px] uppercase text-[#A8C5FF]">
+                                        {item.key}
+                                      </dt>
+                                      <dd className="text-[#CFCAC0] mt-0.5">{item.value}</dd>
+                                    </div>
+                                  ))}
                                 </dl>
                               </div>
                             )}
@@ -510,14 +492,15 @@ export const TraceView: React.FC<TraceViewProps> = ({ onSelectNodeInAtlas, onOpe
             Scroll down or jump directly to the printable experience summary receipt.
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="#receipt"
+            <button
+              type="button"
+              onClick={() => onOpenReceipt?.()}
               className="inline-flex items-center justify-center gap-2 min-h-[44px] px-5 py-2.5 rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap shrink-0"
             >
               <Receipt className="w-4 h-4" aria-hidden="true" />
               <span>View Summary Receipt</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </a>
+            </button>
 
             <button
               type="button"

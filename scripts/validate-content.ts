@@ -18,9 +18,7 @@ import {
   STRATA,
   LEARNING_ENTRIES,
   CERTIFICATIONS,
-  CORE_CAPABILITIES,
-  ABOUT_APPROACH,
-  ABOUT_SUMMARY,
+  SKILL_GROUPS,
 } from '../src/data/universeContent';
 
 let errorCount = 0;
@@ -69,6 +67,9 @@ if (!hwcRole || hwcRole.period !== 'March 2024 to September 2025') {
 if (!hwcRole || hwcRole.role !== 'IT Support | HWC Coffee Malaysia') {
   logError('HWC Coffee public role label must equal "IT Support | HWC Coffee Malaysia".');
 }
+if (SKILL_GROUPS.length !== 4) {
+  logError(`Expected 4 main-page SKILL_GROUPS, found ${SKILL_GROUPS.length}.`);
+}
 
 logSuccess(`Profile descriptor: "${PROFILE.title}"`);
 logSuccess(`Candidate: ${PROFILE.fullName} (${PROFILE.displayName})`);
@@ -78,9 +79,7 @@ logSuccess(`HWC Coffee dates verified: ${hwcRole?.period}`);
 console.log('\n[2/7] Scanning for Em Dashes & Unconfirmed Career Claims...');
 const serializedContent = JSON.stringify({
   PROFILE,
-  CORE_CAPABILITIES,
-  ABOUT_SUMMARY,
-  ABOUT_APPROACH,
+  SKILL_GROUPS,
   EXPERIENCES,
   CASE_STUDIES,
   CERTIFICATIONS,
@@ -136,9 +135,7 @@ const bannedCareerStrings = [
 
 const careerOnlyJson = JSON.stringify({
   PROFILE,
-  CORE_CAPABILITIES,
-  ABOUT_SUMMARY,
-  ABOUT_APPROACH,
+  SKILL_GROUPS,
   EXPERIENCES,
   CASE_STUDIES,
   CERTIFICATIONS,
@@ -174,21 +171,32 @@ NODES.forEach((node) => {
     }
   });
 });
-logSuccess('Zero proficiency percentages or rating fields in nodes.');
+SKILL_GROUPS.forEach((group) => {
+  const record = group as unknown as Record<string, unknown>;
+  prohibitedFields.forEach((field) => {
+    if (record[field] !== undefined) {
+      logError(`Skill group ${group.id} contains prohibited field: "${field}"`);
+    }
+  });
+});
+logSuccess('Zero proficiency percentages or rating fields in nodes and skill groups.');
 
 // 4. Mastery Words & Case Ordering Check
 console.log('\n[4/7] Checking Case Study Ordering & Tone...');
 if (CASE_STUDIES[0]?.id !== 'case-lark-migration') {
-  logError('First case study must be Google Workspace to Lark migration (case-lark-migration).');
+  logError('First case study must be Google Workspace to Lark Migration (case-lark-migration).');
 }
 if (CASE_STUDIES[1]?.id !== 'case-integrations') {
-  logError('Second case study must be Third-Party Integrations & Application Configuration (case-integrations).');
+  logError('Second case study must be Third-Party Integration Configuration (case-integrations).');
 }
 if (CASE_STUDIES[2]?.id !== 'case-pos-triage') {
-  logError('Third case study must be Application incident triage (case-pos-triage).');
+  logError('Third case study must be Application Incident Triage & Vendor Escalation (case-pos-triage).');
+}
+if (!CASE_STUDIES[2]?.triageBreakdown) {
+  logError('Case 3 (case-pos-triage) must define triageBreakdown.');
 }
 if (CASE_STUDIES[3]?.id !== 'case-store-launch') {
-  logError('Fourth case study must be New-site IT readiness (case-store-launch).');
+  logError('Fourth case study must be New-Site IT Deployment & Readiness (case-store-launch).');
 }
 const larkCaseJson = JSON.stringify(CASE_STUDIES[0] || {}).toLowerCase();
 if (larkCaseJson.includes('netsuite') || larkCaseJson.includes('excel')) {

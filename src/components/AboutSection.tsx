@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
-import { ABOUT_APPROACH } from '../data/universeContent';
+import React from 'react';
 import {
   Compass,
   Network,
   Terminal,
   FlaskConical,
-  FileText,
   ArrowRight,
-  Volume2,
 } from 'lucide-react';
-import { audioFx } from '../utils/audioFx';
 
 interface AboutSectionProps {
-  onOpenLab: () => void;
+  onOpenLab: (trigger?: HTMLElement | null) => void;
   onOpenBeepToReceipt: () => void;
   onOpenAtlas: () => void;
-  onOpenTerminal: () => void;
-  onOpenPlainSummary: () => void;
+  onOpenTerminal: (trigger?: HTMLElement | null) => void;
 }
 
 export const AboutSection: React.FC<AboutSectionProps> = ({
@@ -24,65 +19,39 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
   onOpenBeepToReceipt,
   onOpenAtlas,
   onOpenTerminal,
-  onOpenPlainSummary,
 }) => {
-  const [beepPlayed, setBeepPlayed] = useState(false);
-
-  const handleSampleBeep = () => {
-    audioFx.playSuccess();
-    setBeepPlayed((prev) => !prev);
-  };
-
-  const workbenches = [
+  const labItems = [
     {
-      id: 'wb-trace',
-      title: 'Beep to Receipt',
-      tag: 'Illustrative Educational Walkthrough',
-      description:
-        'Step-by-step generic educational model showing how a counter barcode scan passes through hardware, OS drivers, local network, application logic, ERP, and support teams.',
-      cta: 'Open Walkthrough',
-      icon: Compass,
-      onClick: onOpenBeepToReceipt,
+      id: 'lab-shell',
+      title: 'Portfolio Shell',
+      description: 'Explore my profile through simple commands.',
+      cta: 'Open Shell',
+      icon: Terminal,
+      onClick: (e: React.MouseEvent<HTMLButtonElement>) => onOpenTerminal(e.currentTarget),
     },
     {
-      id: 'wb-atlas',
-      title: 'Full Skill Atlas',
-      tag: 'Interactive Node Graph & List',
-      description:
-        'Inspect connections between work-backed support systems, credentials, internship experience, and active learning areas.',
+      id: 'lab-atlas',
+      title: 'Skill Atlas',
+      description: 'Explore connections between my skills and experience.',
       cta: 'Open Skill Atlas',
       icon: Network,
-      onClick: onOpenAtlas,
+      onClick: () => onOpenAtlas(),
     },
     {
-      id: 'wb-terminal',
-      title: 'Interactive Portfolio Shell',
-      tag: 'Read-Only Command Line',
-      description:
-        'Query roles, education, skills, and contact channels using shell commands or click-to-run shortcuts.',
-      cta: 'Launch Shell',
-      icon: Terminal,
-      onClick: onOpenTerminal,
-    },
-    {
-      id: 'wb-lab',
+      id: 'lab-computing',
       title: 'Computing Lab',
-      tag: 'Browser-Native Simulations',
-      description:
-        'Experiment interactively with packet flight hops, LRU/FIFO cache eviction, and UNIX chmod permission bitmasks.',
+      description: 'Try small educational simulations.',
       cta: 'Open Lab',
       icon: FlaskConical,
-      onClick: onOpenLab,
+      onClick: (e: React.MouseEvent<HTMLButtonElement>) => onOpenLab(e.currentTarget),
     },
     {
-      id: 'wb-plain',
-      title: 'Printable Summary',
-      tag: 'High-Contrast Document',
-      description:
-        'Single-document career chronology, case studies, credentials, and educational walkthrough ready for printing or PDF export.',
-      cta: 'Open Summary',
-      icon: FileText,
-      onClick: onOpenPlainSummary,
+      id: 'lab-beep',
+      title: 'Beep to Receipt',
+      description: 'Explore an illustrative transaction workflow.',
+      cta: 'Open Walkthrough',
+      icon: Compass,
+      onClick: () => onOpenBeepToReceipt(),
     },
   ];
 
@@ -90,91 +59,62 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
     <section
       id="workbenches"
       aria-labelledby="workbenches-heading"
-      className="scroll-mt-20 bg-[#0A0913] text-[#F6F2E9] py-16 sm:py-20 border-b border-[#242138]"
+      className="scroll-mt-20 bg-[#0A0913] text-[#F6F2E9] py-14 sm:py-16 border-b border-[#242138]"
     >
-      {/* Keep #about anchor alias cleanly resolving without extra height */}
+      <div id="lab" className="scroll-mt-20" />
       <div id="about" className="scroll-mt-20" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Compact Header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#242138] pb-6">
           <div className="max-w-2xl space-y-2">
-            <p className="text-xs font-mono uppercase tracking-wider text-[#A8C5FF]">
-              Workbenches &amp; Practice
+            <p className="text-xs font-mono uppercase tracking-wider text-[#F2A77D]">
+              Explorations
             </p>
             <h2
               id="workbenches-heading"
               className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight"
             >
-              Supporting Tools &amp; Interactive Views
+              Interactive Lab
             </h2>
-            <p className="text-sm text-[#CFCAC0] leading-relaxed">
-              Optional interactive views kept secondary to the core work history and case studies above.
-            </p>
           </div>
-
-          <button
-            type="button"
-            onClick={handleSampleBeep}
-            className="inline-flex items-center gap-2 text-xs font-mono text-[#CFCAC0] hover:text-[#F2A77D] transition-colors cursor-pointer self-start md:self-auto"
-          >
-            <Volume2 className="w-3.5 h-3.5 text-[#F2A77D]" aria-hidden="true" />
-            <span>{beepPlayed ? 'Scanner beep played' : 'Test scanner audio cue'}</span>
-          </button>
+          <p className="text-sm text-[#CFCAC0] max-w-md leading-relaxed">
+            Interactive tools and educational walkthroughs you can open anytime alongside my case studies and résumé.
+          </p>
         </div>
 
-        {/* Open Rule-Divided Workbenches Table/List */}
-        <div className="divide-y divide-[#242138] border-b border-[#242138]">
-          {workbenches.map((wb) => {
-            const Icon = wb.icon;
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          {labItems.map((item) => {
+            const Icon = item.icon;
             return (
               <div
-                key={wb.id}
-                className="py-5 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center"
+                key={item.id}
+                className="bg-[#12101F] border border-[#242138] rounded-xl p-5 sm:p-6 flex flex-col justify-between gap-4"
               >
-                <div className="lg:col-span-4 flex items-center gap-3">
-                  <Icon className="w-4 h-4 text-[#A8C5FF] shrink-0" aria-hidden="true" />
-                  <div>
-                    <h3 className="font-display text-lg font-bold text-[#F6F2E9]">
-                      {wb.title}
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2.5">
+                    <Icon className="w-4 h-4 text-[#A8C5FF] shrink-0" aria-hidden="true" />
+                    <h3 className="font-display text-xl font-bold text-[#F6F2E9]">
+                      {item.title}
                     </h3>
-                    <div className="text-[11px] font-mono text-[#F2A77D]">{wb.tag}</div>
                   </div>
+                  <p className="text-sm text-[#CFCAC0] leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
 
-                <p className="lg:col-span-6 text-xs sm:text-sm text-[#CFCAC0] leading-relaxed">
-                  {wb.description}
-                </p>
-
-                <div className="lg:col-span-2 lg:text-right">
+                <div>
                   <button
                     type="button"
-                    onClick={wb.onClick}
-                    className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
+                    onClick={item.onClick}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded"
                   >
-                    <span>{wb.cta}</span>
+                    <span>{item.cta}</span>
                     <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                   </button>
                 </div>
               </div>
             );
           })}
-        </div>
-
-        {/* Concise How I Work Principles */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {ABOUT_APPROACH.map((item, idx) => (
-            <div
-              key={item.id}
-              className={`space-y-1.5 ${idx > 0 ? 'md:border-l md:border-[#242138] md:pl-8' : ''}`}
-            >
-              <div className="text-[11px] font-mono text-[#9A94A8] uppercase tracking-wider">
-                Approach 0{idx + 1}
-              </div>
-              <h3 className="text-sm font-semibold text-[#F6F2E9]">{item.title}</h3>
-              <p className="text-xs sm:text-sm text-[#CFCAC0] leading-relaxed">{item.detail}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>

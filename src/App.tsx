@@ -4,9 +4,9 @@ import { HeroSection } from './components/HeroSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { TimelineSection } from './components/TimelineSection';
 import { ConstellationSection } from './components/ConstellationSection';
+import { CredentialsSection } from './components/CredentialsSection';
 import { AboutSection } from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
-import { ReceiptSection } from './components/ReceiptSection';
 import { InteractiveTerminal } from './components/InteractiveTerminal';
 import { CommandPalette } from './components/CommandPalette';
 import { Footer } from './components/Footer';
@@ -23,6 +23,9 @@ const AtlasView = lazy(() =>
 );
 const PlainView = lazy(() =>
   import('./components/PlainView').then((m) => ({ default: m.PlainView }))
+);
+const ReceiptSection = lazy(() =>
+  import('./components/ReceiptSection').then((m) => ({ default: m.ReceiptSection }))
 );
 const TheLab = lazy(() =>
   import('./components/TheLab').then((m) => ({ default: m.TheLab }))
@@ -58,15 +61,22 @@ export default function App() {
     () => resolveCaseIdFromLocation() || CASE_STUDIES[0]?.id || null
   );
 
-  // Store triggering element so Escape / Close restores keyboard focus cleanly
+  // Store triggering element so Escape / Close restores keyboard focus reliably
   const lastFocusedRef = useRef<HTMLElement | null>(null);
   const labCloseRef = useRef<HTMLButtonElement | null>(null);
 
-  const captureFocusAndOpen = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
+  const captureFocusAndOpen = (
+    setter: React.Dispatch<React.SetStateAction<boolean>>,
+    trigger?: HTMLElement | null
+  ) => {
     const hasOpenOverlay =
       resumeModalOpen || commandPaletteOpen || terminalModalOpen || labModalOpen;
-    if (!hasOpenOverlay && document.activeElement instanceof HTMLElement) {
-      lastFocusedRef.current = document.activeElement;
+    if (!hasOpenOverlay) {
+      if (trigger instanceof HTMLElement) {
+        lastFocusedRef.current = trigger;
+      } else if (document.activeElement instanceof HTMLElement) {
+        lastFocusedRef.current = document.activeElement;
+      }
     }
     setter(true);
   };
@@ -108,9 +118,14 @@ export default function App() {
         return;
       }
 
-      if (viewParam && ['portfolio', 'trace', 'atlas', 'plain'].includes(viewParam)) {
+      if (viewParam && ['portfolio', 'trace', 'atlas', 'plain', 'receipt'].includes(viewParam)) {
         setActiveView(viewParam);
-      } else if (hashId === 'trace' || hashId === 'atlas' || hashId === 'plain') {
+      } else if (
+        hashId === 'trace' ||
+        hashId === 'atlas' ||
+        hashId === 'plain' ||
+        hashId === 'receipt'
+      ) {
         setActiveView(hashId as ActiveView);
       }
     };
@@ -221,9 +236,7 @@ export default function App() {
   };
 
   const handleSelectNodeInAtlas = (nodeId: string) => {
-    if (nodeId) {
-      setSelectedAtlasNodeId(nodeId);
-    }
+    setSelectedAtlasNodeId(nodeId || null);
     handleViewChange('atlas');
   };
 
@@ -244,14 +257,21 @@ export default function App() {
         activeView === 'plain' ? 'bg-white text-[#191723]' : 'tech-universe-bg text-[#F6F2E9]'
       }`}
     >
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#A8C5FF] focus:text-[#191723] focus:text-xs focus:font-semibold focus:shadow-lg print:hidden"
+      >
+        Skip to main content
+      </a>
+
       <Navbar
         activeView={activeView}
         onChangeView={handleViewChange}
         onNavigateSection={handleNavigateSection}
-        onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
+        onOpenResume={(trigger) => captureFocusAndOpen(setResumeModalOpen, trigger)}
       />
 
-      <main className={`flex-1 relative z-10 pt-16 ${resumeModalOpen ? 'print:hidden' : ''}`}>
+      <main id="main-content" className={`flex-1 relative z-10 pt-16 ${resumeModalOpen ? 'print:hidden' : ''}`}>
         {activeView === 'plain' ? (
           <Suspense
             fallback={
@@ -297,7 +317,6 @@ export default function App() {
               onJumpToStratum={handleJumpToStratum}
               onOpenExperience={handleOpenExperience}
             />
-            <ReceiptSection />
           </Suspense>
         ) : activeView === 'trace' ? (
           <Suspense
@@ -320,14 +339,35 @@ export default function App() {
             </div>
             <TraceView
               onSelectNodeInAtlas={handleSelectNodeInAtlas}
-              onOpenLab={() => captureFocusAndOpen(setLabModalOpen)}
+              onOpenLab={(trigger) => captureFocusAndOpen(setLabModalOpen, trigger)}
+              onOpenReceipt={() => handleViewChange('receipt')}
             />
+          </Suspense>
+        ) : activeView === 'receipt' ? (
+          <Suspense
+            fallback={
+              <div className="py-32 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
+                <Loader2 className="w-5 h-5 animate-spin" />
+                <span>Loading Summary Receipt...</span>
+              </div>
+            }
+          >
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 print:hidden">
+              <button
+                type="button"
+                onClick={() => handleViewChange('portfolio')}
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>Back to Overview</span>
+              </button>
+            </div>
             <ReceiptSection />
           </Suspense>
         ) : (
           <>
             <HeroSection
-              onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
+              onOpenResume={(trigger) => captureFocusAndOpen(setResumeModalOpen, trigger)}
               onOpenCaseStudy={handleOpenCaseStudy}
             />
             <ProjectsSection
@@ -339,18 +379,16 @@ export default function App() {
             <ConstellationSection
               onOpenFullAtlas={(nodeId) => handleSelectNodeInAtlas(nodeId || '')}
             />
+            <CredentialsSection />
             <AboutSection
-              onOpenLab={() => captureFocusAndOpen(setLabModalOpen)}
+              onOpenLab={(trigger) => captureFocusAndOpen(setLabModalOpen, trigger)}
               onOpenBeepToReceipt={() => handleViewChange('trace')}
               onOpenAtlas={() => handleSelectNodeInAtlas('')}
-              onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
-              onOpenPlainSummary={() => handleViewChange('plain')}
+              onOpenTerminal={(trigger) => captureFocusAndOpen(setTerminalModalOpen, trigger)}
             />
             <ContactSection
-              onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
-              onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
+              onOpenResume={(trigger) => captureFocusAndOpen(setResumeModalOpen, trigger)}
             />
-            <ReceiptSection />
           </>
         )}
       </main>
@@ -432,9 +470,8 @@ export default function App() {
 
       {activeView !== 'plain' && (
         <Footer
-          onOpenResume={() => captureFocusAndOpen(setResumeModalOpen)}
-          onOpenTerminal={() => captureFocusAndOpen(setTerminalModalOpen)}
-          onOpenCommandPalette={() => captureFocusAndOpen(setCommandPaletteOpen)}
+          onOpenResume={(trigger) => captureFocusAndOpen(setResumeModalOpen, trigger)}
+          onOpenCommandPalette={(trigger) => captureFocusAndOpen(setCommandPaletteOpen, trigger)}
           onChangeView={handleViewChange}
         />
       )}

@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { PROFILE } from '../data/universeContent';
-import { Mail, MapPin, Copy, Check, ArrowUpRight, FileText, Terminal } from 'lucide-react';
+import { Mail, MapPin, Copy, Check, ArrowUpRight, FileText } from 'lucide-react';
 import { LinkedInIcon } from './LinkedInIcon';
 
 interface ContactSectionProps {
-  onOpenResume: () => void;
-  onOpenTerminal: () => void;
+  onOpenResume: (trigger?: HTMLElement | null) => void;
 }
 
-export const ContactSection: React.FC<ContactSectionProps> = ({
-  onOpenResume,
-  onOpenTerminal,
-}) => {
+export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = async () => {
@@ -48,44 +44,46 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
               <p className="text-xs font-mono uppercase tracking-wider text-[#F2A77D]">
-                Contact &amp; Roles
+                Contact
               </p>
               <h2
                 id="contact-heading"
                 className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight max-w-2xl"
               >
-                Open to Application Support, IT Operations &amp; Business Systems conversations.
+                Let’s talk about your next support or systems role.
               </h2>
               <p className="text-sm sm:text-base text-[#CFCAC0] leading-relaxed max-w-xl">
-                {PROFILE.availabilityNote} Reach out anytime by email or LinkedIn, or review and save a printable résumé directly.
+                {PROFILE.availabilityNote}
               </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
               <a
                 href={`mailto:${PROFILE.email}`}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
               >
                 <Mail className="w-4 h-4" aria-hidden="true" />
                 <span>Send Email</span>
               </a>
 
-              <button
-                type="button"
-                onClick={onOpenResume}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-transparent border border-[#F6F2E9]/35 hover:border-[#A8C5FF] hover:text-[#A8C5FF] text-[#F6F2E9] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+              <a
+                href={PROFILE.linkedIn}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] rounded-lg bg-transparent border border-[#F6F2E9]/35 hover:border-[#A8C5FF] hover:text-[#A8C5FF] text-[#F6F2E9] text-sm font-semibold transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
               >
-                <FileText className="w-4 h-4" aria-hidden="true" />
-                <span>View Résumé</span>
-              </button>
+                <LinkedInIcon className="w-4 h-4" />
+                <span>LinkedIn</span>
+                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+              </a>
 
               <button
                 type="button"
-                onClick={onOpenTerminal}
-                className="inline-flex items-center gap-2 px-4 py-3 rounded-lg text-xs font-mono text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                onClick={(e) => onOpenResume(e.currentTarget)}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] rounded-lg bg-transparent border border-[#F6F2E9]/35 hover:border-[#A8C5FF] hover:text-[#A8C5FF] text-[#F6F2E9] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
               >
-                <Terminal className="w-3.5 h-3.5 text-[#A8C5FF]" aria-hidden="true" />
-                <span>Open Shell</span>
+                <FileText className="w-4 h-4" aria-hidden="true" />
+                <span>View Résumé</span>
               </button>
             </div>
           </div>
@@ -104,7 +102,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-xs font-mono text-[#A8C5FF] transition-colors cursor-pointer shrink-0"
+                className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[38px] rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-xs font-mono text-[#A8C5FF] transition-colors cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
               >
                 {copied ? (
                   <>
@@ -136,19 +134,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               </div>
               <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#A8C5FF] shrink-0">
                 <LinkedInIcon className="w-3.5 h-3.5" />
-                <span>Connect</span>
+                <span>Open</span>
                 <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
               </div>
             </a>
 
-            <div className="py-5 flex flex-wrap items-center justify-between gap-3 text-xs text-[#CFCAC0]">
-              <span className="inline-flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#F2A77D]" aria-hidden="true" />
-                <span>Based in {PROFILE.location}</span>
-              </span>
-              <span className="font-mono text-[#9A94A8]">
-                {PROFILE.currentRole} · {PROFILE.currentCompany}
-              </span>
+            <div className="py-5 flex items-center gap-2 text-xs text-[#CFCAC0]">
+              <MapPin className="w-4 h-4 text-[#F2A77D] shrink-0" aria-hidden="true" />
+              <span>{PROFILE.location}</span>
             </div>
           </div>
         </div>

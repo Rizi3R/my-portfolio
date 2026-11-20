@@ -1,126 +1,83 @@
-import React, { useEffect, useRef } from 'react';
-import { FileText, FolderOpen, Briefcase, Award } from 'lucide-react';
+import React from 'react';
+import {
+  FileText,
+  FolderOpen,
+  Briefcase,
+  MapPin,
+  Award,
+  Users,
+  KeyRound,
+  GitMerge,
+  LifeBuoy,
+} from 'lucide-react';
 import { PROFILE } from '../data/universeContent';
 
 interface HeroSectionProps {
-  onOpenResume: () => void;
+  onOpenResume: (trigger?: HTMLElement | null) => void;
   onOpenCaseStudy: (caseId?: string) => void;
 }
 
-const clampUnit = (value: number) => Math.max(-1, Math.min(1, value));
+const SUPPORT_NODES = [
+  {
+    id: 'users',
+    label: 'Users',
+    detail: 'Day-to-day support & adoption',
+    icon: Users,
+  },
+  {
+    id: 'access',
+    label: 'Access',
+    detail: 'Onboarding & offboarding',
+    icon: KeyRound,
+  },
+  {
+    id: 'integrations',
+    label: 'Integrations',
+    detail: 'Outlet mappings & sync',
+    icon: GitMerge,
+  },
+  {
+    id: 'vendors',
+    label: 'Vendors',
+    detail: 'Verified incident handoffs',
+    icon: LifeBuoy,
+  },
+];
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenResume,
   onOpenCaseStudy,
 }) => {
-  const stageRef = useRef<HTMLDivElement>(null);
-  const rafIdRef = useRef<number | null>(null);
-  const canTrackRef = useRef(false);
-  const pointerTargetRef = useRef({ nx: 0, ny: 0, active: false });
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    const resetStage = () => {
-      if (rafIdRef.current !== null) {
-        window.cancelAnimationFrame(rafIdRef.current);
-        rafIdRef.current = null;
-      }
-      pointerTargetRef.current = { nx: 0, ny: 0, active: false };
-      const stageEl = stageRef.current;
-      if (stageEl) {
-        stageEl.style.setProperty('--hero-nx', '0');
-        stageEl.style.setProperty('--hero-ny', '0');
-        stageEl.style.setProperty('--hero-active', '0');
-        stageEl.dataset.active = 'false';
-      }
-    };
-
-    const updateCapability = () => {
-      canTrackRef.current = hoverQuery.matches && !motionQuery.matches;
-      if (!canTrackRef.current) {
-        resetStage();
-      }
-    };
-
-    updateCapability();
-    hoverQuery.addEventListener('change', updateCapability);
-    motionQuery.addEventListener('change', updateCapability);
-
-    return () => {
-      hoverQuery.removeEventListener('change', updateCapability);
-      motionQuery.removeEventListener('change', updateCapability);
-      if (rafIdRef.current !== null) {
-        window.cancelAnimationFrame(rafIdRef.current);
-        rafIdRef.current = null;
-      }
-    };
-  }, []);
-
-  const scheduleCommit = () => {
-    if (rafIdRef.current !== null) return;
-    rafIdRef.current = window.requestAnimationFrame(() => {
-      rafIdRef.current = null;
-      const stageEl = stageRef.current;
-      if (!stageEl) return;
-      const { nx, ny, active } = pointerTargetRef.current;
-      stageEl.style.setProperty('--hero-nx', nx.toFixed(4));
-      stageEl.style.setProperty('--hero-ny', ny.toFixed(4));
-      stageEl.style.setProperty('--hero-active', active ? '1' : '0');
-      stageEl.dataset.active = active ? 'true' : 'false';
-    });
-  };
-
-  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (!canTrackRef.current || event.pointerType === 'touch') return;
-    const stageEl = stageRef.current;
-    if (!stageEl) return;
-
-    const rect = stageEl.getBoundingClientRect();
-    if (rect.width <= 0 || rect.height <= 0) return;
-
-    const nx = clampUnit(((event.clientX - rect.left) / rect.width) * 2 - 1);
-    const ny = clampUnit(((event.clientY - rect.top) / rect.height) * 2 - 1);
-
-    pointerTargetRef.current = { nx, ny, active: true };
-    scheduleCommit();
-  };
-
-  const handlePointerLeave = () => {
-    pointerTargetRef.current = { nx: 0, ny: 0, active: false };
-    scheduleCommit();
-  };
-
   return (
     <section
       id="top"
       aria-labelledby="hero-heading"
-      className="relative bg-[#0A0913] text-[#F6F2E9] pt-8 sm:pt-12 lg:pt-14 pb-10 sm:pb-12 lg:pb-14 border-b border-[#242138] overflow-hidden"
+      className="relative bg-[#0A0913] text-[#F6F2E9] pt-8 sm:pt-12 lg:pt-16 pb-12 sm:pb-16 lg:pb-20 border-b border-[#242138]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          {/* Left Column: Intro, Controlled-Measure Headline, Primary Actions */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left Column: Clear Positioning, Intro, CTAs, Concise Identity */}
           <div className="relative z-10 lg:col-span-7 space-y-6">
             <div className="space-y-4">
-              <p className="text-sm sm:text-base font-medium text-[#F6F2E9] tracking-wide">
+              <p className="text-sm sm:text-base font-medium text-[#A8C5FF] tracking-wide">
                 {PROFILE.displayName}
               </p>
 
               <h1
                 id="hero-heading"
-                className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-[#F6F2E9] tracking-tight leading-[1.09] max-w-[19ch]"
+                className="font-display text-3xl sm:text-4xl lg:text-[2.85rem] font-bold text-[#F6F2E9] tracking-tight leading-[1.08] max-w-[19ch]"
               >
                 {PROFILE.title}
               </h1>
 
-              {/* One restrained Soft Copper accent rule */}
               <div className="h-px w-16 bg-[#F2A77D]" aria-hidden="true" />
 
               <p className="text-base sm:text-lg text-[#E6E1D6] leading-relaxed max-w-xl">
                 {PROFILE.intro}
+              </p>
+
+              <p className="text-sm sm:text-base text-[#CFCAC0] leading-relaxed max-w-xl">
+                {PROFILE.supportingLine}
               </p>
             </div>
 
@@ -128,100 +85,132 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <div className="flex flex-wrap items-center gap-3 pt-1">
               <button
                 type="button"
-                onClick={onOpenResume}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
-              >
-                <FileText className="w-4 h-4" aria-hidden="true" />
-                <span>View Résumé</span>
-              </button>
-
-              <button
-                type="button"
                 onClick={() => onOpenCaseStudy()}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-transparent hover:bg-[#12101F] text-[#F6F2E9] border border-[#F6F2E9]/35 hover:border-[#A8C5FF] hover:text-[#A8C5FF] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
               >
                 <FolderOpen className="w-4 h-4" aria-hidden="true" />
                 <span>View Case Studies</span>
               </button>
+
+              <button
+                type="button"
+                onClick={(e) => onOpenResume(e.currentTarget)}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] rounded-lg bg-transparent hover:bg-[#12101F] text-[#F6F2E9] border border-[#F6F2E9]/35 hover:border-[#A8C5FF] hover:text-[#A8C5FF] text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+              >
+                <FileText className="w-4 h-4" aria-hidden="true" />
+                <span>View Résumé</span>
+              </button>
             </div>
 
-            {/* Quiet Supporting Credentials */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 pt-2 text-xs sm:text-sm text-[#CFCAC0]">
-              <span className="inline-flex items-center gap-1.5 text-[#F6F2E9] font-medium">
-                <Briefcase className="w-4 h-4 text-[#F2A77D]" aria-hidden="true" />
-                <span>
-                  {PROFILE.currentRole} at {PROFILE.currentCompany}
-                </span>
-              </span>
-              <span aria-hidden="true" className="text-[#524E66]">
-                ·
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Award className="w-4 h-4 text-[#A8C5FF]" aria-hidden="true" />
-                <span>AWS Certified Cloud Practitioner</span>
-              </span>
-            </div>
-          </div>
-
-          {/* Right Column (Desktop Only): Three Overlapping Angled Glass Panels as One Physical Sculpture */}
-          <div
-            aria-hidden="true"
-            className="hidden lg:block lg:col-span-5 select-none"
-          >
-            <div
-              ref={stageRef}
-              data-active="false"
-              onPointerMove={handlePointerMove}
-              onPointerLeave={handlePointerLeave}
-              onPointerCancel={handlePointerLeave}
-              className="hero-sculpture-stage relative w-full h-[380px] xl:h-[420px] bg-[#0A0913]"
-            >
-              {/* Subtle ambient depth glow */}
-              <div className="absolute inset-8 rounded-full bg-[#A8C5FF]/[0.06] blur-3xl pointer-events-none" />
-
-              {/* Shared 3D rig tilting all 3 panes around a common center */}
-              <div className="hero-sculpture-rig relative w-full h-full pointer-events-none">
-                {/* Panel 1 (Back layer - subtle parallax depth) */}
-                <div className="hero-glass-layer hero-glass-layer--back absolute top-[6%] left-[4%] w-[66%] h-[70%]">
-                  <div className="relative w-full h-full -rotate-6 rounded-2xl border border-[#A8C5FF]/25 bg-gradient-to-br from-[#A8C5FF]/[0.08] via-[#12101F]/70 to-[#0A0913]/90 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(168,197,255,0.2),0_24px_48px_-16px_rgba(0,0,0,0.7)] overflow-hidden">
-                    <div className="absolute inset-0 rotate-6">
-                      <div className="absolute w-[151.515%] h-[142.857%] -left-[6.061%] -top-[8.571%]">
-                        <div className="hero-copper-beam hero-copper-beam--back absolute left-1/2 top-1/2 w-[132px] h-[220%]" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Panel 2 (Mid layer with top specular edge highlight & mid parallax depth) */}
-                <div className="hero-glass-layer hero-glass-layer--mid absolute top-[12%] left-[30%] w-[68%] h-[72%]">
-                  <div className="relative w-full h-full rotate-3 rounded-2xl border border-[#A8C5FF]/35 bg-gradient-to-br from-[#A8C5FF]/[0.14] via-[#151226]/65 to-[#0A0913]/85 backdrop-blur-md shadow-[inset_0_1px_0_rgba(246,242,233,0.22),0_28px_56px_-14px_rgba(0,0,0,0.78)] overflow-hidden">
-                    <div className="relative z-10 h-px w-full bg-gradient-to-r from-[#A8C5FF]/45 via-[#F6F2E9]/20 to-transparent" />
-                    <div className="absolute inset-0 -rotate-3">
-                      <div className="absolute w-[147.059%] h-[138.889%] -left-[44.118%] -top-[16.667%]">
-                        <div className="hero-copper-beam hero-copper-beam--mid absolute left-1/2 top-1/2 w-[132px] h-[220%]" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Panel 3 (Front layer with strongest parallax, specular edge & thin Soft Copper accent) */}
-                <div className="hero-glass-layer hero-glass-layer--front absolute top-[48%] left-[11%] w-[62%] h-[48%]">
-                  <div className="relative w-full h-full -rotate-2 rounded-2xl border border-[#A8C5FF]/50 bg-gradient-to-tr from-[#0A0913]/80 via-[#18152B]/60 to-[#A8C5FF]/[0.18] backdrop-blur-lg shadow-[inset_0_1px_0_rgba(246,242,233,0.28),0_24px_50px_-12px_rgba(0,0,0,0.85)] overflow-hidden">
-                    <div className="relative z-10 h-px w-full bg-gradient-to-r from-transparent via-[#A8C5FF]/55 to-transparent" />
-                    <div className="relative z-10 mt-7 ml-7 h-px w-16 bg-[#F2A77D]" />
-                    <div className="absolute inset-0 rotate-2">
-                      <div className="absolute w-[161.29%] h-[208.333%] -left-[17.742%] -top-[100%]">
-                        <div className="hero-copper-beam hero-copper-beam--front absolute left-1/2 top-1/2 w-[132px] h-[220%]" />
-                      </div>
-                    </div>
-                  </div>
+            {/* Concise Identity Details */}
+            <dl className="grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-2.5 pt-3 border-t border-[#242138] text-xs sm:text-sm text-[#CFCAC0]">
+              <div className="flex items-start gap-2">
+                <Briefcase className="w-4 h-4 text-[#F2A77D] shrink-0 mt-0.5" aria-hidden="true" />
+                <div>
+                  <dt className="sr-only">Current Role</dt>
+                  <dd className="text-[#F6F2E9] font-medium">
+                    {PROFILE.currentRole} at {PROFILE.currentCompany}
+                  </dd>
                 </div>
               </div>
-            </div>
+
+              <div className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 text-[#A8C5FF] shrink-0 mt-0.5" aria-hidden="true" />
+                <div>
+                  <dt className="sr-only">Location</dt>
+                  <dd>Based in {PROFILE.location}</dd>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2">
+                <Award className="w-4 h-4 text-[#A8C5FF] shrink-0 mt-0.5" aria-hidden="true" />
+                <div>
+                  <dt className="sr-only">Certification</dt>
+                  <dd>AWS Certified Cloud Practitioner</dd>
+                </div>
+              </div>
+            </dl>
+          </div>
+
+          {/* Right Column: Restrained Static Application Support & Systems Architecture Diagram */}
+          <div className="lg:col-span-5">
+            <figure
+              aria-labelledby="hero-diagram-caption"
+              className="bg-[#12101F] border border-[#242138] rounded-2xl p-5 sm:p-6 space-y-5"
+            >
+              <figcaption
+                id="hero-diagram-caption"
+                className="flex items-center justify-between gap-2 pb-3 border-b border-[#242138] text-[11px] font-mono uppercase tracking-wider text-[#9A94A8]"
+              >
+                <span className="text-[#A8C5FF] font-semibold">
+                  Illustrative systems &amp; support flow
+                </span>
+                <span>Diagram</span>
+              </figcaption>
+
+              {/* Central Systems Hub */}
+              <div className="rounded-xl border border-[#A8C5FF]/40 bg-[#0A0913] px-4 py-3 text-center">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-[#F2A77D]">
+                  Core Focus
+                </div>
+                <div className="font-display text-base sm:text-lg font-bold text-[#F6F2E9] mt-0.5">
+                  Business Applications &amp; SaaS
+                </div>
+              </div>
+
+              {/* Clean Static Orthogonal Connectors (SVG) */}
+              <svg
+                className="w-full h-5 block text-[#242138]"
+                viewBox="0 0 320 20"
+                fill="none"
+                aria-hidden="true"
+              >
+                <line x1="160" y1="0" x2="160" y2="10" stroke="#A8C5FF" strokeOpacity="0.55" strokeWidth="1.25" />
+                <line x1="60" y1="10" x2="260" y2="10" stroke="#242138" strokeWidth="1.25" />
+                <line x1="60" y1="10" x2="60" y2="20" stroke="#A8C5FF" strokeOpacity="0.45" strokeWidth="1.25" />
+                <line x1="260" y1="10" x2="260" y2="20" stroke="#A8C5FF" strokeOpacity="0.45" strokeWidth="1.25" />
+              </svg>
+
+              {/* Four Connected Support Domains */}
+              <div className="grid grid-cols-2 gap-3 -mt-5">
+                {SUPPORT_NODES.map((node) => {
+                  const Icon = node.icon;
+                  return (
+                    <div
+                      key={node.id}
+                      className="rounded-xl border border-[#242138] bg-[#0A0913] p-3.5 space-y-1"
+                    >
+                      <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#F6F2E9]">
+                        <Icon className="w-3.5 h-3.5 text-[#A8C5FF] shrink-0" aria-hidden="true" />
+                        <span>{node.label}</span>
+                      </div>
+                      <p className="text-[11px] text-[#CFCAC0] leading-snug">{node.detail}</p>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Compact Triage & Handoff Sequence */}
+              <div className="pt-3 border-t border-[#242138] space-y-1.5">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-[#9A94A8]">
+                  Triage &amp; escalation flow
+                </div>
+                <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono text-[#E6E1D6]">
+                  <li>1. Confirm symptoms</li>
+                  <li aria-hidden="true" className="text-[#F2A77D]">
+                    -&gt;
+                  </li>
+                  <li>2. Check sync &amp; access</li>
+                  <li aria-hidden="true" className="text-[#F2A77D]">
+                    -&gt;
+                  </li>
+                  <li>3. Escalate or close</li>
+                </ol>
+              </div>
+            </figure>
           </div>
         </div>
       </div>
     </section>
   );
 };
-
