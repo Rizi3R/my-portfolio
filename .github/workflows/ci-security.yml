@@ -22,32 +22,37 @@ jobs:
           node-version: "22"
           cache: "npm"
 
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+      - name: Install dependencies cleanly from lockfile
+        run: npm ci
 
       - name: TypeScript & lint verification
         run: npm run lint
 
+      - name: Run unit tests
+        run: npm test
+
       - name: Validate portfolio content integrity
         run: npm run validate:content
+
+      - name: Validate multilingual bundles and locale helpers
+        run: npm run validate:i18n
 
       - name: Production build
         run: npm run build
 
-      - name: Verify production bundle contains no source maps or secret leaks
+      - name: Build hygiene check (no source maps or obvious credential patterns in dist/)
         run: |
           if find dist -name '*.map' | grep -q .; then
             echo "ERROR: Source maps found in production dist/"
             exit 1
           fi
-          if grep -rnE 'UPSTASH_REDIS_REST_TOKEN|KV_REST_API_TOKEN|5582 2313|sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}' dist/; then
-            echo "ERROR: Sensitive pattern found in production dist/"
+          if grep -rlE 'UPSTASH_REDIS_REST_TOKEN|KV_REST_API_TOKEN|VISITOR_HASH_SALT|sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{35}|-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----' dist/; then
+            echo "ERROR: Sensitive pattern detected in listed production dist/ file(s)"
             exit 1
           fi
 
       - name: Audit production dependencies (high/critical)
         run: npm audit --omit=dev --audit-level=high
 
-      - name: Audit full dependency tree including build tooling (report only until upstream picomatch > 4.0.7 releases)
-        continue-on-error: true
+      - name: Audit full dependency tree (high/critical)
         run: npm audit --audit-level=high

@@ -2,24 +2,32 @@ import dotenv from 'dotenv';
 import express from 'express';
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { createServer as createHttpServer } from 'node:http';
+import {
+  checkRedisRateLimit,
+  createHashedIp,
+  createVisitorFingerprint,
+  DEDUP_TTL_MS,
+  DEDUP_TTL_SECONDS,
+  getClientIpFromHeaders,
+  getHeaderValue,
+  getRedisCredentials,
+  getVisitorHashSalt,
+  isAllowedOriginHeaders,
+  MAX_CONTENT_LENGTH_BYTES,
+  RATE_LIMIT_WINDOW_MS,
+  RATE_LIMIT_WINDOW_SECONDS,
+  POST_RATE_LIMIT_MAX,
+  GET_RATE_LIMIT_MAX,
+  runRedisCommand,
+  SEEN_PREFIX,
+  TOTAL_KEY,
+} from './api/_visitorCore';
 
 dotenv.config({ path: '.env.local' });
 dotenv.config();
 
 const PORT = Number(process.env.PORT || 3000);
-const TOTAL_KEY = 'aries_portfolio:visitors:total';
-const SEEN_PREFIX = 'aries_portfolio:visitors:seen:';
-const RATE_LIMIT_PREFIX = 'aries_portfolio:visitors:rl:';
-const DEDUP_TTL_MS = 1000 * 60 * 60 * 12; // 12 hours
-const DEDUP_TTL_SECONDS = 60 * 60 * 12;
-const RATE_LIMIT_WINDOW_MS = 60 * 1000;
-const RATE_LIMIT_WINDOW_SECONDS = 60;
-const POST_RATE_LIMIT_MAX = 10;
-const GET_RATE_LIMIT_MAX = 30;
-const REDIS_TIMEOUT_MS = 4000;
-const MAX_CONTENT_LENGTH_BYTES = 1024;
 const LOCAL_STORE_PATH = path.resolve(process.cwd(), '.data', 'visitor-counter.json');
 
 interface LocalStore {
@@ -28,99 +36,6 @@ interface LocalStore {
 }
 
 const memoryRateLimiter = new Map<string, { count: number; resetAt: number }>();
-
-function getRedisCredentials(): { url: string; token: string } | null {
-  const url = (process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL || '').trim();
-  const token = (process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN || '').trim();
-  if (!url || !token || !url.startsWith('https://')) {
-    return null;
-  }
-  return { url: url.replace(/\/$/, ''), token };
-}
-
-async function runRedisCommand(
-  creds: { url: string; token: string },
-  command: (string | number)[]
-): Promise<unknown> {
-  const response = await fetch(creds.url, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${creds.token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(command),
-    signal: AbortSignal.timeout(REDIS_TIMEOUT_MS),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Redis REST status ${response.status}`);
-  }
-
-  const data = (await response.json()) as { result?: unknown; error?: string };
-  if (data.error) {
-    throw new Error('Redis command failed');
-  }
-  return data.result;
-}
-
-function getHashSalt(): string {
-  return process.env.VISITOR_HASH_SALT || 'aries-razak-portfolio-salt';
-}
-
-function getClientIp(req: express.Request): string {
-  const forwarded = (req.headers['x-forwarded-for'] as string | undefined)?.split(',')[0]?.trim() || '';
-  const realIp = (req.headers['x-real-ip'] as string | undefined)?.trim() || '';
-  return forwarded || realIp || req.socket.remoteAddress || 'unknown';
-}
-
-function createHashedIp(ip: string): string {
-  return createHash('sha256')
-    .update(`${getHashSalt()}:rl:${ip}`)
-    .digest('hex')
-    .slice(0, 24);
-}
-
-function createVisitorFingerprint(req: express.Request): string {
-  const ip = getClientIp(req);
-  const ua = (req.headers['user-agent'] || '').slice(0, 200);
-  const dayBucket = new Date().toISOString().slice(0, 10);
-
-  return createHash('sha256')
-    .update(`${getHashSalt()}:${ip}:${ua}:${dayBucket}`)
-    .digest('hex')
-    .slice(0, 32);
-}
-
-function isAllowedOrigin(req: express.Request): boolean {
-  const secFetchSite = String(req.headers['sec-fetch-site'] || '').toLowerCase();
-  if (secFetchSite === 'cross-site') {
-    return false;
-  }
-
-  const origin = String(req.headers.origin || '').trim();
-  if (!origin) {
-    return true;
-  }
-
-  try {
-    const parsedOrigin = new URL(origin);
-    const originHost = parsedOrigin.hostname.toLowerCase();
-    const requestHostHeader = String(req.headers.host || '').split(':')[0]?.toLowerCase() || '';
-
-    if (requestHostHeader && originHost === requestHostHeader) {
-      return true;
-    }
-
-    return (
-      originHost === 'aries-razak.vercel.app' ||
-      originHost === 'localhost' ||
-      originHost === '127.0.0.1' ||
-      originHost.endsWith('.run.app')
-    );
-  } catch {
-    return false;
-  }
-}
 
 function checkMemoryRateLimit(method: 'GET' | 'POST', ipHash: string): boolean {
   const now = Date.now();
@@ -143,22 +58,6 @@ function checkMemoryRateLimit(method: 'GET' | 'POST', ipHash: string): boolean {
 
   existing.count += 1;
   return existing.count <= maxRequests;
-}
-
-async function checkRedisRateLimit(
-  creds: { url: string; token: string },
-  method: 'GET' | 'POST',
-  ipHash: string
-): Promise<boolean> {
-  const minuteBucket = Math.floor(Date.now() / RATE_LIMIT_WINDOW_MS);
-  const rateKey = `${RATE_LIMIT_PREFIX}${method}:${ipHash}:${minuteBucket}`;
-  const maxRequests = method === 'POST' ? POST_RATE_LIMIT_MAX : GET_RATE_LIMIT_MAX;
-
-  const currentCount = Number(await runRedisCommand(creds, ['INCR', rateKey]));
-  if (currentCount === 1) {
-    await runRedisCommand(creds, ['EXPIRE', rateKey, RATE_LIMIT_WINDOW_SECONDS]);
-  }
-  return currentCount <= maxRequests;
 }
 
 let writeLock: Promise<void> = Promise.resolve();
@@ -230,7 +129,7 @@ async function startServer() {
       }
     }
 
-    if (req.method === 'POST' && !isAllowedOrigin(req)) {
+    if (req.method === 'POST' && !isAllowedOriginHeaders(req.headers, { allowRunApp: true })) {
       res.status(403).json({ error: 'Cross-site request rejected' });
       return;
     }
@@ -240,7 +139,19 @@ async function startServer() {
 
   app.get('/api/visitors', async (req, res) => {
     const creds = getRedisCredentials();
-    const ipHash = createHashedIp(getClientIp(req));
+    const hashSalt = getVisitorHashSalt();
+
+    if (!hashSalt) {
+      res.json({
+        configured: false,
+        count: null,
+        deduplicated: false,
+      });
+      return;
+    }
+
+    const clientIp = getClientIpFromHeaders(req.headers, req.socket.remoteAddress || '');
+    const ipHash = createHashedIp(clientIp, hashSalt);
 
     try {
       const allowed = creds
@@ -285,8 +196,24 @@ async function startServer() {
 
   app.post('/api/visitors', async (req, res) => {
     const creds = getRedisCredentials();
-    const ipHash = createHashedIp(getClientIp(req));
-    const fingerprint = createVisitorFingerprint(req);
+    const hashSalt = getVisitorHashSalt();
+
+    if (!hashSalt) {
+      res.json({
+        configured: false,
+        count: null,
+        deduplicated: false,
+      });
+      return;
+    }
+
+    const clientIp = getClientIpFromHeaders(req.headers, req.socket.remoteAddress || '');
+    const ipHash = createHashedIp(clientIp, hashSalt);
+    const fingerprint = createVisitorFingerprint(
+      clientIp,
+      getHeaderValue(req.headers, 'user-agent'),
+      hashSalt
+    );
 
     try {
       const allowed = creds

@@ -1,136 +1,41 @@
-# Technical Architecture: Personal Technology Universe
+# Portfolio Architecture
 
-**Date:** October 28, 2026  
-**Architect:** Frontend Engineering & Systems Architecture Team
+Overview of the application structure, content pipeline, multilingual setup, and optional visitor API.
 
----
+## 1. Frontend Structure
 
-## 1. Component Hierarchy & View Switching Architecture
+`src/App.tsx` renders the main portfolio view (`portfolio`) by default and switches cleanly between secondary views (`trace`, `atlas`, `plain`, `receipt`) via URL query/hash state (`?view=...`, `?case=...`, `#...`). Secondary views and modals (`TraceView`, `AtlasView`, `PlainView`, `ReceiptSection`, `TheLab`, `ResumeModal`) are code-split with `React.lazy`.
 
-```
-App.tsx
-├── Header (Compact Persistent Bar: View Switcher [Trace | Atlas | Plain] + Quick Experience/Contact Jumps)
-│
-├── [VIEW 1: TRACE (Default)]
-│   ├── Premise Banner ("One scan. Six layers. What happens between the beep and the receipt.")
-│   ├── TraceLine Rail (Continuous SVG Path with Scroll-Driven / IntersectionObserver sync)
-│   ├── Stratum 1: Hardware & Peripherals (SVG Schematic, Terminals, Printers, RJ45)
-│   ├── Stratum 2: Operating System & Device (Kernel Drivers, POS Daemons, Process Tree)
-│   ├── Stratum 3: Network (VLANs, Gateway NAT, Packet Flight Simulator)
-│   ├── Stratum 4: Application (Xilnex POS Logic, Transaction Logs, NetSuite Audit)
-│   ├── Stratum 5: Cloud & Automation (Lark Automated Workflows, AWS Primitives, S3/EC2)
-│   ├── Stratum 6: People & Process (Vendor Escalation, Incident Handoff, Commissioning SOP)
-│   └── Receipt Section (Thermal Printed Experience Dossier, Contact, Print Sheet)
-│
-├── [VIEW 2: ATLAS (Interactive Knowledge Graph)] (Lazy Loaded)
-│   ├── Graph Controls (Filter by Stratum, Evidence Status, Text Search)
-│   ├── Deterministic Canvas / SVG Coordinate Graph
-│   ├── Node Inspector Dossier Panel (Summary, Evidence Link, Related Nodes with Edge Reasons)
-│   └── Accessible Screen-Reader Semantic List Tree (ARIA-compliant)
-│
-├── [VIEW 3: PLAIN (Linear Document)]
-│   ├── Semantic Paper Theme View
-│   ├── Complete Linear Text Representation of all 6 Strata, Experiences & Cases
-│   └── Print Stylesheet Source
-│
-├── The Lab (Standalone Interactive Workbench) (Lazy Loaded)
-│   ├── Simulation Chrome ("SIMULATION" Badge, Models / Does Not Model Note)
-│   ├── Packet Flight Simulator (Pure Logic + Canvas/SVG)
-│   ├── Cache Eviction Visualizer (LRU / FIFO State Machine + Visual Slots)
-│   └── UNIX Permission Bitmask Calculator
-│
-├── Shared Modals
-│   ├── ResumeModal (ATS Print Sheet)
-│   └── CommandPalette (Cmd+K Global Shortcuts)
-│
-└── Footer (Colophon, Monogram, Back-to-Top, Verifications)
-```
+- **Primary Sections**:
+  - `HeroSection`: Introduction, verified role scope, quick résumé/case-study actions, and an illustrative triage workflow diagram.
+  - `ProjectsSection`: Four Selected Work case studies rendered from `CASE_STUDIES` (`case-lark-migration`, `case-integrations`, `case-pos-triage`, `case-store-launch`).
+  - `TimelineSection`: Experience timeline (`emart24 Malaysia`, `HWC Coffee Malaysia (Palaterium Sdn Bhd)`, `Managed print services`, and the diploma internship at the `Attorney General's Chambers of Malaysia`).
+  - `ConstellationSection`: Four-group capability summary (`Application Support`, `Business Systems & SaaS`, `IT Operations & Helpdesk`, `Technical Foundations`) plus entry point to `AtlasView`.
+  - `CredentialsSection`: UiTM Diploma, AWS Certified Cloud Practitioner credential, AI Teach Malaysia completed program, and an isolated Currently Learning entry for UiPath / RPA.
+  - `AboutSection`: Background narrative and entry points to `TheLab`, `TraceView`, `AtlasView`, and `InteractiveTerminal`.
+  - `ContactSection` & `Footer`: Email copy helper, LinkedIn link, résumé modal trigger, and `LanguageSelector`.
+- **Overlays & Navigation Aids**:
+  - `Navbar`, `CommandPalette` (`Ctrl+K` / `Cmd+K`), `ResumeModal` / `ResumeDocument` (print styles in `src/index.css`), and focus trapping via `src/utils/useDialogFocusTrap.ts`.
 
----
+## 2. Content & Multilingual Pipeline
 
-## 2. Content Model & Single Source of Truth
+- **Canonical Data (`src/data/universeContent.ts`)**: Stores profile metadata, `SKILL_GROUPS`, `EXPERIENCES`, `CASE_STUDIES`, `EDUCATION`, `CERTIFICATIONS`, `LEARNING_ENTRIES`, `STRATA`, `NODES`, and `EDGES`.
+- **Locale Bundles (`src/i18n/`)**:
+  - `src/i18n/config.ts` defines the four supported locales (`en-MY`, `ms-MY`, `zh-Hans-MY`, `ta-MY`) and resolves active locale from URL `?lang=`, `localStorage`, or default `en-MY`.
+  - `src/i18n/translations/` provides typed `LocaleBundle` modules (`ui` + `content`).
+  - `src/i18n/I18nContext.tsx` supplies translations via `useI18n()` and synchronizes `<html lang>` and `dir`.
+- **Automated Content & i18n Checks**:
+  - `scripts/validate-content.ts` checks employment dates, case ordering, prohibited rating/proficiency fields, forbidden overclaims, node `evidenceRef` integrity, and UiPath learning isolation.
+  - `scripts/validate-i18n.ts` asserts exact parity between `en-MY` and `universeContent.ts`, 100% recursive key/placeholder/array parity across all 4 locales, and non-English translation completeness.
 
-All views (Trace, Atlas, Plain, Receipt, SEO Schema) derive deterministically from `src/data/universeContent.ts`:
+## 3. Visitor Counter Endpoint (`/api/visitors`)
 
-```typescript
-export type StratumType = 
-  | 'hardware' 
-  | 'os' 
-  | 'network' 
-  | 'application' 
-  | 'cloud-automation' 
-  | 'people-process';
+- `api/_visitorCore.ts` holds shared validation, origin checks, Redis REST command helpers, and HMAC-SHA256 hashing helpers (`createHashedIp`, `createVisitorFingerprint`).
+- `api/visitors.ts` implements the Vercel serverless handler; `server.ts` provides local Express parity alongside Vite dev middleware (or static `dist/` serving when `NODE_ENV=production`).
+- Both entry points require a non-empty `VISITOR_HASH_SALT` of at least 16 characters. If `VISITOR_HASH_SALT` (or Redis credentials on Vercel) is missing or weak, `/api/visitors` returns HTTP `200` with `{ configured: false, count: null, deduplicated: false }` and performs no hashing or persistence.
 
-export type NodeKind = 'technology' | 'concept' | 'project' | 'role' | 'certification';
+## 4. Scope & Limitations
 
-export type EvidenceStatus = 
-  | 'professional' 
-  | 'project' 
-  | 'experiment' 
-  | 'foundation' 
-  | 'learning' 
-  | 'exploring';
-
-export interface UniverseNode {
-  id: string;
-  label: string;
-  stratum: StratumType;
-  kind: NodeKind;
-  status: EvidenceStatus;
-  summary: string; // Max 200 chars, factual, first person
-  evidenceRef?: string; // REQUIRED if status is 'professional' or 'project'
-  links?: Array<{ label: string; url: string }>;
-  x?: number; // Normalized coordinate for deterministic Atlas layout (0-100)
-  y?: number;
-}
-
-export interface UniverseEdge {
-  from: string;
-  to: string;
-  reason: string; // REQUIRED, max 120 chars, states real relationship
-}
-
-export interface UniverseExperience {
-  id: string;
-  role: string;
-  organization: string;
-  location: string;
-  period: string;
-  bullets: string[];
-  technologies: string[];
-}
-```
-
----
-
-## 3. Provenance & Validation Workflow
-
-A standalone script `scripts/validate-content.mjs` is executed via:
-```bash
-node scripts/validate-content.mjs
-```
-The validator strictly asserts:
-1. Every node has an assigned `status`.
-2. Every node with status `professional` or `project` has a non-empty `evidenceRef` pointing to an experience ID, project ID, or verified external URL.
-3. Every edge has a descriptive `reason` (under 120 characters) and valid `from`/`to` node references.
-4. No duplicate node IDs or edge pairs exist.
-5. Node summaries are strictly $\le 200$ characters.
-
----
-
-## 4. Code Splitting & Performance Boundaries
-
-To prevent the 740 kB monolithic bundle observed in the audit:
-* `AtlasView` is loaded lazily via `React.lazy(() => import('./views/AtlasView'))`.
-* `TheLab` is loaded lazily via `React.lazy(() => import('./components/TheLab'))`.
-* Initial page load strictly delivers `TraceView` and `ReceiptSection`, bringing the initial-route JavaScript under 120 kB gzipped.
-
----
-
-## 5. Resilience, A11y & Crawlability Strategy
-
-* **No-JS / Crawler Fallback:** Pre-rendered HTML shell inside `index.html` detailing Aries Razak's verified positions, education, and credentials, paired with JSON-LD Person schema.
-* **Scroll Animation Feature Detection:**
-  * Uses CSS `@supports (animation-timeline: scroll())` where native browser support exists.
-  * Gracefully falls back to a passive `IntersectionObserver` scroll listener on non-supporting engines.
-  * If `prefers-reduced-motion: reduce` is enabled, the trace line renders at 100% stroke immediately.
+- The frontend UI does not currently call or display `/api/visitors`; the endpoint exists purely as an optional backend counter service.
+- `vite.config.ts` sets `build.sourcemap: false` so TypeScript source maps are excluded from `dist/`.
+- `tests/visitors.test.ts` exercises `/api/visitors` request validation, secret guards, and HMAC-SHA256 behavior with a mocked `fetch`; live Upstash Redis calls are not run during offline CI checks.

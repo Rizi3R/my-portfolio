@@ -1,171 +1,145 @@
-# Aries Razak — Professional IT Support & Systems Portfolio
+# Aries Razak | Personal Portfolio
 
-[![Live Site](https://img.shields.io/badge/Live%20Demo-aries--razak.vercel.app-0284c7?style=flat&logo=vercel)](https://aries-razak.vercel.app/)
-[![React](https://img.shields.io/badge/React-19.0-61dafb?style=flat&logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-8.x-646cff?style=flat&logo=vite)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38bdf8?style=flat&logo=tailwindcss)](https://tailwindcss.com/)
-[![AWS Certified](https://img.shields.io/badge/AWS-Cloud%20Practitioner-ff9900?style=flat&logo=amazon-aws)](https://aws.amazon.com/certification/certified-cloud-practitioner/)
+Personal portfolio for **Muhammad Aries Irhan bin Abd Razak (Aries Razak)**, highlighting real experience across **Application Support, Business Systems, SaaS Administration, Integration Configuration, and IT Operations**.
 
-> **"I support, troubleshoot, and improve the technology that helps businesses operate."**
-
-A modern, high-performance personal technology portfolio built for **Aries Razak** (Muhammad Aries Irhan bin Abd Razak). Designed as an interactive engineering portfolio that presents hands-on technical capabilities across **Application Support, Systems Support, IT Operations, Business Systems/SaaS, Infrastructure, and Cloud Foundations**.
-
----
-
-## 🌐 Live Website
-
-- **Production Deployment:** [https://aries-razak.vercel.app/](https://aries-razak.vercel.app/)
+- **Live Website:** [https://aries-razak.vercel.app/](https://aries-razak.vercel.app/)
+- **Repository:** [https://github.com/Rizi3R/my-portfolio](https://github.com/Rizi3R/my-portfolio)
 - **LinkedIn:** [linkedin.com/in/aries-razak-a36045256](https://www.linkedin.com/in/aries-razak-a36045256)
-- **Public Contact:** [ariesirhan25@gmail.com](mailto:ariesirhan25@gmail.com)
+- **Contact:** [ariesirhan25@gmail.com](mailto:ariesirhan25@gmail.com)
 
 ---
 
-## 🧭 Key Architectural Features
+## Key Features
 
-### 1. "Choose Your Route" Recruiter Discovery Filter
-A sticky perspective controller that highlights relevant experience, missions, and technical skills based on the visitor's hiring focus:
-- **All Overview:** Comprehensive view of career progression, technical missions, and skills.
-- **Application Support:** Triage workflows, Xilnex POS troubleshooting, payment gateways, vendor escalation, and UAT testing.
-- **IT Operations:** Multi-site retail operations, incident ticket management, hardware diagnostics, and endpoint lifecycles.
-- **Business Systems:** SaaS administration (Lark Super Admin, Google Workspace migration), and NetSuite data validation.
-- **Infrastructure:** Layer 1–4 networking, physical RJ45 termination, DHCP/AP provisioning, and new store commissioning.
-- **Cloud Foundations:** AWS Certified Cloud Practitioner competencies, IAM, and foundational cloud services.
-
-### 2. Interactive Terminal Status Console (`ARIES.EXE`)
-- Simulated CLI interface embedded directly into the hero section.
-- Non-blocking quick command triggers (`--profile`, `--stack`, `--contact`, `--help`).
-- Real-time technical summary without intrusive modal popups.
-
-### 3. Story-Driven Chapters
-Structured as progressive chapters instead of a dry, static resume:
-- **Chapter 01 · The Operator:** Operating philosophy bridging software understanding with hands-on systems support.
-- **Chapter 02 · The Journey:** Interactive career timeline (emart24 Malaysia, Palaterium, Managed Print Services, and the Attorney General’s Chambers of Malaysia).
-- **Chapter 03 · The Problem Solver:** 5 structured case studies detailing *The Challenge*, *The Investigation*, *The Approach*, *The Outcome*, and *What I Learned*.
-- **Chapter 04 · The Toolkit:** Honest, contextualized skill inventory with real production examples.
-- **Chapter 05 · The Builder:** Real project deliverables (DKICT Compliance System in Laravel/MySQL, Lark Super Admin Migration, Multi-Site Commissioning Runbooks, etc.).
-- **Chapter 06 · The Next Mission:** Role-focused email launcher, email copy button with toast feedback, and verified links.
-
-### 4. Verified ATS-Optimized Technical Resume
-- Dedicated full-screen modal with printable stylesheet rules (`@media print`).
-- Allows recruiters to save a clean, standardized 1–2 page PDF directly using native browser print (`Ctrl+P` / `Cmd+P`).
+- **Selected Work Case Studies:** Four expandable case studies covering internal Google Workspace to Lark migration coordination, third-party delivery-platform configuration in Xilnex (GrabFood, foodpanda, ShopeeFood), application incident triage and vendor escalation, and new-site IT readiness.
+- **Career Timeline & Credentials:** Experience across emart24 Malaysia, HWC Coffee Malaysia (Palaterium Sdn Bhd), managed print services, and an application development internship at the Attorney General's Chambers of Malaysia, alongside a UiTM Diploma, AWS Certified Cloud Practitioner credential, AI Teach Malaysia completed program, and a clearly separated Currently Learning section (UiPath and RPA).
+- **Multilingual Support (`en-MY`, `ms-MY`, `zh-Hans-MY`, `ta-MY`):** Full UI and content translations in English, Bahasa Melayu, Simplified Chinese, and Tamil, selectable from the header and syncable via `?lang=` query parameter.
+- **Printable Resume Viewer & Plain View:** Print-styled résumé modal (`Ctrl+P` / `Cmd+P`) and linear plain-text summary view.
+- **Interactive Learning Tools:** Optional secondary views (`Beep to Receipt` walkthrough, interactive skills constellation, Computing Lab, command terminal, and `Ctrl+K` / `Cmd+K` command palette). Illustrative simulations use generic examples and are labeled separately from employer systems.
+- **Content & i18n Validation:** Automated scripts (`validate:content`, `validate:i18n`) that check baseline factual consistency, case ordering, `UiPath` learning isolation, and key/placeholder parity across all four locales.
+- **Optional Visitor Counter API (`/api/visitors`):** Privacy-preserving endpoint using HMAC-SHA256 digests and rate limiting when configured with Redis and `VISITOR_HASH_SALT`. (The current UI does not display a live counter badge; `/api/visitors` operates as an optional backend endpoint.)
 
 ---
 
-## 🔒 Public Repository & Data Privacy Compliance
+## Tech Stack
 
-This codebase has been sanitized for public open-source hosting:
-- **Location:** General regional location only (`Selangor / Kuala Lumpur, Malaysia`).
-- **Phone Number:** Displayed as `"Available upon request"` to prevent web scrapers and telemarketing spam.
-- **Credentials & API Keys:** Zero hardcoded API keys, tokens, database passwords, or confidential internal links.
+Derived directly from `package.json` and deployment configuration:
 
----
-
-## 🛠️ Tech Stack & Tooling
-
-| Layer | Technologies |
-| :--- | :--- |
-| **Framework** | [React 19](https://react.dev/) + [TypeScript 5](https://www.typescriptlang.org/) |
-| **Bundler & Build Tool** | [Vite 8](https://vitejs.dev/) |
-| **Styling** | [Tailwind CSS 4](https://tailwindcss.com/) |
-| **Icons & Motion** | [Lucide React](https://lucide.dev/), [Motion](https://motion.dev/) |
-| **Hosting & CI/CD** | [Vercel](https://vercel.com/) |
+- **Frontend:** React 19, TypeScript, Vite 8, Tailwind CSS 4, Lucide React
+- **Local Server & API Parity:** Express 4, `tsx`, `dotenv`, Node.js built-in test runner (`node:test`)
+- **Hosting & Optional Persistence:** Vercel static build + Node serverless function (`/api/visitors`), optional Upstash Redis / Vercel KV REST API
 
 ---
 
-## 🚀 Getting Started Locally
+## Getting Started Locally
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (version 18.x or 20.x recommended)
-- `npm` (version 9.x or higher)
 
-### 1. Clone the repository
+- **Node.js:** v22 recommended (matches CI in `.github/workflows/ci-security.yml`; Node 20+ supported)
+- **npm:** Included with Node.js
+
+### 1. Clone and install dependencies
+
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/Rizi3R/my-portfolio.git
+cd my-portfolio
+npm ci
 ```
 
-### 2. Install dependencies
-> **Important:** Install with `--legacy-peer-deps` to guarantee clean resolution across modern Vite 8 peer dependencies.
-```bash
-npm install --legacy-peer-deps
-```
+> **Note on `.npmrc`:** `.npmrc` sets `legacy-peer-deps=true` to keep npm dependency installation consistent across the toolchain versions in `package.json` (`typescript` 7.x and Vite 8 plugins).
 
-### 3. Start the development server
-```bash
-npm run dev
-```
-The site will run locally at `http://localhost:3000` (or the port specified in terminal).
+### 2. Available scripts
 
-### 4. Type checking & Linting
-```bash
-npm run lint
-```
-
-### 5. Production Build
-```bash
-npm run build
-npm run preview
-```
+| Command | Purpose |
+| :--- | :--- |
+| `npm run dev` | Start local Express + Vite dev server on `http://localhost:3000` |
+| `npm run start` | Start `server.ts` (serves built `dist/` when `NODE_ENV=production`) |
+| `npm run build` | Build production static assets into `dist/` (source maps disabled) |
+| `npm run preview` | Preview the built `dist/` bundle via Vite |
+| `npm run lint` | Run `tsc --noEmit` across frontend, node scripts/tests, and `api/` |
+| `npm test` | Run unit tests for `/api/visitors` (`tsx --test tests/visitors.test.ts`) |
+| `npm run validate:content` | Validate portfolio facts, dates, evidence refs, and copy rules |
+| `npm run validate:i18n` | Validate all 4 locale bundles and URL locale resolution helpers |
+| `npm run clean` | Remove `dist` and `server.js` build artifacts |
 
 ---
 
-## ☁️ Vercel Deployment
+## Environment Variables (`/api/visitors`)
 
-This project includes pre-configured deployment rules for seamless Vercel integration:
-- `.npmrc`: Sets `legacy-peer-deps=true` automatically.
-- `vercel.json`: Specifies `"installCommand": "npm install --legacy-peer-deps"`, `"buildCommand": "npm run build"`, and Single Page Application (SPA) client-side rewrites.
+Copy `.env.example` to `.env.local` if you want to enable the optional `/api/visitors` endpoint locally:
 
-### Deploying via Vercel CLI:
+| Variable | Required for `/api/visitors` | Purpose |
+| :--- | :--- | :--- |
+| `VISITOR_HASH_SALT` | Yes (`>= 16` chars) | Private HMAC-SHA256 key for one-way IP rate-limit and visit digests |
+| `UPSTASH_REDIS_REST_URL` | On Vercel / remote Redis | Upstash Redis REST endpoint (`https://...`) |
+| `UPSTASH_REDIS_REST_TOKEN` | On Vercel / remote Redis | Upstash Redis REST bearer token |
+| `KV_REST_API_URL` | Alternative alias | Supported automatically instead of `UPSTASH_REDIS_REST_URL` |
+| `KV_REST_API_TOKEN` | Alternative alias | Supported automatically instead of `UPSTASH_REDIS_REST_TOKEN` |
+
+Generate a strong `VISITOR_HASH_SALT`:
+
 ```bash
-npx vercel
+openssl rand -hex 32
 ```
 
-### Deploying via GitHub Integration:
-1. Push your commits to GitHub:
-   ```bash
-   git add .
-   git commit -m "feat: portfolio updates"
-   git push origin main
-   ```
-2. Import the repository in [Vercel](https://vercel.com/new).
-3. Vercel will automatically detect the Vite preset and use settings from `vercel.json`.
+**Security and degradation rules:**
+- Keep all credentials strictly server-side. Never prefix Redis tokens or `VISITOR_HASH_SALT` with `VITE_`.
+- When `VISITOR_HASH_SALT` is unset or shorter than 16 characters (or when Redis credentials are absent in serverless mode), `/api/visitors` disables persistent tracking and responds with HTTP `200` `{ "configured": false, "count": null, "deduplicated": false }`. No raw IPs or User-Agent strings are stored, and no fallback public salt is used.
+- Local development (`server.ts`) uses `.data/visitor-counter.json` only when `VISITOR_HASH_SALT` is set and Redis env vars are absent.
 
 ---
 
-## 📁 Project Structure
+## Vercel Deployment
+
+`vercel.json` is configured for Vite + `/api/visitors`:
+- **Install command:** `npm ci --include=dev`
+- **Build command:** `npm run build`
+- **Output directory:** `dist`
+- **Security headers & SPA rewrites:** Applied in `vercel.json` for production responses and non-API client routes.
+
+To enable persistent visitor counting in production, configure `VISITOR_HASH_SALT` plus `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` (or `KV_REST_API_*`) in **Vercel Project Settings -> Environment Variables** before deploying.
+
+---
+
+## Project Structure
 
 ```text
-├── index.html                   # HTML entry point with SEO & OpenGraph tags
-├── vercel.json                  # Vercel deployment & routing configuration
-├── .npmrc                       # npm dependency resolution configuration
-├── package.json                 # Project scripts and dependencies
+├── .env.example                 # Template for optional server-side visitor-counter env vars
+├── .github/workflows/
+│   └── ci-security.yml          # CI checks: lint, unit tests, content/i18n validators, build, audit
+├── .npmrc                       # Sets legacy-peer-deps=true for npm installs
+├── api/
+│   ├── _visitorCore.ts          # Shared salt validation, HMAC hashing, origin, and Redis helpers
+│   ├── tsconfig.json            # TypeScript config for serverless handler
+│   └── visitors.ts              # Optional Vercel serverless handler for /api/visitors
+├── docs/
+│   └── ARCHITECTURE.md          # Concise architecture and content-pipeline overview
+├── public/
+│   ├── robots.txt               # Crawler directives for production domain
+│   └── sitemap.xml              # XML sitemap for https://aries-razak.vercel.app/
+├── scripts/
+│   ├── validate-content.ts      # Portfolio truthfulness and data integrity checks
+│   └── validate-i18n.ts         # 4-locale parity and translation completeness checks
 ├── src/
-│   ├── main.tsx                 # React application mounting
-│   ├── App.tsx                  # Root component & route state coordination
-│   ├── index.css                # Tailwind CSS imports & print styles
-│   ├── data/
-│   │   └── portfolioData.ts     # Central verified profile, missions & experience data
-│   └── components/
-│       ├── Navbar.tsx           # Header navigation with scroll indicator
-│       ├── RouteSelector.tsx    # "Choose Your Route" recruiter filter bar
-│       ├── Hero.tsx             # Hero section with interactive ARIES.EXE terminal
-│       ├── OperationalStrip.tsx # Core capabilities highlight bar
-│       ├── About.tsx            # Chapter 01: Career progression & narrative
-│       ├── Experience.tsx       # Chapter 02: Interactive career timeline
-│       ├── Projects.tsx         # Chapter 03: Structured technical case studies
-│       ├── Skills.tsx           # Chapter 04: Domain skills explorer
-│       ├── ProjectShowcase.tsx  # Chapter 05: Practical project implementations
-│       ├── Certifications.tsx   # Accreditations & education
-│       ├── LearningJourney.tsx  # Target roles & continuous growth
-│       ├── Contact.tsx          # Chapter 06: Contact form & outreach
-│       ├── ResumeModal.tsx      # Print-ready ATS resume viewer
-│       └── Footer.tsx           # Footer with chapter links & back-to-top
+│   ├── App.tsx                  # Root layout, view routing, modals, and keyboard shortcuts
+│   ├── components/              # Page sections, views (Trace, Atlas, Plain, Receipt), Lab & modals
+│   ├── data/universeContent.ts  # Canonical English profile, experience, case studies & nodes
+│   ├── i18n/                    # Locale resolver, React context, and en/ms/zh-Hans/ta bundles
+│   └── utils/                   # Audio toggle, clipboard helper, and modal focus trap hook
+├── tests/
+│   └── visitors.test.ts         # Unit tests for VISITOR_HASH_SALT, HMAC digests & request guards
+├── index.html                   # HTML shell, Open Graph tags, JSON-LD schema & no-JS fallback
+├── package.json                 # Dependencies and npm scripts
+├── server.ts                    # Local Express server with Vite dev middleware and /api/visitors
+├── vercel.json                  # Vercel build, header, and SPA rewrite rules
+└── vite.config.ts               # Vite configuration (sourcemap disabled for production)
 ```
 
 ---
 
-## 📄 License & Attribution
+## Development Notes & Limitations
 
-- Built and maintained by **Aries Razak**.
-- Designed and engineered with React, TypeScript, and Tailwind CSS.
+- **AI-Assisted Development:** Parts of this codebase, refactoring passes, and multilingual translations were drafted with AI coding assistance and reviewed against Aries Razak's verified career details and automated repository checks (`validate:content`, `validate:i18n`).
+- **Automated Check Scope:** `npm test` tests `/api/visitors` logic with a mocked `fetch`; live Redis connectivity, cross-browser UI rendering, and penetration testing are not covered automatically by CI.
+- **Bundle Scan Scope:** The CI bundle check scans `dist/` for source maps and common credential/env-var patterns as basic build hygiene rather than a standalone security guarantee.
+- **Repository License:** No open-source license file is currently included; code and personal portfolio content belong to Aries Razak unless a license is explicitly added.
