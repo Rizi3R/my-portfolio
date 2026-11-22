@@ -26,24 +26,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const supportNodes = [
     {
       id: 'users' as const,
+      caseId: 'case-lark-migration',
       label: t.hero.nodes.users.label,
       detail: t.hero.nodes.users.detail,
       icon: Users,
     },
     {
       id: 'access' as const,
+      caseId: 'case-lark-migration',
       label: t.hero.nodes.access.label,
       detail: t.hero.nodes.access.detail,
       icon: KeyRound,
     },
     {
       id: 'integrations' as const,
+      caseId: 'case-integrations',
       label: t.hero.nodes.integrations.label,
       detail: t.hero.nodes.integrations.detail,
       icon: GitMerge,
     },
     {
       id: 'vendors' as const,
+      caseId: 'case-pos-triage',
       label: t.hero.nodes.vendors.label,
       detail: t.hero.nodes.vendors.detail,
       icon: LifeBuoy,
@@ -181,18 +185,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   {supportNodes.map((node) => {
                     const Icon = node.icon;
                     return (
-                      <div
+                      <a
+                        href={`#${node.caseId}`}
+                        onClick={(event) => {
+                          if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+                          event.preventDefault();
+                          onOpenCaseStudy(node.caseId);
+                        }}
+                        onPointerMove={(event) => {
+                          if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                          const card = event.currentTarget;
+                          const bounds = card.getBoundingClientRect();
+                          card.style.setProperty('--spot-x', `${event.clientX - bounds.left}px`);
+                          card.style.setProperty('--spot-y', `${event.clientY - bounds.top}px`);
+                        }}
                         key={node.id}
-                        className="rounded-xl border border-[#242138] bg-[#0A0913] p-3 space-y-1 min-w-0 flex flex-col justify-start"
+                        className="support-map-link rounded-xl border border-[#242138] bg-[#0A0913] p-3 space-y-1 min-w-0 flex flex-col justify-start"
                       >
                         <div className="flex items-start gap-2 text-xs sm:text-[13px] font-mono font-semibold text-[#F6F2E9] leading-snug">
                           <Icon className="w-3.5 h-3.5 text-[#A8C5FF] shrink-0 mt-0.5" aria-hidden="true" />
                           <span className="break-words min-w-0">{node.label}</span>
+                          <span aria-hidden="true" className="ml-auto text-[#A8C5FF]">↗</span>
                         </div>
                         <p className="text-xs sm:text-[13px] text-[#E6E1D6] leading-relaxed break-words">
                           {node.detail}
                         </p>
-                      </div>
+                        <span className="sr-only">{content.caseStudies.find((study) => study.id === node.caseId)?.title}</span>
+                      </a>
                     );
                   })}
                 </div>
