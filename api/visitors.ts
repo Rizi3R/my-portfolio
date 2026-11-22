@@ -119,11 +119,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       count: Number.isFinite(count) ? count : 0,
       deduplicated: true,
     });
-  } catch (error) {
-    console.error(
-      'Visitor counter error:',
-      error instanceof Error ? error.message : 'Unknown error'
-    );
+  } catch {
+    console.error('Visitor counter request failed');
     res.status(502).json({
       configured: true,
       count: null,

@@ -195,6 +195,24 @@ describe('visitor handler secret & degradation behavior', () => {
     assert.equal(serializedCommands.includes(rawUa), false);
   });
 
+  test('returns a generic service error when Redis times out', async () => {
+    process.env.UPSTASH_REDIS_REST_URL = 'https://example.upstash.io';
+    process.env.UPSTASH_REDIS_REST_TOKEN = 'test-token';
+    process.env.VISITOR_HASH_SALT = 'test-only-hmac-key';
+    globalThis.fetch = async () => {
+      throw new DOMException('upstream timeout', 'TimeoutError');
+    };
+
+    const result = createMockRes();
+    await handler(createMockReq('GET'), result.res as never);
+    assert.equal(result.statusCode, 502);
+    assert.deepEqual(result.body, {
+      configured: true,
+      count: null,
+      error: 'Unable to reach visitor service.',
+    });
+  });
+
   test('enforces method, payload size, and cross-site origin guards', async () => {
     const deleteRes = createMockRes();
     await handler(createMockReq('DELETE'), deleteRes.res as never);
