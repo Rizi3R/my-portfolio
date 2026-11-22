@@ -75,7 +75,7 @@ export const zhHansMYUi: UiTranslations = {
     eyebrow: '项目案例',
     heading: '精选案例',
     intro:
-      '涵盖内部 SaaS 平台迁移协调、第三方外送平台配置、应用故障初步排查与厂商协调跟进，以及新门店 IT 开业准备的四个代表案例。',
+      '案例涵盖 SaaS 平台迁移、外送平台集成、故障初步排查、新门店 IT 部署和促销导入。',
     caseLabelPrefix: '案例 {number}',
     contextLabel: '背景情况',
     myRoleLabel: '我的职责',

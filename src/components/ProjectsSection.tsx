@@ -72,10 +72,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   );
 
   const renderCaseBody = (cs: CaseStudy) => (
-    <div
-      id={`${cs.id}-body`}
-      className="pt-5 mt-5 border-t border-[#DDD6C7] space-y-6 text-sm text-[#191723]"
-    >
+    <div className="pt-5 mt-5 border-t border-[#DDD6C7] space-y-6 text-sm text-[#191723]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-1.5">
           <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
@@ -274,7 +271,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             </div>
 
             <div className="mt-4">{renderCaseOutcome(primaryCase)}</div>
-            {expandedCaseId === primaryCase.id && renderCaseBody(primaryCase)}
+            <div id={`${primaryCase.id}-body`} hidden={expandedCaseId !== primaryCase.id}>
+              {expandedCaseId === primaryCase.id && renderCaseBody(primaryCase)}
+            </div>
           </article>
         )}
 
@@ -393,7 +392,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 </div>
 
                 <div className="mt-4">{renderCaseOutcome(cs)}</div>
-                {isExpanded && renderCaseBody(cs)}
+                <div id={`${cs.id}-body`} hidden={!isExpanded}>
+                  {isExpanded && renderCaseBody(cs)}
+                </div>
               </article>
             );
           })}

@@ -182,7 +182,7 @@ export const enMYUi: UiTranslations = {
     eyebrow: 'Case Studies',
     heading: 'Selected Work',
     intro:
-      'Four examples covering internal SaaS migration, third-party integration configuration, incident triage, and new-site IT readiness.',
+      'Case studies on SaaS migration, delivery-platform integrations, incident triage, new-site IT setup, and promotion imports.',
     caseLabelPrefix: 'Case {number}',
     contextLabel: 'Context',
     myRoleLabel: 'My role',

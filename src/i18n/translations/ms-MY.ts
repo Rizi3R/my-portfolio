@@ -75,7 +75,7 @@ export const msMYUi: UiTranslations = {
     eyebrow: 'Kajian Kes',
     heading: 'Hasil Kerja Terpilih',
     intro:
-      'Empat contoh merangkumi penyelarasan migrasi SaaS, konfigurasi integrasi pihak ketiga, saringan insiden, dan kesediaan IT cawangan baharu.',
+      'Kajian kes tentang migrasi SaaS, integrasi platform penghantaran, saringan insiden, penyediaan IT cawangan baharu dan import promosi.',
     caseLabelPrefix: 'Kes {number}',
     contextLabel: 'Konteks',
     myRoleLabel: 'Peranan saya',
