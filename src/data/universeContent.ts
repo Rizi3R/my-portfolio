@@ -550,6 +550,28 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     stratumFocus: 'hardware',
   },
+  {
+    id: 'case-promotion-import',
+    title: 'Xilnex Promotion Import Template',
+    organization: 'emart24 Malaysia',
+    roleScope: 'Template Design & Import Guidance',
+    featuredOnHome: true,
+    summaryLine:
+      'Turning recurring promotion requests into structured Excel data for the Xilnex Promotion Portal.',
+    situation:
+      'Recurring promotion requests needed to be prepared in a structured format for import into the Xilnex Promotion Portal.',
+    responsibility:
+      'I created the Excel template and guided colleagues on using the portal’s import function.',
+    whatIDid: [
+      'Created an Excel template to organize recurring promotion requests for import.',
+      'Showed colleagues how to use the import function in the Xilnex Promotion Portal.',
+    ],
+    outcomeLabel: 'Work delivered',
+    outcome:
+      'Delivered a reusable Excel template for promotion imports and showed colleagues how to use the portal’s import function.',
+    technologies: ['Microsoft Excel', 'Xilnex Promotion Portal'],
+    stratumFocus: 'application',
+  },
 ];
 
 export const EDUCATION: EducationEntry = {

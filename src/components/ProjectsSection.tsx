@@ -59,6 +59,18 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     }
   };
 
+  const renderCaseOutcome = (cs: CaseStudy) => cs.outcome && (
+    <div className="flex max-w-3xl items-start gap-2.5 rounded-lg border border-[#DDD6C7] bg-[#F6F2E9] px-3.5 py-3">
+      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#191723]" aria-hidden="true" />
+      <div className="space-y-1">
+        <p className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold">
+          {cs.outcomeLabel}
+        </p>
+        <p className="text-sm leading-relaxed text-[#191723]">{cs.outcome}</p>
+      </div>
+    </div>
+  );
+
   const renderCaseBody = (cs: CaseStudy) => (
     <div
       id={`${cs.id}-body`}
@@ -125,16 +137,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               ))}
             </ul>
           </div>
-        </div>
-      )}
-
-      {cs.outcome && (
-        <div className="border-t border-[#DDD6C7] pt-4 space-y-1">
-          <h4 className="text-xs font-mono uppercase tracking-wider text-[#474457] font-semibold flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-[#191723]" aria-hidden="true" />
-            <span>{cs.outcomeLabel}</span>
-          </h4>
-          <p className="text-sm text-[#191723] leading-relaxed">{cs.outcome}</p>
         </div>
       )}
 
@@ -271,6 +273,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               </div>
             </div>
 
+            <div className="mt-4">{renderCaseOutcome(primaryCase)}</div>
             {expandedCaseId === primaryCase.id && renderCaseBody(primaryCase)}
           </article>
         )}
@@ -389,6 +392,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   </div>
                 </div>
 
+                <div className="mt-4">{renderCaseOutcome(cs)}</div>
                 {isExpanded && renderCaseBody(cs)}
               </article>
             );

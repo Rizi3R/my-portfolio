@@ -85,7 +85,7 @@ export default function App() {
   const [isAudioMuted, setIsAudioMuted] = useState(true);
   const [selectedAtlasNodeId, setSelectedAtlasNodeId] = useState<string | null>(null);
   const [expandedCaseId, setExpandedCaseId] = useState<string | null>(
-    () => resolveCaseIdFromLocation() || CASE_STUDIES[0]?.id || null
+    resolveCaseIdFromLocation
   );
 
   // Store triggering element so Escape / Close restores keyboard focus reliably

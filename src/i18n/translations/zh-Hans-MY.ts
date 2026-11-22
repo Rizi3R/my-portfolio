@@ -927,6 +927,25 @@ export const zhHansMYContent: PortfolioContentTranslations = {
         'RJ45 重压接头',
       ],
     },
+    'case-promotion-import': {
+      title: 'Xilnex 促销导入模板',
+      organization: 'emart24 Malaysia',
+      roleScope: '模板设计与导入指导',
+      summaryLine:
+        '将定期提交的促销申请整理成结构化的 Excel 数据，以便导入 Xilnex 促销门户。',
+      situation:
+        '定期提交的促销申请需要整理成结构化格式，才能导入 Xilnex 促销门户。',
+      responsibility:
+        '我制作了 Excel 模板，并指导同事使用门户的导入功能。',
+      whatIDid: [
+        '制作 Excel 模板，整理定期提交的促销申请，以便导入。',
+        '向同事演示如何使用 Xilnex 促销门户的导入功能。',
+      ],
+      outcomeLabel: '交付成果',
+      outcome:
+        '提供了可重复使用的促销导入 Excel 模板，并向同事演示了门户的导入功能。',
+      technologies: ['Microsoft Excel', 'Xilnex 促销门户'],
+    },
   },
   education: {
     degree: 'Diploma in Computer Science and Mathematics（计算机科学与数学专科文凭）',

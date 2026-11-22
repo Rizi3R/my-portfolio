@@ -948,6 +948,25 @@ export const msMYContent: PortfolioContentTranslations = {
         'Penamatan Semula RJ45',
       ],
     },
+    'case-promotion-import': {
+      title: 'Templat Import Promosi Xilnex',
+      organization: 'emart24 Malaysia',
+      roleScope: 'Reka Bentuk Templat dan Panduan Import',
+      summaryLine:
+        'Menyusun permintaan promosi berkala dalam Excel untuk diimport ke Portal Promosi Xilnex.',
+      situation:
+        'Permintaan promosi berkala perlu disediakan dalam format berstruktur untuk diimport ke Portal Promosi Xilnex.',
+      responsibility:
+        'Saya menyediakan templat Excel dan membimbing rakan sekerja menggunakan fungsi import portal.',
+      whatIDid: [
+        'Membina templat Excel untuk menyusun permintaan promosi berkala bagi tujuan import.',
+        'Menunjukkan kepada rakan sekerja cara menggunakan fungsi import dalam Portal Promosi Xilnex.',
+      ],
+      outcomeLabel: 'Kerja yang disempurnakan',
+      outcome:
+        'Menyediakan templat Excel yang boleh digunakan semula untuk import promosi dan menunjukkan kepada rakan sekerja cara menggunakan fungsi import portal.',
+      technologies: ['Microsoft Excel', 'Portal Promosi Xilnex'],
+    },
   },
   education: {
     degree: 'Diploma in Computer Science and Mathematics',
