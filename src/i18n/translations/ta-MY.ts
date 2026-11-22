@@ -52,7 +52,7 @@ export const taMYUi: UiTranslations = {
     locationTerm: 'இடம்',
     certificationTerm: 'சான்றிதழ்',
     certificationName: 'AWS Certified Cloud Practitioner',
-    workflowCaption: 'மாதிரி ஆதரவு பணிப்பாய்வு',
+    workflowCaption: 'மாதிரி ஆதரவு அமைப்பு வரைபடம்',
     coreFocus: 'முதன்மை கவனம்',
     coreFocusTitle: 'வணிகப் பயன்பாடுகள் & SaaS',
     nodes: {
@@ -61,6 +61,7 @@ export const taMYUi: UiTranslations = {
       integrations: { label: 'ஒருங்கிணைப்புகள்', detail: 'உள்ளமைவு மற்றும் ஒத்திசைவு' },
       vendors: { label: 'வழங்குநர்கள்', detail: 'சிக்கல் ஒருங்கிணைப்பு' },
     },
+    replayAnimation: 'அசைவூட்டத்தை மீண்டும் இயக்கு',
     triageFlowLabel: 'மாதிரி சிக்கல் வகைப்படுத்தல் ஓட்டம்',
     triageSteps: [
       'அறிகுறிகளை உறுதிப்படுத்து',
@@ -76,6 +77,7 @@ export const taMYUi: UiTranslations = {
     heading: 'தேர்ந்தெடுக்கப்பட்ட பணிகள்',
     intro:
       'SaaS இடம்பெயர்வு, விநியோகத் தள ஒருங்கிணைப்பு, சிக்கல்களின் முதற்கட்ட ஆய்வு, புதிய கிளை IT அமைப்பு மற்றும் விற்பனைச் சலுகை இறக்குமதி பற்றிய வழக்கு ஆய்வுகள்.',
+    illustrativeMigration: 'தளங்களுக்கு இடையிலான இடம்பெயர்வின் விளக்கம்',
     caseLabelPrefix: 'வழக்கு {number}',
     contextLabel: 'சூழல்',
     myRoleLabel: 'எனது பங்கு',

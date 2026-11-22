@@ -52,7 +52,7 @@ export const msMYUi: UiTranslations = {
     locationTerm: 'Lokasi',
     certificationTerm: 'Pensijilan',
     certificationName: 'AWS Certified Cloud Practitioner',
-    workflowCaption: 'Aliran kerja sokongan ilustrasi',
+    workflowCaption: 'Rajah ilustrasi sokongan',
     coreFocus: 'Tumpuan Utama',
     coreFocusTitle: 'Aplikasi Perniagaan & SaaS',
     nodes: {
@@ -61,6 +61,7 @@ export const msMYUi: UiTranslations = {
       integrations: { label: 'Integrasi', detail: 'Konfigurasi dan penyegerakan' },
       vendors: { label: 'Vendor', detail: 'Penyelarasan insiden' },
     },
+    replayAnimation: 'Main semula animasi',
     triageFlowLabel: 'Contoh aliran saringan isu',
     triageSteps: [
       'Sahkan simptom',
@@ -76,6 +77,7 @@ export const msMYUi: UiTranslations = {
     heading: 'Hasil Kerja Terpilih',
     intro:
       'Kajian kes tentang migrasi SaaS, integrasi platform penghantaran, saringan insiden, penyediaan IT cawangan baharu dan import promosi.',
+    illustrativeMigration: 'Ilustrasi migrasi antara platform',
     caseLabelPrefix: 'Kes {number}',
     contextLabel: 'Konteks',
     myRoleLabel: 'Peranan saya',

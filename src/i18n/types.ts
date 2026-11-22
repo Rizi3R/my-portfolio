@@ -73,6 +73,7 @@ export interface UiTranslations {
       integrations: { label: string; detail: string };
       vendors: { label: string; detail: string };
     };
+    replayAnimation: string;
     triageFlowLabel: string;
     triageSteps: [string, string, string, string];
     diagramDisclaimer: string;
@@ -81,6 +82,7 @@ export interface UiTranslations {
     eyebrow: string;
     heading: string;
     intro: string;
+    illustrativeMigration: string;
     caseLabelPrefix: string;
     contextLabel: string;
     myRoleLabel: string;

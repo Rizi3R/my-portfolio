@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useI18n } from '../i18n';
+import { useSectionEntrance } from '../utils/useSectionEntrance';
 import { ChevronDown, ChevronUp, Briefcase } from 'lucide-react';
 
 export const TimelineSection: React.FC = () => {
   const { t, content } = useI18n();
+  const headingRef = useSectionEntrance();
   const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({
     'exp-emart24': true,
     'exp-hwc': true,
@@ -21,7 +23,7 @@ export const TimelineSection: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8 border-b border-[#242138]">
-          <div className="max-w-2xl space-y-2">
+          <div ref={headingRef} className="max-w-2xl space-y-2">
             <p className="text-xs font-mono uppercase tracking-wider text-[#A8C5FF]">
               {t.experience.eyebrow}
             </p>

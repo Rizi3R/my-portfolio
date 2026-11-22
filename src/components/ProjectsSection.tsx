@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { buildUrlWithLocale, useI18n } from '../i18n';
+import { useSectionEntrance } from '../utils/useSectionEntrance';
 import type { CaseStudy } from '../data/universeContent';
 import { copyTextToClipboard } from '../utils/clipboard';
+import { MigrationIllustration } from './MigrationIllustration';
 import {
-  Mail,
-  Workflow,
   ChevronDown,
   ChevronUp,
   Link2,
@@ -26,6 +26,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   onJumpToCase,
 }) => {
   const { locale, t, content, format } = useI18n();
+  const headingRef = useSectionEntrance();
   const [copiedCaseId, setCopiedCaseId] = useState<string | null>(null);
   const [copyErrorCaseId, setCopyErrorCaseId] = useState<string | null>(null);
   const [copyAnnouncement, setCopyAnnouncement] = useState('');
@@ -162,7 +163,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         </div>
 
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#DDD6C7] pb-6">
+        <div ref={headingRef} className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#DDD6C7] pb-6">
           <div className="max-w-2xl">
             <p className="text-xs font-mono uppercase tracking-wider text-[#474457] mb-1.5">
               {t.caseStudies.eyebrow}
@@ -186,13 +187,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             aria-labelledby={`${primaryCase.id}-heading`}
             className="scroll-mt-24 bg-white border border-[#191723]/15 rounded-2xl p-6 sm:p-8 shadow-sm"
           >
-            {primaryCase.id === 'case-lark-migration' && (
-              <div aria-hidden="true" className="migration-route">
-                <span><Mail size={20} />Google Workspace</span>
-                <i><ArrowRight size={16} /></i>
-                <span><Workflow size={20} />Lark</span>
-              </div>
-            )}
+            {primaryCase.id === 'case-lark-migration' && <MigrationIllustration />}
             <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-5">
               <div className="space-y-2.5 max-w-3xl">
                 <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-[#474457]">
@@ -235,7 +230,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 <button
                   type="button"
                   onClick={(e) => handleCopyCaseLink(e, primaryCase.id, primaryCase.title)}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-[#F6F2E9] hover:bg-[#EAE3D5] border border-[#CCC4B3] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+                  className="motion-control inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-[#F6F2E9] hover:bg-[#EAE3D5] border border-[#CCC4B3] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                   aria-label={format(t.accessibility.copyCaseLinkLabel, { title: primaryCase.title })}
                 >
                   {copiedCaseId === primaryCase.id ? (
@@ -263,7 +258,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   }
                   aria-expanded={expandedCaseId === primaryCase.id}
                   aria-controls={`${primaryCase.id}-body`}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#191723] hover:bg-[#2A273B] text-[#F6F2E9] text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+                  className="motion-control inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#191723] hover:bg-[#2A273B] text-[#F6F2E9] text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                 >
                   <span>
                     {expandedCaseId === primaryCase.id
@@ -280,8 +275,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             </div>
 
             <div className="mt-4">{renderCaseOutcome(primaryCase)}</div>
-            <div id={`${primaryCase.id}-body`} hidden={expandedCaseId !== primaryCase.id}>
-              {expandedCaseId === primaryCase.id && renderCaseBody(primaryCase)}
+            <div id={`${primaryCase.id}-body`} className="case-disclosure" inert={expandedCaseId !== primaryCase.id}>
+              <div>{renderCaseBody(primaryCase)}</div>
             </div>
           </article>
         )}
@@ -362,7 +357,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     <button
                       type="button"
                       onClick={(e) => handleCopyCaseLink(e, cs.id, cs.title)}
-                      className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-white/80 hover:bg-white border border-[#CCC4B3] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+                      className="motion-control inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-white/80 hover:bg-white border border-[#CCC4B3] text-xs font-mono text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                       aria-label={format(t.accessibility.copyCaseLinkLabel, { title: cs.title })}
                     >
                       {isCopied ? (
@@ -388,7 +383,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       onClick={() => onSelectCaseId(isExpanded ? null : cs.id)}
                       aria-expanded={isExpanded}
                       aria-controls={`${cs.id}-body`}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-lg border border-[#191723]/30 hover:border-[#191723] text-xs font-semibold text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+                      className="motion-control inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-lg border border-[#191723]/30 hover:border-[#191723] text-xs font-semibold text-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                     >
                       <span>{isExpanded ? t.caseStudies.collapse : t.caseStudies.viewCaseStudy}</span>
                       {isExpanded ? (
@@ -401,8 +396,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 </div>
 
                 <div className="mt-4">{renderCaseOutcome(cs)}</div>
-                <div id={`${cs.id}-body`} hidden={!isExpanded}>
-                  {isExpanded && renderCaseBody(cs)}
+                <div id={`${cs.id}-body`} className="case-disclosure" inert={!isExpanded}>
+                  <div>{renderCaseBody(cs)}</div>
                 </div>
               </article>
             );

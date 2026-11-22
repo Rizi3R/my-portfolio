@@ -1,9 +1,11 @@
 import React from 'react';
 import { useI18n } from '../i18n';
+import { useSectionEntrance } from '../utils/useSectionEntrance';
 import { GraduationCap, Award, BookOpen, Compass } from 'lucide-react';
 
 export const CredentialsSection: React.FC = () => {
   const { t, content } = useI18n();
+  const headingRef = useSectionEntrance();
 
   return (
     <section
@@ -15,7 +17,7 @@ export const CredentialsSection: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="border-b border-[#242138] pb-6">
-          <div className="max-w-2xl space-y-2">
+          <div ref={headingRef} className="max-w-2xl space-y-2">
             <p className="text-xs font-mono uppercase tracking-wider text-[#A8C5FF]">
               {t.credentials.eyebrow}
             </p>

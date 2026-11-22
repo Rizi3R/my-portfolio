@@ -52,7 +52,7 @@ export const zhHansMYUi: UiTranslations = {
     locationTerm: '所在地区',
     certificationTerm: '专业认证',
     certificationName: 'AWS Certified Cloud Practitioner',
-    workflowCaption: '支持工作流程示意图',
+    workflowCaption: '支持系统示意图',
     coreFocus: '核心方向',
     coreFocusTitle: '业务应用与 SaaS 系统',
     nodes: {
@@ -61,6 +61,7 @@ export const zhHansMYUi: UiTranslations = {
       integrations: { label: '平台集成', detail: '参数配置与数据同步' },
       vendors: { label: '外部厂商', detail: '故障协调跟进' },
     },
+    replayAnimation: '重播动画',
     triageFlowLabel: '常见问题排查示意流程',
     triageSteps: [
       '确认异常现象',
@@ -76,6 +77,7 @@ export const zhHansMYUi: UiTranslations = {
     heading: '精选案例',
     intro:
       '案例涵盖 SaaS 平台迁移、外送平台集成、故障初步排查、新门店 IT 部署和促销导入。',
+    illustrativeMigration: '平台迁移示意',
     caseLabelPrefix: '案例 {number}',
     contextLabel: '背景情况',
     myRoleLabel: '我的职责',

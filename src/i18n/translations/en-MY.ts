@@ -159,7 +159,7 @@ export const enMYUi: UiTranslations = {
     locationTerm: 'Location',
     certificationTerm: 'Certification',
     certificationName: 'AWS Certified Cloud Practitioner',
-    workflowCaption: 'Illustrative support workflow',
+    workflowCaption: 'Illustrative support diagram',
     coreFocus: 'Core Focus',
     coreFocusTitle: 'Business Applications & SaaS',
     nodes: {
@@ -168,6 +168,7 @@ export const enMYUi: UiTranslations = {
       integrations: { label: 'Integrations', detail: 'Configuration and sync' },
       vendors: { label: 'Vendors', detail: 'Incident coordination' },
     },
+    replayAnimation: 'Replay animation',
     triageFlowLabel: 'Example triage flow',
     triageSteps: [
       'Confirm symptoms',
@@ -183,6 +184,7 @@ export const enMYUi: UiTranslations = {
     heading: 'Selected Work',
     intro:
       'Case studies on SaaS migration, delivery-platform integrations, incident triage, new-site IT setup, and promotion imports.',
+    illustrativeMigration: 'Illustration of the migration between platforms',
     caseLabelPrefix: 'Case {number}',
     contextLabel: 'Context',
     myRoleLabel: 'My role',
