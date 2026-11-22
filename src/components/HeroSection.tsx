@@ -58,7 +58,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     <section
       id="top"
       aria-labelledby="hero-heading"
-      className="scroll-mt-16 bg-[#0A0913] text-[#F6F2E9] pt-8 sm:pt-12 lg:pt-14 pb-12 sm:pb-16 lg:pb-18 border-b border-[#242138]"
+      className="portfolio-hero scroll-mt-16 bg-[#0A0913] text-[#F6F2E9] pt-8 sm:pt-12 lg:pt-14 pb-12 sm:pb-16 lg:pb-18 border-b border-[#242138]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
@@ -71,7 +71,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
               <h1
                 id="hero-heading"
-                className="font-display text-3xl sm:text-4xl lg:text-[2.85rem] font-bold text-[#F6F2E9] tracking-tight leading-[1.08] max-w-[20ch]"
+                className="font-display text-[2.4rem] sm:text-5xl xl:text-6xl font-bold text-[#F6F2E9] tracking-tight leading-[1.08] max-w-[20ch]"
               >
                 {content.profile.title}
               </h1>

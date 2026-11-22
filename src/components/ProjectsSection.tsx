@@ -3,6 +3,8 @@ import { buildUrlWithLocale, useI18n } from '../i18n';
 import type { CaseStudy } from '../data/universeContent';
 import { copyTextToClipboard } from '../utils/clipboard';
 import {
+  Mail,
+  Workflow,
   ChevronDown,
   ChevronUp,
   Link2,
@@ -182,8 +184,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           <article
             id={primaryCase.id}
             aria-labelledby={`${primaryCase.id}-heading`}
-            className="scroll-mt-24 bg-white border border-[#191723]/15 border-l-4 border-l-[#191723] rounded-2xl p-6 sm:p-8 shadow-sm"
+            className="scroll-mt-24 bg-white border border-[#191723]/15 rounded-2xl p-6 sm:p-8 shadow-sm"
           >
+            {primaryCase.id === 'case-lark-migration' && (
+              <div aria-hidden="true" className="migration-route">
+                <span><Mail size={20} />Google Workspace</span>
+                <i><ArrowRight size={16} /></i>
+                <span><Workflow size={20} />Lark</span>
+              </div>
+            )}
             <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-5">
               <div className="space-y-2.5 max-w-3xl">
                 <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-[#474457]">
@@ -278,7 +287,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         )}
 
         {/* Secondary Case Studies */}
-        <div className="divide-y divide-[#DDD6C7] border-t border-b border-[#DDD6C7]">
+        <div className="grid items-start gap-5 lg:grid-cols-2">
           {secondaryCases.map((cs, idx) => {
             const isExpanded = expandedCaseId === cs.id;
             const isCopied = copiedCaseId === cs.id;
@@ -289,9 +298,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 key={cs.id}
                 id={cs.id}
                 aria-labelledby={`${cs.id}-heading`}
-                className="scroll-mt-24 py-6 sm:py-7"
+                className="case-panel scroll-mt-24 rounded-2xl border border-[#D8D2C5] bg-white p-5 sm:p-6"
               >
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                <div className="flex flex-col gap-4">
                   <div className="space-y-1.5 max-w-3xl">
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#474457]">
                       <span className="font-mono font-semibold text-[#191723]">

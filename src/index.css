@@ -247,3 +247,41 @@
     background-image: radial-gradient(120px circle at var(--spot-x, 50%) var(--spot-y, 50%), #344562, transparent);
   }
 }
+
+.portfolio-hero {
+  background-image: radial-gradient(ellipse at 78% 35%, #20274566, transparent 60%),
+    radial-gradient(circle, #a8c5ff16 1px, transparent 1px);
+  background-size: auto, 20px 20px;
+}
+
+.migration-route {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.5rem, 2vw, 1.5rem);
+  padding: clamp(1rem, 3vw, 2rem) .5rem;
+  margin-bottom: 1.5rem;
+  border-radius: .75rem;
+  background: repeating-linear-gradient(135deg, transparent 0 15px, #ffffff07 15px 16px), #181c31;
+  color: #f6f2e9;
+}
+.migration-route span {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-weight: 600;
+  font-size: clamp(.75rem, 2vw, 1rem);
+}
+.migration-route span svg { color: #a8c5ff; flex: none; }
+.migration-route i {
+  display: flex;
+  align-items: center;
+  color: #f2a77d;
+  width: clamp(1rem, 12vw, 8rem);
+}
+.migration-route i::before { content: ''; flex: 1; border-top: 1px dashed currentColor; }
+.case-panel:focus-within { border-color: #6a7592; }
+@media (prefers-reduced-motion: no-preference) {
+  .case-panel [id$="-body"]:not([hidden]) { animation: case-reveal .2s ease-out; }
+  @keyframes case-reveal { from { opacity: 0; transform: translateY(4px); } }
+}
