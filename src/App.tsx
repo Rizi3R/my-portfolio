@@ -341,7 +341,7 @@ export default function App() {
       }`}
     >
       {/* Background page shell: marked inert while any overlay dialog is open */}
-      <div ref={appShellRef} className="flex-1 flex flex-col">
+      <div ref={appShellRef} className={`flex-1 flex flex-col ${resumeModalOpen ? 'print:hidden' : ''}`}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#A8C5FF] focus:text-[#191723] focus:text-xs focus:font-semibold focus:shadow-lg print:hidden"
@@ -358,7 +358,7 @@ export default function App() {
 
         <main
           id="main-content"
-          className={`flex-1 relative z-10 pt-16 ${resumeModalOpen ? 'print:hidden' : ''}`}
+          className="flex-1 relative z-10 pt-16"
         >
           {activeView === 'plain' ? (
             <ErrorBoundary
