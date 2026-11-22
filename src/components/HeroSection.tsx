@@ -140,7 +140,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="lg:col-span-5">
             <figure
               aria-labelledby="hero-diagram-caption"
-              className="bg-[#12101F] border border-[#242138] rounded-2xl p-5 sm:p-6 space-y-5"
+              className="bg-[#12101F] border border-[#242138] rounded-2xl p-4 sm:p-5 space-y-3"
             >
               <figcaption
                 id="hero-diagram-caption"
@@ -177,13 +177,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="sm:hidden w-px h-3.5 mx-auto bg-[#A8C5FF]/55" aria-hidden="true" />
 
                 {/* Four Connected Support Domains */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 items-stretch">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 items-stretch">
                   {supportNodes.map((node) => {
                     const Icon = node.icon;
                     return (
                       <div
                         key={node.id}
-                        className="rounded-xl border border-[#242138] bg-[#0A0913] p-3.5 sm:p-4 space-y-1.5 min-w-0 flex flex-col justify-start"
+                        className="rounded-xl border border-[#242138] bg-[#0A0913] p-3 space-y-1 min-w-0 flex flex-col justify-start"
                       >
                         <div className="flex items-start gap-2 text-xs sm:text-[13px] font-mono font-semibold text-[#F6F2E9] leading-snug">
                           <Icon className="w-3.5 h-3.5 text-[#A8C5FF] shrink-0 mt-0.5" aria-hidden="true" />
@@ -203,23 +203,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="text-xs font-mono uppercase tracking-wider text-[#CFCAC0]">
                   {t.hero.triageFlowLabel}
                 </div>
-                <ol className="flex flex-col gap-1.5 text-xs sm:text-[13px] font-sans text-[#F6F2E9]">
+                <ol className="list-decimal pl-6 space-y-1 text-xs sm:text-[13px] font-sans text-[#F6F2E9]">
                   {t.hero.triageSteps.map((step, index) => (
-                    <li
-                      key={index}
-                      className="flex flex-col items-stretch gap-1.5"
-                    >
-                      <div className="w-full px-3.5 py-2 rounded-lg bg-[#0A0913] border border-[#242138] text-[#F6F2E9] leading-relaxed break-words">
-                        {index + 1}. {step}
-                      </div>
-                      {index < t.hero.triageSteps.length - 1 && (
-                        <span
-                          aria-hidden="true"
-                          className="text-[#F2A77D] font-mono self-center text-xs leading-none py-0.5 select-none"
-                        >
-                          ↓
-                        </span>
-                      )}
+                    <li key={index} className="pl-1 leading-relaxed marker:text-[#F2A77D]">
+                      {step}
                     </li>
                   ))}
                 </ol>

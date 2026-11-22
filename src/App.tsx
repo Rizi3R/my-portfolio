@@ -7,7 +7,6 @@ import { ConstellationSection } from './components/ConstellationSection';
 import { CredentialsSection } from './components/CredentialsSection';
 import { AboutSection } from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
-import { InteractiveTerminal } from './components/InteractiveTerminal';
 import { CommandPalette } from './components/CommandPalette';
 import { Footer } from './components/Footer';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -18,6 +17,9 @@ import { useI18n } from './i18n';
 import { Loader2, X, ArrowLeft } from 'lucide-react';
 
 // Code-split secondary views and interactive workbench
+const InteractiveTerminal = lazy(() =>
+  import('./components/InteractiveTerminal').then((module) => ({ default: module.InteractiveTerminal }))
+);
 const TraceView = lazy(() =>
   import('./components/TraceView').then((m) => ({ default: m.TraceView }))
 );
@@ -104,6 +106,10 @@ export default function App() {
     const shell = appShellRef.current;
     if (!shell) return;
     shell.inert = hasAnyModalOpen;
+    if (!hasAnyModalOpen && lastFocusedRef.current) {
+      lastFocusedRef.current.focus();
+      lastFocusedRef.current = null;
+    }
   }, [hasAnyModalOpen]);
 
   const captureFocusAndOpen = (
@@ -122,11 +128,6 @@ export default function App() {
 
   const closeOverlayAndRestoreFocus = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
     setter(false);
-    setTimeout(() => {
-      if (lastFocusedRef.current && lastFocusedRef.current.isConnected) {
-        lastFocusedRef.current.focus();
-      }
-    }, 20);
   };
 
   const scrollToElementCleanly = (elementId: string, instant = false) => {
@@ -278,8 +279,6 @@ export default function App() {
         setCommandPaletteOpen((prev) => {
           if (!prev && document.activeElement instanceof HTMLElement) {
             lastFocusedRef.current = document.activeElement;
-          } else if (prev) {
-            setTimeout(() => lastFocusedRef.current?.focus(), 20);
           }
           return !prev;
         });
@@ -521,18 +520,20 @@ export default function App() {
           onClick={() => closeOverlayAndRestoreFocus(setTerminalModalOpen)}
         >
           <div className="max-w-3xl w-full" onClick={(e) => e.stopPropagation()}>
-            <InteractiveTerminal
-              isModal
-              onClose={() => closeOverlayAndRestoreFocus(setTerminalModalOpen)}
-              onOpenResume={() => {
-                setTerminalModalOpen(false);
-                captureFocusAndOpen(setResumeModalOpen);
-              }}
-              onJumpToSection={(id) => {
-                closeOverlayAndRestoreFocus(setTerminalModalOpen);
-                handleNavigateSection(id);
-              }}
-            />
+            <Suspense fallback={<p role="status" className="text-white">{format(t.common.loadingView, { view: t.terminal.dialogLabel })}</p>}>
+              <InteractiveTerminal
+                isModal
+                onClose={() => closeOverlayAndRestoreFocus(setTerminalModalOpen)}
+                onOpenResume={() => {
+                  setTerminalModalOpen(false);
+                  captureFocusAndOpen(setResumeModalOpen);
+                }}
+                onJumpToSection={(id) => {
+                  closeOverlayAndRestoreFocus(setTerminalModalOpen);
+                  handleNavigateSection(id);
+                }}
+              />
+            </Suspense>
           </div>
         </div>
       )}

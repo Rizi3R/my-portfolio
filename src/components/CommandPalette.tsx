@@ -87,15 +87,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     if (ok) {
       setCopyStatus('copied');
       audioFx.playSuccess();
-      setTimeout(() => {
-        setCopyStatus('idle');
-        onClose();
-      }, 1100);
     } else {
       setCopyStatus('error');
-      setTimeout(() => {
-        setCopyStatus('idle');
-      }, 2400);
     }
   };
 
@@ -398,6 +391,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       }
     } else if (e.key === 'Escape') {
       e.preventDefault();
+      e.stopPropagation();
       onClose();
     }
   };
