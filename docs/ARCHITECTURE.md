@@ -7,7 +7,7 @@ Overview of the application structure, content pipeline, multilingual setup, and
 `src/App.tsx` renders the main portfolio view (`portfolio`) by default and switches cleanly between secondary views (`trace`, `atlas`, `plain`, `receipt`) via URL query/hash state (`?view=...`, `?case=...`, `#...`). Secondary views and modals (`TraceView`, `AtlasView`, `PlainView`, `ReceiptSection`, `TheLab`, `ResumeModal`) are code-split with `React.lazy`.
 
 - **Primary Sections**:
-  - `HeroSection`: Introduction, verified role scope, quick résumé/case-study actions, and an illustrative triage workflow diagram.
+  - `HeroSection`: Introduction, owner-provided role scope, quick résumé/case-study actions, and an illustrative triage workflow diagram.
   - `ProjectsSection`: Four Selected Work case studies rendered from `CASE_STUDIES` (`case-lark-migration`, `case-integrations`, `case-pos-triage`, `case-store-launch`).
   - `TimelineSection`: Experience timeline (`emart24 Malaysia`, `HWC Coffee Malaysia (Palaterium Sdn Bhd)`, `Managed print services`, and the diploma internship at the `Attorney General's Chambers of Malaysia`).
   - `ConstellationSection`: Four-group capability summary (`Application Support`, `Business Systems & SaaS`, `IT Operations & Helpdesk`, `Technical Foundations`) plus entry point to `AtlasView`.

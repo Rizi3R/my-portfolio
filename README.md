@@ -9,9 +9,11 @@ Personal portfolio for **Muhammad Aries Irhan bin Abd Razak (Aries Razak)**, hig
 
 ---
 
+![Portfolio introduction and support workflow](docs/portfolio.png)
+
 ## Key Features
 
-- **Selected Work Case Studies:** Four expandable case studies covering internal Google Workspace to Lark migration coordination, third-party delivery-platform configuration in Xilnex (GrabFood, foodpanda, ShopeeFood), application incident triage and vendor escalation, and new-site IT readiness.
+- **Selected Work Case Studies:** Five expandable case studies covering internal Google Workspace to Lark migration coordination, third-party delivery-platform configuration in Xilnex (GrabFood, foodpanda, ShopeeFood), application incident triage and vendor escalation, new-site IT readiness, and the Excel promotion import template.
 - **Career Timeline & Credentials:** Experience across emart24 Malaysia, HWC Coffee Malaysia (Palaterium Sdn Bhd), managed print services, and an application development internship at the Attorney General's Chambers of Malaysia, alongside a UiTM Diploma, AWS Certified Cloud Practitioner credential, AI Teach Malaysia completed program, and a clearly separated Currently Learning section (UiPath and RPA).
 - **Multilingual Support (`en-MY`, `ms-MY`, `zh-Hans-MY`, `ta-MY`):** Full UI and content translations in English, Bahasa Melayu, Simplified Chinese, and Tamil, selectable from the header and syncable via `?lang=` query parameter.
 - **Printable Resume Viewer & Plain View:** Print-styled résumé modal (`Ctrl+P` / `Cmd+P`) and linear plain-text summary view.
@@ -35,8 +37,8 @@ Derived directly from `package.json` and deployment configuration:
 
 ### Prerequisites
 
-- **Node.js:** v22 recommended (matches CI in `.github/workflows/ci-security.yml`; Node 20+ supported)
-- **npm:** Included with Node.js
+- **Node.js:** v22 recommended (matches CI in `.github/workflows/ci-security.yml`; use 22.12 or later on the 22.x line)
+- **npm:** Use the bundled npm and the committed lockfile
 
 ### 1. Clone and install dependencies
 
@@ -58,7 +60,7 @@ npm ci
 | `npm run preview` | Preview the built `dist/` bundle via Vite |
 | `npm run lint` | Run `tsc --noEmit` across frontend, node scripts/tests, and `api/` |
 | `npm test` | Run unit tests for `/api/visitors` (`tsx --test tests/visitors.test.ts`) |
-| `npm run validate:content` | Validate portfolio facts, dates, evidence refs, and copy rules |
+| `npm run validate:content` | Check owner-provided content, dates, evidence refs, and copy rules |
 | `npm run validate:i18n` | Validate all 4 locale bundles and URL locale resolution helpers |
 | `npm run clean` | Remove `dist` and `server.js` build artifacts |
 
@@ -139,7 +141,7 @@ To enable persistent visitor counting in production, configure `VISITOR_HASH_SAL
 
 ## Development Notes & Limitations
 
-- **AI-Assisted Development:** Parts of this codebase, refactoring passes, and multilingual translations were drafted with AI coding assistance and reviewed against Aries Razak's verified career details and automated repository checks (`validate:content`, `validate:i18n`).
+- **AI-Assisted Development:** Aries used Google AI Studio during initial development and Codex for maintenance. Professional content is owner-provided. The validators check consistency and translation structure. Employment and language accuracy require human review.
 - **Automated Check Scope:** `npm test` tests `/api/visitors` logic with a mocked `fetch`; live Redis connectivity, cross-browser UI rendering, and penetration testing are not covered automatically by CI.
 - **Bundle Scan Scope:** The CI bundle check scans `dist/` for source maps and common credential/env-var patterns as basic build hygiene rather than a standalone security guarantee.
 - **Repository License:** No open-source license file is currently included; code and personal portfolio content belong to Aries Razak unless a license is explicitly added.
