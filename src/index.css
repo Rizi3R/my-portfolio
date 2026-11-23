@@ -456,3 +456,8 @@
     display: none !important;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .case-timeline-note { animation: case-timeline-reveal 180ms ease-out; }
+  @keyframes case-timeline-reveal { from { opacity: .72; transform: translateY(3px); } }
+}

@@ -152,6 +152,7 @@ function mergeContent(translations: PortfolioContentTranslations): MergedPortfol
       situation: tr?.situation ?? cs.situation,
       responsibility: tr?.responsibility ?? cs.responsibility,
       whatIDid: tr?.whatIDid ?? cs.whatIDid,
+      explorationNotes: tr?.explorationNotes ?? cs.explorationNotes,
       triageBreakdown: tr?.triageBreakdown ?? cs.triageBreakdown,
       outcomeLabel: (tr?.outcomeLabel as CaseStudy['outcomeLabel']) ?? cs.outcomeLabel,
       outcome: tr?.outcome ?? cs.outcome,

@@ -1,6 +1,6 @@
 /**
  * SINGLE SOURCE OF TRUTH FOR ARIES RAZAK'S PORTFOLIO
- * Grounded strictly in verified career facts and clearly separated
+ * Grounded in owner-provided career evidence and clearly separated
  * from illustrative educational walkthroughs (Beep to Receipt & Computing Lab).
  */
 
@@ -114,6 +114,7 @@ export interface CaseStudy {
   situation: string;
   responsibility: string;
   whatIDid: string[];
+  explorationNotes?: string[];
   triageBreakdown?: TriageBreakdown;
   outcomeLabel: 'Outcome' | 'Work delivered';
   outcome: string;
@@ -174,8 +175,7 @@ export const PROFILE: ProfileData = {
   location: 'Selangor / Kuala Lumpur, Malaysia',
   email: 'ariesirhan25@gmail.com',
   linkedIn: 'https://www.linkedin.com/in/aries-razak-a36045256',
-  intro:
-    'I troubleshoot business applications, manage user access, coordinate integrations, and help teams adopt the tools they use every day.',
+  intro: "I support business applications, workplace systems and multi-site IT operations. My work spans incident investigation, integrations, user access, infrastructure troubleshooting and process improvement.",
   resumeSummary:
     'System Application Specialist with experience across application support, business systems administration, user onboarding and access cleanup, third-party delivery-platform configuration, and multi-site IT setup. Led the internal Google Workspace to Lark migration at HWC Coffee Malaysia with support from the Lark team and created an Excel template for recurring Xilnex promotion imports at emart24 Malaysia.',
   availabilityNote:
@@ -194,6 +194,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
       'Incident triage',
       'Vendor escalation',
       'UAT support',
+      "API error-trace analysis",
     ],
   },
   {
@@ -204,6 +205,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
       'User onboarding and offboarding',
       'Approval workflows',
       'Microsoft 365 provisioning assistance',
+      "SharePoint and OneDrive troubleshooting",
     ],
   },
   {
@@ -214,6 +216,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
       'Outlet mappings, price schemes, and menu profiles',
       'Excel promotion-import templates',
       'NetSuite import preparation',
+      "Service reporting and data quality",
     ],
   },
   {
@@ -224,6 +227,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
       'POS and peripheral setup',
       'LAN / Wi-Fi troubleshooting',
       'New-site readiness',
+      "ICMP connectivity diagnostics",
     ],
   },
 ];
@@ -328,8 +332,7 @@ export const EXPERIENCES: ExperienceEntry[] = [
     period: 'September 2025 to present',
     compactPeriod: 'Sep 2025 to present',
     location: 'Malaysia',
-    summary:
-      'Support Xilnex POS across HQ and outlets, manage store user access, configure delivery integrations, and prepare new-store IT setups.',
+    summary: "Support business applications, user access, integrations and multi-site IT operations, including workplace systems and network troubleshooting.",
     highlights: [
       'Provision Xilnex POS accounts from HR onboarding requests after checking request status, user groups, and outlet assignments, and clean up departed employees’ access and staff-discount eligibility.',
       'Coordinate with Xilnex and delivery partners (GrabFood, foodpanda, and ShopeeFood) to configure and sync outlet settings in the Xilnex portal, including store links, price schemes, and menu profiles for foodpanda.',
@@ -337,6 +340,7 @@ export const EXPERIENCES: ExperienceEntry[] = [
       'Created an Excel template that structured recurring promotion requests for import into the Xilnex Promotion Portal and provided guidance on using the import function.',
       'Set up and check POS devices, payment terminals, scanners, printers, and LAN / Wi-Fi connectivity during new-store setups.',
       'Assist with Microsoft 365 provisioning and UAT within assigned scope.',
+      "Investigated Microsoft 365 access and synchronisation issues involving SharePoint Online and OneDrive, in addition to assisting with assigned provisioning and UAT tasks.",
     ],
     technologies: [
       'Xilnex POS',
@@ -566,11 +570,153 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Created an Excel template to organize recurring promotion requests for import.',
       'Showed colleagues how to use the import function in the Xilnex Promotion Portal.',
     ],
+    explorationNotes: [
+      "Separately proposed a shared SharePoint Excel tracker for HR-to-IT account requests. Organisation-wide adoption is unconfirmed.",
+      "Explored Excel VBA export logic for bills of materials, including column selection, excluding unit prices and handling errors. Production deployment is unconfirmed.",
+    ],
     outcomeLabel: 'Work delivered',
     outcome:
       'Delivered a reusable Excel template for promotion imports and showed colleagues how to use the portal’s import function.',
     technologies: ['Microsoft Excel', 'Xilnex Promotion Portal'],
     stratumFocus: 'application',
+  },
+  {
+    id: "case-voucher-configuration",
+    title: "Resolving a Business Application Configuration Failure",
+    roleScope: "Configuration diagnosis and retesting",
+    summaryLine: "Voucher generation failed in Xilnex. I traced the failure to a configuration mismatch and verified the correction.",
+    situation: "The available imported voucher codes did not match the configured redemption quantity.",
+    responsibility: "I investigated the error, corrected the redemption setting and retested generation.",
+    whatIDid: [
+      "Compared the available imported codes with the configured redemption quantity.",
+      "Corrected the redemption configuration to match the available codes.",
+      "Retested generation and confirmed that voucher creation completed successfully.",
+    ],
+    outcome: "Corrected the configuration mismatch and confirmed successful voucher generation.",
+    technologies: ["Xilnex", "Voucher configuration", "Functional testing"],
+    organization: "emart24 Malaysia",
+    outcomeLabel: "Outcome",
+    stratumFocus: "application",
+  },
+  {
+    id: "case-transaction-recovery",
+    title: "Cross-System Transaction Synchronisation Recovery",
+    roleScope: "Vendor coordination and recovery verification",
+    summaryLine: "Sales from a third-party application were missing in Xilnex. I coordinated the investigation and verified recovery.",
+    situation: "Transactions recorded in the originating application did not appear in the POS, leaving a gap in the sales records.",
+    responsibility: "I raised the support ticket, coordinated questions across providers, and verified the transactions after the originating provider corrected the issue and re-sent the data.",
+    whatIDid: [
+      "Escalated the missing sales and raised a support ticket.",
+      "Coordinated follow-up between Xilnex and the originating provider to clarify ownership and recovery of the missing records.",
+      "Checked that the missing transactions appeared in Xilnex after the originating provider corrected the issue and re-sent the data.",
+    ],
+    outcome: "The originating provider corrected the issue and re-sent the data. I confirmed that the missing transactions appeared in Xilnex.",
+    technologies: ["Xilnex POS", "Third-party integration", "Transaction verification"],
+    organization: "emart24 Malaysia",
+    outcomeLabel: "Outcome",
+    stratumFocus: "application",
+  },
+  {
+    id: "case-api-error-traces",
+    title: "Investigating API Transaction Failures",
+    roleScope: "Error-trace analysis and follow-up",
+    summaryLine: "Separate transaction errors pointed to a missing catalogue SKU and unavailable product options.",
+    situation: "A sales submission failed when a SKU could not be found. Another transaction was rejected because product modifiers or extras were unavailable.",
+    responsibility: "I reviewed the error traces and compared them with transaction and catalogue information.",
+    whatIDid: [
+      "Identified the relevant error messages and examined product mapping and catalogue availability.",
+      "Flagged configuration areas for review and coordinated follow-up.",
+    ],
+    outcome: "The investigation identified what to check next. Final remediation was unconfirmed.",
+    technologies: ["API error traces", "SKU mapping", "Product catalogues"],
+    organization: "emart24 Malaysia",
+    outcomeLabel: "Work delivered",
+    stratumFocus: "application",
+  },
+  {
+    id: "case-payment-settlement",
+    title: "Payment Capture and Settlement Investigation",
+    roleScope: "Payment verification and follow-up",
+    summaryLine: "A reported bank deduction differed from the payment status in the POS.",
+    situation: "The initial reported deduction and a separate payment attempt needed to be reconciled against merchant records.",
+    responsibility: "I compared the attempts and checked the payment-provider portal.",
+    whatIDid: [
+      "Reviewed the reported attempts alongside the merchant records.",
+      "Documented the difference between bank activity and merchant receipt and coordinated proposed next steps.",
+    ],
+    outcome: "I verified that the initial payment had not been received by the company. The proposed cancellation remains unconfirmed.",
+    technologies: ["POS payments", "Provider portal", "Transaction reconciliation"],
+    organization: "emart24 Malaysia",
+    outcomeLabel: "Work delivered",
+    stratumFocus: "application",
+  },
+  {
+    id: "case-m365-access-sync",
+    title: "Microsoft 365 Access and Sync Investigations",
+    roleScope: "Workplace application troubleshooting",
+    summaryLine: "I investigated guest search, department folder visibility and a stalled OneDrive library sync.",
+    situation: "Three symptoms raised questions about account state, permissions and client synchronisation.",
+    responsibility: "I compared account behaviour and identified areas for Microsoft 365 support follow-up.",
+    whatIDid: [
+      "Compared SharePoint search as an administrator and as an external guest and observed different behaviour.",
+      "Reviewed possible group, permission and propagation issues for folder visibility, and considered client, account and library state for the stalled sync.",
+    ],
+    outcome: "These checks narrowed the areas for follow-up. Final remediation was unconfirmed.",
+    technologies: ["Microsoft 365", "SharePoint Online", "OneDrive"],
+    organization: "emart24 Malaysia",
+    outcomeLabel: "Work delivered",
+    stratumFocus: "cloud",
+  },
+  {
+    id: "case-network-connectivity",
+    title: "Diagnosing Intermittent Network Connectivity",
+    roleScope: "Connectivity testing and escalation",
+    summaryLine: "Intermittent store connectivity prompted checks of the gateway and network path.",
+    situation: "The connection alternated between usable periods and failures. The underlying cause remained open.",
+    responsibility: "I tested connectivity, documented the symptoms and escalated them to network support.",
+    whatIDid: [
+      "Ran continuous ICMP checks and compared successful replies, timeouts and gateway reachability errors.",
+      "Separated the reachability symptoms from DNS latency and raised the possible local network, WAN or ISP paths for follow-up.",
+    ],
+    outcome: "Documented intermittent reachability failures and handed the evidence to network support for investigation.",
+    technologies: ["TCP/IP", "ICMP / ping", "Gateway reachability"],
+    organization: "emart24 Malaysia",
+    outcomeLabel: "Work delivered",
+    stratumFocus: "network",
+  },
+  {
+    id: "case-service-reporting",
+    title: "IT Service Reporting and Data Quality Analysis",
+    roleScope: "Operational reporting analysis",
+    summaryLine: "I explored how support records could describe workload, backlog and demand while accounting for incomplete dates.",
+    situation: "Incomplete date fields limited what could be concluded about response and resolution performance.",
+    responsibility: "I analysed reporting categories and examined the reliability of date-based measures.",
+    whatIDid: [
+      "Reviewed incident and request categories, work status, overdue items and departmental demand trends.",
+      "Considered how missing dates affect response and resolution analysis before management reporting.",
+    ],
+    outcome: "The work covered reporting categories and data-quality limitations. Delivery of a production dashboard is unconfirmed.",
+    technologies: ["Microsoft Excel", "Service reporting", "Data validation"],
+    organization: "emart24 Malaysia",
+    outcomeLabel: "Work delivered",
+    stratumFocus: "application",
+  },
+  {
+    id: "case-architecture-evaluation",
+    title: "Evaluating Integration and Migration Risks",
+    roleScope: "Proposal assessment and requirements review",
+    summaryLine: "I assessed a proposal to consolidate ordering and loyalty services and explored the operational risks of switching providers.",
+    situation: "Replacing an existing customer application raised questions about data ownership, transaction behaviour and operational continuity.",
+    responsibility: "I evaluated the proposal and identified areas that needed clarification before deciding on migration.",
+    whatIDid: [
+      "Reviewed data ownership, completeness, integrity, vendor dependency and exit options.",
+      "Considered API behaviour, offline transactions, queues, duplicate prevention, refunds, reporting and resilience.",
+    ],
+    outcome: "The assessment identified decision and validation questions. The proposed migration was not implemented.",
+    technologies: ["Integration requirements", "Data migration", "Operational risk"],
+    organization: "emart24 Malaysia",
+    outcomeLabel: "Work delivered",
+    stratumFocus: "application",
   },
 ];
 

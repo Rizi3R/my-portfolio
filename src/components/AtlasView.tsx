@@ -8,20 +8,23 @@ import {
 } from '../data/universeContent';
 import type { MergedPortfolioContent } from '../i18n/I18nContext';
 import { useI18n } from '../i18n';
+import { CASE_METADATA } from '../data/caseExplorer';
 import { Search, X, ArrowRight, List, Network } from 'lucide-react';
 
 interface AtlasViewProps {
   initialSelectedNodeId?: string | null;
   onJumpToStratum?: (stratumId: StratumType) => void;
   onOpenExperience?: (expId: string) => void;
+  onOpenCaseStudy?: (caseId: string) => void;
 }
 
 export const AtlasView: React.FC<AtlasViewProps> = ({
   initialSelectedNodeId,
   onJumpToStratum,
   onOpenExperience,
+  onOpenCaseStudy,
 }) => {
-  const { t, content, format } = useI18n();
+  const { t, content, format, locale: contentLocale } = useI18n();
   const [selectedNodeId, setSelectedNodeId] = useState<string>(
     initialSelectedNodeId || content.nodes[0].id
   );
@@ -90,6 +93,10 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
   const selectedNode = useMemo(() => {
     return localizedNodes.find((n) => n.id === selectedNodeId) || filteredNodes[0] || localizedNodes[0];
   }, [localizedNodes, selectedNodeId, filteredNodes]);
+
+  const relatedCases = selectedNode ? content.caseStudies.filter((study) =>
+    CASE_METADATA[study.id]?.skills.includes(selectedNode.id)
+  ) : [];
 
   const relatedEdges = useMemo(() => {
     if (!selectedNode) return [];
@@ -475,6 +482,28 @@ export const AtlasView: React.FC<AtlasViewProps> = ({
                       </button>
                     )}
                   </div>
+                </div>
+              )}
+
+              {relatedCases.length > 0 && (
+                <div className="space-y-1">
+                  <p className="font-mono text-xs uppercase tracking-wider text-[#CFCAC0]">{t.caseExplorer.related}</p>
+                  <ul className="space-y-1.5">
+                    {relatedCases.map((study) => (
+                      <li key={study.id}>
+                        <a href={`?lang=${encodeURIComponent(contentLocale)}#${study.id}`}
+                          onClick={(event) => {
+                            if (!onOpenCaseStudy || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+                            event.preventDefault();
+                            onOpenCaseStudy(study.id);
+                          }}
+                          className="flex min-h-11 items-center gap-2 rounded-lg border border-[#34334D] px-3 py-2 text-sm text-[#A8C5FF] hover:bg-[#242138] focus-visible:outline-2 focus-visible:outline-offset-2">
+                          <span className="min-w-0 [overflow-wrap:anywhere]">{study.title}</span>
+                          <ArrowRight className="ml-auto size-4 shrink-0" aria-hidden="true" />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
 

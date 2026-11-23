@@ -9,6 +9,8 @@
  * - Strict isolation of UiPath & RPA as 'learning'.
  */
 
+import { readFileSync } from 'node:fs';
+import { CASE_DOMAINS, CASE_EVIDENCE, CASE_METADATA, CASE_ROLES, CASE_STAGES, CASE_TYPES } from '../src/data/caseExplorer';
 import {
   NODES,
   EDGES,
@@ -207,6 +209,39 @@ if (larkCaseJson.includes('netsuite') || larkCaseJson.includes('excel')) {
   logError('Case 1 (Lark migration) should not mention Excel/NetSuite unless migration-related.');
 }
 
+const caseIds = new Set<string>();
+const professionalNodeIds = new Set(NODES.filter((node) => node.status === 'professional').map((node) => node.id));
+
+for (const study of CASE_STUDIES) {
+  if (caseIds.has(study.id) || !/^case-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(study.id)) {
+    logError(`Duplicate or invalid case identifier: ${study.id}`);
+  }
+  caseIds.add(study.id);
+  if (![study.title, study.summaryLine, study.situation, study.responsibility, study.outcome].every((item) => item.trim()) ||
+      !study.whatIDid.length || !study.technologies.length ||
+      [...study.whatIDid, ...study.technologies].some((item) => !item.trim())) {
+    logError(`Incomplete technical description: ${study.id}`);
+  }
+  const metadata = CASE_METADATA[study.id];
+  if (!metadata || !CASE_DOMAINS.includes(metadata.domain) || !CASE_TYPES.includes(metadata.type) ||
+      !CASE_EVIDENCE.includes(metadata.evidence) || !metadata.roles.length ||
+      !metadata.roles.every((role) => CASE_ROLES.includes(role)) || !metadata.skills.length ||
+      !metadata.skills.every((id) => professionalNodeIds.has(id))) {
+    logError(`Missing or invalid explorer metadata: ${study.id}`);
+  } else if (metadata.timeline && (metadata.timeline.length !== study.whatIDid.length ||
+      new Set(metadata.timeline).size !== metadata.timeline.length ||
+      !metadata.timeline.every((stage) => CASE_STAGES.includes(stage)))) {
+    logError(`Timeline stages must match the case actions: ${study.id}`);
+  }
+}
+for (const id of Object.keys(CASE_METADATA)) {
+  if (!caseIds.has(id)) logError(`Explorer metadata references a missing case: ${id}`);
+}
+const diagram = readFileSync(new URL('../src/components/SupportSystemDiagram.tsx', import.meta.url), 'utf8');
+for (const [, id] of diagram.matchAll(/caseId: '(case-[a-z0-9-]+)'/g)) {
+  if (!caseIds.has(id)) logError(`Support diagram references a missing case: ${id}`);
+}
+
 const masteryWords = ['expert', 'advanced', 'proficient', 'mastery', 'extensive'];
 NODES.forEach((node) => {
   const combined = `${node.label} ${node.summary} ${node.usage || ''}`.toLowerCase();
@@ -216,7 +251,7 @@ NODES.forEach((node) => {
     }
   });
 });
-logSuccess('Case study priority order and tone verified.');
+logSuccess('Case ordering, explorer metadata, timelines, and evidence links checked.');
 
 // 5. Verify Nodes EvidenceRef & Usage
 console.log(`\n[5/7] Checking ${NODES.length} Skill Nodes (EvidenceRef & Usage)...`);

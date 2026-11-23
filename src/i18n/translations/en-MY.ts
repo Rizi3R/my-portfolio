@@ -47,6 +47,7 @@ for (const cs of CASE_STUDIES) {
     situation: cs.situation,
     responsibility: cs.responsibility,
     whatIDid: [...cs.whatIDid],
+    explorationNotes: cs.explorationNotes,
     triageBreakdown: cs.triageBreakdown
       ? {
           checksPerformed: [...cs.triageBreakdown.checksPerformed],
@@ -110,8 +111,7 @@ for (const cat of CONSTELLATION_CATEGORIES) {
 export const enMYUi: UiTranslations = {
   metadata: {
     title: 'Aries Razak | Application Support & Business Systems',
-    description:
-      'Explore Aries Razak’s experience in application support, SaaS administration, integration configuration, and IT operations.',
+    description: "Application support, workplace systems and IT operations experience covering Microsoft 365, system integrations, incident investigation and infrastructure troubleshooting.",
   },
   accessibility: {
     skipToMain: 'Skip to main content',
@@ -179,11 +179,65 @@ export const enMYUi: UiTranslations = {
     diagramDisclaimer:
       'Simplified conceptual illustration. Actual paths depend on the issue and whether vendor-side investigation is required.',
   },
+  caseExplorer: {
+    search: "Search cases",
+    domain: "Technical domain",
+    type: "Case type",
+    allDomains: "All domains",
+    allTypes: "All types",
+    count: "{count} found",
+    empty: "No cases match your search and filters.",
+    clear: "Clear filters",
+    collection: "Technical investigations and assessments",
+    skills: "Transferable skills",
+    roles: "Related career paths",
+    related: "Related case studies",
+    exploration: 'Related proposals and prototypes',
+    findings: "Findings",
+    deepDive: "Technical deep dive",
+    timeline: "Investigation timeline",
+    domains: {
+      applications: "Application support",
+      integration: "Integration troubleshooting",
+      workplace: "Workplace systems",
+      infrastructure: "Infrastructure & networking",
+      operations: "Operational improvement",
+      reporting: "Data & reporting",
+      evaluation: "Technical evaluation",
+    },
+    types: {
+      incident: "Incident",
+      project: "Project",
+      assessment: "Assessment",
+    },
+    evidence: {
+      resolved: "Resolved and retested",
+      vendorRecovery: "Vendor recovery verified",
+      delivered: "Work delivered",
+      investigation: "Investigation",
+      assessment: "Assessment",
+    },
+    rolesById: {
+      applicationSupport: "Application Support",
+      integrationSupport: "Integration Support",
+      saasSupport: "SaaS Support",
+      itOperations: "IT Operations",
+      infrastructureSupport: "Infrastructure Support",
+      serviceDesk: "Service Desk",
+      businessSystems: "Business Systems",
+    },
+    stages: {
+      diagnose: "Diagnose",
+      correct: "Correct the setting",
+      verify: "Verify",
+      escalate: "Escalate",
+      coordinate: "Coordinate",
+    },
+  },
   caseStudies: {
     eyebrow: 'Case Studies',
     heading: 'Selected Work',
-    intro:
-      'Case studies on SaaS migration, delivery-platform integrations, incident triage, new-site IT setup, and promotion imports.',
+    intro: "Explore how I diagnose application failures, verify vendor recovery and support workplace systems and multi-site IT operations.",
     illustrativeMigration: 'Illustration of the migration between platforms',
     caseLabelPrefix: 'Case {number}',
     contextLabel: 'Context',

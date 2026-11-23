@@ -13,7 +13,7 @@ Personal portfolio for **Muhammad Aries Irhan bin Abd Razak (Aries Razak)**, hig
 
 ## Key Features
 
-- **Selected Work Case Studies:** Five expandable case studies covering internal Google Workspace to Lark migration coordination, third-party delivery-platform configuration in Xilnex (GrabFood, foodpanda, ShopeeFood), application incident triage and vendor escalation, new-site IT readiness, and the Excel promotion import template.
+- **Selected Work and case explorer:** Search by technology or skill and filter by domain and case type. Featured cases cover voucher configuration, vendor-led recovery and completed projects. A compact collection distinguishes diagnostic findings and technical assessments from verified resolutions.
 - **Career Timeline & Credentials:** Experience across emart24 Malaysia, HWC Coffee Malaysia (Palaterium Sdn Bhd), managed print services, and an application development internship at the Attorney General's Chambers of Malaysia, alongside a UiTM Diploma, AWS Certified Cloud Practitioner credential, AI Teach Malaysia completed program, and a clearly separated Currently Learning section (UiPath and RPA).
 - **Multilingual Support (`en-MY`, `ms-MY`, `zh-Hans-MY`, `ta-MY`):** Full UI and content translations in English, Bahasa Melayu, Simplified Chinese, and Tamil, selectable from the header and syncable via `?lang=` query parameter.
 - **Printable Resume Viewer & Plain View:** Print-styled résumé modal (`Ctrl+P` / `Cmd+P`) and linear plain-text summary view.
@@ -59,7 +59,7 @@ npm ci
 | `npm run build` | Build production static assets into `dist/` (source maps disabled) |
 | `npm run preview` | Preview the built `dist/` bundle via Vite |
 | `npm run lint` | Run `tsc --noEmit` across frontend, node scripts/tests, and `api/` |
-| `npm test` | Run unit tests for `/api/visitors` (`tsx --test tests/visitors.test.ts`) |
+| `npm test` | Run unit tests for case filtering and `/api/visitors` |
 | `npm run validate:content` | Check owner-provided content, dates, evidence refs, and copy rules |
 | `npm run validate:i18n` | Validate all 4 locale bundles and URL locale resolution helpers |
 | `npm run clean` | Remove `dist` and `server.js` build artifacts |
@@ -142,6 +142,6 @@ To enable persistent visitor counting in production, configure `VISITOR_HASH_SAL
 ## Development Notes & Limitations
 
 - **AI-Assisted Development:** Aries used Google AI Studio during initial development and Codex for maintenance. Professional content is owner-provided. The validators check consistency and translation structure. Employment and language accuracy require human review.
-- **Automated Check Scope:** `npm test` tests `/api/visitors` logic with a mocked `fetch`; live Redis connectivity, cross-browser UI rendering, and penetration testing are not covered automatically by CI.
+- **Automated Check Scope:** `npm test` covers the case explorer and `/api/visitors` logic with a mocked `fetch`; live Redis connectivity, cross-browser UI rendering, and penetration testing are not covered automatically by CI.
 - **Bundle Scan Scope:** The CI bundle check scans `dist/` for source maps and common credential/env-var patterns as basic build hygiene rather than a standalone security guarantee.
 - **Repository License:** No open-source license file is currently included; code and personal portfolio content belong to Aries Razak unless a license is explicitly added.

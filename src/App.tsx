@@ -86,6 +86,7 @@ export default function App() {
   const [labModalOpen, setLabModalOpen] = useState(false);
   const [isAudioMuted, setIsAudioMuted] = useState(true);
   const [selectedAtlasNodeId, setSelectedAtlasNodeId] = useState<string | null>(null);
+  const [caseNavigationVersion, setCaseNavigationVersion] = useState(0);
   const [expandedCaseId, setExpandedCaseId] = useState<string | null>(
     resolveCaseIdFromLocation
   );
@@ -156,6 +157,7 @@ export default function App() {
       if (linkedCaseId) {
         setActiveView('portfolio');
         setExpandedCaseId(linkedCaseId);
+        setCaseNavigationVersion((version) => version + 1);
         setTimeout(() => {
           scrollToElementCleanly(linkedCaseId, isInitialLoad);
         }, 120);
@@ -238,6 +240,7 @@ export default function App() {
 
     if (caseId && CASE_STUDY_IDS.has(caseId)) {
       setExpandedCaseId(caseId);
+      setCaseNavigationVersion((version) => version + 1);
       url.hash = `#${caseId}`;
     } else {
       url.hash = '#featured-work';
@@ -247,12 +250,13 @@ export default function App() {
       window.history.pushState({}, '', url.toString());
     }
 
-    if (activeView !== 'portfolio') {
-      setActiveView('portfolio');
-      setTimeout(() => scrollToElementCleanly(targetId), 120);
-    } else {
-      setTimeout(() => scrollToElementCleanly(targetId), 40);
-    }
+    const showDestination = () => {
+      document.getElementById(`${targetId}-heading`)?.focus({ preventScroll: true });
+      scrollToElementCleanly(targetId);
+    };
+
+    if (activeView !== 'portfolio') setActiveView('portfolio');
+    setTimeout(showDestination, activeView === 'portfolio' ? 40 : 120);
   };
 
   const handleToggleCaseCard = (caseId: string | null) => {
@@ -413,6 +417,7 @@ export default function App() {
                   initialSelectedNodeId={selectedAtlasNodeId}
                   onJumpToStratum={handleJumpToStratum}
                   onOpenExperience={handleOpenExperience}
+                  onOpenCaseStudy={handleOpenCaseStudy}
                 />
               </Suspense>
             </ErrorBoundary>
@@ -481,7 +486,7 @@ export default function App() {
               <ProjectsSection
                 expandedCaseId={expandedCaseId}
                 onSelectCaseId={handleToggleCaseCard}
-                onJumpToCase={handleOpenCaseStudy}
+                navigationVersion={caseNavigationVersion}
               />
               <TimelineSection />
               <ConstellationSection

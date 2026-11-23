@@ -176,6 +176,7 @@ CASE_STUDIES.forEach((cs) => {
       situation: cs.situation,
       responsibility: cs.responsibility,
       whatIDid: cs.whatIDid,
+      explorationNotes: cs.explorationNotes,
       triageBreakdown: cs.triageBreakdown,
       outcomeLabel: cs.outcomeLabel,
       outcome: cs.outcome,

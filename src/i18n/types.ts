@@ -78,6 +78,29 @@ export interface UiTranslations {
     triageSteps: [string, string, string, string];
     diagramDisclaimer: string;
   };
+  caseExplorer: {
+    search: string;
+    domain: string;
+    type: string;
+    allDomains: string;
+    allTypes: string;
+    count: string;
+    empty: string;
+    clear: string;
+    collection: string;
+    skills: string;
+    roles: string;
+    related: string;
+    exploration: string;
+    findings: string;
+    deepDive: string;
+    timeline: string;
+    domains: Record<'applications' | 'integration' | 'workplace' | 'infrastructure' | 'operations' | 'reporting' | 'evaluation', string>;
+    types: Record<'incident' | 'project' | 'assessment', string>;
+    evidence: Record<'resolved' | 'vendorRecovery' | 'delivered' | 'investigation' | 'assessment', string>;
+    rolesById: Record<'applicationSupport' | 'integrationSupport' | 'saasSupport' | 'itOperations' | 'infrastructureSupport' | 'serviceDesk' | 'businessSystems', string>;
+    stages: Record<'diagnose' | 'correct' | 'verify' | 'escalate' | 'coordinate', string>;
+  };
   caseStudies: {
     eyebrow: string;
     heading: string;
@@ -479,6 +502,7 @@ export interface PortfolioContentTranslations {
       situation: string;
       responsibility: string;
       whatIDid: string[];
+      explorationNotes?: string[];
       triageBreakdown?: {
         checksPerformed: string[];
         providedToVendor: string[];
