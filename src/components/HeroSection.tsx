@@ -39,7 +39,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 id="hero-heading"
                 className="font-display text-[2.4rem] sm:text-5xl xl:text-6xl font-bold text-[#F6F2E9] tracking-tight leading-[1.08] max-w-[20ch]"
               >
-                {content.profile.title}
+                {t.hero.positioningTitle}
               </h1>
 
               <div className="h-px w-16 bg-[#F2A77D]" aria-hidden="true" />
@@ -75,33 +75,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             {/* Identity Details: Uncramped layout keeping icons aligned to first line */}
             <dl className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap lg:items-start gap-x-7 gap-y-3 pt-4 border-t border-[#242138] text-xs sm:text-sm text-[#CFCAC0]">
-              <div className="flex items-start gap-2 sm:col-span-2 lg:col-span-1">
-                <Briefcase className="w-4 h-4 text-[#F2A77D] shrink-0 mt-0.5" aria-hidden="true" />
-                <div>
-                  <dt className="sr-only">{t.hero.currentRoleTerm}</dt>
-                  <dd className="text-[#F6F2E9] font-medium">
-                    {format(t.hero.currentRoleFormat, {
-                      role: content.profile.currentRole,
-                      company: content.profile.currentCompany,
-                    })}
-                  </dd>
-                </div>
+              <div className="sm:col-span-2 lg:col-span-1">
+                <dt className="sr-only">{t.hero.currentRoleTerm}</dt>
+                <dd className="flex items-start gap-2 font-medium text-[#F6F2E9]">
+                  <Briefcase className="mt-0.5 size-4 shrink-0 text-[#F2A77D]" aria-hidden="true" />
+                  {format(t.hero.currentRoleFormat, {
+                    role: content.profile.currentRole,
+                    company: content.profile.currentCompany,
+                  })}
+                </dd>
               </div>
-
-              <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-[#A8C5FF] shrink-0 mt-0.5" aria-hidden="true" />
-                <div>
-                  <dt className="sr-only">{t.hero.locationTerm}</dt>
-                  <dd>{content.profile.location}</dd>
-                </div>
+              <div>
+                <dt className="sr-only">{t.hero.locationTerm}</dt>
+                <dd className="flex items-start gap-2">
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-[#A8C5FF]" aria-hidden="true" />
+                  {content.profile.location}
+                </dd>
               </div>
-
-              <div className="flex items-start gap-2">
-                <Award className="w-4 h-4 text-[#A8C5FF] shrink-0 mt-0.5" aria-hidden="true" />
-                <div>
-                  <dt className="sr-only">{t.hero.certificationTerm}</dt>
-                  <dd>{t.hero.certificationName}</dd>
-                </div>
+              <div>
+                <dt className="sr-only">{t.hero.certificationTerm}</dt>
+                <dd className="flex items-start gap-2">
+                  <Award className="mt-0.5 size-4 shrink-0 text-[#A8C5FF]" aria-hidden="true" />
+                  {t.hero.certificationName}
+                </dd>
               </div>
             </dl>
           </div>

@@ -4,6 +4,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import {
@@ -42,9 +43,7 @@ import {
   writeStoredLocale,
 } from './config';
 import { enMYBundle, enMYContent, enMYUi } from './translations/en-MY';
-import { msMYBundle } from './translations/ms-MY';
-import { taMYBundle } from './translations/ta-MY';
-import { zhHansMYBundle } from './translations/zh-Hans-MY';
+import { loadLocale } from './loadLocale';
 import type {
   LocaleBundle,
   LocaleMeta,
@@ -52,13 +51,6 @@ import type {
   SupportedLocale,
   UiTranslations,
 } from './types';
-
-const BUNDLES: Record<SupportedLocale, LocaleBundle> = {
-  'en-MY': enMYBundle,
-  'ms-MY': msMYBundle,
-  'zh-Hans-MY': zhHansMYBundle,
-  'ta-MY': taMYBundle,
-};
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -300,13 +292,15 @@ function updateDocumentMetadata(meta: LocaleMeta, metadataUi: UiTranslations['me
   setMetaContent('meta[name="twitter:description"]', metadataUi.description);
 }
 
-export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [locale, setLocaleState] = useState<SupportedLocale>(() => resolveLocale());
+export const I18nProvider: React.FC<{
+  children: React.ReactNode;
+  initialBundle: LocaleBundle;
+}> = ({ children, initialBundle }) => {
+  const [bundle, setBundle] = useState(initialBundle);
   const [announcement, setAnnouncement] = useState('');
-
-  const bundle = BUNDLES[locale] || enMYBundle;
+  const request = useRef(0);
+  const locale = bundle.meta.code;
   const localeMeta = getLocaleMeta(locale);
-
   const t = useMemo(() => deepMerge(enMYUi, bundle.ui), [bundle.ui]);
   const content = useMemo(() => mergeContent(bundle.content), [bundle.content]);
 
@@ -314,39 +308,40 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
     updateDocumentMetadata(localeMeta, t.metadata);
   }, [localeMeta, t.metadata]);
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const handlePopState = () => {
-      const next = resolveLocale({ search: window.location.search });
-      setLocaleState(next);
-    };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+  const selectLocale = useCallback(async (nextLocale: SupportedLocale, persist: boolean) => {
+    const currentRequest = ++request.current;
+    try {
+      const nextBundle = await loadLocale(nextLocale);
+      if (currentRequest !== request.current) return;
+
+      setBundle(nextBundle);
+      if (!persist) return;
+      writeStoredLocale(nextLocale);
+      try {
+        window.history.replaceState({}, '', buildUrlWithLocale(window.location.href, nextLocale));
+      } catch {
+        // Language selection still works when history is restricted.
+      }
+      setAnnouncement(formatTemplate(nextBundle.ui.accessibility.languageChangedAnnouncement, {
+        language: getLocaleMeta(nextLocale).nativeLabel,
+      }));
+    } catch {
+      if (currentRequest === request.current) setAnnouncement(enMYUi.accessibility.languageUnavailable);
+    }
   }, []);
+
+  useEffect(() => {
+    const handlePopState = () => void selectLocale(resolveLocale({ search: window.location.search }), false);
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      request.current++;
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [selectLocale]);
 
   const setLocale = useCallback((nextLocale: SupportedLocale) => {
-    const targetBundle = BUNDLES[nextLocale] || enMYBundle;
-    const targetMeta = getLocaleMeta(nextLocale);
-    const targetUi = deepMerge(enMYUi, targetBundle.ui);
-
-    writeStoredLocale(nextLocale);
-    setLocaleState(nextLocale);
-
-    if (typeof window !== 'undefined') {
-      try {
-        const nextUrl = buildUrlWithLocale(window.location.href, nextLocale);
-        window.history.replaceState({}, '', nextUrl);
-      } catch {
-        // Ignore history errors in restricted frames
-      }
-    }
-
-    setAnnouncement(
-      formatTemplate(targetUi.accessibility.languageChangedAnnouncement, {
-        language: targetMeta.nativeLabel,
-      })
-    );
-  }, []);
+    void selectLocale(nextLocale, true);
+  }, [selectLocale]);
 
   const value = useMemo<I18nContextValue>(
     () => ({

@@ -8,7 +8,7 @@ Overview of the application structure, content pipeline, multilingual setup, and
 
 - **Primary Sections**:
   - `HeroSection`: Introduction, owner-provided role scope, quick résumé/case-study actions, and an illustrative triage workflow diagram.
-  - `ProjectsSection`: Four Selected Work case studies rendered from `CASE_STUDIES` (`case-lark-migration`, `case-integrations`, `case-pos-triage`, `case-store-launch`).
+  - `ProjectsSection`: Four featured cards open the 13-case explorer. Search and filters use the full collection. Non-featured deep links open the complete view. A collapsed disclosure renders its detail only after its first opening so close animations can run with the content inert.
   - `TimelineSection`: Experience timeline (`emart24 Malaysia`, `HWC Coffee Malaysia (Palaterium Sdn Bhd)`, `Managed print services`, and the diploma internship at the `Attorney General's Chambers of Malaysia`).
   - `ConstellationSection`: Four-group capability summary (`Application Support`, `Business Systems & SaaS`, `IT Operations & Helpdesk`, `Technical Foundations`) plus entry point to `AtlasView`.
   - `CredentialsSection`: UiTM Diploma, AWS Certified Cloud Practitioner credential, AI Teach Malaysia completed program, and an isolated Currently Learning entry for UiPath / RPA.
@@ -20,22 +20,30 @@ Overview of the application structure, content pipeline, multilingual setup, and
 ## 2. Content & Multilingual Pipeline
 
 - **Canonical Data (`src/data/universeContent.ts`)**: Stores profile metadata, `SKILL_GROUPS`, `EXPERIENCES`, `CASE_STUDIES`, `EDUCATION`, `CERTIFICATIONS`, `LEARNING_ENTRIES`, `STRATA`, `NODES`, and `EDGES`.
+- **Explorer Metadata (`src/data/caseExplorer.ts`)**: Defines the presentation order, technical domains, case types, evidence labels, career paths, timeline stages, and Skill Atlas connections. Case bodies and professional facts come from canonical data.
 - **Locale Bundles (`src/i18n/`)**:
   - `src/i18n/config.ts` defines the four supported locales (`en-MY`, `ms-MY`, `zh-Hans-MY`, `ta-MY`) and resolves active locale from URL `?lang=`, `localStorage`, or default `en-MY`.
-  - `src/i18n/translations/` provides typed `LocaleBundle` modules (`ui` + `content`).
+  - `src/i18n/translations/` provides typed `LocaleBundle` modules (`ui` + `content`). `loadLocale.ts` bundles English with the app and imports other locales on demand. The provider commits a locale selection only after the bundle loads.
   - `src/i18n/I18nContext.tsx` supplies translations via `useI18n()` and synchronizes `<html lang>` and `dir`.
 - **Automated Content & i18n Checks**:
   - `scripts/validate-content.ts` checks employment dates, case ordering, prohibited rating/proficiency fields, forbidden overclaims, node `evidenceRef` integrity, and UiPath learning isolation.
   - `scripts/validate-i18n.ts` asserts exact parity between `en-MY` and `universeContent.ts`, 100% recursive key/placeholder/array parity across all 4 locales, and non-English translation completeness.
 
-## 3. Visitor Counter Endpoint (`/api/visitors`)
+## 3. Static content and deployment provenance
+
+`scripts/generateStaticContent.ts` runs after Vite writes the production bundle. It reuses the English canonical summaries and evidence wording for the homepage no-script overview, `/cases/index.html`, and one canonical HTML URL per case. Static pages render without a JavaScript runtime. The interactive portfolio retains localized `/?lang=…#case-id` links and its existing navigation. The generated sitemap lists the static case URLs.
+
+The generator publishes `/build-info.json` with the case count and Vercel commit SHA when available. Vercel excludes the sitemap, static cases, and build info from its application rewrite. The Express production server serves the same output directory.
+
+## 4. Visitor Counter Endpoint (`/api/visitors`)
 
 - `api/_visitorCore.ts` holds shared validation, origin checks, Redis REST command helpers, and HMAC-SHA256 hashing helpers (`createHashedIp`, `createVisitorFingerprint`).
 - `api/visitors.ts` implements the Vercel serverless handler; `server.ts` provides local Express parity alongside Vite dev middleware (or static `dist/` serving when `NODE_ENV=production`).
 - Both entry points require a non-empty `VISITOR_HASH_SALT` of at least 16 characters. If `VISITOR_HASH_SALT` (or Redis credentials on Vercel) is missing or weak, `/api/visitors` returns HTTP `200` with `{ configured: false, count: null, deduplicated: false }` and performs no hashing or persistence.
 
-## 4. Scope & Limitations
+## 5. Verification & Limitations
 
 - The frontend UI does not currently call or display `/api/visitors`; the endpoint exists purely as an optional backend counter service.
 - `vite.config.ts` sets `build.sourcemap: false` so TypeScript source maps are excluded from `dist/`.
 - `tests/visitors.test.ts` exercises `/api/visitors` request validation, secret guards, and HMAC-SHA256 behavior with a mocked `fetch`; live Upstash Redis calls are not run during offline CI checks.
+- `tests/e2e/portfolio.spec.ts` runs the production build in desktop and mobile Chromium with Playwright. It checks the explorer, deep links, résumé focus, locale changes, static HTML, and axe results. These scans cover the tested states and rules.

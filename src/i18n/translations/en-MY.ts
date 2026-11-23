@@ -11,7 +11,7 @@ import {
   STRATA,
   NODES,
   EDGES,
-} from '../../data/universeContent';
+} from '../../data/universeContent.ts';
 import type { LocaleBundle, PortfolioContentTranslations, UiTranslations } from '../types';
 
 const skillGroupsRecord: PortfolioContentTranslations['skillGroups'] = {};
@@ -110,7 +110,7 @@ for (const cat of CONSTELLATION_CATEGORIES) {
 
 export const enMYUi: UiTranslations = {
   metadata: {
-    title: 'Aries Razak | Application Support & Business Systems',
+    title: 'Aries Razak | IT Operations & Application Support',
     description: "Application support, workplace systems and IT operations experience covering Microsoft 365, system integrations, incident investigation and infrastructure troubleshooting.",
   },
   accessibility: {
@@ -121,11 +121,11 @@ export const enMYUi: UiTranslations = {
     openMenu: 'Open navigation menu',
     closeMenu: 'Close navigation menu',
     languageSelectorLabel: 'Select language',
+    languageUnavailable: 'Could not load this language. Please try again.',
     languageChangedAnnouncement: 'Language switched to {language}.',
     backToOverview: 'Back to Overview',
     backToTop: 'Back to top',
     copyEmailLabel: 'Copy email address to clipboard',
-    copyCaseLinkLabel: 'Copy shareable link to {title}',
     openInNewTabLabel: 'Open {label} in new tab',
   },
   common: {
@@ -152,6 +152,7 @@ export const enMYUi: UiTranslations = {
     languageHeading: 'Language',
   },
   hero: {
+    positioningTitle: 'IT Operations & Application Support',
     viewCaseStudies: 'View Case Studies',
     viewResume: 'View Résumé',
     currentRoleTerm: 'Current Role',
@@ -183,6 +184,8 @@ export const enMYUi: UiTranslations = {
     search: "Search cases",
     domain: "Technical domain",
     type: "Case type",
+    showAll: 'Explore all {count} cases',
+    showFeatured: 'Show featured cases',
     allDomains: "All domains",
     allTypes: "All types",
     count: "{count} found",

@@ -40,6 +40,12 @@ jobs:
       - name: Production build
         run: npm run build
 
+      - name: Install Chromium for browser smoke tests
+        run: npx playwright install --with-deps chromium
+
+      - name: State and accessibility smoke tests
+        run: npm run test:e2e
+
       - name: Build hygiene check (no source maps or obvious credential patterns in dist/)
         run: |
           if find dist -name '*.map' | grep -q .; then

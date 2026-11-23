@@ -2,7 +2,7 @@ import type { LocaleBundle, PortfolioContentTranslations, UiTranslations } from 
 
 export const taMYUi: UiTranslations = {
   metadata: {
-    title: 'Aries Razak | பயன்பாட்டு ஆதரவு & வணிக அமைப்புகள்',
+    title: 'Aries Razak | IT செயல்பாடுகளும் பயன்பாட்டு ஆதரவும்',
     description: "Microsoft 365, அமைப்பு ஒருங்கிணைப்பு, சம்பவ ஆய்வு மற்றும் உள்கட்டமைப்புச் சிக்கல் ஆய்வு உள்ளிட்ட பயன்பாட்டு ஆதரவு, பணியிட அமைப்புகள் மற்றும் IT செயல்பாட்டு அனுபவம்.",
   },
   accessibility: {
@@ -13,11 +13,11 @@ export const taMYUi: UiTranslations = {
     openMenu: 'வழிசெலுத்தல் பட்டியலைத் திறக்கவும்',
     closeMenu: 'வழிசெலுத்தல் பட்டியலை மூடவும்',
     languageSelectorLabel: 'மொழியைத் தேர்ந்தெடுக்கவும்',
+    languageUnavailable: 'இந்த மொழியை ஏற்ற முடியவில்லை. மீண்டும் முயலவும்.',
     languageChangedAnnouncement: 'மொழி {language} ஆக மாற்றப்பட்டது.',
     backToOverview: 'முதன்மை மேலோட்டத்திற்குத் திரும்புக',
     backToTop: 'மேலே செல்லவும்',
     copyEmailLabel: 'மின்னஞ்சல் முகவரியை நகலெடுக்கவும்',
-    copyCaseLinkLabel: '{title} பகிரக்கூடிய இணைப்பை நகலெடுக்கவும்',
     openInNewTabLabel: 'புதிய தாவலில் {label} திறக்கவும்',
   },
   common: {
@@ -44,6 +44,7 @@ export const taMYUi: UiTranslations = {
     languageHeading: 'மொழி',
   },
   hero: {
+    positioningTitle: 'IT செயல்பாடுகளும் பயன்பாட்டு ஆதரவும்',
     viewCaseStudies: 'பணி விவரங்களைக் காண்க',
     viewResume: 'விண்ணப்பக் குறிப்பைக் காண்க',
     currentRoleTerm: 'தற்போதைய பதவி',
@@ -75,6 +76,8 @@ export const taMYUi: UiTranslations = {
     search: "வழக்குகளைத் தேடு",
     domain: "தொழில்நுட்பத் துறை",
     type: "வழக்கு வகை",
+    showAll: 'அனைத்து {count} வழக்குகளையும் பார்க்கவும்',
+    showFeatured: 'சிறப்புத் தேர்வு வழக்குகளைக் காட்டு',
     allDomains: "எல்லாத் துறைகளும்",
     allTypes: "எல்லா வகைகளும்",
     count: "பொருந்தும் வழக்குகள் {count}",

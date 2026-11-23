@@ -2,10 +2,22 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
+import { generateStaticContent } from './scripts/generateStaticContent.ts';
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(),
+      tailwindcss(),
+      {
+        name: 'portfolio-static-content',
+        apply: 'build',
+        async writeBundle({ dir }) {
+          if (!dir) throw new Error('Missing portfolio output directory');
+          await generateStaticContent(dir);
+        },
+      },
+    ],
     resolve: {
       alias: {
         '@': path.resolve(import.meta.dirname || '.', '.'),

@@ -94,7 +94,7 @@ async function startServer() {
     res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
     res.setHeader(
       'Permissions-Policy',
-      'camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope()'
+      'camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=()'
     );
     if (isProd) {
       res.setHeader('X-Frame-Options', 'DENY');
@@ -342,7 +342,7 @@ async function startServer() {
     const distDir = path.resolve(process.cwd(), 'dist');
     app.use(express.static(distDir));
     app.get('*', (req, res) => {
-      if (req.path.startsWith('/assets/') || path.extname(req.path)) {
+      if (req.path.startsWith('/assets/') || req.path.startsWith('/cases/') || path.extname(req.path)) {
         res.status(404).end();
         return;
       }

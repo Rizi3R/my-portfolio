@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { buildUrlWithLocale, useI18n } from '../i18n';
 import { useSectionEntrance } from '../utils/useSectionEntrance';
 import type { CaseStudy } from '../data/universeContent';
@@ -16,6 +16,31 @@ import {
   ArrowRight,
   AlertCircle,
 } from 'lucide-react';
+
+const FEATURED_CASES = new Set([
+  'case-voucher-configuration',
+  'case-transaction-recovery',
+  'case-lark-migration',
+  'case-m365-access-sync',
+]);
+
+function CaseDisclosure({ id, expanded, render }: {
+  id: string;
+  expanded: boolean;
+  render: () => React.ReactNode;
+}) {
+  const [opened, setOpened] = useState(expanded);
+
+  useEffect(() => {
+    if (expanded) setOpened(true);
+  }, [expanded]);
+
+  return (
+    <div id={id} className="case-disclosure" inert={!expanded}>
+      <div>{(expanded || opened) && render()}</div>
+    </div>
+  );
+}
 
 interface ProjectsSectionProps {
   expandedCaseId: string | null;
@@ -47,9 +72,25 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     ...metadata.skills.map((id) => skillLabels.get(id) ?? ''),
     ...metadata.roles.map((role) => explorer.rolesById[role]),
   ]);
-  const majorCases = matches.filter((study) => !CASE_METADATA[study.id].compact);
-  const compactCases = matches.filter((study) => CASE_METADATA[study.id].compact);
+  const [browseAll, setBrowseAll] = useState(false);
   const hasFilters = Boolean(filters.query || filters.domain || filters.type);
+  const outsideFeatured = expandedCaseId !== null && !FEATURED_CASES.has(expandedCaseId);
+  useEffect(() => {
+    if (outsideFeatured) setBrowseAll(true);
+  }, [outsideFeatured]);
+
+  const showAll = browseAll || hasFilters || outsideFeatured;
+  const visibleCases = showAll ? matches : matches.filter((study) => FEATURED_CASES.has(study.id));
+  const majorCases = visibleCases.filter((study) => !showAll || !CASE_METADATA[study.id].compact);
+  const compactCases = showAll ? visibleCases.filter((study) => CASE_METADATA[study.id].compact) : [];
+
+  const toggleCaseList = () => {
+    if (showAll) {
+      updateFilters(EMPTY_CASE_FILTERS);
+      if (outsideFeatured) onSelectCaseId(null);
+    }
+    setBrowseAll(!showAll);
+  };
 
   const handleCopyCaseLink = async (caseId: string, title: string) => {
     const shareUrl = buildUrlWithLocale(window.location.href, locale, {
@@ -96,8 +137,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     );
   };
 
-  const renderCaseBody = (cs: CaseStudy) => {
-    const { timeline, compact } = CASE_METADATA[cs.id];
+  const renderCaseBody = (cs: CaseStudy, compact: boolean) => {
+    const { timeline } = CASE_METADATA[cs.id];
     const DetailHeading = compact ? 'h5' : 'h4';
 
     return (
@@ -196,10 +237,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     );
   };
 
-  const renderCase = (study: CaseStudy) => {
+  const renderCase = (study: CaseStudy, compact: boolean) => {
     const metadata = CASE_METADATA[study.id];
     const expanded = expandedCaseId === study.id;
-    const Heading = metadata.compact ? 'h4' : 'h3';
+    const Heading = compact ? 'h4' : 'h3';
     const isMigration = study.id === 'case-lark-migration';
     const copied = copiedCaseId === study.id;
     const copyFallback = copyErrorCaseId === study.id;
@@ -209,9 +250,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         id={study.id}
         key={study.id}
         aria-labelledby={`${study.id}-heading`}
-        className={`case-panel min-w-0 scroll-mt-24 border border-[#D8D2C5] bg-white ${metadata.compact
+        className={`case-panel min-w-0 scroll-mt-24 border border-[#D8D2C5] bg-white ${compact
           ? 'rounded-xl px-4 py-4 sm:px-5'
-          : 'rounded-2xl p-5 sm:p-6 shadow-sm'} ${isMigration ? 'lg:col-span-2' : ''}`}
+          : 'rounded-2xl p-5 sm:p-6 shadow-sm'} ${isMigration && showAll ? 'lg:col-span-2' : ''}`}
       >
         {isMigration && <MigrationIllustration />}
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#474457]">
@@ -223,7 +264,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           </span>
         </div>
 
-        <Heading id={`${study.id}-heading`} tabIndex={-1} className={`mt-2 font-display font-bold tracking-tight [overflow-wrap:anywhere] focus:outline-2 focus:outline-offset-4 focus:outline-[#506391] ${metadata.compact ? 'text-lg' : 'text-2xl'}`}>
+        <Heading id={`${study.id}-heading`} tabIndex={-1} className={`mt-2 font-display font-bold tracking-tight [overflow-wrap:anywhere] focus:outline-2 focus:outline-offset-4 focus:outline-[#506391] ${compact ? 'text-lg' : 'text-2xl'}`}>
           <a href={`#${study.id}`} onClick={(event) => {
             if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
             event.preventDefault();
@@ -258,19 +299,19 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           </button>
           <button
             type="button"
-            aria-label={format(t.accessibility.copyCaseLinkLabel, { title: study.title })}
             onClick={() => void handleCopyCaseLink(study.id, study.title)}
             className="motion-control inline-flex min-h-11 items-center gap-2 rounded-lg border border-[#CCC4B3] px-3 py-2 text-xs font-medium hover:bg-[#F6F2E9] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#191723]"
           >
             {copied ? <Check size={14} aria-hidden="true" /> : copyFallback
               ? <AlertCircle size={14} aria-hidden="true" /> : <Link2 size={14} aria-hidden="true" />}
             {copied ? t.caseStudies.copied : copyFallback ? t.caseStudies.urlUpdated : t.caseStudies.copyLink}
+            <span className="sr-only"> {study.title}</span>
           </button>
         </div>
 
-        <div id={`${study.id}-body`} className="case-disclosure" inert={!expanded}>
-          <div>
-            {renderCaseBody(study)}
+        <CaseDisclosure id={`${study.id}-body`} expanded={expanded} render={() => (
+          <>
+            {renderCaseBody(study, compact)}
             <dl className="mt-4 grid gap-4 border-t border-[#DDD6C7] pt-4 text-sm sm:grid-cols-2">
               <div>
                 <dt className="font-semibold">{explorer.skills}</dt>
@@ -281,8 +322,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 <dd className="mt-1 text-[#474457]">{metadata.roles.map((role) => explorer.rolesById[role]).join(' · ')}</dd>
               </div>
             </dl>
-          </div>
-        </div>
+          </>
+        )} />
       </article>
     );
   };
@@ -332,28 +373,40 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           </div>
           <div className="mt-2 flex min-h-10 flex-wrap items-center justify-between gap-x-3 text-sm">
             <p role="status" aria-atomic="true" className="font-medium text-[#474457]">
-              {format(explorer.count, { count: String(matches.length) })}
+              {format(explorer.count, { count: String(visibleCases.length) })}
             </p>
-            <button type="button" disabled={!hasFilters} onClick={() => {
-              updateFilters(EMPTY_CASE_FILTERS);
-              searchRef.current?.focus();
-            }}
-              className="min-h-10 rounded px-2 font-semibold text-[#253459] underline underline-offset-4 hover:text-[#191723] focus-visible:outline-2 disabled:opacity-55">
-              {explorer.clear}
-            </button>
+            <div className="flex flex-wrap items-center gap-x-3">
+              {hasFilters && (
+                <button type="button" onClick={() => {
+                  updateFilters(EMPTY_CASE_FILTERS);
+                  searchRef.current?.focus();
+                }} className="min-h-11 rounded px-2 font-semibold text-[#253459] underline underline-offset-4 focus-visible:outline-2">
+                  {explorer.clear}
+                </button>
+              )}
+              <button type="button" aria-controls="case-results" aria-expanded={showAll}
+                onClick={toggleCaseList}
+                className="motion-control min-h-11 rounded-lg bg-[#253459] px-3 py-2 font-semibold text-white hover:bg-[#364976] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#253459]">
+                {showAll ? explorer.showFeatured : format(explorer.showAll, { count: String(content.caseStudies.length) })}
+              </button>
+            </div>
           </div>
         </div>
 
-        {matches.length === 0 && (
-          <p className="rounded-xl border border-[#D8D2C5] bg-white px-5 py-8 text-center text-sm">{explorer.empty}</p>
-        )}
-        {majorCases.length > 0 && <div className="grid items-start gap-5 lg:grid-cols-2">{majorCases.map(renderCase)}</div>}
-        {compactCases.length > 0 && (
-          <section aria-labelledby="case-collection-heading" className="space-y-3 border-t border-[#DDD6C7] pt-6">
-            <h3 id="case-collection-heading" className="font-display text-xl font-bold">{explorer.collection}</h3>
-            <div className="grid items-start gap-3 lg:grid-cols-2">{compactCases.map(renderCase)}</div>
-          </section>
-        )}
+        <div id="case-results" className="space-y-7">
+          {visibleCases.length === 0 && (
+            <p className="rounded-xl border border-[#D8D2C5] bg-white px-5 py-8 text-center text-sm">{explorer.empty}</p>
+          )}
+          {majorCases.length > 0 && (
+            <div className="grid items-start gap-5 lg:grid-cols-2">{majorCases.map((study) => renderCase(study, false))}</div>
+          )}
+          {compactCases.length > 0 && (
+            <section aria-labelledby="case-collection-heading" className="space-y-3 border-t border-[#DDD6C7] pt-6">
+              <h3 id="case-collection-heading" className="font-display text-xl font-bold">{explorer.collection}</h3>
+              <div className="grid items-start gap-3 lg:grid-cols-2">{compactCases.map((study) => renderCase(study, true))}</div>
+            </section>
+          )}
+        </div>
       </div>
     </section>
   );

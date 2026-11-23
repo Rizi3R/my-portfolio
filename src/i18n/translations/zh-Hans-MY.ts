@@ -2,7 +2,7 @@ import type { LocaleBundle, PortfolioContentTranslations, UiTranslations } from 
 
 export const zhHansMYUi: UiTranslations = {
   metadata: {
-    title: 'Aries Razak | 应用支持与业务系统',
+    title: 'Aries Razak | IT 运营与应用支持',
     description: "业务应用、办公系统及 IT 运营支持经验，涵盖 Microsoft 365、系统集成、事件排查和基础设施故障排查。",
   },
   accessibility: {
@@ -13,11 +13,11 @@ export const zhHansMYUi: UiTranslations = {
     openMenu: '打开导航菜单',
     closeMenu: '关闭导航菜单',
     languageSelectorLabel: '选择语言',
+    languageUnavailable: '无法加载此语言，请重试。',
     languageChangedAnnouncement: '语言已切换为 {language}。',
     backToOverview: '返回概览',
     backToTop: '返回顶部',
     copyEmailLabel: '复制电子邮箱地址到剪贴板',
-    copyCaseLinkLabel: '复制「{title}」的可分享链接',
     openInNewTabLabel: '在新标签页中打开 {label}',
   },
   common: {
@@ -44,6 +44,7 @@ export const zhHansMYUi: UiTranslations = {
     languageHeading: '语言',
   },
   hero: {
+    positioningTitle: 'IT 运营与应用支持',
     viewCaseStudies: '查看案例研究',
     viewResume: '查看简历',
     currentRoleTerm: '现任职位',
@@ -75,6 +76,8 @@ export const zhHansMYUi: UiTranslations = {
     search: "搜索案例",
     domain: "技术领域",
     type: "案例类型",
+    showAll: '浏览全部 {count} 个案例',
+    showFeatured: '显示精选案例',
     allDomains: "所有领域",
     allTypes: "所有类型",
     count: "{count} 个匹配案例",
