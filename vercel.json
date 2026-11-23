@@ -38,6 +38,13 @@
       ]
     },
     {
+      "source": "/build-info.json",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" },
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
+    {
       "source": "/api/(.*)",
       "headers": [
         {
@@ -57,7 +64,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!api/|assets/|robots\\.txt|sitemap\\.xml).*)",
+      "source": "/((?!api/|assets/|cases/|build-info\\.json|robots\\.txt|sitemap\\.xml).*)",
       "destination": "/index.html"
     }
   ]

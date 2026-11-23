@@ -2,7 +2,7 @@ import type { LocaleBundle, PortfolioContentTranslations, UiTranslations } from 
 
 export const msMYUi: UiTranslations = {
   metadata: {
-    title: 'Aries Razak | Sokongan Aplikasi & Sistem Perniagaan',
+    title: 'Aries Razak | Operasi IT dan Sokongan Aplikasi',
     description: "Pengalaman sokongan aplikasi, sistem tempat kerja dan operasi IT merangkumi Microsoft 365, integrasi sistem, siasatan insiden dan penyelesaian masalah infrastruktur.",
   },
   accessibility: {
@@ -13,11 +13,11 @@ export const msMYUi: UiTranslations = {
     openMenu: 'Buka menu navigasi',
     closeMenu: 'Tutup menu navigasi',
     languageSelectorLabel: 'Pilih bahasa',
+    languageUnavailable: 'Bahasa ini tidak dapat dimuatkan. Sila cuba lagi.',
     languageChangedAnnouncement: 'Bahasa ditukar ke {language}.',
     backToOverview: 'Kembali ke Gambaran Keseluruhan',
     backToTop: 'Kembali ke atas',
     copyEmailLabel: 'Salin alamat e-mel ke papan klip',
-    copyCaseLinkLabel: 'Salin pautan boleh kongsi untuk {title}',
     openInNewTabLabel: 'Buka {label} dalam tab baharu',
   },
   common: {
@@ -44,6 +44,7 @@ export const msMYUi: UiTranslations = {
     languageHeading: 'Bahasa',
   },
   hero: {
+    positioningTitle: 'Operasi IT dan Sokongan Aplikasi',
     viewCaseStudies: 'Lihat Kajian Kes',
     viewResume: 'Lihat Resume',
     currentRoleTerm: 'Jawatan Semasa',
@@ -75,6 +76,8 @@ export const msMYUi: UiTranslations = {
     search: "Cari kajian kes",
     domain: "Bidang teknikal",
     type: "Jenis kes",
+    showAll: 'Terokai semua {count} kes',
+    showFeatured: 'Tunjukkan kes pilihan',
     allDomains: "Semua bidang",
     allTypes: "Semua jenis",
     count: "{count} kes sepadan",

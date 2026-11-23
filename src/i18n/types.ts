@@ -27,11 +27,11 @@ export interface UiTranslations {
     openMenu: string;
     closeMenu: string;
     languageSelectorLabel: string;
+    languageUnavailable: string;
     languageChangedAnnouncement: string;
     backToOverview: string;
     backToTop: string;
     copyEmailLabel: string;
-    copyCaseLinkLabel: string;
     openInNewTabLabel: string;
   };
   common: {
@@ -57,6 +57,7 @@ export interface UiTranslations {
     languageHeading: string;
   };
   hero: {
+    positioningTitle: string;
     viewCaseStudies: string;
     viewResume: string;
     currentRoleTerm: string;
@@ -82,6 +83,8 @@ export interface UiTranslations {
     search: string;
     domain: string;
     type: string;
+    showAll: string;
+    showFeatured: string;
     allDomains: string;
     allTypes: string;
     count: string;
