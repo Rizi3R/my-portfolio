@@ -26,6 +26,13 @@ function page(title: string, description: string, path: string, body: string): s
   <meta property="og:title" content="${escape(title)} | ${escape(PROFILE.displayName)}">
   <meta property="og:description" content="${escape(description)}">
   <meta property="og:url" content="${site}${path}">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="${site}/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="${escape(PROFILE.displayName)}: IT Operations and Application Support portfolio">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${site}/og-image.png">
   <style>${styles}</style>
 </head>
 <body>
