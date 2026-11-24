@@ -41,9 +41,6 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#242138] pb-6">
           <div className="max-w-2xl space-y-2">
-            <p className="text-xs font-mono uppercase tracking-wider text-[#A8C5FF]">
-              {t.skills.eyebrow}
-            </p>
             <h2
               id="constellation-heading"
               className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight"
@@ -74,7 +71,6 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
               >
                 <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-3">
                   <div className="min-w-0 space-y-1">
-                    <div className="text-xs font-mono text-[#F2A77D] uppercase tracking-wider">0{idx + 1}</div>
                     <h3 className={`font-display font-bold text-[#F6F2E9] ${hero ? 'text-2xl sm:text-3xl' : 'text-xl'}`}>
                       {group.title}
                     </h3>
@@ -84,7 +80,7 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
                       <span className={`block font-display font-bold leading-none text-[#A8C5FF] ${hero ? 'text-5xl' : 'text-3xl'}`}>
                         <CountUp value={evidence.length} />
                       </span>
-                      <span className="mt-1 block font-mono text-[11px] uppercase tracking-wider text-[#CFCAC0]">
+                      <span className="mt-1 block text-xs text-[#CFCAC0]">
                         {t.skills.caseCount}
                       </span>
                     </p>
@@ -104,7 +100,7 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
 
                 {hero && evidence.length > 0 && (
                   <div className="mt-auto space-y-2 border-t border-[#242138] pt-4">
-                    <p className="font-mono text-[11px] uppercase tracking-wider text-[#F2A77D]">{t.skills.provenIn}</p>
+                    <p className="text-xs text-[#F2A77D]">{t.skills.provenIn}</p>
                     <ul className="space-y-1">
                       {evidence.slice(0, 4).map((study) => (
                         <li key={study.id}>
@@ -126,7 +122,7 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
                     href={`#${lead.id}`}
                     className="mt-auto inline-flex min-h-11 items-center gap-2 self-start rounded-lg text-sm text-[#CFCAC0] transition-colors hover:text-[#F6F2E9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
                   >
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-[#F2A77D]">{t.skills.provenIn}</span>
+                    <span className="text-xs text-[#F2A77D]">{t.skills.provenIn}</span>
                     <span className="font-medium underline decoration-[#3A3654] underline-offset-4 group-hover:decoration-[#A8C5FF]">
                       {lead.title}
                     </span>
@@ -139,7 +135,7 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
         </ul>
 
         {onOpenFullAtlas && (
-          <div className="pt-4 border-t border-[#242138] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#CFCAC0]">
+          <div className="pt-4 border-t border-[#242138] flex flex-wrap items-center justify-between gap-4 text-xs text-[#CFCAC0]">
             <span>{t.skills.atlasPrompt}</span>
             <button
               type="button"

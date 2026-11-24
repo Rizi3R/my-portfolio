@@ -11,7 +11,7 @@ export function CaseTimeline({ id, title, stages, steps }: {
 
   return (
     <div className="space-y-2.5">
-      <h4 className="text-xs font-mono uppercase tracking-wider text-[#CFCAC0] font-semibold">{title}</h4>
+      <h4 className="text-xs text-[#CFCAC0] font-semibold">{title}</h4>
       <ol className="grid gap-2 sm:grid-cols-3">
         {stages.map((stage, index) => (
           <li key={stage} className="min-w-0">

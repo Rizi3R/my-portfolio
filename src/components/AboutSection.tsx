@@ -70,9 +70,6 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#242138] pb-6">
           <div className="max-w-2xl space-y-2">
-            <p className="text-xs font-mono uppercase tracking-wider text-[#F2A77D]">
-              {t.interactiveLab.eyebrow}
-            </p>
             <h2
               id="workbenches-heading"
               className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight"
@@ -109,7 +106,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                   <button
                     type="button"
                     onClick={item.onClick}
-                    className="inline-flex min-h-11 items-center gap-1.5 text-xs font-mono font-semibold text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded"
+                    className="inline-flex min-h-11 items-center gap-1.5 text-xs font-semibold text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded"
                   >
                     <span>{item.cta}</span>
                     <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />

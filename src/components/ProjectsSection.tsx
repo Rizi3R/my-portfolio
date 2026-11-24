@@ -137,7 +137,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       <div className="flex max-w-3xl items-start gap-2.5 rounded-lg border border-[#242138] bg-[#19162B] px-3.5 py-3">
         <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[#F6F2E9]" aria-hidden="true" />
         <div className="space-y-1">
-          <p className="text-xs font-mono uppercase tracking-wider text-[#CFCAC0] font-semibold">
+          <p className="text-xs text-[#CFCAC0] font-semibold">
             {findings ? explorer.findings : cs.outcomeLabel}
           </p>
           <p className="text-sm leading-relaxed text-[#F6F2E9]">{cs.outcome}</p>
@@ -154,14 +154,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       <div className="pt-5 mt-5 border-t border-[#242138] space-y-6 text-sm text-[#F6F2E9]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-1.5">
-            <DetailHeading className="text-xs font-mono uppercase tracking-wider text-[#CFCAC0] font-semibold">
+            <DetailHeading className="text-xs text-[#CFCAC0] font-semibold">
               {t.caseStudies.contextLabel}
             </DetailHeading>
             <p className="text-sm text-[#F6F2E9] leading-relaxed">{cs.situation}</p>
           </div>
 
           <div className="space-y-1.5">
-            <DetailHeading className="text-xs font-mono uppercase tracking-wider text-[#CFCAC0] font-semibold">
+            <DetailHeading className="text-xs text-[#CFCAC0] font-semibold">
               {t.caseStudies.myRoleLabel}
             </DetailHeading>
             <p className="text-sm text-[#F6F2E9] leading-relaxed">{cs.responsibility}</p>
@@ -177,7 +177,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           />
         ) : (
           <div className="space-y-2">
-            <DetailHeading className="text-xs font-mono uppercase tracking-wider text-[#CFCAC0] font-semibold">
+            <DetailHeading className="text-xs text-[#CFCAC0] font-semibold">
               {t.caseStudies.actionsTakenLabel}
             </DetailHeading>
             <ul className="list-disc pl-5 space-y-1.5 text-sm text-[#F6F2E9] leading-relaxed">
@@ -190,7 +190,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
         {cs.explorationNotes?.length ? (
           <div className="space-y-2 rounded-lg border border-[#242138] bg-[#19162B] p-4">
-            <DetailHeading className="text-xs font-mono uppercase tracking-wider font-semibold">
+            <DetailHeading className="text-xs font-semibold">
               {explorer.exploration}
             </DetailHeading>
             <ul className="list-disc space-y-1.5 pl-5 leading-relaxed">
@@ -202,7 +202,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         {cs.triageBreakdown && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#19162B] border border-[#242138] rounded-xl p-4 sm:p-5">
             <div className="space-y-1.5">
-              <DetailHeading className="text-xs font-mono uppercase tracking-wider text-[#F6F2E9] font-bold">
+              <DetailHeading className="text-xs text-[#F6F2E9] font-bold">
                 {t.caseStudies.checksPerformedLabel}
               </DetailHeading>
               <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#F6F2E9] leading-relaxed">
@@ -213,7 +213,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             </div>
 
             <div className="space-y-1.5 md:border-l md:border-[#242138] md:pl-4 pt-3 md:pt-0 border-t md:border-t-0 border-[#242138]">
-              <DetailHeading className="text-xs font-mono uppercase tracking-wider text-[#F6F2E9] font-bold">
+              <DetailHeading className="text-xs text-[#F6F2E9] font-bold">
                 {t.caseStudies.providedToVendorLabel}
               </DetailHeading>
               <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#F6F2E9] leading-relaxed">
@@ -224,7 +224,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             </div>
 
             <div className="space-y-1.5 md:border-l md:border-[#242138] md:pl-4 pt-3 md:pt-0 border-t md:border-t-0 border-[#242138]">
-              <DetailHeading className="text-xs font-mono uppercase tracking-wider text-[#F6F2E9] font-bold">
+              <DetailHeading className="text-xs text-[#F6F2E9] font-bold">
                 {t.caseStudies.vendorScopeLabel}
               </DetailHeading>
               <ul className="list-disc pl-4 space-y-1.5 text-xs sm:text-sm text-[#F6F2E9] leading-relaxed">
@@ -237,10 +237,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         )}
 
         <div className="border-t border-[#242138] pt-4 space-y-1.5">
-          <DetailHeading className="text-xs font-mono uppercase tracking-wider text-[#CFCAC0] font-semibold">
+          <DetailHeading className="text-xs text-[#CFCAC0] font-semibold">
             {t.caseStudies.toolsUsedLabel}
           </DetailHeading>
-          <div className="text-xs font-mono text-[#F6F2E9]">{cs.technologies.join(' · ')}</div>
+          <div className="text-xs text-[#F6F2E9]">{cs.technologies.join(' · ')}</div>
         </div>
       </div>
     );
@@ -349,7 +349,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         <div className="sr-only" role="status">{copyAnnouncement}</div>
         <div ref={headingRef} className="flex flex-col justify-between gap-4 border-b border-[#242138] pb-6 md:flex-row md:items-end">
           <div>
-            <p className="mb-1.5 font-mono text-xs font-medium uppercase tracking-wider text-[#CFCAC0]">{t.caseStudies.eyebrow}</p>
             <h2 id="featured-work-heading" ref={sectionHeadingRef} tabIndex={-1} className="scroll-mt-24 font-display text-3xl font-bold tracking-tight focus:outline-none sm:text-4xl">
               {t.caseStudies.heading}
             </h2>

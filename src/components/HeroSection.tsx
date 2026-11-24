@@ -54,7 +54,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
 
             {/* Primary & Secondary Actions */}
-            <div className="flex flex-wrap items-center gap-3 pt-1">
+            <div className="grid grid-cols-1 gap-3 pt-1 sm:flex sm:flex-wrap sm:items-center">
               <a
                 href="#featured-work"
                 onClick={(e) => {
@@ -114,7 +114,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             >
               <figcaption
                 id="hero-diagram-caption"
-                className="pb-3 border-b border-[#242138] text-xs font-mono uppercase tracking-wider text-[#A8C5FF] font-semibold"
+                className="pb-3 border-b border-[#242138] text-xs text-[#A8C5FF] font-semibold"
               >
                 {t.hero.workflowCaption}
               </figcaption>
@@ -123,7 +123,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
               {/* Readable Conceptual Troubleshooting Sequence */}
               <div className="pt-3.5 border-t border-[#242138] space-y-3">
-                <div className="text-xs font-mono uppercase tracking-wider text-[#CFCAC0]">
+                <div className="text-xs text-[#CFCAC0]">
                   {t.hero.triageFlowLabel}
                 </div>
                 <ol className="list-decimal pl-6 space-y-1 text-xs sm:text-[13px] font-sans text-[#F6F2E9]">

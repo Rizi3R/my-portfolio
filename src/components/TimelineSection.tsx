@@ -24,9 +24,6 @@ export const TimelineSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8 border-b border-[#242138]">
           <div ref={headingRef} className="max-w-2xl space-y-2">
-            <p className="text-xs font-mono uppercase tracking-wider text-[#A8C5FF]">
-              {t.experience.eyebrow}
-            </p>
             <h2
               id="timeline-heading"
               className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight"
@@ -61,12 +58,12 @@ export const TimelineSection: React.FC = () => {
                 >
                   {/* Left Metadata Column */}
                   <div className="lg:col-span-4 space-y-1.5">
-                    <div className="inline-flex items-center gap-2 text-xs font-mono">
+                    <div className="inline-flex items-center gap-2 text-xs">
                       <Briefcase className="w-3.5 h-3.5 text-[#A8C5FF] shrink-0" aria-hidden="true" />
                       <span className="text-[#A8C5FF] font-medium">{roleBadge}</span>
                     </div>
                     <div
-                      className={`text-xs sm:text-sm font-mono ${
+                      className={`text-xs sm:text-sm ${
                         isCurrent ? 'text-[#F2A77D] font-semibold' : 'text-[#B5B0C2]'
                       }`}
                     >
@@ -88,7 +85,7 @@ export const TimelineSection: React.FC = () => {
                       </p>
                     </div>
 
-                    <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#A8C5FF] shrink-0 self-start sm:self-center">
+                    <div className="inline-flex items-center gap-1.5 text-xs text-[#A8C5FF] shrink-0 self-start sm:self-center">
                       <span>{isExpanded ? t.experience.hide : t.experience.details}</span>
                       {isExpanded ? (
                         <ChevronUp className="w-4 h-4" aria-hidden="true" />
@@ -112,7 +109,7 @@ export const TimelineSection: React.FC = () => {
                         ))}
                       </ul>
 
-                      <div className="text-xs font-mono text-[#B5B0C2]">
+                      <div className="text-xs text-[#B5B0C2]">
                         <span className="text-[#A8C5FF] mr-2">{t.common.tools}</span>
                         <span>{exp.technologies.join(' · ')}</span>
                       </div>

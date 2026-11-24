@@ -47,9 +47,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
           {/* Left 7 Cols: Contact Headline & Primary Actions */}
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
-              <p className="text-xs font-mono uppercase tracking-wider text-[#F2A77D]">
-                {t.contact.eyebrow}
-              </p>
               <h2
                 id="contact-heading"
                 className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight max-w-2xl"
@@ -86,7 +83,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
             <div className="py-5 space-y-2">
               <div className="flex items-center justify-between gap-4">
                 <div className="space-y-1 min-w-0">
-                  <div className="text-xs font-mono text-[#B5B0C2] uppercase tracking-wider">
+                  <div className="text-xs text-[#B5B0C2]">
                     {t.contact.directEmailLabel}
                   </div>
                   <div className="text-sm font-semibold text-[#F6F2E9] break-all">
@@ -97,7 +94,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
                   type="button"
                   onClick={handleCopyEmail}
                   aria-label={t.accessibility.copyEmailLabel}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 min-h-11 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-xs font-mono text-[#A8C5FF] transition-colors cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 min-h-11 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-xs text-[#A8C5FF] transition-colors cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
                 >
                   {copyState === 'copied' ? (
                     <>
@@ -131,14 +128,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
               className="py-5 flex items-center justify-between gap-4 group transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded"
             >
               <div className="space-y-1">
-                <div className="text-xs font-mono text-[#B5B0C2] uppercase tracking-wider">
+                <div className="text-xs text-[#B5B0C2]">
                   {t.contact.linkedInLabel}
                 </div>
                 <div className="text-sm font-semibold text-[#F6F2E9] group-hover:text-[#A8C5FF] transition-colors">
                   {t.contact.linkedInValue}
                 </div>
               </div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#A8C5FF] shrink-0">
+              <div className="inline-flex items-center gap-1.5 text-xs text-[#A8C5FF] shrink-0">
                 <LinkedInIcon className="w-3.5 h-3.5" />
                 <span>{t.contact.open}</span>
                 <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />

@@ -44,7 +44,7 @@ export function SupportSystemDiagram({ onOpenCaseStudy }: {
   return (
     <div ref={ref} className="support-system">
       <div className="support-system-hub rounded-xl border border-[#A8C5FF]/40 bg-[#0A0913] px-4 py-3 text-center">
-        <div className="text-xs font-mono uppercase tracking-wider text-[#F2A77D]">
+        <div className="text-xs text-[#F2A77D]">
           {t.hero.coreFocus}
         </div>
         <div className="font-display text-base sm:text-lg font-bold text-[#F6F2E9] mt-0.5 leading-snug">
@@ -75,7 +75,7 @@ export function SupportSystemDiagram({ onOpenCaseStudy }: {
             }}
             className="support-map-link rounded-xl border border-[#34334D] bg-[#0A0913] px-2.5 py-2.5 sm:px-3 min-w-0 flex flex-col justify-center gap-1"
           >
-            <div className="flex items-start gap-1.5 text-xs sm:text-[13px] sm:font-mono font-semibold text-[#F6F2E9] leading-snug">
+            <div className="flex items-start gap-1.5 text-xs sm:text-[13px] font-semibold text-[#F6F2E9] leading-snug">
               <Icon className="w-3.5 h-3.5 text-[#A8C5FF] shrink-0 mt-0.5" aria-hidden="true" />
               <span className="min-w-0 [overflow-wrap:anywhere]">{t.hero.nodes[id].label}</span>
               <ArrowUpRight size={12} className="ml-auto shrink-0 text-[#A8C5FF]" aria-hidden="true" />
