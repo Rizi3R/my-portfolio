@@ -142,6 +142,8 @@ export interface UiTranslations {
     intro: string;
     atlasPrompt: string;
     openAtlasCta: string;
+    caseCount: string;
+    provenIn: string;
   };
   credentials: {
     eyebrow: string;

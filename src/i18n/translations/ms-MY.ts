@@ -170,6 +170,8 @@ export const msMYUi: UiTranslations = {
       'Bidang praktikal utama yang diamalkan dalam sokongan aplikasi, pentadbiran SaaS, konfigurasi integrasi, dan operasi cawangan.',
     atlasPrompt: 'Ingin lihat bagaimana alatan ini berhubung merentasi peranan?',
     openAtlasCta: 'Buka Atlas Kemahiran di Makmal Interaktif',
+    caseCount: 'kajian kes',
+    provenIn: 'Dibuktikan dalam',
   },
   credentials: {
     eyebrow: 'Asas & Kelayakan',

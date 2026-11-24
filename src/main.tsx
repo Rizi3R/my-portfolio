@@ -4,6 +4,9 @@ import { I18nProvider, resolveLocale } from './i18n';
 import { loadLocale } from './i18n/loadLocale';
 import { enMYBundle } from './i18n/translations/en-MY';
 import './index.css';
+import { initInteractiveSurfaces } from './utils/interactiveSurfaces';
+
+initInteractiveSurfaces();
 
 const root = createRoot(document.getElementById('root')!);
 const initialLocale = resolveLocale();

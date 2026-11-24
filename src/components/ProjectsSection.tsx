@@ -259,6 +259,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         id={study.id}
         key={study.id}
         aria-labelledby={`${study.id}-heading`}
+        data-glow
         className={`case-panel min-w-0 scroll-mt-24 border border-[#242138] bg-[#12101F] ${compact
           ? 'rounded-xl px-4 py-4 sm:px-5'
           : 'rounded-2xl p-5 sm:p-6 shadow-sm'} ${isMigration && showAll ? 'lg:col-span-2' : ''}`}

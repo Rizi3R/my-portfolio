@@ -461,3 +461,79 @@
   .case-timeline-note { animation: case-timeline-reveal 180ms ease-out; }
   @keyframes case-timeline-reveal { from { opacity: .72; transform: translateY(3px); } }
 }
+
+/* ── Interactive surfaces (cursor spotlight + tilt, see utils/interactiveSurfaces.ts) ── */
+[data-glow] {
+  position: relative;
+  isolation: isolate;
+}
+
+[data-glow]::before,
+[data-glow]::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  z-index: -1;
+}
+
+/* Soft light inside the surface */
+[data-glow]::before {
+  inset: 0;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(168, 197, 255, 0.18), transparent 45%);
+}
+
+/* Bright rim that traces the border near the cursor */
+[data-glow]::after {
+  inset: -1px;
+  padding: 1px;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(168, 197, 255, 0.85), rgba(242, 167, 125, 0.35) 40%, transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  [data-glow]:hover::before,
+  [data-glow]:hover::after { opacity: 1; }
+
+  [data-tilt] {
+    transform-style: preserve-3d;
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 200ms ease;
+    will-change: transform;
+  }
+
+  .bento-chip {
+    transition: border-color 200ms ease, color 200ms ease, transform 200ms ease;
+  }
+
+  .bento-tile:hover .bento-chip {
+    border-color: #3A3654;
+  }
+
+  .bento-chip:hover {
+    border-color: #A8C5FF;
+    color: #F6F2E9;
+    transform: translateY(-1px);
+  }
+}
+
+/* ── Hero headline: words rise in on first paint ── */
+.hero-word {
+  display: inline-block;
+  white-space: pre;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-word {
+    animation: hero-word-in 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 90ms + 120ms);
+  }
+
+  @keyframes hero-word-in {
+    from { opacity: 0; transform: translateY(0.45em); filter: blur(8px); }
+    to { opacity: 1; transform: none; filter: blur(0); }
+  }
+}

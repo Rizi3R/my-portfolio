@@ -169,6 +169,8 @@ export const zhHansMYUi: UiTranslations = {
       '在应用支持、SaaS 管理、集成配置与门店运维工作中实际运用的四大核心领域。',
     atlasPrompt: '想查看各项工具如何在不同岗位与项目中相互关联？',
     openAtlasCta: '在互动实验室中打开技能图谱',
+    caseCount: '个案例研究',
+    provenIn: '实战案例',
   },
   credentials: {
     eyebrow: '学历与证书',

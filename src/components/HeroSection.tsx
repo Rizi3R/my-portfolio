@@ -39,7 +39,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 id="hero-heading"
                 className="font-display text-[2.4rem] sm:text-5xl xl:text-6xl font-bold text-[#F6F2E9] tracking-tight leading-[1.08] max-w-[20ch]"
               >
-                {t.hero.positioningTitle}
+                {t.hero.positioningTitle.split(/(?<=\s)/).map((word, i) => (
+                  <span key={`${word}-${i}`} className="hero-word" style={{ '--i': i } as React.CSSProperties}>{word}</span>
+                ))}
               </h1>
 
               <div className="h-px w-16 bg-[#F2A77D]" aria-hidden="true" />

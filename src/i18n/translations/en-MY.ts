@@ -277,6 +277,8 @@ export const enMYUi: UiTranslations = {
       'Core practical areas applied across application support, SaaS administration, integration configuration, and site operations.',
     atlasPrompt: 'Want to inspect how these tools connect across roles?',
     openAtlasCta: 'Open Skill Atlas in Interactive Lab',
+    caseCount: 'case studies',
+    provenIn: 'Proven in',
   },
   credentials: {
     eyebrow: 'Foundations & Credentials',
