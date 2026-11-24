@@ -34,7 +34,7 @@ const ErrorFallback: React.FC<{
         <button
           type="button"
           onClick={onRetry}
-          className="inline-flex items-center gap-2 px-4 py-2 min-h-[40px] rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
+          className="inline-flex items-center gap-2 px-4 py-2 min-h-11 rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
         >
           <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
           <span>{t.common.retry}</span>
@@ -43,7 +43,7 @@ const ErrorFallback: React.FC<{
           <button
             type="button"
             onClick={onResetView}
-            className="inline-flex items-center gap-2 px-4 py-2 min-h-[40px] rounded-lg border border-[#242138] hover:border-[#A8C5FF]/60 text-[#F6F2E9] text-xs font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+            className="inline-flex items-center gap-2 px-4 py-2 min-h-11 rounded-lg border border-[#242138] hover:border-[#A8C5FF]/60 text-[#F6F2E9] text-xs font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
           >
             <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
             <span>{t.accessibility.backToOverview}</span>

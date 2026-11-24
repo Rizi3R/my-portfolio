@@ -26,6 +26,9 @@ test('navigation starts with four featured cases and the complete explorer is re
 
 test('search and filters include cases outside the initial selection', async ({ page }) => {
   await page.goto('/?lang=en-MY');
+  await expect(page.getByRole('searchbox', { name: 'Search cases' })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Explore all 13 cases' }).click();
+  await expect(page.getByRole('searchbox', { name: 'Search cases' })).toBeFocused();
   await page.getByRole('searchbox', { name: 'Search cases' }).fill('ICMP');
   await expect(page.locator(caseArticles)).toHaveCount(1);
   await expect(page.locator('#case-network-connectivity')).toBeVisible();

@@ -381,7 +381,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => handleViewChange('portfolio')}
-                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#0A0913] text-[#F6F2E9] text-xs font-mono hover:bg-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#0A0913] text-[#F6F2E9] text-xs font-mono hover:bg-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>{t.accessibility.backToOverview}</span>
@@ -407,7 +407,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => handleViewChange('portfolio')}
-                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>{t.accessibility.backToOverview}</span>
@@ -438,7 +438,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => handleViewChange('portfolio')}
-                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>{t.accessibility.backToOverview}</span>
@@ -468,7 +468,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => handleViewChange('portfolio')}
-                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>{t.accessibility.backToOverview}</span>
@@ -570,7 +570,7 @@ export default function App() {
                 ref={labCloseRef}
                 type="button"
                 onClick={() => closeOverlayAndRestoreFocus(setLabModalOpen)}
-                className="p-2 rounded-lg text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/60 cursor-pointer min-w-[40px] min-h-[40px] flex items-center justify-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                className="p-2 rounded-lg text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/60 cursor-pointer min-w-11 min-h-11 flex items-center justify-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
                 aria-label={t.lab.closeModal}
               >
                 <X className="w-4 h-4" />

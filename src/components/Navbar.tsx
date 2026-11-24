@@ -99,7 +99,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onNavigateSection('top');
             }
           }}
-          className="font-display text-lg font-bold tracking-tight text-[#F6F2E9] hover:text-[#A8C5FF] transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded px-1 py-1"
+          className="inline-flex min-h-11 items-center font-display text-lg font-bold tracking-tight text-[#F6F2E9] hover:text-[#A8C5FF] transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded px-1 py-1"
         >
           {content.profile.displayName}
         </a>
@@ -131,7 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               setMobileMenuOpen(false);
               onOpenResume(e.currentTarget);
             }}
-            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 min-h-[40px] rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] active:bg-[#9bb9fa] text-[#191723] text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
+            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 min-h-11 rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] active:bg-[#9bb9fa] text-[#191723] text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
           >
             <FileText className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
             <span>{t.navigation.resume}</span>

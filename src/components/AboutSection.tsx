@@ -109,7 +109,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                   <button
                     type="button"
                     onClick={item.onClick}
-                    className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded"
+                    className="inline-flex min-h-11 items-center gap-1.5 text-xs font-mono font-semibold text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded"
                   >
                     <span>{item.cta}</span>
                     <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />

@@ -75,7 +75,7 @@ export const ConstellationSection: React.FC<ConstellationSectionProps> = ({
             <button
               type="button"
               onClick={() => onOpenFullAtlas()}
-              className="inline-flex items-center gap-1.5 text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded"
+              className="inline-flex min-h-11 items-center gap-1.5 text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded"
             >
               <span>{t.skills.openAtlasCta}</span>
               <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />

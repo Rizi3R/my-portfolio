@@ -97,7 +97,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
                   type="button"
                   onClick={handleCopyEmail}
                   aria-label={t.accessibility.copyEmailLabel}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-xs font-mono text-[#A8C5FF] transition-colors cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 min-h-11 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-xs font-mono text-[#A8C5FF] transition-colors cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
                 >
                   {copyState === 'copied' ? (
                     <>

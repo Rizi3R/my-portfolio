@@ -22,7 +22,7 @@ export const PlainView: React.FC = () => {
         <button
           type="button"
           onClick={() => window.print()}
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-lg bg-[#191723] hover:bg-[#2A273B] text-[#F6F2E9] text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-11 rounded-lg bg-[#191723] hover:bg-[#2A273B] text-[#F6F2E9] text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
         >
           <Printer className="w-3.5 h-3.5" aria-hidden="true" />
           <span>{t.resume.printSavePdf}</span>

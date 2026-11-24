@@ -54,7 +54,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   }
 
   return (
-    <div className="relative inline-flex items-center gap-1.5 rounded-lg border border-[#242138] bg-[#12101F] px-2.5 py-2 text-[13px] font-medium text-[#EDE7DB] hover:border-[#A8C5FF]/60 hover:text-[#F6F2E9] focus-within:ring-2 focus-within:ring-[#A8C5FF] focus-within:ring-offset-2 focus-within:ring-offset-[#0A0913] transition-colors shrink-0 min-h-[40px]">
+    <div className="relative inline-flex items-center gap-1.5 rounded-lg border border-[#242138] bg-[#12101F] px-2.5 py-2 text-[13px] font-medium text-[#EDE7DB] hover:border-[#A8C5FF]/60 hover:text-[#F6F2E9] focus-within:ring-2 focus-within:ring-[#A8C5FF] focus-within:ring-offset-2 focus-within:ring-offset-[#0A0913] transition-colors shrink-0 min-h-11">
       <Globe className="w-3.5 h-3.5 text-[#A8C5FF] shrink-0" aria-hidden="true" />
       <span lang={localeMeta.htmlLang} className="whitespace-nowrap">
         {localeMeta.nativeLabel}

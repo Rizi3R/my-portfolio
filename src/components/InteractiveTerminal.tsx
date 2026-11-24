@@ -317,7 +317,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="p-2 rounded text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/50 cursor-pointer min-w-[40px] min-h-[40px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+              className="p-2 rounded text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/50 cursor-pointer min-w-11 min-h-11 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
               aria-label={t.terminal.closeAria}
             >
               <X className="w-4 h-4" />
