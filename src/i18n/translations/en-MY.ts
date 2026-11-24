@@ -153,6 +153,8 @@ export const enMYUi: UiTranslations = {
   },
   hero: {
     positioningTitle: 'IT Operations & Application Support',
+    queueHeading: 'Cases from my work',
+    queueIntro: 'Each row is a real case. Select one to read what happened, what I did and how it ended.',
     viewCaseStudies: 'View Case Studies',
     viewResume: 'View Résumé',
     currentRoleTerm: 'Current Role',

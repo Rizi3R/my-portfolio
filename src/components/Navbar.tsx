@@ -72,12 +72,12 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-200 print:hidden ${
         isScrolled
-          ? 'bg-[#0A0913]/95 backdrop-blur-md border-b border-[#242138]'
-          : 'bg-[#0A0913]/92 backdrop-blur-sm border-b border-[#242138]/70'
+          ? 'bg-[#13161C]/95 backdrop-blur-md border-b border-[#2E3644]'
+          : 'bg-[#13161C]/92 backdrop-blur-sm border-b border-[#2E3644]/70'
       }`}
     >
       <div
-        className="h-[2px] bg-[#A8C5FF] transition-transform duration-75 origin-left"
+        className="h-[2px] bg-[#B9D6E6] transition-transform duration-75 origin-left"
         style={{ width: `${scrollProgress}%` }}
         role="progressbar"
         aria-valuenow={Math.round(scrollProgress)}
@@ -99,21 +99,21 @@ export const Navbar: React.FC<NavbarProps> = ({
               onNavigateSection('top');
             }
           }}
-          className="inline-flex min-h-11 items-center font-display text-lg font-bold tracking-tight text-[#F6F2E9] hover:text-[#A8C5FF] transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded px-1 py-1"
+          className="inline-flex min-h-11 items-center font-display text-lg font-bold tracking-tight text-[#EEF4F8] hover:text-[#B9D6E6] transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C] rounded px-1 py-1"
         >
           {content.profile.displayName}
         </a>
 
         <nav
           aria-label={t.accessibility.primaryNavLabel}
-          className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium text-[#E6E1D6]"
+          className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium text-[#DCE6EE]"
         >
           {navLinks.map((link) => (
             <a
               key={link.id}
               href={`#${link.id}`}
               onClick={(e) => handleLinkClick(e, link.id)}
-              className="hover:text-[#A8C5FF] transition-colors whitespace-nowrap shrink-0 py-1.5 border-b border-transparent hover:border-[#A8C5FF]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded-sm"
+              className="hover:text-[#B9D6E6] transition-colors whitespace-nowrap shrink-0 py-1.5 border-b border-transparent hover:border-[#B9D6E6]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C] rounded-sm"
             >
               {link.label}
             </a>
@@ -131,7 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               setMobileMenuOpen(false);
               onOpenResume(e.currentTarget);
             }}
-            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 min-h-11 rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] active:bg-[#9bb9fa] text-[#191723] text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
+            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 min-h-11 rounded-lg bg-[#B9D6E6] hover:bg-[#cfe3ee] active:bg-[#a6c8db] text-[#13161C] text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EEF4F8]"
           >
             <FileText className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
             <span>{t.navigation.resume}</span>
@@ -141,7 +141,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             ref={menuButtonRef}
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="md:hidden p-2 rounded-lg text-[#F6F2E9] hover:text-[#A8C5FF] border border-[#242138] cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+            className="md:hidden p-2 rounded-lg text-[#EEF4F8] hover:text-[#B9D6E6] border border-[#2E3644] cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C]"
             aria-label={mobileMenuOpen ? t.accessibility.closeMenu : t.accessibility.openMenu}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-primary-nav"
@@ -155,7 +155,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <nav
           id="mobile-primary-nav"
           aria-label={t.accessibility.mobileNavLabel}
-          className="md:hidden bg-[#0A0913] border-b border-[#242138] px-4 py-3 space-y-1 max-h-[82dvh] overflow-y-auto"
+          className="md:hidden bg-[#13161C] border-b border-[#2E3644] px-4 py-3 space-y-1 max-h-[82dvh] overflow-y-auto"
         >
           <LanguageSelector
             variant="mobile"
@@ -166,7 +166,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               key={link.id}
               href={`#${link.id}`}
               onClick={(e) => handleLinkClick(e, link.id)}
-              className="block w-full text-left px-3 py-3 rounded-lg text-sm font-medium text-[#F6F2E9] hover:text-[#A8C5FF] hover:bg-[#12101F] transition-colors min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+              className="block w-full text-left px-3 py-3 rounded-lg text-sm font-medium text-[#EEF4F8] hover:text-[#B9D6E6] hover:bg-[#1B2029] transition-colors min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C]"
             >
               {link.label}
             </a>

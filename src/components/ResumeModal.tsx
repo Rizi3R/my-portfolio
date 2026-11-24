@@ -45,22 +45,22 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
       role="dialog"
       aria-modal="true"
       aria-labelledby="resume-modal-title"
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-2 sm:p-6 bg-[#0A0913]/88 backdrop-blur-md resume-print-overlay"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-2 sm:p-6 bg-[#13161C]/88 backdrop-blur-md resume-print-overlay"
       onClick={onClose}
     >
       <div
         ref={sheetRef}
-        className="bg-white text-[#191723] rounded-xl border border-[#242138] max-w-4xl w-full max-h-[calc(100dvh-1rem)] sm:max-h-[90dvh] flex flex-col overflow-hidden shadow-2xl relative resume-print-sheet"
+        className="bg-white text-[#13161C] rounded-xl border border-[#2E3644] max-w-4xl w-full max-h-[calc(100dvh-1rem)] sm:max-h-[90dvh] flex flex-col overflow-hidden shadow-2xl relative resume-print-sheet"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Pinned Control Bar inside modal (always reachable while scrolling on mobile; hidden in print) */}
-        <div className="shrink-0 z-20 bg-[#0A0913] text-[#F6F2E9] px-4 sm:px-6 py-3 flex items-center justify-between gap-2 border-b border-[#242138] no-print font-mono text-xs">
+        <div className="shrink-0 z-20 bg-[#13161C] text-[#EEF4F8] px-4 sm:px-6 py-3 flex items-center justify-between gap-2 border-b border-[#2E3644] no-print font-mono text-xs">
           <div className="flex items-center gap-2 min-w-0 flex-wrap">
-            <span className="font-bold text-[#A8C5FF]">{t.resume.headerLabel}</span>
-            <span className="text-[#B5B0C2] hidden sm:inline">·</span>
-            <span className="text-[#CFCAC0] hidden sm:inline">{t.resume.headerSubtitle}</span>
-            <span className="text-[#B5B0C2] hidden md:inline">·</span>
-            <span className="text-[#F2A77D] hidden md:inline">
+            <span className="font-bold text-[#B9D6E6]">{t.resume.headerLabel}</span>
+            <span className="text-[#A7B5C3] hidden sm:inline">·</span>
+            <span className="text-[#B4C2CF] hidden sm:inline">{t.resume.headerSubtitle}</span>
+            <span className="text-[#A7B5C3] hidden md:inline">·</span>
+            <span className="text-[#F0583C] hidden md:inline">
               {format(t.resume.languageTagPrefix, { language: localeMeta.nativeLabel })}
             </span>
           </div>
@@ -69,7 +69,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 min-h-11 rounded-lg text-xs font-semibold bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] transition-colors cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
+              className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 min-h-11 rounded-lg text-xs font-semibold bg-[#B9D6E6] hover:bg-[#cfe3ee] text-[#13161C] transition-colors cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EEF4F8]"
             >
               <Printer className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
               <span>{t.resume.printSavePdf}</span>
@@ -80,7 +80,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               type="button"
               onClick={onClose}
               aria-label={t.resume.closeAriaLabel}
-              className="p-2 rounded-lg text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/50 cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+              className="p-2 rounded-lg text-[#B4C2CF] hover:text-[#EEF4F8] border border-[#2E3644] hover:border-[#B9D6E6]/50 cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C]"
             >
               <X className="w-4 h-4" />
             </button>

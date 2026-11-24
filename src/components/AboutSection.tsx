@@ -62,25 +62,25 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
     <section
       id="workbenches"
       aria-labelledby="workbenches-heading"
-      className="scroll-mt-20 bg-[#0A0913] text-[#F6F2E9] py-14 sm:py-16 border-b border-[#242138]"
+      className="scroll-mt-20 bg-[#13161C] text-[#EEF4F8] py-14 sm:py-16 border-b border-[#2E3644]"
     >
       <div id="lab" className="scroll-mt-20" />
       <div id="about" className="scroll-mt-20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#242138] pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#2E3644] pb-6">
           <div className="max-w-2xl space-y-2">
-            <p className="text-xs font-mono uppercase tracking-wider text-[#F2A77D]">
+            <p className="text-xs label-condensed text-[#B9D6E6]">
               {t.interactiveLab.eyebrow}
             </p>
             <h2
               id="workbenches-heading"
-              className="font-display text-3xl sm:text-4xl font-bold text-[#F6F2E9] tracking-tight"
+              className="font-display text-3xl sm:text-4xl font-bold text-[#EEF4F8] tracking-tight"
             >
               {t.interactiveLab.heading}
             </h2>
           </div>
-          <p className="text-sm text-[#CFCAC0] max-w-md leading-relaxed">
+          <p className="text-sm text-[#B4C2CF] max-w-md leading-relaxed">
             {t.interactiveLab.intro}
           </p>
         </div>
@@ -91,16 +91,16 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             return (
               <div
                 key={item.id}
-                className="bg-[#12101F] border border-[#242138] rounded-xl p-5 sm:p-6 flex flex-col justify-between gap-4"
+                className="bg-[#1B2029] border border-[#2E3644] rounded-xl p-5 sm:p-6 flex flex-col justify-between gap-4"
               >
                 <div className="space-y-2">
                   <div className="flex items-center gap-2.5">
-                    <Icon className="w-4 h-4 text-[#A8C5FF] shrink-0" aria-hidden="true" />
-                    <h3 className="font-display text-xl font-bold text-[#F6F2E9]">
+                    <Icon className="w-4 h-4 text-[#B9D6E6] shrink-0" aria-hidden="true" />
+                    <h3 className="font-display text-xl font-bold text-[#EEF4F8]">
                       {item.title}
                     </h3>
                   </div>
-                  <p className="text-sm text-[#CFCAC0] leading-relaxed">
+                  <p className="text-sm text-[#B4C2CF] leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -109,7 +109,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                   <button
                     type="button"
                     onClick={item.onClick}
-                    className="inline-flex min-h-11 items-center gap-1.5 text-xs font-mono font-semibold text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded"
+                    className="inline-flex min-h-11 items-center gap-1.5 text-xs label-condensed font-semibold text-[#B9D6E6] hover:text-[#EEF4F8] transition-colors cursor-pointer py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C] rounded"
                   >
                     <span>{item.cta}</span>
                     <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />

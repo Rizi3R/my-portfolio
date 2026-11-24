@@ -33,13 +33,13 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="bg-[#0A0913] border-t border-[#242138] py-8 relative no-print text-xs text-[#CFCAC0]">
+    <footer className="bg-[#13161C] border-t border-[#2E3644] py-8 relative no-print text-xs text-[#B4C2CF]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-          <span className="font-display text-sm font-bold text-[#F6F2E9]">
+          <span className="font-display text-sm font-bold text-[#EEF4F8]">
             {content.profile.displayName}
           </span>
-          <span aria-hidden="true" className="text-[#B5B0C2]">
+          <span aria-hidden="true" className="text-[#A7B5C3]">
             ·
           </span>
           <span>
@@ -50,9 +50,9 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <a
             href={`mailto:${content.profile.email}`}
-            className="inline-flex min-h-11 items-center gap-1.5 text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
+            className="inline-flex min-h-11 items-center gap-1.5 text-[#B4C2CF] hover:text-[#B9D6E6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C] rounded py-1"
           >
-            <Mail className="w-3.5 h-3.5 text-[#A8C5FF]" aria-hidden="true" />
+            <Mail className="w-3.5 h-3.5 text-[#B9D6E6]" aria-hidden="true" />
             <span>{t.footer.email}</span>
           </a>
 
@@ -60,25 +60,25 @@ export const Footer: React.FC<FooterProps> = ({
             href={content.profile.linkedIn}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-1.5 text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
+            className="inline-flex min-h-11 items-center gap-1.5 text-[#B4C2CF] hover:text-[#B9D6E6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C] rounded py-1"
           >
-            <LinkedInIcon className="w-3.5 h-3.5 text-[#A8C5FF]" />
+            <LinkedInIcon className="w-3.5 h-3.5 text-[#B9D6E6]" />
             <span>{t.footer.linkedIn}</span>
           </a>
 
           <button
             type="button"
             onClick={(e) => onOpenResume(e.currentTarget)}
-            className="inline-flex min-h-11 items-center gap-1.5 text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
+            className="inline-flex min-h-11 items-center gap-1.5 text-[#B4C2CF] hover:text-[#B9D6E6] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C] rounded py-1"
           >
-            <FileText className="w-3.5 h-3.5 text-[#F2A77D]" aria-hidden="true" />
+            <FileText className="w-3.5 h-3.5 text-[#B9D6E6]" aria-hidden="true" />
             <span>{t.footer.resume}</span>
           </button>
 
           <button
             type="button"
             onClick={() => onChangeView('plain')}
-            className="inline-flex min-h-11 items-center gap-1.5 text-[#CFCAC0] hover:text-[#A8C5FF] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
+            className="inline-flex min-h-11 items-center gap-1.5 text-[#B4C2CF] hover:text-[#B9D6E6] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C] rounded py-1"
           >
             <span>{t.footer.printableSummary}</span>
           </button>
@@ -86,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({
           <button
             type="button"
             onClick={(e) => onOpenCommandPalette(e.currentTarget)}
-            className="inline-flex min-h-11 items-center gap-1 text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
+            className="inline-flex min-h-11 items-center gap-1 text-[#B9D6E6] hover:text-[#EEF4F8] transition-colors cursor-pointer label-condensed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C] rounded py-1"
           >
             <Command className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Cmd/Ctrl + K</span>
@@ -96,7 +96,7 @@ export const Footer: React.FC<FooterProps> = ({
             <button
               type="button"
               onClick={scrollToTop}
-              className="inline-flex min-h-11 items-center gap-1 text-[#A8C5FF] hover:text-[#F6F2E9] transition-colors cursor-pointer font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] rounded py-1"
+              className="inline-flex min-h-11 items-center gap-1 text-[#B9D6E6] hover:text-[#EEF4F8] transition-colors cursor-pointer label-condensed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C] rounded py-1"
               aria-label={t.accessibility.backToTop}
             >
               <span>{t.footer.top}</span>

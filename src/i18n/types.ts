@@ -58,6 +58,8 @@ export interface UiTranslations {
   };
   hero: {
     positioningTitle: string;
+    queueHeading: string;
+    queueIntro: string;
     viewCaseStudies: string;
     viewResume: string;
     currentRoleTerm: string;

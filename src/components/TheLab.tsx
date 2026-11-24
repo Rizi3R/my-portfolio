@@ -427,42 +427,42 @@ export const TheLab: React.FC = () => {
   };
 
   return (
-    <section id="lab" className="py-10 lg:py-16 relative bg-[#0A0913] border-y border-[#242138] text-[#F6F2E9]">
+    <section id="lab" className="py-10 lg:py-16 relative bg-[#13161C] border-y border-[#2E3644] text-[#EEF4F8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-3xl">
-            <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-semibold tracking-wider text-[#A8C5FF] uppercase mb-3">
-              <span className="px-2 py-0.5 rounded bg-[#F2A77D]/15 text-[#F2A77D] border border-[#F2A77D]/40 text-[11px] font-bold">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-semibold tracking-wider text-[#B9D6E6] uppercase mb-3">
+              <span className="px-2 py-0.5 rounded bg-[#F0583C]/15 text-[#F0583C] border border-[#F0583C]/40 text-[11px] font-bold">
                 {t.lab.badgeSimulation}
               </span>
-              <Cpu className="w-4 h-4 text-[#A8C5FF]" aria-hidden="true" />
+              <Cpu className="w-4 h-4 text-[#B9D6E6]" aria-hidden="true" />
               <span>{t.lab.eyebrowTitle}</span>
-              <span aria-hidden="true" className="text-[#524E66]">·</span>
-              <span className="text-[#9A94A8]">{t.lab.eyebrowSub}</span>
+              <span aria-hidden="true" className="text-[#4A5464]">·</span>
+              <span className="text-[#97A4B3]">{t.lab.eyebrowSub}</span>
             </div>
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F6F2E9] tracking-tight leading-snug mb-3">
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-[#EEF4F8] tracking-tight leading-snug mb-3">
               {t.lab.heading}
             </h2>
-            <p className="text-sm sm:text-base text-[#CFCAC0] leading-relaxed font-sans mb-4">
+            <p className="text-sm sm:text-base text-[#B4C2CF] leading-relaxed font-sans mb-4">
               {t.lab.intro}
             </p>
 
             {/* Persistent Educational Simulation Disclaimer */}
-            <div className="p-3.5 rounded-xl bg-[#12101F] border border-[#242138] text-xs font-mono space-y-1.5 mb-6 text-[#CFCAC0]">
+            <div className="p-3.5 rounded-xl bg-[#1B2029] border border-[#2E3644] text-xs font-mono space-y-1.5 mb-6 text-[#B4C2CF]">
               <div className="flex items-start gap-2">
-                <span className="text-[#A8C5FF] font-bold shrink-0">{t.lab.modelsLabel}</span>
+                <span className="text-[#B9D6E6] font-bold shrink-0">{t.lab.modelsLabel}</span>
                 <span>{t.lab.modelsText}</span>
               </div>
-              <div className="flex items-start gap-2 pt-1.5 border-t border-[#242138]">
-                <span className="text-[#F2A77D] font-bold shrink-0">{t.lab.doesNotModelLabel}</span>
+              <div className="flex items-start gap-2 pt-1.5 border-t border-[#2E3644]">
+                <span className="text-[#F0583C] font-bold shrink-0">{t.lab.doesNotModelLabel}</span>
                 <span>{t.lab.doesNotModelText}</span>
               </div>
             </div>
           </div>
 
           {/* Workbench Tabs */}
-          <div className="flex items-center gap-1.5 p-1 bg-[#12101F] border border-[#242138] rounded-lg self-start md:self-auto overflow-x-auto max-w-full font-mono text-xs">
+          <div className="flex items-center gap-1.5 p-1 bg-[#1B2029] border border-[#2E3644] rounded-lg self-start md:self-auto overflow-x-auto max-w-full font-mono text-xs">
             <button
               type="button"
               onClick={() => {
@@ -471,8 +471,8 @@ export const TheLab: React.FC = () => {
               }}
               className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'network'
-                  ? 'bg-[#A8C5FF] text-[#191723] font-bold'
-                  : 'text-[#9A94A8] hover:text-[#F6F2E9]'
+                  ? 'bg-[#B9D6E6] text-[#13161C] font-bold'
+                  : 'text-[#97A4B3] hover:text-[#EEF4F8]'
               }`}
             >
               <Network className="w-3.5 h-3.5" aria-hidden="true" />
@@ -487,8 +487,8 @@ export const TheLab: React.FC = () => {
               }}
               className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'cache'
-                  ? 'bg-[#A8C5FF] text-[#191723] font-bold'
-                  : 'text-[#9A94A8] hover:text-[#F6F2E9]'
+                  ? 'bg-[#B9D6E6] text-[#13161C] font-bold'
+                  : 'text-[#97A4B3] hover:text-[#EEF4F8]'
               }`}
             >
               <Database className="w-3.5 h-3.5" aria-hidden="true" />
@@ -503,8 +503,8 @@ export const TheLab: React.FC = () => {
               }}
               className={`px-3 py-1.5 rounded-md transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
                 activeTab === 'permissions'
-                  ? 'bg-[#A8C5FF] text-[#191723] font-bold'
-                  : 'text-[#9A94A8] hover:text-[#F6F2E9]'
+                  ? 'bg-[#B9D6E6] text-[#13161C] font-bold'
+                  : 'text-[#97A4B3] hover:text-[#EEF4F8]'
               }`}
             >
               <Lock className="w-3.5 h-3.5" aria-hidden="true" />
@@ -519,8 +519,8 @@ export const TheLab: React.FC = () => {
         {activeTab === 'network' && (
           <div className="space-y-6">
             {/* Protocol Preset Selector */}
-            <div className="flex flex-wrap items-center gap-2 bg-[#12101F] p-2.5 rounded-xl border border-[#242138]">
-              <span className="text-xs font-mono text-[#9A94A8] px-2 uppercase tracking-wider">
+            <div className="flex flex-wrap items-center gap-2 bg-[#1B2029] p-2.5 rounded-xl border border-[#2E3644]">
+              <span className="text-xs font-mono text-[#97A4B3] px-2 uppercase tracking-wider">
                 {t.lab.network.selectProtocol}
               </span>
               {packetPresets.map((preset, idx) => (
@@ -530,11 +530,11 @@ export const TheLab: React.FC = () => {
                   onClick={() => handleSelectPreset(idx)}
                   className={`px-3 py-1.5 text-xs rounded-lg transition-colors flex items-center gap-2 cursor-pointer ${
                     selectedPresetIndex === idx
-                      ? 'bg-[#0A0913] text-[#A8C5FF] border border-[#A8C5FF]/60 font-medium'
-                      : 'text-[#9A94A8] hover:text-[#F6F2E9] hover:bg-[#19162B]'
+                      ? 'bg-[#13161C] text-[#B9D6E6] border border-[#B9D6E6]/60 font-medium'
+                      : 'text-[#97A4B3] hover:text-[#EEF4F8] hover:bg-[#232935]'
                   }`}
                 >
-                  <span className="font-mono text-[10px] text-[#F2A77D]">[{preset.protocol}]</span>
+                  <span className="font-mono text-[10px] text-[#F0583C]">[{preset.protocol}]</span>
                   <span>{preset.name}</span>
                 </button>
               ))}
@@ -543,15 +543,15 @@ export const TheLab: React.FC = () => {
             {/* Interactive Simulation Arena */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               {/* Left 8 Cols: Visual Network Canvas */}
-              <div className="lg:col-span-8 bg-[#12101F] border border-[#242138] rounded-2xl p-6 relative overflow-hidden">
-                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#242138] text-xs font-mono gap-2">
+              <div className="lg:col-span-8 bg-[#1B2029] border border-[#2E3644] rounded-2xl p-6 relative overflow-hidden">
+                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#2E3644] text-xs font-mono gap-2">
                   <div className="flex items-center gap-2 min-w-0">
-                    <span className="w-2 h-2 rounded-full bg-[#A8C5FF] shrink-0" aria-hidden="true" />
-                    <span className="text-[#F6F2E9] font-semibold truncate">{activePreset.name}</span>
-                    <span className="text-[#524E66]">·</span>
-                    <span className="text-[#A8C5FF] font-mono shrink-0">{activePreset.port}</span>
+                    <span className="w-2 h-2 rounded-full bg-[#B9D6E6] shrink-0" aria-hidden="true" />
+                    <span className="text-[#EEF4F8] font-semibold truncate">{activePreset.name}</span>
+                    <span className="text-[#4A5464]">·</span>
+                    <span className="text-[#B9D6E6] font-mono shrink-0">{activePreset.port}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-[#9A94A8] text-[11px] shrink-0">
+                  <div className="flex items-center gap-2 text-[#97A4B3] text-[11px] shrink-0">
                     <span>
                       {format(t.lab.network.hopCounter, {
                         current: currentHopIndex + 1,
@@ -562,18 +562,18 @@ export const TheLab: React.FC = () => {
                 </div>
 
                 {/* Network Nodes Coordinate Canvas */}
-                <div className="overflow-x-auto bg-[#0A0913] border border-[#242138] rounded-xl">
+                <div className="overflow-x-auto bg-[#13161C] border border-[#2E3644] rounded-xl">
                   <div className="relative min-w-[520px] h-[320px] sm:h-[360px] w-full overflow-hidden p-4">
                     <svg
                       className="absolute inset-0 w-full h-full pointer-events-none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <line x1="10%" y1="50%" x2="26%" y2="25%" stroke="#242138" strokeWidth="2" strokeDasharray="3 3" />
-                      <line x1="26%" y1="25%" x2="44%" y2="50%" stroke="#242138" strokeWidth="2" />
-                      <line x1="44%" y1="50%" x2="44%" y2="82%" stroke="#242138" strokeWidth="1.5" strokeDasharray="4 4" />
-                      <line x1="44%" y1="50%" x2="65%" y2="35%" stroke="#242138" strokeWidth="2" />
-                      <line x1="65%" y1="35%" x2="84%" y2="35%" stroke="#242138" strokeWidth="2" />
-                      <line x1="84%" y1="35%" x2="84%" y2="72%" stroke="#242138" strokeWidth="2" />
+                      <line x1="10%" y1="50%" x2="26%" y2="25%" stroke="#2E3644" strokeWidth="2" strokeDasharray="3 3" />
+                      <line x1="26%" y1="25%" x2="44%" y2="50%" stroke="#2E3644" strokeWidth="2" />
+                      <line x1="44%" y1="50%" x2="44%" y2="82%" stroke="#2E3644" strokeWidth="1.5" strokeDasharray="4 4" />
+                      <line x1="44%" y1="50%" x2="65%" y2="35%" stroke="#2E3644" strokeWidth="2" />
+                      <line x1="65%" y1="35%" x2="84%" y2="35%" stroke="#2E3644" strokeWidth="2" />
+                      <line x1="84%" y1="35%" x2="84%" y2="72%" stroke="#2E3644" strokeWidth="2" />
                     </svg>
 
                     {networkNodes.map((node) => {
@@ -595,16 +595,16 @@ export const TheLab: React.FC = () => {
                           <div
                             className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center border shadow-lg transition-all ${
                               isCurrent
-                                ? 'bg-[#F2A77D]/20 border-[#F2A77D] text-[#F6F2E9] ring-4 ring-[#F2A77D]/20'
-                                : 'bg-[#12101F] border-[#242138] text-[#A8C5FF]'
+                                ? 'bg-[#F0583C]/20 border-[#F0583C] text-[#EEF4F8] ring-4 ring-[#F0583C]/20'
+                                : 'bg-[#1B2029] border-[#2E3644] text-[#B9D6E6]'
                             }`}
                           >
                             <NodeIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                           </div>
-                          <span className="text-[11px] font-semibold text-[#F6F2E9] mt-1.5 whitespace-nowrap">
+                          <span className="text-[11px] font-semibold text-[#EEF4F8] mt-1.5 whitespace-nowrap">
                             {node.name}
                           </span>
-                          <span className="text-[10px] font-mono text-[#B5B0C2] whitespace-nowrap">
+                          <span className="text-[10px] font-mono text-[#A7B5C3] whitespace-nowrap">
                             {node.category}
                           </span>
                         </div>
@@ -612,11 +612,11 @@ export const TheLab: React.FC = () => {
                     })}
 
                     {activeHop && (
-                      <div className="absolute bottom-3 left-3 bg-[#12101F]/95 border border-[#242138] px-3 py-1.5 rounded-lg text-[11px] font-mono flex items-center gap-2 text-[#A8C5FF]">
-                        <span className="w-2 h-2 rounded-full bg-[#F2A77D]" aria-hidden="true" />
+                      <div className="absolute bottom-3 left-3 bg-[#1B2029]/95 border border-[#2E3644] px-3 py-1.5 rounded-lg text-[11px] font-mono flex items-center gap-2 text-[#B9D6E6]">
+                        <span className="w-2 h-2 rounded-full bg-[#F0583C]" aria-hidden="true" />
                         <span>
                           {t.lab.network.packetAt}{' '}
-                          <strong className="text-[#F6F2E9]">
+                          <strong className="text-[#EEF4F8]">
                             {activeHop.label.split(/[（(]/)[0].trim()}
                           </strong>
                         </span>
@@ -624,8 +624,8 @@ export const TheLab: React.FC = () => {
                     )}
 
                     {activeHop && (
-                      <div className="absolute top-3 right-3 bg-[#12101F]/95 border border-[#242138] px-3 py-1 rounded text-[11px] font-mono text-[#A8C5FF] flex items-center gap-1.5">
-                        <Clock className="w-3 h-3 text-[#A8C5FF]" aria-hidden="true" />
+                      <div className="absolute top-3 right-3 bg-[#1B2029]/95 border border-[#2E3644] px-3 py-1 rounded text-[11px] font-mono text-[#B9D6E6] flex items-center gap-1.5">
+                        <Clock className="w-3 h-3 text-[#B9D6E6]" aria-hidden="true" />
                         <span>{format(t.lab.network.elapsedMs, { ms: activeHop.latencyMs })}</span>
                       </div>
                     )}
@@ -633,13 +633,13 @@ export const TheLab: React.FC = () => {
                 </div>
 
                 {/* Controls Bar */}
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#242138]">
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#2E3644]">
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={handleDispatch}
                       disabled={isPlaying}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#A8C5FF] hover:bg-[#bfd5ff] disabled:opacity-50 text-[#191723] text-xs font-semibold rounded-lg transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#B9D6E6] hover:bg-[#cfe3ee] disabled:opacity-50 text-[#13161C] text-xs font-semibold rounded-lg transition-colors cursor-pointer"
                     >
                       <Play className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
                       <span>{isPlaying ? t.lab.network.simulating : t.lab.network.dispatchPacket}</span>
@@ -649,7 +649,7 @@ export const TheLab: React.FC = () => {
                       type="button"
                       onClick={handleStepNext}
                       disabled={isPlaying}
-                      className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#0A0913] hover:bg-[#19162B] text-[#A8C5FF] text-xs font-medium rounded-lg border border-[#242138] transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#13161C] hover:bg-[#232935] text-[#B9D6E6] text-xs font-medium rounded-lg border border-[#2E3644] transition-colors cursor-pointer"
                     >
                       <span>{t.lab.network.stepNext}</span>
                       <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -658,7 +658,7 @@ export const TheLab: React.FC = () => {
                     <button
                       type="button"
                       onClick={handleResetSim}
-                      className="p-2 text-[#9A94A8] hover:text-[#F6F2E9] hover:bg-[#0A0913] rounded-lg transition-colors border border-[#242138] cursor-pointer"
+                      className="p-2 text-[#97A4B3] hover:text-[#EEF4F8] hover:bg-[#13161C] rounded-lg transition-colors border border-[#2E3644] cursor-pointer"
                       aria-label={t.lab.network.resetTooltip}
                       title={t.lab.network.resetTooltip}
                     >
@@ -666,15 +666,15 @@ export const TheLab: React.FC = () => {
                     </button>
                   </div>
 
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#9A94A8]">
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#97A4B3]">
                     <span>{t.lab.network.speedLabel}</span>
                     <button
                       type="button"
                       onClick={() => setPlaySpeed(1)}
                       className={`px-2 py-0.5 rounded text-[11px] cursor-pointer ${
                         playSpeed === 1
-                          ? 'bg-[#A8C5FF]/20 text-[#A8C5FF] font-bold border border-[#A8C5FF]/40'
-                          : 'text-[#9A94A8]'
+                          ? 'bg-[#B9D6E6]/20 text-[#B9D6E6] font-bold border border-[#B9D6E6]/40'
+                          : 'text-[#97A4B3]'
                       }`}
                     >
                       1x
@@ -684,8 +684,8 @@ export const TheLab: React.FC = () => {
                       onClick={() => setPlaySpeed(2)}
                       className={`px-2 py-0.5 rounded text-[11px] cursor-pointer ${
                         playSpeed === 2
-                          ? 'bg-[#A8C5FF]/20 text-[#A8C5FF] font-bold border border-[#A8C5FF]/40'
-                          : 'text-[#9A94A8]'
+                          ? 'bg-[#B9D6E6]/20 text-[#B9D6E6] font-bold border border-[#B9D6E6]/40'
+                          : 'text-[#97A4B3]'
                       }`}
                     >
                       2x
@@ -695,41 +695,41 @@ export const TheLab: React.FC = () => {
               </div>
 
               {/* Right 4 Cols: Packet Telemetry Inspector */}
-              <div className="lg:col-span-4 bg-[#12101F] border border-[#242138] rounded-2xl p-6 space-y-5">
+              <div className="lg:col-span-4 bg-[#1B2029] border border-[#2E3644] rounded-2xl p-6 space-y-5">
                 <div>
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#A8C5FF] uppercase tracking-wider mb-1">
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#B9D6E6] uppercase tracking-wider mb-1">
                     <Info className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>{t.lab.network.inspectorHeader}</span>
                   </div>
-                  <h3 className="text-lg font-bold text-[#F6F2E9] tracking-tight">
+                  <h3 className="text-lg font-bold text-[#EEF4F8] tracking-tight">
                     {activeHop?.label}
                   </h3>
-                  <span className="inline-block mt-1.5 text-[11px] font-mono text-[#F2A77D] bg-[#0A0913] border border-[#F2A77D]/40 px-2 py-0.5 rounded">
+                  <span className="inline-block mt-1.5 text-[11px] font-mono text-[#F0583C] bg-[#13161C] border border-[#F0583C]/40 px-2 py-0.5 rounded">
                     {activeHop?.layer}
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-2">
-                  <span className="text-[11px] font-mono text-[#9A94A8] uppercase block">
+                <div className="p-3.5 rounded-xl bg-[#13161C] border border-[#2E3644] space-y-2">
+                  <span className="text-[11px] font-mono text-[#97A4B3] uppercase block">
                     {t.lab.network.currentNodeAction}
                   </span>
-                  <p className="text-xs font-medium text-[#F6F2E9] leading-relaxed">
+                  <p className="text-xs font-medium text-[#EEF4F8] leading-relaxed">
                     {activeHop?.action}
                   </p>
-                  <p className="text-xs text-[#CFCAC0] leading-relaxed pt-1.5 border-t border-[#242138]">
+                  <p className="text-xs text-[#B4C2CF] leading-relaxed pt-1.5 border-t border-[#2E3644]">
                     {activeHop?.details}
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#0A0913] border border-[#242138] font-mono text-[11px] space-y-1 text-[#CFCAC0]">
-                  <div className="text-[#9A94A8] text-[10px] pb-1 border-b border-[#242138] flex justify-between">
+                <div className="p-3.5 rounded-xl bg-[#13161C] border border-[#2E3644] font-mono text-[11px] space-y-1 text-[#B4C2CF]">
+                  <div className="text-[#97A4B3] text-[10px] pb-1 border-b border-[#2E3644] flex justify-between">
                     <span>{t.lab.network.payloadHeader}</span>
-                    <span className="text-[#A8C5FF]">{activePreset.protocol}</span>
+                    <span className="text-[#B9D6E6]">{activePreset.protocol}</span>
                   </div>
-                  <div className="pt-1 text-[#A8C5FF] break-all">
+                  <div className="pt-1 text-[#B9D6E6] break-all">
                     {activePreset.payloadSummary}
                   </div>
-                  <div className="text-[#9A94A8] text-[10px] pt-1">
+                  <div className="text-[#97A4B3] text-[10px] pt-1">
                     {format(t.lab.network.portLabel, {
                       port: activePreset.port,
                       current: currentHopIndex + 1,
@@ -738,8 +738,8 @@ export const TheLab: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-3 rounded-lg bg-[#0A0913] border border-[#242138] text-[11px] text-[#CFCAC0] leading-relaxed">
-                  <strong className="text-[#A8C5FF]">{t.lab.network.simulationNoteTitle}</strong>{' '}
+                <div className="p-3 rounded-lg bg-[#13161C] border border-[#2E3644] text-[11px] text-[#B4C2CF] leading-relaxed">
+                  <strong className="text-[#B9D6E6]">{t.lab.network.simulationNoteTitle}</strong>{' '}
                   {t.lab.network.simulationNoteBody}
                 </div>
               </div>
@@ -751,23 +751,23 @@ export const TheLab: React.FC = () => {
            VIEW 2: CACHE EVICTION ALGORITHM PLAYGROUND (LRU vs FIFO)
            ========================================================================= */}
         {activeTab === 'cache' && (
-          <div className="bg-[#12101F] border border-[#242138] rounded-2xl p-6 sm:p-8 space-y-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#242138]">
+          <div className="bg-[#1B2029] border border-[#2E3644] rounded-2xl p-6 sm:p-8 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#2E3644]">
               <div>
-                <div className="flex items-center gap-2 text-xs font-mono text-[#A8C5FF] uppercase tracking-wider mb-1">
+                <div className="flex items-center gap-2 text-xs font-mono text-[#B9D6E6] uppercase tracking-wider mb-1">
                   <Database className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>{t.lab.cache.eyebrow}</span>
                 </div>
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-[#F6F2E9] tracking-tight">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-[#EEF4F8] tracking-tight">
                   {t.lab.cache.heading}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#CFCAC0] mt-1">
+                <p className="text-xs sm:text-sm text-[#B4C2CF] mt-1">
                   {t.lab.cache.intro}
                 </p>
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono text-[#9A94A8] mr-1">{t.lab.cache.policyLabel}</span>
+                <span className="text-xs font-mono text-[#97A4B3] mr-1">{t.lab.cache.policyLabel}</span>
                 <button
                   type="button"
                   onClick={() => {
@@ -776,8 +776,8 @@ export const TheLab: React.FC = () => {
                   }}
                   className={`px-3 py-1.5 text-xs rounded-lg transition-colors font-mono cursor-pointer ${
                     cachePolicy === 'LRU'
-                      ? 'bg-[#A8C5FF] text-[#191723] font-bold'
-                      : 'text-[#9A94A8] hover:text-[#F6F2E9] bg-[#0A0913] border border-[#242138]'
+                      ? 'bg-[#B9D6E6] text-[#13161C] font-bold'
+                      : 'text-[#97A4B3] hover:text-[#EEF4F8] bg-[#13161C] border border-[#2E3644]'
                   }`}
                 >
                   LRU
@@ -791,8 +791,8 @@ export const TheLab: React.FC = () => {
                   }}
                   className={`px-3 py-1.5 text-xs rounded-lg transition-colors font-mono cursor-pointer ${
                     cachePolicy === 'FIFO'
-                      ? 'bg-[#A8C5FF] text-[#191723] font-bold'
-                      : 'text-[#9A94A8] hover:text-[#F6F2E9] bg-[#0A0913] border border-[#242138]'
+                      ? 'bg-[#B9D6E6] text-[#13161C] font-bold'
+                      : 'text-[#97A4B3] hover:text-[#EEF4F8] bg-[#13161C] border border-[#2E3644]'
                   }`}
                 >
                   FIFO
@@ -801,7 +801,7 @@ export const TheLab: React.FC = () => {
             </div>
 
             <div>
-              <span className="text-xs font-mono text-[#9A94A8] uppercase tracking-wider block mb-2.5">
+              <span className="text-xs font-mono text-[#97A4B3] uppercase tracking-wider block mb-2.5">
                 {t.lab.cache.dispatchLabel}
               </span>
               <div className="flex flex-wrap items-center gap-2">
@@ -811,7 +811,7 @@ export const TheLab: React.FC = () => {
                       key={k}
                       type="button"
                       onClick={() => accessKey(k)}
-                      className="px-3 py-2 bg-[#0A0913] hover:bg-[#19162B] text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/60 rounded-lg text-xs font-mono transition-colors cursor-pointer"
+                      className="px-3 py-2 bg-[#13161C] hover:bg-[#232935] text-[#EEF4F8] border border-[#2E3644] hover:border-[#B9D6E6]/60 rounded-lg text-xs font-mono transition-colors cursor-pointer"
                     >
                       {format(t.lab.cache.getPrefix, { key: k })}
                     </button>
@@ -821,7 +821,7 @@ export const TheLab: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleResetCache}
-                  className="px-3 py-2 text-xs font-mono text-[#9A94A8] hover:text-[#F6F2E9] hover:bg-[#0A0913] rounded-lg border border-[#242138] transition-colors ml-auto flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-2 text-xs font-mono text-[#97A4B3] hover:text-[#EEF4F8] hover:bg-[#13161C] rounded-lg border border-[#2E3644] transition-colors ml-auto flex items-center gap-1.5 cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>{t.lab.cache.resetCache}</span>
@@ -830,14 +830,14 @@ export const TheLab: React.FC = () => {
             </div>
 
             <div>
-              <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[#9A94A8] mb-3">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[#97A4B3] mb-3">
                 <span>
                   {format(t.lab.cache.activeSlots, {
                     used: cacheItems.length,
                     capacity: CACHE_CAPACITY,
                   })}
                 </span>
-                <span className="text-[#A8C5FF]">
+                <span className="text-[#B9D6E6]">
                   {format(t.lab.cache.hitRatio, {
                     ratio:
                       cacheStats.total > 0
@@ -860,14 +860,14 @@ export const TheLab: React.FC = () => {
                       key={slotIdx}
                       className={`p-4 rounded-xl border transition-all ${
                         item
-                          ? 'bg-[#0A0913] border-[#242138]'
-                          : 'bg-[#0A0913]/60 border-dashed border-[#242138] text-[#9A94A8]'
+                          ? 'bg-[#13161C] border-[#2E3644]'
+                          : 'bg-[#13161C]/60 border-dashed border-[#2E3644] text-[#97A4B3]'
                       }`}
                     >
-                      <div className="flex items-center justify-between text-xs font-mono text-[#9A94A8] mb-2">
+                      <div className="flex items-center justify-between text-xs font-mono text-[#97A4B3] mb-2">
                         <span>{format(t.lab.cache.slotPrefix, { number: slotIdx + 1 })}</span>
                         {item && (
-                          <span className="text-[10px] text-[#A8C5FF] font-semibold bg-[#12101F] px-2 py-0.5 rounded border border-[#242138]">
+                          <span className="text-[10px] text-[#B9D6E6] font-semibold bg-[#1B2029] px-2 py-0.5 rounded border border-[#2E3644]">
                             {format(t.lab.cache.cyclePrefix, { cycle: item.lastAccessCycle })}
                           </span>
                         )}
@@ -875,19 +875,19 @@ export const TheLab: React.FC = () => {
 
                       {item ? (
                         <div>
-                          <div className="font-mono text-sm font-bold text-[#F6F2E9] tracking-tight mb-1 truncate">
+                          <div className="font-mono text-sm font-bold text-[#EEF4F8] tracking-tight mb-1 truncate">
                             {item.key}
                           </div>
-                          <div className="text-xs text-[#9A94A8] truncate mb-3">{item.value}</div>
-                          <div className="pt-2 border-t border-[#242138] text-[11px] font-mono text-[#CFCAC0] flex justify-between">
+                          <div className="text-xs text-[#97A4B3] truncate mb-3">{item.value}</div>
+                          <div className="pt-2 border-t border-[#2E3644] text-[11px] font-mono text-[#B4C2CF] flex justify-between">
                             <span>{format(t.lab.cache.hitsLabel, { count: item.accessCount })}</span>
-                            <span className="text-[#F2A77D]">
+                            <span className="text-[#F0583C]">
                               {cachePolicy === 'LRU' && slotIdx === 0 ? t.lab.cache.nextEvict : ''}
                             </span>
                           </div>
                         </div>
                       ) : (
-                        <div className="h-18 flex items-center justify-center text-xs font-mono text-[#9A94A8]">
+                        <div className="h-18 flex items-center justify-center text-xs font-mono text-[#97A4B3]">
                           {t.lab.cache.emptySlot}
                         </div>
                       )}
@@ -898,8 +898,8 @@ export const TheLab: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-2">
-              <div className="lg:col-span-7 bg-[#0A0913] border border-[#242138] rounded-xl p-4 font-mono text-xs">
-                <span className="text-[11px] text-[#9A94A8] block mb-2 font-semibold">
+              <div className="lg:col-span-7 bg-[#13161C] border border-[#2E3644] rounded-xl p-4 font-mono text-xs">
+                <span className="text-[11px] text-[#97A4B3] block mb-2 font-semibold">
                   {t.lab.cache.logHeader}
                 </span>
                 <div className="space-y-1.5 h-[130px] overflow-y-auto text-[11px]">
@@ -908,10 +908,10 @@ export const TheLab: React.FC = () => {
                       key={idx}
                       className={
                         log.type === 'hit'
-                          ? 'text-[#A8C5FF]'
+                          ? 'text-[#B9D6E6]'
                           : log.type === 'miss'
-                          ? 'text-[#F2A77D]'
-                          : 'text-[#CFCAC0]'
+                          ? 'text-[#F0583C]'
+                          : 'text-[#B4C2CF]'
                       }
                     >
                       {log.text}
@@ -920,14 +920,14 @@ export const TheLab: React.FC = () => {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 p-4 rounded-xl bg-[#0A0913] border border-[#242138] space-y-2 text-xs">
-                <span className="font-mono text-[#A8C5FF] text-[11px] font-semibold block uppercase">
+              <div className="lg:col-span-5 p-4 rounded-xl bg-[#13161C] border border-[#2E3644] space-y-2 text-xs">
+                <span className="font-mono text-[#B9D6E6] text-[11px] font-semibold block uppercase">
                   {t.lab.cache.howItWorksTitle}
                 </span>
-                <p className="text-[#CFCAC0] leading-relaxed">
+                <p className="text-[#B4C2CF] leading-relaxed">
                   {t.lab.cache.howItWorksBody1}
                 </p>
-                <p className="text-[#9A94A8] leading-relaxed text-[11px]">
+                <p className="text-[#97A4B3] leading-relaxed text-[11px]">
                   {t.lab.cache.howItWorksBody2}
                 </p>
               </div>
@@ -939,50 +939,50 @@ export const TheLab: React.FC = () => {
            VIEW 3: UNIX PERMISSIONS & BITMASK MATRIX
            ========================================================================= */}
         {activeTab === 'permissions' && (
-          <div className="bg-[#12101F] border border-[#242138] rounded-2xl p-6 sm:p-8 space-y-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#242138]">
+          <div className="bg-[#1B2029] border border-[#2E3644] rounded-2xl p-6 sm:p-8 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#2E3644]">
               <div>
-                <div className="flex items-center gap-2 text-xs font-mono text-[#F2A77D] uppercase tracking-wider mb-1">
+                <div className="flex items-center gap-2 text-xs font-mono text-[#F0583C] uppercase tracking-wider mb-1">
                   <Lock className="w-3.5 h-3.5" aria-hidden="true" />
                   <span>{t.lab.permissions.eyebrow}</span>
                 </div>
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-[#F6F2E9] tracking-tight">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-[#EEF4F8] tracking-tight">
                   {t.lab.permissions.heading}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#CFCAC0] mt-1">
+                <p className="text-xs sm:text-sm text-[#B4C2CF] mt-1">
                   {t.lab.permissions.intro}
                 </p>
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-mono text-[#9A94A8]">
+                <span className="text-xs font-mono text-[#97A4B3]">
                   {t.lab.permissions.presetsLabel}
                 </span>
                 <button
                   type="button"
                   onClick={() => applyPreset(7, 5, 5)}
-                  className="px-2.5 py-1 text-xs font-mono bg-[#0A0913] hover:bg-[#19162B] text-[#A8C5FF] border border-[#242138] rounded cursor-pointer"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#13161C] hover:bg-[#232935] text-[#B9D6E6] border border-[#2E3644] rounded cursor-pointer"
                 >
                   chmod 755
                 </button>
                 <button
                   type="button"
                   onClick={() => applyPreset(6, 4, 4)}
-                  className="px-2.5 py-1 text-xs font-mono bg-[#0A0913] hover:bg-[#19162B] text-[#F6F2E9] border border-[#242138] rounded cursor-pointer"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#13161C] hover:bg-[#232935] text-[#EEF4F8] border border-[#2E3644] rounded cursor-pointer"
                 >
                   chmod 644
                 </button>
                 <button
                   type="button"
                   onClick={() => applyPreset(6, 0, 0)}
-                  className="px-2.5 py-1 text-xs font-mono bg-[#0A0913] hover:bg-[#19162B] text-[#F2A77D] border border-[#242138] rounded cursor-pointer"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#13161C] hover:bg-[#232935] text-[#F0583C] border border-[#2E3644] rounded cursor-pointer"
                 >
                   chmod 600
                 </button>
                 <button
                   type="button"
                   onClick={() => applyPreset(4, 0, 0)}
-                  className="px-2.5 py-1 text-xs font-mono bg-[#0A0913] hover:bg-[#19162B] text-[#A8C5FF] border border-[#242138] rounded cursor-pointer"
+                  className="px-2.5 py-1 text-xs font-mono bg-[#13161C] hover:bg-[#232935] text-[#B9D6E6] border border-[#2E3644] rounded cursor-pointer"
                 >
                   chmod 400
                 </button>
@@ -991,12 +991,12 @@ export const TheLab: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Owner Bits */}
-              <div className="p-5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#242138]">
-                  <span className="font-bold text-[#F6F2E9] text-sm">
+              <div className="p-5 rounded-xl bg-[#13161C] border border-[#2E3644] space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#2E3644]">
+                  <span className="font-bold text-[#EEF4F8] text-sm">
                     {t.lab.permissions.ownerLabel}
                   </span>
-                  <span className="font-mono text-sm font-bold text-[#A8C5FF]">
+                  <span className="font-mono text-sm font-bold text-[#B9D6E6]">
                     {format(t.lab.permissions.octalLabel, { value: octalOwner })}
                   </span>
                 </div>
@@ -1012,8 +1012,8 @@ export const TheLab: React.FC = () => {
                       onClick={() => togglePerm('owner', bit)}
                       className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors cursor-pointer ${
                         permissions.owner[bit]
-                          ? 'bg-[#A8C5FF]/15 border-[#A8C5FF]/50 text-[#F6F2E9] font-medium'
-                          : 'bg-[#12101F] border-[#242138] text-[#9A94A8]'
+                          ? 'bg-[#B9D6E6]/15 border-[#B9D6E6]/50 text-[#EEF4F8] font-medium'
+                          : 'bg-[#1B2029] border-[#2E3644] text-[#97A4B3]'
                       }`}
                     >
                       <span className="text-xs">{label}</span>
@@ -1024,12 +1024,12 @@ export const TheLab: React.FC = () => {
               </div>
 
               {/* Group Bits */}
-              <div className="p-5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#242138]">
-                  <span className="font-bold text-[#F6F2E9] text-sm">
+              <div className="p-5 rounded-xl bg-[#13161C] border border-[#2E3644] space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#2E3644]">
+                  <span className="font-bold text-[#EEF4F8] text-sm">
                     {t.lab.permissions.groupLabel}
                   </span>
-                  <span className="font-mono text-sm font-bold text-[#A8C5FF]">
+                  <span className="font-mono text-sm font-bold text-[#B9D6E6]">
                     {format(t.lab.permissions.octalLabel, { value: octalGroup })}
                   </span>
                 </div>
@@ -1045,8 +1045,8 @@ export const TheLab: React.FC = () => {
                       onClick={() => togglePerm('group', bit)}
                       className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors cursor-pointer ${
                         permissions.group[bit]
-                          ? 'bg-[#A8C5FF]/15 border-[#A8C5FF]/50 text-[#F6F2E9] font-medium'
-                          : 'bg-[#12101F] border-[#242138] text-[#9A94A8]'
+                          ? 'bg-[#B9D6E6]/15 border-[#B9D6E6]/50 text-[#EEF4F8] font-medium'
+                          : 'bg-[#1B2029] border-[#2E3644] text-[#97A4B3]'
                       }`}
                     >
                       <span className="text-xs">{label}</span>
@@ -1057,12 +1057,12 @@ export const TheLab: React.FC = () => {
               </div>
 
               {/* Others Bits */}
-              <div className="p-5 rounded-xl bg-[#0A0913] border border-[#242138] space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#242138]">
-                  <span className="font-bold text-[#F6F2E9] text-sm">
+              <div className="p-5 rounded-xl bg-[#13161C] border border-[#2E3644] space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#2E3644]">
+                  <span className="font-bold text-[#EEF4F8] text-sm">
                     {t.lab.permissions.othersLabel}
                   </span>
-                  <span className="font-mono text-sm font-bold text-[#F2A77D]">
+                  <span className="font-mono text-sm font-bold text-[#F0583C]">
                     {format(t.lab.permissions.octalLabel, { value: octalOthers })}
                   </span>
                 </div>
@@ -1078,8 +1078,8 @@ export const TheLab: React.FC = () => {
                       onClick={() => togglePerm('others', bit)}
                       className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-colors cursor-pointer ${
                         permissions.others[bit]
-                          ? 'bg-[#F2A77D]/15 border-[#F2A77D]/50 text-[#F6F2E9] font-medium'
-                          : 'bg-[#12101F] border-[#242138] text-[#9A94A8]'
+                          ? 'bg-[#F0583C]/15 border-[#F0583C]/50 text-[#EEF4F8] font-medium'
+                          : 'bg-[#1B2029] border-[#2E3644] text-[#97A4B3]'
                       }`}
                     >
                       <span className="text-xs">{label}</span>
@@ -1090,40 +1090,40 @@ export const TheLab: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-4 sm:p-5 rounded-xl bg-[#0A0913] border border-[#242138] grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
+            <div className="p-4 sm:p-5 rounded-xl bg-[#13161C] border border-[#2E3644] grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
               <div>
-                <span className="text-[11px] font-mono text-[#9A94A8] uppercase block mb-1">
+                <span className="text-[11px] font-mono text-[#97A4B3] uppercase block mb-1">
                   {t.lab.permissions.octalHeader}
                 </span>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-[#A8C5FF]">
+                <span className="font-mono text-xl sm:text-2xl font-bold text-[#B9D6E6]">
                   chmod {octalString.slice(1)}
                 </span>
               </div>
 
               <div>
-                <span className="text-[11px] font-mono text-[#9A94A8] uppercase block mb-1">
+                <span className="text-[11px] font-mono text-[#97A4B3] uppercase block mb-1">
                   {t.lab.permissions.symbolicHeader}
                 </span>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-[#F6F2E9]">
+                <span className="font-mono text-xl sm:text-2xl font-bold text-[#EEF4F8]">
                   {symbolicString}
                 </span>
               </div>
 
               <div>
-                <span className="text-[11px] font-mono text-[#9A94A8] uppercase block mb-1">
+                <span className="text-[11px] font-mono text-[#97A4B3] uppercase block mb-1">
                   {t.lab.permissions.binaryHeader}
                 </span>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-[#F2A77D]">
+                <span className="font-mono text-xl sm:text-2xl font-bold text-[#F0583C]">
                   {binaryString}
                 </span>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#0A0913] border border-[#242138] text-xs space-y-2">
-              <span className="font-mono text-[#A8C5FF] font-semibold block uppercase">
+            <div className="p-4 rounded-xl bg-[#13161C] border border-[#2E3644] text-xs space-y-2">
+              <span className="font-mono text-[#B9D6E6] font-semibold block uppercase">
                 {t.lab.permissions.securityTitle}
               </span>
-              <p className="text-[#CFCAC0] leading-relaxed">
+              <p className="text-[#B4C2CF] leading-relaxed">
                 {t.lab.permissions.securityBody}
               </p>
             </div>

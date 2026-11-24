@@ -17,12 +17,12 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   if (variant === 'mobile') {
     return (
       <div
-        className="mb-3 pb-3 border-b border-[#242138]"
+        className="mb-3 pb-3 border-b border-[#2E3644]"
         role="group"
         aria-label={t.accessibility.languageSelectorLabel}
       >
-        <div className="flex items-center gap-2 px-1 pb-2 text-xs font-mono uppercase tracking-[0.14em] text-[#9790A6]">
-          <Globe className="w-3.5 h-3.5 text-[#A8C5FF]" aria-hidden="true" />
+        <div className="flex items-center gap-2 px-1 pb-2 text-xs font-mono uppercase tracking-[0.14em] text-[#97A4B3]">
+          <Globe className="w-3.5 h-3.5 text-[#B9D6E6]" aria-hidden="true" />
           <span>{t.navigation.languageHeading}</span>
         </div>
         <div className="grid grid-cols-2 gap-2">
@@ -38,10 +38,10 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
                   setLocale(item.code);
                   onSelected?.();
                 }}
-                className={`min-h-[44px] px-3 py-2 rounded-lg text-sm font-medium border text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF] ${
+                className={`min-h-[44px] px-3 py-2 rounded-lg text-sm font-medium border text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C] ${
                   isActive
-                    ? 'bg-[#A8C5FF]/15 border-[#A8C5FF] text-[#F6F2E9]'
-                    : 'bg-[#12101F] border-[#242138] text-[#EDE7DB] hover:border-[#A8C5FF]/60 hover:text-[#F6F2E9]'
+                    ? 'bg-[#B9D6E6]/15 border-[#B9D6E6] text-[#EEF4F8]'
+                    : 'bg-[#1B2029] border-[#2E3644] text-[#E3EEF4] hover:border-[#B9D6E6]/60 hover:text-[#EEF4F8]'
                 }`}
               >
                 {item.nativeLabel}
@@ -54,12 +54,12 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   }
 
   return (
-    <div className="relative inline-flex items-center gap-1.5 rounded-lg border border-[#242138] bg-[#12101F] px-2.5 py-2 text-[13px] font-medium text-[#EDE7DB] hover:border-[#A8C5FF]/60 hover:text-[#F6F2E9] focus-within:ring-2 focus-within:ring-[#A8C5FF] focus-within:ring-offset-2 focus-within:ring-offset-[#0A0913] transition-colors shrink-0 min-h-11">
-      <Globe className="w-3.5 h-3.5 text-[#A8C5FF] shrink-0" aria-hidden="true" />
+    <div className="relative inline-flex items-center gap-1.5 rounded-lg border border-[#2E3644] bg-[#1B2029] px-2.5 py-2 text-[13px] font-medium text-[#E3EEF4] hover:border-[#B9D6E6]/60 hover:text-[#EEF4F8] focus-within:ring-2 focus-within:ring-[#B9D6E6] focus-within:ring-offset-2 focus-within:ring-offset-[#13161C] transition-colors shrink-0 min-h-11">
+      <Globe className="w-3.5 h-3.5 text-[#B9D6E6] shrink-0" aria-hidden="true" />
       <span lang={localeMeta.htmlLang} className="whitespace-nowrap">
         {localeMeta.nativeLabel}
       </span>
-      <ChevronDown className="w-3.5 h-3.5 text-[#9790A6] shrink-0" aria-hidden="true" />
+      <ChevronDown className="w-3.5 h-3.5 text-[#97A4B3] shrink-0" aria-hidden="true" />
       <select
         aria-label={t.accessibility.languageSelectorLabel}
         value={locale}
@@ -74,7 +74,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
             key={item.code}
             value={item.code}
             lang={item.htmlLang}
-            className="bg-[#12101F] text-[#F6F2E9]"
+            className="bg-[#1B2029] text-[#EEF4F8]"
           >
             {item.nativeLabel}
           </option>

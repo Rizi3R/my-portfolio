@@ -340,15 +340,15 @@ export default function App() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col font-sans selection:bg-[#A8C5FF]/25 selection:text-[#F6F2E9] relative overflow-x-hidden ${
-        activeView === 'plain' ? 'bg-white text-[#191723]' : 'bg-[#0A0913] text-[#F6F2E9]'
+      className={`min-h-screen flex flex-col font-sans selection:bg-[#B9D6E6]/25 selection:text-[#EEF4F8] relative overflow-x-hidden ${
+        activeView === 'plain' ? 'bg-white text-[#13161C]' : 'bg-[#13161C] text-[#EEF4F8]'
       }`}
     >
       {/* Background page shell: marked inert while any overlay dialog is open */}
       <div ref={appShellRef} className={`flex-1 flex flex-col ${resumeModalOpen ? 'print:hidden' : ''}`}>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#A8C5FF] focus:text-[#191723] focus:text-xs focus:font-semibold focus:shadow-lg print:hidden"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#B9D6E6] focus:text-[#13161C] focus:text-xs focus:font-semibold focus:shadow-lg print:hidden"
         >
           {t.accessibility.skipToMain}
         </a>
@@ -371,8 +371,8 @@ export default function App() {
             >
               <Suspense
                 fallback={
-                  <div className="py-24 text-center font-mono text-sm text-[#474457] flex items-center justify-center gap-2">
-                    <Loader2 className="w-5 h-5 animate-spin text-[#191723]" aria-hidden="true" />
+                  <div className="py-24 text-center font-mono text-sm text-[#3E4A5A] flex items-center justify-center gap-2">
+                    <Loader2 className="w-5 h-5 animate-spin text-[#13161C]" aria-hidden="true" />
                     <span>{format(t.common.loadingView, { view: t.footer.printableSummary })}</span>
                   </div>
                 }
@@ -381,7 +381,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => handleViewChange('portfolio')}
-                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#0A0913] text-[#F6F2E9] text-xs font-mono hover:bg-[#191723] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#191723]"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#13161C] text-[#EEF4F8] text-xs font-mono hover:bg-[#13161C] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#13161C]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>{t.accessibility.backToOverview}</span>
@@ -397,7 +397,7 @@ export default function App() {
             >
               <Suspense
                 fallback={
-                  <div className="py-32 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
+                  <div className="py-32 text-center font-mono text-sm text-[#B9D6E6] flex items-center justify-center gap-2">
                     <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
                     <span>{format(t.common.loadingView, { view: t.atlas.title })}</span>
                   </div>
@@ -407,7 +407,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => handleViewChange('portfolio')}
-                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#1B2029] border border-[#2E3644] hover:border-[#B9D6E6]/60 text-[#B9D6E6] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>{t.accessibility.backToOverview}</span>
@@ -428,7 +428,7 @@ export default function App() {
             >
               <Suspense
                 fallback={
-                  <div className="py-32 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
+                  <div className="py-32 text-center font-mono text-sm text-[#B9D6E6] flex items-center justify-center gap-2">
                     <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
                     <span>{format(t.common.loadingView, { view: t.interactiveLab.items.walkthrough.title })}</span>
                   </div>
@@ -438,7 +438,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => handleViewChange('portfolio')}
-                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#1B2029] border border-[#2E3644] hover:border-[#B9D6E6]/60 text-[#B9D6E6] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>{t.accessibility.backToOverview}</span>
@@ -458,7 +458,7 @@ export default function App() {
             >
               <Suspense
                 fallback={
-                  <div className="py-32 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
+                  <div className="py-32 text-center font-mono text-sm text-[#B9D6E6] flex items-center justify-center gap-2">
                     <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
                     <span>{format(t.common.loadingView, { view: t.receipt.heading })}</span>
                   </div>
@@ -468,7 +468,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => handleViewChange('portfolio')}
-                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#12101F] border border-[#242138] hover:border-[#A8C5FF]/60 text-[#A8C5FF] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 min-h-11 rounded-lg bg-[#1B2029] border border-[#2E3644] hover:border-[#B9D6E6]/60 text-[#B9D6E6] text-xs font-mono transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C]"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
                     <span>{t.accessibility.backToOverview}</span>
@@ -521,7 +521,7 @@ export default function App() {
           role="dialog"
           aria-modal="true"
           aria-label={t.terminal.dialogLabel}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#0A0913]/85 backdrop-blur-sm no-print"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#13161C]/85 backdrop-blur-sm no-print"
           onClick={() => closeOverlayAndRestoreFocus(setTerminalModalOpen)}
         >
           <div className="max-w-3xl w-full" onClick={(e) => e.stopPropagation()}>
@@ -549,20 +549,20 @@ export default function App() {
           role="dialog"
           aria-modal="true"
           aria-label={t.lab.modalDialogLabel}
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#0A0913]/88 backdrop-blur-md overflow-y-auto no-print"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#13161C]/88 backdrop-blur-md overflow-y-auto no-print"
           onClick={() => closeOverlayAndRestoreFocus(setLabModalOpen)}
         >
           <div
             ref={labSheetRef}
-            className="bg-[#0A0913] border border-[#242138] rounded-2xl max-w-6xl w-full max-h-[92dvh] overflow-y-auto shadow-2xl relative my-6"
+            className="bg-[#13161C] border border-[#2E3644] rounded-2xl max-w-6xl w-full max-h-[92dvh] overflow-y-auto shadow-2xl relative my-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="sticky top-0 z-20 bg-[#12101F] px-6 py-3.5 flex items-center justify-between border-b border-[#242138] font-mono text-xs gap-2">
+            <div className="sticky top-0 z-20 bg-[#1B2029] px-6 py-3.5 flex items-center justify-between border-b border-[#2E3644] font-mono text-xs gap-2">
               <div className="flex flex-wrap items-center gap-2.5 min-w-0">
-                <span className="px-2 py-0.5 rounded bg-[#F2A77D]/15 text-[#F2A77D] border border-[#F2A77D]/40 text-xs font-bold">
+                <span className="px-2 py-0.5 rounded bg-[#F0583C]/15 text-[#F0583C] border border-[#F0583C]/40 text-xs font-bold">
                   {t.lab.modalBadge}
                 </span>
-                <span className="text-[#F6F2E9] font-semibold">
+                <span className="text-[#EEF4F8] font-semibold">
                   {t.lab.modalTitle}
                 </span>
               </div>
@@ -570,7 +570,7 @@ export default function App() {
                 ref={labCloseRef}
                 type="button"
                 onClick={() => closeOverlayAndRestoreFocus(setLabModalOpen)}
-                className="p-2 rounded-lg text-[#CFCAC0] hover:text-[#F6F2E9] border border-[#242138] hover:border-[#A8C5FF]/60 cursor-pointer min-w-11 min-h-11 flex items-center justify-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+                className="p-2 rounded-lg text-[#B4C2CF] hover:text-[#EEF4F8] border border-[#2E3644] hover:border-[#B9D6E6]/60 cursor-pointer min-w-11 min-h-11 flex items-center justify-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C]"
                 aria-label={t.lab.closeModal}
               >
                 <X className="w-4 h-4" />
@@ -581,7 +581,7 @@ export default function App() {
               <ErrorBoundary fallbackTitle={t.common.errorBoundaryTitle}>
                 <Suspense
                   fallback={
-                    <div className="py-20 text-center font-mono text-sm text-[#A8C5FF] flex items-center justify-center gap-2">
+                    <div className="py-20 text-center font-mono text-sm text-[#B9D6E6] flex items-center justify-center gap-2">
                       <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
                       <span>{t.lab.loading}</span>
                     </div>

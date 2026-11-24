@@ -45,6 +45,8 @@ export const msMYUi: UiTranslations = {
   },
   hero: {
     positioningTitle: 'Operasi IT dan Sokongan Aplikasi',
+    queueHeading: 'Kes daripada kerja saya',
+    queueIntro: 'Setiap baris ialah kes sebenar. Pilih satu untuk membaca apa yang berlaku, apa yang saya lakukan dan kesudahannya.',
     viewCaseStudies: 'Lihat Kajian Kes',
     viewResume: 'Lihat Resume',
     currentRoleTerm: 'Jawatan Semasa',

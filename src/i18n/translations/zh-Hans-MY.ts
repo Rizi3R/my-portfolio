@@ -45,6 +45,8 @@ export const zhHansMYUi: UiTranslations = {
   },
   hero: {
     positioningTitle: 'IT 运营与应用支持',
+    queueHeading: '我的工作案例',
+    queueIntro: '每一行都是真实案例。选择一个，查看事情经过、我的处理方式和最终结果。',
     viewCaseStudies: '查看案例研究',
     viewResume: '查看简历',
     currentRoleTerm: '现任职位',

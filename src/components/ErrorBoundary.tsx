@@ -22,19 +22,19 @@ const ErrorFallback: React.FC<{
   return (
     <div
       role="alert"
-      className="max-w-xl mx-auto my-12 p-6 rounded-2xl bg-[#12101F] border border-[#242138] text-[#F6F2E9] space-y-4 font-sans"
+      className="max-w-xl mx-auto my-12 p-6 rounded-2xl bg-[#1B2029] border border-[#2E3644] text-[#EEF4F8] space-y-4 font-sans"
     >
-      <h2 className="font-display text-xl font-bold text-[#F6F2E9]">
+      <h2 className="font-display text-xl font-bold text-[#EEF4F8]">
         {fallbackTitle || t.common.errorBoundaryTitle}
       </h2>
-      <p className="text-sm text-[#CFCAC0] leading-relaxed">
+      <p className="text-sm text-[#B4C2CF] leading-relaxed">
         {t.common.errorBoundaryDescription}
       </p>
       <div className="flex flex-wrap items-center gap-3 pt-1">
         <button
           type="button"
           onClick={onRetry}
-          className="inline-flex items-center gap-2 px-4 py-2 min-h-11 rounded-lg bg-[#A8C5FF] hover:bg-[#bfd5ff] text-[#191723] text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F2E9]"
+          className="inline-flex items-center gap-2 px-4 py-2 min-h-11 rounded-lg bg-[#B9D6E6] hover:bg-[#cfe3ee] text-[#13161C] text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EEF4F8]"
         >
           <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
           <span>{t.common.retry}</span>
@@ -43,7 +43,7 @@ const ErrorFallback: React.FC<{
           <button
             type="button"
             onClick={onResetView}
-            className="inline-flex items-center gap-2 px-4 py-2 min-h-11 rounded-lg border border-[#242138] hover:border-[#A8C5FF]/60 text-[#F6F2E9] text-xs font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+            className="inline-flex items-center gap-2 px-4 py-2 min-h-11 rounded-lg border border-[#2E3644] hover:border-[#B9D6E6]/60 text-[#EEF4F8] text-xs font-medium transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C]"
           >
             <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
             <span>{t.accessibility.backToOverview}</span>

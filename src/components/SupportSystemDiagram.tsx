@@ -43,11 +43,11 @@ export function SupportSystemDiagram({ onOpenCaseStudy }: {
 
   return (
     <div ref={ref} className="support-system">
-      <div className="support-system-hub rounded-xl border border-[#A8C5FF]/40 bg-[#0A0913] px-4 py-3 text-center">
-        <div className="text-xs font-mono uppercase tracking-wider text-[#F2A77D]">
+      <div className="support-system-hub rounded-xl border border-[#B9D6E6]/40 bg-[#13161C] px-4 py-3 text-center">
+        <div className="text-xs font-mono uppercase tracking-wider text-[#F0583C]">
           {t.hero.coreFocus}
         </div>
-        <div className="font-display text-base sm:text-lg font-bold text-[#F6F2E9] mt-0.5 leading-snug">
+        <div className="font-display text-base sm:text-lg font-bold text-[#EEF4F8] mt-0.5 leading-snug">
           {t.hero.coreFocusTitle}
         </div>
       </div>
@@ -73,14 +73,14 @@ export function SupportSystemDiagram({ onOpenCaseStudy }: {
               event.preventDefault();
               onOpenCaseStudy(caseId);
             }}
-            className="support-map-link rounded-xl border border-[#34334D] bg-[#0A0913] px-2.5 py-2.5 sm:px-3 min-w-0 flex flex-col justify-center gap-1"
+            className="support-map-link rounded-xl border border-[#343C4A] bg-[#13161C] px-2.5 py-2.5 sm:px-3 min-w-0 flex flex-col justify-center gap-1"
           >
-            <div className="flex items-start gap-1.5 text-xs sm:text-[13px] sm:font-mono font-semibold text-[#F6F2E9] leading-snug">
-              <Icon className="w-3.5 h-3.5 text-[#A8C5FF] shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="flex items-start gap-1.5 text-xs sm:text-[13px] sm:font-mono font-semibold text-[#EEF4F8] leading-snug">
+              <Icon className="w-3.5 h-3.5 text-[#B9D6E6] shrink-0 mt-0.5" aria-hidden="true" />
               <span className="min-w-0 [overflow-wrap:anywhere]">{t.hero.nodes[id].label}</span>
-              <ArrowUpRight size={12} className="ml-auto shrink-0 text-[#A8C5FF]" aria-hidden="true" />
+              <ArrowUpRight size={12} className="ml-auto shrink-0 text-[#B9D6E6]" aria-hidden="true" />
             </div>
-            <p className="text-xs sm:text-[13px] text-[#E6E1D6] leading-relaxed [overflow-wrap:anywhere]">
+            <p className="text-xs sm:text-[13px] text-[#DCE6EE] leading-relaxed [overflow-wrap:anywhere]">
               {t.hero.nodes[id].detail}
             </p>
             <span className="sr-only">{content.caseStudies.find((study) => study.id === caseId)?.title}</span>

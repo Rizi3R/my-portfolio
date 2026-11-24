@@ -101,7 +101,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         sublabel: t.commandPalette.actions.home.sublabel,
         keywords: 'home overview intro hero top',
         shortcut: 'H',
-        icon: <Home className="w-4 h-4 text-[#A8C5FF]" />,
+        icon: <Home className="w-4 h-4 text-[#B9D6E6]" />,
         perform: () => {
           onSelectView('portfolio');
           const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -120,7 +120,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           count: content.caseStudies.length,
         }),
         keywords: 'work projects case studies lark xilnex',
-        icon: <FolderGit2 className="w-4 h-4 text-[#A8C5FF]" />,
+        icon: <FolderGit2 className="w-4 h-4 text-[#B9D6E6]" />,
         perform: () => {
           onNavigateSection('featured-work');
           onClose();
@@ -134,7 +134,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           count: content.experiences.length,
         }),
         keywords: 'experience timeline employment emart24 hwc',
-        icon: <Briefcase className="w-4 h-4 text-[#A8C5FF]" />,
+        icon: <Briefcase className="w-4 h-4 text-[#B9D6E6]" />,
         perform: () => {
           onNavigateSection('experience');
           onClose();
@@ -146,7 +146,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         label: t.commandPalette.actions.skills.label,
         sublabel: t.commandPalette.actions.skills.sublabel,
         keywords: 'skills capabilities',
-        icon: <Sparkles className="w-4 h-4 text-[#A8C5FF]" />,
+        icon: <Sparkles className="w-4 h-4 text-[#B9D6E6]" />,
         perform: () => {
           onNavigateSection('constellation');
           onClose();
@@ -158,7 +158,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         label: t.commandPalette.actions.credentials.label,
         sublabel: t.commandPalette.actions.credentials.sublabel,
         keywords: 'education credentials uitm aws uipath diploma',
-        icon: <BookOpen className="w-4 h-4 text-[#A8C5FF]" />,
+        icon: <BookOpen className="w-4 h-4 text-[#B9D6E6]" />,
         perform: () => {
           onNavigateSection('credentials');
           onClose();
@@ -170,7 +170,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         label: t.commandPalette.actions.workbenches.label,
         sublabel: t.commandPalette.actions.workbenches.sublabel,
         keywords: 'interactive lab shell atlas trace computing',
-        icon: <Layers className="w-4 h-4 text-[#F2A77D]" />,
+        icon: <Layers className="w-4 h-4 text-[#F0583C]" />,
         perform: () => {
           onNavigateSection('workbenches');
           onClose();
@@ -182,7 +182,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         label: t.commandPalette.actions.contact.label,
         sublabel: t.commandPalette.actions.contact.sublabel,
         keywords: 'contact email linkedin resume',
-        icon: <Phone className="w-4 h-4 text-[#A8C5FF]" />,
+        icon: <Phone className="w-4 h-4 text-[#B9D6E6]" />,
         perform: () => {
           onNavigateSection('contact');
           onClose();
@@ -195,7 +195,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         sublabel: t.commandPalette.actions.resume.sublabel,
         keywords: 'resume cv print pdf',
         shortcut: 'R',
-        icon: <FileText className="w-4 h-4 text-[#F2A77D]" />,
+        icon: <FileText className="w-4 h-4 text-[#F0583C]" />,
         perform: () => {
           onOpenResume();
         },
@@ -207,7 +207,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         sublabel: t.commandPalette.actions.terminal.sublabel,
         keywords: 'shell terminal cli portfolio shell',
         shortcut: 'T',
-        icon: <Terminal className="w-4 h-4 text-[#A8C5FF]" />,
+        icon: <Terminal className="w-4 h-4 text-[#B9D6E6]" />,
         perform: () => {
           onOpenTerminal();
         },
@@ -218,7 +218,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         label: t.commandPalette.actions.trace.label,
         sublabel: t.commandPalette.actions.trace.sublabel,
         keywords: 'beep to receipt walkthrough trace layers',
-        icon: <Compass className="w-4 h-4 text-[#A8C5FF]" />,
+        icon: <Compass className="w-4 h-4 text-[#B9D6E6]" />,
         perform: () => {
           onSelectView('trace');
           onClose();
@@ -232,7 +232,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           count: content.nodes.length,
         }),
         keywords: 'skill atlas graph network',
-        icon: <Network className="w-4 h-4 text-[#A8C5FF]" />,
+        icon: <Network className="w-4 h-4 text-[#B9D6E6]" />,
         perform: () => {
           onSelectView('atlas');
           onClose();
@@ -244,7 +244,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         label: t.commandPalette.actions.plain.label,
         sublabel: t.commandPalette.actions.plain.sublabel,
         keywords: 'printable summary plain view',
-        icon: <FileText className="w-4 h-4 text-[#CFCAC0]" />,
+        icon: <FileText className="w-4 h-4 text-[#B4C2CF]" />,
         perform: () => {
           onSelectView('plain');
           onClose();
@@ -256,7 +256,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         label: t.commandPalette.actions.receipt.label,
         sublabel: t.commandPalette.actions.receipt.sublabel,
         keywords: 'summary receipt printable',
-        icon: <Receipt className="w-4 h-4 text-[#A8C5FF]" />,
+        icon: <Receipt className="w-4 h-4 text-[#B9D6E6]" />,
         perform: () => {
           onSelectView('receipt');
           onClose();
@@ -271,7 +271,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         }),
         sublabel: st.subtitle,
         keywords: `layer 0${i + 1} ${st.id}`,
-        icon: <span className="text-xs font-mono font-bold text-[#A8C5FF]">0{i + 1}</span>,
+        icon: <span className="text-xs font-mono font-bold text-[#B9D6E6]">0{i + 1}</span>,
         perform: () => {
           onJumpToStratum(st.id);
           onClose();
@@ -291,11 +291,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         shortcut: 'C',
         icon:
           copyStatus === 'copied' ? (
-            <Check className="w-4 h-4 text-[#A8C5FF]" />
+            <Check className="w-4 h-4 text-[#B9D6E6]" />
           ) : copyStatus === 'error' ? (
-            <AlertCircle className="w-4 h-4 text-[#F2A77D]" />
+            <AlertCircle className="w-4 h-4 text-[#F0583C]" />
           ) : (
-            <Mail className="w-4 h-4 text-[#A8C5FF]" />
+            <Mail className="w-4 h-4 text-[#B9D6E6]" />
           ),
         perform: copyEmail,
       },
@@ -309,9 +309,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         keywords: 'audio sound cues mute enable',
         shortcut: 'M',
         icon: isAudioMuted ? (
-          <VolumeX className="w-4 h-4 text-[#B5B0C2]" />
+          <VolumeX className="w-4 h-4 text-[#A7B5C3]" />
         ) : (
-          <Volume2 className="w-4 h-4 text-[#A8C5FF]" />
+          <Volume2 className="w-4 h-4 text-[#B9D6E6]" />
         ),
         perform: onToggleAudio,
       },
@@ -321,7 +321,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         label: t.commandPalette.actions.linkedIn.label,
         sublabel: t.commandPalette.actions.linkedIn.sublabel,
         keywords: 'linkedin external profile',
-        icon: <ExternalLink className="w-4 h-4 text-[#CFCAC0]" />,
+        icon: <ExternalLink className="w-4 h-4 text-[#B4C2CF]" />,
         perform: () => {
           const anchor = document.createElement('a');
           anchor.href = content.profile.linkedIn;
@@ -344,7 +344,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         label: node.label,
         sublabel: `${content.constellationCategories[node.category]} · ${node.summary}`,
         keywords: `${node.category} ${node.id}`,
-        icon: <span className="text-xs font-mono text-[#A8C5FF]">◆</span>,
+        icon: <span className="text-xs font-mono text-[#B9D6E6]">◆</span>,
         perform: () => {
           onSelectNode(node.id);
           onClose();
@@ -400,7 +400,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-[#0A0913]/85 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-[#13161C]/85 backdrop-blur-sm"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -408,11 +408,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     >
       <div
         ref={dialogRef}
-        className="w-full max-w-xl bg-[#0A0913] border border-[#242138] rounded-2xl shadow-2xl overflow-hidden text-xs"
+        className="w-full max-w-xl bg-[#13161C] border border-[#2E3644] rounded-2xl shadow-2xl overflow-hidden text-xs"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center px-4 border-b border-[#242138] bg-[#12101F]">
-          <Search className="w-4 h-4 text-[#A8C5FF] mr-3 shrink-0" aria-hidden="true" />
+        <div className="flex items-center px-4 border-b border-[#2E3644] bg-[#1B2029]">
+          <Search className="w-4 h-4 text-[#B9D6E6] mr-3 shrink-0" aria-hidden="true" />
           <input
             ref={inputRef}
             type="text"
@@ -420,14 +420,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={t.commandPalette.searchPlaceholder}
-            className="w-full py-3.5 bg-transparent text-[#F6F2E9] placeholder-[#B5B0C2] focus:outline-none text-xs sm:text-sm"
+            className="w-full py-3.5 bg-transparent text-[#EEF4F8] placeholder-[#A7B5C3] focus:outline-none text-xs sm:text-sm"
             aria-label={t.commandPalette.searchInputAriaLabel}
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery('')}
-              className="text-[#B5B0C2] hover:text-[#F6F2E9] p-1.5 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+              className="text-[#A7B5C3] hover:text-[#EEF4F8] p-1.5 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C]"
               aria-label={t.commandPalette.clearSearch}
             >
               <X className="w-4 h-4" />
@@ -436,16 +436,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="ml-1 text-[#B5B0C2] hover:text-[#F6F2E9] p-1.5 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A8C5FF]"
+            className="ml-1 text-[#A7B5C3] hover:text-[#EEF4F8] p-1.5 cursor-pointer rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0583C]"
             aria-label={t.commandPalette.closeLabel}
           >
             <span className="font-mono text-xs">Esc</span>
           </button>
         </div>
 
-        <div className="max-h-80 overflow-y-auto divide-y divide-[#242138]" role="listbox">
+        <div className="max-h-80 overflow-y-auto divide-y divide-[#2E3644]" role="listbox">
           {filteredActions.length === 0 ? (
-            <div className="p-8 text-center text-[#B5B0C2]">
+            <div className="p-8 text-center text-[#A7B5C3]">
               {format(t.commandPalette.emptyState, { query })}
             </div>
           ) : (
@@ -459,8 +459,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   onMouseEnter={() => setSelectedIndex(idx)}
                   className={`w-full text-left p-3.5 flex items-center justify-between cursor-pointer transition-colors ${
                     isSelected
-                      ? 'bg-[#12101F] text-[#F6F2E9]'
-                      : 'text-[#CFCAC0] hover:bg-[#12101F]/60'
+                      ? 'bg-[#1B2029] text-[#EEF4F8]'
+                      : 'text-[#B4C2CF] hover:bg-[#1B2029]/60'
                   }`}
                   role="option"
                   aria-selected={isSelected}
@@ -468,19 +468,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   <div className="flex items-center gap-3 overflow-hidden">
                     <span className="shrink-0">{action.icon}</span>
                     <div className="truncate">
-                      <div className="font-semibold text-[#F6F2E9] truncate flex items-center gap-2">
+                      <div className="font-semibold text-[#EEF4F8] truncate flex items-center gap-2">
                         {isSelected && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#F2A77D] shrink-0" aria-hidden="true" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#F0583C] shrink-0" aria-hidden="true" />
                         )}
                         <span>{action.label}</span>
                       </div>
                       {action.sublabel && (
-                        <div className="text-xs text-[#B5B0C2] truncate">{action.sublabel}</div>
+                        <div className="text-xs text-[#A7B5C3] truncate">{action.sublabel}</div>
                       )}
                     </div>
                   </div>
                   {action.shortcut && (
-                    <kbd className="shrink-0 ml-2 px-2 py-0.5 rounded bg-[#12101F] border border-[#242138] text-xs font-mono text-[#A8C5FF]">
+                    <kbd className="shrink-0 ml-2 px-2 py-0.5 rounded bg-[#1B2029] border border-[#2E3644] text-xs font-mono text-[#B9D6E6]">
                       {action.shortcut}
                     </kbd>
                   )}
@@ -490,13 +490,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           )}
         </div>
 
-        <div className="px-4 py-2.5 border-t border-[#242138] bg-[#12101F] flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[#B5B0C2]">
+        <div className="px-4 py-2.5 border-t border-[#2E3644] bg-[#1B2029] flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[#A7B5C3]">
           <div className="flex items-center gap-3">
             <span>↑↓ {t.commandPalette.footerNavigate}</span>
             <span>↵ {t.commandPalette.footerOpen}</span>
             <span>Esc {t.commandPalette.footerClose}</span>
           </div>
-          <span className="text-[#A8C5FF]">
+          <span className="text-[#B9D6E6]">
             {format(t.commandPalette.footerSkillsCount, { count: content.nodes.length })}
           </span>
         </div>

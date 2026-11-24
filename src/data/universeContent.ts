@@ -250,7 +250,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'A barcode scanner reads reflected light, decodes bars into digits, and passes keystrokes or input events to the active checkout application.',
     exampleComponents: ['Barcode Scanner', 'Receipt Printer', 'Payment Terminal', 'Ethernet Drop'],
-    accentColor: '#F2A77D',
+    accentColor: '#F0583C',
   },
   {
     id: 'kernel',
@@ -264,7 +264,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'Input drivers route scan events to the active window, while the operating system print queue formats output for the connected thermal printer.',
     exampleComponents: ['USB Drivers', 'Print Spooler', 'Network Adapter', 'Local Cache'],
-    accentColor: '#A8C5FF',
+    accentColor: '#B9D6E6',
   },
   {
     id: 'network',
@@ -278,7 +278,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'If a wall port, patch lead, or gateway link drops, local terminals cannot pull updated catalog pricing or sync completed sales.',
     exampleComponents: ['Ethernet Links', 'Site Wi-Fi', 'Local Switch', 'Gateway Router'],
-    accentColor: '#A8C5FF',
+    accentColor: '#B9D6E6',
   },
   {
     id: 'application',
@@ -292,7 +292,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'When catalogs or promotions stall during sync, front-line users see outdated prices or missing discounts until a sync finishes.',
     exampleComponents: ['SKU Lookup', 'Promotion Rules', 'Tender Trigger', 'Sales Sync'],
-    accentColor: '#F2A77D',
+    accentColor: '#F0583C',
   },
   {
     id: 'cloud',
@@ -306,7 +306,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'Shared platforms depend on accurate account provisioning, clean import templates, and steady connectivity across teams.',
     exampleComponents: ['Central Sync', 'Workplace Mail & Chat', 'ERP Data Prep', 'Access Control'],
-    accentColor: '#A8C5FF',
+    accentColor: '#B9D6E6',
   },
   {
     id: 'operations',
@@ -320,7 +320,7 @@ export const STRATA: StratumDef[] = [
     whatHappensConceptually:
       'Support specialists verify what a user sees, run safe initial checks first, and share focused context with vendors when platform fixes are needed.',
     exampleComponents: ['User Support', 'Remote Triage', 'Vendor Escalation', 'Site Readiness'],
-    accentColor: '#F2A77D',
+    accentColor: '#F0583C',
   },
 ];
 
