@@ -55,14 +55,22 @@ export function initInteractiveSurfaces(): () => void {
     if (!frame) frame = requestAnimationFrame(apply);
   };
 
+  // Pointer left the window entirely (relatedTarget is null).
+  const onOut = (event: PointerEvent) => {
+    if (!event.relatedTarget) resetTilt();
+  };
+
   document.addEventListener('pointermove', onMove, { passive: true });
-  document.addEventListener('pointerleave', resetTilt);
+  document.addEventListener('pointerout', onOut);
+  // Scrolling moves surfaces out from under a still cursor.
+  window.addEventListener('scroll', resetTilt, { passive: true });
   window.addEventListener('blur', resetTilt);
   reduceMotion.addEventListener?.('change', resetTilt);
 
   return () => {
     document.removeEventListener('pointermove', onMove);
-    document.removeEventListener('pointerleave', resetTilt);
+    document.removeEventListener('pointerout', onOut);
+    window.removeEventListener('scroll', resetTilt);
     window.removeEventListener('blur', resetTilt);
     reduceMotion.removeEventListener?.('change', resetTilt);
     if (frame) cancelAnimationFrame(frame);

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 /**
  * Counts from 0 to `value` the first time it scrolls into view.
@@ -9,7 +9,8 @@ export function CountUp({ value, durationMs = 900 }: { value: number; durationMs
   const ref = useRef<HTMLSpanElement>(null);
   const [shown, setShown] = useState(value);
 
-  useEffect(() => {
+  // Layout effect so the reset to 0 happens before paint (no flash of the final value).
+  useLayoutEffect(() => {
     const element = ref.current;
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (!element || reduce || typeof IntersectionObserver === 'undefined') return;
