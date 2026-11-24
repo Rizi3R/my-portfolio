@@ -14,7 +14,7 @@ import {
   runRedisCommand,
   SEEN_PREFIX,
   TOTAL_KEY,
-} from './_visitorCore';
+} from './_visitorCore.js';
 
 interface VercelRequest extends IncomingMessage {
   method?: string;
