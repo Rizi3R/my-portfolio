@@ -102,6 +102,7 @@ ${pages.map((path) => `  <url><loc>${site}${path}</loc></url>`).join('\n')}
   const commit = process.env.VERCEL_GIT_COMMIT_SHA;
   await Promise.all([
     writeFile(join(outputDir, 'sitemap.xml'), sitemap),
+    writeFile(join(outputDir, '404.html'), page('Page not found', 'This page does not exist.', '/404.html', `<p>This page doesn't exist. <a href="/">Go to the portfolio</a> · <a href="${caseDirectory}">All technical cases</a></p>`)),
     writeFile(join(outputDir, 'build-info.json'), JSON.stringify({
       commit: commit && /^[a-f0-9]{40}$/i.test(commit) ? commit : null,
       caseCount: CASE_STUDIES.length,

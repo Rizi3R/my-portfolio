@@ -61,11 +61,5 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/((?!api/|assets/|cases/|build-info\\.json|robots\\.txt|sitemap\\.xml).*)",
-      "destination": "/index.html"
-    }
   ]
 }
